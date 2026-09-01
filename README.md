@@ -4,6 +4,9 @@ Statisk nettside (ren HTML/CSS/JS, ingen build-steg) som samler ressurser for
 høstsemesterets emner ett sted: en landingsside med oversikt, og en egen
 temaside per emne.
 
+**Live:** https://nokahm.github.io/h26-kontrollpult/ (GitHub Pages, deployes
+automatisk fra `main`).
+
 ## Emner
 
 | Kode      | Emne                              | Status |
