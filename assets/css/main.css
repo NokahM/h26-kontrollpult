@@ -362,7 +362,8 @@ html[data-sidebar="collapsed"] .sidebar__foot { visibility: hidden; }
 }
 .res:last-child { border-bottom: 0; }
 .res__num { font-family: var(--font-mono); font-size: .78rem; color: var(--muted); }
-.res__title { font-size: .94rem; }
+.res__title { font-size: .94rem; font-weight: 600; }
+.res__title a:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
 .res__sub { font-size: .78rem; color: var(--muted); margin-top: .15rem; }
 .res__tags { display: flex; gap: .4rem; }
 .tag {
@@ -418,6 +419,108 @@ html[data-sidebar="collapsed"] .sidebar__foot { visibility: hidden; }
   border-radius: 4px;
   color: var(--text);
 }
+
+/* ==========================================================================
+   Guide / chapter articles
+   ========================================================================== */
+
+.sourcebar { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.25rem; }
+
+.prose { max-width: 42rem; }
+.prose > :first-child { margin-top: 0; }
+.prose h2 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-top: 2.5rem;
+  margin-bottom: .8rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+.prose h2:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.prose h3 {
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-top: 1.7rem;
+  margin-bottom: .5rem;
+}
+.prose p { margin-top: .85rem; line-height: 1.7; color: var(--text); font-size: .96rem; }
+.prose ul, .prose ol { margin-top: .8rem; padding-left: 1.2rem; line-height: 1.65; font-size: .96rem; }
+.prose li { margin-top: .4rem; padding-left: .2rem; }
+.prose li::marker { color: var(--accent); font-family: var(--font-mono); font-size: .85em; }
+.prose strong { color: var(--text); font-weight: 600; }
+.prose em { color: var(--muted); font-style: italic; }
+.prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent); }
+.prose code { font-family: var(--font-mono); font-size: .85em; background: var(--surface-2); padding: .12rem .4rem; border-radius: 4px; color: var(--text); }
+
+.codeblock {
+  margin-top: 1rem;
+  padding: .9rem 1.1rem;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: .8rem;
+  line-height: 1.65;
+  overflow-x: auto;
+  color: var(--text);
+  white-space: pre;
+}
+
+.note {
+  margin-top: 1.1rem;
+  padding: .9rem 1.1rem;
+  border-left: 3px solid var(--accent);
+  background: var(--surface);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: .87rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.note strong { color: var(--text); }
+.note code { font-family: var(--font-mono); background: var(--surface-2); padding: .1rem .35rem; border-radius: 4px; color: var(--text); }
+
+.steps { counter-reset: step; margin-top: 1rem; display: flex; flex-direction: column; }
+.step { position: relative; padding: 1rem 0 1rem 2.7rem; border-bottom: 1px solid var(--line); }
+.step:last-child { border-bottom: 0; padding-bottom: .2rem; }
+.step::before {
+  counter-increment: step;
+  content: counter(step, decimal-leading-zero);
+  position: absolute;
+  left: 0; top: 1rem;
+  font-family: var(--font-mono);
+  font-size: .76rem;
+  color: var(--accent);
+}
+.step h4 { font-family: var(--font-body); font-weight: 600; font-size: .92rem; color: var(--text); margin: 0 0 .3rem; }
+.step p { font-size: .86rem; color: var(--muted); line-height: 1.6; margin: 0; }
+.step p + p { margin-top: .5rem; }
+.step code { font-family: var(--font-mono); font-size: .84em; background: var(--surface-2); padding: .1rem .35rem; border-radius: 4px; color: var(--text); }
+
+.chapter-nav {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.chapter-nav a {
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+  max-width: 46%;
+}
+.chapter-nav a:hover { color: var(--accent); }
+.chapter-nav a[data-dir="next"] { text-align: right; margin-left: auto; }
+.chapter-nav small { color: var(--muted); font-size: .68rem; letter-spacing: .08em; }
+.chapter-nav a:hover small { color: var(--accent); }
 
 /* ---- empty state / placeholder (konte-fag) ------------------------------*/
 
