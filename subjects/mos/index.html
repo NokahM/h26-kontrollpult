@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MoS — Maskinvare og sikkerhet · H26</title>
-  <meta name="description" content="Forelesninger og laboppgaver for Maskinvare og sikkerhet: SWD/UART, BLE, MQTT/IoT, effektanalyse og glitching.">
+  <meta name="description" content="Kapittelguider for Maskinvare og sikkerhet (VE3270/TSD3050): bootloadere, SWD/UART, BLE, MQTT/IoT, effektanalyse og glitching.">
   <link rel="stylesheet" href="../../assets/css/main.css">
 </head>
 <body class="theme-mos">
@@ -74,86 +74,80 @@
 
       <main class="content">
         <header class="page-header">
-          <div class="page-header__eyebrow"><span class="page-header__trace"></span>EMNE · MoS</div>
+          <div class="page-header__eyebrow"><span class="page-header__trace"></span>EMNE · MoS · VE3270/TSD3050</div>
           <h1>Maskinvare og sikkerhet</h1>
           <p class="page-header__desc">Bootloadere, feilsøking over SWD/UART, Bluetooth Low Energy, MQTT/IoT og sidekanalangrep — effektanalyse og spenningsglitching.</p>
-          <span class="page-header__status" data-status="active"><i></i>ressurser tilgjengelig lokalt</span>
+          <span class="page-header__status" data-status="active"><i></i>6 kapitler · teori + lab omskrevet fra pensum</span>
         </header>
 
         <section class="section">
-          <div class="section__label">Forelesninger</div>
+          <div class="section__label">Kapitler</div>
           <div class="reslist">
             <div class="res">
               <span class="res__num">01</span>
-              <div><div class="res__title">Intro</div></div>
+              <div>
+                <div class="res__title"><a href="guides/01-intro.html">Introduksjon</a></div>
+                <div class="res__sub">Faget, sikkerhetsbegrepet, chain of trust</div>
+              </div>
               <div class="res__tags"><a class="tag" href="../../assets/resources/mos/%2301_Intro.pdf" target="_blank" rel="noopener">pdf</a></div>
             </div>
             <div class="res">
               <span class="res__num">02</span>
-              <div><div class="res__title">Bootloader, SWD, UART</div></div>
-              <div class="res__tags"><a class="tag" href="../../assets/resources/mos/%2302_Bootloader_SWD_UART.pdf" target="_blank" rel="noopener">pdf</a></div>
+              <div>
+                <div class="res__title"><a href="guides/02-bootloader-swd-uart.html">Bootloader, SWD og UART</a></div>
+                <div class="res__sub">SWD/DAP, APPROTECT-omgåelse, RS-232 · + lab 1</div>
+              </div>
+              <div class="res__tags">
+                <a class="tag" href="../../assets/resources/mos/%2302_Bootloader_SWD_UART.pdf" target="_blank" rel="noopener">pdf</a>
+                <a class="tag" href="../../assets/resources/mos/Lab%2301_HWS_SWD_RS232_BOOTLOADER_FLASH.pdf" target="_blank" rel="noopener">lab pdf</a>
+              </div>
             </div>
             <div class="res">
               <span class="res__num">03</span>
-              <div><div class="res__title">Bluetooth Low Energy</div></div>
-              <div class="res__tags"><a class="tag" href="../../assets/resources/mos/%2303_Bluetooth_Low_Energy.pdf" target="_blank" rel="noopener">pdf</a></div>
+              <div>
+                <div class="res__title"><a href="guides/03-ble.html">Bluetooth Low Energy</a></div>
+                <div class="res__sub">GAP/GATT, advertising, egendefinert tjeneste · + lab 2</div>
+              </div>
+              <div class="res__tags">
+                <a class="tag" href="../../assets/resources/mos/%2303_Bluetooth_Low_Energy.pdf" target="_blank" rel="noopener">pdf</a>
+                <a class="tag" href="../../assets/resources/mos/Lab%2302_HWS_BLE.pdf" target="_blank" rel="noopener">lab pdf · no</a>
+                <a class="tag" href="../../assets/resources/mos/Lab%2302_HWS_BLE_english.pdf" target="_blank" rel="noopener">lab pdf · en</a>
+              </div>
             </div>
             <div class="res">
               <span class="res__num">04</span>
-              <div><div class="res__title">MicroPython &amp; MQTT</div></div>
-              <div class="res__tags"><a class="tag" href="../../assets/resources/mos/%2304_MicroPython_MQTT.pdf" target="_blank" rel="noopener">pdf</a></div>
+              <div>
+                <div class="res__title"><a href="guides/04-micropython-mqtt.html">MicroPython og MQTT</a></div>
+                <div class="res__sub">ESP8266, MicroPython, pub/sub · + lab 3</div>
+              </div>
+              <div class="res__tags">
+                <a class="tag" href="../../assets/resources/mos/%2304_MicroPython_MQTT.pdf" target="_blank" rel="noopener">pdf</a>
+                <a class="tag" href="../../assets/resources/mos/Lab%2303_HWS_IOT_MQTT.pdf" target="_blank" rel="noopener">lab pdf · no</a>
+                <a class="tag" href="../../assets/resources/mos/Lab%2303_HWS_IOT_MQTT_english.pdf" target="_blank" rel="noopener">lab pdf · en</a>
+              </div>
             </div>
             <div class="res">
               <span class="res__num">05</span>
-              <div><div class="res__title">Effektanalyse</div></div>
-              <div class="res__tags"><a class="tag" href="../../assets/resources/mos/%2305_Effektanalyse.pptx" target="_blank" rel="noopener">pptx</a></div>
+              <div>
+                <div class="res__title"><a href="guides/05-effektanalyse.html">Effektanalyse</a></div>
+                <div class="res__sub">Simple Power Analysis, shunt-måling · + lab 4</div>
+              </div>
+              <div class="res__tags">
+                <a class="tag" href="../../assets/resources/mos/%2305_Effektanalyse.pptx" target="_blank" rel="noopener">pptx</a>
+                <a class="tag" href="../../assets/resources/mos/Lab%2304%20-%20Effektanalyse.pdf" target="_blank" rel="noopener">lab pdf · no</a>
+                <a class="tag" href="../../assets/resources/mos/Lab%2304%20-%20Effektanalyse_eng.pdf" target="_blank" rel="noopener">lab pdf · en</a>
+              </div>
             </div>
             <div class="res">
               <span class="res__num">06</span>
-              <div><div class="res__title">Glitching</div></div>
-              <div class="res__tags"><a class="tag" href="../../assets/resources/mos/%2306_Glitching.pptx" target="_blank" rel="noopener">pptx</a></div>
-            </div>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="section__label">Laboppgaver</div>
-          <div class="reslist">
-            <div class="res">
-              <span class="res__num">01</span>
-              <div><div class="res__title">SWD / RS232 / bootloader-flashing</div></div>
-              <div class="res__tags"><a class="tag" href="../../assets/resources/mos/Lab%2301_HWS_SWD_RS232_BOOTLOADER_FLASH.pdf" target="_blank" rel="noopener">pdf</a></div>
-            </div>
-            <div class="res">
-              <span class="res__num">02</span>
-              <div><div class="res__title">Bluetooth Low Energy</div></div>
-              <div class="res__tags">
-                <a class="tag" href="../../assets/resources/mos/Lab%2302_HWS_BLE.pdf" target="_blank" rel="noopener">pdf · no</a>
-                <a class="tag" href="../../assets/resources/mos/Lab%2302_HWS_BLE_english.pdf" target="_blank" rel="noopener">pdf · en</a>
+              <div>
+                <div class="res__title"><a href="guides/06-glitching.html">Glitching</a></div>
+                <div class="res__sub">Setup/hold-tid, spenningsglitching · + lab 5</div>
               </div>
-            </div>
-            <div class="res">
-              <span class="res__num">03</span>
-              <div><div class="res__title">IoT / MQTT</div></div>
               <div class="res__tags">
-                <a class="tag" href="../../assets/resources/mos/Lab%2303_HWS_IOT_MQTT.pdf" target="_blank" rel="noopener">pdf · no</a>
-                <a class="tag" href="../../assets/resources/mos/Lab%2303_HWS_IOT_MQTT_english.pdf" target="_blank" rel="noopener">pdf · en</a>
-              </div>
-            </div>
-            <div class="res">
-              <span class="res__num">04</span>
-              <div><div class="res__title">Effektanalyse</div></div>
-              <div class="res__tags">
-                <a class="tag" href="../../assets/resources/mos/Lab%2304%20-%20Effektanalyse.pdf" target="_blank" rel="noopener">pdf · no</a>
-                <a class="tag" href="../../assets/resources/mos/Lab%2304%20-%20Effektanalyse_eng.pdf" target="_blank" rel="noopener">pdf · en</a>
-              </div>
-            </div>
-            <div class="res">
-              <span class="res__num">05</span>
-              <div><div class="res__title">Voltage glitching</div></div>
-              <div class="res__tags">
-                <a class="tag" href="../../assets/resources/mos/Lab%2305%20-%20Voltage%20glitching.pdf" target="_blank" rel="noopener">pdf · no</a>
-                <a class="tag" href="../../assets/resources/mos/Lab%2305%20-%20Voltage%20glitching_eng.pdf" target="_blank" rel="noopener">pdf · en</a>
+                <a class="tag" href="../../assets/resources/mos/%2306_Glitching.pptx" target="_blank" rel="noopener">pptx</a>
+                <a class="tag" href="../../assets/resources/mos/Lab%2305%20-%20Voltage%20glitching.pdf" target="_blank" rel="noopener">lab pdf · no</a>
+                <a class="tag" href="../../assets/resources/mos/Lab%2305%20-%20Voltage%20glitching_eng.pdf" target="_blank" rel="noopener">lab pdf · en</a>
               </div>
             </div>
           </div>
