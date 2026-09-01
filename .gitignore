@@ -1,0 +1,9 @@
+# Course material files (PDFs/slides) — kept local only.
+# Copyrighted USN course content shouldn't be redistributed via a public
+# GitHub Pages deploy; the site's resource links assume these exist locally.
+assets/resources/*/*
+!assets/resources/*/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db
