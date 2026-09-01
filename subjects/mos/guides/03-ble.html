@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>03 · Bluetooth Low Energy — MoS · H26</title>
+  <meta name="description" content="GAP, GATT, advertising og en egendefinert BLE-tjeneste med CircuitPython — teori og lab 2-oppskrift.">
+  <link rel="stylesheet" href="../../../assets/css/main.css">
+</head>
+<body class="theme-mos">
+  <div class="scrim" data-sidebar-toggle></div>
+  <div class="app-shell">
+
+    <aside class="sidebar">
+      <div class="sidebar__head">
+        <span class="sidebar__brand">H26 · <strong>KONTROLLPULT</strong></span>
+      </div>
+      <nav class="sidebar__nav">
+        <div class="sidebar__group-label">Emner</div>
+        <a class="navlink" href="../../../index.html">
+          <span class="navlink__dot" data-status="active" style="color:#5eead4"></span>
+          <span class="navlink__label"><span class="navlink__code">H26</span><span class="navlink__name">Oversikt</span></span>
+        </a>
+        <a class="navlink" data-active="true" href="../index.html">
+          <span class="navlink__dot" data-status="active" style="color:#57f27c"></span>
+          <span class="navlink__label"><span class="navlink__code">MoS</span><span class="navlink__name">Maskinvare og sikkerhet</span></span>
+        </a>
+        <a class="navlink" href="../../tsd3060/index.html">
+          <span class="navlink__dot" data-status="active" style="color:#35c7f0"></span>
+          <span class="navlink__label"><span class="navlink__code">TSD3060</span><span class="navlink__name">Sikre webtjenester</span></span>
+        </a>
+        <div class="sidebar__group-label">Konte</div>
+        <a class="navlink" href="../../statistikk/index.html">
+          <span class="navlink__dot" data-status="pending" style="color:#d98b2b"></span>
+          <span class="navlink__label"><span class="navlink__code">STAT</span><span class="navlink__name">Statistikk</span></span>
+        </a>
+        <a class="navlink" href="../../fysikk2/index.html">
+          <span class="navlink__dot" data-status="pending" style="color:#a78bfa"></span>
+          <span class="navlink__label"><span class="navlink__code">FYS2-EL</span><span class="navlink__name">Elektrisitetslære</span></span>
+        </a>
+      </nav>
+      <div class="sidebar__foot">H26 · sist oppdatert 2026-09-01</div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">← MoS</a>
+        <div class="topbar__crumb"><span>·</span> Kapittel 03</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow"><span class="page-header__trace"></span>MoS · KAPITTEL 03</div>
+          <h1>Bluetooth Low Energy</h1>
+          <p class="page-header__desc">Hvordan BLE-enheter annonserer seg selv, hvordan GATT strukturerer data i tjenester og karakteristikker, og hvordan man bygger en egendefinert BLE-tjeneste med CircuitPython.</p>
+          <span class="page-header__status" data-status="active"><i></i>forelesning 03 + lab 2</span>
+        </header>
+
+        <div class="sourcebar">
+          <a class="tag" href="../../../assets/resources/mos/%2303_Bluetooth_Low_Energy.pdf" target="_blank" rel="noopener">kilde · forelesning</a>
+          <a class="tag" href="../../../assets/resources/mos/Lab%2302_HWS_BLE.pdf" target="_blank" rel="noopener">kilde · lab 2 · no</a>
+          <a class="tag" href="../../../assets/resources/mos/Lab%2302_HWS_BLE_english.pdf" target="_blank" rel="noopener">kilde · lab 2 · en</a>
+        </div>
+
+        <article class="prose">
+          <h2>To lag: GAP og GATT</h2>
+          <p>Bluetooth Low Energy (BLE, «Bluetooth Smart», versjon 4.0 til 5.3) deler funksjonaliteten i to profiler som løser hvert sitt problem.</p>
+          <p><strong>GAP (Generic Access Profile)</strong> styrer det lavnivåmessige: hvordan enheter oppdager og snakker med hverandre i utgangspunktet. GAP definerer fire roller — <em>broadcaster</em> og <em>observer</em> (kringkaster uten forbindelse, hører etter uten å koble til), og <em>central</em> og <em>peripheral</em> (som faktisk oppretter en toveis forbindelse). En sensor som bare sender målinger ut i luften er typisk en broadcaster; en telefon som skanner etter og kobler seg til den er central.</p>
+          <p><strong>GATT (Generic Attribute Profile)</strong> tar over når en forbindelse er opprettet, og definerer selve dataformatet: hvordan faktiske verdier sendes og mottas. GATT strukturerer data hierarkisk:</p>
+          <ul>
+            <li><strong>Services</strong> — en samling karakteristikker som sammen utgjør én funksjon på enheten (f.eks. «batterinivå» eller «min egendefinerte sensor»).</li>
+            <li><strong>Characteristics</strong> — den faktiske verdien: ett definert attributt med én logisk verdi som kan leses, skrives eller abonneres på.</li>
+            <li><strong>Descriptors</strong> — metadata som beskriver en karakteristikk nærmere (f.eks. enhet eller lesbart format).</li>
+          </ul>
+          <p>Services og characteristics identifiseres med UUID-er. Standardiserte funksjoner bruker korte 16-bit UUID-er innbakt i et felles 128-bit skjema (<code>0000####-0000-1000-8000-00805f9b34fb</code>) — for eksempel er <code>0x1800</code> «Generic Access» og <code>0x2A00</code> er karakteristikken «Device Name» inni den. Egendefinerte tjenester bruker gjerne en helt egen 128-bit UUID, som <code>0xA000</code>-tjenesten i labben under.</p>
+
+          <h2>Advertising: hvordan en enhet forteller hvem den er</h2>
+          <p>Før noen kan koble seg til en BLE-enhet, må den kringkaste («advertise») sin tilstedeværelse med jevne mellomrom — et lite reklamepaket med navn og hvilke tjenester den tilbyr. En observer (typisk en telefon som skanner) plukker opp disse annonsene og kan initiere en forbindelse. Så snart en forbindelse er opprettet, er det vanlig å stoppe advertisingen, siden enheten normalt bare vil ha én tilkoblet klient om gangen.</p>
+
+          <h2>Verktøy for å utforske BLE</h2>
+          <p>På Linux er <strong>BlueZ</strong> den offisielle Bluetooth-stacken, og <code>hcitool lescan</code> eller <code>btmgmt find</code> er de enkleste kommandolinjeverktøyene for å skanne etter enheter i nærheten. For programmatisk tilgang — enten fra en PC, en Raspberry Pi eller CircuitPython selv — dekker Python-pakken <code>adafruit-circuitpython-ble</code> det meste, og fungerer på tvers av Windows, Linux og CircuitPython-enheter med samme API. Grafisk kan man bruke mobilappen <em>nRF Connect</em> til å skanne, koble til og lese/skrive characteristics manuelt, uten å skrive kode.</p>
+
+          <h2>Lab 2 i praksis</h2>
+          <p>Labben bygger en komplett egendefinert BLE-tjeneste på en nRF52840-dongle med CircuitPython, og verifiserer den både fra mobil og fra en Raspberry Pi.</p>
+
+          <div class="steps">
+            <div class="step">
+              <h4>Bli kjent med CircuitPython i Thonny</h4>
+              <p>Koble donglen til USB-porten (den dukker opp som stasjonen <code>CIRCUITPY</code>), velg CircuitPython-interpreteren i Thonny, og utforsk tilgjengelige I/O-pinner interaktivt i REPL-en:</p>
+              <pre class="codeblock">import board
+dir(board)</pre>
+            </div>
+            <div class="step">
+              <h4>Reager på en fysisk knapp</h4>
+              <p>Kjør et eksempelprogram som lyser en LED når den innebygde knappen trykkes — en rask sanity-sjekk på at toolchainen fungerer før BLE kommer inn i bildet.</p>
+            </div>
+            <div class="step">
+              <h4>Start advertising</h4>
+              <p>Sett et unikt enhetsnavn og start kringkasting med <code>adafruit_ble</code>-biblioteket:</p>
+              <pre class="codeblock">from adafruit_ble import BLERadio
+from adafruit_ble.advertising.standard import ProvideServicesAdvertisement
+
+ble = BLERadio()
+ble.name = "mitt-eget-navn"
+
+advertisement = ProvideServicesAdvertisement()
+ble.start_advertising(advertisement)
+
+while not ble.connected:
+    pass
+
+ble.stop_advertising()</pre>
+            </div>
+            <div class="step">
+              <h4>Koble til fra mobil og les Device Name</h4>
+              <p>Skann og koble til enheten med nRF Connect, åpne «Generic Access»-tjenesten (0x1800) og last ned verdien av «Device Name» (0x2A00) — det er nettopp navnet som ble satt i forrige steg, lest tilbake over selve BLE-protokollen.</p>
+            </div>
+            <div class="step">
+              <h4>Bygg og test en egendefinert tjeneste</h4>
+              <p>Legg til en egen service med UUID <code>0xA000</code> og to characteristics: <code>0xA001</code> (les) og <code>0xA002</code> (skriv). Programlogikken er bevisst enkel: skriver du en verdi til 0xA002, dukker den samme verdien pluss <code>0x10</code> opp i 0xA001 rett etterpå — nok til å bevise at skriving og lesing faktisk går gjennom egen kode på enheten, ikke bare en passiv buffer.</p>
+              <pre class="codeblock">skriv 0x01 til characteristic 0xA002 (i nRF Connect)
+→ les characteristic 0xA001 → forvent 0x11 (0x10 + 0x01)</pre>
+            </div>
+            <div class="step">
+              <h4>Koble til programmatisk fra Raspberry Pi</h4>
+              <p>Finn BLE-adressen til donglen fra Linux-siden (filtrert for kjente/navngitte enheter):</p>
+              <pre class="codeblock">sudo stdbuf -oL hcitool lescan | grep -v '(unknown)'</pre>
+              <p>Bruk deretter <code>adafruit-circuitpython-ble</code> i et Python-skript på Raspberry Pi-en til å koble til akkurat den adressen og lese/skrive samme egendefinerte tjeneste programmatisk — samme protokoll, nå uten mobilapp i mellom.</p>
+            </div>
+          </div>
+        </article>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="02-bootloader-swd-uart.html"><small>forrige</small>← 02 · Bootloader, SWD og UART</a>
+          <a data-dir="next" href="04-micropython-mqtt.html"><small>neste</small>04 · MicroPython og MQTT →</a>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js"></script>
+</body>
+</html>

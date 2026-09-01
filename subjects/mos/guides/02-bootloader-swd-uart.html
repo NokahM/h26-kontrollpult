@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>02 · Bootloader, SWD og UART — MoS · H26</title>
+  <meta name="description" content="SWD-feilsøking, Debug Access Port, APPROTECT-omgåelse på nRF52840, og RS-232 — teori og lab 1-oppskrift.">
+  <link rel="stylesheet" href="../../../assets/css/main.css">
+</head>
+<body class="theme-mos">
+  <div class="scrim" data-sidebar-toggle></div>
+  <div class="app-shell">
+
+    <aside class="sidebar">
+      <div class="sidebar__head">
+        <span class="sidebar__brand">H26 · <strong>KONTROLLPULT</strong></span>
+      </div>
+      <nav class="sidebar__nav">
+        <div class="sidebar__group-label">Emner</div>
+        <a class="navlink" href="../../../index.html">
+          <span class="navlink__dot" data-status="active" style="color:#5eead4"></span>
+          <span class="navlink__label"><span class="navlink__code">H26</span><span class="navlink__name">Oversikt</span></span>
+        </a>
+        <a class="navlink" data-active="true" href="../index.html">
+          <span class="navlink__dot" data-status="active" style="color:#57f27c"></span>
+          <span class="navlink__label"><span class="navlink__code">MoS</span><span class="navlink__name">Maskinvare og sikkerhet</span></span>
+        </a>
+        <a class="navlink" href="../../tsd3060/index.html">
+          <span class="navlink__dot" data-status="active" style="color:#35c7f0"></span>
+          <span class="navlink__label"><span class="navlink__code">TSD3060</span><span class="navlink__name">Sikre webtjenester</span></span>
+        </a>
+        <div class="sidebar__group-label">Konte</div>
+        <a class="navlink" href="../../statistikk/index.html">
+          <span class="navlink__dot" data-status="pending" style="color:#d98b2b"></span>
+          <span class="navlink__label"><span class="navlink__code">STAT</span><span class="navlink__name">Statistikk</span></span>
+        </a>
+        <a class="navlink" href="../../fysikk2/index.html">
+          <span class="navlink__dot" data-status="pending" style="color:#a78bfa"></span>
+          <span class="navlink__label"><span class="navlink__code">FYS2-EL</span><span class="navlink__name">Elektrisitetslære</span></span>
+        </a>
+      </nav>
+      <div class="sidebar__foot">H26 · sist oppdatert 2026-09-01</div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">← MoS</a>
+        <div class="topbar__crumb"><span>·</span> Kapittel 02</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow"><span class="page-header__trace"></span>MoS · KAPITTEL 02</div>
+          <h1>Bootloader, SWD og UART</h1>
+          <p class="page-header__desc">Hvordan man debugger en beskyttet ARM-krets over Serial Wire Debug, hvorfor readback-beskyttelse kan omgås med en full sletting, og hvordan RS-232 fortsatt brukes til å snakke med et kort over seriellport.</p>
+          <span class="page-header__status" data-status="active"><i></i>forelesning 02 + lab 1</span>
+        </header>
+
+        <div class="sourcebar">
+          <a class="tag" href="../../../assets/resources/mos/%2302_Bootloader_SWD_UART.pdf" target="_blank" rel="noopener">kilde · forelesning</a>
+          <a class="tag" href="../../../assets/resources/mos/Lab%2301_HWS_SWD_RS232_BOOTLOADER_FLASH.pdf" target="_blank" rel="noopener">kilde · lab 1-hefte</a>
+        </div>
+
+        <article class="prose">
+          <h2>Serial Wire Debug (SWD)</h2>
+          <p>De fleste moderne ARM Cortex-brikker (som nRF52840-en denne labben bruker) eksponerer et debug-grensesnitt kalt <strong>SWD</strong> — en 2-tråds etterfølger til JTAG som bare trenger klokke (<code>SWCLK</code>) og databane (<code>SWDIO</code>). Formålet er å gi en ekstern debugger full tilgang til å lese/skrive minne, sette breakpoints og styre CPU-en, uten å gå via programvaren som allerede kjører på kretsen.</p>
+          <p>SWD-tilgangen er strukturert som et <strong>Debug Access Port (DAP)</strong>: en <em>Debug Port (DP)</em> er selve den fysiske inngangen utenfra (JTAG/SWD), og DP-en kobler videre til en eller flere <em>Access Ports (AP)</em>. Hver AP gir tilgang til én delsystem på brikken — typisk en <em>MEM-AP</em> som gir minnetilgang til CPU-en. Er MEM-AP-en låst, er det vanlig at én ekstra AP blir stående åpen: <strong>CTRL-AP</strong>.</p>
+
+          <h3>CTRL-AP — bakdøren produsenten selv la inn</h3>
+          <p>CTRL-AP er en egen access port designet nettopp for å kunne styre kretsen selv når alle andre AP-er er sperret av <em>access port protection</em>. Den støtter blant annet myk reset og — viktigst her — å fjerne selve beskyttelsen. Nordic sin nRF52-serie kaller denne beskyttelsesmekanismen <code>APPROTECT</code>, og statusen ligger i registeret <code>APPROTECTSTATUS</code>.</p>
+          <p>Konsekvensen er et reelt sikkerhetsavveining: for å gjøre kretsen debugbar igjen etter at leseknyttet er slått på, må man kjøre <code>ERASEALL</code> via CTRL-AP — som sletter <em>alt</em> innhold i flashen. Beskyttelsen kan altså ikke omgås mens koden består; den kan bare fjernes sammen med koden. Det er samme prinsipp som chain of trust i kapittel 01: bryter man tilliten ett sted, mister man alt som lå bak den.</p>
+
+          <h2>Picoprobe: en Raspberry Pi Pico som SWD- og UART-bro</h2>
+          <p>Denne labben bruker ikke dedikert debug-maskinvare, men en vanlig <strong>Raspberry Pi Pico</strong> flashet med <em>debugprobe</em>-firmware (kjent som <em>Picoprobe</em>). Den implementerer CMSIS-DAP-protokollen (samme grensesnitt som proprietære debuggere snakker) og eksponerer i tillegg en RS-232-til-USB-bro — én billig USB-enhet dekker altså både programmering/debugging og seriellterminal.</p>
+
+          <h2>RS-232 — eldgammel, men fortsatt overalt</h2>
+          <p><strong>RS-232</strong> (Recommended Standard 232) er en seriellstandard som går tilbake til 1960 og har blitt revidert en rekke ganger siden (senest TIA-232-F). Den definerer hvordan en dataterminal (DTE) — typisk en PC — snakker med kommunikasjonsutstyr (DCE) over separate sende- og mottakslinjer. I praksis brukes den fortsatt til konsoll-/loggtilgang på embedded utstyr, nettopp fordi den er enkel og krever minimalt med logikk på mottakersiden.</p>
+          <p>Det ene punktet det er lett å gå på trynet på: <strong>TxD på den ene siden må kobles til RxD på den andre</strong> (og omvendt) — sender- og mottakerlinjene skal krysses mellom to DTE-er, ikke kobles rett gjennom.</p>
+
+          <h2>Lab 1 i praksis</h2>
+          <p>Lab-heftet fører deg gjennom å bygge en komplett programmerings- og debug-kjede fra bunnen, og deretter bruke den til å omgå readback-beskyttelsen på en nRF52840-dongle.</p>
+
+          <div class="steps">
+            <div class="step">
+              <h4>Gjør Pico-kortet om til en SWD-probe</h4>
+              <p>Hold inne <code>BOOTSEL</code> mens USB-kabelen kobles til, slik at kortet dukker opp som en diskstasjon. Kopier debugprobe-firmwaren (<code>.uf2</code>-filen) over — kortet er nå en fungerende SWD/UART-debugger.</p>
+            </div>
+            <div class="step">
+              <h4>Koble opp maskinvaren</h4>
+              <p>Koble SWCLK, SWDIO, VBUS og GND fra picoproben til nRF52840-donglen etter koblingstabellen i heftet, og RS-232-pinnene (krysset TxD/RxD) mellom picoproben og Raspberry Pi-en.</p>
+            </div>
+            <div class="step">
+              <h4>Snakk med OpenOCD via telnet</h4>
+              <p>OpenOCD kan styres direkte fra kommandolinjen med <code>-c "..."</code>, eller ved å koble seg til TCP-port <code>4444</code> med en telnet-klient (f.eks. MobaXterm) mens OpenOCD kjører i bakgrunnen — det gir en interaktiv kommandoprompt mot debuggeren.</p>
+              <pre class="codeblock">openocd -c "adapter driver cmsis-dap; adapter speed 4000; transport select swd"</pre>
+            </div>
+            <div class="step">
+              <h4>Koble til target-kretsen</h4>
+              <p>Kjør OpenOCD med riktig interface- og target-script. Er readback-beskyttelsen aktiv, feiler dette med <code>Error: Could not find MEM-AP to control the core</code> — det er forventet, og selve poenget med resten av oppgaven.</p>
+              <pre class="codeblock">openocd -s &lt;scripts&gt; -f interface/cmsis-dap.cfg -f target/nrf52.cfg</pre>
+            </div>
+            <div class="step">
+              <h4>Les beskyttelsesstatus via CTRL-AP</h4>
+              <p>Selv når MEM-AP er sperret, svarer CTRL-AP. <code>apreg 1 &lt;adresse&gt;</code> leser et register på access port nr. 1 (CTRL-AP).</p>
+              <pre class="codeblock">nrf52.dap apreg 1 0x0FC   # CTRL-AP identification register (IDR)
+nrf52.dap apreg 1 0x00C   # APPROTECTSTATUS — 0 betyr beskyttet</pre>
+            </div>
+            <div class="step">
+              <h4>Fjern beskyttelsen med ERASEALL</h4>
+              <p>Å skrive til ERASEALL-registeret sletter hele flashen — og fjerner dermed beskyttelsen sammen med programmet som lå der.</p>
+              <pre class="codeblock">nrf52.dap apreg 1 0x04 0x0001   # ERASEALL
+reset
+flash mdw 0x10001208            # forvent 0xffffffff — APPROTECT er nå av</pre>
+            </div>
+            <div class="step">
+              <h4>Programmer inn ny firmware</h4>
+              <p>Med kretsen ubeskyttet kan den programmeres på vanlig måte, først med en enkel blink-test, deretter med en UF2-bootloader som lar deg programmere videre bare ved å dra en fil inn på en diskstasjon.</p>
+              <pre class="codeblock">program blinky_pca10059_mbr.hex
+reset</pre>
+            </div>
+            <div class="step">
+              <h4>Logg inn over seriellport</h4>
+              <p>Koble Raspberry Pi-en til picoproben over RS-232 og åpne en seriellsesjon i MobaXterm på 115200 bps. Brukernavn og passord for lab-Pi-en står i det lokale lab-heftet (endres fra semester til semester, derfor ikke gjengitt her). Verifiser nettilgang med <code>ping www.vg.no</code>.</p>
+            </div>
+          </div>
+
+          <div class="note"><strong>Merk:</strong> innloggingsdetaljer for lab-utstyret (Raspberry Pi-bruker, wifi-passord) er bevisst utelatt her — de ligger i PDF-heftet lenket øverst, og oppdateres årlig.</div>
+        </article>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="01-intro.html"><small>forrige</small>← 01 · Introduksjon</a>
+          <a data-dir="next" href="03-ble.html"><small>neste</small>03 · Bluetooth Low Energy →</a>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js"></script>
+</body>
+</html>

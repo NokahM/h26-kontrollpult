@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>04 · MicroPython, ESP8266 og MQTT — MoS · H26</title>
+  <meta name="description" content="SoC-er, MicroPython, publish/subscribe-mønsteret og MQTT — teori og lab 3-oppskrift med ESP8266.">
+  <link rel="stylesheet" href="../../../assets/css/main.css">
+</head>
+<body class="theme-mos">
+  <div class="scrim" data-sidebar-toggle></div>
+  <div class="app-shell">
+
+    <aside class="sidebar">
+      <div class="sidebar__head">
+        <span class="sidebar__brand">H26 · <strong>KONTROLLPULT</strong></span>
+      </div>
+      <nav class="sidebar__nav">
+        <div class="sidebar__group-label">Emner</div>
+        <a class="navlink" href="../../../index.html">
+          <span class="navlink__dot" data-status="active" style="color:#5eead4"></span>
+          <span class="navlink__label"><span class="navlink__code">H26</span><span class="navlink__name">Oversikt</span></span>
+        </a>
+        <a class="navlink" data-active="true" href="../index.html">
+          <span class="navlink__dot" data-status="active" style="color:#57f27c"></span>
+          <span class="navlink__label"><span class="navlink__code">MoS</span><span class="navlink__name">Maskinvare og sikkerhet</span></span>
+        </a>
+        <a class="navlink" href="../../tsd3060/index.html">
+          <span class="navlink__dot" data-status="active" style="color:#35c7f0"></span>
+          <span class="navlink__label"><span class="navlink__code">TSD3060</span><span class="navlink__name">Sikre webtjenester</span></span>
+        </a>
+        <div class="sidebar__group-label">Konte</div>
+        <a class="navlink" href="../../statistikk/index.html">
+          <span class="navlink__dot" data-status="pending" style="color:#d98b2b"></span>
+          <span class="navlink__label"><span class="navlink__code">STAT</span><span class="navlink__name">Statistikk</span></span>
+        </a>
+        <a class="navlink" href="../../fysikk2/index.html">
+          <span class="navlink__dot" data-status="pending" style="color:#a78bfa"></span>
+          <span class="navlink__label"><span class="navlink__code">FYS2-EL</span><span class="navlink__name">Elektrisitetslære</span></span>
+        </a>
+      </nav>
+      <div class="sidebar__foot">H26 · sist oppdatert 2026-09-01</div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">← MoS</a>
+        <div class="topbar__crumb"><span>·</span> Kapittel 04</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow"><span class="page-header__trace"></span>MoS · KAPITTEL 04</div>
+          <h1>MicroPython, ESP8266 og MQTT</h1>
+          <p class="page-header__desc">Hvordan et billig wifi-brikkesett kan kjøre Python direkte, og hvorfor publish/subscribe-mønsteret via MQTT passer IoT-enheter bak en NAT-brannmur bedre enn tradisjonell HTTP.</p>
+          <span class="page-header__status" data-status="active"><i></i>forelesning 04 + lab 3</span>
+        </header>
+
+        <div class="sourcebar">
+          <a class="tag" href="../../../assets/resources/mos/%2304_MicroPython_MQTT.pdf" target="_blank" rel="noopener">kilde · forelesning</a>
+          <a class="tag" href="../../../assets/resources/mos/Lab%2303_HWS_IOT_MQTT.pdf" target="_blank" rel="noopener">kilde · lab 3 · no</a>
+          <a class="tag" href="../../../assets/resources/mos/Lab%2303_HWS_IOT_MQTT_english.pdf" target="_blank" rel="noopener">kilde · lab 3 · en</a>
+        </div>
+
+        <article class="prose">
+          <h2>System on Chip: mer enn bare en prosessor</h2>
+          <p>Et moderne mikrokontrollerkort er sjelden «bare en CPU» — det er et <strong>System on Chip (SoC)</strong>: CPU, arbeidsminne, sekundærlagring og en samling periferigrensesnitt (UART, BLE, wifi, I2C, SPI, CAN) integrert på én brikke. <strong>ESP8266</strong> er et av de rimeligste eksemplene med innebygget wifi, og finnes i mange fysiske formfaktorer (ESP-01, ESP-12F, NodeMCU, D1 mini) som alle deler samme brikke og verktøykjede.</p>
+          <p>Brikken programmeres og inspiseres med <code>esptool</code> — et Python-verktøy som kan lese/skrive/slette flashinnhold, lese ut brikkedetaljer som MAC-adresse, og pakke sammen ferdige binærimages for flashing.</p>
+
+          <h2>MicroPython</h2>
+          <p><strong>MicroPython</strong> er en slank, effektiv implementasjon av Python 3 bygget for å kjøre innenfor svært begrensede ressurser — ned mot 256 kB kodeplass og 16 kB RAM. Den dekker et delmengde av standardbiblioteket, men beholder det som gjør Python behagelig å jobbe med: en interaktiv REPL for rask utforsking, og et API som ligner vanlig Python så langt maskinvaren tillater det. Det gjør at man kan iterere direkte på selve kretsen — akkurat som i CircuitPython-labben i forrige kapittel — i stedet for å kompilere og flashe C for hver endring.</p>
+
+          <h2>Publish/subscribe og MQTT</h2>
+          <p>Internet of Things (IoT) — «tingenes internett» — beskriver nettverk av gjenstander med innebygd elektronikk, sensorer og programvare som utveksler data med hverandre. Et vanlig problem er at IoT-enheter ofte sitter bak en NAT-brannmur på et hjemmenettverk, uten en offentlig IP en server kan koble seg til. Løsningen er å snu kommunikasjonen: enheten oppretter selv en <em>utgående</em> forbindelse til en sentral megler, og kommunikasjonen skjer via <strong>publish/subscribe</strong>-mønsteret i stedet for direkte forespørsler.</p>
+          <p><strong>MQTT (MQ Telemetry Transport)</strong> er den mest brukte pub/sub-protokollen for nettopp dette. Prinsippet: en enhet <em>publiserer</em> en melding på et navngitt <em>topic</em> (f.eks. <code>hjem/stue/temperatur</code>) til en <em>broker</em>. Andre enheter som har <em>abonnert</em> på det samme topicet (eller et mønster som matcher det) mottar meldingen automatisk — uten at publisher og abonnent noensinne trenger å kjenne hverandres adresse. Sammenlignet med HTTP er MQTT lettvekts (liten protokolloverhead, egnet for trege/upålitelige lenker) og løser NAT-problemet gratis, siden begge parter kun trenger en utgående forbindelse til broker.</p>
+
+          <h2>Lab 3 i praksis</h2>
+          <p>Labben installerer MicroPython på et ESP8266-kort, kobler det til wifi, og bruker det til å både publisere og abonnere på MQTT-meldinger.</p>
+
+          <div class="steps">
+            <div class="step">
+              <h4>Identifiser seriellporten</h4>
+              <p>Kjør et lite hjelpeskript i Thonny (lokal Python-interpreter, ikke MicroPython ennå) for å finne COM-porten ESP8266-kortet dukker opp som (typisk en CH340- eller CP210x USB-til-UART-bro).</p>
+            </div>
+            <div class="step">
+              <h4>Flash MicroPython-firmware</h4>
+              <p>Bytt interpreter i Thonny til «MicroPython (ESP8266)» og bruk innebygd firmware-wizard til å flashe MicroPython rett på kortet — et alternativ til å kjøre <code>esptool.py</code> manuelt fra kommandolinjen.</p>
+            </div>
+            <div class="step">
+              <h4>Last opp programfilene</h4>
+              <p>Bruk filutforskeren i Thonny til å laste opp skriptene fra labpakken (skanning, wifi-tilkobling, ping, MQTT) til kortets filsystem.</p>
+            </div>
+            <div class="step">
+              <h4>Koble til wifi</h4>
+              <p>Skann etter tilgjengelige nettverk, sett SSID og passord for lab-wifiet i tilkoblingsskriptet (verdiene står i det lokale lab-heftet), og verifiser med et ping-skript at kortet faktisk har internettilgang.</p>
+            </div>
+            <div class="step">
+              <h4>Send og motta med en MQTT-web-klient</h4>
+              <p>Koble til en offentlig MQTT-broker fra nettleseren (f.eks. via WebSocket Secure), publiser en melding på et unikt topic-navn, og abonner på det samme topicet for å se meldingen komme tilbake — en rask måte å verifisere broker-oppsettet på uten kode.</p>
+            </div>
+            <div class="step">
+              <h4>Publiser og abonner fra MicroPython</h4>
+              <p>Sett samme broker-adresse og topic-navn i <code>mqtt_subscribe.py</code> på ESP8266-kortet (biblioteket <code>umqtt.simple</code> er en del av standard MicroPython-distribusjonen), og bekreft at meldinger sendt fra web-klienten mottas av kortet.</p>
+              <pre class="codeblock">mqtt_topic = b'mitt/eget/topic'   # må matche på begge sider</pre>
+            </div>
+            <div class="step">
+              <h4>Koble en LED til meldingsstrømmen</h4>
+              <p>Utvid abonnement-skriptet slik at meldingen <code>ON</code> slår på en LED koblet til en GPIO-pin, og alt annet slår den av — MQTT-meldinger blir nå en fysisk bryter.</p>
+              <pre class="codeblock">from machine import Pin
+led = Pin(2, Pin.OUT)
+led.off()   # aktiv lav: off() lyser LED-en på dette kortet</pre>
+            </div>
+          </div>
+
+          <div class="note"><strong>Merk:</strong> wifi-passord og broker-legitimasjon for lab-oppsettet er utelatt her av samme grunn som i forrige kapittel — se det lokale PDF-heftet.</div>
+        </article>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="03-ble.html"><small>forrige</small>← 03 · Bluetooth Low Energy</a>
+          <a data-dir="next" href="05-effektanalyse.html"><small>neste</small>05 · Effektanalyse →</a>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js"></script>
+</body>
+</html>
