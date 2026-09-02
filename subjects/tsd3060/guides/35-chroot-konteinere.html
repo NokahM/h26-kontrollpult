@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Uke 35 · chroot og konteinere — TSD3060 · H26</title>
+  <meta name="description" content="Fra chroot() til namespaces og manuell konteinerhåndtering med unshare og nsenter — hva en konteiner faktisk består av.">
+  <link rel="stylesheet" href="../../../assets/css/main.css">
+</head>
+<body class="theme-tsd3060">
+  <div class="scrim" data-sidebar-toggle></div>
+  <div class="app-shell">
+
+    <aside class="sidebar">
+      <div class="sidebar__head">
+        <span class="sidebar__brand">H26 · <strong>KONTROLLPULT</strong></span>
+      </div>
+      <nav class="sidebar__nav">
+        <div class="sidebar__group-label">Emner</div>
+        <a class="navlink" href="../../../index.html">
+          <span class="navlink__dot" data-status="active" style="color:#5eead4"></span>
+          <span class="navlink__label"><span class="navlink__code">H26</span><span class="navlink__name">Oversikt</span></span>
+        </a>
+        <a class="navlink" href="../../mos/index.html">
+          <span class="navlink__dot" data-status="active" style="color:#57f27c"></span>
+          <span class="navlink__label"><span class="navlink__code">MoS</span><span class="navlink__name">Maskinvare og sikkerhet</span></span>
+        </a>
+        <a class="navlink" data-active="true" href="../index.html">
+          <span class="navlink__dot" data-status="active" style="color:#35c7f0"></span>
+          <span class="navlink__label"><span class="navlink__code">TSD3060</span><span class="navlink__name">Sikre webtjenester</span></span>
+        </a>
+        <div class="sidebar__group-label">Konte</div>
+        <a class="navlink" href="../../statistikk/index.html">
+          <span class="navlink__dot" data-status="pending" style="color:#d98b2b"></span>
+          <span class="navlink__label"><span class="navlink__code">STAT</span><span class="navlink__name">Statistikk</span></span>
+        </a>
+        <a class="navlink" href="../../fysikk2/index.html">
+          <span class="navlink__dot" data-status="pending" style="color:#a78bfa"></span>
+          <span class="navlink__label"><span class="navlink__code">FYS2-EL</span><span class="navlink__name">Elektrisitetslære</span></span>
+        </a>
+      </nav>
+      <div class="sidebar__foot">H26 · sist oppdatert 2026-09-02</div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">← TSD3060</a>
+        <div class="topbar__crumb"><span>·</span> Uke 35</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow"><span class="page-header__trace"></span>TSD3060 · UKE 35</div>
+          <h1>chroot og konteinere</h1>
+          <p class="page-header__desc">Hva en «konteiner» egentlig består av under panseret: chroot() som avgrenser filsystemet, namespaces som avgrenser alt annet, og hvordan man bygger en konteiner for hånd med unshare og nsenter.</p>
+          <span class="page-header__status" data-status="active"><i></i>pensum + notater</span>
+        </header>
+
+        <article class="prose">
+          <h2>Hva ordet «konteiner» faktisk betyr</h2>
+          <p>«Konteiner» kommer av det engelske <em>contain</em>, fra latin <em>con-</em> (sammen) + <em>tenere</em> (holde) — å holde noe sammen. Å holde noe sammen skaper samtidig et skille mellom det som holdes inne og det som holdes ute, og nettopp skiller og grenser er kjernen i god sikkerhet. En programvarekonteiner er et fullstendig, flyttbart datasystem realisert med operativsystem-nivå-virtualisering: alt av programvare pakken trenger er inkludert, bortsett fra selve kjernen — den deles med vertssystemet. To Linux-mekanismer gjør dette mulig: <strong>chroot(2)</strong> og <strong>namespaces(7)</strong>.</p>
+
+          <h2>chroot(2) — en tidlig konteinerforløper</h2>
+          <p>En prosess kan sette en ny rot i filsystemtreet for seg selv og sine etterkommere med systemkallet <code>chroot()</code> — et av de eldste isolasjonsverktøyene i Unix. Alt prosessen ser av filsystemet begrenses til det som ligger under den nye roten:</p>
+          <pre class="codeblock">#include &lt;signal.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+int main() {
+  if (-1 == chroot("/tmp")) exit(1);
+  raise(SIGSTOP);   // fryser prosessen slik at den kan inspiseres
+  return 0;
+}</pre>
+          <p>Kjør den, finn PID-en, og se at prosessen faktisk oppfatter <code>/tmp</code> som sin rot:</p>
+          <pre class="codeblock">gcc rot.c &amp;&amp; sudo ./a.out
+jobs -l                     # finner PID til a.out
+sudo ls -l /proc/&lt;PID&gt;/root  # viser hva prosessen selv ser som "/"</pre>
+          <p>chroot alene begrenser bare katalogstrukturen — <strong>ikke</strong> brukere eller prosesser. Kopierer man inn en statisk <code>busybox</code> og setter opp et minimalt <code>bin/</code>-katalog, kan man kjøre et skall inni «fengselet»:</p>
+          <pre class="codeblock">$ mkdir nyrot &amp;&amp; cp $(which busybox) nyrot/
+$ cd nyrot &amp;&amp; sudo chroot . /busybox sh
+# /busybox --install bin      # installerer symlenker for standardkommandoer</pre>
+          <p>Men <code>/etc/passwd</code> og <code>/proc</code> finnes ikke automatisk der inne — de må eksplisitt kopieres inn eller monteres (<code>mount -t proc proc /proc</code>) om man vil at brukeroppslag eller <code>ps</code> skal fungere som forventet i fengselet.</p>
+
+          <h2>namespaces(7) — isolerer alt chroot ikke gjør</h2>
+          <p>Der chroot bare avgrenser filsystemsynet, gir <strong>navnerom</strong> en prosess sin egen, private versjon av andre globale ressurser — ressursene finnes fortsatt på vertssystemet, men under andre navn/tellere sett fra innsiden:</p>
+          <table style="width:100%; margin-top:1rem; border-collapse:collapse; font-size:.86rem;">
+            <thead><tr style="text-align:left; border-bottom:1px solid var(--line)"><th style="padding:.5rem .3rem">Navnerom</th><th style="padding:.5rem .3rem">Flagg</th><th style="padding:.5rem .3rem">Isolerer</th></tr></thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--line)"><td style="padding:.5rem .3rem">Cgroup</td><td style="padding:.5rem .3rem"><code>CLONE_NEWCGROUP</code></td><td style="padding:.5rem .3rem">Cgroup-rotkatalog</td></tr>
+              <tr style="border-bottom:1px solid var(--line)"><td style="padding:.5rem .3rem">IPC</td><td style="padding:.5rem .3rem"><code>CLONE_NEWIPC</code></td><td style="padding:.5rem .3rem">System V IPC, POSIX-meldingskøer</td></tr>
+              <tr style="border-bottom:1px solid var(--line)"><td style="padding:.5rem .3rem">Network</td><td style="padding:.5rem .3rem"><code>CLONE_NEWNET</code></td><td style="padding:.5rem .3rem">Nettverksenheter, -stack, porter</td></tr>
+              <tr style="border-bottom:1px solid var(--line)"><td style="padding:.5rem .3rem">Mount</td><td style="padding:.5rem .3rem"><code>CLONE_NEWNS</code></td><td style="padding:.5rem .3rem">Monteringspunkter</td></tr>
+              <tr style="border-bottom:1px solid var(--line)"><td style="padding:.5rem .3rem">PID</td><td style="padding:.5rem .3rem"><code>CLONE_NEWPID</code></td><td style="padding:.5rem .3rem">Prosess-ID-er</td></tr>
+              <tr style="border-bottom:1px solid var(--line)"><td style="padding:.5rem .3rem">Time</td><td style="padding:.5rem .3rem"><code>CLONE_NEWTIME</code></td><td style="padding:.5rem .3rem">Boot- og monotone klokker</td></tr>
+              <tr style="border-bottom:1px solid var(--line)"><td style="padding:.5rem .3rem">User</td><td style="padding:.5rem .3rem"><code>CLONE_NEWUSER</code></td><td style="padding:.5rem .3rem">Bruker-/gruppe-ID-er</td></tr>
+              <tr><td style="padding:.5rem .3rem">UTS</td><td style="padding:.5rem .3rem"><code>CLONE_NEWUTS</code></td><td style="padding:.5rem .3rem">Vertsnavn</td></tr>
+            </tbody>
+          </table>
+          <p>Uten et eget PID-navnerom ser en prosess inni chroot-fengselet fortsatt de samme prosess-ID-ene som vertssystemet bruker; <em>med</em> ett eget navnerom starter den på nytt fra PID 1, akkurat som en frittstående maskin. <code>unshare(1)</code> lar deg starte en prosess med ett eller flere nye navnerom direkte fra kommandolinjen:</p>
+          <pre class="codeblock"># Uten eget PID-navnerom:
+sudo unshare --mount-proc=$PWD/nyrot/proc --fork chroot nyrot/ sh
+
+# Med eget PID-navnerom -- prosessen ser nå seg selv som PID 1:
+sudo unshare --mount-proc=$PWD/nyrot/proc --pid --fork chroot nyrot/ sh</pre>
+
+          <h2>Å bygge en konteiner for hånd</h2>
+          <p>Kombinerer man chroot med flere navnerom samtidig, får man noe som begynner å ligne det Docker/Podman gjør automatisk — bare manuelt, ett flagg om gangen:</p>
+          <pre class="codeblock">$ mkdir -p nyrot/{bin,proc,etc}
+$ cp /usr/bin/busybox nyrot/bin/ &amp;&amp; nyrot/bin/busybox --install nyrot/bin/
+$ cd nyrot
+$ sudo unshare -inpufCT --mount-proc=proc chroot . bin/sh</pre>
+          <p>Flaggene <code>-inpufCT</code> gir prosessen egne navnerom for IPC, nettverk, PID, brukere, fork, cgroup og tid — det aller meste en konteinerkjøretid ville satt opp automatisk. For å «gå inn i» en allerede kjørende konteiner utenfra, brukes <code>nsenter</code> (namespace enter) sammen med PID-en til prosessen inni den:</p>
+          <pre class="codeblock">$ ps aux | grep '/bin/sh$'         # finn PID-en til skallet inni konteineren
+$ sudo nsenter -t &lt;PID&gt; -a chroot $PWD/nyrot sh</pre>
+          <p>Et viktig poeng som ofte overses: en konteiner er ikke en «ting» som eksisterer uavhengig av prosessene sine. En konteiner <em>er</em> bare en samling prosesser som deler et sett navnerom og en chroot-rot — dør alle prosessene, finnes konteineren rett og slett ikke lenger. Det er ingen egen «konteiner-enhet» å slå av; den forsvinner av seg selv.</p>
+        </article>
+
+        <section class="section">
+          <div class="section__label">Øvinger for uke 35</div>
+          <div class="reslist">
+            <div class="res">
+              <span class="res__num">·</span>
+              <div><div class="res__title">hallo_verden-konteiner</div><div class="res__sub">Lag et hallo-verden-program og få det til å kjøre som en prosess i en egen unshare-konteiner.</div></div>
+            </div>
+            <div class="res">
+              <span class="res__num">·</span>
+              <div><div class="res__title">hallotjener-konteiner</div><div class="res__sub">Bygg en konteiner med chroot(8) og unshare(1) som kjører hallotjener.c fra uke 33 inni seg.</div></div>
+            </div>
+            <div class="res">
+              <span class="res__num">·</span>
+              <div><div class="res__title">REST-konteiner</div><div class="res__sub">Få REST-API-et fra uke 33 (eller din egen utvidelse av det) til å kjøre inni en unshare-konteiner.</div></div>
+            </div>
+          </div>
+        </section>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="34-sqlite-injeksjon-autentisering.html"><small>forrige</small>← Uke 34 · SQLite, injeksjon og autentisering</a>
+          <span></span>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js"></script>
+</body>
+</html>
