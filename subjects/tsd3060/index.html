@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>TSD3060 — Sikre webtjenester · H26</title>
-  <meta name="description" content="Utvikling av sikre webtjenester (TSD3060) — læringsressurser ligger på et eget passordbeskyttet kurssystem.">
+  <meta name="description" content="Utvikling av sikre webtjenester (TSD3060) — kapittelguider for uke 33-35: HTTP/REST, SQLite/injeksjon/autentisering, chroot/konteinere.">
   <link rel="stylesheet" href="../../assets/css/main.css">
 </head>
 <body class="theme-tsd3060">
@@ -60,7 +60,7 @@
           </span>
         </a>
       </nav>
-      <div class="sidebar__foot">H26 · sist oppdatert 2026-09-01</div>
+      <div class="sidebar__foot">H26 · sist oppdatert 2026-09-02</div>
     </aside>
 
     <div class="main">
@@ -76,12 +76,40 @@
         <header class="page-header">
           <div class="page-header__eyebrow"><span class="page-header__trace"></span>EMNE · TSD3060</div>
           <h1>Utvikling av sikre webtjenester</h1>
-          <p class="page-header__desc">Kurset har sitt eget læringsressurssystem med forelesninger, oppgaver og materiell. Ressursene ligger ikke speilet her — denne siden er en direkte inngang til kurssystemet.</p>
-          <span class="page-header__status" data-status="active"><i></i>ressurser hos ekstern kilde</span>
+          <p class="page-header__desc">Læreres egne forelesningsnotater, omskrevet til kapitler: HTTP-tjenere fra bunnen, SQL-injeksjon og autentisering, og hvordan en konteiner faktisk er bygget opp av chroot og navnerom.</p>
+          <span class="page-header__status" data-status="active"><i></i>3 kapitler · uke 33&#8211;35</span>
         </header>
 
         <section class="section">
-          <div class="section__label">Læringsressurser</div>
+          <div class="section__label">Kapitler</div>
+          <div class="reslist">
+            <div class="res">
+              <span class="res__num">33</span>
+              <div>
+                <div class="res__title"><a href="guides/33-http-rest.html">HTTP, port 80/443 og REST</a></div>
+                <div class="res__sub">hallotjener.c, demonisering, CRUD over HTTP</div>
+              </div>
+            </div>
+            <div class="res">
+              <span class="res__num">34</span>
+              <div>
+                <div class="res__title"><a href="guides/34-sqlite-injeksjon-autentisering.html">SQLite, injeksjon og autentisering</a></div>
+                <div class="res__sub">Forberedte SQL-kommandoer, Basic Auth, informasjonskapsler</div>
+              </div>
+            </div>
+            <div class="res">
+              <span class="res__num">35</span>
+              <div>
+                <div class="res__title"><a href="guides/35-chroot-konteinere.html">chroot og konteinere</a></div>
+                <div class="res__sub">namespaces, unshare, nsenter</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section__label">Kurssystem</div>
+          <p class="callout">Resten av semesteret (uke 36 og utover), samt eksamensarkiv med sensorveiledninger og tidligere prosjektoppgaver, ligger foreløpig kun i det opprinnelige kurssystemet — det fylles på her etter hvert som pensum blir klart.</p>
           <a class="btn" href="https://debbie.usn.no/tsd3060/" target="_blank" rel="noopener">
             Åpne kurssystem (debbie.usn.no) →
           </a>
