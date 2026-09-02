@@ -95,16 +95,26 @@
             </div>
             <div class="step">
               <h4>Koble til wifi</h4>
-              <p>Skann etter tilgjengelige nettverk, sett SSID og passord for lab-wifiet i tilkoblingsskriptet (verdiene står i det lokale lab-heftet), og verifiser med et ping-skript at kortet faktisk har internettilgang.</p>
+              <p>Skann etter tilgjengelige nettverk og sett SSID og passord for lab-wifiet i tilkoblingsskriptet, og verifiser med et ping-skript at kortet faktisk har internettilgang.</p>
+              <pre class="codeblock">ssid:     elab-open
+passord:  student2022</pre>
             </div>
             <div class="step">
               <h4>Send og motta med en MQTT-web-klient</h4>
-              <p>Koble til en offentlig MQTT-broker fra nettleseren (f.eks. via WebSocket Secure), publiser en melding på et unikt topic-navn, og abonner på det samme topicet for å se meldingen komme tilbake — en rask måte å verifisere broker-oppsettet på uten kode.</p>
+              <p>Koble til MQTT-brokeren (Eclipse Mosquitto, Frankfurt) fra nettleseren via <a href="http://www.emqx.io/online-mqtt-client" target="_blank" rel="noopener">emqx.io sin web-klient</a>, publiser en melding på et unikt topic-navn, og abonner på det samme topicet for å se meldingen komme tilbake — en rask måte å verifisere broker-oppsettet på uten kode.</p>
+              <pre class="codeblock">host:      wss://ub.langoy.in
+port:      8811       path: /
+username:  usn
+passord:   student2024
+SSL/TLS:   true (CA signed server)</pre>
             </div>
             <div class="step">
               <h4>Publiser og abonner fra MicroPython</h4>
-              <p>Sett samme broker-adresse og topic-navn i <code>mqtt_subscribe.py</code> på ESP8266-kortet (biblioteket <code>umqtt.simple</code> er en del av standard MicroPython-distribusjonen), og bekreft at meldinger sendt fra web-klienten mottas av kortet.</p>
-              <pre class="codeblock">mqtt_topic = b'mitt/eget/topic'   # må matche på begge sider</pre>
+              <p>Sett samme broker-adresse, brukernavn/passord og topic-navn i <code>mqtt_subscribe.py</code> på ESP8266-kortet (biblioteket <code>umqtt.simple</code> er en del av standard MicroPython-distribusjonen), og bekreft at meldinger sendt fra web-klienten mottas av kortet.</p>
+              <pre class="codeblock">mqtt_broker   = 'ub.langoy.in'
+mqtt_user     = 'usn'
+mqtt_password = 'student2024'
+mqtt_topic    = b'mitt/eget/topic'   # må matche på begge sider</pre>
             </div>
             <div class="step">
               <h4>Koble en LED til meldingsstrømmen</h4>
@@ -114,8 +124,6 @@ led = Pin(2, Pin.OUT)
 led.off()   # aktiv lav: off() lyser LED-en på dette kortet</pre>
             </div>
           </div>
-
-          <div class="note"><strong>Merk:</strong> wifi-passord og broker-legitimasjon for lab-oppsettet er utelatt her av samme grunn som i forrige kapittel — se det lokale PDF-heftet.</div>
         </article>
 
         <nav class="chapter-nav">
