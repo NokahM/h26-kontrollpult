@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Eksamensoversikt — TSD3060 · H26</title>
+  <meta name="description" content="Mønstre fra åtte tidligere TSD3060-eksamener (2022-2023 til 2025-2026): hva som går igjen, og hva som sannsynligvis dukker opp igjen.">
+  <link rel="stylesheet" href="../../../assets/css/main.css">
+</head>
+<body class="theme-tsd3060">
+  <div class="scrim" data-sidebar-toggle></div>
+  <div class="app-shell">
+
+    <aside class="sidebar">
+      <div class="sidebar__head">
+        <span class="sidebar__brand">H26 · <strong>KONTROLLPULT</strong></span>
+      </div>
+      <nav class="sidebar__nav">
+        <div class="sidebar__group-label">Emner</div>
+        <a class="navlink" href="../../../index.html">
+          <span class="navlink__dot" data-status="active" style="color:#5eead4"></span>
+          <span class="navlink__label"><span class="navlink__code">H26</span><span class="navlink__name">Oversikt</span></span>
+        </a>
+        <a class="navlink" href="../../mos/index.html">
+          <span class="navlink__dot" data-status="active" style="color:#57f27c"></span>
+          <span class="navlink__label"><span class="navlink__code">MoS</span><span class="navlink__name">Maskinvare og sikkerhet</span></span>
+        </a>
+        <a class="navlink" data-active="true" href="../index.html">
+          <span class="navlink__dot" data-status="active" style="color:#35c7f0"></span>
+          <span class="navlink__label"><span class="navlink__code">TSD3060</span><span class="navlink__name">Sikre webtjenester</span></span>
+        </a>
+        <div class="sidebar__group-label">Konte</div>
+        <a class="navlink" href="../../statistikk/index.html">
+          <span class="navlink__dot" data-status="pending" style="color:#d98b2b"></span>
+          <span class="navlink__label"><span class="navlink__code">STAT</span><span class="navlink__name">Statistikk</span></span>
+        </a>
+        <a class="navlink" href="../../fysikk2/index.html">
+          <span class="navlink__dot" data-status="pending" style="color:#a78bfa"></span>
+          <span class="navlink__label"><span class="navlink__code">FYS2-EL</span><span class="navlink__name">Elektrisitetslære</span></span>
+        </a>
+      </nav>
+      <div class="sidebar__foot">H26 · sist oppdatert 2026-09-02</div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">← TSD3060</a>
+        <div class="topbar__crumb"><span>·</span> Eksamensoversikt</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow"><span class="page-header__trace"></span>TSD3060 · EKSAMENSFORBEREDELSE</div>
+          <h1>Eksamensoversikt</h1>
+          <p class="page-header__desc">Basert på alle åtte tilgjengelige eksamenssett — ordinær og konte, 2022&#8211;2023 til og med 2025&#8211;2026. Ikke en fasit, men et kart over hva som faktisk har blitt spurt om år etter år.</p>
+          <span class="page-header__status" data-status="active"><i></i>basert på 8 eksamenssett</span>
+        </header>
+
+        <article class="prose">
+          <h2>To eksamensformater — begge kan dukke opp, uansett ordinær/konte</h2>
+          <p>Eksamenene faller stort sett i to bøtter, og hvilken det blir er ikke pålitelig knyttet til om det er ordinær eller konte-eksamen:</p>
+          <ul>
+            <li><strong>Kodegjennomgang.</strong> Ett komplett, lite web-system (som regel <code>compose.yaml</code>/<code>Dockerfile</code> + en HTML-side + en JS-fil med <code>fetch()</code>-kall + et server-skript i shell/CGI som snakker med SQLite) er listet opp i sin helhet bakerst i oppgavesettet. Du skal forklare hva filene gjør sammen, gå linje for linje gjennom deler av koden, vurdere autentiseringsmekanismen og foreslå en konkret forbedring. Dette er det klart vanligste formatet — 6 av 8 sett følger det.</li>
+            <li><strong>Begrepssjekkliste.</strong> En rekke frittstående deloppgaver (10&#8211;16 % hver) som hver spør «forklar X, gi et eksempel, og vurder om/hvordan X bidrar til sikkerhet» — for temaer som demonisering, chroot, cookies, samme opphav, konteinere. To av åtte sett (2024&#8211;2025 konte, 2022&#8211;2023 konte) følger dette formatet.</li>
+          </ul>
+          <div class="note"><strong>Konsekvens:</strong> uansett hvilket format det blir, må du kunne <em>begge</em> ferdighetene — lese fremmed kode linje for linje <em>og</em> forklare enkeltbegreper isolert med eksempel.</div>
+
+          <h2>Temaene som går igjen</h2>
+          <p>Rangert etter hvor mange av de åtte settene temaet faktisk dukker opp i:</p>
+
+          <table style="width:100%; margin-top:1rem; border-collapse:collapse; font-size:.85rem;">
+            <thead>
+              <tr style="text-align:left; border-bottom:1px solid var(--line)">
+                <th style="padding:.5rem .3rem">Tema</th>
+                <th style="padding:.5rem .3rem">Frekvens</th>
+                <th style="padding:.5rem .3rem">Hva som konkret spørres om</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--line)">
+                <td style="padding:.6rem .3rem"><strong>Autentisering</strong> (hashing+salt, sesjonskapsel, kritiser & forbedre)</td>
+                <td style="padding:.6rem .3rem">8 / 8</td>
+                <td style="padding:.6rem .3rem">Nesten ordrett samme spørsmål tre år på rad: <em>«Gi en vurdering av autentiseringsmekanismen som brukes i systemet. Foreslå en forbedring. Begrunn svaret.»</em> Koden bruker gjennomgående <code>mkpasswd</code> med salt + en <code>SESJONSID</code>-informasjonskapsel satt med <code>SameSite=Strict</code>.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--line)">
+                <td style="padding:.6rem .3rem"><strong>Konteinere / OS-nivå-virtualisering</strong> (chroot, namespaces, Docker/Podman)</td>
+                <td style="padding:.6rem .3rem">8 / 8</td>
+                <td style="padding:.6rem .3rem">Enten direkte («forklar chroot», «hvilke Linux-kjernemekanismer gir konteinerisering») eller indirekte via en <code>Dockerfile</code>/<code>Containerfile</code> som skal forklares linje for linje — inkludert hvorfor flere <code>RUN</code>-linjer bør slås sammen til én (lagdeling/image-størrelse).</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--line)">
+                <td style="padding:.6rem .3rem"><strong>REST over HTTP</strong> (GET/POST/PUT/DELETE → SQL, Content-Length/Cookie-parsing i shell)</td>
+                <td style="padding:.6rem .3rem">6 / 8</td>
+                <td style="padding:.6rem .3rem">Server-skriptet er nesten alltid strukturelt identisk med <code>fordeler.sh</code>/<code>get.sh</code>/<code>post.sh</code> fra uke 33 — les hodet linje for linje, finn <code>Content-Length</code>, les kroppen med <code>dd</code>, grener på <code>REQUEST_METHOD</code>.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--line)">
+                <td style="padding:.6rem .3rem"><strong>Samme opphav (same-origin policy) / CORS</strong></td>
+                <td style="padding:.6rem .3rem">5 / 8</td>
+                <td style="padding:.6rem .3rem">«Hvor håndheves retningslinjen, og hvordan?» — som regel koblet til <code>fetch(..., {credentials:'include'})</code> og <code>Access-Control-Allow-*</code>-headere i eksempelkoden når to konteinere (web + db) kjører på ulike porter.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--line)">
+                <td style="padding:.6rem .3rem">Linje-for-linje-forklaring av en liten C-socket-tjener</td>
+                <td style="padding:.6rem .3rem">3 / 8 direkte</td>
+                <td style="padding:.6rem .3rem">Samme mønster som hallotjener/close.c fra uke 33 (<code>socket→bind→listen→accept→fork</code>), av og til med et konkret linjeintervall å forklare.</td>
+              </tr>
+              <tr>
+                <td style="padding:.6rem .3rem">DTD/XML-validering (<code>xmllint --xpath</code>)</td>
+                <td style="padding:.6rem .3rem">2 / 8 &#8212; kun 2023&#8211;2024</td>
+                <td style="padding:.6rem .3rem">Brukt begge sittinger i 2023&#8211;2024, men erstattet med JSON i både 2024&#8211;2025 og 2025&#8211;2026-eksamenene. Trolig utfaset &#8212; lavere prioritet enn de andre.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2>Kodemønsteret du bør kunne blindt</h2>
+          <p>Uavhengig av hvilke detaljer som varierer fra år til år, er dette skjelettet i praksis <em>samme</em> kode i nesten alle kodegjennomgang-eksamenene &#8212; snakk gjennom det høyt for deg selv til det sitter:</p>
+          <pre class="codeblock">read LINJE                              # første linje: METODE STI HTTP/1.1
+REQUEST_METHOD=$(echo $LINJE | cut -f1 -d' ')
+SCRIPT_NAME=$(echo $LINJE   | cut -f2 -d' ' | cut -f1 -d?)
+
+while true; do read LINJE               # les resten av hodet
+  [ $(echo $LINJE | wc -c) -le 2 ] && break        # tom linje = slutt på hode
+  # ... plukk ut Content-Length og Cookie her ...
+done
+
+KROPP=$(dd bs=1 count=$CONTENT_LENGTH status=none) # les nøyaktig så mange byte kropp
+
+# autentisering: finn bruker via sesjonskapsel, avvis hvis ikke innlogget
+# deretter: grener på $REQUEST_METHOD → tilsvarende SQL mot SQLite</pre>
+          <p>Og login-delen som går igjen med saltet passordhash og ny sesjons-ID ved hver innlogging (se også sesjonsfiksering i uke 34):</p>
+          <pre class="codeblock">SALT=$(echo "SELECT passordhash FROM person WHERE brukerid='$BRUKER'" | sqlite3 db.db | cut -f3 -d'$')
+HASHET=$(echo $PASSORD | mkpasswd -S $SALT --stdin)
+if [ "$HASHET" = "$LAGRET_HASH" ]; then
+    SESJONSID=$(uuidgen)                           # NY id ved hver vellykket innlogging
+    echo "UPDATE person SET sesjonsid='$SESJONSID' WHERE brukerid='$BRUKER'" | sqlite3 db.db
+    printf "Set-cookie: SESJONSID=$SESJONSID; SameSite=Strict; Path=/\r\n"
+fi</pre>
+
+          <h2>Konkrete forbedringer sensor typisk er ute etter</h2>
+          <p>Når oppgaven ber om å «foreslå en forbedring» av autentiseringen, er dette forslagene som faktisk passer til svakhetene i eksempelkoden over &#8212; verdt å ha klare på forhånd:</p>
+          <ul>
+            <li>Bytt <code>SameSite=Strict</code> til å alltid inkludere <code>Secure</code> og <code>HttpOnly</code> eksplisitt (koden i eksemplene setter ofte ikke disse).</li>
+            <li>Sett en utløpstid (<code>Max-Age</code>) på sesjonskapselen &#8212; eksempelkoden lar sesjoner leve for alltid.</li>
+            <li>Bruk HTTPS (TLS) i stedet for ren HTTP &#8212; passord og sesjons-ID sendes i klartekst over transportlaget i eksemplene.</li>
+            <li>Rate-limiting/lockout på innloggingsforsøk &#8212; ingenting i eksempelkoden hindrer brute force mot <code>login</code>-endepunktet.</li>
+            <li>Valider/sanitiser input før det brukes i SQL &#8212; flere av eksemplene limer variabler rett inn i SQL-strenger igjen (se injeksjon, uke 34) selv i «ordinær»-eksamenskoden.</li>
+          </ul>
+
+          <div class="note"><strong>Ikke lenger sett:</strong> service workers (kun 2022&#8211;2023) og DTD/XML (kun 2023&#8211;2024) dukket opp én gang/ett år og har siden blitt byttet ut &#8212; lavest prioritet av det som faktisk har vært spurt om.</div>
+        </article>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="35-chroot-konteinere.html"><small>forrige</small>← Uke 35 · chroot og konteinere</a>
+          <span></span>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js"></script>
+</body>
+</html>
