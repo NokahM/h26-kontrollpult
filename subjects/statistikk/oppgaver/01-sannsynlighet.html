@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sannsynlighet og hendelsestre — Statistikk · H26</title>
+  <meta name="description" content="Betinget sannsynlighet, hendelsestre, total sannsynlighet og Bayes. Oppgave 1 på nesten annethvert sett.">
+  <link rel="stylesheet" href="../../../assets/css/main.css">
+</head>
+<body class="theme-statistikk">
+  <div class="scrim" data-sidebar-toggle></div>
+  <div class="app-shell">
+
+    <aside class="sidebar">
+      <div class="sidebar__head">
+        <span class="sidebar__brand">H26 · <strong>KONTROLLPULT</strong></span>
+      </div>
+      <nav class="sidebar__nav">
+        <div class="sidebar__group-label">Emner</div>
+        <a class="navlink" href="../../../index.html">
+          <span class="navlink__dot" data-status="active" style="color:#5eead4"></span>
+          <span class="navlink__label"><span class="navlink__code">H26</span><span class="navlink__name">Oversikt</span></span>
+        </a>
+        <a class="navlink" href="../../mos/index.html">
+          <span class="navlink__dot" data-status="active" style="color:#57f27c"></span>
+          <span class="navlink__label"><span class="navlink__code">MoS</span><span class="navlink__name">Maskinvare og sikkerhet</span></span>
+        </a>
+        <a class="navlink" href="../../tsd3060/index.html">
+          <span class="navlink__dot" data-status="active" style="color:#35c7f0"></span>
+          <span class="navlink__label"><span class="navlink__code">TSD3060</span><span class="navlink__name">Sikre webtjenester</span></span>
+        </a>
+        <div class="sidebar__group-label">Konte</div>
+        <a class="navlink" data-active="true" href="../index.html">
+          <span class="navlink__dot" data-status="active" style="color:#d98b2b"></span>
+          <span class="navlink__label"><span class="navlink__code">STAT</span><span class="navlink__name">Statistikk</span></span>
+        </a>
+        <a class="navlink" href="../../fysikk2/index.html">
+          <span class="navlink__dot" data-status="pending" style="color:#a78bfa"></span>
+          <span class="navlink__label"><span class="navlink__code">FYS2-EL</span><span class="navlink__name">Elektrisitetslære</span></span>
+        </a>
+      </nav>
+      <div class="sidebar__foot">H26 · sist oppdatert 2026-09-14</div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">← Statistikk</a>
+        <div class="topbar__crumb"><span>·</span> Sannsynlighet og hendelsestre</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow"><span class="page-header__trace"></span>PB2030 · OPPGAVER MED LØSNING</div>
+          <h1>Sannsynlighet og hendelsestre</h1>
+          <p class="page-header__desc">Betinget sannsynlighet, hendelsestre, total sannsynlighet og Bayes. Oppgave 1 på nesten annethvert sett.</p>
+          <span class="page-header__status" data-status="active"><i></i>10 oppgaver · 10 sett</span>
+        </header>
+
+        <section class="section">
+          <div class="section__label">Metode</div>
+          <article class="prose">
+            <p>Denne oppgavetypen er den mest forutsigbare i hele emnet. Den kommer nesten alltid som <strong>Oppgave 1</strong>, den er formulert som en liten historie, og den løses alltid med de samme tre formlene fra formelarket:</p>
+            <p>\[ P(A\cap B)=P(A)\cdot P(B\mid A), \qquad P(B)=\sum_{k} P(B\mid A_k)P(A_k), \qquad P(A_i\mid B)=\frac{P(B\mid A_i)P(A_i)}{P(B)} \]</p>
+            <h3>Oppskrift</h3>
+            <ol>
+              <li><strong>Navngi hendelsene.</strong> To bokstaver, og skriv ned hva de betyr. Sensor gir poeng for dette alene.</li>
+              <li><strong>Tegn hendelsestreet.</strong> Første forgrening er det du deles inn i (skole, kjønn, syk/frisk). Andre forgrening er det som observeres (stå/stryk, positiv/negativ test). Tallene i oppgaveteksten er nesten alltid gitt i akkurat den rekkefølgen.</li>
+              <li><strong>Multipliser langs greinene</strong> for å få \(P(A\cap B)\), og <strong>summer over greinene</strong> for å få \(P(B)\).</li>
+              <li><strong>Bayes er å snu treet:</strong> når oppgaven sier «gitt at testen var positiv, hva er sannsynligheten for …», er svaret alltid én grein delt på summen av greinene.</li>
+            </ol>
+            <div class="note"><strong>Fellen som går igjen:</strong> \(P(A\mid B)\) og \(P(B\mid A)\) forveksles. I testoppgavene er \(P(\text{positiv}\mid\text{syk})\) høy — testen er god — mens \(P(\text{syk}\mid\text{positiv})\) kan være lav fordi sykdommen er sjelden. Okt 2024 O3 er nettopp dette poenget satt på spissen: en test som fanger 99 % av de syke gir likevel bare 33 % treffsikkerhet.</div>
+            <div class="note"><strong>Snarvei:</strong> når oppgaven gir deg <em>antall</em> (1000 personer, 10 hotellrom, 2,9 mill. biler) i stedet for prosenter, dropp formlene og tell. Uniform sannsynlighetsmodell: \(P=\tfrac{\text{gunstige}}{\text{mulige}}\). Okt 2021, mai 2025 og okt 2025 løses raskest slik.</div>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section__label">Oppgaver</div>
+          <div class="tasknav">
+            <a href="#okt2021">Okt 2021 · hurtigtest</a>
+            <a href="#mai2022">Mai 2022 · vaksine</a>
+            <a href="#okt2022">Okt 2022 · utslippstest</a>
+            <a href="#mai2023">Mai 2023 · flymat</a>
+            <a href="#okt2023">Okt 2023 · fisk og virus</a>
+            <a href="#mai2024">Mai 2024 · tre skoler</a>
+            <a href="#okt2024">Okt 2024 · sjelden sykdom</a>
+            <a href="#des2020">Des 2020 · salgsingeniører</a>
+            <a href="#mai2025">Mai 2025 · el-biler</a>
+            <a href="#okt2025">Okt 2025 · hotellrom</a>
+          </div>
+
+          <article class="task" id="okt2021">
+            <header class="task__head">
+              <span class="task__src">OKT 2021 · O1</span>
+              <span class="task__title">Hurtigtest for koronavirus</span>
+              <span class="task__tags"><span class="tag">hendelsestre</span><span class="tag">betinget</span></span>
+            </header>
+            <div class="task__q">
+              <p>I en studie av en ny type hurtigtest for koronavirus ble 1000 personer med symptomer testet både med hurtigtesten og med en annen test. Vi antar at den andre testen hadde en nøyaktighet på 100 prosent.</p>
+              <p>Av 600 som testet positivt på hurtigtesten viste den andre testen at 200 likevel ikke var smittet. Av 400 som testet negativt på hurtigtesten viste den andre testen at 100 likevel var smittet.</p>
+              <ol>
+                <li>Tegn hendelsestre for studien.</li>
+                <li>Per testet positivt på hurtigtesten. Hva er sannsynligheten for at han ikke var smittet likevel?</li>
+                <li>Både Tor og Kari testet negativt på hurtigtesten. Hva er sannsynligheten for at minst én av dem var smittet?</li>
+                <li>Hva er sannsynligheten for at en person som er smittet testet positivt på hurtigtesten?</li>
+                <li>Anta nå at 1 % av befolkningen er smittet og hurtigtesten brukes på 50 000 personer. Hvor mange ville da kunne forvente å få uriktige testresultater?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>a) Hendelsestre</h4>
+                <p>La \(P\) = positiv hurtigtest, \(N\) = negativ, \(S\) = smittet, \(I\) = ikke smittet. Første forgrening er hurtigtestens svar, andre forgrening er fasiten:</p>
+                <div class="dtable-wrap"><table class="dtable">
+                  <thead><tr><th>Hurtigtest</th><th class="num">Antall</th><th>Fasit</th><th class="num">Antall</th></tr></thead>
+                  <tbody>
+                    <tr><td>Positiv \(P\)</td><td class="num">600</td><td>Smittet \(S\)</td><td class="num">400</td></tr>
+                    <tr><td></td><td class="num"></td><td>Ikke smittet \(I\)</td><td class="num">200</td></tr>
+                    <tr><td>Negativ \(N\)</td><td class="num">400</td><td>Smittet \(S\)</td><td class="num">100</td></tr>
+                    <tr><td></td><td class="num"></td><td>Ikke smittet \(I\)</td><td class="num">300</td></tr>
+                  </tbody>
+                </table></div>
+                <p>Totalt er 400 + 100 = 500 smittet og 200 + 300 = 500 ikke smittet.</p>
+                <h4>b)</h4>
+                <p>\[ P(I\mid P)=\frac{200}{600}=\frac{1}{3}\approx 0{,}33 \]</p>
+                <h4>c)</h4>
+                <p>\[ P(I\mid N)=\frac{300}{400}=\frac{3}{4} \]</p>
+                <p>Tor og Kari er uavhengige, så sannsynligheten for at ingen av dem er smittet er \((3/4)^2=9/16\). Da blir</p>
+                <p>\[ P(\text{minst én smittet})=1-\frac{9}{16}=\frac{7}{16}\approx 0{,}44 \]</p>
+                <h4>d)</h4>
+                <p>Av de 500 smittede testet 400 positivt:</p>
+                <p>\[ P(P\mid S)=\frac{400}{500}=0{,}80 \]</p>
+                <h4>e)</h4>
+                <p>Uriktig resultat er enten falsk negativ eller falsk positiv. Fra studien: \(P(N\mid S)=1-0{,}80=0{,}20\) og \(P(P\mid I)=\tfrac{200}{500}=0{,}40\).</p>
+                <p>\[ 50\,000\cdot\bigl(0{,}01\cdot 0{,}20+0{,}99\cdot 0{,}40\bigr)=50\,000\cdot 0{,}398 \]</p>
+                <div class="answer"><b>19 900</b> personer forventes å få uriktig testresultat. Legg merke til at nesten alle feilene er falske positive, fordi de friske er så mange flere.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="mai2022">
+            <header class="task__head">
+              <span class="task__src">MAI 2022 · O2</span>
+              <span class="task__title">Vaksine og bivirkninger</span>
+              <span class="task__tags"><span class="tag">hendelsestre</span><span class="tag">bayes</span></span>
+            </header>
+            <div class="task__q">
+              <p>En ny vaksine mot koronaviruset er utviklet. Vaksinen ble testet på 10 000 frivillige personer, og undersøkelsen har vist at 65 % av de som ble testet ikke blir syke av koronaviruset. Dessverre har vaksinen bivirkninger: sannsynligheten for å få bivirkninger blant dem som ikke ble syke er 0,31, mens sannsynligheten for å få bivirkninger blant dem som ble syke av korona til tross for vaksinasjon er 0,15.</p>
+              <ol>
+                <li>Tegn et hendelsestre og vis alle sannsynlighetene i forgreningspunktene.</li>
+                <li>Hva er sannsynligheten for at en tilfeldig vaksinert person ikke blir syk av koronaviruset og ikke får bivirkninger?</li>
+                <li>Hva er sannsynligheten for at en tilfeldig vaksinert person får bivirkninger?</li>
+                <li>Hva er sannsynligheten for at en tilfeldig vaksinert person som ikke har fått bivirkninger, ikke blir syk av koronaviruset?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>a)</h4>
+                <p>La \(F\) = «blir ikke syk» og \(B\) = «får bivirkninger». Gitt: \(P(F)=0{,}65\), \(P(\bar F)=0{,}35\), \(P(B\mid F)=0{,}31\), \(P(B\mid \bar F)=0{,}15\). Treet får fire endepunkter: 0,2015 · 0,4485 · 0,0525 · 0,2975.</p>
+                <h4>b)</h4>
+                <p>\[ P(F\cap\bar B)=P(F)\cdot P(\bar B\mid F)=0{,}65\cdot 0{,}69=0{,}4485 \]</p>
+                <h4>c) Total sannsynlighet</h4>
+                <p>\[ P(B)=P(B\mid F)P(F)+P(B\mid\bar F)P(\bar F)=0{,}65\cdot 0{,}31+0{,}35\cdot 0{,}15=0{,}254 \]</p>
+                <h4>d) Bayes</h4>
+                <p>\[ P(F\mid \bar B)=\frac{P(F\cap\bar B)}{P(\bar B)}=\frac{0{,}4485}{1-0{,}254}=\frac{0{,}4485}{0{,}746} \]</p>
+                <div class="answer"><b>\(P(F\mid\bar B)\approx 0{,}60\)</b> — altså 60 %.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="okt2022">
+            <header class="task__head">
+              <span class="task__src">OKT 2022 · O2</span>
+              <span class="task__title">Utslippstest for bensinbiler</span>
+              <span class="task__tags"><span class="tag">bayes</span><span class="tag">testpålitelighet</span></span>
+            </header>
+            <div class="task__q">
+              <p>Veitrafikkmyndighetene har utviklet en metode for å teste utslipp av et bestemt miljøforurensende stoff fra bensindrevne biler. Det viser seg at 20 % av bilene slipper ut for mye. Hvis en bil slipper ut for mye, er det 98 % sikkert at testen avslører det. Hvis en bil ikke slipper ut for mye, er sjansen 15 % for at testen feilkonkluderer og likevel sier at den slipper ut for mye.</p>
+              <ol>
+                <li>Tegn et hendelsestre og vis alle sannsynlighetene i forgreningspunktene.</li>
+                <li>Hva er sannsynligheten for at testen konkluderer med at en tilfeldig valgt bil slipper ut for mye?</li>
+                <li>Hva er sannsynligheten for at en bil virkelig slipper ut for mye dersom testen viser at den gjør det?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>\(A\) = «bilen slipper ut for mye», \(B\) = «testen viser høyt utslipp». Gitt \(P(A)=0{,}20\), \(P(B\mid A)=0{,}98\), \(P(B\mid\bar A)=0{,}15\).</p>
+                <h4>b)</h4>
+                <p>\[ P(B)=0{,}20\cdot 0{,}98+0{,}80\cdot 0{,}15=0{,}196+0{,}120=0{,}316 \]</p>
+                <h4>c)</h4>
+                <p>\[ P(A\mid B)=\frac{0{,}196}{0{,}316} \]</p>
+                <div class="answer"><b>\(P(A\mid B)\approx 0{,}62\).</b> Testen fanger 98 % av verstingene, men fordi 80 % av bilene er i orden, er nesten 4 av 10 «stryk» falske alarmer.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="mai2023">
+            <header class="task__head">
+              <span class="task__src">MAI 2023 · O1</span>
+              <span class="task__title">Forhåndsbestilt flymat og matallergi</span>
+              <span class="task__tags"><span class="tag">forventning</span><span class="tag">bayes</span></span>
+            </header>
+            <div class="task__q">
+              <p>Et flyselskap lar passasjerene forhåndsbestille 0, 1 eller 2 måltider. La \(X\) være antall måltider en tilfeldig passasjer bestiller:</p>
+              <div class="dtable-wrap"><table class="dtable">
+                <thead><tr><th class="num">\(x\)</th><th class="num">0</th><th class="num">1</th><th class="num">2</th></tr></thead>
+                <tbody><tr><td class="num">\(P(X=x)\)</td><td class="num">0,12</td><td class="num">0,36</td><td class="num">0,52</td></tr></tbody>
+              </table></div>
+              <p>Av dem som velger 0 måltider har 44 % matallergi. Av dem som velger 1 måltid har 8 % matallergi. Av dem som velger 2 måltider har 3 % matallergi.</p>
+              <ol>
+                <li>Finn forventningsverdien til \(X\).</li>
+                <li>Finn sannsynligheten for at en tilfeldig valgt passasjer har matallergi.</li>
+                <li>Finn sannsynligheten for at en passasjer som har matallergi ikke bestiller noen måltider.</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>a)</h4>
+                <p>\[ E(X)=0\cdot 0{,}12+1\cdot 0{,}36+2\cdot 0{,}52=1{,}40 \]</p>
+                <h4>b) Total sannsynlighet</h4>
+                <p>Med \(A\) = «har matallergi»:</p>
+                <p>\[ P(A)=0{,}12\cdot 0{,}44+0{,}36\cdot 0{,}08+0{,}52\cdot 0{,}03 = 0{,}0528+0{,}0288+0{,}0156 = 0{,}0972 \]</p>
+                <h4>c) Bayes</h4>
+                <p>\[ P(X=0\mid A)=\frac{0{,}12\cdot 0{,}44}{0{,}0972}=\frac{0{,}0528}{0{,}0972} \]</p>
+                <div class="answer"><b>\(E(X)=1{,}40\) · \(P(A)=0{,}0972\) · \(P(X=0\mid A)\approx 0{,}54\).</b></div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="okt2023">
+            <header class="task__head">
+              <span class="task__src">OKT 2023 · O1</span>
+              <span class="task__title">Fisk og virus i en dam</span>
+              <span class="task__tags"><span class="tag">total sanns.</span><span class="tag">bayes</span></span>
+            </header>
+            <div class="task__q">
+              <p>I en dam er 80 % av alle fiskene hunner. Av fiskene som er hunner er 5 % smittet av et spesielt virus. Av fiskene som er hanner er 30 % smittet av viruset.</p>
+              <ol>
+                <li>Finn sannsynligheten for at en tilfeldig fisk trukket fra dammen er smittet av viruset.</li>
+                <li>Anta at man trekker en tilfeldig fisk og finner at den er smittet. Hva er sannsynligheten for at det er en hunn?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>\(V\) = smittet, \(F\) = hunnfisk. \(P(F)=0{,}8\), \(P(V\mid F)=0{,}05\), \(P(V\mid\bar F)=0{,}30\).</p>
+                <h4>a)</h4>
+                <p>\[ P(V)=P(V\mid F)P(F)+P(V\mid\bar F)P(\bar F)=0{,}05\cdot 0{,}8+0{,}30\cdot 0{,}2=0{,}10 \]</p>
+                <h4>b)</h4>
+                <p>\[ P(F\mid V)=\frac{P(V\cap F)}{P(V)}=\frac{0{,}05\cdot 0{,}8}{0{,}10}=\frac{0{,}04}{0{,}10}=0{,}40 \]</p>
+                <div class="answer"><b>10 % av fiskene er smittet; 40 % av de smittede er hunner</b> — selv om 80 % av dammen er hunner.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="mai2024">
+            <header class="task__head">
+              <span class="task__src">MAI 2024 · O1</span>
+              <span class="task__title">Eksamensbesvarelser fra tre skoler</span>
+              <span class="task__tags"><span class="tag">hendelsestre</span><span class="tag">bayes</span></span>
+            </header>
+            <div class="task__q">
+              <p>En eksamenssensor får tilsendt besvarelser fra tre skoler. Halvparten kommer fra Skole 1, der 70 % av elevene oppnår ståkarakter. 30 % kommer fra Skole 2, hvor 60 % fikk ståkarakter, og de siste 20 % kommer fra Skole 3, hvor 55 % fikk ståkarakter.</p>
+              <ol>
+                <li>Tegn et hendelsestre med tilhørende sannsynligheter på hver grein.</li>
+                <li>Besvarelsene blandes godt og én trekkes tilfeldig. Hva er sannsynligheten for at den fikk ståkarakter?</li>
+                <li>Gitt at sensoren har trukket en besvarelse med ståkarakter — hva er sannsynligheten for at den kommer fra Skole 1?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>\(S_1,S_2,S_3\) = skolene (disjunkte og dekker hele utfallsrommet), \(G\) = ståkarakter.</p>
+                <p>\(P(S_1)=0{,}5,\ P(S_2)=0{,}3,\ P(S_3)=0{,}2\) og \(P(G\mid S_1)=0{,}70,\ P(G\mid S_2)=0{,}60,\ P(G\mid S_3)=0{,}55\).</p>
+                <h4>b)</h4>
+                <p>\[ P(G)=0{,}5\cdot 0{,}70+0{,}3\cdot 0{,}60+0{,}2\cdot 0{,}55=0{,}35+0{,}18+0{,}11=0{,}64 \]</p>
+                <h4>c)</h4>
+                <p>\[ P(S_1\mid G)=\frac{P(G\mid S_1)P(S_1)}{P(G)}=\frac{0{,}35}{0{,}64}\approx 0{,}547 \]</p>
+                <div class="answer"><b>64 % står; av dem kommer ca. 55 % fra Skole 1.</b></div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="okt2024">
+            <header class="task__head">
+              <span class="task__src">OKT 2024 · O3</span>
+              <span class="task__title">Diagnosetest for en sjelden sykdom</span>
+              <span class="task__tags"><span class="tag">bayes</span><span class="tag">klassiker</span></span>
+            </header>
+            <div class="task__q">
+              <p>Andelen mennesker i et gitt samfunn som har en bestemt sykdom er 0,005. En test er tilgjengelig for å diagnostisere sykdommen. Hvis en person har sykdommen, er sannsynligheten for positivt utslag 0,99. Hvis en person ikke har sykdommen, er sannsynligheten for positivt utslag 0,01. Dersom en tilfeldig person tester positivt, hva er sannsynligheten for at personen faktisk har sykdommen?</p>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>\(X\) = «har sykdommen», \(S\) = «testen er positiv». Gitt \(P(X)=0{,}005\), \(P(S\mid X)=0{,}99\), \(P(S\mid\bar X)=0{,}01\) og \(P(\bar X)=0{,}995\).</p>
+                <p>\[ P(X\mid S)=\frac{P(S\mid X)P(X)}{P(S\mid X)P(X)+P(S\mid\bar X)P(\bar X)}=\frac{0{,}99\cdot 0{,}005}{0{,}99\cdot 0{,}005+0{,}01\cdot 0{,}995}=\frac{0{,}00495}{0{,}01490} \]</p>
+                <div class="answer"><b>\(P(X\mid S)\approx 0{,}33\).</b> Bare en tredel av dem som tester positivt har faktisk sykdommen: de friske er 199 ganger så mange, så den lille feilraten på 1 % veier tyngre enn treffraten på 99 %.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="des2020">
+            <header class="task__head">
+              <span class="task__src">DES 2020 · O1</span>
+              <span class="task__title">To salgsingeniører</span>
+              <span class="task__tags"><span class="tag">bayes</span></span>
+            </header>
+            <div class="task__q">
+              <p>Et byggefirma har to salgsingeniører. Ingeniør nr. 1 jobber med prisanslag for 80 % av anbudskonkurransene firmaet deltar i, ingeniør nr. 2 for 20 %. Sannsynligheten for at ingeniør nr. 1 estimerer feil er 0,02, mens den for ingeniør nr. 2 er 0,04.</p>
+              <p>Hva er sannsynligheten for at det er ingeniør nr. 1 som har gjort jobben i neste prisanslag med alvorlig feil?</p>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>\(I_1,I_2\) = hvilken ingeniør, \(F\) = «feil i anslaget».</p>
+                <p>\[ P(F)=0{,}80\cdot 0{,}02+0{,}20\cdot 0{,}04=0{,}016+0{,}008=0{,}024 \]</p>
+                <p>\[ P(I_1\mid F)=\frac{0{,}016}{0{,}024}=\frac{2}{3} \]</p>
+                <div class="answer"><b>\(P(I_1\mid F)=2/3\approx 0{,}67\).</b> Ingeniør 1 er dobbelt så nøyaktig, men gjør fire ganger så mange anslag — og står derfor for flertallet av feilene.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="mai2025">
+            <header class="task__head">
+              <span class="task__src">MAI 2025 · O1a–b</span>
+              <span class="task__title">El-biler og varebiler</span>
+              <span class="task__tags"><span class="tag">uniform modell</span><span class="tag">betinget</span></span>
+            </header>
+            <div class="task__q">
+              <p>I 2024 fantes det 2 889 023 personbiler og 514 740 varebiler blant alle registrerte kjøretøy i Norge. Av personbilene var 788 753 el-biler og 369 696 hybrid-biler. Av varebilene var 36 986 el-biler og 1 763 hybrid-biler.</p>
+              <ol>
+                <li>Vi trekker en tilfeldig bil blant alle person- og varebiler. Gitt at vi trekker en personbil — hva er sannsynligheten for at dette hverken er en el-bil eller en hybrid-bil?</li>
+                <li>Gitt at vi trekker en el-bil — hva er sannsynligheten for at den også er en varebil?</li>
+              </ol>
+              <p class="callout">Punkt c) på dette settet (binomisk trekking av 12 biler) ligger under <a href="03-diskrete-fordelinger.html#mai2025">diskrete fordelinger</a>.</p>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>Uniform sannsynlighetsmodell — alle biler er like sannsynlige. Da er betinget sannsynlighet rett og slett å telle innenfor gruppen.</p>
+                <h4>a)</h4>
+                <p>\[ P(\overline{E\cup H}\mid P)=\frac{2\,889\,023-(788\,753+369\,696)}{2\,889\,023}=\frac{1\,730\,574}{2\,889\,023}\approx 0{,}599 \]</p>
+                <h4>b)</h4>
+                <p>Antall el-biler totalt er \(36\,986+788\,753=825\,739\), og av dem er 36 986 varebiler:</p>
+                <p>\[ P(V\mid E)=\frac{36\,986}{825\,739}\approx 0{,}0448 \]</p>
+                <div class="answer"><b>a) ca. 60 % · b) ca. 4,5 %.</b></div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="okt2025">
+            <header class="task__head">
+              <span class="task__src">OKT 2025 · O1</span>
+              <span class="task__title">Hotellrom med og uten badekar</span>
+              <span class="task__tags"><span class="tag">uniform modell</span><span class="tag">kombinatorikk</span></span>
+            </header>
+            <div class="task__q">
+              <p>Et hotell har 10 rom med dører i ulike farger. 4 av rommene har rød dør, hvorav 2 har badekar. 4 har svart dør, hvorav 1 har badekar. 2 har grønn dør, hvorav 1 har badekar.</p>
+              <ol>
+                <li>Hva er sannsynligheten for at et tilfeldig tildelt rom ikke har badekar?</li>
+                <li>Et reisefølge som ønsker to rom får utdelt to tilfeldige nøkler. Hva er sannsynligheten for at begge rommene har badekar?</li>
+                <li>Tre gjester ankommer og får nøkler til tre rom uten badekar. Hva er sannsynligheten for at de får tre forskjellige dørfarger?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>Sett opp tabellen først — den løser alle tre punktene:</p>
+                <div class="dtable-wrap"><table class="dtable">
+                  <thead><tr><th>Dørfarge</th><th class="num">Badekar</th><th class="num">Uten</th><th class="num">Sum</th></tr></thead>
+                  <tbody>
+                    <tr><td>Rød</td><td class="num">2</td><td class="num">2</td><td class="num">4</td></tr>
+                    <tr><td>Svart</td><td class="num">1</td><td class="num">3</td><td class="num">4</td></tr>
+                    <tr><td>Grønn</td><td class="num">1</td><td class="num">1</td><td class="num">2</td></tr>
+                    <tr><td><strong>Sum</strong></td><td class="num"><strong>4</strong></td><td class="num"><strong>6</strong></td><td class="num"><strong>10</strong></td></tr>
+                  </tbody>
+                </table></div>
+                <h4>a)</h4>
+                <p>\[ P(\bar B)=\frac{6}{10}=0{,}6 \]</p>
+                <h4>b)</h4>
+                <p>Uten tilbakelegging:</p>
+                <p>\[ P(\text{begge badekar})=\frac{4}{10}\cdot\frac{3}{9}=\frac{2}{15}\approx 0{,}13 \]</p>
+                <p>Samme svar hypergeometrisk med \(N=10\), \(M=4\), \(n=2\): \(\binom{4}{2}\binom{6}{0}\big/\binom{10}{2}=6/45=2/15\).</p>
+                <h4>c)</h4>
+                <p>Vi ser nå kun på de 6 rommene uten badekar: 2 røde, 3 svarte, 1 grønn. Antall måter å velge én av hver farge er \(2\cdot 3\cdot 1=6\), og antall måter å velge 3 rom av 6 er \(\binom{6}{3}=20\):</p>
+                <p>\[ p=\frac{2\cdot 3\cdot 1}{\binom{6}{3}}=\frac{6}{20}=\frac{3}{10}=0{,}3 \]</p>
+                <div class="answer"><b>a) 0,6 · b) 2/15 ≈ 0,13 · c) 0,3.</b></div>
+              </div>
+            </details>
+          </article>
+        </section>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="00-eksamensoversikt.html"><small>forrige</small>← Eksamensoversikt</a>
+          <a data-dir="next" href="02-kombinatorikk.html"><small>neste</small>Kombinatorikk og hypergeometrisk →</a>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js"></script>
+  <script src="../../../assets/js/math.js"></script>
+</body>
+</html>

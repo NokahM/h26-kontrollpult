@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kombinatorikk og hypergeometrisk — Statistikk · H26</title>
+  <meta name="description" content="Trekking uten tilbakelegging: binomialkoeffisienter, hypergeometrisk fordeling og når du kan tilnærme med binomisk.">
+  <link rel="stylesheet" href="../../../assets/css/main.css">
+</head>
+<body class="theme-statistikk">
+  <div class="scrim" data-sidebar-toggle></div>
+  <div class="app-shell">
+
+    <aside class="sidebar">
+      <div class="sidebar__head">
+        <span class="sidebar__brand">H26 · <strong>KONTROLLPULT</strong></span>
+      </div>
+      <nav class="sidebar__nav">
+        <div class="sidebar__group-label">Emner</div>
+        <a class="navlink" href="../../../index.html">
+          <span class="navlink__dot" data-status="active" style="color:#5eead4"></span>
+          <span class="navlink__label"><span class="navlink__code">H26</span><span class="navlink__name">Oversikt</span></span>
+        </a>
+        <a class="navlink" href="../../mos/index.html">
+          <span class="navlink__dot" data-status="active" style="color:#57f27c"></span>
+          <span class="navlink__label"><span class="navlink__code">MoS</span><span class="navlink__name">Maskinvare og sikkerhet</span></span>
+        </a>
+        <a class="navlink" href="../../tsd3060/index.html">
+          <span class="navlink__dot" data-status="active" style="color:#35c7f0"></span>
+          <span class="navlink__label"><span class="navlink__code">TSD3060</span><span class="navlink__name">Sikre webtjenester</span></span>
+        </a>
+        <div class="sidebar__group-label">Konte</div>
+        <a class="navlink" data-active="true" href="../index.html">
+          <span class="navlink__dot" data-status="active" style="color:#d98b2b"></span>
+          <span class="navlink__label"><span class="navlink__code">STAT</span><span class="navlink__name">Statistikk</span></span>
+        </a>
+        <a class="navlink" href="../../fysikk2/index.html">
+          <span class="navlink__dot" data-status="pending" style="color:#a78bfa"></span>
+          <span class="navlink__label"><span class="navlink__code">FYS2-EL</span><span class="navlink__name">Elektrisitetslære</span></span>
+        </a>
+      </nav>
+      <div class="sidebar__foot">H26 · sist oppdatert 2026-09-14</div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">← Statistikk</a>
+        <div class="topbar__crumb"><span>·</span> Kombinatorikk og hypergeometrisk</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow"><span class="page-header__trace"></span>PB2030 · OPPGAVER MED LØSNING</div>
+          <h1>Kombinatorikk og hypergeometrisk</h1>
+          <p class="page-header__desc">Trekking uten tilbakelegging: binomialkoeffisienter, hypergeometrisk fordeling og når du kan tilnærme med binomisk.</p>
+          <span class="page-header__status" data-status="active"><i></i>8 oppgaver · 8 sett</span>
+        </header>
+
+        <section class="section">
+          <div class="section__label">Metode</div>
+          <article class="prose">
+            <p>Kjennetegnet er alltid det samme: en <strong>endelig pott</strong> med \(N\) enheter, hvorav \(M\) har en bestemt egenskap, og du trekker \(n\) uten tilbakelegging. Da er antallet «treff» \(X\) hypergeometrisk fordelt:</p>
+            <p>\[ P(X=x)=\frac{\binom{M}{x}\binom{N-M}{n-x}}{\binom{N}{n}},\qquad \mu=n\frac{M}{N},\qquad \sigma^2=n\frac{M}{N}\Bigl(1-\frac{M}{N}\Bigr)\frac{N-n}{N-1} \]</p>
+            <h3>Gjenkjenning på fem sekunder</h3>
+            <ul>
+              <li><strong>«Vareparti på 200, hvorav 30 er defekte, vi kontrollerer 40»</strong> → hypergeometrisk. Potten er endelig og du trekker uten å legge tilbake.</li>
+              <li><strong>«7 % av komponentene er defekte, et kort har 10»</strong> → binomisk. Ingen pott, bare en fast sannsynlighet per forsøk.</li>
+              <li>Er potten stor i forhold til utvalget — formelarkets regel er \(N\ge 10n\) — kan du tilnærme hypergeometrisk med \(\mathrm{Bin}(n, M/N)\). Sensurveiledningen mai 2024 godtar begge og viser at avviket der er ca. 1 %.</li>
+            </ul>
+            <h3>Typiske delspørsmål</h3>
+            <ol>
+              <li><em>«Skriv opp formelen for punktsannsynlighetene»</em> — gratis poeng, bare sett inn \(N\), \(M\), \(n\).</li>
+              <li><em>«Minst 3 av 5»</em> — regn komplementært: \(1-P(X\le 2)\).</li>
+              <li><em>«Hvor stort utvalg må kontrolleres for å være 95 % sikker på …»</em> — prøv deg fram med \(n=4,5,6,\dots\) til kravet er oppfylt. Det finnes ingen lukket formel, og sensor forventer at du viser tabellen.</li>
+              <li><em>«Bare den tredje som kontrolleres har …»</em> — dette er <em>ikke</em> hypergeometrisk. Gang sannsynlighetene sekvensielt: \(\tfrac{13}{20}\cdot\tfrac{12}{19}\cdot\tfrac{7}{18}\).</li>
+            </ol>
+            <div class="note"><strong>Kombinatorikken du trenger:</strong> \(\binom{n}{k}=\frac{n!}{k!\,(n-k)!}\) (uordnet, uten tilbakelegging) dekker nesten alt. Ordnet uten tilbakelegging \(\frac{n!}{(n-k)!}\) dukker bare opp i terning- og dørfarge-oppgavene.</div>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section__label">Oppgaver</div>
+          <div class="tasknav">
+            <a href="#mai2021">Mai 2021 · fotballbilletter</a>
+            <a href="#des2020">Des 2020 · kompressorer</a>
+            <a href="#mai2022">Mai 2022 · duty-free</a>
+            <a href="#okt2022">Okt 2022 · kompressorer</a>
+            <a href="#okt2023">Okt 2023 · lyspærer</a>
+            <a href="#mai2024">Mai 2024 · fikenplanter</a>
+            <a href="#okt2024">Okt 2024 · misfornøyde kunder</a>
+            <a href="#mai2026">Mai 2026 · vareparti</a>
+          </div>
+
+          <article class="task" id="mai2021">
+            <header class="task__head">
+              <span class="task__src">MAI 2021 · O1</span>
+              <span class="task__title">Seks billetter til Old Trafford</span>
+              <span class="task__tags"><span class="tag">hypergeometrisk</span><span class="tag">vanskelig</span></span>
+            </header>
+            <div class="task__q">
+              <p>Seks gratis billetter skal deles ved loddtrekning blant 10 gutter og 8 jenter i en klasse. Hver elev kan maksimalt vinne én billett.</p>
+              <ol>
+                <li>Regn ut sannsynligheten for at det blir 3 gutter og 3 jenter som får billetter.</li>
+                <li>Regn ut sannsynligheten for at jentene får to eller flere billetter.</li>
+                <li>Blant guttene er det en gruppe på tre (G3) som vil reise sammen, blant jentene en gruppe på to (G2). Regn ut sannsynligheten for at G3 får tre billetter, og sannsynligheten for at G2 får to billetter.</li>
+                <li>Regn ut sannsynligheten for at G3 får tre billetter <em>og</em> G2 får to billetter.</li>
+                <li>G3 og G2 inngår følgende avtale: får G3 3 eller 0 billetter beholder G2 sine; får G3 2 billetter gir G2 sine til G3; får G3 1 billett gir G3 sin til G2. Regn ut sannsynligheten for at G3 får minst tre billetter med denne avtalen, og for at G2 får minst to.</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>Totalt 18 elever, 6 trekkes. Alle utvalg er like sannsynlige, så nevneren er alltid \(\binom{18}{6}=18\,564\).</p>
+                <h4>a)</h4>
+                <p>\[ P(3G\cap 3J)=\frac{\binom{10}{3}\binom{8}{3}}{\binom{18}{6}}=\frac{120\cdot 56}{18\,564}\approx 0{,}36 \]</p>
+                <h4>b)</h4>
+                <p>Komplementært, der \(J\) er antall jenter blant de seks:</p>
+                <p>\[ P(J\ge 2)=1-\frac{\binom{10}{6}\binom{8}{0}+\binom{10}{5}\binom{8}{1}}{\binom{18}{6}}=1-0{,}12=0{,}88 \]</p>
+                <h4>c)</h4>
+                <p>G3 er 3 av de 18; de tre andre billettene fordeles blant de resterende 15:</p>
+                <p>\[ P(G3=3)=\frac{\binom{3}{3}\binom{15}{3}}{\binom{18}{6}}\approx 0{,}025,\qquad P(G2=2)=\frac{\binom{2}{2}\binom{16}{4}}{\binom{18}{6}}\approx 0{,}098 \]</p>
+                <h4>d)</h4>
+                <p>Nå må 5 bestemte personer alle få billett, og den siste går til én av de 13 øvrige:</p>
+                <p>\[ P(G3=3\cap G2=2)=\frac{\binom{5}{5}\binom{13}{1}}{\binom{18}{6}}=\frac{13}{18\,564}\approx 0{,}0007 \]</p>
+                <h4>e)</h4>
+                <p>Med avtalen får G3 minst tre billetter enten ved å trekke tre selv, eller ved å trekke to og overta minst én fra G2:</p>
+                <p>\[ P(G3\ge 3)=\frac{\binom{3}{3}\binom{15}{3}+\binom{3}{2}\binom{2}{1}\binom{13}{3}+\binom{3}{2}\binom{2}{2}\binom{13}{2}}{\binom{18}{6}}\approx 0{,}13 \]</p>
+                <p>G2 får minst to enten ved å trekke to selv (så lenge G3 ikke trakk nøyaktig to, for da mister de dem), eller ved å trekke én og overta G3s ene billett:</p>
+                <p>\[ P(G2\ge 2)=\frac{\binom{2}{2}\binom{16}{4}-\binom{2}{2}\binom{3}{2}\binom{13}{2}+\binom{2}{1}\binom{3}{1}\binom{13}{4}}{\binom{18}{6}}\approx 0{,}32 \]</p>
+                <div class="answer"><b>a) 0,36 · b) 0,88 · c) 0,025 og 0,098 · d) 0,0007 · e) 0,13 og 0,32.</b></div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="des2020">
+            <header class="task__head">
+              <span class="task__src">DES 2020 · O2</span>
+              <span class="task__title">Vareparti med 150 kompressorer</span>
+              <span class="task__tags"><span class="tag">hypergeometrisk</span><span class="tag">n-bestemmelse</span></span>
+            </header>
+            <div class="task__q">
+              <p>Et vareparti inneholder 150 kompressorer, hvorav 20 er defekte. Vi kontrollerer et tilfeldig utvalg på 50 enheter.</p>
+              <ol>
+                <li>Finn sannsynligheten for at det er nøyaktig 3 defekte.</li>
+                <li>Hvor stort utvalg må man kontrollere dersom man skal være minst 95 % sikker på å velge minst 5 ikke-defekte?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>a)</h4>
+                <p>\(X\sim\mathrm{Hyp}(150,20,50)\):</p>
+                <p>\[ P(X=3)=\frac{\binom{20}{3}\binom{130}{47}}{\binom{150}{50}}\approx 0{,}0359 \]</p>
+                <h4>b)</h4>
+                <p>Snu problemet: la \(Y\) være antall <em>ikke-defekte</em> i utvalget, \(Y\sim\mathrm{Hyp}(150,130,n)\). Vi vil ha \(P(Y\ge 5)\ge 0{,}95\). Prøv økende \(n\):</p>
+                <div class="dtable-wrap"><table class="dtable">
+                  <thead><tr><th class="num">\(n\)</th><th class="num">5</th><th class="num">6</th><th class="num">7</th><th class="num">8</th></tr></thead>
+                  <tbody><tr><td class="num">\(P(Y\ge 5)\)</td><td class="num">0,484</td><td class="num">0,818</td><td class="num hit">0,950</td><td class="num">0,988</td></tr></tbody>
+                </table></div>
+                <div class="answer"><b>a) 0,036 · b) \(n=7\)</b> enheter må kontrolleres.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="mai2022">
+            <header class="task__head">
+              <span class="task__src">MAI 2022 · O3</span>
+              <span class="task__title">Duty-free og tollkontroll</span>
+              <span class="task__tags"><span class="tag">hypergeometrisk</span><span class="tag">E og Var</span></span>
+            </header>
+            <div class="task__q">
+              <p>En gruppe på 20 studenter kommer tilbake til Norge. 7 av dem har kjøpt for mye alkohol på duty-free og ingen informerer tollerne. Tollerne velger tilfeldig 5 personer for kontroll. La \(X\) være antall blant de 5 utvalgte som har kjøpt for mye.</p>
+              <ol>
+                <li>Hvilken type sannsynlighetsfordeling har \(X\)? Skriv opp formelen for punktsannsynlighetene.</li>
+                <li>Hva er sannsynligheten for at ingen av de kontrollerte har kjøpt for mye?</li>
+                <li>Hva er sannsynligheten for at minst 3 av de 5 kontrollerte har kjøpt for mye?</li>
+                <li>Hva er forventningsverdi og standardavvik til \(X\)?</li>
+                <li>Hva er sannsynligheten for at bare den tredje som blir kontrollert har kjøpt for mye?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>a)</h4>
+                <p>\(X\sim\mathrm{Hyp}(N{=}20,\ M{=}7,\ n{=}5)\), verdimengde \(\{0,1,2,3,4,5\}\):</p>
+                <p>\[ P(X=x)=\frac{\binom{7}{x}\binom{13}{5-x}}{\binom{20}{5}} \]</p>
+                <h4>b)</h4>
+                <p>\[ P(X=0)=\frac{\binom{7}{0}\binom{13}{5}}{\binom{20}{5}}=\frac{1287}{15\,504}\approx 0{,}083 \]</p>
+                <h4>c)</h4>
+                <p>\[ P(X\ge 3)=P(X{=}3)+P(X{=}4)+P(X{=}5)\approx 0{,}207 \]</p>
+                <h4>d)</h4>
+                <p>\[ \mu=n\frac{M}{N}=5\cdot\frac{7}{20}=1{,}75 \]</p>
+                <p>\[ \sigma^2=5\cdot\frac{7}{20}\Bigl(1-\frac{7}{20}\Bigr)\frac{20-5}{20-1}=0{,}898 \quad\Rightarrow\quad \sigma\approx 0{,}948 \]</p>
+                <h4>e)</h4>
+                <p>Her spørres det om en bestemt <em>rekkefølge</em>: de to første er rene, den tredje ikke. Da kan vi ikke bruke hypergeometrisk punktsannsynlighet, men må gange sekvensielt:</p>
+                <p>\[ \frac{13}{20}\cdot\frac{12}{19}\cdot\frac{7}{18}\approx 0{,}160 \]</p>
+                <div class="answer"><b>b) 0,083 · c) 0,207 · d) \(\mu=1{,}75\), \(\sigma\approx0{,}95\) · e) 0,16.</b></div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="okt2022">
+            <header class="task__head">
+              <span class="task__src">OKT 2022 · O3</span>
+              <span class="task__title">Vareparti med 200 kompressorer</span>
+              <span class="task__tags"><span class="tag">hypergeometrisk</span><span class="tag">n-bestemmelse</span></span>
+            </header>
+            <div class="task__q">
+              <p>Et vareparti inneholder 200 kompressorer hvorav 30 er defekte. Vi kontrollerer et tilfeldig utvalg på 40 enheter. La \(X\) være antall defekte blant de 40.</p>
+              <ol>
+                <li>Hvilken type sannsynlighetsfordeling har \(X\)? Skriv opp formelen for punktsannsynlighetene.</li>
+                <li>Finn sannsynligheten for at det er nøyaktig 5 defekte.</li>
+                <li>Hvor stort utvalg må man kontrollere dersom man skal være minst 95 % sikker på å velge minst 4 ikke-defekte?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>a)</h4>
+                <p>\[ X\sim\mathrm{Hyp}(200,30,40):\qquad P(X=x)=\frac{\binom{30}{x}\binom{170}{40-x}}{\binom{200}{40}} \]</p>
+                <h4>b)</h4>
+                <p>\[ P(X=5)=\frac{\binom{30}{5}\binom{170}{35}}{\binom{200}{40}}\approx 0{,}181 \]</p>
+                <h4>c)</h4>
+                <p>La \(Y\sim\mathrm{Hyp}(200,170,n)\) være antall ikke-defekte. Krav: \(P(Y\ge 4)\ge 0{,}95\).</p>
+                <div class="dtable-wrap"><table class="dtable">
+                  <thead><tr><th class="num">\(n\)</th><th class="num">4</th><th class="num">5</th><th class="num">6</th><th class="num">7</th></tr></thead>
+                  <tbody><tr><td class="num">\(P(Y\ge 4)\)</td><td class="num">0,519</td><td class="num">0,837</td><td class="num hit">0,955</td><td class="num">0,989</td></tr></tbody>
+                </table></div>
+                <div class="answer"><b>b) 0,18 · c) \(n=6\).</b></div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="okt2023">
+            <header class="task__head">
+              <span class="task__src">OKT 2023 · O2</span>
+              <span class="task__title">Ni lyspærer, fire defekte</span>
+              <span class="task__tags"><span class="tag">hypergeometrisk</span><span class="tag">E og Var</span></span>
+            </header>
+            <div class="task__q">
+              <p>I en eske ligger ni lyspærer hvorav fire er defekte. Fem lyspærer tas ut tilfeldig. La \(X\) betegne antall defekte blant de fem utvalgte.</p>
+              <ol>
+                <li>Finn en formel for punktsannsynlighetene \(P(X=x)\). Hva kalles denne sannsynlighetsfordelingen?</li>
+                <li>Finn forventningsverdi og varians til \(X\).</li>
+                <li>Hva er sannsynligheten for at det finnes to eller flere defekte blant de fem utvalgte pærene?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>a)</h4>
+                <p>Hypergeometrisk fordeling med \(N=9\), \(M=4\), \(n=5\):</p>
+                <p>\[ P(X=x)=\frac{\binom{4}{x}\binom{5}{5-x}}{\binom{9}{5}},\qquad x=0,1,2,3,4 \]</p>
+                <h4>b)</h4>
+                <p>\[ \mu=n\frac{M}{N}=\frac{5\cdot 4}{9}=\frac{20}{9}\approx 2{,}22 \]</p>
+                <p>\[ \sigma^2=\frac{nM(1-M/N)(N-n)}{N(N-1)}=\frac{5\cdot 4\,(1-4/9)(9-5)}{9\cdot 8}\approx 0{,}617 \]</p>
+                <h4>c)</h4>
+                <p>\[ P(X\ge 2)=1-P(X{=}0)-P(X{=}1)=1-\frac{1}{126}-\frac{20}{126}=\frac{105}{126}=\frac{5}{6}\approx 0{,}83 \]</p>
+                <div class="answer"><b>\(\mu\approx 2{,}22\) · \(\sigma^2\approx 0{,}62\) · \(P(X\ge 2)=5/6\approx 0{,}83\).</b></div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="mai2024">
+            <header class="task__head">
+              <span class="task__src">MAI 2024 · O2</span>
+              <span class="task__title">Fikenplanter på to bord</span>
+              <span class="task__tags"><span class="tag">hypergeometrisk</span><span class="tag">binomisk tilnærming</span></span>
+            </header>
+            <div class="task__q">
+              <p>En gartner har et bord med 220 planter som ikke er merket. 40 % av plantene er fikenplanter.</p>
+              <ol>
+                <li>En kunde forsyner seg tilfeldig av 10 planter. Bestem sannsynligheten for at minst tre av disse er fikenplanter.</li>
+                <li>Gartneren har satt ut enda et bord: totalt 150 planter, hvorav 50 er fikenplanter. En kunde tar to tilfeldige planter fra hvert bord. Hva er sannsynligheten for at nøyaktig én av de fire plantene er en fikenplante?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>a) To like gyldige veier</h4>
+                <p><strong>Eksakt (hypergeometrisk).</strong> \(M=0{,}4\cdot 220=88\), så \(X\sim\mathrm{Hyp}(220,88,10)\):</p>
+                <p>\[ P(X\ge 3)=1-\sum_{x=0}^{2}\frac{\binom{88}{x}\binom{132}{10-x}}{\binom{220}{10}}\approx 0{,}839 \]</p>
+                <p><strong>Tilnærmet (binomisk).</strong> Siden \(N=220\ge 10n=100\) kan vi bruke \(X\sim\mathrm{Bin}(10;\,0{,}4)\):</p>
+                <p>\[ P(X\ge 3)=1-\sum_{x=0}^{2}\binom{10}{x}0{,}4^x0{,}6^{10-x}\approx 0{,}833 \]</p>
+                <p>Avviket er under 1 %, og sensurveiledningen godtar begge.</p>
+                <h4>b)</h4>
+                <p>Nøyaktig én fikenplante totalt betyr enten «1 fra bord 1 og 0 fra bord 2» eller «0 fra bord 1 og 1 fra bord 2». Bordene er uavhengige, så vi ganger og summerer:</p>
+                <p>\[ \underbrace{\frac{\binom{88}{1}\binom{132}{1}}{\binom{220}{2}}}_{0{,}4822}\cdot\underbrace{\frac{\binom{50}{0}\binom{100}{2}}{\binom{150}{2}}}_{0{,}4430} + \underbrace{\frac{\binom{88}{0}\binom{132}{2}}{\binom{220}{2}}}_{0{,}3589}\cdot\underbrace{\frac{\binom{50}{1}\binom{100}{1}}{\binom{150}{2}}}_{0{,}4474} \]</p>
+                <p>\[ =0{,}2136+0{,}1606=0{,}3742 \]</p>
+                <div class="answer"><b>a) ca. 0,84 (0,83 binomisk) · b) ca. 0,37.</b></div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="okt2024">
+            <header class="task__head">
+              <span class="task__src">OKT 2024 · O2</span>
+              <span class="task__title">Misfornøyde kunder</span>
+              <span class="task__tags"><span class="tag">hypergeometrisk</span><span class="tag">E og Var</span></span>
+            </header>
+            <div class="task__q">
+              <p>En bedrift har 80 kunder hvorav 7 er misfornøyde med leveransene. Bedriftsledelsen skal besøke et tilfeldig utvalg på 12 kunder. La \(X\) være antall misfornøyde kunder blant de 12.</p>
+              <ol>
+                <li>Hvor sannsynlig er det at nøyaktig én av de tolv kundene er misfornøyd?</li>
+                <li>Beregn forventningsverdi og varians for \(X\).</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>\(X\sim\mathrm{Hyp}(80,7,12)\).</p>
+                <h4>a)</h4>
+                <p>\[ P(X=1)=\frac{\binom{7}{1}\binom{73}{11}}{\binom{80}{12}}\approx 0{,}414 \]</p>
+                <h4>b)</h4>
+                <p>\[ \mu=12\cdot\frac{7}{80}=1{,}05 \]</p>
+                <p>\[ \sigma^2=12\cdot\frac{7}{80}\Bigl(1-\frac{7}{80}\Bigr)\cdot\frac{80-12}{80-1}\approx 0{,}82 \]</p>
+                <div class="answer"><b>a) 0,41 · b) \(\mu=1{,}05\), \(\sigma^2\approx 0{,}82\).</b></div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="mai2026">
+            <header class="task__head">
+              <span class="task__src">MAI 2026 · O2</span>
+              <span class="task__title">Vareparti med garantert defektandel</span>
+              <span class="task__tags"><span class="tag">hypergeometrisk</span></span>
+            </header>
+            <div class="task__q">
+              <p>Leverandøren av et vareparti på 100 enheter garanterer at defektandelen er høyst 3 %. Man velger tilfeldig ut 15 enheter for kontroll, og blant de 15 finner man at tre er defekte. Hvor stor sannsynlighet er det for å finne minst tre defekte i et slikt utvalg dersom defektandelen i hele partiet er 3 %?</p>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>Med defektandel 3 % i et parti på 100 er \(M=3\), altså \(X\sim\mathrm{Hyp}(N{=}100,\ M{=}3,\ n{=}15)\). Siden det bare finnes 3 defekte i hele partiet er \(P(X\ge 3)=P(X=3)\):</p>
+                <p>\[ P(X\ge 3)=\frac{\binom{3}{3}\binom{97}{12}}{\binom{100}{15}}=\frac{15\cdot 14\cdot 13}{100\cdot 99\cdot 98}\approx 0{,}0028 \]</p>
+                <div class="answer"><b>Ca. 0,28 %.</b> Det er altså svært lite trolig å finne tre defekte hvis garantien holder — et sterkt argument for at partiet er dårligere enn lovet. (Dette er i praksis en p-verdi, se <a href="08-hypotesetesting.html">hypotesetesting</a>.)</div>
+              </div>
+            </details>
+          </article>
+        </section>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="01-sannsynlighet.html"><small>forrige</small>← Sannsynlighet og hendelsestre</a>
+          <a data-dir="next" href="03-diskrete-fordelinger.html"><small>neste</small>Diskrete fordelinger →</a>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js"></script>
+  <script src="../../../assets/js/math.js"></script>
+</body>
+</html>

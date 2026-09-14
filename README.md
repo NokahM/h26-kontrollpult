@@ -13,7 +13,7 @@ automatisk fra `main`).
 |-----------|------------------------------------|--------|
 | MoS       | Maskinvare og sikkerhet            | aktiv — ressurser lokalt |
 | TSD3060   | Utvikling av sikre webtjenester    | aktiv — ressurser hos ekstern kilde |
-| STAT      | Statistikk                         | kontefag — ressurser kommer |
+| STAT      | Statistikk                         | kontefag — 88 eksamensoppgaver med løsning |
 | FYS2-EL   | Fysikk 2, elektrisitetslære        | kontefag — ressurser kommer |
 
 ## Kjøre lokalt
@@ -31,11 +31,14 @@ og åpne `http://localhost:8000`.
 
 ```
 site/
-  index.html                 landingsside
-  subjects/<emne>/index.html én side per emne
-  assets/css/main.css        delt stilark + tema-tokens per emne
-  assets/js/main.js          sidepanel: skjul/vis, lagres i localStorage
-  assets/resources/<emne>/   ressursfiler (IKKE i git, se .gitignore)
+  index.html                    landingsside
+  subjects/<emne>/index.html    én side per emne
+  subjects/<emne>/guides/       temasider (MoS, TSD3060)
+  subjects/statistikk/oppgaver/ eksamensoppgaver etter tema, med løsningsforslag
+  assets/css/main.css           delt stilark + tema-tokens per emne
+  assets/js/main.js             sidepanel: skjul/vis, lagres i localStorage
+  assets/js/math.js             laster MathJax fra CDN (kun statistikk-sidene)
+  assets/resources/<emne>/      ressursfiler (IKKE i git, se .gitignore)
 ```
 
 ## Legge til ressurser
@@ -44,10 +47,23 @@ site/
 prosjektroten. Legg nye filer i mappen og en tilhørende rad i
 `subjects/mos/index.html` sin ressursliste.
 
-**Statistikk / Fysikk 2**: sidene har en tom-tilstand
-(`.empty`-komponenten) frem til pensum er klart. Når ressurser er klare:
-legg filene i riktig `assets/resources/<emne>/`-mappe og bytt ut
-`.empty`-blokken med `.section`/`.reslist`-mønsteret som på MoS-siden.
+**Statistikk**: `subjects/statistikk/oppgaver/` inneholder 88 oppgaver fra 13
+tidligere PB2030-eksamenssett (juni 2020 – mai 2026), gruppert etter tema i
+stedet for etter sitting, hver med et løsningsforslag som ligger skjult i et
+`<details class="sol">`-element. Eksamens-PDF-ene ligger i
+`assets/resources/statistikk/` (utenfor git, se under).
+
+Sidene er vanlig, håndredigerbar HTML — legg til en ny oppgave ved å kopiere en
+eksisterende `<article class="task">`-blokk. Matematikken skrives som LaTeX
+mellom `\(…\)` (inline) og `\[…\]` (blokk), og rendres av MathJax som lastes
+av `assets/js/math.js`. **Husk å skrive `&lt;` og `&gt;` i stedet for `<` og `>`
+inne i formler** — nettleseren parser HTML før MathJax kjører, så en rå `<`
+foran en bokstav blir tolket som starten på en tag og spiser resten av formelen.
+
+**Fysikk 2**: siden har fortsatt en tom-tilstand (`.empty`-komponenten) frem til
+pensum er klart. Når ressurser er klare: legg filene i
+`assets/resources/fysikk2/` og bytt ut `.empty`-blokken med
+`.section`/`.reslist`-mønsteret som på MoS-siden.
 
 **TSD3060**: ressursene ligger på et eksternt, passordbeskyttet
 kurssystem (debbie.usn.no). Innlogging er *bevisst* ikke lagt inn i denne

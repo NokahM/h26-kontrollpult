@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Konfidensintervall — Statistikk · H26</title>
+  <meta name="description" content="Intervall for μ med kjent og ukjent σ, for andelen p, for σ selv — og hvor mange målinger som trengs.">
+  <link rel="stylesheet" href="../../../assets/css/main.css">
+</head>
+<body class="theme-statistikk">
+  <div class="scrim" data-sidebar-toggle></div>
+  <div class="app-shell">
+
+    <aside class="sidebar">
+      <div class="sidebar__head">
+        <span class="sidebar__brand">H26 · <strong>KONTROLLPULT</strong></span>
+      </div>
+      <nav class="sidebar__nav">
+        <div class="sidebar__group-label">Emner</div>
+        <a class="navlink" href="../../../index.html">
+          <span class="navlink__dot" data-status="active" style="color:#5eead4"></span>
+          <span class="navlink__label"><span class="navlink__code">H26</span><span class="navlink__name">Oversikt</span></span>
+        </a>
+        <a class="navlink" href="../../mos/index.html">
+          <span class="navlink__dot" data-status="active" style="color:#57f27c"></span>
+          <span class="navlink__label"><span class="navlink__code">MoS</span><span class="navlink__name">Maskinvare og sikkerhet</span></span>
+        </a>
+        <a class="navlink" href="../../tsd3060/index.html">
+          <span class="navlink__dot" data-status="active" style="color:#35c7f0"></span>
+          <span class="navlink__label"><span class="navlink__code">TSD3060</span><span class="navlink__name">Sikre webtjenester</span></span>
+        </a>
+        <div class="sidebar__group-label">Konte</div>
+        <a class="navlink" data-active="true" href="../index.html">
+          <span class="navlink__dot" data-status="active" style="color:#d98b2b"></span>
+          <span class="navlink__label"><span class="navlink__code">STAT</span><span class="navlink__name">Statistikk</span></span>
+        </a>
+        <a class="navlink" href="../../fysikk2/index.html">
+          <span class="navlink__dot" data-status="pending" style="color:#a78bfa"></span>
+          <span class="navlink__label"><span class="navlink__code">FYS2-EL</span><span class="navlink__name">Elektrisitetslære</span></span>
+        </a>
+      </nav>
+      <div class="sidebar__foot">H26 · sist oppdatert 2026-09-14</div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">← Statistikk</a>
+        <div class="topbar__crumb"><span>·</span> Konfidensintervall</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow"><span class="page-header__trace"></span>PB2030 · OPPGAVER MED LØSNING</div>
+          <h1>Konfidensintervall</h1>
+          <p class="page-header__desc">Intervall for μ med kjent og ukjent σ, for andelen p, for σ selv — og hvor mange målinger som trengs.</p>
+          <span class="page-header__status" data-status="active"><i></i>12 oppgaver · 11 sett</span>
+        </header>
+
+        <section class="section">
+          <div class="section__label">Metode</div>
+          <article class="prose">
+            <p>Alle konfidensintervallene i dette emnet har samme form: <strong>estimat ± kvantil · standardfeil</strong>. Hele jobben er å velge riktig kvantil og riktig standardfeil.</p>
+
+            <h3>For forventningsverdien μ</h3>
+            <div class="dtable-wrap"><table class="dtable">
+              <thead><tr><th>Situasjon</th><th>Intervall</th><th>Kvantil fra</th></tr></thead>
+              <tbody>
+                <tr><td>\(\sigma\) <strong>kjent</strong></td><td>\(\bar X \pm z_{\alpha/2}\cdot\dfrac{\sigma}{\sqrt n}\)</td><td>Tabell B</td></tr>
+                <tr><td>\(\sigma\) <strong>ukjent</strong> (bruk \(s\))</td><td>\(\bar X \pm t_{\alpha/2}\cdot\dfrac{S}{\sqrt n}\)</td><td>Tabell C, \(n-1\) frihetsgrader</td></tr>
+              </tbody>
+            </table></div>
+            <p>Krav: enten normalfordelte \(X_i\), eller \(n\ge 30\) (sentralgrenseteoremet). Er \(n\) stor, er \(t_{\alpha/2}\approx z_{\alpha/2}\), og begge godtas.</p>
+
+            <h3>For en sannsynlighet p</h3>
+            <p>\[ \hat p \pm z_{\alpha/2}\sqrt{\frac{\hat p(1-\hat p)}{n}},\qquad \hat p=\frac{X}{n} \]</p>
+            <p>Gyldig når \(n\hat p(1-\hat p)\ge 5\) — vis alltid denne sjekken, den gir poeng.</p>
+
+            <h3>Kvantilene du trenger</h3>
+            <div class="dtable-wrap"><table class="dtable">
+              <thead><tr><th class="num">Konfidensgrad</th><th class="num">90 %</th><th class="num">95 %</th><th class="num">98 %</th><th class="num">99 %</th></tr></thead>
+              <tbody>
+                <tr><td class="num">\(\alpha\)</td><td class="num">0,10</td><td class="num">0,05</td><td class="num">0,02</td><td class="num">0,01</td></tr>
+                <tr><td class="num">\(z_{\alpha/2}\)</td><td class="num">1,645</td><td class="num">1,960</td><td class="num">2,326</td><td class="num">2,576</td></tr>
+              </tbody>
+            </table></div>
+
+            <h3>«Hvor mange målinger trengs?»</h3>
+            <p>Lengden på intervallet er \(L=2z_{\alpha/2}\sigma/\sqrt n\). Sett inn kravet og løs for \(n\) — og rund alltid <strong>opp</strong>.</p>
+
+            <div class="note"><strong>Tolkning i ord</strong> blir ofte etterspurt. Riktig formulering: «Vi er 95 % sikre på at den sanne \(\mu\) ligger i intervallet» — i betydningen at metoden treffer i 95 % av tilfellene om undersøkelsen gjentas. Ikke: «det er 95 % sannsynlighet for at \(\mu\) er der», som gir \(\mu\) en fordeling den ikke har i denne modellen.</div>
+            <div class="note"><strong>Kobling til hypotesetest:</strong> ligger \(\mu_0\) <em>utenfor</em> et \(100(1-\alpha)\%\) intervall, kan \(H_0:\mu=\mu_0\) forkastes tosidig på nivå \(\alpha\). Et symmetrisk 90 %-intervall gir samtidig et ensidig 95 %-intervall. Både okt 2021, mai 2022 og mai 2026 bruker denne snarveien.</div>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section__label">Intervall for μ — σ kjent (z-intervall)</div>
+          <div class="tasknav">
+            <a href="#mai2026">Mai 2026 · fuktighet</a>
+            <a href="#okt2025">Okt 2025 · laksevekt</a>
+            <a href="#mai2025">Mai 2025 · eplevekt</a>
+            <a href="#okt2023">Okt 2023 · CO₂-utslipp</a>
+            <a href="#mai2023">Mai 2023 · resistans</a>
+            <a href="#mai2021">Mai 2021 · kyllingvekt</a>
+          </div>
+
+          <article class="task" id="mai2026">
+            <header class="task__head">
+              <span class="task__src">MAI 2026 · O5a</span>
+              <span class="task__title">Fuktprosent i fyringsved</span>
+              <span class="task__tags"><span class="tag">z-intervall</span><span class="tag">90 %</span></span>
+            </header>
+            <div class="task__q">
+              <p>Sju tilfeldig valgte vedkubber ga følgende fuktighetsprosent: 19,2 · 23,4 · 21,9 · 26,1 · 24,9 · 33,6 · 16,8. Observasjonene kan regnes som realiseringer av uavhengige normalfordelte variable med forventning \(\mu\) og standardavvik 5. Lag et 90 % symmetrisk konfidensintervall for \(\mu\).</p>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>Summen er 165,9, altså \(\bar x=165{,}9/7=23{,}7\). Med \(\sigma=5\) kjent og \(n=7\) bruker vi z-intervallet — lovlig selv om \(n&lt;30\), fordi observasjonene er normalfordelte.</p>
+                <p>\[ \bar x \pm z_{0{,}05}\cdot\frac{\sigma}{\sqrt n}=23{,}7\pm 1{,}645\cdot\frac{5}{\sqrt 7}=23{,}7\pm 3{,}11 \]</p>
+                <div class="answer"><b>\(\mu\in[20{,}6;\ 26{,}8]\).</b> Legg merke til at 20 ligger <em>utenfor</em> intervallet — se <a href="08-hypotesetesting.html#mai2026">hypotesetesten</a> i punkt b).</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="okt2025">
+            <header class="task__head">
+              <span class="task__src">OKT 2025 · O4</span>
+              <span class="task__title">Gjennomsnittsvekt på laks i en merd</span>
+              <span class="task__tags"><span class="tag">z-intervall</span><span class="tag">98 %</span></span>
+            </header>
+            <div class="task__q">
+              <p>Vekten til en fisk fra merden er normalfordelt med forventning \(\mu\) og standardavvik \(\sigma=0{,}5\) kg. Basert på et tilfeldig utvalg av 25 laks er gjennomsnittsvekten 4,25 kg. Finn et 98 % konfidensintervall for den virkelige gjennomsnittsvekten.</p>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>\(100(1-\alpha)=98\ \Rightarrow\ \alpha=0{,}02\ \Rightarrow\ \alpha/2=0{,}01\ \Rightarrow\ z_{0{,}01}=2{,}326\).</p>
+                <p>\[ \bar X\pm z_{\alpha/2}\frac{\sigma}{\sqrt n}=4{,}25\pm 2{,}326\cdot\frac{0{,}5}{\sqrt{25}}=4{,}25\pm 0{,}233 \]</p>
+                <div class="answer"><b>\(\mu\in[4{,}02;\ 4{,}48]\) kg.</b></div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="mai2025">
+            <header class="task__head">
+              <span class="task__src">MAI 2025 · O4</span>
+              <span class="task__title">Gjennomsnittsvekt for epler</span>
+              <span class="task__tags"><span class="tag">z-intervall</span><span class="tag">99 %</span></span>
+            </header>
+            <div class="task__q">
+              <p>En eplebonde veier 100 tilfeldige epler. Vektene (i kg) antas normalfordelte med ukjent \(\mu\) og \(\sigma=0{,}028\) kg. Fra målingene er \(\bar X=0{,}153\) kg. Finn et 99 % symmetrisk konfidensintervall for forventet eplevekt.</p>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>\(\alpha=0{,}01\ \Rightarrow\ z_{0{,}005}=2{,}576\).</p>
+                <p>\[ 0{,}153\pm 2{,}576\cdot\frac{0{,}028}{\sqrt{100}}=0{,}153\pm 0{,}0072 \]</p>
+                <div class="answer"><b>\(\mu\in[0{,}146;\ 0{,}160]\) kg.</b> Oppgi svaret med samme antall desimaler som dataene — her tre.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="okt2023">
+            <header class="task__head">
+              <span class="task__src">OKT 2023 · O4</span>
+              <span class="task__title">CO₂-utslipp — og hvor mange biler som trengs</span>
+              <span class="task__tags"><span class="tag">z-intervall</span><span class="tag">n-bestemmelse</span></span>
+            </header>
+            <div class="task__q">
+              <p>En bilprodusent vil estimere forventet CO₂-utslipp \(\mu\) [g/km] for en dieselmodell. De måler utslippet til 6 eksemplarer. Måleresultatene antas normalfordelte med kjent \(\sigma=10\) g/km.</p>
+              <ol>
+                <li>Gjennomsnittlig utslipp ble 118,5 g/km. Bestem et 95 % konfidensintervall for \(\mu\).</li>
+                <li>Hvor mange biler må undersøkes for at lengden på konfidensintervallet skal være mindre eller lik 10 g/km?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>a)</h4>
+                <p>\[ 118{,}5\pm 1{,}960\cdot\frac{10}{\sqrt 6}=118{,}5\pm 8{,}00 \]</p>
+                <p>altså \(\mu\in[110{,}5;\ 126{,}5]\) g/km.</p>
+                <h4>b)</h4>
+                <p>Lengden er \(L=2z_{\alpha/2}\sigma/\sqrt n\):</p>
+                <p>\[ 2\cdot 1{,}960\cdot\frac{10}{\sqrt n}\le 10 \quad\Rightarrow\quad \sqrt n\ge 3{,}92 \quad\Rightarrow\quad n\ge 15{,}37 \]</p>
+                <div class="answer"><b>a) [110,5; 126,5] · b) minst 16 biler.</b> Rund alltid opp — 15 biler gir et for langt intervall.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="mai2023">
+            <header class="task__head">
+              <span class="task__src">MAI 2023 · O4</span>
+              <span class="task__title">Resistans i fem motstander</span>
+              <span class="task__tags"><span class="tag">z-intervall</span><span class="tag">liten n</span></span>
+            </header>
+            <div class="task__q">
+              <p>Det ble gjort følgende målinger av resistansen (i kΩ) til 5 motstander: 49, 49, 50, 50, 54. Vi antar at \(R_i\) er uavhengige og normalfordelte med forventningsverdi \(\mu\) og standardavvik \(\sigma=2\). Finn et 95 % konfidensintervall for \(\mu\).</p>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>\[ \bar x=\frac{49+49+50+50+54}{5}=\frac{252}{5}=50{,}4 \]</p>
+                <p>\(\sigma\) er <em>kjent</em> (oppgitt til 2), så vi bruker z og ikke t, selv med bare 5 målinger:</p>
+                <p>\[ 50{,}4\pm 1{,}960\cdot\frac{2}{\sqrt 5}=50{,}4\pm 1{,}75 \]</p>
+                <div class="answer"><b>\(\mu\in[48{,}65;\ 52{,}15]\) kΩ.</b> 50 ligger godt innenfor — se <a href="08-hypotesetesting.html#okt2022">den tilhørende hypotesetesten</a> fra okt 2022, som bruker nøyaktig samme data.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="mai2021">
+            <header class="task__head">
+              <span class="task__src">MAI 2021 · O3d–e</span>
+              <span class="task__title">Kyllingvekt — og kravet baklengs</span>
+              <span class="task__tags"><span class="tag">z-intervall</span><span class="tag">kombinert</span></span>
+            </header>
+            <div class="task__q">
+              <p>Kyllingvekt er normalfordelt med ukjent \(\mu\) og \(\sigma=0{,}3\) kg.</p>
+              <ol>
+                <li>Produsenten veier 9 kyllinger som til sammen veier 16 kg. Finn et 95 % konfidensintervall for den virkelige \(\mu\).</li>
+                <li>Hva må gjennomsnittet av 9 kyllingers vekt være for at produsenten kan være 95 % sikker på at minst 80 % av kyllingene veier mer enn 1,6 kg?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>d)</h4>
+                <p>\[ \bar x=\frac{16}{9}=1{,}778 \]</p>
+                <p>\[ 1{,}778\pm 1{,}960\cdot\frac{0{,}3}{\sqrt 9}=1{,}778\pm 0{,}196 \]</p>
+                <p>altså \(\mu\in[1{,}58;\ 1{,}97]\) kg.</p>
+                <h4>e)</h4>
+                <p>Fra punkt b) på samme sett vet vi at kravet «minst 80 % over 1,6 kg» betyr \(\mu\ge 1{,}85\). Den laveste \(\mu\)-verdien vi er 95 % sikre på, er intervallets nedre grense \(\bar X-0{,}196\). Kravet blir derfor</p>
+                <p>\[ \bar X-0{,}196\ge 1{,}85 \quad\Rightarrow\quad \bar X\ge 2{,}046\ \text{kg} \]</p>
+                <div class="answer"><b>d) [1,58; 1,97] kg · e) \(\bar X\ge 2{,}05\) kg.</b> Punkt e) er en fin illustrasjon av hvordan et konfidensintervall brukes som et <em>krav</em>, ikke bare som en rapport.</div>
+              </div>
+            </details>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section__label">Intervall for μ — σ ukjent (t-intervall)</div>
+          <div class="tasknav">
+            <a href="#mai2024">Mai 2024 · sylinderdiameter</a>
+            <a href="#okt2024">Okt 2024 · musenes levetid</a>
+            <a href="#mai2022">Mai 2022 · 9 studenter</a>
+            <a href="#okt2021">Okt 2021 · husky-valper</a>
+          </div>
+
+          <article class="task" id="mai2024">
+            <header class="task__head">
+              <span class="task__src">MAI 2024 · O5a</span>
+              <span class="task__title">Diameter på sylindriske metalldeler</span>
+              <span class="task__tags"><span class="tag">t-intervall</span><span class="tag">99 %</span></span>
+            </header>
+            <div class="task__q">
+              <p>Diameteren til 9 sylindere måles. Gjennomsnittsverdien er 1,0087 cm og utvalgsvariansen er \(s^2=0{,}0016\) cm². Målingene er uavhengige og normalfordelte. Finn et 99 % konfidensintervall for forventningsverdien til en metalldels diameter.</p>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>Standardavviket er <em>ukjent</em> og estimert fra dataene, så det er t-fordelingen som gjelder:</p>
+                <p>\[ s=\sqrt{0{,}0016}=0{,}040\ \text{cm},\qquad \nu=n-1=8,\qquad t_{0{,}005}=3{,}355 \]</p>
+                <p>\[ 1{,}0087\pm 3{,}355\cdot\frac{0{,}040}{\sqrt 9}=1{,}0087\pm 0{,}0447 \]</p>
+                <div class="answer"><b>\(\mu\in[0{,}964;\ 1{,}053]\) cm.</b> Sammenlikn med \(z_{0{,}005}=2{,}576\): t-kvantilet er 30 % større med bare 8 frihetsgrader, så intervallet blir merkbart bredere.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="okt2024">
+            <header class="task__head">
+              <span class="task__src">OKT 2024 · O6b &amp; O7b</span>
+              <span class="task__title">Musenes levetid — og myntens sannsynlighet</span>
+              <span class="task__tags"><span class="tag">t-intervall</span><span class="tag">intervall for p</span></span>
+            </header>
+            <div class="task__q">
+              <ol>
+                <li>Forsøk på 61 mus ga gjennomsnittlig levetid 38,2 måneder og utvalgsstandardavvik 5,6 måneder. Finn et 98 % symmetrisk konfidensintervall for forventet levetid.</li>
+                <li>En mynt ble kastet 1000 ganger og ga kron 476 ganger. Finn et 99 % konfidensintervall for sannsynligheten \(p\) for kron.</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>O6b — t-intervall</h4>
+                <p>\(\alpha=0{,}02\), \(\nu=60\) frihetsgrader, og Tabell C gir \(t_{0{,}01}=2{,}390\):</p>
+                <p>\[ 38{,}2\pm 2{,}390\cdot\frac{5{,}6}{\sqrt{61}}=38{,}2\pm 1{,}71 \]</p>
+                <p>altså \(\mu\in[36{,}49;\ 39{,}91]\) måneder.</p>
+                <p>Siden \(n=61\) er stort, kan man også tilnærme \(t_{0{,}01}\approx z_{0{,}01}=2{,}326\), som gir [36,53; 39,87] — identisk til første desimal.</p>
+                <h4>O7b — intervall for p</h4>
+                <p>\[ \hat p=\frac{476}{1000}=0{,}476,\qquad n\hat p(1-\hat p)=249{,}4\ \ge 5 \quad\checkmark \]</p>
+                <p>\[ 0{,}476\pm 2{,}576\sqrt{\frac{0{,}476\cdot 0{,}524}{1000}}=0{,}476\pm 0{,}041 \]</p>
+                <div class="answer"><b>b) [36,5; 39,9] måneder · O7b) \(p\in[0{,}43;\ 0{,}52]\).</b> At 0,5 ligger innenfor, betyr at dataene ikke gir grunnlag for å hevde at mynten er skjev.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="mai2022">
+            <header class="task__head">
+              <span class="task__src">MAI 2022 · O1d</span>
+              <span class="task__title">Ni studenters eksamensresultat</span>
+              <span class="task__tags"><span class="tag">t-intervall</span><span class="tag">99 %</span></span>
+            </header>
+            <div class="task__q">
+              <p>Et utvalg av 9 studenter hadde følgende resultat (i prosent): 41,3 · 63,7 · 35,7 · 87,1 · 37,9 · 53,5 · 58,6 · 49,5 · 25,4. Finn et 99 % konfidensintervall for \(\mu\) når standardavviket \(\sigma\) er ukjent og resultatene er uavhengige.</p>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>\[ \bar x=\frac{452{,}7}{9}=50{,}3 \]</p>
+                <p>\[ s^2=\frac{1}{n-1}\left(\sum x_i^2-n\bar x^2\right)=\frac{1}{8}\bigl(25\,452{,}31-9\cdot 50{,}3^2\bigr)=335{,}19 \ \Rightarrow\ s=18{,}31 \]</p>
+                <p>\(\alpha=0{,}01\), \(\nu=8\), \(t_{0{,}005}=3{,}355\):</p>
+                <p>\[ 50{,}3\pm 3{,}355\cdot\frac{18{,}31}{\sqrt 9}=50{,}3\pm 20{,}48 \]</p>
+                <div class="answer"><b>\(\mu\in[29{,}8;\ 70{,}8]\).</b> Et enormt bredt intervall — 9 målinger med stor spredning gir nesten ingen presisjon. Legg merke til at \(\mu_0=57{,}9\) ligger innenfor, så hypotesen om uendret nivå kan ikke forkastes (se <a href="08-hypotesetesting.html#mai2022">hypotesetesting</a>).</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="okt2021">
+            <header class="task__head">
+              <span class="task__src">OKT 2021 · O3a–b</span>
+              <span class="task__title">Fødselsvekt hos sibirsk husky — også for σ</span>
+              <span class="task__tags"><span class="tag">t-intervall</span><span class="tag">kjikvadrat</span><span class="tag">sjelden</span></span>
+            </header>
+            <div class="task__q">
+              <p>I undersøkelse A måles fødselsvekten på 81 nyfødte huskyer. Undersøkelsen gir gjennomsnittsvekt 461 gram og utvalgsstandardavvik 13 gram. Fødselsvektene antas normalfordelte og uavhengige.</p>
+              <ol>
+                <li>Finn et 95 % konfidensintervall for forventet fødselsvekt \(\mu\).</li>
+                <li>Finn et 95 % konfidensintervall for standardavviket \(\sigma\).</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>a)</h4>
+                <p>Det sanne standardavviket er ukjent, så i prinsippet gjelder t-fordelingen. Men \(n=81\) er stort, så \(t_{0{,}025}\approx z_{0{,}025}=1{,}96\):</p>
+                <p>\[ 461\pm 1{,}96\cdot\frac{13}{\sqrt{81}}=461\pm 2{,}83 \]</p>
+                <p>altså \(\mu\in[458{,}2;\ 463{,}8]\) gram.</p>
+                <h4>b) Intervall for σ — den eneste gangen dette er spurt om</h4>
+                <p>Her trengs kjikvadratfordelingen med \(n-1=80\) frihetsgrader, \(\chi^2_{0{,}025}=106{,}63\) og \(\chi^2_{0{,}975}=57{,}15\):</p>
+                <p>\[ \left[\sqrt{\frac{(n-1)s^2}{\chi^2_{\alpha/2}}},\ \sqrt{\frac{(n-1)s^2}{\chi^2_{1-\alpha/2}}}\right]=\left[13\sqrt{\frac{79}{106{,}63}},\ 13\sqrt{\frac{79}{57{,}15}}\right] \]</p>
+                <div class="answer"><b>a) [458,2; 463,8] gram · b) \(\sigma\in[11{,}2;\ 15{,}3]\) gram.</b>
+                <br><br>Kjikvadratintervallet for \(\sigma\) er spurt om <strong>én gang på 13 sett</strong>, og formelen står ikke på dagens formelark. Kjenn igjen mønsteret, men prioriter det lavt.</div>
+              </div>
+            </details>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section__label">Intervall for en sannsynlighet p</div>
+          <div class="tasknav">
+            <a href="#mai2021-p">Mai 2021 · defekte komponenter</a>
+            <a href="#mai2024-p">Mai 2024 · defekte metalldeler</a>
+          </div>
+
+          <article class="task" id="mai2021-p">
+            <header class="task__head">
+              <span class="task__src">MAI 2021 · O2a</span>
+              <span class="task__title">Defektsannsynlighet hos en leverandør</span>
+              <span class="task__tags"><span class="tag">intervall for p</span><span class="tag">tolkning</span></span>
+            </header>
+            <div class="task__q">
+              <p>Hansen tester 200 komponenter og finner at 14 stykker er defekte. La \(X\) være antall defekte blant 200 tilfeldig utvalgte.</p>
+              <ul>
+                <li>Forklar hvorfor \(X\) er tilnærmet normalfordelt.</li>
+                <li>Finn et 95 % konfidensintervall for den virkelige defektsannsynligheten \(p\).</li>
+                <li>Kan Hansen konkludere med at \(p\neq 0{,}05\) på 5 % signifikansnivå?</li>
+              </ul>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>Hvorfor normalfordelt</h4>
+                <p>\(X\) er binomisk fordelt med \(n=200\) og \(\hat p=14/200=0{,}07\). Betingelsen for normaltilnærming er oppfylt:</p>
+                <p>\[ n\hat p(1-\hat p)=200\cdot 0{,}07\cdot 0{,}93=13{,}0 \ \ge 5 \quad\checkmark \]</p>
+                <h4>Konfidensintervall</h4>
+                <p>\[ SE(\hat p)=\sqrt{\frac{0{,}07\cdot 0{,}93}{200}}=0{,}0180 \]</p>
+                <p>\[ 0{,}07\pm 1{,}960\cdot 0{,}0180=0{,}07\pm 0{,}0354 \]</p>
+                <p>altså \(p\in[0{,}035;\ 0{,}105]\).</p>
+                <h4>Konklusjon</h4>
+                <div class="answer"><b>Nei.</b> \(p=0{,}05\) ligger innenfor det 95 % konfidensintervallet, og da kan nullhypotesen \(H_0: p=0{,}05\) ikke forkastes på 5 % signifikansnivå. Dette er konfidensintervall-snarveien til en tosidig test.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="mai2024-p">
+            <header class="task__head">
+              <span class="task__src">MAI 2024 · O5b</span>
+              <span class="task__title">Andel defekte metalldeler</span>
+              <span class="task__tags"><span class="tag">intervall for p</span></span>
+            </header>
+            <div class="task__q">
+              <p>En undersøkelse av 1000 produserte deler ga 28 defekte. Finn et 95 % konfidensintervall for sannsynligheten for at en tilfeldig del er defekt.</p>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>\[ \hat p=\frac{28}{1000}=0{,}028,\qquad n\hat p(1-\hat p)=27{,}2\ \ge 5 \quad\checkmark \]</p>
+                <p>\[ 0{,}028\pm 1{,}960\sqrt{\frac{0{,}028\cdot 0{,}972}{1000}}=0{,}028\pm 0{,}0102 \]</p>
+                <div class="answer"><b>\(p\in[0{,}018;\ 0{,}038]\).</b> Merk at intervallet er asymmetrisk i praktisk forstand: øvre grense er mer enn dobbelt så stor som nedre, fordi \(\hat p\) er liten.</div>
+              </div>
+            </details>
+          </article>
+        </section>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="06-sentralgrenseteoremet.html"><small>forrige</small>← Sentralgrenseteoremet</a>
+          <a data-dir="next" href="08-hypotesetesting.html"><small>neste</small>Hypotesetesting →</a>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js"></script>
+  <script src="../../../assets/js/math.js"></script>
+</body>
+</html>

@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sentralgrenseteoremet — Statistikk · H26</title>
+  <meta name="description" content="Gjennomsnitt og sum av mange variable, normaltilnærming til binomisk og poisson, heltallskorreksjon.">
+  <link rel="stylesheet" href="../../../assets/css/main.css">
+</head>
+<body class="theme-statistikk">
+  <div class="scrim" data-sidebar-toggle></div>
+  <div class="app-shell">
+
+    <aside class="sidebar">
+      <div class="sidebar__head">
+        <span class="sidebar__brand">H26 · <strong>KONTROLLPULT</strong></span>
+      </div>
+      <nav class="sidebar__nav">
+        <div class="sidebar__group-label">Emner</div>
+        <a class="navlink" href="../../../index.html">
+          <span class="navlink__dot" data-status="active" style="color:#5eead4"></span>
+          <span class="navlink__label"><span class="navlink__code">H26</span><span class="navlink__name">Oversikt</span></span>
+        </a>
+        <a class="navlink" href="../../mos/index.html">
+          <span class="navlink__dot" data-status="active" style="color:#57f27c"></span>
+          <span class="navlink__label"><span class="navlink__code">MoS</span><span class="navlink__name">Maskinvare og sikkerhet</span></span>
+        </a>
+        <a class="navlink" href="../../tsd3060/index.html">
+          <span class="navlink__dot" data-status="active" style="color:#35c7f0"></span>
+          <span class="navlink__label"><span class="navlink__code">TSD3060</span><span class="navlink__name">Sikre webtjenester</span></span>
+        </a>
+        <div class="sidebar__group-label">Konte</div>
+        <a class="navlink" data-active="true" href="../index.html">
+          <span class="navlink__dot" data-status="active" style="color:#d98b2b"></span>
+          <span class="navlink__label"><span class="navlink__code">STAT</span><span class="navlink__name">Statistikk</span></span>
+        </a>
+        <a class="navlink" href="../../fysikk2/index.html">
+          <span class="navlink__dot" data-status="pending" style="color:#a78bfa"></span>
+          <span class="navlink__label"><span class="navlink__code">FYS2-EL</span><span class="navlink__name">Elektrisitetslære</span></span>
+        </a>
+      </nav>
+      <div class="sidebar__foot">H26 · sist oppdatert 2026-09-14</div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">← Statistikk</a>
+        <div class="topbar__crumb"><span>·</span> Sentralgrenseteoremet</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow"><span class="page-header__trace"></span>PB2030 · OPPGAVER MED LØSNING</div>
+          <h1>Sentralgrenseteoremet</h1>
+          <p class="page-header__desc">Gjennomsnitt og sum av mange variable, normaltilnærming til binomisk og poisson, heltallskorreksjon.</p>
+          <span class="page-header__status" data-status="active"><i></i>10 oppgaver · 13 sett</span>
+        </header>
+
+        <section class="section">
+          <div class="section__label">Metode</div>
+          <article class="prose">
+            <p>Sentralgrenseteoremet er limet i emnet: det er grunnen til at konfidensintervall og hypotesetester i det hele tatt virker, og det dukker opp som eget delspørsmål i samtlige 13 sett.</p>
+            <p>Hvis \(X_1,\dots,X_n\) er uavhengige og identisk fordelte med \(E(X_i)=\mu\) og \(\operatorname{Var}(X_i)=\sigma^2\), så er</p>
+            <p>\[ \bar X=\frac{1}{n}\sum_{i=1}^n X_i \ \text{ tilnærmet } N\!\left(\mu,\ \frac{\sigma}{\sqrt n}\right),\qquad Y=\sum_{i=1}^n X_i \ \text{ tilnærmet } N\!\left(n\mu,\ \sqrt n\,\sigma\right) \]</p>
+            <p>Tommelfingerregelen er \(n\ge 30\). Er \(X_i\)-ene <em>allerede</em> normalfordelte, gjelder resultatet eksakt for alle \(n\).</p>
+
+            <h3>De tre feilene som koster poeng</h3>
+            <ul>
+              <li><strong>\(\sqrt n\) vs. \(n\).</strong> Gjennomsnittet har \(\sigma/\sqrt n\), summen har \(\sqrt n\,\sigma\) — aldri \(n\sigma\).</li>
+              <li><strong>Glemt heltallskorreksjon.</strong> Går du fra en <em>heltallsvariabel</em> (binomisk, poisson, terningsum) til normalfordelingen, skal grensen flyttes en halv enhet: \(P(X\le x)\approx G\bigl(\frac{x+0{,}5-\mu}{\sigma}\bigr)\).</li>
+              <li><strong>Glemt å begrunne.</strong> Spør oppgaven «hva er fordelingen til \(\bar X\)? Begrunn svaret», vil sensor se: uavhengige, identisk fordelte, \(n\ge 30\) ⇒ sentralgrenseteoremet ⇒ tilnærmet normal, med \(\mu_{\bar X}=\mu\) og \(\sigma_{\bar X}=\sigma/\sqrt n\).</li>
+            </ul>
+
+            <h3>Når kan du tilnærme? (fra formelarket)</h3>
+            <div class="dtable-wrap"><table class="dtable">
+              <thead><tr><th>Fra</th><th>Til</th><th>Betingelse</th></tr></thead>
+              <tbody>
+                <tr><td>\(\mathrm{Hyp}(N,M,n)\)</td><td>\(\mathrm{Bin}(n,M/N)\)</td><td class="num">\(N\ge 10n\)</td></tr>
+                <tr><td>\(\mathrm{Bin}(n,p)\)</td><td>\(\mathrm{Poisson}(np)\)</td><td class="num">\(n&gt;10,\ p&lt;0{,}1\)</td></tr>
+                <tr><td>\(\mathrm{Bin}(n,p)\)</td><td>\(N\bigl(np,\sqrt{np(1-p)}\bigr)\)</td><td class="num">\(np(1-p)\ge 5\)</td></tr>
+                <tr><td>\(\mathrm{Poisson}(\lambda t)\)</td><td>\(N\bigl(\lambda t,\sqrt{\lambda t}\bigr)\)</td><td class="num">\(\lambda t\ge 10\)</td></tr>
+              </tbody>
+            </table></div>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section__label">Oppgaver — normaltilnærming til en heltallsvariabel</div>
+          <div class="tasknav">
+            <a href="#jun2020">Jun 2020 · 1000 biler</a>
+            <a href="#okt2024">Okt 2024 · 1000 myntkast</a>
+            <a href="#mai2025">Mai 2025 · 200 terninger</a>
+            <a href="#okt2025">Okt 2025 · lynnedslag</a>
+          </div>
+
+          <article class="task" id="jun2020">
+            <header class="task__head">
+              <span class="task__src">JUN 2020 · O1b</span>
+              <span class="task__title">800 av 1000 biler — tilnærmet og eksakt</span>
+              <span class="task__tags"><span class="tag">binomisk → normal</span><span class="tag">heltallskorreksjon</span></span>
+            </header>
+            <div class="task__q">
+              <p>76 % av bilene som kjører gjennom en bestemt tunnel kjører for fort. Finn sannsynligheten for at minst 800 av 1000 tilfeldig valgte biler kjører for fort. Bruk normaltilnærming med heltallskorreksjon og sammenlikn svaret med det du får med eksakt beregningsmetode.</p>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>Sjekk betingelsen først</h4>
+                <p>\[ np(1-p)=1000\cdot 0{,}76\cdot 0{,}24=182{,}4\ \ge 5 \quad\checkmark \]</p>
+                <p>Så \(Y\) er tilnærmet normalfordelt med</p>
+                <p>\[ \mu=np=760,\qquad \sigma=\sqrt{182{,}4}=13{,}51 \]</p>
+                <h4>Med heltallskorreksjon</h4>
+                <p>«Minst 800» er \(Y\ge 800\), altså \(1-P(Y\le 799)\), og grensen flyttes til 799,5:</p>
+                <p>\[ P(Y\ge 800)\approx 1-G\!\left(\frac{799{,}5-760}{13{,}51}\right)=1-G(2{,}92)=0{,}0017 \]</p>
+                <h4>Eksakt</h4>
+                <p>\[ P(Y\ge 800)=\sum_{y=800}^{1000}\binom{1000}{y}0{,}76^y\,0{,}24^{1000-y}=0{,}00145 \]</p>
+                <div class="answer"><b>Tilnærmet 0,0017 mot eksakt 0,00145.</b> Tilnærmingen er god i absolutt forstand, men relativt ganske grov langt ute i halen — et poeng verdt å nevne i besvarelsen.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="okt2024">
+            <header class="task__head">
+              <span class="task__src">OKT 2024 · O7a</span>
+              <span class="task__title">476 kron av 1000 myntkast</span>
+              <span class="task__tags"><span class="tag">binomisk → normal</span><span class="tag">heltallskorreksjon</span></span>
+            </header>
+            <div class="task__q">
+              <p>En person kaster en mynt 1000 ganger. Resultatet blir kron 476 av gangene. Dersom vi antar at sannsynligheten for kron i et kast er \(p=0{,}5\), finn en tilnærmet sannsynlighet for å få 476 eller færre kron i forsøket.</p>
+              <p class="callout">Punkt b)–c) ligger under <a href="07-konfidensintervall.html#okt2024">konfidensintervall</a> og <a href="08-hypotesetesting.html#okt2024-mynt">hypotesetesting</a>.</p>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>\(X\sim\mathrm{Bin}(1000;\,0{,}5)\) med \(\sigma^2=np(1-p)=250\ge 5\), altså kan vi tilnærme med \(N(500;\,15{,}8)\).</p>
+                <p>\[ P(X\le 476)\approx G\!\left(\frac{476+0{,}5-500}{15{,}8}\right)=G(-1{,}49)=0{,}068 \]</p>
+                <div class="answer"><b>Ca. 6,8 %.</b> Dette er samtidig den ensidige p-verdien for påstanden om at mynten er rettferdig — så et resultat som 476/1000 er ikke i seg selv mistenkelig.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="mai2025">
+            <header class="task__head">
+              <span class="task__src">MAI 2025 · O2b</span>
+              <span class="task__title">Sum øyne for 200 terninger</span>
+              <span class="task__tags"><span class="tag">sum</span><span class="tag">heltallskorreksjon</span></span>
+            </header>
+            <div class="task__q">
+              <p>Du kaster 200 terninger. Hvor stor er den tilnærmede sannsynligheten for at sum øyne for alle terningene skal være 670 eller lavere? (Fra a): \(\mu=7/2\) og \(\sigma^2=35/12\) for én terning.)</p>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>La \(Y=X_1+\dots+X_{200}\). Sentralgrenseteoremet gir</p>
+                <p>\[ E(Y)=200\cdot\frac72=700,\qquad \operatorname{Var}(Y)=200\cdot\frac{35}{12}=\frac{1750}{3} \ \Rightarrow\ \sigma_Y=\sqrt{\tfrac{1750}{3}}\approx 24{,}15 \]</p>
+                <p>\(Y\) er en heltallsvariabel, så vi bruker heltallskorreksjon:</p>
+                <p>\[ P(Y\le 670)\approx G\!\left(\frac{670+0{,}5-700}{24{,}15}\right)=G(-1{,}22)\approx 0{,}11 \]</p>
+                <div class="answer"><b>Ca. 11 %.</b></div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="okt2025">
+            <header class="task__head">
+              <span class="task__src">OKT 2025 · O2b</span>
+              <span class="task__title">Poisson blir normal</span>
+              <span class="task__tags"><span class="tag">poisson → normal</span></span>
+            </header>
+            <div class="task__q">
+              <p>Antall lynnedslag per kvadratkilometer per døgn er poissonfordelt med forventning 5. Finn tilnærmet sannsynlighet for at det i løpet av et døgn forekommer 40 eller færre lynnedslag i et område på ti kvadratkilometer.</p>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>Poissonparameteren skalerer med areal: \(X_{10}\sim\mathrm{Poisson}(50)\). Siden \(\lambda t=50\ge 10\) tilnærmer vi med \(N(50,\sqrt{50})\), og heltallskorreksjon gjelder:</p>
+                <p>\[ P(X_{10}\le 40)\approx G\!\left(\frac{40+0{,}5-50}{\sqrt{50}}\right)=G(-1{,}34)\approx 0{,}09 \]</p>
+                <div class="answer"><b>Ca. 9 %</b> (eksakt poisson gir 0,086). Se også <a href="03-diskrete-fordelinger.html#okt2025-poisson">poissonfordeling</a>.</div>
+              </div>
+            </details>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section__label">Oppgaver — gjennomsnitt av n målinger</div>
+          <div class="tasknav">
+            <a href="#okt2023">Okt 2023 · ventetid</a>
+            <a href="#mai2023">Mai 2023 · 35 støymålinger</a>
+            <a href="#mai2022">Mai 2022 · 81 studenter</a>
+            <a href="#mai2021">Mai 2021 · 9 kyllinger</a>
+            <a href="#eksponensial">Eksponensielle levetider</a>
+            <a href="#tabellfordeling">Fordeling fra tabell</a>
+          </div>
+
+          <article class="task" id="okt2023">
+            <header class="task__head">
+              <span class="task__src">OKT 2023 · O3d–e</span>
+              <span class="task__title">Ventetid mellom kaffekopper</span>
+              <span class="task__tags"><span class="tag">ukjent fordeling</span><span class="tag">sum</span><span class="tag">m-bestemmelse</span></span>
+            </header>
+            <div class="task__q">
+              <p>Det tar litt tid \(T\) fra en kopp er fylt opp til maskinen er klar til å fylle neste. Fordelingen til \(T\) er <em>ukjent</em>, men vi vet at \(\mu=8{,}0\) sekunder og \(\sigma=2{,}0\) sekunder.</p>
+              <ol>
+                <li>Vi fyller 100 kopper og måler de 99 tilhørende ventetidene, som antas uavhengige. Gjennomsnittet kalles \(\bar T\). Hva er sannsynligheten for at \(\bar T&lt;8{,}2\) sekunder?</li>
+                <li>Anta at vi måler \(m\) uavhengige ventetider og kaller summen \(S\). Hvor stor må \(m\) minst være for at sannsynligheten for at det relative avviket \(|S-\mu_S|/\mu_S&lt;0{,}01\) skal være større enn 0,9?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>d)</h4>
+                <p>Fordelingen er ukjent — men det spiller ingen rolle, for \(n=99\ge 30\). Sentralgrenseteoremet gir</p>
+                <p>\[ \mu_{\bar T}=8{,}0,\qquad \sigma_{\bar T}=\frac{2{,}0}{\sqrt{99}}=0{,}201 \]</p>
+                <p>\[ P(\bar T&lt;8{,}2)=G\!\left(\frac{8{,}2-8{,}0}{0{,}201}\right)=G(0{,}995)\approx 0{,}84 \]</p>
+                <h4>e) Den vanskeligste varianten</h4>
+                <p>Summen er tilnærmet normalfordelt med \(\mu_S=m\mu\) og \(\sigma_S=\sqrt m\,\sigma\). Kravet kan skrives om:</p>
+                <p>\[ P\bigl(0{,}99\mu_S&lt;S&lt;1{,}01\mu_S\bigr)&gt;0{,}9 \]</p>
+                <p>Normalfordelingen er symmetrisk om \(\mu_S\), så dette er ekvivalent med</p>
+                <p>\[ 2P(S&lt;1{,}01\mu_S)-1&gt;0{,}9 \iff P(S&lt;1{,}01\mu_S)&gt;0{,}95 \]</p>
+                <p>\[ G\!\left(\frac{0{,}01\,m\mu}{\sqrt m\,\sigma}\right)&gt;0{,}95 \iff \frac{0{,}01\sqrt m\,\mu}{\sigma}&gt;z_{0{,}05}=1{,}645 \]</p>
+                <p>\[ m&gt;\left(\frac{\sigma}{0{,}01\mu}\cdot z_{0{,}05}\right)^2=\left(\frac{2{,}0}{0{,}01\cdot 8{,}0}\cdot 1{,}645\right)^2=1691{,}3 \]</p>
+                <div class="answer"><b>d) 0,84 · e) \(m\ge 1692\) målinger.</b> Trikset er å gjøre om det tosidige kravet til ett ensidig, og så huske at \(\mu_S/\sigma_S\) vokser som \(\sqrt m\).</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="mai2023">
+            <header class="task__head">
+              <span class="task__src">MAI 2023 · O3d</span>
+              <span class="task__title">Fordelingen til gjennomsnittet — med begrunnelse</span>
+              <span class="task__tags"><span class="tag">teori</span><span class="tag">begrunnelse</span></span>
+            </header>
+            <div class="task__q">
+              <p>Kari har fått tilgang til data med \(n=35\) støymålinger fra et sted i Tønsberg. Hun antar at målingene er uavhengige og identisk fordelte med forventning 40 dB og standardavvik 10 dB. Hva er fordelingen til gjennomsnittet \(\bar X\) av de 35 målingene? Begrunn svaret. Bestem gjennomsnittets forventningsverdi og standardavvik.</p>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>Alle tre forutsetningene i sentralgrenseteoremet er nevnt eksplisitt i oppgaveteksten, og det er nettopp det sensor vil se at du bruker:</p>
+                <ul>
+                  <li>Målingene er <strong>uavhengige</strong>.</li>
+                  <li>De er <strong>identisk fordelte</strong> med endelig \(\mu\) og \(\sigma\).</li>
+                  <li>\(n=35\ge 30\).</li>
+                </ul>
+                <p>Derfor er \(\bar X\) tilnærmet normalfordelt, uansett hvilken fordeling de enkelte målingene har:</p>
+                <p>\[ \mu_{\bar X}=\mu=40\ \text{dB},\qquad \sigma_{\bar X}=\frac{\sigma}{\sqrt n}=\frac{10}{\sqrt{35}}\approx 1{,}69\ \text{dB} \]</p>
+                <div class="answer"><b>\(\bar X\) tilnærmet \(N(40;\,1{,}69)\).</b> Legg merke til at spredningen krymper fra 10 til 1,69 — med 35 målinger blir estimatet nesten seks ganger så presist.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="mai2022">
+            <header class="task__head">
+              <span class="task__src">MAI 2022 · O1b–c</span>
+              <span class="task__title">81 studenter — antall og gjennomsnitt</span>
+              <span class="task__tags"><span class="tag">binomisk</span><span class="tag">gjennomsnitt</span></span>
+            </header>
+            <div class="task__q">
+              <p>\(X\sim N(57{,}9;\,14{,}0)\) er andel riktige svar på matematikkeksamen. Fra a): \(P(X&gt;60)=0{,}440\).</p>
+              <ol>
+                <li>Betrakt 81 studenter fra samme årskull. Hva er sannsynligheten for at minst 30 av dem får over 60 % riktig? (Uavhengige resultater.)</li>
+                <li>La \(\bar X\) være gjennomsnittsresultatet for de 81 studentene. Hva er sannsynligheten for at \(\bar X\) er over 60 %?</li>
+              </ol>
+              <div class="note"><strong>Legg merke til forskjellen:</strong> b) spør om <em>hvor mange studenter</em> som passerer en grense (binomisk), c) spør om <em>gjennomsnittet</em> deres (normalfordelt). Samme tall, helt ulik fordeling — og svært ulike svar.</div>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>b)</h4>
+                <p>La \(Y\) være antall av de 81 som får over 60 %. Da er \(Y\sim\mathrm{Bin}(81;\,0{,}4404)\):</p>
+                <p>\[ P(Y\ge 30)=1-\sum_{y=0}^{29}\binom{81}{y}0{,}4404^y\,0{,}5596^{81-y}\approx 0{,}917 \]</p>
+                <p>Alternativt med normaltilnærming, siden \(np(1-p)=20{,}0\ge 5\): \(\mu=35{,}67\), \(\sigma=4{,}47\), og med heltallskorreksjon \(1-G\bigl(\tfrac{29{,}5-35{,}67}{4{,}47}\bigr)=1-G(-1{,}38)\approx 0{,}916\).</p>
+                <h4>c)</h4>
+                <p>Siden de enkelte \(X_i\) er normalfordelte, er \(\bar X\) <em>eksakt</em> normalfordelt:</p>
+                <p>\[ \sigma_{\bar X}=\frac{14{,}0}{\sqrt{81}}=\frac{14{,}0}{9}=1{,}556 \]</p>
+                <p>\[ P(\bar X&gt;60)=1-G\!\left(\frac{60-57{,}9}{1{,}556}\right)=1-G(1{,}35)\approx 0{,}089 \]</p>
+                <div class="answer"><b>b) 0,92 · c) 0,089.</b> At <em>minst 30 av 81</em> er over 60 er nesten sikkert; at <em>snittet</em> er over 60 er ganske usannsynlig.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="mai2021">
+            <header class="task__head">
+              <span class="task__src">MAI 2021 · O3c</span>
+              <span class="task__title">Gjennomsnittsvekt av 9 kyllinger</span>
+              <span class="task__tags"><span class="tag">eksakt normal</span></span>
+            </header>
+            <div class="task__q">
+              <p>Kyllingvekt er \(N(\mu;\,0{,}3)\) kg. Produsenten veier 9 kyllinger. Hva er sannsynligheten for at gjennomsnittet av disse er mellom 1,58 og 1,98 kg dersom \(\mu=1{,}78\) kg?</p>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>Her er \(n=9&lt;30\), men det gjør ingenting: de enkelte vektene er allerede normalfordelte, så gjennomsnittet er eksakt normalfordelt.</p>
+                <p>\[ \bar X\sim N\!\left(1{,}78,\ \frac{0{,}3}{\sqrt 9}\right)=N(1{,}78;\,0{,}10) \]</p>
+                <p>Grensene ligger symmetrisk om 1,78 (\(\pm 0{,}20\)), altså \(z=2{,}00\):</p>
+                <p>\[ P(1{,}58&lt;\bar X&lt;1{,}98)=2G(2{,}00)-1=2\cdot 0{,}9772-1=0{,}954 \]</p>
+                <div class="answer"><b>Ca. 95,4 %</b> — det klassiske «to standardavvik»-intervallet.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="eksponensial">
+            <header class="task__head">
+              <span class="task__src">MAI 2026 · O4 &amp; MAI 2024 · O3c &amp; JUN 2020 · O3c</span>
+              <span class="task__title">Gjennomsnitt av eksponensielle levetider</span>
+              <span class="task__tags"><span class="tag">gjenganger</span></span>
+            </header>
+            <div class="task__q">
+              <p>Samme mønster tre sittinger: en tydelig ikke-normal fordeling, mange uavhengige målinger, og spørsmål om gjennomsnittet.</p>
+              <ol>
+                <li><strong>Mai 2026:</strong> 100 lyspærer, levetid eksponensialfordelt med forventning 1100 timer. Sannsynligheten for at gjennomsnittlig levetid er under 1150 timer?</li>
+                <li><strong>Mai 2024:</strong> 30 programmerere, tid eksponensialfordelt med \(\mu=3{,}2\) timer. Sannsynligheten for at gjennomsnittstiden er over 4,0 timer?</li>
+                <li><strong>Jun 2020:</strong> 100 personer, responstid med \(\mu=2\) og \(\sigma^2=2\) dager. Sannsynligheten for at gjennomsnittet er minst 2,2 dager?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>Mai 2026</h4>
+                <p>For eksponentialfordelingen er \(\sigma=\mu=1100\), altså \(\sigma_{\bar X}=1100/\sqrt{100}=110\):</p>
+                <p>\[ P(\bar X&lt;1150)=G\!\left(\frac{1150-1100}{110}\right)=G(0{,}45)\approx 0{,}67 \]</p>
+                <h4>Mai 2024</h4>
+                <p>\(\sigma=\mu=3{,}2\), \(\sigma_{\bar T}=3{,}2/\sqrt{30}=0{,}584\):</p>
+                <p>\[ P(\bar T&gt;4{,}0)=1-G\!\left(\frac{4{,}0-3{,}2}{0{,}584}\right)=1-G(1{,}37)\approx 0{,}085 \]</p>
+                <h4>Jun 2020</h4>
+                <p>\(\sigma_{\bar T}=\sqrt{2/100}=0{,}141\):</p>
+                <p>\[ P(\bar T\ge 2{,}2)=1-G\!\left(\frac{2{,}2-2}{0{,}141}\right)=1-G(1{,}41)\approx 0{,}079 \]</p>
+                <div class="answer"><b>0,67 · 0,085 · 0,079.</b> Felles fremgangsmåte: finn \(\mu\) og \(\sigma\) for <em>én</em> observasjon, del \(\sigma\) på \(\sqrt n\), standardiser.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="tabellfordeling">
+            <header class="task__head">
+              <span class="task__src">DES 2020 · O3c &amp; OKT 2022 · O4c</span>
+              <span class="task__title">Gjennomsnitt fra en tabellfordeling</span>
+              <span class="task__tags"><span class="tag">gjenganger</span></span>
+            </header>
+            <div class="task__q">
+              <p>Begge disse settene gir en diskret fordeling som tabell, ber deg regne ut \(\mu\) og \(\sigma^2\), og spør så om gjennomsnittet av mange slike.</p>
+              <ol>
+                <li><strong>Des 2020:</strong> kirsebær med \(\mu=5{,}3\), \(\sigma^2=0{,}81\). \(P(\bar X&lt;5{,}5)\) for 36 kaker?</li>
+                <li><strong>Okt 2022:</strong> bringebær med \(\mu=18{,}9\), \(\sigma^2=10{,}09\). \(P(\bar X&lt;18{,}5)\) for 25 desserter?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>Des 2020</h4>
+                <p>\[ \sigma_{\bar X}=\sqrt{\frac{0{,}81}{36}}=0{,}15 \quad\Rightarrow\quad P(\bar X&lt;5{,}5)=G\!\left(\frac{5{,}5-5{,}3}{0{,}15}\right)=G(1{,}33)\approx 0{,}91 \]</p>
+                <h4>Okt 2022</h4>
+                <p>\[ \sigma_{\bar X}=\sqrt{\frac{10{,}09}{25}}=0{,}635 \quad\Rightarrow\quad P(\bar X&lt;18{,}5)=G\!\left(\frac{18{,}5-18{,}9}{0{,}635}\right)=G(-0{,}63)\approx 0{,}26 \]</p>
+                <div class="answer"><b>0,91 · 0,26.</b> Her er \(n=36\) og \(n=25\) — det siste er strengt tatt under tommelfingergrensen på 30, men oppgaven ber eksplisitt om en <em>tilnærmet</em> sannsynlighet. Se hele oppgavene under <a href="03-diskrete-fordelinger.html">diskrete fordelinger</a>.</div>
+              </div>
+            </details>
+          </article>
+        </section>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="05-normalfordeling.html"><small>forrige</small>← Normalfordeling</a>
+          <a data-dir="next" href="07-konfidensintervall.html"><small>neste</small>Konfidensintervall →</a>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js"></script>
+  <script src="../../../assets/js/math.js"></script>
+</body>
+</html>

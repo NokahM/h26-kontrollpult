@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hypotesetesting — Statistikk · H26</title>
+  <meta name="description" content="Z- og T-test, kritisk verdi, p-verdi, teststyrke og utvalgsstørrelse. Alltid siste halvdel av settet.">
+  <link rel="stylesheet" href="../../../assets/css/main.css">
+</head>
+<body class="theme-statistikk">
+  <div class="scrim" data-sidebar-toggle></div>
+  <div class="app-shell">
+
+    <aside class="sidebar">
+      <div class="sidebar__head">
+        <span class="sidebar__brand">H26 · <strong>KONTROLLPULT</strong></span>
+      </div>
+      <nav class="sidebar__nav">
+        <div class="sidebar__group-label">Emner</div>
+        <a class="navlink" href="../../../index.html">
+          <span class="navlink__dot" data-status="active" style="color:#5eead4"></span>
+          <span class="navlink__label"><span class="navlink__code">H26</span><span class="navlink__name">Oversikt</span></span>
+        </a>
+        <a class="navlink" href="../../mos/index.html">
+          <span class="navlink__dot" data-status="active" style="color:#57f27c"></span>
+          <span class="navlink__label"><span class="navlink__code">MoS</span><span class="navlink__name">Maskinvare og sikkerhet</span></span>
+        </a>
+        <a class="navlink" href="../../tsd3060/index.html">
+          <span class="navlink__dot" data-status="active" style="color:#35c7f0"></span>
+          <span class="navlink__label"><span class="navlink__code">TSD3060</span><span class="navlink__name">Sikre webtjenester</span></span>
+        </a>
+        <div class="sidebar__group-label">Konte</div>
+        <a class="navlink" data-active="true" href="../index.html">
+          <span class="navlink__dot" data-status="active" style="color:#d98b2b"></span>
+          <span class="navlink__label"><span class="navlink__code">STAT</span><span class="navlink__name">Statistikk</span></span>
+        </a>
+        <a class="navlink" href="../../fysikk2/index.html">
+          <span class="navlink__dot" data-status="pending" style="color:#a78bfa"></span>
+          <span class="navlink__label"><span class="navlink__code">FYS2-EL</span><span class="navlink__name">Elektrisitetslære</span></span>
+        </a>
+      </nav>
+      <div class="sidebar__foot">H26 · sist oppdatert 2026-09-14</div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">← Statistikk</a>
+        <div class="topbar__crumb"><span>·</span> Hypotesetesting</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow"><span class="page-header__trace"></span>PB2030 · OPPGAVER MED LØSNING</div>
+          <h1>Hypotesetesting</h1>
+          <p class="page-header__desc">Z- og T-test, kritisk verdi, p-verdi, teststyrke og utvalgsstørrelse. Alltid siste halvdel av settet.</p>
+          <span class="page-header__status" data-status="active"><i></i>13 oppgaver · 13 sett</span>
+        </header>
+
+        <section class="section">
+          <div class="section__label">Metode</div>
+          <article class="prose">
+            <p>Hypotesetesting er tyngdepunktet i eksamen: det kommer i samtlige 13 sett, alltid i siste halvdel, og gir gjerne 3–4 delspørsmål. Oppskriften er den samme hver gang.</p>
+            <h3>Femstegsoppskriften</h3>
+            <ol>
+              <li><strong>Sett opp hypotesene.</strong> \(H_1\) er alltid det oppgaven <em>vil undersøke om stemmer</em> («er fuktigheten høyere enn 20?», «har testtiden blitt redusert?»). \(H_0\) er det motsatte, og inneholder alltid likhetstegnet.</li>
+              <li><strong>Velg testobservator.</strong> \(\sigma\) kjent ⇒ Z-test, \(\sigma\) ukjent (bare \(s\) oppgitt) ⇒ T-test med \(n-1\) frihetsgrader.
+                \[ Z=\frac{\bar X-\mu_0}{\sigma/\sqrt n},\qquad T=\frac{\bar X-\mu_0}{S/\sqrt n} \]</li>
+              <li><strong>Finn forkastingsområdet.</strong> \(H_1:\mu&gt;\mu_0\) ⇒ forkast hvis \(Z&gt;z_\alpha\). \(H_1:\mu&lt;\mu_0\) ⇒ forkast hvis \(Z&lt;-z_\alpha\). \(H_1:\mu\neq\mu_0\) ⇒ forkast hvis \(|Z|&gt;z_{\alpha/2}\).</li>
+              <li><strong>Regn ut og sammenlikn.</strong></li>
+              <li><strong>Konkluder i ord</strong>, knyttet til den opprinnelige problemstillingen — ikke bare «H₀ forkastes».</li>
+            </ol>
+
+            <h3>De tre oppfølgingsspørsmålene</h3>
+            <div class="dtable-wrap"><table class="dtable">
+              <thead><tr><th>Spørsmål</th><th>Formel</th><th>Hva det betyr</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Kritisk verdi</strong> \(k\)<br>«største/minste gjennomsnitt som gir forkasting»</td><td>\(k=\mu_0\pm z_\alpha\dfrac{\sigma}{\sqrt n}\)</td><td>Grensen uttrykt i samme enhet som dataene, i stedet for i z-verdier.</td></tr>
+                <tr><td><strong>p-verdi</strong></td><td>\(p=P(\bar X \text{ minst så ekstremt}\mid H_0)\)</td><td>Forkast hvis \(p&lt;\alpha\). Tosidig test: gang med 2.</td></tr>
+                <tr><td><strong>Teststyrke</strong> \(\gamma(\mu_1)\)</td><td>\(P(\text{forkaste }H_0\mid \mu=\mu_1)\)</td><td>Sjansen for at testen «oppdager» at \(H_0\) er feil når sannheten er \(\mu_1\). Regnes alltid via \(k\).</td></tr>
+              </tbody>
+            </table></div>
+
+            <div class="note"><strong>Fremgangsmåten for teststyrke</strong> — den samme hver gang, og den skiller besvarelsene:
+            <br>1) finn kritisk verdi \(k\) under \(H_0\); 2) regn sannsynligheten for å havne i forkastingsområdet, men nå med \(\mu=\mu_1\) i standardiseringen:
+            \[ \gamma(\mu_1)=P(\bar X&gt;k\mid \mu_1)=1-G\!\left(\frac{k-\mu_1}{\sigma/\sqrt n}\right) \]
+            (snu ulikheten for venstresidig test).</div>
+            <div class="note"><strong>Type I og type II:</strong> type I-feil er å forkaste en sann \(H_0\) — sannsynligheten er \(\alpha\). Type II-feil er å beholde en gal \(H_0\) — sannsynligheten er \(\beta=1-\gamma\). Mai 2023 O5d spør nettopp om hvor stor \(n\) må være for at \(\beta&lt;0{,}10\).</div>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section__label">Full testsyklus — test, kritisk verdi, teststyrke, n</div>
+          <div class="tasknav">
+            <a href="#mai2026">Mai 2026 · fyringsved</a>
+            <a href="#okt2025">Okt 2025 · testtid</a>
+            <a href="#mai2025">Mai 2025 · hotellpris</a>
+            <a href="#mai2023">Mai 2023 · fett i kjøttdeig</a>
+            <a href="#jun2020">Jun 2020 · håndtemperatur</a>
+          </div>
+
+          <article class="task" id="mai2026">
+            <header class="task__head">
+              <span class="task__src">MAI 2026 · O5b–c</span>
+              <span class="task__title">Fuktprosent i fyringsved</span>
+              <span class="task__tags"><span class="tag">z-test</span><span class="tag">høyresidig</span><span class="tag">teststyrke</span></span>
+            </header>
+            <div class="task__q">
+              <p>En produsent markedsfører fyringsved med at fuktighetsprosenten er høyst 20. Etter klager ble sju tilfeldig valgte kubber undersøkt: 19,2 · 23,4 · 21,9 · 26,1 · 24,9 · 33,6 · 16,8. Observasjonene er uavhengige og normalfordelte med forventning \(\mu\) og standardavvik 5.</p>
+              <ol>
+                <li>Sett opp en hypotesetest som er naturlig i denne situasjonen, der du ønsker å undersøke om veden har høyere fuktprosent enn 20. Gjennomfør testen og konkluder på 5 % signifikansnivå.</li>
+                <li>Beregn teststyrken \(\gamma(25)\). Hva gir denne teststyrken uttrykk for?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>b) Hypoteser</h4>
+                <p>Klagene handler om at veden er <em>fuktigere</em> enn lovet, så testen er ensidig høyresidig:</p>
+                <p>\[ H_0:\mu\le 20 \qquad\text{mot}\qquad H_1:\mu&gt;20 \]</p>
+                <p><strong>Alternativ 1 — z-observator.</strong> \(\bar x=165{,}9/7=23{,}7\), \(\sigma=5\), \(n=7\):</p>
+                <p>\[ z=\frac{23{,}7-20}{5/\sqrt 7}=1{,}958 \]</p>
+                <p>Siden \(1{,}958&gt;z_{0{,}05}=1{,}645\) forkastes \(H_0\).</p>
+                <p><strong>Alternativ 2 — kritisk verdi.</strong></p>
+                <p>\[ k=\mu_0+z_\alpha\frac{\sigma}{\sqrt n}=20+1{,}645\cdot\frac{5}{\sqrt 7}=23{,}11 \]</p>
+                <p>og \(\bar x=23{,}7&gt;23{,}11\) gir samme konklusjon.</p>
+                <p><strong>Alternativ 3 — via konfidensintervallet.</strong> Fra a) er [20,6; 26,8] et symmetrisk 90 %-intervall. Det ensidige intervallet \([20{,}6;\infty\rangle\) har da konfidensgrad 95 %, og siden \(20&lt;20{,}6\) forkastes \(H_0\) på 5 % nivå.</p>
+                <p><strong>Konklusjon:</strong> dataene gir grunnlag for å hevde at veden har høyere fuktighetsprosent enn 20.</p>
+                <h4>c) Teststyrke</h4>
+                <p>Bruk kritisk verdi \(k=23{,}11\), men standardiser nå med \(\mu=25\):</p>
+                <p>\[ \gamma(25)=P(\bar X&gt;23{,}11\mid\mu=25)=1-G\!\left(\frac{23{,}11-25}{5/\sqrt 7}\right)=1-G(-1{,}00)=0{,}84 \]</p>
+                <div class="answer"><b>\(H_0\) forkastes · \(\gamma(25)=0{,}84\).</b> Det betyr at hvis den virkelige fuktprosenten er 25, har testen 84 % sjanse for å avsløre at produsentens påstand er gal.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="okt2025">
+            <header class="task__head">
+              <span class="task__src">OKT 2025 · O5</span>
+              <span class="task__title">Har testtiden blitt redusert?</span>
+              <span class="task__tags"><span class="tag">z-test</span><span class="tag">venstresidig</span><span class="tag">teststyrke</span></span>
+            </header>
+            <div class="task__q">
+              <p>Tiden elever trenger for å gjennomføre en bestemt test er normalfordelt med \(\mu=35\) min og \(\sigma=4{,}3\) min. For å undersøke om tiden har blitt redusert, ble \(n=20\) elever testet under kontrollerte forhold. Standardavvik og fordelingstype antas uendret.</p>
+              <ol>
+                <li>Formuler problemet som en hypotesetest. Still opp nullhypotese og alternativ hypotese, og gjennomfør testen på 5 % signifikansnivå når gjennomsnittlig testtid ble 33,1 min.</li>
+                <li>Hva er den største gjennomsnittsverdien som vil gi forkasting av nullhypotesen?</li>
+                <li>Finn sannsynligheten for å forkaste \(H_0\) gitt at den sanne forventningsverdien er \(\mu=32\) min.</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>a)</h4>
+                <p>Vi undersøker om tiden er <em>redusert</em>, altså venstresidig test med \(\mu_0=35\):</p>
+                <p>\[ H_0:\mu\ge 35 \qquad\text{mot}\qquad H_1:\mu&lt;35 \]</p>
+                <p>Forkast \(H_0\) dersom \(Z&lt;-z_\alpha\). Med \(\bar X=33{,}1\), \(n=20\), \(\sigma=4{,}3\):</p>
+                <p>\[ Z=\frac{33{,}1-35}{4{,}3/\sqrt{20}}=-1{,}976 \]</p>
+                <p>Siden \(-1{,}976&lt;-1{,}645\) forkastes \(H_0\): dataene støtter antakelsen om redusert testtid.</p>
+                <h4>b) Kritisk verdi</h4>
+                <p>\[ k=\mu_0-z_\alpha\frac{\sigma}{\sqrt n}=35-1{,}645\cdot\frac{4{,}3}{\sqrt{20}}=33{,}42\ \text{min} \]</p>
+                <h4>c) Teststyrke</h4>
+                <p>Forkasting skjer når \(\bar x&lt;33{,}42\). Med \(\mu=32\):</p>
+                <p>\[ \gamma(32)=P(\bar X&lt;33{,}42\mid\mu=32)=G\!\left(\frac{33{,}42-32}{4{,}3/\sqrt{20}}\right)=G(1{,}48)=0{,}93 \]</p>
+                <div class="answer"><b>a) \(H_0\) forkastes (\(z=-1{,}98\)) · b) \(k=33{,}42\) min · c) \(\gamma(32)=0{,}93\).</b></div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="mai2025">
+            <header class="task__head">
+              <span class="task__src">MAI 2025 · O5</span>
+              <span class="task__title">Hotellpriser i Barcelona</span>
+              <span class="task__tags"><span class="tag">z-test</span><span class="tag">høyresidig</span><span class="tag">n for styrke</span></span>
+            </header>
+            <div class="task__q">
+              <p>Prisen på et hotellrom er normalfordelt med forventning \(\mu\) euro og standardavvik 20 euro. Harald mener den forventede prisen er høyst 100 euro, mens en venn sier det har blitt dyrere. Harald samler inn prisdata for 20 hotellrom og finner \(\bar X=120\) euro.</p>
+              <ol>
+                <li>Formuler undersøkelsen som en hypotesetest og gjennomfør den på signifikansnivå \(\alpha=0{,}05\).</li>
+                <li>Hva er den minste gjennomsnittsverdien som vil gi forkasting av nullhypotesen?</li>
+                <li>Finn sannsynligheten for å forkaste \(H_0\) gitt at den sanne forventningsverdien er \(\mu=110\).</li>
+                <li>Hvor mange målinger måtte Harald ha samlet inn for å få en teststyrke for \(\mu=110\) på 0,95?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>a)</h4>
+                <p>\[ H_0:\mu\le 100 \qquad\text{mot}\qquad H_1:\mu&gt;100 \]</p>
+                <p>\[ Z=\frac{120-100}{20/\sqrt{20}}=\frac{20}{4{,}472}=4{,}472 \]</p>
+                <p>Siden \(4{,}472\gg z_{0{,}05}=1{,}645\) forkastes \(H_0\) klart: hotellprisen er høyere enn 100 euro.</p>
+                <h4>b)</h4>
+                <p>\[ k=100+1{,}645\cdot\frac{20}{\sqrt{20}}=107{,}36\ \text{euro} \]</p>
+                <h4>c)</h4>
+                <p>\[ \gamma(110)=P(\bar X&gt;107{,}36\mid\mu=110)=1-G\!\left(\frac{107{,}36-110}{4{,}472}\right)=1-G(-0{,}590)=0{,}72 \]</p>
+                <h4>d) Løs for n</h4>
+                <p>Kravet er \(\gamma(110)=0{,}95\). Generelt:</p>
+                <p>\[ \gamma(\mu_1)=1-G\!\left(z_\alpha-\frac{\mu_1-\mu_0}{\sigma/\sqrt n}\right)=0{,}95 \quad\Longrightarrow\quad z_\alpha-\frac{\mu_1-\mu_0}{\sigma/\sqrt n}=-z_{0{,}05} \]</p>
+                <p>\[ 1{,}645-\frac{10}{20/\sqrt n}=-1{,}645 \quad\Rightarrow\quad \frac{\sqrt n}{2}=2\cdot 1{,}645 \quad\Rightarrow\quad n=(4\cdot 1{,}645)^2=43{,}3 \]</p>
+                <div class="answer"><b>a) \(H_0\) forkastes · b) 107,36 euro · c) 0,72 · d) minst 44 målinger.</b> Legg merke til strukturen i d): kravet «styrke 0,95» blir til \(z_\alpha + z_\beta = \frac{\mu_1-\mu_0}{\sigma/\sqrt n}\).</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="mai2023">
+            <header class="task__head">
+              <span class="task__src">MAI 2023 · O5</span>
+              <span class="task__title">Fettinnhold i kjøttdeig</span>
+              <span class="task__tags"><span class="tag">z-test</span><span class="tag">p-verdi</span><span class="tag">type II</span></span>
+            </header>
+            <div class="task__q">
+              <p>En vanlig pakke kjøttdeig skal ikke inneholde mer enn 14 % fett. Fettinnholdet antas normalfordelt med forventningsverdi \(\mu\) og standardavvik \(\sigma=3\), og uavhengig mellom pakker.</p>
+              <ol>
+                <li>For å kontrollere om fettinnholdet er høyere enn \(\mu_0=14\), gjennomfør en hypotesetest basert på 9 observasjoner med \(\alpha=0{,}05\). Hva blir konklusjonen når \(\bar x=15{,}44\)?</li>
+                <li>Beregn p-verdien til testen i a).</li>
+                <li>Beregn teststyrken for \(\mu=14\).</li>
+                <li>Gitt at \(\mu=16\): hvor mange pakker må kontrolleres for at sannsynligheten for å begå en type II-feil skal være mindre enn 0,10?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>a)</h4>
+                <p>\[ H_0:\mu\le 14 \qquad\text{mot}\qquad H_1:\mu&gt;14 \]</p>
+                <p>\[ z=\frac{15{,}44-14}{3/\sqrt 9}=\frac{1{,}44}{1}=1{,}44 \]</p>
+                <p>Siden \(1{,}44&lt;z_{0{,}05}=1{,}645\) kan \(H_0\) <strong>ikke</strong> forkastes. Dataene gir ikke grunnlag for å hevde at fettinnholdet er høyere enn 14 %.</p>
+                <h4>b) p-verdi</h4>
+                <p>\[ p=P(\bar X&gt;15{,}44\mid\mu_0=14)=1-G(1{,}44)=1-0{,}9251=0{,}075 \]</p>
+                <p>Konsistent med a): \(0{,}075&gt;0{,}05\).</p>
+                <h4>c) Teststyrke ved \(\mu=14\)</h4>
+                <p>Her er \(\mu=\mu_0\), altså er \(H_0\) sann. Sannsynligheten for å forkaste en sann \(H_0\) er per definisjon signifikansnivået:</p>
+                <p>\[ \gamma(14)=\alpha=0{,}05 \]</p>
+                <p>Et lite «gotcha» — mange regner seg unødvendig fram til det samme.</p>
+                <h4>d)</h4>
+                <p>Forkastingsgrensen er \(k=14+1{,}645\cdot 3/\sqrt n\), og type II-feil er \(\beta=P(\bar X&lt;k\mid\mu=16)\):</p>
+                <p>\[ G\!\left(\frac{14+1{,}645\cdot 3/\sqrt n-16}{3/\sqrt n}\right)&lt;0{,}10 \quad\Rightarrow\quad 1{,}645-\frac{2\sqrt n}{3}&lt;-1{,}282 \]</p>
+                <p>\[ \sqrt n&gt;\frac{3(1{,}645+1{,}282)}{2}=4{,}39 \quad\Rightarrow\quad n&gt;19{,}3 \]</p>
+                <div class="answer"><b>a) \(H_0\) beholdes · b) \(p=0{,}075\) · c) 0,05 · d) minst 20 pakker.</b></div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="jun2020">
+            <header class="task__head">
+              <span class="task__src">JUN 2020 · O4b–d</span>
+              <span class="task__title">Håndtemperatur og et stoff i blodet</span>
+              <span class="task__tags"><span class="tag">z-test</span><span class="tag">p-verdi</span><span class="tag">teststyrke</span></span>
+            </header>
+            <div class="task__q">
+              <p>Normal håndtemperatur er \(N(33{,}5;\,1{,}5)\). Man mistenker at folk med et visst stoff i blodet får lavere håndtemperatur. Ni personer med stoffet ble målt: 29,4 · 30,5 · 30,1 · 31,3 · 31,0 · 33,6 · 28,5 · 33,4 · 31,3. Håndtemperaturen for disse antas \(N(\mu;\,1{,}5)\) med ukjent \(\mu\).</p>
+              <ol>
+                <li>Sett opp en nullhypotese og en passende mothypotese.</li>
+                <li>Regn ut verdien til z-observatoren og bruk denne til å beregne p-verdien. Kan nullhypotesen forkastes på 5 % signifikansnivå?</li>
+                <li>Beregn styrken til testen i c) dersom \(\mu=32\). Forklar hva dette tallet uttrykker.</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>b)</h4>
+                <p>Mistanken er ensidig — <em>lavere</em> temperatur:</p>
+                <p>\[ H_0:\mu\ge 33{,}5 \qquad\text{mot}\qquad H_1:\mu&lt;33{,}5 \]</p>
+                <h4>c)</h4>
+                <p>Summen av de ni målingene er 279,1, altså \(\bar x=31{,}01\). Med \(\sigma=1{,}5\) kjent:</p>
+                <p>\[ z=\frac{31{,}01-33{,}5}{1{,}5/\sqrt 9}=\frac{-2{,}489}{0{,}5}=-4{,}98 \]</p>
+                <p>\[ p=G(-4{,}98)\approx 3\cdot 10^{-7} \]</p>
+                <p>p-verdien er langt under 0,05, så \(H_0\) forkastes klart: de med stoffet i blodet har lavere håndtemperatur.</p>
+                <h4>d) Teststyrke</h4>
+                <p>\[ k=33{,}5-1{,}645\cdot 0{,}5=32{,}68 \]</p>
+                <p>\[ \gamma(32)=P(\bar X&lt;32{,}68\mid\mu=32)=G\!\left(\frac{32{,}68-32}{0{,}5}\right)=G(1{,}36)=0{,}91 \]</p>
+                <div class="answer"><b>\(z=-4{,}98\), \(p\approx 0\), \(H_0\) forkastes · \(\gamma(32)=0{,}91\).</b> Tolkning: er den sanne forventede håndtemperaturen 32 grader, vil testen med 9 målinger oppdage det i 91 % av tilfellene.</div>
+              </div>
+            </details>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section__label">T-test (σ ukjent)</div>
+          <div class="tasknav">
+            <a href="#okt2023">Okt 2023 · potetposer</a>
+            <a href="#mai2024">Mai 2024 · saltsyre</a>
+            <a href="#okt2024">Okt 2024 · musenes levetid</a>
+            <a href="#okt2021">Okt 2021 · husky-valper</a>
+            <a href="#mai2022">Mai 2022 · endret nivå?</a>
+          </div>
+
+          <article class="task" id="okt2023">
+            <header class="task__head">
+              <span class="task__src">OKT 2023 · O5</span>
+              <span class="task__title">Potetposer på 400 gram</span>
+              <span class="task__tags"><span class="tag">z-test</span><span class="tag">p-verdi</span><span class="tag">t-test</span></span>
+            </header>
+            <div class="task__q">
+              <p>Et forbrukerprogram kontrollerte vekten av poteter i poser à 400 gram. Ifølge produsenten er potetinnholdet normalfordelt med \(\mu=400\) gram. Programmet tok 10 stikkprøver og vil teste om forventet vekt er mindre enn 400 gram.</p>
+              <ol>
+                <li>Gjennomsnittsvekten av de ti posene var 393 gram, og standardavviket antas \(\sigma=10\) gram. Ved 5 % signifikansnivå: gir dataene grunnlag for å hevde at forventet vekt er mindre enn 400 gram?</li>
+                <li>Beregn p-verdien for testen i a).</li>
+                <li>Nå antar vi at \(\sigma\) ikke er kjent. Basert på målingene 389, 396, 390, 391, 396, 399, 386, 396, 394, 393 (fortsatt \(\bar x=393\)): gir dataene grunnlag for samme påstand på 5 % nivå?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>a) Z-test, venstresidig</h4>
+                <p>\[ H_0:\mu\ge 400 \qquad\text{mot}\qquad H_1:\mu&lt;400 \]</p>
+                <p>\[ z=\frac{393-400}{10/\sqrt{10}}=\frac{-7}{3{,}162}=-2{,}214 \]</p>
+                <p>Siden \(-2{,}214&lt;-1{,}645\) forkastes \(H_0\).</p>
+                <p>Alternativt via kritisk verdi: \(k=400-1{,}645\cdot 3{,}162=394{,}8\), og \(393&lt;394{,}8\).</p>
+                <h4>b) p-verdi</h4>
+                <p>\[ p=G(-2{,}214)=0{,}0136 \]</p>
+                <p>Siden \(0{,}0136&lt;0{,}05\) bekrefter p-verdien konklusjonen i a).</p>
+                <h4>c) T-test, samme data</h4>
+                <p>Nå må vi estimere standardavviket fra målingene:</p>
+                <p>\[ s=\sqrt{\frac{1}{n-1}\left(\sum x_i^2-n\bar x^2\right)}=3{,}97\ \text{gram} \]</p>
+                <p>\[ t=\frac{393-400}{3{,}97/\sqrt{10}}=-5{,}58 \]</p>
+                <p>Med \(\nu=9\) frihetsgrader er \(t_{0{,}05}=1{,}833\), og \(-5{,}58&lt;-1{,}833\) gir forkasting.</p>
+                <div class="answer"><b>Alle tre: \(H_0\) forkastes.</b> Interessant: t-testen er her <em>mye</em> mer overbevisende enn z-testen, fordi det faktiske utvalgsstandardavviket (3,97) er langt mindre enn det antatte (10).</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="mai2024">
+            <header class="task__head">
+              <span class="task__src">MAI 2024 · O6</span>
+              <span class="task__title">Saltsyrekonsentrasjon</span>
+              <span class="task__tags"><span class="tag">t-test</span><span class="tag">n fra p-verdi</span><span class="tag">teststyrke</span></span>
+            </header>
+            <div class="task__q">
+              <p>En bedrift produserer saltsyre i 1-liters beholdere. Det hevdes at konsentrasjonens forventningsverdi \(\mu\) er 30,00 eller høyere.</p>
+              <ol>
+                <li>En test av 150 uavhengige beholdere ga gjennomsnittskonsentrasjon 29,97 og utvalgsstandardavvik 0,21. Formuler en hypotesetest med \(H_0:\mu\ge 30{,}00\) og avgjør om det er grunnlag for å hevde at forventet konsentrasjon er lavere enn 30,00 på 5 % signifikansnivå.</li>
+                <li>Ledelsen er bare villig til å endre produksjonsprosessen hvis testen gir p-verdi lavere enn 0,005. Estimer hvor mange beholdere testen måtte involvere for at det skulle vært tilfelle, med samme gjennomsnitt og standardavvik som i a).</li>
+                <li>Etter en oppgradering er standardavviket verifisert til \(\sigma=0{,}20\). Ny test med \(H_0:\mu\ge 30{,}00\), \(n=150\) og \(\alpha=0{,}05\). Gitt at faktisk \(\mu=30{,}01\), hva er sannsynligheten for at testen forkaster \(H_0\)?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>a)</h4>
+                <p>\(\sigma\) er ukjent (bare \(s\) oppgitt), så T-test. Med \(n=150\) er t-kvantilene praktisk talt lik z-kvantilene: \(t_{0{,}05}\approx 1{,}645\).</p>
+                <p>\[ t=\frac{29{,}97-30{,}00}{0{,}21/\sqrt{150}}=-1{,}75 \]</p>
+                <p>Siden \(-1{,}75&lt;-1{,}645\) forkastes \(H_0\): det er grunnlag for å hevde at konsentrasjonen er lavere enn 30,00.</p>
+                <h4>b) Hvor mange beholdere?</h4>
+                <p>Kravet «p-verdi under 0,005» er det samme som å kreve signifikansnivå 0,005, altså \(t&lt;-t_{0{,}005}\approx -z_{0{,}005}=-2{,}58\):</p>
+                <p>\[ \frac{\bar x-\mu_0}{s/\sqrt n}&lt;-2{,}58 \quad\Rightarrow\quad n&gt;\left(\frac{s\cdot 2{,}58}{\mu_0-\bar x}\right)^2=\left(\frac{0{,}21\cdot 2{,}58}{0{,}03}\right)^2=326{,}2 \]</p>
+                <p>(Ulikhetstegnet snus når vi multipliserer med et negativt tall.) Altså over 326 beholdere. Sensurveiledningen godtar 326–338 avhengig av hvilket t-kvantil du bruker.</p>
+                <h4>c) Teststyrke med kjent σ</h4>
+                <p>Nå er \(\sigma\) kjent, så Z-test. \(H_0\) forkastes når</p>
+                <p>\[ \bar X&lt;\mu_0-z_{0{,}05}\frac{\sigma}{\sqrt n} \]</p>
+                <p>Med faktisk \(\mu=30{,}01\):</p>
+                <p>\[ \gamma=G\!\left(\frac{\mu_0-\mu}{\sigma/\sqrt n}-z_{0{,}05}\right)=G\!\left(\frac{30{,}00-30{,}01}{0{,}20/\sqrt{150}}-1{,}645\right)=G(-2{,}26)=0{,}012 \]</p>
+                <div class="answer"><b>a) \(H_0\) forkastes · b) over 326 beholdere · c) 0,012.</b> Punkt c) er egentlig en type I-feil-beregning i forkledning: \(\mu=30{,}01\) oppfyller jo \(H_0\), så 1,2 % er sannsynligheten for å ta feil den andre veien.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="okt2024">
+            <header class="task__head">
+              <span class="task__src">OKT 2024 · O6a</span>
+              <span class="task__title">Forventet levetid for mus i fangenskap</span>
+              <span class="task__tags"><span class="tag">t-test</span><span class="tag">venstresidig</span></span>
+            </header>
+            <div class="task__q">
+              <p>En forskningsgruppe påstår at forventet levetid \(\mu\) for mus i fangenskap er 40 måneder eller mer med en spesiell type mat. Forsøk på 61 mus ga gjennomsnittlig levetid 38,2 måneder og utvalgsstandardavvik 5,6 måneder. Utfør en hypotesetest på 2,5 % signifikansnivå. Er det grunnlag for å tro at forventet levetid er mindre enn 40 måneder?</p>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>Vi vet ikke om levetiden er normalfordelt, men \(n=61\) er stort nok til at sentralgrenseteoremet redder oss. Standardavviket er ukjent ⇒ venstresidig T-test.</p>
+                <p>\[ H_0:\mu\ge 40 \qquad\text{mot}\qquad H_1:\mu&lt;40 \]</p>
+                <p>Tabell C med \(\nu=60\) gir \(t_{0{,}025}=2{,}00\) (eller tilnærmet \(z_{0{,}025}=1{,}96\)).</p>
+                <p>\[ t=\frac{38{,}2-40}{5{,}6/\sqrt{61}}=-2{,}51 \]</p>
+                <p>Siden \(|t|&gt;t_{0{,}025}\) forkastes \(H_0\).</p>
+                <div class="answer"><b>Ja — det er grunnlag for å tro at forventet levetid er under 40 måneder på 2,5 % signifikansnivå.</b> Konfidensintervallet i punkt b) ([36,5; 39,9], se <a href="07-konfidensintervall.html#okt2024">konfidensintervall</a>) sier det samme: 40 ligger utenfor.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="okt2021">
+            <header class="task__head">
+              <span class="task__src">OKT 2021 · O3c–e</span>
+              <span class="task__title">Dyrlegens påstand — tre undersøkelser</span>
+              <span class="task__tags"><span class="tag">t-test</span><span class="tag">n fra p-verdi</span><span class="tag">vanskelig</span></span>
+            </header>
+            <div class="task__q">
+              <p>En dyrlege hevder at forventet fødselsvekt for sibirsk husky umulig kan være høyere enn \(\mu_0=455\) gram.</p>
+              <ol>
+                <li><strong>Undersøkelse A</strong> (n = 81, \(\bar x=461\), \(s=13\)): konstruer en hypotesetest og avgjør om dyrlegens påstand kan forkastes med 2,5 % signifikansnivå.</li>
+                <li><strong>Undersøkelse B</strong> (n = 12, \(\bar x=462\), \(s=14\)): samme spørsmål.</li>
+                <li><strong>Undersøkelse C</strong> (\(\bar x=459\), \(s=15\)) gir p-verdi 0,0020. Bruk dette til å bestemme omtrent hvor mange hunder som ble veid.</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>c) Undersøkelse A</h4>
+                <p>\[ H_0:\mu\le 455 \qquad\text{mot}\qquad H_1:\mu&gt;455 \]</p>
+                <p>Ensidig T-test, men \(n=81\) er stort så \(t_{0{,}025}\approx z_{0{,}025}=1{,}96\):</p>
+                <p>\[ t=\frac{461-455}{13/\sqrt{81}}=\frac{6}{1{,}444}=4{,}15 \ &gt;\ 1{,}96 \]</p>
+                <p>\(H_0\) forkastes. Snarvei: 455 ligger utenfor konfidensintervallet [458,2; 463,8] fra punkt a).</p>
+                <h4>d) Undersøkelse B</h4>
+                <p>Her er \(n=12\) lite, så vi må bruke t-kvantilet for \(\nu=11\): \(t_{0{,}025}=2{,}201\).</p>
+                <p>\[ t=\frac{462-455}{14/\sqrt{12}}=1{,}73 \ &lt;\ 2{,}201 \]</p>
+                <p>\(H_0\) kan <strong>ikke</strong> forkastes. Samme avvik som i A (faktisk større: 7 mot 6 gram), men for få målinger til å være overbevisende.</p>
+                <h4>e) Finn n fra p-verdien</h4>
+                <p>p-verdien er sannsynligheten for å observere minst like stort avvik gitt \(H_0\):</p>
+                <p>\[ 0{,}0020=1-G\!\left(\frac{459-455}{15/\sqrt n}\right) \quad\Rightarrow\quad G(z)=0{,}9980 \quad\Rightarrow\quad z=2{,}88 \]</p>
+                <p>\[ \frac{4\sqrt n}{15}=2{,}88 \quad\Rightarrow\quad \sqrt n=10{,}8 \quad\Rightarrow\quad n\approx 117 \]</p>
+                <div class="answer"><b>c) forkastes · d) forkastes ikke · e) ca. 117 hunder.</b> Sammenlikningen c) mot d) er hele poenget: samme effekt, ulik \(n\), motsatt konklusjon.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="mai2022">
+            <header class="task__head">
+              <span class="task__src">MAI 2022 · O1e</span>
+              <span class="task__title">Har nivået endret seg?</span>
+              <span class="task__tags"><span class="tag">t-test</span><span class="tag">tosidig</span><span class="tag">p-verdi</span></span>
+            </header>
+            <div class="task__q">
+              <p>Basert på utvalget på 9 studenter (\(\bar x=50{,}3\), \(s=18{,}31\)) — er det grunn til å hevde at forventningsverdien \(\mu\) for resultat på matematikkeksamen har endret seg fra 57,9? Formuler \(H_0\) og \(H_1\), test på \(\alpha=0{,}01\) og konkluder.</p>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>«Endret seg» er tosidig:</p>
+                <p>\[ H_0:\mu=57{,}9 \qquad\text{mot}\qquad H_1:\mu\neq 57{,}9 \]</p>
+                <p>\(\sigma\) er ukjent, \(\nu=8\), \(t_{0{,}005}=3{,}355\):</p>
+                <p>\[ t=\frac{50{,}3-57{,}9}{18{,}31/\sqrt 9}=\frac{-7{,}6}{6{,}103}=-1{,}25 \]</p>
+                <p>Siden \(|{-1{,}25}|&lt;3{,}355\) beholdes \(H_0\).</p>
+                <p><strong>Via p-verdi:</strong> tosidig gir \(p=2\cdot P(T&lt;-1{,}25)=0{,}248\), langt over \(\alpha=0{,}01\).</p>
+                <p><strong>Via konfidensintervall:</strong> \(\mu_0=57{,}9\) ligger innenfor 99 %-intervallet [29,8; 70,8] fra punkt d).</p>
+                <div class="answer"><b>\(H_0\) beholdes.</b> Alle tre veiene gir samme svar — vis gjerne minst to, det er billige poeng.</div>
+              </div>
+            </details>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section__label">Tester for en andel, og tosidige tester</div>
+          <div class="tasknav">
+            <a href="#des2020">Des 2020 · ny medisin</a>
+            <a href="#okt2024-mynt">Okt 2024 · rettferdig mynt?</a>
+            <a href="#okt2022">Okt 2022 · avvikende resistans?</a>
+          </div>
+
+          <article class="task" id="des2020">
+            <header class="task__head">
+              <span class="task__src">DES 2020 · O4</span>
+              <span class="task__title">Er den nye medisinen bedre?</span>
+              <span class="task__tags"><span class="tag">binomisk test</span><span class="tag">p-verdi</span></span>
+            </header>
+            <div class="task__q">
+              <p>Eksisterende medisiner har nytteeffekt hos 60 % av pasientene. En ny medisin gitt til 100 pasienter ga lindring hos 70.</p>
+              <ol>
+                <li>Er den nye medisinen bedre? Bestem z-observatoren og gjennomfør en tilnærmet binomisk test på 5 % signifikansnivå. Hva blir konklusjonen?</li>
+                <li>Bestem den eksakte p-verdien og forklar sammenhengen med konklusjonen i a).</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>a)</h4>
+                <p>\[ H_0:p\le 0{,}60 \qquad\text{mot}\qquad H_1:p&gt;0{,}60 \]</p>
+                <p>Under \(H_0\) er \(\hat p\) tilnærmet normalfordelt med standardfeil \(\sqrt{p_0(1-p_0)/n}\):</p>
+                <p>\[ z=\frac{0{,}70-0{,}60}{\sqrt{\dfrac{0{,}60\cdot 0{,}40}{100}}}=\frac{0{,}10}{0{,}049}=2{,}04 \]</p>
+                <p>Siden \(2{,}04&gt;1{,}645\) forkastes \(H_0\): den nye medisinen ser ut til å være bedre.</p>
+                <h4>b) Eksakt p-verdi</h4>
+                <p>Uten normaltilnærming, med \(X\sim\mathrm{Bin}(100;\,0{,}60)\):</p>
+                <p>\[ p=P(X\ge 70)=\sum_{x=70}^{100}\binom{100}{x}0{,}60^x\,0{,}40^{100-x}=0{,}0248 \]</p>
+                <p>(Den tilnærmede p-verdien er \(1-G(2{,}04)=0{,}021\).)</p>
+                <div class="answer"><b>a) \(H_0\) forkastes · b) \(p=0{,}025\).</b> Sammenhengen: p-verdien er det minste signifikansnivået der \(H_0\) forkastes. Siden \(0{,}025&lt;0{,}05\), forkastes den på 5 % nivå — men den ville <em>ikke</em> blitt forkastet på 1 % nivå.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="okt2024-mynt">
+            <header class="task__head">
+              <span class="task__src">OKT 2024 · O7c</span>
+              <span class="task__title">Teststyrke for en nesten rettferdig mynt</span>
+              <span class="task__tags"><span class="tag">tosidig</span><span class="tag">teststyrke</span><span class="tag">vanskelig</span></span>
+            </header>
+            <div class="task__q">
+              <p>Anta at den egentlige sannsynligheten for kron er \(p=0{,}496\). Finn en tilnærmet verdi for sannsynligheten for at en person som kaster en mynt 100 000 ganger vil <em>beholde</em> nullhypotesen \(H_0: p=0{,}5\) på 5 % signifikansnivå.</p>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>Steg 1 — hvor beholdes \(H_0\)?</h4>
+                <p>Tosidig test: \(H_0\) beholdes så lenge antall kron \(X\) ligger i</p>
+                <p>\[ \left[np_0-z_{0{,}025}\sqrt{np_0(1-p_0)},\ np_0+z_{0{,}025}\sqrt{np_0(1-p_0)}\right] \]</p>
+                <p>Med \(n=100\,000\) og \(p_0=0{,}5\) blir \(np_0=50\,000\) og \(\sqrt{np_0(1-p_0)}=158{,}1\):</p>
+                <p>\[ 50\,000\pm 1{,}96\cdot 158{,}1 \quad\Rightarrow\quad [49\,690,\ 50\,310] \]</p>
+                <h4>Steg 2 — hvor sannsynlig er det, gitt \(p=0{,}496\)?</h4>
+                <p>Nå skifter vi fordeling: \(X\) er tilnærmet normalfordelt med</p>
+                <p>\[ \mu=np=49\,600,\qquad \sigma=\sqrt{np(1-p)}=158{,}0 \]</p>
+                <p>\[ P(49\,690&lt;X&lt;50\,310)=G\!\left(\frac{50\,310-49\,600}{158}\right)-G\!\left(\frac{49\,690-49\,600}{158}\right) \]</p>
+                <p>\[ =G(4{,}49)-G(0{,}57)=1{,}000-0{,}716=0{,}28 \]</p>
+                <div class="answer"><b>Ca. 28 %.</b> Med 100 000 kast er testen så kraftig at selv et bittelite avvik (0,496 mot 0,500) blir oppdaget i 72 % av tilfellene — den beste illustrasjonen i hele oppgavesamlingen av at «statistisk signifikans» ikke er det samme som «praktisk betydning».</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="okt2022">
+            <header class="task__head">
+              <span class="task__src">OKT 2022 · O1c</span>
+              <span class="task__title">Avviker resistansen fra 50 kΩ?</span>
+              <span class="task__tags"><span class="tag">z-test</span><span class="tag">tosidig</span></span>
+            </header>
+            <div class="task__q">
+              <p>Det ble gjort følgende målinger av 5 motstander: 49, 49, 50, 50, 54. Resistansene \(R_i\) er uavhengige og \(N(\mu;\,2)\)-fordelte. For å kontrollere om forventet resistans avviker fra 50 kΩ, gjennomfør en hypotesetest på 5 % signifikansnivå. Hva blir konklusjonen?</p>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>«Avviker fra» er tosidig, og \(\sigma=2\) er kjent ⇒ Z-test:</p>
+                <p>\[ H_0:\mu=50 \qquad\text{mot}\qquad H_1:\mu\neq 50 \]</p>
+                <p>\[ \bar x=\frac{252}{5}=50{,}4,\qquad z=\frac{50{,}4-50}{2/\sqrt 5}=\frac{0{,}4}{0{,}894}=0{,}447 \]</p>
+                <p>Forkastingskravet er \(|z|&gt;z_{0{,}025}=1{,}96\), og \(0{,}447\) er langt unna.</p>
+                <div class="answer"><b>\(H_0\) beholdes</b> — det er ikke signifikant avvik fra 50 kΩ. Samme konklusjon som via konfidensintervallet [48,65; 52,15], se <a href="07-konfidensintervall.html#mai2023">konfidensintervall</a>.</div>
+              </div>
+            </details>
+          </article>
+        </section>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="07-konfidensintervall.html"><small>forrige</small>← Konfidensintervall</a>
+          <a data-dir="next" href="09-regresjon.html"><small>neste</small>Regresjon og korrelasjon →</a>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js"></script>
+  <script src="../../../assets/js/math.js"></script>
+</body>
+</html>

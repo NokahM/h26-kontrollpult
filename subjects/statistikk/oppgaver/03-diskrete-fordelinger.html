@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Diskrete fordelinger — Statistikk · H26</title>
+  <meta name="description" content="Punktsannsynligheter, forventning og varians, binomisk fordeling og poissonfordeling.">
+  <link rel="stylesheet" href="../../../assets/css/main.css">
+</head>
+<body class="theme-statistikk">
+  <div class="scrim" data-sidebar-toggle></div>
+  <div class="app-shell">
+
+    <aside class="sidebar">
+      <div class="sidebar__head">
+        <span class="sidebar__brand">H26 · <strong>KONTROLLPULT</strong></span>
+      </div>
+      <nav class="sidebar__nav">
+        <div class="sidebar__group-label">Emner</div>
+        <a class="navlink" href="../../../index.html">
+          <span class="navlink__dot" data-status="active" style="color:#5eead4"></span>
+          <span class="navlink__label"><span class="navlink__code">H26</span><span class="navlink__name">Oversikt</span></span>
+        </a>
+        <a class="navlink" href="../../mos/index.html">
+          <span class="navlink__dot" data-status="active" style="color:#57f27c"></span>
+          <span class="navlink__label"><span class="navlink__code">MoS</span><span class="navlink__name">Maskinvare og sikkerhet</span></span>
+        </a>
+        <a class="navlink" href="../../tsd3060/index.html">
+          <span class="navlink__dot" data-status="active" style="color:#35c7f0"></span>
+          <span class="navlink__label"><span class="navlink__code">TSD3060</span><span class="navlink__name">Sikre webtjenester</span></span>
+        </a>
+        <div class="sidebar__group-label">Konte</div>
+        <a class="navlink" data-active="true" href="../index.html">
+          <span class="navlink__dot" data-status="active" style="color:#d98b2b"></span>
+          <span class="navlink__label"><span class="navlink__code">STAT</span><span class="navlink__name">Statistikk</span></span>
+        </a>
+        <a class="navlink" href="../../fysikk2/index.html">
+          <span class="navlink__dot" data-status="pending" style="color:#a78bfa"></span>
+          <span class="navlink__label"><span class="navlink__code">FYS2-EL</span><span class="navlink__name">Elektrisitetslære</span></span>
+        </a>
+      </nav>
+      <div class="sidebar__foot">H26 · sist oppdatert 2026-09-14</div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">← Statistikk</a>
+        <div class="topbar__crumb"><span>·</span> Diskrete fordelinger</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow"><span class="page-header__trace"></span>PB2030 · OPPGAVER MED LØSNING</div>
+          <h1>Diskrete fordelinger</h1>
+          <p class="page-header__desc">Punktsannsynligheter, forventning og varians, binomisk fordeling og poissonfordeling.</p>
+          <span class="page-header__status" data-status="active"><i></i>12 oppgaver · 12 sett</span>
+        </header>
+
+        <section class="section">
+          <div class="section__label">Metode</div>
+          <article class="prose">
+            <h3>Fordeling fra tabell</h3>
+            <p>Når oppgaven gir en ferdig tabell over \(P(X=x)\), er alt du skal gjøre å sette inn i to formler:</p>
+            <p>\[ \mu=E(X)=\sum_i x_i P(X=x_i),\qquad \sigma^2=\operatorname{Var}(X)=\sum_i x_i^2 P(X=x_i)-\mu^2 \]</p>
+            <p>Bruk alltid den siste formen (\(E(X^2)-\mu^2\)) — den er raskere og gir færre regnefeil enn \(\sum(x_i-\mu)^2P(X=x_i)\).</p>
+
+            <h3>Binomisk fordeling</h3>
+            <p>\[ X\sim\mathrm{Bin}(n,p):\quad P(X=x)=\binom{n}{x}p^x(1-p)^{n-x},\quad \mu=np,\quad \sigma^2=np(1-p) \]</p>
+            <p>De fire kjennetegnene ved en binomisk forsøksrekke — som mai 2023 ber deg ramse opp eksplisitt:</p>
+            <ol>
+              <li>Et fast antall delforsøk \(n\).</li>
+              <li>Hvert delforsøk har bare to utfall: suksess eller ikke.</li>
+              <li>Sannsynligheten \(p\) for suksess er den samme i hvert delforsøk.</li>
+              <li>Delforsøkene er uavhengige av hverandre.</li>
+            </ol>
+
+            <h3>Poissonfordeling</h3>
+            <p>\[ X\sim\mathrm{Poisson}(\lambda t):\quad P(X=x)=\frac{(\lambda t)^x}{x!}e^{-\lambda t},\quad \mu=\sigma^2=\lambda t \]</p>
+            <p>Kjennetegn: hendelser som skjer <em>tilfeldig spredt i tid eller rom</em> med kjent gjennomsnittsrate — partikler i en geigerteller, lynnedslag per km², oppringninger per time. Skaler alltid \(\lambda\) til riktig intervall først: 0,35 per sekund over 20 sekunder gir \(\lambda t = 7{,}0\).</p>
+            <div class="note"><strong>Kobling videre:</strong> ventetiden mellom to poissonhendelser er eksponensialfordelt med \(E(T)=1/\lambda\) — se <a href="04-kontinuerlige-fordelinger.html">tetthet og eksponentialfordeling</a>. Og når \(\lambda t\ge 10\) kan poisson tilnærmes med \(N(\lambda t,\sqrt{\lambda t})\) — se <a href="06-sentralgrenseteoremet.html">sentralgrenseteoremet</a>.</div>
+
+            <div class="note"><strong>Sjekkliste for «minst / færre enn»:</strong> «minst 3» er \(1-P(X\le 2)\), «færre enn 4» er \(P(X\le 3)\), «fra og med 2 til og med 4» er \(P(X\le4)-P(X\le1)\). Halvparten av tapte poeng på denne typen skyldes å bomme med én her.</div>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section__label">Fordeling fra tabell</div>
+          <div class="tasknav">
+            <a href="#des2020">Des 2020 · kirsebær</a>
+            <a href="#okt2022">Okt 2022 · bringebær</a>
+            <a href="#mai2026">Mai 2026 · vinterdekk</a>
+            <a href="#mai2025-terning">Mai 2025 · terning</a>
+          </div>
+
+          <article class="task" id="des2020">
+            <header class="task__head">
+              <span class="task__src">DES 2020 · O3</span>
+              <span class="task__title">Antall kirsebær i en kake</span>
+              <span class="task__tags"><span class="tag">E og Var</span><span class="tag">SGT</span></span>
+            </header>
+            <div class="task__q">
+              <p>Antall kirsebær \(X\) i en bestemt type kake har følgende sannsynlighetsfordeling:</p>
+              <div class="dtable-wrap"><table class="dtable">
+                <thead><tr><th class="num">\(k\)</th><th class="num">4</th><th class="num">5</th><th class="num">6</th><th class="num">7</th></tr></thead>
+                <tbody><tr><td class="num">\(P(X=k)\)</td><td class="num">0,2</td><td class="num">0,4</td><td class="num">0,3</td><td class="num">0,1</td></tr></tbody>
+              </table></div>
+              <ol>
+                <li>Hva er verdimengden til \(X\)? Finn forventningsverdien \(\mu\) og variansen \(\sigma^2\).</li>
+                <li>Finn forventningsverdien \(\mu_{\bar X}\) og variansen \(\sigma^2_{\bar X}\) til det gjennomsnittlige antallet \(\bar X\) for 36 kaker.</li>
+                <li>Benytt sentralgrenseteoremet til å bestemme tilnærmet sannsynlighet for at gjennomsnittlig antall kirsebær for 36 kaker er under 5,5.</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>a)</h4>
+                <p>Verdimengden er \(\{4,5,6,7\}\).</p>
+                <p>\[ \mu=4(0{,}2)+5(0{,}4)+6(0{,}3)+7(0{,}1)=0{,}8+2{,}0+1{,}8+0{,}7=5{,}3 \]</p>
+                <p>\[ E(X^2)=16(0{,}2)+25(0{,}4)+36(0{,}3)+49(0{,}1)=28{,}9 \quad\Rightarrow\quad \sigma^2=28{,}9-5{,}3^2=0{,}81 \]</p>
+                <p>Altså \(\sigma=0{,}90\).</p>
+                <h4>b)</h4>
+                <p>\[ \mu_{\bar X}=\mu=5{,}3,\qquad \sigma^2_{\bar X}=\frac{\sigma^2}{n}=\frac{0{,}81}{36}=0{,}0225\ \Rightarrow\ \sigma_{\bar X}=0{,}15 \]</p>
+                <h4>c)</h4>
+                <p>\[ P(\bar X&lt;5{,}5)=G\!\left(\frac{5{,}5-5{,}3}{0{,}15}\right)=G(1{,}33)\approx 0{,}91 \]</p>
+                <div class="answer"><b>\(\mu=5{,}3\), \(\sigma^2=0{,}81\) · \(\sigma_{\bar X}=0{,}15\) · \(P(\bar X&lt;5{,}5)\approx 0{,}91\).</b></div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="okt2022">
+            <header class="task__head">
+              <span class="task__src">OKT 2022 · O4</span>
+              <span class="task__title">Antall bringebær i en dessert</span>
+              <span class="task__tags"><span class="tag">E og Var</span><span class="tag">SGT</span></span>
+            </header>
+            <div class="task__q">
+              <p>Antall bringebær \(X\) i en bestemt type dessert har følgende sannsynlighetsfordeling:</p>
+              <div class="dtable-wrap"><table class="dtable">
+                <thead><tr><th class="num">\(k\)</th><th class="num">14</th><th class="num">18</th><th class="num">20</th><th class="num">22</th><th class="num">25</th></tr></thead>
+                <tbody><tr><td class="num">\(P(X=k)\)</td><td class="num">0,2</td><td class="num">0,3</td><td class="num">0,3</td><td class="num">0,1</td><td class="num">0,1</td></tr></tbody>
+              </table></div>
+              <ol>
+                <li>Hva er verdimengden til \(X\)? Finn forventningsverdien \(\mu\) og variansen \(\sigma^2\).</li>
+                <li>Finn \(\mu_{\bar X}\) og \(\sigma^2_{\bar X}\) for gjennomsnittet av 25 desserter.</li>
+                <li>Bestem tilnærmet sannsynligheten for at gjennomsnittlig antall bringebær for 25 desserter er under 18,5.</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>a)</h4>
+                <p>Verdimengde \(\{14,18,20,22,25\}\).</p>
+                <p>\[ \mu=14(0{,}2)+18(0{,}3)+20(0{,}3)+22(0{,}1)+25(0{,}1)=18{,}9 \]</p>
+                <p>\[ E(X^2)=196(0{,}2)+324(0{,}3)+400(0{,}3)+484(0{,}1)+625(0{,}1)=367{,}3 \]</p>
+                <p>\[ \sigma^2=367{,}3-18{,}9^2=10{,}09\ \Rightarrow\ \sigma\approx 3{,}18 \]</p>
+                <h4>b)</h4>
+                <p>\[ \mu_{\bar X}=18{,}9,\qquad \sigma^2_{\bar X}=\frac{10{,}09}{25}=0{,}4036\ \Rightarrow\ \sigma_{\bar X}\approx 0{,}635 \]</p>
+                <h4>c)</h4>
+                <p>\[ P(\bar X&lt;18{,}5)=G\!\left(\frac{18{,}5-18{,}9}{0{,}635}\right)=G(-0{,}63)\approx 0{,}26 \]</p>
+                <div class="answer"><b>\(\mu=18{,}9\), \(\sigma^2=10{,}09\) · \(\sigma_{\bar X}\approx 0{,}64\) · \(P(\bar X&lt;18{,}5)\approx 0{,}26\).</b></div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="mai2026">
+            <header class="task__head">
+              <span class="task__src">MAI 2026 · O3</span>
+              <span class="task__title">Fire vinterdekk på feil plass</span>
+              <span class="task__tags"><span class="tag">E og Var</span><span class="tag">betinget</span><span class="tag">sum</span></span>
+            </header>
+            <div class="task__q">
+              <p>Fire vinterdekk plasseres tilfeldig på en bil. De har hver sin «riktige» plass, men eieren har glemt å merke dem. La \(X\) være antall dekk av 4 som havner på rett plass. Punktsannsynlighetene er:</p>
+              <div class="dtable-wrap"><table class="dtable">
+                <thead><tr><th class="num">\(k\)</th><th class="num">0</th><th class="num">1</th><th class="num">2</th><th class="num">3</th><th class="num">4</th></tr></thead>
+                <tbody><tr><td class="num">\(P(X=k)\)</td><td class="num">3/8</td><td class="num">1/3</td><td class="num">1/4</td><td class="num">0</td><td class="num">1/24</td></tr></tbody>
+              </table></div>
+              <ol>
+                <li>Bestem forventningen og variansen til \(X\).</li>
+                <li>Forklar hvorfor \(P(X=3)=0\) og \(P(X=4)=1/24\).</li>
+                <li>Finn \(P(X\le 1\cap X\le 3)\), \(P(X\le 1\mid X\le 3)\) og \(P(X\le 2\mid X\ge 2)\).</li>
+                <li>La \(Y=X_1+X_2\) være antall dekk som havner på rett plass når det legges om dekk på to tilfeldig valgte biler etter samme sløve framgangsmåte. Finn \(P(Y=4)\).</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>Skriv om alle brøkene til 24-deler først: \(9/24,\ 8/24,\ 6/24,\ 0,\ 1/24\). Da blir alt enklere.</p>
+                <h4>a)</h4>
+                <p>\[ \mu=0\cdot\tfrac{9}{24}+1\cdot\tfrac{8}{24}+2\cdot\tfrac{6}{24}+4\cdot\tfrac{1}{24}=\frac{8+12+4}{24}=1 \]</p>
+                <p>\[ \sigma^2=E(X^2)-\mu^2=\frac{0+8+24+16}{24}-1^2=2-1=1 \]</p>
+                <h4>b)</h4>
+                <p>De fire dekkene kan plasseres på \(4!=24\) måter, og nøyaktig én av dem har alle på rett plass, derfor \(P(X=4)=1/24\). Det er umulig å ha nøyaktig tre riktige: hvis tre er riktig plassert, må det fjerde også være det. Derfor \(P(X=3)=0\).</p>
+                <h4>c)</h4>
+                <p>\(\{X\le1\}\) er en delmengde av \(\{X\le3\}\), så snittet er bare \(\{X\le1\}\):</p>
+                <p>\[ P(X\le 1\cap X\le 3)=P(X\le 1)=\tfrac{9}{24}+\tfrac{8}{24}=\tfrac{17}{24}\approx 0{,}708 \]</p>
+                <p>\[ P(X\le 1\mid X\le 3)=\frac{17/24}{23/24}=\frac{17}{23}\approx 0{,}739 \]</p>
+                <p>\[ P(X\le 2\mid X\ge 2)=\frac{P(X=2)}{P(X\ge 2)}=\frac{6/24}{7/24}=\frac{6}{7}\approx 0{,}857 \]</p>
+                <h4>d)</h4>
+                <p>Summen blir 4 på tre måter, siden \(P(X=3)=0\):</p>
+                <p>\[ \{X_1{=}0,X_2{=}4\}\cup\{X_1{=}4,X_2{=}0\}\cup\{X_1{=}2,X_2{=}2\} \]</p>
+                <p>Bilene er uavhengige:</p>
+                <p>\[ P(Y=4)=2\cdot\tfrac{1}{24}\cdot\tfrac{3}{8}+\left(\tfrac{1}{4}\right)^2=\tfrac{1}{32}+\tfrac{1}{16}=\tfrac{3}{32}\approx 0{,}094 \]</p>
+                <div class="answer"><b>\(\mu=1\), \(\sigma^2=1\) · c) 17/24, 17/23, 6/7 · d) 3/32 ≈ 0,09.</b></div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="mai2025-terning">
+            <header class="task__head">
+              <span class="task__src">MAI 2025 · O2a</span>
+              <span class="task__title">Forventning og varians for en terning</span>
+              <span class="task__tags"><span class="tag">E og Var</span><span class="tag">utledning</span></span>
+            </header>
+            <div class="task__q">
+              <p>La \(X\) betegne antall øyne som vises når vi kaster en vanlig terning. Vis at \(\mu=E(X)=7/2\) og \(\sigma^2=\operatorname{Var}(X)=35/12\).</p>
+              <p class="callout">Punkt b) — sum av 200 terninger — ligger under <a href="06-sentralgrenseteoremet.html#mai2025">sentralgrenseteoremet</a>.</p>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>Uniform fordeling: \(P(X=k)=1/6\) for \(k=1,\dots,6\).</p>
+                <p>\[ E(X)=\frac{1}{6}(1+2+3+4+5+6)=\frac{21}{6}=\frac{7}{2} \]</p>
+                <p>\[ E(X^2)=\frac{1}{6}(1+4+9+16+25+36)=\frac{91}{6} \]</p>
+                <p>\[ \operatorname{Var}(X)=\frac{91}{6}-\left(\frac{7}{2}\right)^2=\frac{182}{12}-\frac{147}{12}=\frac{35}{12} \]</p>
+                <div class="answer">Gratispoeng — men husk å skrive begge summene ut, ikke bare svaret.</div>
+              </div>
+            </details>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section__label">Binomisk fordeling</div>
+          <div class="tasknav">
+            <a href="#mai2023-bin">Mai 2023 · seksere</a>
+            <a href="#jun2020">Jun 2020 · fartsovertredelser</a>
+            <a href="#okt2024-bin">Okt 2024 · kretskort</a>
+            <a href="#mai2021-bin">Mai 2021 · komponenter</a>
+            <a href="#mai2025">Mai 2025 · el-biler</a>
+            <a href="#normal-bin">Normal → binomisk</a>
+          </div>
+
+          <article class="task" id="mai2023-bin">
+            <header class="task__head">
+              <span class="task__src">MAI 2023 · O2</span>
+              <span class="task__title">Antall seksere på n terningkast</span>
+              <span class="task__tags"><span class="tag">binomisk</span><span class="tag">teori</span><span class="tag">n-krav</span></span>
+            </header>
+            <div class="task__q">
+              <p>La \(X\) være antall seksere på \(n\) terningkast med en vanlig 6-sidet terning.</p>
+              <ol>
+                <li>Forklar hvorfor \(X\) er binomisk fordelt ved å vise til de fire kjennetegnene ved en binomisk forsøksrekke.</li>
+                <li>Finn sannsynligheten for å få minst tre seksere dersom \(n=8\).</li>
+                <li>Hva må \(n\) minst være for at \(\sigma/\mu&lt;0{,}15\), der \(\sigma\) er standardavviket og \(\mu\) forventningsverdien til \(X\)?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>a)</h4>
+                <ul>
+                  <li>Fast antall delforsøk: vi kaster nøyaktig \(n\) ganger.</li>
+                  <li>To utfall per kast: sekser eller ikke sekser.</li>
+                  <li>Samme sannsynlighet hver gang: \(p=1/6\), terningen endrer seg ikke.</li>
+                  <li>Uavhengige kast: utfallet av ett kast påvirker ikke de andre.</li>
+                </ul>
+                <h4>b)</h4>
+                <p>\(X\sim\mathrm{Bin}(8;\,1/6)\):</p>
+                <p>\[ P(X\ge 3)=1-\sum_{x=0}^{2}\binom{8}{x}\left(\tfrac16\right)^x\left(\tfrac56\right)^{8-x}\approx 0{,}135 \]</p>
+                <h4>c)</h4>
+                <p>Med \(\mu=np\) og \(\sigma=\sqrt{np(1-p)}\):</p>
+                <p>\[ \frac{\sigma}{\mu}=\frac{\sqrt{np(1-p)}}{np}=\sqrt{\frac{1-p}{np}}&lt;0{,}15 \]</p>
+                <p>\[ \frac{1-p}{np}&lt;0{,}0225 \quad\Rightarrow\quad n&gt;\frac{1-p}{p\cdot 0{,}0225}=\frac{5/6}{(1/6)\cdot 0{,}0225}=222{,}2 \]</p>
+                <div class="answer"><b>b) 0,135 · c) \(n\ge 223\) kast.</b> Legg merke til at det relative standardavviket krymper som \(1/\sqrt n\) — dette er hele ideen bak både konfidensintervall og sentralgrenseteoremet.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="jun2020">
+            <header class="task__head">
+              <span class="task__src">JUN 2020 · O1a</span>
+              <span class="task__title">Fartsovertredelser i en tunnel</span>
+              <span class="task__tags"><span class="tag">binomisk</span></span>
+            </header>
+            <div class="task__q">
+              <p>Det viser seg at 76 % av bilene som kjører gjennom en bestemt tunnel kjører for fort. Finn sannsynligheten for at minst 8 av 10 tilfeldig valgte biler kjører for fort gjennom tunnelen.</p>
+              <p class="callout">Punkt b) — 800 av 1000 med normaltilnærming — ligger under <a href="06-sentralgrenseteoremet.html#jun2020">sentralgrenseteoremet</a>.</p>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>\(X\sim\mathrm{Bin}(10;\,0{,}76)\), forutsatt uavhengighet mellom bilene:</p>
+                <p>\[ P(X\ge 8)=\sum_{x=8}^{10}\binom{10}{x}0{,}76^x\,0{,}24^{10-x}\approx 0{,}556 \]</p>
+                <div class="answer"><b>\(P(X\ge 8)\approx 0{,}56\).</b></div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="okt2024-bin">
+            <header class="task__head">
+              <span class="task__src">OKT 2024 · O1</span>
+              <span class="task__title">Kretskort med ti komponenter</span>
+              <span class="task__tags"><span class="tag">binomisk</span><span class="tag">intervall</span></span>
+            </header>
+            <div class="task__q">
+              <p>En bedrift masseproduserer et kretskort med ti elektroniske komponenter. Kvalitetskontroll har avslørt at 7 % av denne typen komponenter er defekte. Kortet fungerer ikke dersom to eller flere komponenter er defekte.</p>
+              <ol>
+                <li>Hva er sannsynligheten for at et vilkårlig kretskort ikke har noen defekte komponenter?</li>
+                <li>Kortene blir reparert hvis de inneholder fra og med 2 til og med 4 defekte komponenter. Hva er sannsynligheten for det?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>\(X\sim\mathrm{Bin}(10;\,0{,}07)\).</p>
+                <h4>a)</h4>
+                <p>\[ P(X=0)=\binom{10}{0}0{,}07^0\,0{,}93^{10}=0{,}93^{10}\approx 0{,}484 \]</p>
+                <h4>b)</h4>
+                <p>\[ P(2\le X\le 4)=\sum_{x=2}^{4}\binom{10}{x}0{,}07^x\,0{,}93^{10-x}=0{,}1234+0{,}0262+0{,}0036\approx 0{,}151 \]</p>
+                <div class="answer"><b>a) ca. 48 % · b) ca. 15 %.</b></div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="mai2021-bin">
+            <header class="task__head">
+              <span class="task__src">MAI 2021 · O2b–c</span>
+              <span class="task__title">Kretskort av fem og seks komponenter</span>
+              <span class="task__tags"><span class="tag">binomisk</span><span class="tag">forventet antall</span></span>
+            </header>
+            <div class="task__q">
+              <p>Hansen kjøper 3000 elektroniske komponenter. Anta at defektsannsynligheten er \(p=0{,}05\). Bedriften bruker komponentene til å lage kretskort.</p>
+              <ol>
+                <li>Med fem komponenter per kort, og kortet fungerer bare når alle fem er gode: regn ut sannsynligheten for at et kretskort fungerer, og finn forventet antall fungerende kretskort.</li>
+                <li>Med seks komponenter per kort, og kortet fungerer når minst fem er gode: regn ut forventet antall fungerende kretskort.</li>
+              </ol>
+              <p class="callout">Punkt a) (konfidensintervall for \(p\)) ligger under <a href="07-konfidensintervall.html#mai2021">konfidensintervall</a>, og punkt d)–e) (levetid) under <a href="04-kontinuerlige-fordelinger.html#mai2021">eksponentialfordeling</a>.</p>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>b)</h4>
+                <p>La \(Y\) være antall defekte på kortet, \(Y\sim\mathrm{Bin}(5;\,0{,}05)\):</p>
+                <p>\[ P(Y=0)=0{,}95^5\approx 0{,}7738 \]</p>
+                <p>3000 komponenter gir \(3000/5=600\) kort, altså forventet</p>
+                <p>\[ 600\cdot 0{,}7738\approx 464 \text{ fungerende kort} \]</p>
+                <h4>c)</h4>
+                <p>Nå er \(X\sim\mathrm{Bin}(6;\,0{,}05)\), og kortet fungerer når \(X\le 1\):</p>
+                <p>\[ P(X\le 1)=0{,}95^6+\binom{6}{1}0{,}05\cdot 0{,}95^5=0{,}7351+0{,}2321=0{,}9672 \]</p>
+                <p>3000 komponenter gir \(3000/6=500\) kort:</p>
+                <p>\[ 500\cdot 0{,}9672\approx 484 \text{ fungerende kort} \]</p>
+                <div class="answer"><b>b) 0,774 og ca. 464 kort · c) ca. 484 kort.</b> Å bruke én komponent ekstra per kort gir flere <em>fungerende</em> kort selv om det blir færre kort totalt.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="mai2025">
+            <header class="task__head">
+              <span class="task__src">MAI 2025 · O1c</span>
+              <span class="task__title">Tolv tilfeldige biler</span>
+              <span class="task__tags"><span class="tag">binomisk</span><span class="tag">tilnærming</span></span>
+            </header>
+            <div class="task__q">
+              <p>Vi trekker 12 tilfeldige biler blant alle person- og varebiler (3 403 763 biler, hvorav 825 739 el-biler). Hva er sannsynligheten for at færre enn 4 av disse er el-biler?</p>
+              <p><em>Hint fra oppgaven:</em> her kan du benytte at sannsynligheten for å trekke en el-bil er omtrent den samme for hver bil du trekker.</p>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p><strong>Hvorfor binomisk?</strong> Strengt tatt er \(X\) hypergeometrisk — vi trekker uten tilbakelegging. Men potten er enorm:</p>
+                <p>\[ P(\text{el-bil på 1. trekning})=\frac{825\,739}{3\,403\,763}\approx 0{,}243 \]</p>
+                <p>\[ P(\text{el-bil på 2.}\mid\text{el-bil på 1.})=\frac{825\,738}{3\,403\,762}\approx 0{,}243 \]</p>
+                <p>Sannsynligheten endrer seg ikke merkbart, så \(X\sim\mathrm{Bin}(12;\,0{,}243)\) er en utmerket tilnærming.</p>
+                <p>\[ P(X&lt;4)=\sum_{x=0}^{3}\binom{12}{x}0{,}243^x\,0{,}757^{12-x}\approx 0{,}67 \]</p>
+                <div class="answer"><b>\(P(X&lt;4)\approx 0{,}67\).</b></div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="normal-bin">
+            <header class="task__head">
+              <span class="task__src">OKT 2024 · O5c &amp; OKT 2025 · O3c</span>
+              <span class="task__title">Normalfordeling som mater en binomisk</span>
+              <span class="task__tags"><span class="tag">kombinasjon</span><span class="tag">gjenganger</span></span>
+            </header>
+            <div class="task__q">
+              <p>Dette mønsteret har dukket opp tre sittinger på rad: først regner du ut \(p\) fra en normalfordeling, så bruker du den \(p\)-en i en binomisk fordeling.</p>
+              <ol>
+                <li><strong>Okt 2024:</strong> teposer er \(N(1{,}30;\,0{,}05)\) gram. Finn sannsynligheten for at minst 3 av 5 tilfeldig valgte teposer veier over 1,32 gram.</li>
+                <li><strong>Okt 2025:</strong> appelsiner er \(N(270;\,15)\) gram. Du trekker 25 tilfeldige appelsiner med uavhengig vekt. Hva er sannsynligheten for at minst 3 av dem veier mer enn 285 gram?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>Okt 2024</h4>
+                <p>Steg 1 — normalfordeling gir \(p\):</p>
+                <p>\[ p=P(X&gt;1{,}32)=1-G\!\left(\frac{1{,}32-1{,}30}{0{,}05}\right)=1-G(0{,}40)=1-0{,}6554=0{,}3446 \]</p>
+                <p>Steg 2 — binomisk med \(n=5\), \(p=0{,}3446\):</p>
+                <p>\[ P(T\ge 3)=\sum_{x=3}^{5}\binom{5}{x}p^x(1-p)^{5-x}\approx 0{,}227 \]</p>
+                <h4>Okt 2025</h4>
+                <p>\[ p=P(X&gt;285)=1-G\!\left(\frac{285-270}{15}\right)=1-G(1{,}00)=0{,}1587 \]</p>
+                <p>\[ P(Y\ge 3)=1-\sum_{x=0}^{2}\binom{25}{x}p^x(1-p)^{25-x}\approx 0{,}78 \]</p>
+                <div class="answer"><b>Okt 2024: 0,227 · Okt 2025: 0,78.</b> Nøkkelen er å se at spørsmålet skifter fra «hvor mye veier én» til «hvor mange av n» — da skifter du fordeling.</div>
+              </div>
+            </details>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section__label">Poissonfordeling</div>
+          <div class="tasknav">
+            <a href="#okt2021">Okt 2021 · geigerteller</a>
+            <a href="#okt2025-poisson">Okt 2025 · lynnedslag</a>
+          </div>
+
+          <article class="task" id="okt2021">
+            <header class="task__head">
+              <span class="task__src">OKT 2021 · O2</span>
+              <span class="task__title">Geigerteller og betapartikler</span>
+              <span class="task__tags"><span class="tag">poisson</span><span class="tag">binomisk</span><span class="tag">SGT</span></span>
+            </header>
+            <div class="task__q">
+              <p>Et radioaktivt materiale sender ut betapartikler. En geigerteller registrerer i gjennomsnitt 0,35 partikler per sekund. La \(X\) være antall registreringer i løpet av 20 sekunder, antatt poissonfordelt.</p>
+              <ol>
+                <li>Finn sannsynligheten for at telleren registrerer akkurat 6 partikler i løpet av 20 sekunder.</li>
+                <li>Finn sannsynligheten for at telleren registrerer færre enn 3 partikler i løpet av 20 sekunder.</li>
+                <li>Finn forventet tid fra en partikkelregistrering til den neste.</li>
+                <li>Det gjøres 100 målinger av \(X\). Hva er sannsynligheten for at telleren registrerer færre enn 3 partikler i minst 3 av de 100 forsøkene?</li>
+                <li>Finn tilnærmet forventningsverdi og standardavvik for gjennomsnittet \(\bar X\) av de 100 målingene.</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>Skaler først raten til intervallet: \(\lambda t=0{,}35\cdot 20=7{,}0\).</p>
+                <h4>a)</h4>
+                <p>\[ P(X=6)=\frac{7{,}0^6}{6!}e^{-7{,}0}\approx 0{,}149 \]</p>
+                <h4>b)</h4>
+                <p>\[ P(X&lt;3)=e^{-7}\left(\frac{7^0}{0!}+\frac{7^1}{1!}+\frac{7^2}{2!}\right)\approx 0{,}0296 \]</p>
+                <h4>c)</h4>
+                <p>Ventetiden \(T\) mellom to hendelser i en poissonprosess er eksponensialfordelt:</p>
+                <p>\[ E(T)=\frac{1}{\lambda}=\frac{1}{0{,}35}\approx 2{,}9\ \text{sekunder} \]</p>
+                <h4>d)</h4>
+                <p>Nå skifter vi fordeling: la \(Y\) være antall av de 100 forsøkene der det registreres færre enn 3 partikler. \(Y\sim\mathrm{Bin}(100;\,0{,}0296)\):</p>
+                <p>\[ P(Y\ge 3)=1-\sum_{x=0}^{2}\binom{100}{x}p^x(1-p)^{100-x}\approx 0{,}57 \]</p>
+                <h4>e)</h4>
+                <p>For poisson er \(\mu=\sigma^2=7{,}0\), så \(\sigma=\sqrt{7{,}0}\approx 2{,}65\). Sentralgrenseteoremet (\(n=100\gg 30\)) gir</p>
+                <p>\[ \mu_{\bar X}=7{,}0,\qquad \sigma_{\bar X}=\frac{\sigma}{\sqrt n}=\frac{2{,}65}{10}\approx 0{,}26 \]</p>
+                <div class="answer"><b>a) 0,149 · b) 0,030 · c) 2,9 s · d) 0,57 · e) \(\mu_{\bar X}=7{,}0\), \(\sigma_{\bar X}=0{,}26\).</b></div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="okt2025-poisson">
+            <header class="task__head">
+              <span class="task__src">OKT 2025 · O2</span>
+              <span class="task__title">Lynnedslag per kvadratkilometer</span>
+              <span class="task__tags"><span class="tag">poisson</span><span class="tag">normaltilnærming</span></span>
+            </header>
+            <div class="task__q">
+              <p>Antall lynnedslag per kvadratkilometer i løpet av et døgn er poissonfordelt med forventning 5.</p>
+              <ol>
+                <li>Finn sannsynligheten for at det i løpet av et døgn forekommer fire eller færre lynnedslag på et område på én kvadratkilometer.</li>
+                <li>Finn tilnærmet sannsynlighet for at det i løpet av et døgn forekommer 40 eller færre lynnedslag i et område på ti kvadratkilometer.</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>a)</h4>
+                <p>\(X_1\sim\mathrm{Poisson}(5)\):</p>
+                <p>\[ P(X_1\le 4)=e^{-5}\left(\frac{5^0}{0!}+\frac{5^1}{1!}+\frac{5^2}{2!}+\frac{5^3}{3!}+\frac{5^4}{4!}\right)\approx 0{,}44 \]</p>
+                <h4>b)</h4>
+                <p>Poissonparameteren skalerer med arealet: \(X_{10}\sim\mathrm{Poisson}(50)\). Siden \(\lambda t=50\ge 10\) kan vi tilnærme med \(N(50,\sqrt{50})\). Ordet «tilnærmet» i oppgaveteksten er signalet om at du skal gjøre nettopp dette — og siden \(X\) er en heltallsvariabel, bruker vi heltallskorreksjon:</p>
+                <p>\[ P(X_{10}\le 40)\approx G\!\left(\frac{40+0{,}5-50}{\sqrt{50}}\right)=G(-1{,}34)\approx 0{,}09 \]</p>
+                <div class="answer"><b>a) 0,44 · b) 0,09.</b> (Eksakt poissonberegning gir 0,086 — tilnærmingen er god.)</div>
+              </div>
+            </details>
+          </article>
+        </section>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="02-kombinatorikk.html"><small>forrige</small>← Kombinatorikk og hypergeometrisk</a>
+          <a data-dir="next" href="04-kontinuerlige-fordelinger.html"><small>neste</small>Tetthet og eksponentialfordeling →</a>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js"></script>
+  <script src="../../../assets/js/math.js"></script>
+</body>
+</html>

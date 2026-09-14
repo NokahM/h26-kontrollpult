@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Formelsamling og tabeller — Statistikk · H26</title>
+  <meta name="description" content="Formelarket du får utdelt, pluss kvantilene du trenger oftest — samlet slik de faktisk brukes.">
+  <link rel="stylesheet" href="../../../assets/css/main.css">
+</head>
+<body class="theme-statistikk">
+  <div class="scrim" data-sidebar-toggle></div>
+  <div class="app-shell">
+
+    <aside class="sidebar">
+      <div class="sidebar__head">
+        <span class="sidebar__brand">H26 · <strong>KONTROLLPULT</strong></span>
+      </div>
+      <nav class="sidebar__nav">
+        <div class="sidebar__group-label">Emner</div>
+        <a class="navlink" href="../../../index.html">
+          <span class="navlink__dot" data-status="active" style="color:#5eead4"></span>
+          <span class="navlink__label"><span class="navlink__code">H26</span><span class="navlink__name">Oversikt</span></span>
+        </a>
+        <a class="navlink" href="../../mos/index.html">
+          <span class="navlink__dot" data-status="active" style="color:#57f27c"></span>
+          <span class="navlink__label"><span class="navlink__code">MoS</span><span class="navlink__name">Maskinvare og sikkerhet</span></span>
+        </a>
+        <a class="navlink" href="../../tsd3060/index.html">
+          <span class="navlink__dot" data-status="active" style="color:#35c7f0"></span>
+          <span class="navlink__label"><span class="navlink__code">TSD3060</span><span class="navlink__name">Sikre webtjenester</span></span>
+        </a>
+        <div class="sidebar__group-label">Konte</div>
+        <a class="navlink" data-active="true" href="../index.html">
+          <span class="navlink__dot" data-status="active" style="color:#d98b2b"></span>
+          <span class="navlink__label"><span class="navlink__code">STAT</span><span class="navlink__name">Statistikk</span></span>
+        </a>
+        <a class="navlink" href="../../fysikk2/index.html">
+          <span class="navlink__dot" data-status="pending" style="color:#a78bfa"></span>
+          <span class="navlink__label"><span class="navlink__code">FYS2-EL</span><span class="navlink__name">Elektrisitetslære</span></span>
+        </a>
+      </nav>
+      <div class="sidebar__foot">H26 · sist oppdatert 2026-09-14</div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">← Statistikk</a>
+        <div class="topbar__crumb"><span>·</span> Formelsamling og tabeller</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow"><span class="page-header__trace"></span>PB2030 · VEDLEGG</div>
+          <h1>Formelsamling og tabeller</h1>
+          <p class="page-header__desc">Formelarket du får utdelt, pluss kvantilene du trenger oftest — samlet slik de faktisk brukes.</p>
+          <span class="page-header__status" data-status="active"><i></i>vedlegg</span>
+        </header>
+
+        <section class="section">
+          <div class="section__label">Om vedlegget</div>
+          <article class="prose">
+            <p>Fra og med mai 2023 leveres eksamen ut med et fast formelark og tre tabeller. Under er innholdet i formelarket gjengitt, gruppert etter hvordan det faktisk brukes i oppgavene — pluss de kvantilverdiene som går igjen, slik at du slipper å bla.</p>
+            <div class="note">Formelarket er identisk fra 2023 til 2026, bortsett fra årstallet i toppteksten. Tabellene er Tabell A (kumulative sannsynligheter for standard normalfordeling), Tabell B (kvantiler i standard normalfordeling) og Tabell C (kvantiler i student t-fordeling), hentet fra <a href="https://nettressurser.no/statistikk" target="_blank" rel="noopener">nettressurser.no/statistikk</a>.</div>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section__label">Sannsynlighetsregning</div>
+          <article class="prose">
+            <p>\[ P(\bar A)=1-P(A),\qquad P(A\cup B)=P(A)+P(B)-P(A\cap B) \]</p>
+            <p>\[ P(A\mid B)=\frac{P(A\cap B)}{P(B)},\qquad P(A\cap B)=P(A)P(B\mid A)=P(B)P(A\mid B) \]</p>
+            <p>Total sannsynlighet, når én og bare én av \(A_1,\dots,A_n\) inntreffer:</p>
+            <p>\[ P(B)=\sum_{k=1}^{n}P(B\mid A_k)P(A_k) \]</p>
+            <p>Bayes' formel:</p>
+            <p>\[ P(A_i\mid B)=\frac{P(B\mid A_i)P(A_i)}{\sum_{k=1}^{n}P(B\mid A_k)P(A_k)} \]</p>
+            <p>Uavhengige hendelser: \(P(A_1\cap\dots\cap A_n)=P(A_1)\cdots P(A_n)\).</p>
+            <h3>Kombinatorikk</h3>
+            <p>\(n\) ulike enheter kan organiseres i \(n!\) rekkefølger. Ved valg av \(k\) fra \(n\):</p>
+            <div class="dtable-wrap"><table class="dtable">
+              <thead><tr><th></th><th>Uten tilbakelegging</th><th>Med tilbakelegging</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Ordnet</strong></td><td>\(P_{n,k}=\dfrac{n!}{(n-k)!}\)</td><td>\(n^k\)</td></tr>
+                <tr><td><strong>Uordnet</strong></td><td>\(\dbinom{n}{k}=\dfrac{n!}{(n-k)!\,k!}\)</td><td>\(\dbinom{n+k-1}{k}\)</td></tr>
+              </tbody>
+            </table></div>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section__label">Fordelinger</div>
+          <article class="prose">
+            <div class="dtable-wrap"><table class="dtable">
+              <thead><tr><th>Fordeling</th><th>Punktsannsynlighet / tetthet</th><th>\(\mu\)</th><th>\(\sigma^2\)</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><strong>Binomisk</strong><br>\(\mathrm{Bin}(n,p)\)</td>
+                  <td>\(\dbinom{n}{x}p^x(1-p)^{n-x}\)</td>
+                  <td>\(np\)</td><td>\(np(1-p)\)</td>
+                </tr>
+                <tr>
+                  <td><strong>Hypergeometrisk</strong><br>\(\mathrm{Hyp}(N,M,n)\)</td>
+                  <td>\(\dfrac{\binom{M}{x}\binom{N-M}{n-x}}{\binom{N}{n}}\)</td>
+                  <td>\(n\dfrac{M}{N}\)</td>
+                  <td>\(n\dfrac{M}{N}\Bigl(1-\dfrac{M}{N}\Bigr)\dfrac{N-n}{N-1}\)</td>
+                </tr>
+                <tr>
+                  <td><strong>Poisson</strong><br>\(\mathrm{Poisson}(\lambda t)\)</td>
+                  <td>\(\dfrac{(\lambda t)^x}{x!}e^{-\lambda t}\)</td>
+                  <td>\(\lambda t\)</td><td>\(\lambda t\)</td>
+                </tr>
+                <tr>
+                  <td><strong>Eksponential</strong></td>
+                  <td>\(f(x)=\lambda e^{-\lambda x}\), \(P(X\le x)=1-e^{-\lambda x}\)</td>
+                  <td>\(\dfrac{1}{\lambda}\)</td><td>\(\dfrac{1}{\lambda^2}\)</td>
+                </tr>
+                <tr>
+                  <td><strong>Normal</strong><br>\(N(\mu,\sigma)\)</td>
+                  <td>\(P(X\le x)=G\!\left(\dfrac{x-\mu}{\sigma}\right)\)</td>
+                  <td>\(\mu\)</td><td>\(\sigma^2\)</td>
+                </tr>
+              </tbody>
+            </table></div>
+            <h3>Forventning og varians</h3>
+            <p>Diskret: \(\mu=\sum_i x_iP(X=x_i)\), \(\ \sigma^2=\sum_i x_i^2P(X=x_i)-\mu^2\)</p>
+            <p>Kontinuerlig: \(\mu=\int_{-\infty}^{\infty}xf(x)\,dx\), \(\ \sigma^2=\int_{-\infty}^{\infty}x^2f(x)\,dx-\mu^2\)</p>
+            <p>Regneregler:</p>
+            <p>\[ \operatorname{Var}(aX+b)=a^2\operatorname{Var}(X),\qquad E\Bigl(\sum a_iX_i+b\Bigr)=\sum a_iE(X_i)+b \]</p>
+            <p>For <em>uavhengige</em> variable:</p>
+            <p>\[ \operatorname{Var}\Bigl(\sum a_iX_i+b\Bigr)=\sum a_i^2\operatorname{Var}(X_i),\qquad E(X_1X_2\cdots X_n)=E(X_1)E(X_2)\cdots E(X_n) \]</p>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section__label">Sentralgrenseteoremet og tilnærminger</div>
+          <article class="prose">
+            <p>For uavhengige, identisk fordelte \(X_i\) med \(E(X_i)=\mu\), \(\operatorname{Var}(X_i)=\sigma^2\):</p>
+            <p>\[ \bar X \approx N\!\left(\mu,\ \frac{\sigma}{\sqrt n}\right),\qquad Y=\sum_{i=1}^n X_i \approx N\!\left(n\mu,\ \sqrt n\,\sigma\right) \quad (n\ge 30) \]</p>
+            <p>Er \(X_i\)-ene normalfordelte, gjelder begge eksakt for alle \(n\).</p>
+            <p><strong>Heltallskorreksjon</strong> ved tilnærming fra en heltallsvariabel:</p>
+            <p>\[ P(X\le x)\approx G\!\left(\frac{x+\tfrac12-\mu}{\sigma}\right) \]</p>
+            <div class="dtable-wrap"><table class="dtable">
+              <thead><tr><th>Fra</th><th>Til</th><th>Gyldig når</th></tr></thead>
+              <tbody>
+                <tr><td>\(\mathrm{Hyp}(N,M,n)\)</td><td>\(\mathrm{Bin}(n,M/N)\)</td><td class="num">\(N\ge 10n\)</td></tr>
+                <tr><td>\(\mathrm{Hyp}(N,M,n)\)</td><td>\(N\!\left(np,\sqrt{\tfrac{N-n}{N-1}np(1-p)}\right)\)</td><td class="num">\(\tfrac{N-n}{N-1}np(1-p)\ge 5\)</td></tr>
+                <tr><td>\(\mathrm{Bin}(n,p)\)</td><td>\(\mathrm{Poisson}(np)\)</td><td class="num">\(n&gt;10,\ p&lt;0{,}1\)</td></tr>
+                <tr><td>\(\mathrm{Bin}(n,p)\)</td><td>\(N\!\left(np,\sqrt{np(1-p)}\right)\)</td><td class="num">\(np(1-p)\ge 5\)</td></tr>
+                <tr><td>\(\mathrm{Poisson}(\lambda t)\)</td><td>\(N\!\left(\lambda t,\sqrt{\lambda t}\right)\)</td><td class="num">\(\lambda t\ge 10\)</td></tr>
+              </tbody>
+            </table></div>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section__label">Estimering og testing</div>
+          <article class="prose">
+            <h3>Konfidensintervall for μ</h3>
+            <p>\[ \bar X \pm z_{\alpha/2}\cdot\frac{\sigma}{\sqrt n} \quad (\sigma \text{ kjent}),\qquad \bar X \pm t_{\alpha/2}\cdot\frac{S}{\sqrt n} \quad (\sigma \text{ ukjent}) \]</p>
+            <p>\(t_{\alpha/2}\) har \(n-1\) frihetsgrader. Gjelder for normalfordelte \(X_i\) eller \(n\ge 30\).</p>
+            <h3>Konfidensintervall for p</h3>
+            <p>\[ \hat p \pm z_{\alpha/2}\sqrt{\frac{\hat p(1-\hat p)}{n}},\qquad \hat p=\frac{X}{n},\quad \text{krever } n\hat p(1-\hat p)\ge 5 \]</p>
+            <h3>Hypotesetest</h3>
+            <p>\[ Z=\frac{\bar X-\mu_0}{\sigma/\sqrt n},\qquad T=\frac{\bar X-\mu_0}{S/\sqrt n} \quad (\nu=n-1) \]</p>
+            <div class="dtable-wrap"><table class="dtable">
+              <thead><tr><th>\(H_0\)</th><th>\(H_1\)</th><th>Forkast \(H_0\) hvis</th><th>Kritisk verdi for \(\bar X\)</th></tr></thead>
+              <tbody>
+                <tr><td>\(\mu\le\mu_0\)</td><td>\(\mu&gt;\mu_0\)</td><td>\(Z&gt;z_\alpha\)</td><td>\(k=\mu_0+z_\alpha\sigma/\sqrt n\)</td></tr>
+                <tr><td>\(\mu\ge\mu_0\)</td><td>\(\mu&lt;\mu_0\)</td><td>\(Z&lt;-z_\alpha\)</td><td>\(k=\mu_0-z_\alpha\sigma/\sqrt n\)</td></tr>
+                <tr><td>\(\mu=\mu_0\)</td><td>\(\mu\neq\mu_0\)</td><td>\(|Z|&gt;z_{\alpha/2}\)</td><td>\(k=\mu_0\pm z_{\alpha/2}\sigma/\sqrt n\)</td></tr>
+              </tbody>
+            </table></div>
+            <h3>Lineær regresjon</h3>
+            <p>Med \(S_X^2=\frac{\sum(x_i-\bar x)^2}{n-1}\), \(S_Y^2=\frac{\sum(y_i-\bar y)^2}{n-1}\), \(S_{XY}=\frac{\sum(x_i-\bar x)(y_i-\bar y)}{n-1}\):</p>
+            <p>\[ R=\frac{S_{XY}}{S_XS_Y},\qquad \hat\beta=\frac{S_{XY}}{S_X^2},\qquad \hat\alpha=\bar Y-\hat\beta\bar X \]</p>
+            <p>\[ \hat\beta \pm t_{\alpha/2}\cdot\frac{\sqrt{S_X^2S_Y^2-S_{XY}^2}}{S_X^2\sqrt{n-2}},\qquad \nu=n-2 \]</p>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section__label">Kvantiler du trenger oftest</div>
+          <article class="prose">
+            <h3>Tabell B — standard normalfordeling</h3>
+            <p>\(z_\alpha\) er verdien der \(P(Z&gt;z_\alpha)=\alpha\).</p>
+            <div class="dtable-wrap"><table class="dtable">
+              <thead><tr><th class="num">\(\alpha\)</th><th class="num">0,10</th><th class="num">0,05</th><th class="num">0,025</th><th class="num">0,01</th><th class="num">0,005</th><th class="num">0,001</th></tr></thead>
+              <tbody><tr><td class="num">\(z_\alpha\)</td><td class="num">1,282</td><td class="num">1,645</td><td class="num">1,960</td><td class="num">2,326</td><td class="num">2,576</td><td class="num">3,090</td></tr></tbody>
+            </table></div>
+            <p><strong>Ensidig test</strong> på nivå \(\alpha\) bruker \(z_\alpha\). <strong>Tosidig test</strong> og <strong>symmetrisk konfidensintervall</strong> på nivå \(\alpha\) bruker \(z_{\alpha/2}\) — altså 1,960 for 95 % og 2,576 for 99 %.</p>
+
+            <h3>Tabell C — student t-fordeling</h3>
+            <p>\(t_\alpha\) med \(\nu\) frihetsgrader. Bruk \(\nu=n-1\) for konfidensintervall og tester for \(\mu\), og \(\nu=n-2\) for regresjon.</p>
+            <div class="dtable-wrap"><table class="dtable">
+              <thead><tr><th class="num">\(\nu\)</th><th class="num">\(t_{0,10}\)</th><th class="num">\(t_{0,05}\)</th><th class="num">\(t_{0,025}\)</th><th class="num">\(t_{0,01}\)</th><th class="num">\(t_{0,005}\)</th></tr></thead>
+              <tbody>
+                <tr><td class="num">1</td><td class="num">3,078</td><td class="num">6,314</td><td class="num">12,706</td><td class="num">31,821</td><td class="num">63,657</td></tr>
+                <tr><td class="num">2</td><td class="num">1,886</td><td class="num">2,920</td><td class="num">4,303</td><td class="num">6,965</td><td class="num">9,925</td></tr>
+                <tr><td class="num">3</td><td class="num">1,638</td><td class="num">2,353</td><td class="num">3,182</td><td class="num">4,541</td><td class="num">5,841</td></tr>
+                <tr><td class="num">4</td><td class="num">1,533</td><td class="num">2,132</td><td class="num">2,776</td><td class="num">3,747</td><td class="num">4,604</td></tr>
+                <tr><td class="num">5</td><td class="num">1,476</td><td class="num">2,015</td><td class="num">2,571</td><td class="num">3,365</td><td class="num">4,032</td></tr>
+                <tr><td class="num">6</td><td class="num">1,440</td><td class="num">1,943</td><td class="num">2,447</td><td class="num">3,143</td><td class="num">3,707</td></tr>
+                <tr><td class="num">7</td><td class="num">1,415</td><td class="num">1,895</td><td class="num">2,365</td><td class="num">2,998</td><td class="num">3,499</td></tr>
+                <tr><td class="num">8</td><td class="num">1,397</td><td class="num">1,860</td><td class="num">2,306</td><td class="num">2,896</td><td class="num">3,355</td></tr>
+                <tr><td class="num">9</td><td class="num">1,383</td><td class="num">1,833</td><td class="num">2,262</td><td class="num">2,821</td><td class="num">3,250</td></tr>
+                <tr><td class="num">10</td><td class="num">1,372</td><td class="num">1,812</td><td class="num">2,228</td><td class="num">2,764</td><td class="num">3,169</td></tr>
+                <tr><td class="num">11</td><td class="num">1,363</td><td class="num">1,796</td><td class="num">2,201</td><td class="num">2,718</td><td class="num">3,106</td></tr>
+                <tr><td class="num">12</td><td class="num">1,356</td><td class="num">1,782</td><td class="num">2,179</td><td class="num">2,681</td><td class="num">3,055</td></tr>
+                <tr><td class="num">15</td><td class="num">1,341</td><td class="num">1,753</td><td class="num">2,131</td><td class="num">2,602</td><td class="num">2,947</td></tr>
+                <tr><td class="num">20</td><td class="num">1,325</td><td class="num">1,725</td><td class="num">2,086</td><td class="num">2,528</td><td class="num">2,845</td></tr>
+                <tr><td class="num">30</td><td class="num">1,310</td><td class="num">1,697</td><td class="num">2,042</td><td class="num">2,457</td><td class="num">2,750</td></tr>
+                <tr><td class="num">60</td><td class="num">1,296</td><td class="num">1,671</td><td class="num">2,000</td><td class="num">2,390</td><td class="num">2,660</td></tr>
+                <tr><td class="num">120</td><td class="num">1,289</td><td class="num">1,658</td><td class="num">1,980</td><td class="num">2,358</td><td class="num">2,617</td></tr>
+                <tr><td class="num">\(\infty\)</td><td class="num">1,282</td><td class="num">1,645</td><td class="num">1,960</td><td class="num">2,326</td><td class="num">2,576</td></tr>
+              </tbody>
+            </table></div>
+            <div class="note">Nederste rad er identisk med z-kvantilene — t-fordelingen går mot normalfordelingen når \(\nu\) vokser. Derfor godtar løsningsforslagene å erstatte \(t\) med \(z\) når \(n\) er stor (fra rundt 60 frihetsgrader er forskjellen under 2 %).</div>
+
+            <h3>Tabell A — utvalgte verdier av \(G(z)=P(Z\le z)\)</h3>
+            <div class="dtable-wrap"><table class="dtable">
+              <thead><tr><th class="num">\(z\)</th><th class="num">0,00</th><th class="num">0,25</th><th class="num">0,50</th><th class="num">0,67</th><th class="num">1,00</th><th class="num">1,28</th><th class="num">1,50</th><th class="num">1,645</th><th class="num">1,96</th><th class="num">2,00</th><th class="num">2,33</th><th class="num">2,58</th><th class="num">3,00</th></tr></thead>
+              <tbody><tr><td class="num">\(G(z)\)</td><td class="num">0,5000</td><td class="num">0,5987</td><td class="num">0,6915</td><td class="num">0,7486</td><td class="num">0,8413</td><td class="num">0,8997</td><td class="num">0,9332</td><td class="num">0,9500</td><td class="num">0,9750</td><td class="num">0,9772</td><td class="num">0,9901</td><td class="num">0,9951</td><td class="num">0,9987</td></tr></tbody>
+            </table></div>
+            <p>For negative \(z\): \(G(-z)=1-G(z)\).</p>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section__label">Alle eksamenssettene</div>
+          <article class="prose">
+            <p>PDF-ene ligger lokalt i <code>assets/resources/statistikk/</code>. Som for de andre emnene er mappen ekskludert fra git — lenkene virker når siden kjøres lokalt eller fra et privat repo.</p>
+          </article>
+          <div class="reslist">
+            <div class="res">
+              <span class="res__num">26</span>
+              <div><div class="res__title">Mai 2026</div><div class="res__sub">Ordinær · normalfordeling, hypergeometrisk, vinterdekk, eksponensial, hypotesetest, regresjon</div></div>
+              <div class="res__tags">
+                <a class="tag" href="../../../assets/resources/statistikk/Eksamen_PB2030_13_mai_2026.pdf" target="_blank" rel="noopener">oppgaver</a>
+                <a class="tag" href="../../../assets/resources/statistikk/LF_PB2030_13_mai_2026.pdf" target="_blank" rel="noopener">LF</a>
+              </div>
+            </div>
+            <div class="res">
+              <span class="res__num">25K</span>
+              <div><div class="res__title">Oktober 2025 · konte</div><div class="res__sub">Hotellrom, poisson, appelsiner, konfidensintervall, testtid, makspuls</div></div>
+              <div class="res__tags">
+                <a class="tag" href="../../../assets/resources/statistikk/Eksamen_PB2030_06_Oktober_2025.pdf" target="_blank" rel="noopener">oppgaver</a>
+                <a class="tag" href="../../../assets/resources/statistikk/LF_konte_Oct2025.pdf" target="_blank" rel="noopener">LF</a>
+              </div>
+            </div>
+            <div class="res">
+              <span class="res__num">25</span>
+              <div><div class="res__title">Mai 2025</div><div class="res__sub">El-biler, terning, stempelringer, epler, hotellpriser, poteter</div></div>
+              <div class="res__tags">
+                <a class="tag" href="../../../assets/resources/statistikk/FinalVersion_Eksamen_PB2030_14mai_2025.pdf" target="_blank" rel="noopener">oppgaver</a>
+                <a class="tag" href="../../../assets/resources/statistikk/FinalVersion_LF_Eksamen_PB2030_2025.pdf" target="_blank" rel="noopener">LF</a>
+              </div>
+            </div>
+            <div class="res">
+              <span class="res__num">24K</span>
+              <div><div class="res__title">Oktober 2024 · konte</div><div class="res__sub">Kretskort, misfornøyde kunder, sjelden sykdom, nødnummer, teposer, mus, myntkast</div></div>
+              <div class="res__tags">
+                <a class="tag" href="../../../assets/resources/statistikk/EksamenPB2030_H2024_InklForsideVedlegg.pdf" target="_blank" rel="noopener">oppgaver</a>
+                <a class="tag" href="../../../assets/resources/statistikk/LF_EksamenPB2030_H2024.pdf" target="_blank" rel="noopener">LF</a>
+              </div>
+            </div>
+            <div class="res">
+              <span class="res__num">24</span>
+              <div><div class="res__title">Mai 2024</div><div class="res__sub">Tre skoler, fikenplanter, programmerer, mandelpoteter, sylindere, saltsyre</div></div>
+              <div class="res__tags">
+                <a class="tag" href="../../../assets/resources/statistikk/Eksamen_PB2030Statistikk_08052024_InklForsideVedlegg.pdf" target="_blank" rel="noopener">oppgaver</a>
+                <a class="tag" href="../../../assets/resources/statistikk/Sensurveiledning_PB2030Statistikk_08052024.pdf" target="_blank" rel="noopener">sensurveiledning</a>
+              </div>
+            </div>
+            <div class="res">
+              <span class="res__num">23K</span>
+              <div><div class="res__title">Oktober 2023 · konte</div><div class="res__sub">Fisk og virus, lyspærer, kaffemaskin, CO₂-utslipp, potetposer</div></div>
+              <div class="res__tags">
+                <a class="tag" href="../../../assets/resources/statistikk/Eksamen_PB2030Statistikk_Okt2023.pdf" target="_blank" rel="noopener">oppgaver</a>
+                <a class="tag" href="../../../assets/resources/statistikk/LF_Eksamen_PB2030Statistikk_Okt2023.pdf" target="_blank" rel="noopener">LF</a>
+              </div>
+            </div>
+            <div class="res">
+              <span class="res__num">23</span>
+              <div><div class="res__title">Mai 2023</div><div class="res__sub">Flymat, seksere, støymålinger, resistans, kjøttdeig</div></div>
+              <div class="res__tags">
+                <a class="tag" href="../../../assets/resources/statistikk/Eksamen_PB2030Statistikk_Mai2023.pdf" target="_blank" rel="noopener">oppgaver</a>
+                <a class="tag" href="../../../assets/resources/statistikk/LF_Eksamen_PB2030Statistikk_Mai2023.pdf" target="_blank" rel="noopener">LF · skannet</a>
+              </div>
+            </div>
+            <div class="res">
+              <span class="res__num">22K</span>
+              <div><div class="res__title">Oktober 2022 · konte</div><div class="res__sub">Resistans, utslippstest, kompressorer, bringebær, løperbrikker</div></div>
+              <div class="res__tags">
+                <a class="tag" href="../../../assets/resources/statistikk/PB2030_konteeksamen_stat_okt2022_medforside.pdf" target="_blank" rel="noopener">oppgaver</a>
+                <a class="tag" href="../../../assets/resources/statistikk/stat_kontesp_okt2022_maple_losningsforslag.pdf" target="_blank" rel="noopener">LF · Maple</a>
+              </div>
+            </div>
+            <div class="res">
+              <span class="res__num">22</span>
+              <div><div class="res__title">Mai 2022</div><div class="res__sub">Eksamensresultat, vaksine, duty-free, tannbørste</div></div>
+              <div class="res__tags">
+                <a class="tag" href="../../../assets/resources/statistikk/PB2030_eksamen_stat_mai2022_medforside.pdf" target="_blank" rel="noopener">oppgaver</a>
+                <a class="tag" href="../../../assets/resources/statistikk/PB2030_losningsforslag_stat_mai2022.pdf" target="_blank" rel="noopener">LF</a>
+              </div>
+            </div>
+            <div class="res">
+              <span class="res__num">21K</span>
+              <div><div class="res__title">Oktober 2021 · konte</div><div class="res__sub">Hurtigtest, geigerteller, husky-valper (KI for σ)</div></div>
+              <div class="res__tags">
+                <a class="tag" href="../../../assets/resources/statistikk/PB2030_okt_2021.pdf" target="_blank" rel="noopener">oppgaver</a>
+                <a class="tag" href="../../../assets/resources/statistikk/LF_Konteeksamen_20211007_PB2030.pdf" target="_blank" rel="noopener">LF</a>
+              </div>
+            </div>
+            <div class="res">
+              <span class="res__num">21</span>
+              <div><div class="res__title">Mai 2021</div><div class="res__sub">Fotballbilletter, komponenter og kretskort, kyllingvekt</div></div>
+              <div class="res__tags">
+                <a class="tag" href="../../../assets/resources/statistikk/PB2030_mai_2021.pdf" target="_blank" rel="noopener">oppgaver</a>
+                <a class="tag" href="../../../assets/resources/statistikk/PB2030_mai_2021_LF.pdf" target="_blank" rel="noopener">LF</a>
+              </div>
+            </div>
+            <div class="res">
+              <span class="res__num">20D</span>
+              <div><div class="res__title">Desember 2020</div><div class="res__sub">Annen emnekode (BY3215 m.fl.) · salgsingeniører, kompressorer, kirsebær, medisin, høyde/vekt</div></div>
+              <div class="res__tags">
+                <a class="tag" href="../../../assets/resources/statistikk/Eksamen_2020_oppgset_nr1_09_12_20.pdf" target="_blank" rel="noopener">oppgaver</a>
+                <a class="tag" href="../../../assets/resources/statistikk/statistikk_h2020_losningsforslag_09_12_20%20(v1).pdf" target="_blank" rel="noopener">LF</a>
+              </div>
+            </div>
+            <div class="res">
+              <span class="res__num">20</span>
+              <div><div class="res__title">Juni 2020</div><div class="res__sub">Tunnel, terninger, responstid, håndtemperatur, svevestøv</div></div>
+              <div class="res__tags">
+                <a class="tag" href="../../../assets/resources/statistikk/EksamenPB2030_Juni2020.pdf" target="_blank" rel="noopener">oppgaver + LF</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="09-regresjon.html"><small>forrige</small>← Regresjon og korrelasjon</a>
+          <span></span>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js"></script>
+  <script src="../../../assets/js/math.js"></script>
+</body>
+</html>

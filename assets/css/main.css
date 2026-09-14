@@ -701,3 +701,142 @@ html[data-sidebar="collapsed"] .sidebar__foot { visibility: hidden; }
 }
 
 .scrim { display: none; }
+
+/* ==========================================================================
+   Exam task cards (statistikk-oppgaver)
+   ========================================================================== */
+
+.tasknav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem;
+  margin-top: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--line);
+}
+.tasknav a {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  padding: .3rem .6rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+}
+.tasknav a:hover { border-color: var(--accent); color: var(--accent); }
+
+.task {
+  margin-top: 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow: hidden;
+}
+.task__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .6rem;
+  padding: .85rem 1.1rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-2);
+}
+.task__src {
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .06em;
+  color: var(--bg);
+  background: var(--accent);
+  padding: .18rem .5rem;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.task__title { font-size: .95rem; font-weight: 600; color: var(--text); }
+.task__tags { margin-left: auto; display: flex; gap: .35rem; flex-wrap: wrap; }
+.task__tags .tag { font-size: .64rem; }
+
+.task__q { padding: 1rem 1.1rem .2rem; }
+.task__q p { margin-top: .7rem; line-height: 1.65; font-size: .92rem; }
+.task__q > p:first-child { margin-top: 0; }
+.task__q ol, .task__q ul { margin: .7rem 0 0; padding-left: 1.4rem; font-size: .92rem; line-height: 1.6; }
+.task__q li { margin-top: .35rem; }
+.task__q ol { list-style: lower-alpha; }
+.task__q li::marker { color: var(--accent); font-family: var(--font-mono); font-size: .85em; }
+
+.sol { margin: .9rem 0 0; border-top: 1px solid var(--line); }
+.sol > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: .7rem 1.1rem;
+  font-family: var(--font-mono);
+  font-size: .74rem;
+  letter-spacing: .06em;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  user-select: none;
+}
+.sol > summary::-webkit-details-marker { display: none; }
+.sol > summary::before {
+  content: "▸";
+  color: var(--accent);
+  font-size: .8rem;
+  transition: transform var(--ease);
+}
+.sol[open] > summary::before { transform: rotate(90deg); }
+.sol > summary:hover { color: var(--text); }
+.sol__body { padding: .1rem 1.1rem 1.1rem; border-top: 1px solid var(--line); }
+.sol__body p { margin-top: .8rem; font-size: .92rem; line-height: 1.7; }
+.sol__body ul, .sol__body ol { margin-top: .7rem; padding-left: 1.3rem; font-size: .92rem; line-height: 1.65; }
+.sol__body li { margin-top: .35rem; }
+.sol__body li::marker { color: var(--accent); }
+.sol__body h4 {
+  margin: 1.3rem 0 0;
+  font-family: var(--font-mono);
+  font-size: .76rem;
+  letter-spacing: .06em;
+  color: var(--accent-2);
+  font-weight: 600;
+}
+.sol__body h4:first-child { margin-top: .9rem; }
+
+.answer {
+  margin-top: .9rem;
+  padding: .6rem .85rem;
+  border-left: 3px solid var(--accent);
+  background: var(--surface-2);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: .9rem;
+  line-height: 1.6;
+}
+.answer b { color: var(--text); }
+
+/* ---- data tables --------------------------------------------------------*/
+
+.dtable-wrap { overflow-x: auto; margin-top: 1rem; }
+table.dtable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .85rem;
+  min-width: 26rem;
+}
+table.dtable th, table.dtable td {
+  text-align: left;
+  padding: .55rem .55rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+table.dtable thead th {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  letter-spacing: .05em;
+  color: var(--muted);
+  font-weight: 500;
+}
+table.dtable tbody tr:last-child td { border-bottom: 0; }
+table.dtable td.num, table.dtable th.num { font-family: var(--font-mono); white-space: nowrap; }
+table.dtable .hit { color: var(--accent); font-weight: 600; }
+
+/* ---- MathJax fits the prose ---------------------------------------------*/
+mjx-container { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+mjx-container[display="true"] { margin: .9rem 0 !important; }
