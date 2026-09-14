@@ -60,6 +60,10 @@ av `assets/js/math.js`. **Husk å skrive `&lt;` og `&gt;` i stedet for `<` og `>
 inne i formler** — nettleseren parser HTML før MathJax kjører, så en rå `<`
 foran en bokstav blir tolket som starten på en tag og spiser resten av formelen.
 
+**Desimaltall skrives med punktum** (`0.05`, `1.645`), også i norsk prosa, fordi
+alle eksamenssettene fra 2023 og senere gjør det. Intervaller og
+fordelingsparametre skilles derfor med komma: `[20.6, 26.8]`, `N(57.9, 14.0)`.
+
 **Fysikk 2**: siden har fortsatt en tom-tilstand (`.empty`-komponenten) frem til
 pensum er klart. Når ressurser er klare: legg filene i
 `assets/resources/fysikk2/` og bytt ut `.empty`-blokken med

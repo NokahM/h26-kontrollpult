@@ -100,7 +100,7 @@
               <ol>
                 <li>Forklar hvorfor \(f\) er en sannsynlighetstetthet, og finn sannsynligheten for at en person besvarer undersøkelsen i løpet av 5 dager.</li>
                 <li>Sett opp integraler som viser at \(E(T)=2\) og \(\operatorname{Var}(T)=2\).</li>
-                <li>Finn tilnærmet sannsynlighet for at gjennomsnittlig responstid for 100 personer er minst 2,2 dager.</li>
+                <li>Finn tilnærmet sannsynlighet for at gjennomsnittlig responstid for 100 personer er minst 2.2 dager.</li>
               </ol>
               <div class="note"><strong>Om tettheten:</strong> selve formelen er et innfelt bilde i eksamens-PDF-en og lar seg ikke hente ut som tekst. \(f(t)=t\,e^{-t}\) er den entydige rekonstruksjonen som gir både \(E(T)=2\) og \(\operatorname{Var}(T)=2\), slik løsningsforslaget oppgir. Metoden under er uansett den samme.</div>
             </div>
@@ -111,15 +111,15 @@
                 <p>Krav 1: \(t\ge 0\) og \(e^{-t}&gt;0\), så \(f(t)\ge 0\) overalt. Krav 2, med delvis integrasjon:</p>
                 <p>\[ \int_0^{\infty}t e^{-t}\,dt=\Bigl[-te^{-t}\Bigr]_0^{\infty}+\int_0^{\infty}e^{-t}\,dt=0+1=1 \]</p>
                 <p>Begge kravene er oppfylt. Videre:</p>
-                <p>\[ P(T\le 5)=\int_0^{5}t e^{-t}\,dt=1-6e^{-5}\approx 0{,}96 \]</p>
+                <p>\[ P(T\le 5)=\int_0^{5}t e^{-t}\,dt=1-6e^{-5}\approx 0.96 \]</p>
                 <h4>b)</h4>
                 <p>Definisjonene for en kontinuerlig variabel:</p>
                 <p>\[ E(T)=\int_0^{\infty}t\cdot t e^{-t}\,dt=\int_0^{\infty}t^2e^{-t}\,dt=2 \]</p>
                 <p>\[ E(T^2)=\int_0^{\infty}t^2\cdot t e^{-t}\,dt=\int_0^{\infty}t^3e^{-t}\,dt=6 \quad\Rightarrow\quad \operatorname{Var}(T)=6-2^2=2 \]</p>
                 <h4>c)</h4>
-                <p>Sentralgrenseteoremet med \(n=100\): \(\bar T\) er tilnærmet normalfordelt med \(\mu=2\) og \(\sigma_{\bar T}=\sqrt{2/100}=0{,}1414\):</p>
-                <p>\[ P(\bar T\ge 2{,}2)=1-G\!\left(\frac{2{,}2-2}{0{,}1414}\right)=1-G(1{,}41)\approx 0{,}079 \]</p>
-                <div class="answer"><b>a) 0,96 · b) \(E(T)=2\), \(\operatorname{Var}(T)=2\) · c) ca. 0,08.</b></div>
+                <p>Sentralgrenseteoremet med \(n=100\): \(\bar T\) er tilnærmet normalfordelt med \(\mu=2\) og \(\sigma_{\bar T}=\sqrt{2/100}=0.1414\):</p>
+                <p>\[ P(\bar T\ge 2.2)=1-G\!\left(\frac{2.2-2}{0.1414}\right)=1-G(1.41)\approx 0.079 \]</p>
+                <div class="answer"><b>a) 0.96 · b) \(E(T)=2\), \(\operatorname{Var}(T)=2\) · c) ca. 0.08.</b></div>
               </div>
             </details>
           </article>
@@ -136,7 +136,7 @@
               <ol>
                 <li>Finn sannsynligheten for at en tilfeldig valgt tannbørste har levetid på over 2 år.</li>
                 <li>Anta at en tannbørste har fungert i ett år. Hvor stor er sannsynligheten for at den fungerer i minst 3 år til?</li>
-                <li>Hva er sannsynligheten for at gjennomsnittlig levetid \(\bar T\) for 90 uavhengige tannbørster er større enn 2,1 år?</li>
+                <li>Hva er sannsynligheten for at gjennomsnittlig levetid \(\bar T\) for 90 uavhengige tannbørster er større enn 2.1 år?</li>
               </ol>
             </div>
             <details class="sol">
@@ -144,17 +144,17 @@
               <div class="sol__body">
                 <p>Nyttig antiderivert: \(\displaystyle F(t)=\int_0^t f=\frac{t}{3}-\frac{t^2}{36}\) for \(0\le t\le 6\). Sjekk: \(F(6)=2-1=1\) ✓</p>
                 <h4>a)</h4>
-                <p>\[ P(T&gt;2)=1-F(2)=1-\left(\frac{2}{3}-\frac{4}{36}\right)=1-\frac{5}{9}=\frac{4}{9}\approx 0{,}444 \]</p>
+                <p>\[ P(T&gt;2)=1-F(2)=1-\left(\frac{2}{3}-\frac{4}{36}\right)=1-\frac{5}{9}=\frac{4}{9}\approx 0.444 \]</p>
                 <h4>b)</h4>
                 <p>Denne fordelingen er <em>ikke</em> hukommelsesløs, så vi må bruke definisjonen:</p>
-                <p>\[ P(T\ge 4\mid T\ge 1)=\frac{P(T\ge 4)}{P(T\ge 1)}=\frac{1-F(4)}{1-F(1)}=\frac{1-\tfrac{8}{9}}{1-\tfrac{11}{36}}=\frac{0{,}1111}{0{,}6944}\approx 0{,}16 \]</p>
+                <p>\[ P(T\ge 4\mid T\ge 1)=\frac{P(T\ge 4)}{P(T\ge 1)}=\frac{1-F(4)}{1-F(1)}=\frac{1-\tfrac{8}{9}}{1-\tfrac{11}{36}}=\frac{0.1111}{0.6944}\approx 0.16 \]</p>
                 <h4>c)</h4>
                 <p>Først forventning og varians ved integrasjon:</p>
                 <p>\[ E(T)=\int_0^6 t\left(\frac13-\frac{t}{18}\right)dt=\left[\frac{t^2}{6}-\frac{t^3}{54}\right]_0^6=6-4=2 \]</p>
                 <p>\[ E(T^2)=\int_0^6 t^2\left(\frac13-\frac{t}{18}\right)dt=\left[\frac{t^3}{9}-\frac{t^4}{72}\right]_0^6=24-18=6 \ \Rightarrow\ \operatorname{Var}(T)=6-4=2 \]</p>
-                <p>Sentralgrenseteoremet med \(n=90\), \(\sigma_{\bar T}=\sqrt{2/90}=0{,}149\):</p>
-                <p>\[ P(\bar T&gt;2{,}1)=1-G\!\left(\frac{2{,}1-2}{0{,}149}\right)=1-G(0{,}67)\approx 0{,}25 \]</p>
-                <div class="answer"><b>a) 4/9 ≈ 0,44 · b) 0,16 · c) 0,25.</b></div>
+                <p>Sentralgrenseteoremet med \(n=90\), \(\sigma_{\bar T}=\sqrt{2/90}=0.149\):</p>
+                <p>\[ P(\bar T&gt;2.1)=1-G\!\left(\frac{2.1-2}{0.149}\right)=1-G(0.67)\approx 0.25 \]</p>
+                <div class="answer"><b>a) 4/9 ≈ 0.44 · b) 0.16 · c) 0.25.</b></div>
               </div>
             </details>
           </article>
@@ -188,13 +188,13 @@
               <div class="sol__body">
                 <h4>d)</h4>
                 <p>\(\lambda=1/3000\):</p>
-                <p>\[ P(T&gt;1000)=e^{-\lambda\cdot 1000}=e^{-1/3}\approx 0{,}72 \]</p>
+                <p>\[ P(T&gt;1000)=e^{-\lambda\cdot 1000}=e^{-1/3}\approx 0.72 \]</p>
                 <h4>e)</h4>
                 <p>Fem-komponentkortet krever at alle fem overlever. Uavhengighet gir</p>
-                <p>\[ P=p^5=0{,}72^5\approx 0{,}19 \]</p>
+                <p>\[ P=p^5=0.72^5\approx 0.19 \]</p>
                 <p>Seks-komponentkortet tåler at én ryker:</p>
-                <p>\[ P=p^6+\binom{6}{1}p^5(1-p)\approx 0{,}46 \]</p>
-                <div class="answer"><b>d) 0,72 · e) 0,19 og 0,46.</b> Redundansen mer enn dobler sannsynligheten for at kortet overlever 1000 timer.</div>
+                <p>\[ P=p^6+\binom{6}{1}p^5(1-p)\approx 0.46 \]</p>
+                <div class="answer"><b>d) 0.72 · e) 0.19 og 0.46.</b> Redundansen mer enn dobler sannsynligheten for at kortet overlever 1000 timer.</div>
               </div>
             </details>
           </article>
@@ -217,11 +217,11 @@
               <div class="sol__body">
                 <p>\(\lambda=1/24\).</p>
                 <h4>a)</h4>
-                <p>\[ P(T&lt;15)=1-e^{-15/24}=1-e^{-0{,}625}\approx 0{,}465 \]</p>
+                <p>\[ P(T&lt;15)=1-e^{-15/24}=1-e^{-0.625}\approx 0.465 \]</p>
                 <h4>b)</h4>
-                <p>For én brikke: \(P(T&gt;12)=e^{-12/24}=e^{-0{,}5}\). Uavhengighet gir</p>
-                <p>\[ \bigl(e^{-0{,}5}\bigr)^5=e^{-2{,}5}\approx 0{,}082 \]</p>
-                <div class="answer"><b>a) 0,46 · b) 0,082.</b> Bare 8 % sjanse for at hele laget kan stille etter ett år — et poeng om hvor raskt uavhengige feilkilder multipliserer seg opp.</div>
+                <p>For én brikke: \(P(T&gt;12)=e^{-12/24}=e^{-0.5}\). Uavhengighet gir</p>
+                <p>\[ \bigl(e^{-0.5}\bigr)^5=e^{-2.5}\approx 0.082 \]</p>
+                <div class="answer"><b>a) 0.46 · b) 0.082.</b> Bare 8 % sjanse for at hele laget kan stille etter ett år — et poeng om hvor raskt uavhengige feilkilder multipliserer seg opp.</div>
               </div>
             </details>
           </article>
@@ -233,28 +233,28 @@
               <span class="task__tags"><span class="tag">eksponensial</span><span class="tag">hukommelsesløs</span><span class="tag">SGT</span></span>
             </header>
             <div class="task__q">
-              <p>La \(T\) betegne tiden (i timer) det tar for en programmerer å løse et bestemt programmeringsoppdrag. Anta at \(T\) er eksponensialfordelt med \(\mu=E(T)=3{,}2\).</p>
+              <p>La \(T\) betegne tiden (i timer) det tar for en programmerer å løse et bestemt programmeringsoppdrag. Anta at \(T\) er eksponensialfordelt med \(\mu=E(T)=3.2\).</p>
               <ol>
-                <li>Hvor stor sannsynlighet er det for at en programmerer bruker lenger tid enn 4,0 timer?</li>
-                <li>Hvor stor sannsynlighet er det for at oppdraget løses innenfor 4,5 timer når du får vite at programmereren fremdeles arbeider etter 2,0 timer?</li>
-                <li>Bestem tilnærmet sannsynlighet for at gjennomsnittlig tid for 30 programmerere (som ikke samarbeider) er større enn 4,0 timer.</li>
+                <li>Hvor stor sannsynlighet er det for at en programmerer bruker lenger tid enn 4.0 timer?</li>
+                <li>Hvor stor sannsynlighet er det for at oppdraget løses innenfor 4.5 timer når du får vite at programmereren fremdeles arbeider etter 2.0 timer?</li>
+                <li>Bestem tilnærmet sannsynlighet for at gjennomsnittlig tid for 30 programmerere (som ikke samarbeider) er større enn 4.0 timer.</li>
               </ol>
             </div>
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>\(\lambda=1/3{,}2\).</p>
+                <p>\(\lambda=1/3.2\).</p>
                 <h4>a)</h4>
-                <p>\[ P(T&gt;4{,}0)=e^{-4{,}0/3{,}2}\approx 0{,}29 \]</p>
+                <p>\[ P(T&gt;4.0)=e^{-4.0/3.2}\approx 0.29 \]</p>
                 <h4>b) To veier fram</h4>
-                <p><strong>Med hukommelsesløshet:</strong> vi spør om de neste 2,5 timene, og fordelingen «glemmer» de 2,0 som har gått:</p>
-                <p>\[ P(T\le 4{,}5\mid T&gt;2{,}0)=P(T\le 2{,}5)=1-e^{-2{,}5/3{,}2}\approx 0{,}54 \]</p>
+                <p><strong>Med hukommelsesløshet:</strong> vi spør om de neste 2.5 timene, og fordelingen «glemmer» de 2.0 som har gått:</p>
+                <p>\[ P(T\le 4.5\mid T&gt;2.0)=P(T\le 2.5)=1-e^{-2.5/3.2}\approx 0.54 \]</p>
                 <p><strong>Med definisjonen</strong> — hvis du ikke husker regelen:</p>
-                <p>\[ \frac{P(T\le 4{,}5)-P(T\le 2{,}0)}{P(T&gt;2{,}0)}=\frac{(1-e^{-4{,}5/3{,}2})-(1-e^{-2{,}0/3{,}2})}{e^{-2{,}0/3{,}2}}=1-e^{-2{,}5/3{,}2}\approx 0{,}54 \]</p>
+                <p>\[ \frac{P(T\le 4.5)-P(T\le 2.0)}{P(T&gt;2.0)}=\frac{(1-e^{-4.5/3.2})-(1-e^{-2.0/3.2})}{e^{-2.0/3.2}}=1-e^{-2.5/3.2}\approx 0.54 \]</p>
                 <h4>c)</h4>
-                <p>For eksponentialfordelingen er \(\sigma=\mu=3{,}2\). Med \(n=30\) gir sentralgrenseteoremet \(\sigma_{\bar T}=3{,}2/\sqrt{30}\):</p>
-                <p>\[ P(\bar T&gt;4{,}0)=1-G\!\left(\frac{4{,}0-3{,}2}{3{,}2/\sqrt{30}}\right)=1-G(1{,}37)\approx 0{,}085 \]</p>
-                <div class="answer"><b>a) 0,29 · b) 0,54 · c) 0,085.</b></div>
+                <p>For eksponentialfordelingen er \(\sigma=\mu=3.2\). Med \(n=30\) gir sentralgrenseteoremet \(\sigma_{\bar T}=3.2/\sqrt{30}\):</p>
+                <p>\[ P(\bar T&gt;4.0)=1-G\!\left(\frac{4.0-3.2}{3.2/\sqrt{30}}\right)=1-G(1.37)\approx 0.085 \]</p>
+                <div class="answer"><b>a) 0.29 · b) 0.54 · c) 0.085.</b></div>
               </div>
             </details>
           </article>
@@ -268,7 +268,7 @@
             <div class="task__q">
               <p>La \(T\) være tiden (i minutter) mellom to oppringninger på et offentlig nødnummer, eksponensialfordelt med parameter \(\lambda\).</p>
               <ol>
-                <li>Anta først at \(\lambda=0{,}1\) og finn sannsynligheten for at det går mellom 10 og 15 minutter fra en oppringning til den neste.</li>
+                <li>Anta først at \(\lambda=0.1\) og finn sannsynligheten for at det går mellom 10 og 15 minutter fra en oppringning til den neste.</li>
                 <li>Du får tilgang til 21 observasjoner av \(T\): 5, 7, 8, 20, 17, 2, 24, 8, 8, 6, 4, 3, 42, 10, 18, 5, 7, 8, 4, 5, 10. Summen er 221. Finn et estimat for \(\lambda\).</li>
               </ol>
             </div>
@@ -276,11 +276,11 @@
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
                 <h4>a)</h4>
-                <p>\[ P(10&lt;T&lt;15)=\bigl(1-e^{-1{,}5}\bigr)-\bigl(1-e^{-1{,}0}\bigr)=e^{-1{,}0}-e^{-1{,}5}\approx 0{,}145 \]</p>
+                <p>\[ P(10&lt;T&lt;15)=\bigl(1-e^{-1.5}\bigr)-\bigl(1-e^{-1.0}\bigr)=e^{-1.0}-e^{-1.5}\approx 0.145 \]</p>
                 <h4>b)</h4>
                 <p>Forventningen \(\mu=1/\lambda\) estimeres best med gjennomsnittet:</p>
-                <p>\[ \bar t=\frac{221}{21}\approx 10{,}52 \quad\Rightarrow\quad \hat\lambda=\frac{1}{\bar t}=\frac{21}{221}\approx 0{,}095 \]</p>
-                <div class="answer"><b>a) 0,145 · b) \(\hat\lambda\approx 0{,}095\) oppringninger per minutt.</b> Legg merke til at man estimerer \(\mu\) først og inverterer — ikke omvendt.</div>
+                <p>\[ \bar t=\frac{221}{21}\approx 10.52 \quad\Rightarrow\quad \hat\lambda=\frac{1}{\bar t}=\frac{21}{221}\approx 0.095 \]</p>
+                <div class="answer"><b>a) 0.145 · b) \(\hat\lambda\approx 0.095\) oppringninger per minutt.</b> Legg merke til at man estimerer \(\mu\) først og inverterer — ikke omvendt.</div>
               </div>
             </details>
           </article>
@@ -299,7 +299,7 @@
               <div class="sol__body">
                 <p>Eksponentialfordelingen er langt fra normalfordelt, men med \(n=100\) redder sentralgrenseteoremet oss: \(\bar X\) er tilnærmet normalfordelt.</p>
                 <p>\[ \mu_{\bar X}=\mu=1100,\qquad \sigma=\mu=1100,\qquad \sigma_{\bar X}=\frac{1100}{\sqrt{100}}=110 \]</p>
-                <p>\[ P(\bar X&lt;1150)=G\!\left(\frac{1150-1100}{110}\right)=G(0{,}45)\approx 0{,}67 \]</p>
+                <p>\[ P(\bar X&lt;1150)=G\!\left(\frac{1150-1100}{110}\right)=G(0.45)\approx 0.67 \]</p>
                 <div class="answer"><b>Ca. 67 %.</b> Nøkkelsteget er \(\sigma=\mu\) for eksponentialfordelingen — uten det får du feil standardavvik.</div>
               </div>
             </details>

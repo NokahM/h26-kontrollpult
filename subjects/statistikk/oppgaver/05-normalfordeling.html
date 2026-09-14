@@ -75,7 +75,7 @@
             </ol>
 
             <div class="note"><strong>Negative z-verdier:</strong> mange tabeller stopper på \(z=0\). Bruk symmetrien \(G(-z)=1-G(z)\).</div>
-            <div class="note"><strong>Benytt riktig tabell:</strong> går du <em>fra</em> en x-verdi <em>til</em> en sannsynlighet, er det Tabell A. Går du <em>fra</em> en sannsynlighet <em>til</em> en x-verdi, er det Tabell B. De mest brukte kvantilene: \(z_{0{,}10}=1{,}282\), \(z_{0{,}05}=1{,}645\), \(z_{0{,}025}=1{,}960\), \(z_{0{,}01}=2{,}326\), \(z_{0{,}005}=2{,}576\), \(z_{0{,}001}=3{,}090\).</div>
+            <div class="note"><strong>Benytt riktig tabell:</strong> går du <em>fra</em> en x-verdi <em>til</em> en sannsynlighet, er det Tabell A. Går du <em>fra</em> en sannsynlighet <em>til</em> en x-verdi, er det Tabell B. De mest brukte kvantilene: \(z_{0.10}=1.282\), \(z_{0.05}=1.645\), \(z_{0.025}=1.960\), \(z_{0.01}=2.326\), \(z_{0.005}=2.576\), \(z_{0.001}=3.090\).</div>
             <div class="note"><strong>Enheter:</strong> mai 2025 O3b ber om garantitid i <em>hele måneder</em> mens fordelingen er gitt i <em>år</em>. Gjør om først (\(\mu=144\), \(\sigma=30\) måneder), ellers blir avrundingen feil.</div>
           </article>
         </section>
@@ -103,10 +103,10 @@
               <span class="task__tags"><span class="tag">standardisering</span><span class="tag">kvantil</span><span class="tag">sum</span></span>
             </header>
             <div class="task__q">
-              <p>En maskin produserer elektriske komponenter. Verdiene (målt i ohm) på motstandene er uavhengige og normalfordelte med forventning 50 ohm og standardavvik 0,80 ohm.</p>
+              <p>En maskin produserer elektriske komponenter. Verdiene (målt i ohm) på motstandene er uavhengige og normalfordelte med forventning 50 ohm og standardavvik 0.80 ohm.</p>
               <ol>
-                <li>Hva er sannsynligheten for at en tilfeldig valgt motstand har en verdi større enn 51,2 ohm?</li>
-                <li>La \(c\) være en kritisk grense. Bestem \(c\) slik at \(P(X&lt;c)=0{,}001\).</li>
+                <li>Hva er sannsynligheten for at en tilfeldig valgt motstand har en verdi større enn 51.2 ohm?</li>
+                <li>La \(c\) være en kritisk grense. Bestem \(c\) slik at \(P(X&lt;c)=0.001\).</li>
                 <li>Hva er sannsynligheten for at 20 valgte motstander har en samlet verdi på mindre enn 999 ohm?</li>
               </ol>
             </div>
@@ -114,15 +114,15 @@
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
                 <h4>a)</h4>
-                <p>\[ P(X&gt;51{,}2)=1-G\!\left(\frac{51{,}2-50}{0{,}80}\right)=1-G(1{,}50)=1-0{,}9332=0{,}0668 \]</p>
+                <p>\[ P(X&gt;51.2)=1-G\!\left(\frac{51.2-50}{0.80}\right)=1-G(1.50)=1-0.9332=0.0668 \]</p>
                 <h4>b) Baklengs — Tabell B</h4>
-                <p>\[ G\!\left(\frac{c-50}{0{,}80}\right)=0{,}001 \quad\Rightarrow\quad \frac{c-50}{0{,}80}=-z_{0{,}001}=-3{,}090 \]</p>
-                <p>\[ c=50-3{,}090\cdot 0{,}80=47{,}53\ \text{ohm} \]</p>
+                <p>\[ G\!\left(\frac{c-50}{0.80}\right)=0.001 \quad\Rightarrow\quad \frac{c-50}{0.80}=-z_{0.001}=-3.090 \]</p>
+                <p>\[ c=50-3.090\cdot 0.80=47.53\ \text{ohm} \]</p>
                 <h4>c) Sum av uavhengige normalfordelte</h4>
                 <p>Summen \(Y=X_1+\dots+X_{20}\) er <em>eksakt</em> normalfordelt (ikke bare tilnærmet — de enkelte variablene er jo normalfordelte):</p>
-                <p>\[ \mu_Y=20\cdot 50=1000,\qquad \sigma_Y=\sqrt{20}\cdot 0{,}80\approx 3{,}578 \]</p>
-                <p>\[ P(Y&lt;999)=G\!\left(\frac{999-1000}{3{,}578}\right)=G(-0{,}28)\approx 0{,}39 \]</p>
-                <div class="answer"><b>a) 0,067 · b) 47,5 ohm · c) ca. 0,39.</b> Merk \(\sigma_Y=\sqrt n\,\sigma\), ikke \(n\sigma\).</div>
+                <p>\[ \mu_Y=20\cdot 50=1000,\qquad \sigma_Y=\sqrt{20}\cdot 0.80\approx 3.578 \]</p>
+                <p>\[ P(Y&lt;999)=G\!\left(\frac{999-1000}{3.578}\right)=G(-0.28)\approx 0.39 \]</p>
+                <div class="answer"><b>a) 0.067 · b) 47.5 ohm · c) ca. 0.39.</b> Merk \(\sigma_Y=\sqrt n\,\sigma\), ikke \(n\sigma\).</div>
               </div>
             </details>
           </article>
@@ -145,16 +145,16 @@
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
                 <h4>a)</h4>
-                <p>\[ P(255&lt;X&lt;300)=G\!\left(\frac{300-270}{15}\right)-G\!\left(\frac{255-270}{15}\right)=G(2{,}00)-G(-1{,}00) \]</p>
-                <p>\[ =0{,}9772-0{,}1587=0{,}82 \]</p>
+                <p>\[ P(255&lt;X&lt;300)=G\!\left(\frac{300-270}{15}\right)-G\!\left(\frac{255-270}{15}\right)=G(2.00)-G(-1.00) \]</p>
+                <p>\[ =0.9772-0.1587=0.82 \]</p>
                 <h4>b) Baklengs</h4>
-                <p>\[ P(X&lt;k)=0{,}10 \quad\Rightarrow\quad \frac{k-270}{15}=-z_{0{,}10}=-1{,}282 \]</p>
-                <p>\[ k=270-1{,}282\cdot 15=250{,}8\approx 251\ \text{gram} \]</p>
+                <p>\[ P(X&lt;k)=0.10 \quad\Rightarrow\quad \frac{k-270}{15}=-z_{0.10}=-1.282 \]</p>
+                <p>\[ k=270-1.282\cdot 15=250.8\approx 251\ \text{gram} \]</p>
                 <h4>c)</h4>
                 <p>Først \(p\) fra normalfordelingen, så binomisk:</p>
-                <p>\[ p=P(X&gt;285)=1-G(1{,}00)=0{,}1587 \]</p>
-                <p>\[ P(Y\ge 3)=1-\sum_{x=0}^{2}\binom{25}{x}p^x(1-p)^{25-x}\approx 0{,}78 \]</p>
-                <div class="answer"><b>a) 0,82 · b) ca. 251 gram · c) 0,78.</b></div>
+                <p>\[ p=P(X&gt;285)=1-G(1.00)=0.1587 \]</p>
+                <p>\[ P(Y\ge 3)=1-\sum_{x=0}^{2}\binom{25}{x}p^x(1-p)^{25-x}\approx 0.78 \]</p>
+                <div class="answer"><b>a) 0.82 · b) ca. 251 gram · c) 0.78.</b></div>
               </div>
             </details>
           </article>
@@ -167,8 +167,8 @@
             </header>
             <div class="task__q">
               <ol>
-                <li>En fabrikant av stempelringer lager ringer hvor indre diameter er normalfordelt med forventningsverdi 10 cm og standardavvik 0,03 cm. Hva er sannsynligheten for at en tilfeldig valgt ring har diameter mellom 9,95 cm og 10,05 cm?</li>
-                <li>En motorfabrikant lager motorer med levetid normalfordelt med forventningsverdi 12 år og standardavvik 2,5 år. Kjøpet kommer med garanti om at fabrikanten erstatter alle motorer som slutter å virke i garantitiden. Garantitiden er et helt antall måneder. Dersom fabrikanten ikke ønsker å erstatte mer enn 5 % av motorene, hva er den lengste garantitiden?</li>
+                <li>En fabrikant av stempelringer lager ringer hvor indre diameter er normalfordelt med forventningsverdi 10 cm og standardavvik 0.03 cm. Hva er sannsynligheten for at en tilfeldig valgt ring har diameter mellom 9.95 cm og 10.05 cm?</li>
+                <li>En motorfabrikant lager motorer med levetid normalfordelt med forventningsverdi 12 år og standardavvik 2.5 år. Kjøpet kommer med garanti om at fabrikanten erstatter alle motorer som slutter å virke i garantitiden. Garantitiden er et helt antall måneder. Dersom fabrikanten ikke ønsker å erstatte mer enn 5 % av motorene, hva er den lengste garantitiden?</li>
               </ol>
             </div>
             <details class="sol">
@@ -176,11 +176,11 @@
               <div class="sol__body">
                 <h4>a)</h4>
                 <p>Grensene ligger symmetrisk om \(\mu\), så bruk \(2G(z)-1\):</p>
-                <p>\[ z=\frac{0{,}05}{0{,}03}=1{,}67 \quad\Rightarrow\quad P=2G(1{,}67)-1=2\cdot 0{,}9525-1=0{,}905\approx 0{,}91 \]</p>
+                <p>\[ z=\frac{0.05}{0.03}=1.67 \quad\Rightarrow\quad P=2G(1.67)-1=2\cdot 0.9525-1=0.905\approx 0.91 \]</p>
                 <h4>b)</h4>
-                <p>Regn om til måneder først: \(\mu=12\cdot 12=144\), \(\sigma=2{,}5\cdot 12=30\). La garantitiden være \(k\) måneder. Kravet er \(P(X&lt;k)\le 0{,}05\):</p>
-                <p>\[ \frac{k-144}{30}&lt;-z_{0{,}05}=-1{,}645 \quad\Rightarrow\quad k&lt;144-1{,}645\cdot 30=94{,}65 \]</p>
-                <div class="answer"><b>a) 0,91 · b) 94 måneder.</b> Avrund <em>ned</em> — 95 måneder ville gitt mer enn 5 % erstatninger.</div>
+                <p>Regn om til måneder først: \(\mu=12\cdot 12=144\), \(\sigma=2.5\cdot 12=30\). La garantitiden være \(k\) måneder. Kravet er \(P(X&lt;k)\le 0.05\):</p>
+                <p>\[ \frac{k-144}{30}&lt;-z_{0.05}=-1.645 \quad\Rightarrow\quad k&lt;144-1.645\cdot 30=94.65 \]</p>
+                <div class="answer"><b>a) 0.91 · b) 94 måneder.</b> Avrund <em>ned</em> — 95 måneder ville gitt mer enn 5 % erstatninger.</div>
               </div>
             </details>
           </article>
@@ -192,26 +192,26 @@
               <span class="task__tags"><span class="tag">standardisering</span><span class="tag">sum</span><span class="tag">binomisk</span></span>
             </header>
             <div class="task__q">
-              <p>I en eske er det 20 teposer. Vekten til hver pose antas normalfordelt med forventning \(\mu=1{,}30\) gram og standardavvik \(\sigma=0{,}05\) gram.</p>
+              <p>I en eske er det 20 teposer. Vekten til hver pose antas normalfordelt med forventning \(\mu=1.30\) gram og standardavvik \(\sigma=0.05\) gram.</p>
               <ol>
-                <li>Finn sannsynligheten for at en vilkårlig valgt tepose veier over 1,32 gram.</li>
-                <li>Finn sannsynligheten for at 20 teposer til sammen veier over 26,4 gram.</li>
-                <li>Finn sannsynligheten for at minst 3 av 5 tilfeldig valgte teposer veier over 1,32 gram.</li>
+                <li>Finn sannsynligheten for at en vilkårlig valgt tepose veier over 1.32 gram.</li>
+                <li>Finn sannsynligheten for at 20 teposer til sammen veier over 26.4 gram.</li>
+                <li>Finn sannsynligheten for at minst 3 av 5 tilfeldig valgte teposer veier over 1.32 gram.</li>
               </ol>
             </div>
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
                 <h4>a)</h4>
-                <p>\[ P(X&gt;1{,}32)=1-G\!\left(\frac{1{,}32-1{,}30}{0{,}05}\right)=1-G(0{,}40)=1-0{,}6554=0{,}3446 \]</p>
+                <p>\[ P(X&gt;1.32)=1-G\!\left(\frac{1.32-1.30}{0.05}\right)=1-G(0.40)=1-0.6554=0.3446 \]</p>
                 <h4>b)</h4>
                 <p>\(Y=\sum_{i=1}^{20}X_i\) er normalfordelt med</p>
-                <p>\[ E(Y)=20\cdot 1{,}30=26,\qquad \operatorname{Var}(Y)=20\cdot 0{,}05^2=0{,}05 \ \Rightarrow\ \sigma_Y=\sqrt{0{,}05}\approx 0{,}224 \]</p>
-                <p>\[ P(Y&gt;26{,}4)=1-G\!\left(\frac{26{,}4-26}{0{,}224}\right)=1-G(1{,}79)=1-0{,}9633=0{,}037 \]</p>
+                <p>\[ E(Y)=20\cdot 1.30=26,\qquad \operatorname{Var}(Y)=20\cdot 0.05^2=0.05 \ \Rightarrow\ \sigma_Y=\sqrt{0.05}\approx 0.224 \]</p>
+                <p>\[ P(Y&gt;26.4)=1-G\!\left(\frac{26.4-26}{0.224}\right)=1-G(1.79)=1-0.9633=0.037 \]</p>
                 <h4>c)</h4>
-                <p>Binomisk med \(n=5\) og \(p=0{,}3446\) fra a):</p>
-                <p>\[ P(T\ge 3)=\sum_{x=3}^{5}\binom{5}{x}p^x(1-p)^{5-x}\approx 0{,}227 \]</p>
-                <div class="answer"><b>a) 0,345 · b) 0,037 · c) 0,227.</b></div>
+                <p>Binomisk med \(n=5\) og \(p=0.3446\) fra a):</p>
+                <p>\[ P(T\ge 3)=\sum_{x=3}^{5}\binom{5}{x}p^x(1-p)^{5-x}\approx 0.227 \]</p>
+                <div class="answer"><b>a) 0.345 · b) 0.037 · c) 0.227.</b></div>
               </div>
             </details>
           </article>
@@ -233,11 +233,11 @@
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
                 <h4>a)</h4>
-                <p>\[ P(X&lt;50)=G\!\left(\frac{50-38}{8}\right)=G(1{,}50)=0{,}9332 \]</p>
+                <p>\[ P(X&lt;50)=G\!\left(\frac{50-38}{8}\right)=G(1.50)=0.9332 \]</p>
                 <h4>b) Maks-triks</h4>
                 <p>«Den tyngste veier over 50» er det motsatte av «alle 14 veier høyst 50». Med uavhengighet:</p>
-                <p>\[ P(X_{\max}&gt;50)=1-P(X\le 50)^{14}=1-0{,}9332^{14}\approx 0{,}62 \]</p>
-                <div class="answer"><b>a) 0,933 · b) 0,62.</b> Dette komplementtrikset er verdt å kunne utenat — «minst én av n», «den største av n» og «den minste av n» løses alle slik.</div>
+                <p>\[ P(X_{\max}&gt;50)=1-P(X\le 50)^{14}=1-0.9332^{14}\approx 0.62 \]</p>
+                <div class="answer"><b>a) 0.933 · b) 0.62.</b> Dette komplementtrikset er verdt å kunne utenat — «minst én av n», «den største av n» og «den minste av n» løses alle slik.</div>
               </div>
             </details>
           </article>
@@ -249,11 +249,11 @@
               <span class="task__tags"><span class="tag">standardisering</span><span class="tag">kvantil</span></span>
             </header>
             <div class="task__q">
-              <p>En maskin fyller kaffe i engangskopper. Volumet i en tilfeldig kopp er normalfordelt med forventningsverdi 220 ml og standardavvik 3,0 ml.</p>
+              <p>En maskin fyller kaffe i engangskopper. Volumet i en tilfeldig kopp er normalfordelt med forventningsverdi 220 ml og standardavvik 3.0 ml.</p>
               <ol>
                 <li>Hva er sannsynligheten for at en tilfeldig kopp inneholder mindre enn 215 ml kaffe?</li>
                 <li>Hva er sannsynligheten for at volumet i en tilfeldig kopp er mellom 218 og 220 ml?</li>
-                <li>Hva må volumet av en kopp minst være for at sjansen for at kaffen renner over skal være mindre enn 0,1 %?</li>
+                <li>Hva må volumet av en kopp minst være for at sjansen for at kaffen renner over skal være mindre enn 0.1 %?</li>
               </ol>
               <p class="callout">Punkt d)–e) (ventetid, gjennomsnitt og sum) ligger under <a href="06-sentralgrenseteoremet.html#okt2023">sentralgrenseteoremet</a>.</p>
             </div>
@@ -261,14 +261,14 @@
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
                 <h4>a)</h4>
-                <p>\[ P(X&lt;215)=G\!\left(\frac{215-220}{3{,}0}\right)=G(-1{,}67)=0{,}0475 \]</p>
+                <p>\[ P(X&lt;215)=G\!\left(\frac{215-220}{3.0}\right)=G(-1.67)=0.0475 \]</p>
                 <h4>b)</h4>
                 <p>Merk at 220 er nøyaktig \(\mu\), så \(G(0)=1/2\):</p>
-                <p>\[ P(218&lt;X&lt;220)=\tfrac12-G(-0{,}67)=0{,}5-0{,}2514=0{,}2486\approx 0{,}25 \]</p>
+                <p>\[ P(218&lt;X&lt;220)=\tfrac12-G(-0.67)=0.5-0.2514=0.2486\approx 0.25 \]</p>
                 <h4>c) Baklengs</h4>
-                <p>Med koppvolum \(v\) krever vi \(P(X&gt;v)&lt;0{,}001\), altså \(G\bigl(\tfrac{v-220}{3{,}0}\bigr)&gt;0{,}999\):</p>
-                <p>\[ \frac{v-220}{3{,}0}&gt;z_{0{,}001}=3{,}090 \quad\Rightarrow\quad v&gt;229{,}3 \]</p>
-                <div class="answer"><b>a) 0,048 · b) 0,25 · c) koppen må romme minst ca. 229 ml.</b></div>
+                <p>Med koppvolum \(v\) krever vi \(P(X&gt;v)&lt;0.001\), altså \(G\bigl(\tfrac{v-220}{3.0}\bigr)&gt;0.999\):</p>
+                <p>\[ \frac{v-220}{3.0}&gt;z_{0.001}=3.090 \quad\Rightarrow\quad v&gt;229.3 \]</p>
+                <div class="answer"><b>a) 0.048 · b) 0.25 · c) koppen må romme minst ca. 229 ml.</b></div>
               </div>
             </details>
           </article>
@@ -291,13 +291,13 @@
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
                 <h4>a)</h4>
-                <p>\[ P(X&gt;60)=1-G\!\left(\frac{60-40}{10}\right)=1-G(2{,}00)=1-0{,}9772=0{,}023 \]</p>
+                <p>\[ P(X&gt;60)=1-G\!\left(\frac{60-40}{10}\right)=1-G(2.00)=1-0.9772=0.023 \]</p>
                 <h4>b)</h4>
-                <p>\[ P(50&lt;X&lt;60)=G(2{,}00)-G(1{,}00)=0{,}9772-0{,}8413=0{,}136 \]</p>
+                <p>\[ P(50&lt;X&lt;60)=G(2.00)-G(1.00)=0.9772-0.8413=0.136 \]</p>
                 <h4>c) Nå er det \(\mu\) som er ukjent</h4>
-                <p>\[ P(X&lt;50)\ge 0{,}90 \quad\Rightarrow\quad \frac{50-\mu}{10}\ge z_{0{,}10}=1{,}282 \]</p>
-                <p>\[ \mu\le 50-1{,}282\cdot 10=37{,}2\ \text{dB} \]</p>
-                <div class="answer"><b>a) 0,023 · b) 0,136 · c) \(\mu\le 37{,}2\) dB.</b></div>
+                <p>\[ P(X&lt;50)\ge 0.90 \quad\Rightarrow\quad \frac{50-\mu}{10}\ge z_{0.10}=1.282 \]</p>
+                <p>\[ \mu\le 50-1.282\cdot 10=37.2\ \text{dB} \]</p>
+                <div class="answer"><b>a) 0.023 · b) 0.136 · c) \(\mu\le 37.2\) dB.</b></div>
               </div>
             </details>
           </article>
@@ -320,11 +320,11 @@
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
                 <h4>a)</h4>
-                <p>\[ P(49&lt;R&lt;51)=2G\!\left(\frac{1}{2}\right)-1=2\cdot 0{,}6915-1=0{,}383 \]</p>
+                <p>\[ P(49&lt;R&lt;51)=2G\!\left(\frac{1}{2}\right)-1=2\cdot 0.6915-1=0.383 \]</p>
                 <h4>b)</h4>
                 <p>Gjennomsnittet av normalfordelte variable er <em>eksakt</em> normalfordelt, med samme forventning men mindre spredning:</p>
-                <p>\[ \sigma_{\bar R}=\frac{2}{\sqrt5}=0{,}894 \quad\Rightarrow\quad P(49&lt;\bar R&lt;51)=2G\!\left(\frac{1}{0{,}894}\right)-1=2G(1{,}12)-1\approx 0{,}736 \]</p>
-                <div class="answer"><b>a) 0,38 · b) 0,74.</b> Det samme intervallet fanger mye mer sannsynlighet når du midler over fem målinger — kjernen i hele estimeringsteorien.</div>
+                <p>\[ \sigma_{\bar R}=\frac{2}{\sqrt5}=0.894 \quad\Rightarrow\quad P(49&lt;\bar R&lt;51)=2G\!\left(\frac{1}{0.894}\right)-1=2G(1.12)-1\approx 0.736 \]</p>
+                <div class="answer"><b>a) 0.38 · b) 0.74.</b> Det samme intervallet fanger mye mer sannsynlighet når du midler over fem målinger — kjernen i hele estimeringsteorien.</div>
               </div>
             </details>
           </article>
@@ -336,13 +336,13 @@
               <span class="task__tags"><span class="tag">standardisering</span></span>
             </header>
             <div class="task__q">
-              <p>La \(X\) være andel riktige svar (i prosent) på eksamen i matematikk for en tilfeldig ingeniørstudent, \(X\sim N(57{,}9;\,14{,}0)\). Finn sannsynligheten for at en tilfeldig valgt student har over 60 % riktig.</p>
+              <p>La \(X\) være andel riktige svar (i prosent) på eksamen i matematikk for en tilfeldig ingeniørstudent, \(X\sim N(57.9,\,14.0)\). Finn sannsynligheten for at en tilfeldig valgt student har over 60 % riktig.</p>
               <p class="callout">Punkt b)–c) ligger under <a href="06-sentralgrenseteoremet.html#mai2022">sentralgrenseteoremet</a>, og d)–e) under <a href="07-konfidensintervall.html#mai2022">konfidensintervall</a>.</p>
             </div>
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>\[ P(X&gt;60)=1-G\!\left(\frac{60-57{,}9}{14{,}0}\right)=1-G(0{,}15)=1-0{,}5596=0{,}440 \]</p>
+                <p>\[ P(X&gt;60)=1-G\!\left(\frac{60-57.9}{14.0}\right)=1-G(0.15)=1-0.5596=0.440 \]</p>
                 <div class="answer"><b>Ca. 44 %.</b></div>
               </div>
             </details>
@@ -355,10 +355,10 @@
               <span class="task__tags"><span class="tag">symmetrisk</span><span class="tag">finn μ</span></span>
             </header>
             <div class="task__q">
-              <p>Hos en kyllingprodusent er det ønskelig å selge kyllinger når vekten er ca. 1,8 kg. La \(X\) være vekten av en kylling, normalfordelt med forventning \(\mu\) og standardavvik \(\sigma=0{,}3\) kg.</p>
+              <p>Hos en kyllingprodusent er det ønskelig å selge kyllinger når vekten er ca. 1.8 kg. La \(X\) være vekten av en kylling, normalfordelt med forventning \(\mu\) og standardavvik \(\sigma=0.3\) kg.</p>
               <ol>
-                <li>Regn ut prosentandelen av kyllinger som veier mellom 1,6 og 2,0 kg dersom \(\mu=1{,}8\) kg.</li>
-                <li>Hva må forventningsverdien \(\mu\) være dersom produsenten ønsker at minst 80 % av kyllingene skal veie mer enn 1,6 kg?</li>
+                <li>Regn ut prosentandelen av kyllinger som veier mellom 1.6 og 2.0 kg dersom \(\mu=1.8\) kg.</li>
+                <li>Hva må forventningsverdien \(\mu\) være dersom produsenten ønsker at minst 80 % av kyllingene skal veie mer enn 1.6 kg?</li>
               </ol>
               <p class="callout">Punkt c)–e) ligger under <a href="06-sentralgrenseteoremet.html#mai2021">sentralgrenseteoremet</a> og <a href="07-konfidensintervall.html#mai2021">konfidensintervall</a>.</p>
             </div>
@@ -366,13 +366,13 @@
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
                 <h4>a)</h4>
-                <p>Symmetrisk om \(\mu=1{,}8\), med \(z=0{,}2/0{,}3=0{,}67\):</p>
-                <p>\[ P(1{,}6&lt;X&lt;2{,}0)=2G(0{,}67)-1=2\cdot 0{,}7486-1=0{,}497 \]</p>
+                <p>Symmetrisk om \(\mu=1.8\), med \(z=0.2/0.3=0.67\):</p>
+                <p>\[ P(1.6&lt;X&lt;2.0)=2G(0.67)-1=2\cdot 0.7486-1=0.497 \]</p>
                 <p>Altså ca. <strong>50 %</strong> av kyllingene.</p>
                 <h4>b)</h4>
-                <p>\[ P(X&gt;1{,}6)\ge 0{,}80 \iff P(X\le 1{,}6)\le 0{,}20 \iff \frac{1{,}6-\mu}{0{,}3}\le -z_{0{,}20}=-0{,}842 \]</p>
-                <p>\[ \mu\ge 1{,}6+0{,}842\cdot 0{,}3=1{,}85\ \text{kg} \]</p>
-                <div class="answer"><b>a) ca. 50 % · b) \(\mu\ge 1{,}85\) kg.</b></div>
+                <p>\[ P(X&gt;1.6)\ge 0.80 \iff P(X\le 1.6)\le 0.20 \iff \frac{1.6-\mu}{0.3}\le -z_{0.20}=-0.842 \]</p>
+                <p>\[ \mu\ge 1.6+0.842\cdot 0.3=1.85\ \text{kg} \]</p>
+                <div class="answer"><b>a) ca. 50 % · b) \(\mu\ge 1.85\) kg.</b></div>
               </div>
             </details>
           </article>
@@ -384,14 +384,14 @@
               <span class="task__tags"><span class="tag">standardisering</span></span>
             </header>
             <div class="task__q">
-              <p>Et menneskes normale håndtemperatur \(X\) (i grader Celsius) er normalfordelt med forventningsverdi \(\mu=33{,}5\) og standardavvik \(\sigma=1{,}5\). Finn sannsynligheten for at en tilfeldig valgt person har håndtemperatur mellom 31,0 og 34,0 grader.</p>
+              <p>Et menneskes normale håndtemperatur \(X\) (i grader Celsius) er normalfordelt med forventningsverdi \(\mu=33.5\) og standardavvik \(\sigma=1.5\). Finn sannsynligheten for at en tilfeldig valgt person har håndtemperatur mellom 31.0 og 34.0 grader.</p>
               <p class="callout">Punkt b)–d) (hypotesetest og teststyrke) ligger under <a href="08-hypotesetesting.html#jun2020">hypotesetesting</a>.</p>
             </div>
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>\[ P(31{,}0&lt;X&lt;34{,}0)=G\!\left(\frac{34{,}0-33{,}5}{1{,}5}\right)-G\!\left(\frac{31{,}0-33{,}5}{1{,}5}\right)=G(0{,}33)-G(-1{,}67) \]</p>
-                <p>\[ =0{,}6293-0{,}0475=0{,}582 \]</p>
+                <p>\[ P(31.0&lt;X&lt;34.0)=G\!\left(\frac{34.0-33.5}{1.5}\right)-G\!\left(\frac{31.0-33.5}{1.5}\right)=G(0.33)-G(-1.67) \]</p>
+                <p>\[ =0.6293-0.0475=0.582 \]</p>
                 <div class="answer"><b>Ca. 58 %.</b> Her er grensene <em>ikke</em> symmetriske om \(\mu\), så \(2G(z)-1\) kan ikke brukes.</div>
               </div>
             </details>

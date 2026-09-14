@@ -146,7 +146,7 @@
               <tbody>
                 <tr><td>\(\mathrm{Hyp}(N,M,n)\)</td><td>\(\mathrm{Bin}(n,M/N)\)</td><td class="num">\(N\ge 10n\)</td></tr>
                 <tr><td>\(\mathrm{Hyp}(N,M,n)\)</td><td>\(N\!\left(np,\sqrt{\tfrac{N-n}{N-1}np(1-p)}\right)\)</td><td class="num">\(\tfrac{N-n}{N-1}np(1-p)\ge 5\)</td></tr>
-                <tr><td>\(\mathrm{Bin}(n,p)\)</td><td>\(\mathrm{Poisson}(np)\)</td><td class="num">\(n&gt;10,\ p&lt;0{,}1\)</td></tr>
+                <tr><td>\(\mathrm{Bin}(n,p)\)</td><td>\(\mathrm{Poisson}(np)\)</td><td class="num">\(n&gt;10,\ p&lt;0.1\)</td></tr>
                 <tr><td>\(\mathrm{Bin}(n,p)\)</td><td>\(N\!\left(np,\sqrt{np(1-p)}\right)\)</td><td class="num">\(np(1-p)\ge 5\)</td></tr>
                 <tr><td>\(\mathrm{Poisson}(\lambda t)\)</td><td>\(N\!\left(\lambda t,\sqrt{\lambda t}\right)\)</td><td class="num">\(\lambda t\ge 10\)</td></tr>
               </tbody>
@@ -185,42 +185,42 @@
             <h3>Tabell B — standard normalfordeling</h3>
             <p>\(z_\alpha\) er verdien der \(P(Z&gt;z_\alpha)=\alpha\).</p>
             <div class="dtable-wrap"><table class="dtable">
-              <thead><tr><th class="num">\(\alpha\)</th><th class="num">0,10</th><th class="num">0,05</th><th class="num">0,025</th><th class="num">0,01</th><th class="num">0,005</th><th class="num">0,001</th></tr></thead>
-              <tbody><tr><td class="num">\(z_\alpha\)</td><td class="num">1,282</td><td class="num">1,645</td><td class="num">1,960</td><td class="num">2,326</td><td class="num">2,576</td><td class="num">3,090</td></tr></tbody>
+              <thead><tr><th class="num">\(\alpha\)</th><th class="num">0.10</th><th class="num">0.05</th><th class="num">0.025</th><th class="num">0.01</th><th class="num">0.005</th><th class="num">0.001</th></tr></thead>
+              <tbody><tr><td class="num">\(z_\alpha\)</td><td class="num">1.282</td><td class="num">1.645</td><td class="num">1.960</td><td class="num">2.326</td><td class="num">2.576</td><td class="num">3.090</td></tr></tbody>
             </table></div>
-            <p><strong>Ensidig test</strong> på nivå \(\alpha\) bruker \(z_\alpha\). <strong>Tosidig test</strong> og <strong>symmetrisk konfidensintervall</strong> på nivå \(\alpha\) bruker \(z_{\alpha/2}\) — altså 1,960 for 95 % og 2,576 for 99 %.</p>
+            <p><strong>Ensidig test</strong> på nivå \(\alpha\) bruker \(z_\alpha\). <strong>Tosidig test</strong> og <strong>symmetrisk konfidensintervall</strong> på nivå \(\alpha\) bruker \(z_{\alpha/2}\) — altså 1.960 for 95 % og 2.576 for 99 %.</p>
 
             <h3>Tabell C — student t-fordeling</h3>
             <p>\(t_\alpha\) med \(\nu\) frihetsgrader. Bruk \(\nu=n-1\) for konfidensintervall og tester for \(\mu\), og \(\nu=n-2\) for regresjon.</p>
             <div class="dtable-wrap"><table class="dtable">
-              <thead><tr><th class="num">\(\nu\)</th><th class="num">\(t_{0,10}\)</th><th class="num">\(t_{0,05}\)</th><th class="num">\(t_{0,025}\)</th><th class="num">\(t_{0,01}\)</th><th class="num">\(t_{0,005}\)</th></tr></thead>
+              <thead><tr><th class="num">\(\nu\)</th><th class="num">\(t_{0.10}\)</th><th class="num">\(t_{0.05}\)</th><th class="num">\(t_{0.025}\)</th><th class="num">\(t_{0.01}\)</th><th class="num">\(t_{0.005}\)</th></tr></thead>
               <tbody>
-                <tr><td class="num">1</td><td class="num">3,078</td><td class="num">6,314</td><td class="num">12,706</td><td class="num">31,821</td><td class="num">63,657</td></tr>
-                <tr><td class="num">2</td><td class="num">1,886</td><td class="num">2,920</td><td class="num">4,303</td><td class="num">6,965</td><td class="num">9,925</td></tr>
-                <tr><td class="num">3</td><td class="num">1,638</td><td class="num">2,353</td><td class="num">3,182</td><td class="num">4,541</td><td class="num">5,841</td></tr>
-                <tr><td class="num">4</td><td class="num">1,533</td><td class="num">2,132</td><td class="num">2,776</td><td class="num">3,747</td><td class="num">4,604</td></tr>
-                <tr><td class="num">5</td><td class="num">1,476</td><td class="num">2,015</td><td class="num">2,571</td><td class="num">3,365</td><td class="num">4,032</td></tr>
-                <tr><td class="num">6</td><td class="num">1,440</td><td class="num">1,943</td><td class="num">2,447</td><td class="num">3,143</td><td class="num">3,707</td></tr>
-                <tr><td class="num">7</td><td class="num">1,415</td><td class="num">1,895</td><td class="num">2,365</td><td class="num">2,998</td><td class="num">3,499</td></tr>
-                <tr><td class="num">8</td><td class="num">1,397</td><td class="num">1,860</td><td class="num">2,306</td><td class="num">2,896</td><td class="num">3,355</td></tr>
-                <tr><td class="num">9</td><td class="num">1,383</td><td class="num">1,833</td><td class="num">2,262</td><td class="num">2,821</td><td class="num">3,250</td></tr>
-                <tr><td class="num">10</td><td class="num">1,372</td><td class="num">1,812</td><td class="num">2,228</td><td class="num">2,764</td><td class="num">3,169</td></tr>
-                <tr><td class="num">11</td><td class="num">1,363</td><td class="num">1,796</td><td class="num">2,201</td><td class="num">2,718</td><td class="num">3,106</td></tr>
-                <tr><td class="num">12</td><td class="num">1,356</td><td class="num">1,782</td><td class="num">2,179</td><td class="num">2,681</td><td class="num">3,055</td></tr>
-                <tr><td class="num">15</td><td class="num">1,341</td><td class="num">1,753</td><td class="num">2,131</td><td class="num">2,602</td><td class="num">2,947</td></tr>
-                <tr><td class="num">20</td><td class="num">1,325</td><td class="num">1,725</td><td class="num">2,086</td><td class="num">2,528</td><td class="num">2,845</td></tr>
-                <tr><td class="num">30</td><td class="num">1,310</td><td class="num">1,697</td><td class="num">2,042</td><td class="num">2,457</td><td class="num">2,750</td></tr>
-                <tr><td class="num">60</td><td class="num">1,296</td><td class="num">1,671</td><td class="num">2,000</td><td class="num">2,390</td><td class="num">2,660</td></tr>
-                <tr><td class="num">120</td><td class="num">1,289</td><td class="num">1,658</td><td class="num">1,980</td><td class="num">2,358</td><td class="num">2,617</td></tr>
-                <tr><td class="num">\(\infty\)</td><td class="num">1,282</td><td class="num">1,645</td><td class="num">1,960</td><td class="num">2,326</td><td class="num">2,576</td></tr>
+                <tr><td class="num">1</td><td class="num">3.078</td><td class="num">6.314</td><td class="num">12.706</td><td class="num">31.821</td><td class="num">63.657</td></tr>
+                <tr><td class="num">2</td><td class="num">1.886</td><td class="num">2.920</td><td class="num">4.303</td><td class="num">6.965</td><td class="num">9.925</td></tr>
+                <tr><td class="num">3</td><td class="num">1.638</td><td class="num">2.353</td><td class="num">3.182</td><td class="num">4.541</td><td class="num">5.841</td></tr>
+                <tr><td class="num">4</td><td class="num">1.533</td><td class="num">2.132</td><td class="num">2.776</td><td class="num">3.747</td><td class="num">4.604</td></tr>
+                <tr><td class="num">5</td><td class="num">1.476</td><td class="num">2.015</td><td class="num">2.571</td><td class="num">3.365</td><td class="num">4.032</td></tr>
+                <tr><td class="num">6</td><td class="num">1.440</td><td class="num">1.943</td><td class="num">2.447</td><td class="num">3.143</td><td class="num">3.707</td></tr>
+                <tr><td class="num">7</td><td class="num">1.415</td><td class="num">1.895</td><td class="num">2.365</td><td class="num">2.998</td><td class="num">3.499</td></tr>
+                <tr><td class="num">8</td><td class="num">1.397</td><td class="num">1.860</td><td class="num">2.306</td><td class="num">2.896</td><td class="num">3.355</td></tr>
+                <tr><td class="num">9</td><td class="num">1.383</td><td class="num">1.833</td><td class="num">2.262</td><td class="num">2.821</td><td class="num">3.250</td></tr>
+                <tr><td class="num">10</td><td class="num">1.372</td><td class="num">1.812</td><td class="num">2.228</td><td class="num">2.764</td><td class="num">3.169</td></tr>
+                <tr><td class="num">11</td><td class="num">1.363</td><td class="num">1.796</td><td class="num">2.201</td><td class="num">2.718</td><td class="num">3.106</td></tr>
+                <tr><td class="num">12</td><td class="num">1.356</td><td class="num">1.782</td><td class="num">2.179</td><td class="num">2.681</td><td class="num">3.055</td></tr>
+                <tr><td class="num">15</td><td class="num">1.341</td><td class="num">1.753</td><td class="num">2.131</td><td class="num">2.602</td><td class="num">2.947</td></tr>
+                <tr><td class="num">20</td><td class="num">1.325</td><td class="num">1.725</td><td class="num">2.086</td><td class="num">2.528</td><td class="num">2.845</td></tr>
+                <tr><td class="num">30</td><td class="num">1.310</td><td class="num">1.697</td><td class="num">2.042</td><td class="num">2.457</td><td class="num">2.750</td></tr>
+                <tr><td class="num">60</td><td class="num">1.296</td><td class="num">1.671</td><td class="num">2.000</td><td class="num">2.390</td><td class="num">2.660</td></tr>
+                <tr><td class="num">120</td><td class="num">1.289</td><td class="num">1.658</td><td class="num">1.980</td><td class="num">2.358</td><td class="num">2.617</td></tr>
+                <tr><td class="num">\(\infty\)</td><td class="num">1.282</td><td class="num">1.645</td><td class="num">1.960</td><td class="num">2.326</td><td class="num">2.576</td></tr>
               </tbody>
             </table></div>
             <div class="note">Nederste rad er identisk med z-kvantilene — t-fordelingen går mot normalfordelingen når \(\nu\) vokser. Derfor godtar løsningsforslagene å erstatte \(t\) med \(z\) når \(n\) er stor (fra rundt 60 frihetsgrader er forskjellen under 2 %).</div>
 
             <h3>Tabell A — utvalgte verdier av \(G(z)=P(Z\le z)\)</h3>
             <div class="dtable-wrap"><table class="dtable">
-              <thead><tr><th class="num">\(z\)</th><th class="num">0,00</th><th class="num">0,25</th><th class="num">0,50</th><th class="num">0,67</th><th class="num">1,00</th><th class="num">1,28</th><th class="num">1,50</th><th class="num">1,645</th><th class="num">1,96</th><th class="num">2,00</th><th class="num">2,33</th><th class="num">2,58</th><th class="num">3,00</th></tr></thead>
-              <tbody><tr><td class="num">\(G(z)\)</td><td class="num">0,5000</td><td class="num">0,5987</td><td class="num">0,6915</td><td class="num">0,7486</td><td class="num">0,8413</td><td class="num">0,8997</td><td class="num">0,9332</td><td class="num">0,9500</td><td class="num">0,9750</td><td class="num">0,9772</td><td class="num">0,9901</td><td class="num">0,9951</td><td class="num">0,9987</td></tr></tbody>
+              <thead><tr><th class="num">\(z\)</th><th class="num">0.00</th><th class="num">0.25</th><th class="num">0.50</th><th class="num">0.67</th><th class="num">1.00</th><th class="num">1.28</th><th class="num">1.50</th><th class="num">1.645</th><th class="num">1.96</th><th class="num">2.00</th><th class="num">2.33</th><th class="num">2.58</th><th class="num">3.00</th></tr></thead>
+              <tbody><tr><td class="num">\(G(z)\)</td><td class="num">0.5000</td><td class="num">0.5987</td><td class="num">0.6915</td><td class="num">0.7486</td><td class="num">0.8413</td><td class="num">0.8997</td><td class="num">0.9332</td><td class="num">0.9500</td><td class="num">0.9750</td><td class="num">0.9772</td><td class="num">0.9901</td><td class="num">0.9951</td><td class="num">0.9987</td></tr></tbody>
             </table></div>
             <p>For negative \(z\): \(G(-z)=1-G(z)\).</p>
           </article>

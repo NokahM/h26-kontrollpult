@@ -104,9 +104,9 @@
             <div class="task__q">
               <div class="dtable-wrap"><table class="dtable">
                 <thead><tr><th class="num">Fuktprosent \(x\)</th><th class="num">20</th><th class="num">30</th><th class="num">40</th><th class="num">50</th></tr></thead>
-                <tbody><tr><td class="num">Brennverdi \(y\) (kWh/kg)</td><td class="num">4,6</td><td class="num">3,7</td><td class="num">3,0</td><td class="num">2,6</td></tr></tbody>
+                <tbody><tr><td class="num">Brennverdi \(y\) (kWh/kg)</td><td class="num">4.6</td><td class="num">3.7</td><td class="num">3.0</td><td class="num">2.6</td></tr></tbody>
               </table></div>
-              <p><strong>Nøkkeltall:</strong> \(\sum x_i=140\), \(\sum y_i=13{,}9\), \(\sum(x_i-\bar x)^2=500\), \(\sum(y_i-\bar y)^2=2{,}3075\), \(\sum(x_i-\bar x)(y_i-\bar y)=-33{,}5\)</p>
+              <p><strong>Nøkkeltall:</strong> \(\sum x_i=140\), \(\sum y_i=13.9\), \(\sum(x_i-\bar x)^2=500\), \(\sum(y_i-\bar y)^2=2.3075\), \(\sum(x_i-\bar x)(y_i-\bar y)=-33.5\)</p>
               <ol>
                 <li>Finn likningen for den rette linja \(\hat y=\hat\alpha+\hat\beta x\) etter minste kvadraters metode. Hvilken brennverdi gir modellen hvis fuktprosenten er 15?</li>
                 <li>Observasjonene antas realisert fra en lineærnormal modell \(Y_i=\alpha+\beta x_i+e_i\) med uavhengige \(N(0,\sigma)\)-fordelte residualer og ukjent \(\sigma\). Finn et 95 % konfidensintervall for \(\beta\) og klargjør hvilken informasjon dette gir.</li>
@@ -116,16 +116,16 @@
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
                 <h4>a)</h4>
-                <p>\[ \bar x=\frac{140}{4}=35,\qquad \bar y=\frac{13{,}9}{4}=3{,}475 \]</p>
-                <p>\[ \hat\beta=\frac{\sum(x_i-\bar x)(y_i-\bar y)}{\sum(x_i-\bar x)^2}=\frac{-33{,}5}{500}=-0{,}067 \]</p>
-                <p>\[ \hat\alpha=\bar y-\hat\beta\bar x=3{,}475-(-0{,}067)\cdot 35=5{,}82 \]</p>
-                <p>\[ \hat y=5{,}82-0{,}067x \quad\Rightarrow\quad \hat y(15)=5{,}82-0{,}067\cdot 15\approx 4{,}8\ \text{kWh/kg} \]</p>
+                <p>\[ \bar x=\frac{140}{4}=35,\qquad \bar y=\frac{13.9}{4}=3.475 \]</p>
+                <p>\[ \hat\beta=\frac{\sum(x_i-\bar x)(y_i-\bar y)}{\sum(x_i-\bar x)^2}=\frac{-33.5}{500}=-0.067 \]</p>
+                <p>\[ \hat\alpha=\bar y-\hat\beta\bar x=3.475-(-0.067)\cdot 35=5.82 \]</p>
+                <p>\[ \hat y=5.82-0.067x \quad\Rightarrow\quad \hat y(15)=5.82-0.067\cdot 15\approx 4.8\ \text{kWh/kg} \]</p>
                 <h4>b)</h4>
-                <p>\(\nu=n-2=2\) frihetsgrader gir \(t_{0{,}025}=4{,}303\):</p>
-                <p>\[ \frac{\sqrt{500\cdot 2{,}3075-(-33{,}5)^2}}{500\sqrt{2}}=\frac{\sqrt{1153{,}75-1122{,}25}}{707{,}1}=\frac{5{,}61}{707{,}1}=0{,}00794 \]</p>
-                <p>\[ -0{,}067\pm 4{,}303\cdot 0{,}00794=-0{,}067\pm 0{,}034 \]</p>
-                <div class="answer"><b>a) \(\hat y=5{,}82-0{,}067x\), \(\hat y(15)\approx 4{,}8\) kWh/kg · b) \(\beta\in[-0{,}10;\ -0{,}03]\).</b>
-                <br><br>I ord: vi kan være 95 % sikre på at én prosents økning i fuktighet reduserer forventet brennverdi med mellom 0,03 og 0,10 kWh per kg. Siden hele intervallet er negativt, er sammenhengen signifikant.</div>
+                <p>\(\nu=n-2=2\) frihetsgrader gir \(t_{0.025}=4.303\):</p>
+                <p>\[ \frac{\sqrt{500\cdot 2.3075-(-33.5)^2}}{500\sqrt{2}}=\frac{\sqrt{1153.75-1122.25}}{707.1}=\frac{5.61}{707.1}=0.00794 \]</p>
+                <p>\[ -0.067\pm 4.303\cdot 0.00794=-0.067\pm 0.034 \]</p>
+                <div class="answer"><b>a) \(\hat y=5.82-0.067x\), \(\hat y(15)\approx 4.8\) kWh/kg · b) \(\beta\in[-0.10,\ -0.03]\).</b>
+                <br><br>I ord: vi kan være 95 % sikre på at én prosents økning i fuktighet reduserer forventet brennverdi med mellom 0.03 og 0.10 kWh per kg. Siden hele intervallet er negativt, er sammenhengen signifikant.</div>
               </div>
             </details>
           </article>
@@ -141,7 +141,7 @@
                 <thead><tr><th class="num">Alder \(x\)</th><th class="num">30</th><th class="num">38</th><th class="num">41</th><th class="num">38</th><th class="num">29</th><th class="num">39</th><th class="num">46</th><th class="num">41</th><th class="num">42</th><th class="num">24</th></tr></thead>
                 <tbody><tr><td class="num">Makspuls \(y\)</td><td class="num">186</td><td class="num">183</td><td class="num">171</td><td class="num">177</td><td class="num">191</td><td class="num">177</td><td class="num">175</td><td class="num">176</td><td class="num">171</td><td class="num">196</td></tr></tbody>
               </table></div>
-              <p><strong>Regnehjelp:</strong> \(\bar x=36{,}8\), \(\bar y=180{,}3\), \(\sum(x_i-\bar x)^2=425{,}6\), \(\sum(y_i-\bar y)^2=642{,}1\), \(\sum(x_i-\bar x)(y_i-\bar y)=-485{,}4\)</p>
+              <p><strong>Regnehjelp:</strong> \(\bar x=36.8\), \(\bar y=180.3\), \(\sum(x_i-\bar x)^2=425.6\), \(\sum(y_i-\bar y)^2=642.1\), \(\sum(x_i-\bar x)(y_i-\bar y)=-485.4\)</p>
               <ol>
                 <li>Estimer \(\alpha\) og \(\beta\) ved minste kvadraters metode og skriv opp likningen til regresjonslinjen. Estimer forventet makspuls for en 35-åring.</li>
                 <li>Beregn et symmetrisk 95 % konfidensintervall for \(\beta\) og forklar hvilken informasjon intervallet gir.</li>
@@ -151,16 +151,16 @@
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
                 <h4>a)</h4>
-                <p>\[ \hat\beta=\frac{-485{,}4}{425{,}6}=-1{,}14 \]</p>
-                <p>\[ \hat\alpha=\bar y-\hat\beta\bar x=180{,}3-(-1{,}14)\cdot 36{,}8=222{,}3 \]</p>
-                <p>\[ \hat y=222{,}3-1{,}14x \quad\Rightarrow\quad \hat y(35)=222{,}3-1{,}14\cdot 35\approx 182 \]</p>
+                <p>\[ \hat\beta=\frac{-485.4}{425.6}=-1.14 \]</p>
+                <p>\[ \hat\alpha=\bar y-\hat\beta\bar x=180.3-(-1.14)\cdot 36.8=222.3 \]</p>
+                <p>\[ \hat y=222.3-1.14x \quad\Rightarrow\quad \hat y(35)=222.3-1.14\cdot 35\approx 182 \]</p>
                 <p>Modellen er altså i praksis den kjente tommelfingerregelen «makspuls ≈ 220 − alder».</p>
                 <h4>b)</h4>
-                <p>\(\nu=n-2=8\) gir \(t_{0{,}025}=2{,}306\):</p>
-                <p>\[ \frac{\sqrt{425{,}6\cdot 642{,}1-(-485{,}4)^2}}{425{,}6\sqrt{8}}=\frac{\sqrt{273\,277{,}8-235\,613{,}2}}{1203{,}8}=\frac{194{,}1}{1203{,}8}=0{,}1612 \]</p>
-                <p>\[ -1{,}14\pm 2{,}306\cdot 0{,}1612=-1{,}14\pm 0{,}372 \]</p>
-                <div class="answer"><b>a) \(\hat y=222{,}3-1{,}14x\), ca. 182 slag/min for en 35-åring · b) \(\beta\in[-1{,}51;\ -0{,}77]\).</b>
-                <br><br>I ord: den forventede årlige reduksjonen i makspuls ligger med 95 % sikkerhet mellom 0,77 og 1,51 slag per minutt per leveår.</div>
+                <p>\(\nu=n-2=8\) gir \(t_{0.025}=2.306\):</p>
+                <p>\[ \frac{\sqrt{425.6\cdot 642.1-(-485.4)^2}}{425.6\sqrt{8}}=\frac{\sqrt{273\,277.8-235\,613.2}}{1203.8}=\frac{194.1}{1203.8}=0.1612 \]</p>
+                <p>\[ -1.14\pm 2.306\cdot 0.1612=-1.14\pm 0.372 \]</p>
+                <div class="answer"><b>a) \(\hat y=222.3-1.14x\), ca. 182 slag/min for en 35-åring · b) \(\beta\in[-1.51,\ -0.77]\).</b>
+                <br><br>I ord: den forventede årlige reduksjonen i makspuls ligger med 95 % sikkerhet mellom 0.77 og 1.51 slag per minutt per leveår.</div>
               </div>
             </details>
           </article>
@@ -173,10 +173,10 @@
             </header>
             <div class="task__q">
               <div class="dtable-wrap"><table class="dtable">
-                <thead><tr><th class="num">Lengde \(x\) (cm)</th><th class="num">6,0</th><th class="num">6,4</th><th class="num">6,8</th><th class="num">7,2</th><th class="num">7,6</th></tr></thead>
+                <thead><tr><th class="num">Lengde \(x\) (cm)</th><th class="num">6.0</th><th class="num">6.4</th><th class="num">6.8</th><th class="num">7.2</th><th class="num">7.6</th></tr></thead>
                 <tbody><tr><td class="num">Vekt \(y\) (gram)</td><td class="num">82</td><td class="num">77</td><td class="num">88</td><td class="num">100</td><td class="num">100</td></tr></tbody>
               </table></div>
-              <p><strong>Regnehjelp:</strong> \(\sum x_i=34{,}0\), \(\sum y_i=447\), \(\sum(x_i-\bar x)^2=1{,}60\), \(\sum(y_i-\bar y)^2=435{,}2\), \(\sum(x_i-\bar x)(y_i-\bar y)=23{,}6\)</p>
+              <p><strong>Regnehjelp:</strong> \(\sum x_i=34.0\), \(\sum y_i=447\), \(\sum(x_i-\bar x)^2=1.60\), \(\sum(y_i-\bar y)^2=435.2\), \(\sum(x_i-\bar x)(y_i-\bar y)=23.6\)</p>
               <ol>
                 <li>Bestem den empiriske korrelasjonskoeffisienten. Hva forteller svaret oss om poteters lengde og vekt?</li>
                 <li>Finn et 95 % symmetrisk konfidensintervall for \(\beta\) og forklar hvilken informasjon intervallet gir.</li>
@@ -186,15 +186,15 @@
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
                 <h4>a)</h4>
-                <p>\[ R=\frac{S_{XY}}{S_XS_Y}=\frac{23{,}6}{\sqrt{1{,}60\cdot 435{,}2}}=\frac{23{,}6}{26{,}39}=0{,}894 \]</p>
-                <p><strong>Tolkning:</strong> \(R\) måler graden av linearitet i et spredningsplott. Med \(R=0{,}89\) — relativt nær 1 — er det ganske høy grad av lineær sammenheng. At \(R\) er positiv betyr, ikke overraskende, at lange poteter i dette utvalget har en tendens til å veie mer enn korte. Med bare fem observasjoner er usikkerheten imidlertid stor.</p>
+                <p>\[ R=\frac{S_{XY}}{S_XS_Y}=\frac{23.6}{\sqrt{1.60\cdot 435.2}}=\frac{23.6}{26.39}=0.894 \]</p>
+                <p><strong>Tolkning:</strong> \(R\) måler graden av linearitet i et spredningsplott. Med \(R=0.89\) — relativt nær 1 — er det ganske høy grad av lineær sammenheng. At \(R\) er positiv betyr, ikke overraskende, at lange poteter i dette utvalget har en tendens til å veie mer enn korte. Med bare fem observasjoner er usikkerheten imidlertid stor.</p>
                 <h4>b)</h4>
-                <p>\[ \hat\beta=\frac{23{,}60}{1{,}60}=14{,}75 \]</p>
-                <p>\(\nu=5-2=3\) gir \(t_{0{,}025}=3{,}182\):</p>
-                <p>\[ \frac{\sqrt{1{,}60\cdot 435{,}2-23{,}60^2}}{1{,}60\sqrt{3}}=\frac{\sqrt{696{,}32-556{,}96}}{2{,}771}=\frac{11{,}81}{2{,}771}=4{,}26 \]</p>
-                <p>\[ 14{,}75\pm 3{,}182\cdot 4{,}26=14{,}75\pm 13{,}55 \]</p>
-                <div class="answer"><b>a) \(R=0{,}89\) · b) \(\beta\in[1{,}2;\ 28]\) gram per cm.</b>
-                <br><br>I ord: sammenlikner vi poteter med 1 cm lengdeforskjell, kan vi være 95 % sikre på at forventet vektforskjell ligger mellom 1,2 og 28 gram. Intervallet er ekstremt bredt — med \(n=5\) og \(t_{0{,}025}=3{,}18\) er presisjonen dårlig, selv om korrelasjonen ser sterk ut.</div>
+                <p>\[ \hat\beta=\frac{23.60}{1.60}=14.75 \]</p>
+                <p>\(\nu=5-2=3\) gir \(t_{0.025}=3.182\):</p>
+                <p>\[ \frac{\sqrt{1.60\cdot 435.2-23.60^2}}{1.60\sqrt{3}}=\frac{\sqrt{696.32-556.96}}{2.771}=\frac{11.81}{2.771}=4.26 \]</p>
+                <p>\[ 14.75\pm 3.182\cdot 4.26=14.75\pm 13.55 \]</p>
+                <div class="answer"><b>a) \(R=0.89\) · b) \(\beta\in[1.2,\ 28]\) gram per cm.</b>
+                <br><br>I ord: sammenlikner vi poteter med 1 cm lengdeforskjell, kan vi være 95 % sikre på at forventet vektforskjell ligger mellom 1.2 og 28 gram. Intervallet er ekstremt bredt — med \(n=5\) og \(t_{0.025}=3.18\) er presisjonen dårlig, selv om korrelasjonen ser sterk ut.</div>
               </div>
             </details>
           </article>
@@ -220,17 +220,17 @@
               <div class="sol__body">
                 <h4>a)</h4>
                 <p>Her må du regne ut summene selv — det er ingen regnehjelp i dette settet:</p>
-                <p>\[ \bar x=175{,}8,\qquad \bar y=79{,}2 \]</p>
-                <p>\[ \sum(x_i-\bar x)^2=738{,}8,\quad \sum(y_i-\bar y)^2=462{,}8,\quad \sum(x_i-\bar x)(y_i-\bar y)=546{,}2 \]</p>
-                <p>\[ \hat\beta=\frac{546{,}2}{738{,}8}=0{,}739,\qquad \hat\alpha=79{,}2-0{,}739\cdot 175{,}8=-50{,}77 \]</p>
-                <p>\[ \hat y=-50{,}77+0{,}739x \quad\Rightarrow\quad \hat y(175)\approx 78{,}6\ \text{kg} \]</p>
-                <p>(Til orientering: \(R=546{,}2/\sqrt{738{,}8\cdot 462{,}8}=0{,}934\).)</p>
+                <p>\[ \bar x=175.8,\qquad \bar y=79.2 \]</p>
+                <p>\[ \sum(x_i-\bar x)^2=738.8,\quad \sum(y_i-\bar y)^2=462.8,\quad \sum(x_i-\bar x)(y_i-\bar y)=546.2 \]</p>
+                <p>\[ \hat\beta=\frac{546.2}{738.8}=0.739,\qquad \hat\alpha=79.2-0.739\cdot 175.8=-50.77 \]</p>
+                <p>\[ \hat y=-50.77+0.739x \quad\Rightarrow\quad \hat y(175)\approx 78.6\ \text{kg} \]</p>
+                <p>(Til orientering: \(R=546.2/\sqrt{738.8\cdot 462.8}=0.934\).)</p>
                 <h4>b)</h4>
-                <p>\(\nu=3\), \(t_{0{,}025}=3{,}182\):</p>
-                <p>\[ \frac{\sqrt{738{,}8\cdot 462{,}8-546{,}2^2}}{738{,}8\sqrt 3}=\frac{\sqrt{341\,916-298\,334}}{1279{,}6}=\frac{208{,}8}{1279{,}6}=0{,}163 \]</p>
-                <p>\[ 0{,}739\pm 3{,}182\cdot 0{,}163=0{,}739\pm 0{,}519 \]</p>
-                <div class="answer"><b>a) ca. 78,6 kg · b) \(\beta\in[0{,}22;\ 1{,}26]\) kg per cm.</b>
-                <br><br>I ord: for hver ekstra centimeter kroppshøyde øker forventet vekt med mellom 0,22 og 1,26 kg, med 95 % sikkerhet. At 0 ikke ligger i intervallet, viser at sammenhengen er signifikant på 5 % nivå.</div>
+                <p>\(\nu=3\), \(t_{0.025}=3.182\):</p>
+                <p>\[ \frac{\sqrt{738.8\cdot 462.8-546.2^2}}{738.8\sqrt 3}=\frac{\sqrt{341\,916-298\,334}}{1279.6}=\frac{208.8}{1279.6}=0.163 \]</p>
+                <p>\[ 0.739\pm 3.182\cdot 0.163=0.739\pm 0.519 \]</p>
+                <div class="answer"><b>a) ca. 78.6 kg · b) \(\beta\in[0.22,\ 1.26]\) kg per cm.</b>
+                <br><br>I ord: for hver ekstra centimeter kroppshøyde øker forventet vekt med mellom 0.22 og 1.26 kg, med 95 % sikkerhet. At 0 ikke ligger i intervallet, viser at sammenhengen er signifikant på 5 % nivå.</div>
               </div>
             </details>
           </article>
@@ -257,23 +257,23 @@
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
                 <h4>a)</h4>
-                <p>\[ \bar x=4,\qquad \bar y=805{,}7 \]</p>
-                <p>\[ \sum(x_i-\bar x)^2=28,\quad \sum(y_i-\bar y)^2=243\,323{,}4,\quad \sum(x_i-\bar x)(y_i-\bar y)=-2600 \]</p>
-                <p>\[ R=\frac{-2600}{\sqrt{28\cdot 243\,323{,}4}}=-0{,}996 \]</p>
+                <p>\[ \bar x=4,\qquad \bar y=805.7 \]</p>
+                <p>\[ \sum(x_i-\bar x)^2=28,\quad \sum(y_i-\bar y)^2=243\,323.4,\quad \sum(x_i-\bar x)(y_i-\bar y)=-2600 \]</p>
+                <p>\[ R=\frac{-2600}{\sqrt{28\cdot 243\,323.4}}=-0.996 \]</p>
                 <p>Nesten perfekt negativ lineær sammenheng.</p>
-                <p>\[ \hat\beta=\frac{-2600}{28}=-92{,}86,\qquad \hat\alpha=805{,}7-(-92{,}86)\cdot 4=1177{,}1 \]</p>
-                <p>\[ \hat y=1177{,}1-92{,}86x \quad\Rightarrow\quad \hat y(8)\approx 434\ \text{tonn i 2019} \]</p>
+                <p>\[ \hat\beta=\frac{-2600}{28}=-92.86,\qquad \hat\alpha=805.7-(-92.86)\cdot 4=1177.1 \]</p>
+                <p>\[ \hat y=1177.1-92.86x \quad\Rightarrow\quad \hat y(8)\approx 434\ \text{tonn i 2019} \]</p>
                 <h4>b)</h4>
-                <p>\(\nu=5\), \(t_{0{,}025}=2{,}571\):</p>
-                <p>\[ \frac{\sqrt{28\cdot 243\,323{,}4-2600^2}}{28\sqrt 5}=\frac{\sqrt{6\,813\,056-6\,760\,000}}{62{,}61}=\frac{230{,}3}{62{,}61}=3{,}679 \]</p>
-                <p>\[ -92{,}86\pm 2{,}571\cdot 3{,}679=-92{,}86\pm 9{,}46 \]</p>
-                <p>Intervallet for \(\beta\) er \([-102{,}3;\ -83{,}4]\). Oppgaven spør om <em>reduksjonen</em>, altså et positivt tall — snu fortegnet:</p>
-                <p>\[ \text{reduksjon}\in[83{,}4;\ 102{,}3]\ \text{tonn per år} \]</p>
+                <p>\(\nu=5\), \(t_{0.025}=2.571\):</p>
+                <p>\[ \frac{\sqrt{28\cdot 243\,323.4-2600^2}}{28\sqrt 5}=\frac{\sqrt{6\,813\,056-6\,760\,000}}{62.61}=\frac{230.3}{62.61}=3.679 \]</p>
+                <p>\[ -92.86\pm 2.571\cdot 3.679=-92.86\pm 9.46 \]</p>
+                <p>Intervallet for \(\beta\) er \([-102.3,\ -83.4]\). Oppgaven spør om <em>reduksjonen</em>, altså et positivt tall — snu fortegnet:</p>
+                <p>\[ \text{reduksjon}\in[83.4,\ 102.3]\ \text{tonn per år} \]</p>
                 <h4>c)</h4>
                 <p>Testen må gjelde \(\beta\), den må være tosidig, og \(H_0\) må forkastes på 5 % nivå. Det oppnås ved å velge en \(\beta_0\) som ligger <em>utenfor</em> intervallet i b), for eksempel:</p>
                 <p>\[ H_0:\beta=-80 \qquad\text{mot}\qquad H_1:\beta\neq -80 \]</p>
-                <p>Siden \(-80\notin[-102{,}3;\ -83{,}4]\), forkastes \(H_0\) på 5 % signifikansnivå.</p>
-                <div class="answer"><b>a) \(R=-0{,}996\), \(\hat y=1177-92{,}9x\), ca. 434 tonn i 2019 · b) reduksjon i [83,4; 102,3] tonn/år · c) f.eks. \(H_0:\beta=-80\) forkastes.</b>
+                <p>Siden \(-80\notin[-102.3,\ -83.4]\), forkastes \(H_0\) på 5 % signifikansnivå.</p>
+                <div class="answer"><b>a) \(R=-0.996\), \(\hat y=1177-92.9x\), ca. 434 tonn i 2019 · b) reduksjon i [83.4, 102.3] tonn/år · c) f.eks. \(H_0:\beta=-80\) forkastes.</b>
                 <br><br>Punkt c) er en uvanlig oppgaveform — den ber deg <em>konstruere</em> en test med kjent utfall. Poenget er å vise at du skjønner ekvivalensen mellom tosidig test og konfidensintervall.</div>
               </div>
             </details>

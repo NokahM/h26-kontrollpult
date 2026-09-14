@@ -72,7 +72,7 @@
               <li><strong>Bayes er å snu treet:</strong> når oppgaven sier «gitt at testen var positiv, hva er sannsynligheten for …», er svaret alltid én grein delt på summen av greinene.</li>
             </ol>
             <div class="note"><strong>Fellen som går igjen:</strong> \(P(A\mid B)\) og \(P(B\mid A)\) forveksles. I testoppgavene er \(P(\text{positiv}\mid\text{syk})\) høy — testen er god — mens \(P(\text{syk}\mid\text{positiv})\) kan være lav fordi sykdommen er sjelden. Okt 2024 O3 er nettopp dette poenget satt på spissen: en test som fanger 99 % av de syke gir likevel bare 33 % treffsikkerhet.</div>
-            <div class="note"><strong>Snarvei:</strong> når oppgaven gir deg <em>antall</em> (1000 personer, 10 hotellrom, 2,9 mill. biler) i stedet for prosenter, dropp formlene og tell. Uniform sannsynlighetsmodell: \(P=\tfrac{\text{gunstige}}{\text{mulige}}\). Okt 2021, mai 2025 og okt 2025 løses raskest slik.</div>
+            <div class="note"><strong>Snarvei:</strong> når oppgaven gir deg <em>antall</em> (1000 personer, 10 hotellrom, 2.9 mill. biler) i stedet for prosenter, dropp formlene og tell. Uniform sannsynlighetsmodell: \(P=\tfrac{\text{gunstige}}{\text{mulige}}\). Okt 2021, mai 2025 og okt 2025 løses raskest slik.</div>
           </article>
         </section>
 
@@ -124,17 +124,17 @@
                 </table></div>
                 <p>Totalt er 400 + 100 = 500 smittet og 200 + 300 = 500 ikke smittet.</p>
                 <h4>b)</h4>
-                <p>\[ P(I\mid P)=\frac{200}{600}=\frac{1}{3}\approx 0{,}33 \]</p>
+                <p>\[ P(I\mid P)=\frac{200}{600}=\frac{1}{3}\approx 0.33 \]</p>
                 <h4>c)</h4>
                 <p>\[ P(I\mid N)=\frac{300}{400}=\frac{3}{4} \]</p>
                 <p>Tor og Kari er uavhengige, så sannsynligheten for at ingen av dem er smittet er \((3/4)^2=9/16\). Da blir</p>
-                <p>\[ P(\text{minst én smittet})=1-\frac{9}{16}=\frac{7}{16}\approx 0{,}44 \]</p>
+                <p>\[ P(\text{minst én smittet})=1-\frac{9}{16}=\frac{7}{16}\approx 0.44 \]</p>
                 <h4>d)</h4>
                 <p>Av de 500 smittede testet 400 positivt:</p>
-                <p>\[ P(P\mid S)=\frac{400}{500}=0{,}80 \]</p>
+                <p>\[ P(P\mid S)=\frac{400}{500}=0.80 \]</p>
                 <h4>e)</h4>
-                <p>Uriktig resultat er enten falsk negativ eller falsk positiv. Fra studien: \(P(N\mid S)=1-0{,}80=0{,}20\) og \(P(P\mid I)=\tfrac{200}{500}=0{,}40\).</p>
-                <p>\[ 50\,000\cdot\bigl(0{,}01\cdot 0{,}20+0{,}99\cdot 0{,}40\bigr)=50\,000\cdot 0{,}398 \]</p>
+                <p>Uriktig resultat er enten falsk negativ eller falsk positiv. Fra studien: \(P(N\mid S)=1-0.80=0.20\) og \(P(P\mid I)=\tfrac{200}{500}=0.40\).</p>
+                <p>\[ 50\,000\cdot\bigl(0.01\cdot 0.20+0.99\cdot 0.40\bigr)=50\,000\cdot 0.398 \]</p>
                 <div class="answer"><b>19 900</b> personer forventes å få uriktig testresultat. Legg merke til at nesten alle feilene er falske positive, fordi de friske er så mange flere.</div>
               </div>
             </details>
@@ -147,7 +147,7 @@
               <span class="task__tags"><span class="tag">hendelsestre</span><span class="tag">bayes</span></span>
             </header>
             <div class="task__q">
-              <p>En ny vaksine mot koronaviruset er utviklet. Vaksinen ble testet på 10 000 frivillige personer, og undersøkelsen har vist at 65 % av de som ble testet ikke blir syke av koronaviruset. Dessverre har vaksinen bivirkninger: sannsynligheten for å få bivirkninger blant dem som ikke ble syke er 0,31, mens sannsynligheten for å få bivirkninger blant dem som ble syke av korona til tross for vaksinasjon er 0,15.</p>
+              <p>En ny vaksine mot koronaviruset er utviklet. Vaksinen ble testet på 10 000 frivillige personer, og undersøkelsen har vist at 65 % av de som ble testet ikke blir syke av koronaviruset. Dessverre har vaksinen bivirkninger: sannsynligheten for å få bivirkninger blant dem som ikke ble syke er 0.31, mens sannsynligheten for å få bivirkninger blant dem som ble syke av korona til tross for vaksinasjon er 0.15.</p>
               <ol>
                 <li>Tegn et hendelsestre og vis alle sannsynlighetene i forgreningspunktene.</li>
                 <li>Hva er sannsynligheten for at en tilfeldig vaksinert person ikke blir syk av koronaviruset og ikke får bivirkninger?</li>
@@ -159,14 +159,14 @@
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
                 <h4>a)</h4>
-                <p>La \(F\) = «blir ikke syk» og \(B\) = «får bivirkninger». Gitt: \(P(F)=0{,}65\), \(P(\bar F)=0{,}35\), \(P(B\mid F)=0{,}31\), \(P(B\mid \bar F)=0{,}15\). Treet får fire endepunkter: 0,2015 · 0,4485 · 0,0525 · 0,2975.</p>
+                <p>La \(F\) = «blir ikke syk» og \(B\) = «får bivirkninger». Gitt: \(P(F)=0.65\), \(P(\bar F)=0.35\), \(P(B\mid F)=0.31\), \(P(B\mid \bar F)=0.15\). Treet får fire endepunkter: 0.2015 · 0.4485 · 0.0525 · 0.2975.</p>
                 <h4>b)</h4>
-                <p>\[ P(F\cap\bar B)=P(F)\cdot P(\bar B\mid F)=0{,}65\cdot 0{,}69=0{,}4485 \]</p>
+                <p>\[ P(F\cap\bar B)=P(F)\cdot P(\bar B\mid F)=0.65\cdot 0.69=0.4485 \]</p>
                 <h4>c) Total sannsynlighet</h4>
-                <p>\[ P(B)=P(B\mid F)P(F)+P(B\mid\bar F)P(\bar F)=0{,}65\cdot 0{,}31+0{,}35\cdot 0{,}15=0{,}254 \]</p>
+                <p>\[ P(B)=P(B\mid F)P(F)+P(B\mid\bar F)P(\bar F)=0.65\cdot 0.31+0.35\cdot 0.15=0.254 \]</p>
                 <h4>d) Bayes</h4>
-                <p>\[ P(F\mid \bar B)=\frac{P(F\cap\bar B)}{P(\bar B)}=\frac{0{,}4485}{1-0{,}254}=\frac{0{,}4485}{0{,}746} \]</p>
-                <div class="answer"><b>\(P(F\mid\bar B)\approx 0{,}60\)</b> — altså 60 %.</div>
+                <p>\[ P(F\mid \bar B)=\frac{P(F\cap\bar B)}{P(\bar B)}=\frac{0.4485}{1-0.254}=\frac{0.4485}{0.746} \]</p>
+                <div class="answer"><b>\(P(F\mid\bar B)\approx 0.60\)</b> — altså 60 %.</div>
               </div>
             </details>
           </article>
@@ -188,12 +188,12 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>\(A\) = «bilen slipper ut for mye», \(B\) = «testen viser høyt utslipp». Gitt \(P(A)=0{,}20\), \(P(B\mid A)=0{,}98\), \(P(B\mid\bar A)=0{,}15\).</p>
+                <p>\(A\) = «bilen slipper ut for mye», \(B\) = «testen viser høyt utslipp». Gitt \(P(A)=0.20\), \(P(B\mid A)=0.98\), \(P(B\mid\bar A)=0.15\).</p>
                 <h4>b)</h4>
-                <p>\[ P(B)=0{,}20\cdot 0{,}98+0{,}80\cdot 0{,}15=0{,}196+0{,}120=0{,}316 \]</p>
+                <p>\[ P(B)=0.20\cdot 0.98+0.80\cdot 0.15=0.196+0.120=0.316 \]</p>
                 <h4>c)</h4>
-                <p>\[ P(A\mid B)=\frac{0{,}196}{0{,}316} \]</p>
-                <div class="answer"><b>\(P(A\mid B)\approx 0{,}62\).</b> Testen fanger 98 % av verstingene, men fordi 80 % av bilene er i orden, er nesten 4 av 10 «stryk» falske alarmer.</div>
+                <p>\[ P(A\mid B)=\frac{0.196}{0.316} \]</p>
+                <div class="answer"><b>\(P(A\mid B)\approx 0.62\).</b> Testen fanger 98 % av verstingene, men fordi 80 % av bilene er i orden, er nesten 4 av 10 «stryk» falske alarmer.</div>
               </div>
             </details>
           </article>
@@ -208,7 +208,7 @@
               <p>Et flyselskap lar passasjerene forhåndsbestille 0, 1 eller 2 måltider. La \(X\) være antall måltider en tilfeldig passasjer bestiller:</p>
               <div class="dtable-wrap"><table class="dtable">
                 <thead><tr><th class="num">\(x\)</th><th class="num">0</th><th class="num">1</th><th class="num">2</th></tr></thead>
-                <tbody><tr><td class="num">\(P(X=x)\)</td><td class="num">0,12</td><td class="num">0,36</td><td class="num">0,52</td></tr></tbody>
+                <tbody><tr><td class="num">\(P(X=x)\)</td><td class="num">0.12</td><td class="num">0.36</td><td class="num">0.52</td></tr></tbody>
               </table></div>
               <p>Av dem som velger 0 måltider har 44 % matallergi. Av dem som velger 1 måltid har 8 % matallergi. Av dem som velger 2 måltider har 3 % matallergi.</p>
               <ol>
@@ -221,13 +221,13 @@
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
                 <h4>a)</h4>
-                <p>\[ E(X)=0\cdot 0{,}12+1\cdot 0{,}36+2\cdot 0{,}52=1{,}40 \]</p>
+                <p>\[ E(X)=0\cdot 0.12+1\cdot 0.36+2\cdot 0.52=1.40 \]</p>
                 <h4>b) Total sannsynlighet</h4>
                 <p>Med \(A\) = «har matallergi»:</p>
-                <p>\[ P(A)=0{,}12\cdot 0{,}44+0{,}36\cdot 0{,}08+0{,}52\cdot 0{,}03 = 0{,}0528+0{,}0288+0{,}0156 = 0{,}0972 \]</p>
+                <p>\[ P(A)=0.12\cdot 0.44+0.36\cdot 0.08+0.52\cdot 0.03 = 0.0528+0.0288+0.0156 = 0.0972 \]</p>
                 <h4>c) Bayes</h4>
-                <p>\[ P(X=0\mid A)=\frac{0{,}12\cdot 0{,}44}{0{,}0972}=\frac{0{,}0528}{0{,}0972} \]</p>
-                <div class="answer"><b>\(E(X)=1{,}40\) · \(P(A)=0{,}0972\) · \(P(X=0\mid A)\approx 0{,}54\).</b></div>
+                <p>\[ P(X=0\mid A)=\frac{0.12\cdot 0.44}{0.0972}=\frac{0.0528}{0.0972} \]</p>
+                <div class="answer"><b>\(E(X)=1.40\) · \(P(A)=0.0972\) · \(P(X=0\mid A)\approx 0.54\).</b></div>
               </div>
             </details>
           </article>
@@ -248,11 +248,11 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>\(V\) = smittet, \(F\) = hunnfisk. \(P(F)=0{,}8\), \(P(V\mid F)=0{,}05\), \(P(V\mid\bar F)=0{,}30\).</p>
+                <p>\(V\) = smittet, \(F\) = hunnfisk. \(P(F)=0.8\), \(P(V\mid F)=0.05\), \(P(V\mid\bar F)=0.30\).</p>
                 <h4>a)</h4>
-                <p>\[ P(V)=P(V\mid F)P(F)+P(V\mid\bar F)P(\bar F)=0{,}05\cdot 0{,}8+0{,}30\cdot 0{,}2=0{,}10 \]</p>
+                <p>\[ P(V)=P(V\mid F)P(F)+P(V\mid\bar F)P(\bar F)=0.05\cdot 0.8+0.30\cdot 0.2=0.10 \]</p>
                 <h4>b)</h4>
-                <p>\[ P(F\mid V)=\frac{P(V\cap F)}{P(V)}=\frac{0{,}05\cdot 0{,}8}{0{,}10}=\frac{0{,}04}{0{,}10}=0{,}40 \]</p>
+                <p>\[ P(F\mid V)=\frac{P(V\cap F)}{P(V)}=\frac{0.05\cdot 0.8}{0.10}=\frac{0.04}{0.10}=0.40 \]</p>
                 <div class="answer"><b>10 % av fiskene er smittet; 40 % av de smittede er hunner</b> — selv om 80 % av dammen er hunner.</div>
               </div>
             </details>
@@ -276,11 +276,11 @@
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
                 <p>\(S_1,S_2,S_3\) = skolene (disjunkte og dekker hele utfallsrommet), \(G\) = ståkarakter.</p>
-                <p>\(P(S_1)=0{,}5,\ P(S_2)=0{,}3,\ P(S_3)=0{,}2\) og \(P(G\mid S_1)=0{,}70,\ P(G\mid S_2)=0{,}60,\ P(G\mid S_3)=0{,}55\).</p>
+                <p>\(P(S_1)=0.5,\ P(S_2)=0.3,\ P(S_3)=0.2\) og \(P(G\mid S_1)=0.70,\ P(G\mid S_2)=0.60,\ P(G\mid S_3)=0.55\).</p>
                 <h4>b)</h4>
-                <p>\[ P(G)=0{,}5\cdot 0{,}70+0{,}3\cdot 0{,}60+0{,}2\cdot 0{,}55=0{,}35+0{,}18+0{,}11=0{,}64 \]</p>
+                <p>\[ P(G)=0.5\cdot 0.70+0.3\cdot 0.60+0.2\cdot 0.55=0.35+0.18+0.11=0.64 \]</p>
                 <h4>c)</h4>
-                <p>\[ P(S_1\mid G)=\frac{P(G\mid S_1)P(S_1)}{P(G)}=\frac{0{,}35}{0{,}64}\approx 0{,}547 \]</p>
+                <p>\[ P(S_1\mid G)=\frac{P(G\mid S_1)P(S_1)}{P(G)}=\frac{0.35}{0.64}\approx 0.547 \]</p>
                 <div class="answer"><b>64 % står; av dem kommer ca. 55 % fra Skole 1.</b></div>
               </div>
             </details>
@@ -293,14 +293,14 @@
               <span class="task__tags"><span class="tag">bayes</span><span class="tag">klassiker</span></span>
             </header>
             <div class="task__q">
-              <p>Andelen mennesker i et gitt samfunn som har en bestemt sykdom er 0,005. En test er tilgjengelig for å diagnostisere sykdommen. Hvis en person har sykdommen, er sannsynligheten for positivt utslag 0,99. Hvis en person ikke har sykdommen, er sannsynligheten for positivt utslag 0,01. Dersom en tilfeldig person tester positivt, hva er sannsynligheten for at personen faktisk har sykdommen?</p>
+              <p>Andelen mennesker i et gitt samfunn som har en bestemt sykdom er 0.005. En test er tilgjengelig for å diagnostisere sykdommen. Hvis en person har sykdommen, er sannsynligheten for positivt utslag 0.99. Hvis en person ikke har sykdommen, er sannsynligheten for positivt utslag 0.01. Dersom en tilfeldig person tester positivt, hva er sannsynligheten for at personen faktisk har sykdommen?</p>
             </div>
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>\(X\) = «har sykdommen», \(S\) = «testen er positiv». Gitt \(P(X)=0{,}005\), \(P(S\mid X)=0{,}99\), \(P(S\mid\bar X)=0{,}01\) og \(P(\bar X)=0{,}995\).</p>
-                <p>\[ P(X\mid S)=\frac{P(S\mid X)P(X)}{P(S\mid X)P(X)+P(S\mid\bar X)P(\bar X)}=\frac{0{,}99\cdot 0{,}005}{0{,}99\cdot 0{,}005+0{,}01\cdot 0{,}995}=\frac{0{,}00495}{0{,}01490} \]</p>
-                <div class="answer"><b>\(P(X\mid S)\approx 0{,}33\).</b> Bare en tredel av dem som tester positivt har faktisk sykdommen: de friske er 199 ganger så mange, så den lille feilraten på 1 % veier tyngre enn treffraten på 99 %.</div>
+                <p>\(X\) = «har sykdommen», \(S\) = «testen er positiv». Gitt \(P(X)=0.005\), \(P(S\mid X)=0.99\), \(P(S\mid\bar X)=0.01\) og \(P(\bar X)=0.995\).</p>
+                <p>\[ P(X\mid S)=\frac{P(S\mid X)P(X)}{P(S\mid X)P(X)+P(S\mid\bar X)P(\bar X)}=\frac{0.99\cdot 0.005}{0.99\cdot 0.005+0.01\cdot 0.995}=\frac{0.00495}{0.01490} \]</p>
+                <div class="answer"><b>\(P(X\mid S)\approx 0.33\).</b> Bare en tredel av dem som tester positivt har faktisk sykdommen: de friske er 199 ganger så mange, så den lille feilraten på 1 % veier tyngre enn treffraten på 99 %.</div>
               </div>
             </details>
           </article>
@@ -312,16 +312,16 @@
               <span class="task__tags"><span class="tag">bayes</span></span>
             </header>
             <div class="task__q">
-              <p>Et byggefirma har to salgsingeniører. Ingeniør nr. 1 jobber med prisanslag for 80 % av anbudskonkurransene firmaet deltar i, ingeniør nr. 2 for 20 %. Sannsynligheten for at ingeniør nr. 1 estimerer feil er 0,02, mens den for ingeniør nr. 2 er 0,04.</p>
+              <p>Et byggefirma har to salgsingeniører. Ingeniør nr. 1 jobber med prisanslag for 80 % av anbudskonkurransene firmaet deltar i, ingeniør nr. 2 for 20 %. Sannsynligheten for at ingeniør nr. 1 estimerer feil er 0.02, mens den for ingeniør nr. 2 er 0.04.</p>
               <p>Hva er sannsynligheten for at det er ingeniør nr. 1 som har gjort jobben i neste prisanslag med alvorlig feil?</p>
             </div>
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
                 <p>\(I_1,I_2\) = hvilken ingeniør, \(F\) = «feil i anslaget».</p>
-                <p>\[ P(F)=0{,}80\cdot 0{,}02+0{,}20\cdot 0{,}04=0{,}016+0{,}008=0{,}024 \]</p>
-                <p>\[ P(I_1\mid F)=\frac{0{,}016}{0{,}024}=\frac{2}{3} \]</p>
-                <div class="answer"><b>\(P(I_1\mid F)=2/3\approx 0{,}67\).</b> Ingeniør 1 er dobbelt så nøyaktig, men gjør fire ganger så mange anslag — og står derfor for flertallet av feilene.</div>
+                <p>\[ P(F)=0.80\cdot 0.02+0.20\cdot 0.04=0.016+0.008=0.024 \]</p>
+                <p>\[ P(I_1\mid F)=\frac{0.016}{0.024}=\frac{2}{3} \]</p>
+                <div class="answer"><b>\(P(I_1\mid F)=2/3\approx 0.67\).</b> Ingeniør 1 er dobbelt så nøyaktig, men gjør fire ganger så mange anslag — og står derfor for flertallet av feilene.</div>
               </div>
             </details>
           </article>
@@ -345,11 +345,11 @@
               <div class="sol__body">
                 <p>Uniform sannsynlighetsmodell — alle biler er like sannsynlige. Da er betinget sannsynlighet rett og slett å telle innenfor gruppen.</p>
                 <h4>a)</h4>
-                <p>\[ P(\overline{E\cup H}\mid P)=\frac{2\,889\,023-(788\,753+369\,696)}{2\,889\,023}=\frac{1\,730\,574}{2\,889\,023}\approx 0{,}599 \]</p>
+                <p>\[ P(\overline{E\cup H}\mid P)=\frac{2\,889\,023-(788\,753+369\,696)}{2\,889\,023}=\frac{1\,730\,574}{2\,889\,023}\approx 0.599 \]</p>
                 <h4>b)</h4>
                 <p>Antall el-biler totalt er \(36\,986+788\,753=825\,739\), og av dem er 36 986 varebiler:</p>
-                <p>\[ P(V\mid E)=\frac{36\,986}{825\,739}\approx 0{,}0448 \]</p>
-                <div class="answer"><b>a) ca. 60 % · b) ca. 4,5 %.</b></div>
+                <p>\[ P(V\mid E)=\frac{36\,986}{825\,739}\approx 0.0448 \]</p>
+                <div class="answer"><b>a) ca. 60 % · b) ca. 4.5 %.</b></div>
               </div>
             </details>
           </article>
@@ -382,15 +382,15 @@
                   </tbody>
                 </table></div>
                 <h4>a)</h4>
-                <p>\[ P(\bar B)=\frac{6}{10}=0{,}6 \]</p>
+                <p>\[ P(\bar B)=\frac{6}{10}=0.6 \]</p>
                 <h4>b)</h4>
                 <p>Uten tilbakelegging:</p>
-                <p>\[ P(\text{begge badekar})=\frac{4}{10}\cdot\frac{3}{9}=\frac{2}{15}\approx 0{,}13 \]</p>
+                <p>\[ P(\text{begge badekar})=\frac{4}{10}\cdot\frac{3}{9}=\frac{2}{15}\approx 0.13 \]</p>
                 <p>Samme svar hypergeometrisk med \(N=10\), \(M=4\), \(n=2\): \(\binom{4}{2}\binom{6}{0}\big/\binom{10}{2}=6/45=2/15\).</p>
                 <h4>c)</h4>
                 <p>Vi ser nå kun på de 6 rommene uten badekar: 2 røde, 3 svarte, 1 grønn. Antall måter å velge én av hver farge er \(2\cdot 3\cdot 1=6\), og antall måter å velge 3 rom av 6 er \(\binom{6}{3}=20\):</p>
-                <p>\[ p=\frac{2\cdot 3\cdot 1}{\binom{6}{3}}=\frac{6}{20}=\frac{3}{10}=0{,}3 \]</p>
-                <div class="answer"><b>a) 0,6 · b) 2/15 ≈ 0,13 · c) 0,3.</b></div>
+                <p>\[ p=\frac{2\cdot 3\cdot 1}{\binom{6}{3}}=\frac{6}{20}=\frac{3}{10}=0.3 \]</p>
+                <div class="answer"><b>a) 0.6 · b) 2/15 ≈ 0.13 · c) 0.3.</b></div>
               </div>
             </details>
           </article>
