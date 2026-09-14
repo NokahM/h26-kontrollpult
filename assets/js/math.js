@@ -1,9 +1,13 @@
 // MathJax 3 loader — shared config for the statistikk task pages.
 // Loaded from a CDN so the site keeps its no-build-step setup.
+//
+// NB: the delimiters must be written with DOUBLE backslashes. In a JavaScript
+// string literal '\(' collapses to '(' , which would make MathJax treat plain
+// parentheses as math delimiters and mangle every formula on the page.
 window.MathJax = {
   tex: {
-    inlineMath: [['\(', '\)']],
-    displayMath: [['\[', '\]']],
+    inlineMath: [['\\(', '\\)']],
+    displayMath: [['\\[', '\\]']],
     processEscapes: true
   },
   options: {
