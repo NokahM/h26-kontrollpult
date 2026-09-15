@@ -128,7 +128,8 @@ Hver side setter `<body class="theme-…">`, som velger emnefargen `--accent` i
 `assets/css/main.css`. Fargen brukes kun som tekst: kode, nummer, markering av
 gjeldende side.
 
-Temaet velges oppe til høyre i toppfeltet: Lys, Mørk eller System (standard).
+Temaet velges med sol- og måneknappene oppe til høyre i toppfeltet. Uten et
+valg følger siden systemets innstilling.
 Valget lagres i `localStorage` (`h26-theme`) og settes av et lite skript i
 `<head>`, så siden ikke blinker ved lasting. Det lyse temaet har lysegrå bunn
 (`#f4f5f7`), og emne- og statusfargene er mørkere enn i det mørke temaet slik at

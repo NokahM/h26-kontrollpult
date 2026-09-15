@@ -331,32 +331,40 @@
     });
   }
 
-  /* ---- tema: lys / mørk / som systemet ---------------------------------- */
+  /* ---- tema: lys / mørk ------------------------------------------------- */
 
-  // Valget settes allerede i <head> (det lille skriptet der) så siden ikke blinker
+  // Uten et lagret valg følger siden systemet. Valget settes allerede i <head>
+  // (det lille skriptet der) så siden ikke blinker ved lasting.
   var THEME_KEY = 'h26-theme';
+  var DARK_MQ = window.matchMedia('(prefers-color-scheme: dark)');
+  var ICONS = {
+    light: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/>' +
+      '<path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.35 5.35l1.55 1.55M17.1 17.1l1.55 1.55M5.35 18.65l1.55-1.55M17.1 6.9l1.55-1.55"/></svg>',
+    dark: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.2 14.7A7.5 7.5 0 0 1 9.3 4.8a7.5 7.5 0 1 0 9.9 9.9z"/></svg>'
+  };
+
   function buildThemeSwitch() {
     var bar = document.querySelector('.topbar');
     if (!bar) return;
     var group = h('div.theme-switch', { role: 'group', 'aria-label': 'Tema' });
-    [['light', 'Lys'], ['dark', 'Mørk'], ['', 'System']].forEach(function (opt) {
-      var btn = h('button', { type: 'button', 'data-theme-opt': opt[0], text: opt[1] });
+    [['light', 'Lyst tema'], ['dark', 'Mørkt tema']].forEach(function (opt) {
+      var btn = h('button', { type: 'button', 'data-theme-opt': opt[0], 'aria-label': opt[1], title: opt[1] });
+      btn.innerHTML = ICONS[opt[0]];
       btn.addEventListener('click', function () {
-        if (opt[0]) root.setAttribute('data-theme', opt[0]); else root.removeAttribute('data-theme');
-        try {
-          if (opt[0]) localStorage.setItem(THEME_KEY, opt[0]); else localStorage.removeItem(THEME_KEY);
-        } catch (e) { /* lagring blokkert: valget gjelder bare denne siden */ }
+        root.setAttribute('data-theme', opt[0]);
+        try { localStorage.setItem(THEME_KEY, opt[0]); } catch (e) { /* lagring blokkert: gjelder bare denne siden */ }
         sync();
       });
       group.appendChild(btn);
     });
     function sync() {
-      var cur = root.getAttribute('data-theme') || '';
+      var cur = root.getAttribute('data-theme') || (DARK_MQ.matches ? 'dark' : 'light');
       [].forEach.call(group.children, function (b) {
         b.setAttribute('aria-pressed', b.getAttribute('data-theme-opt') === cur ? 'true' : 'false');
       });
     }
     sync();
+    if (DARK_MQ.addEventListener) DARK_MQ.addEventListener('change', sync);
     bar.appendChild(group);
   }
 
