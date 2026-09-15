@@ -1129,3 +1129,97 @@ mjx-container[display="true"] { margin: .9rem 0 !important; }
 .venn__set { fill: none; stroke: var(--ink); stroke-width: 1.3; }
 .venn__shade { fill: color-mix(in srgb, var(--accent) 24%, transparent); }
 .venn text { font-family: var(--font-read); font-style: italic; font-size: 12px; fill: var(--ink); text-anchor: middle; }
+
+/* ---- festede regler ------------------------------------------------------ */
+
+.fp-hint { margin-top: -.35rem; padding: 0 1.25rem .6rem 1.5rem; font-size: .8125rem; color: var(--muted); }
+
+.rule[data-rule] {
+  position: relative;
+  margin: 0 -.75rem;
+  padding-left: .75rem;
+  padding-right: .75rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background-color var(--ease);
+}
+.rule[data-rule]:hover { background: color-mix(in srgb, var(--accent) 8%, transparent); }
+.rule[data-rule]:focus-visible { outline-offset: -2px; }
+.rule__pin {
+  position: absolute;
+  top: .9rem;
+  right: .75rem;
+  display: flex;
+  align-items: center;
+  gap: .2rem;
+  font-size: .75rem;
+  font-weight: 600;
+  color: var(--accent);
+  opacity: 0;
+  transition: opacity var(--ease);
+  pointer-events: none;
+}
+.rule:has(.rule__head) .rule__pin { right: calc(7.5rem + 1.75rem); }
+.rule__pin svg { width: .9rem; height: .9rem; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.rule[data-rule]:hover .rule__pin,
+.rule[data-rule]:focus-visible .rule__pin { opacity: 1; }
+
+.pin-card {
+  position: fixed;
+  z-index: 30;
+  width: min(27rem, 34vw);
+  max-height: min(70vh, 40rem);
+  display: flex;
+  flex-direction: column;
+  background: color-mix(in srgb, var(--bg) 74%, transparent);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid var(--line-2);
+  border-radius: calc(var(--radius) + 2px);
+  box-shadow: 0 12px 32px -14px rgba(10, 16, 24, .38);
+}
+.pin-card__head {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .3rem .35rem .3rem .85rem;
+  border-bottom: 1px solid var(--line);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+.pin-card.is-dragging .pin-card__head { cursor: grabbing; }
+.pin-card__head:focus-visible { outline-offset: -2px; }
+.pin-card__title {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-head);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pin-card__close {
+  width: 1.75rem; height: 1.75rem;
+  display: grid; place-items: center;
+  flex-shrink: 0;
+  border-radius: var(--radius);
+  color: var(--muted);
+}
+.pin-card__close:hover { background: var(--hover); color: var(--ink); }
+.pin-card__close svg { width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; }
+.pin-card__body.rule { margin: 0; padding: .15rem .95rem .85rem; border: 0; overflow-y: auto; cursor: auto; }
+.pin-card__body .rule__head { justify-content: center; margin-top: .5rem; }
+.pin-card mjx-container { font-size: 96%; }
+
+.pin-card.is-new { animation: pin-in 180ms ease-out; }
+.pin-card.is-flash { animation: pin-flash 700ms ease-out; }
+@keyframes pin-in { from { opacity: 0; transform: translateY(-6px) scale(.98); } }
+@keyframes pin-flash {
+  0%, 35% { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 35%, transparent), 0 12px 32px -14px rgba(10, 16, 24, .38); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pin-card.is-new, .pin-card.is-flash { animation: none; }
+}

@@ -125,6 +125,14 @@ eksempler. Panelet blokkerer ikke siden bak, så du kan jobbe med en oppgave
 mens det er åpent. Tastatur: `F` åpner og lukker, `Esc` lukker. Om panelet var
 åpent, huskes mellom sidene.
 
+Klikk på en regel i panelet for å **feste** den. Panelet lukkes, og regelen blir
+liggende i et flytende, halvgjennomsiktig kort oppe til høyre. Kortet kan dras
+etter overskriften, eller flyttes med piltastene når overskriften har fokus, og
+fjernes med ×. Du kan feste flere regler samtidig. Festede regler og posisjonene
+deres huskes per emne (`h26-formler-pins-<emne>`). Regelens id bygger på
+seksjonens id og regelens overskrift, så endrer du en overskrift i formelfila,
+forsvinner et kort som var festet med den gamle.
+
 Innholdet ligger i en egen fil per emne, for statistikk
 `subjects/statistikk/formler.html`. Hver `<section id="…" data-short="…">` blir
 en hopp-lenke, og hver regel er en `<div class="rule">` med overskrift, formel
