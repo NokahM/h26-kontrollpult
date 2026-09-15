@@ -10,6 +10,8 @@
 //
 // Tastatur: F åpner/lukker panelet, Esc lukker. En regel festes med Enter.
 // Et kort flyttes med piltastene når overskriften har fokus (Shift = større steg).
+// Størrelsen endres med håndtaket nede til høyre (dra, eller piltaster når det har
+// fokus; dobbeltklikk nullstiller). Innholdet skalerer med bredden på kortet.
 (function () {
   var OPEN_KEY = 'h26-formler-open';
   var SCROLL_KEY = 'h26-formler-scroll-';
@@ -38,7 +40,7 @@
     if (ready()) return window.MathJax.startup.promise;
     if (!document.getElementById('MathJax-script') && !document.querySelector('script[src*="assets/js/math.js"]')) {
       var s = document.createElement('script');
-      s.src = H.abs('assets/js/math.js?v=13');
+      s.src = H.abs('assets/js/math.js?v=14');
       document.head.appendChild(s);
     }
     return new Promise(function (resolve) {
@@ -188,12 +190,48 @@
 
     /* ---- festede kort --------------------------------------------------- */
 
-    var pins = [];    // { id, x, y, el }
+    var pins = [];    // { id, x, y, w, h, el }
     try { pins = JSON.parse(storeGet(PINS_KEY + subject.id) || '[]').filter(function (p) { return p && p.id; }); }
     catch (e) { pins = []; }
 
     function savePins() {
-      storeSet(PINS_KEY + subject.id, JSON.stringify(pins.map(function (p) { return { id: p.id, x: p.x, y: p.y }; })));
+      storeSet(PINS_KEY + subject.id, JSON.stringify(pins.map(function (p) {
+        return { id: p.id, x: p.x, y: p.y, w: p.w || null, h: p.h || null };
+      })));
+    }
+
+    var MIN_W = 240, MIN_H = 110;
+
+    // Bruk lagret størrelse, men aldri større enn vinduet
+    function applySize(p) {
+      var el = p.el;
+      var vw = document.documentElement.clientWidth, vh = document.documentElement.clientHeight;
+      if (p.w) {
+        p.w = Math.round(Math.min(Math.max(MIN_W, p.w), vw - 8));
+        el.style.width = p.w + 'px';
+      } else {
+        el.style.width = '';
+      }
+      if (p.h) {
+        p.h = Math.round(Math.min(Math.max(MIN_H, p.h), vh - 8));
+        el.style.height = p.h + 'px';
+        el.style.maxHeight = 'none';
+      } else {
+        el.style.height = '';
+        el.style.maxHeight = '';
+      }
+      fitFormulas(el);
+    }
+
+    // Formler som er bredere enn kortet skaleres ned (til minst 60 %) i stedet for å kuttes
+    function fitFormulas(el) {
+      [].forEach.call(el.querySelectorAll('mjx-container[display="true"]'), function (m) {
+        m.style.fontSize = '';
+        var avail = m.clientWidth, need = m.scrollWidth;
+        if (avail > 0 && need > avail + 1) {
+          m.style.fontSize = (Math.max(0.6, avail / need) * 96).toFixed(1) + '%';
+        }
+      });
     }
 
     function clamp(p) {
@@ -235,9 +273,14 @@
         H.h('span.pin-card__title', { text: title }),
         x
       ]);
-      var el = H.h('section.pin-card', { 'aria-label': 'Festet regel: ' + title }, [handle, content]);
+      var grip = H.h('span.pin-card__resize', {
+        tabindex: '0', role: 'separator', 'aria-label': 'Endre størrelse på ' + title,
+        title: 'Dra for å endre størrelse (dobbeltklikk nullstiller)'
+      });
+      var el = H.h('section.pin-card', { 'aria-label': 'Festet regel: ' + title }, [handle, content, grip]);
       document.body.appendChild(el);
       p.el = el;
+      applySize(p);
 
       if (p.x == null || p.y == null) {
         var d = defaultPosition(el);
@@ -284,6 +327,60 @@
         }
       });
       el.addEventListener('pointerdown', function () { bringToFront(p); });
+
+      // Endre størrelse fra hjørnet
+      var rs = null;
+      grip.addEventListener('pointerdown', function (e) {
+        if (e.button !== 0) return;
+        var r = el.getBoundingClientRect();
+        rs = { x: e.clientX, y: e.clientY, w: r.width, h: r.height, id: e.pointerId };
+        grip.setPointerCapture(e.pointerId);
+        el.classList.add('is-resizing');
+        bringToFront(p);
+        e.preventDefault();
+        e.stopPropagation();
+      });
+      grip.addEventListener('pointermove', function (e) {
+        if (!rs || e.pointerId !== rs.id) return;
+        var vw = document.documentElement.clientWidth, vh = document.documentElement.clientHeight;
+        p.w = Math.min(rs.w + e.clientX - rs.x, vw - p.x - 4);
+        p.h = Math.min(rs.h + e.clientY - rs.y, vh - p.y - 4);
+        applySize(p);
+      });
+      function endResize(e) {
+        if (!rs || e.pointerId !== rs.id) return;
+        rs = null;
+        el.classList.remove('is-resizing');
+        clamp(p);
+        savePins();
+      }
+      grip.addEventListener('pointerup', endResize);
+      grip.addEventListener('pointercancel', endResize);
+      grip.addEventListener('dblclick', function () {
+        p.w = null; p.h = null;
+        applySize(p); clamp(p); savePins();
+      });
+      grip.addEventListener('keydown', function (e) {
+        var step = e.shiftKey ? 40 : 10;
+        var r = el.getBoundingClientRect();
+        var d = { ArrowLeft: [-step, 0], ArrowRight: [step, 0], ArrowUp: [0, -step], ArrowDown: [0, step] }[e.key];
+        if (!d) return;
+        p.w = r.width + d[0];
+        p.h = r.height + d[1];
+        applySize(p); clamp(p); savePins();
+        e.preventDefault();
+      });
+
+      // Tilpass formlene hver gang kortet endrer bredde (også når MathJax-skrift lastes)
+      if (window.ResizeObserver) {
+        var lastW = 0;
+        new ResizeObserver(function () {
+          var w = content.clientWidth;
+          if (Math.abs(w - lastW) < 1) return;
+          lastW = w;
+          fitFormulas(el);
+        }).observe(content);
+      }
       return true;
     }
 
@@ -335,7 +432,7 @@
     });
 
     window.addEventListener('resize', function () {
-      pins.forEach(function (p) { if (p.el) clamp(p); });
+      pins.forEach(function (p) { if (p.el) { applySize(p); clamp(p); } });
     });
 
     if (pins.length) {

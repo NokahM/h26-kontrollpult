@@ -1260,3 +1260,43 @@ mjx-container[display="true"] { margin: .9rem 0 !important; }
 .symbols mjx-container { font-size: 92% !important; }
 .pin-card .symbols { grid-template-columns: minmax(0, 1fr); }
 .pin-card:has(.rule--symbols) .pin-card__body.rule { background: none; border: 0; }
+
+/* ---- justerbare kort ------------------------------------------------------ */
+
+/* Kortet er en container: innholdet skalerer med bredden (cqi = 1 % av bredden) */
+.pin-card { container-type: inline-size; min-width: 240px; min-height: 110px; }
+.pin-card__body.rule { flex: 1; min-height: 0; font-size: clamp(13px, calc(9.5px + 1.35cqi), 21px); }
+.pin-card .rule__text,
+.pin-card .rule__ex { font-size: .9375em; }
+.pin-card .rule__note { font-size: .875em; }
+.pin-card .rule__ex > span:first-child { font-size: .8125em; }
+.pin-card table.dtable { font-size: .875em; }
+.pin-card .venn { width: 7.5em; }
+.pin-card .symbols {
+  grid-template-columns: repeat(auto-fill, minmax(14em, 1fr));
+  column-gap: 1.25em;
+}
+.pin-card .symbols > div { grid-template-columns: minmax(4.4em, auto) minmax(0, 1fr); }
+.pin-card .symbols dd { font-size: .8125em; }
+.pin-card .symbols__group { font-size: .75em; }
+.pin-card .symbols mjx-container { font-size: 92% !important; }
+
+.pin-card__resize {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 18px;
+  height: 18px;
+  cursor: nwse-resize;
+  touch-action: none;
+  border-radius: 0 0 calc(var(--radius) + 2px) 0;
+  background:
+    linear-gradient(135deg, transparent 0 55%, var(--line-2) 55% 62%, transparent 62% 72%, var(--line-2) 72% 79%, transparent 79%);
+}
+.pin-card__resize:hover,
+.pin-card.is-resizing .pin-card__resize {
+  background:
+    linear-gradient(135deg, transparent 0 55%, var(--accent) 55% 62%, transparent 62% 72%, var(--accent) 72% 79%, transparent 79%);
+}
+.pin-card__resize:focus-visible { outline-offset: -2px; }
+.pin-card.is-resizing { user-select: none; }

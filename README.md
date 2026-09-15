@@ -128,8 +128,12 @@ mens det er åpent. Tastatur: `F` åpner og lukker, `Esc` lukker. Om panelet var
 Klikk på en regel i panelet for å **feste** den. Panelet lukkes, og regelen blir
 liggende i et flytende, halvgjennomsiktig kort oppe til høyre. Kortet kan dras
 etter overskriften, eller flyttes med piltastene når overskriften har fokus, og
-fjernes med ×. Du kan feste flere regler samtidig. Festede regler og posisjonene
-deres huskes per emne (`h26-formler-pins-<emne>`). Regelens id bygger på
+fjernes med ×. Størrelsen endres med håndtaket nede til høyre (dra, eller
+piltaster når håndtaket har fokus; dobbeltklikk nullstiller). Skrift og
+Venn-diagram skalerer med bredden, symbolboksen får flere kolonner når kortet
+blir bredt, og formler som ikke får plass skaleres ned. Du kan feste flere
+regler samtidig. Festede regler med posisjon og
+størrelse huskes per emne (`h26-formler-pins-<emne>`). Regelens id bygger på
 seksjonens id og regelens overskrift, så endrer du en overskrift i formelfila,
 forsvinner et kort som var festet med den gamle.
 
