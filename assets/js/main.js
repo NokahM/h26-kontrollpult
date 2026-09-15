@@ -8,6 +8,7 @@
 // track: 'page' gir siden én status (kapitler, uker); track: 'tasks' gir hver
 // .task på siden egen status, og tasks: N er antallet oppgaver på siden.
 // Statusene selv håndteres av status.js.
+// formulas: '…/formler.html' gir emnet et formelpanel (formler.js).
 (function () {
   var root = document.documentElement;
   var script = document.currentScript;
@@ -54,6 +55,7 @@
     },
     {
       id: 'statistikk', code: 'PB2030', course: 'PB2030', kind: 'konte',
+      formulas: 'subjects/statistikk/formler.html',
       name: 'Statistikk',
       desc: 'Eksamensoppgaver fra 13 tidligere sett, sortert på tema, med løsningsforslag.',
       scope: '88 oppgaver fra 13 sett',

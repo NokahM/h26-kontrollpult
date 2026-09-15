@@ -987,3 +987,145 @@ mjx-container[display="true"] { margin: .9rem 0 !important; }
 .theme-switch button:hover { color: var(--ink); }
 .theme-switch button[aria-pressed="true"] { background: var(--hover); color: var(--ink); }
 .theme-switch button:focus-visible { outline-offset: -2px; }
+
+/* ==========================================================================
+   Formelpanel (formler.js)
+   ========================================================================== */
+
+.formula-btn {
+  margin-left: auto;
+  width: calc(1.75rem + 6px);
+  height: calc(1.75rem + 6px);
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line-2);
+  border-radius: calc(var(--radius) + 2px);
+  color: var(--muted);
+}
+.formula-btn svg,
+.fp-close svg {
+  width: 1.05rem;
+  height: 1.05rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.formula-btn:hover { color: var(--ink); background: var(--hover); }
+.formula-btn[aria-expanded="true"] { color: var(--accent); background: var(--hover); border-color: var(--accent); }
+.formula-btn + .theme-switch { margin-left: .5rem; }
+
+.formula-panel {
+  position: fixed;
+  top: var(--topbar-h);
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  width: min(40rem, 48vw);
+  display: flex;
+  flex-direction: column;
+  /* Litt gjennomsiktig: siden bak skimtes, men formlene holder seg lesbare */
+  background: color-mix(in srgb, var(--bg) 74%, transparent);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-left: 1px solid var(--line-2);
+  box-shadow: -18px 0 40px -18px rgba(10, 16, 24, .28);
+  transform: translateX(100%);
+  visibility: hidden;
+  transition: transform 220ms cubic-bezier(.2,.7,.3,1), visibility 0s linear 220ms;
+}
+.formula-panel.is-open {
+  transform: none;
+  visibility: visible;
+  transition: transform 220ms cubic-bezier(.2,.7,.3,1), visibility 0s;
+}
+.formula-panel.no-anim { transition: none; }
+
+.fp-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .9rem 1.25rem .6rem 1.5rem;
+}
+.fp-title { display: flex; align-items: baseline; gap: .6rem; min-width: 0; }
+.fp-title h2 { font-family: var(--font-head); font-size: 1.375rem; font-weight: 700; }
+.fp-title span { font-size: .875rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fp-close {
+  width: 2rem; height: 2rem;
+  display: grid; place-items: center;
+  border-radius: var(--radius);
+  color: var(--muted);
+}
+.fp-close:hover { background: var(--hover); color: var(--ink); }
+
+.fp-toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3rem;
+  padding: 0 1.25rem .8rem 1.5rem;
+  border-bottom: 1px solid var(--line-2);
+}
+.fp-toc a {
+  padding: .1rem .5rem;
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius);
+  font-size: .8125rem;
+  color: var(--muted);
+  background: color-mix(in srgb, var(--bg) 60%, transparent);
+}
+.fp-toc a:hover { color: var(--accent); border-color: var(--accent); }
+
+.fp-body {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: .5rem 1.5rem 4rem;
+  outline: none;
+}
+.fp-status { padding-top: 1rem; color: var(--muted); }
+
+.fp-content section { padding-top: 1.5rem; }
+.fp-content section + section { margin-top: 1rem; border-top: 1px solid var(--line-2); }
+.fp-content h2 {
+  font-family: var(--font-head);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.rule { padding: .9rem 0 1rem; border-bottom: 1px solid var(--line); }
+.rule:last-child { border-bottom: 0; }
+.rule__head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.rule h3 { font-family: var(--font-head); font-size: 1.0625rem; font-weight: 600; line-height: 1.25; }
+.rule__f { margin: .35rem 0; }
+.rule__f mjx-container[display="true"] { margin: .4rem 0 !important; }
+.fp-body mjx-container { font-size: 96%; }
+.rule__text,
+.rule__ex,
+.rule__note { margin-top: .4rem; font-family: var(--font-read); font-size: .9375rem; line-height: 1.6; }
+.rule__text { color: var(--ink); }
+.rule__ex { color: var(--muted); }
+.rule__ex > span:first-child {
+  margin-right: .35rem;
+  font-family: var(--font-ui);
+  font-size: .8125rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+.rule__note {
+  padding: .45rem .7rem;
+  border-left: 3px solid var(--accent);
+  background: color-mix(in srgb, var(--side) 70%, transparent);
+  font-size: .875rem;
+}
+.rule .dtable-wrap { margin-top: .6rem; }
+.rule table.dtable { font-size: .875rem; }
+.rule a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+.venn { width: 7.5rem; height: auto; flex-shrink: 0; overflow: visible; }
+.venn__frame { fill: none; stroke: var(--line-2); stroke-width: 1.2; }
+.venn__set { fill: none; stroke: var(--ink); stroke-width: 1.3; }
+.venn__shade { fill: color-mix(in srgb, var(--accent) 24%, transparent); }
+.venn text { font-family: var(--font-read); font-style: italic; font-size: 12px; fill: var(--ink); text-anchor: middle; }

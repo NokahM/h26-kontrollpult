@@ -38,6 +38,8 @@ site/
   assets/css/main.css           delt stilark + tema-tokens per emne
   assets/js/main.js             emneliste (SUBJECTS) → sidemeny, tittelfelt, innholdsfortegnelse, forside
   assets/js/status.js           status på oppgaver og kapitler (lagres i nettleseren)
+  assets/js/formler.js          formelpanelet (Σ-knappen i toppfeltet)
+  subjects/statistikk/formler.html  innholdet i formelpanelet for statistikk
   assets/js/math.js             laster MathJax fra CDN (kun statistikk-sidene)
   assets/resources/<emne>/      ressursfiler (IKKE i git, se .gitignore)
 ```
@@ -114,6 +116,23 @@ knyttet til adressen, så localhost og GitHub Pages har hver sin. Bruk «Last ne
 statusfil» og «Hent statusfil» nederst på forsiden for sikkerhetskopi eller
 flytting. Emnesiden henter oppgavesidene for å liste oppgaver uten status, og
 det virker bare over http (localhost eller GitHub Pages), ikke fra `file://`.
+
+## Formelpanel
+
+Emner med `formulas` i `SUBJECTS` (`main.js`) får en Σ-knapp i toppfeltet. Den
+åpner et halvgjennomsiktig panel fra høyre med formler, korte forklaringer og
+eksempler. Panelet blokkerer ikke siden bak, så du kan jobbe med en oppgave
+mens det er åpent. Tastatur: `F` åpner og lukker, `Esc` lukker. Om panelet var
+åpent, huskes mellom sidene.
+
+Innholdet ligger i en egen fil per emne, for statistikk
+`subjects/statistikk/formler.html`. Hver `<section id="…" data-short="…">` blir
+en hopp-lenke, og hver regel er en `<div class="rule">` med overskrift, formel
+(`\[ … \]`), forklaring og eventuelt eksempel. Flere formler i samme regel
+stables med `egin{gathered} … \ … \end{gathered}` så de får plass i
+panelet. For å gi fysikk 2 et formelpanel senere: lag
+`subjects/fysikk2/formler.html` og sett `formulas` på emnet. Filen hentes med
+`fetch`, så panelet virker via localhost og GitHub Pages, ikke fra `file://`.
 
 ## Design
 

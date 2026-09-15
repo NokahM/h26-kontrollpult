@@ -1,0 +1,382 @@
+<!--
+  Formelpanel for PB2030 Statistikk.
+  Lastes inn i panelet som åpnes med Σ-knappen i toppfeltet (assets/js/formler.js),
+  og er ikke en egen side. Innholdet i .fp-content er alt som vises.
+
+  Oppbygging:  <section id="f-…" data-short="…"><h2>…</h2>  → hopp-lenke øverst i panelet (kort navn)
+               <div class="rule"> med h3, formel (\[ … \]), forklaring og eksempel
+  Notasjon følger formelarket: N(μ, σ) med standardavvik, G(z) = P(Z ≤ z),
+  z_α er verdien med P(Z > z_α) = α.
+  Lenker til andre sider skrives med data-site-href (relativt til site/).
+-->
+<div class="fp-content">
+
+  <section id="f-grunnregler" data-short="Grunnregler">
+    <h2>Grunnregler</h2>
+
+    <div class="rule">
+      <h3>Hendelser og uniform modell</h3>
+      <p class="rule__text">Utfallsrommet \(\Omega\) er alle mulige utfall. En hendelse \(A\) er en samling av utfall, og \(0\le P(A)\le 1\). Er alle utfall like sannsynlige:</p>
+      <p class="rule__f">\[ P(A)=\frac{\text{antall gunstige utfall}}{\text{antall mulige utfall}} \]</p>
+      <p class="rule__ex"><span>Eksempel</span> Én terning, \(A\) = «partall» \(=\{2,4,6\}\): \(P(A)=3/6=0.5\).</p>
+    </div>
+
+    <div class="rule">
+      <div class="rule__head">
+        <h3>Komplement</h3>
+        <svg class="venn" viewBox="0 0 120 70" role="img" aria-label="Alt utenfor A er skravert">
+          <path class="venn__shade" fill-rule="evenodd" d="M4 4h112v62H4z M38 35a22 22 0 1 0 44 0a22 22 0 1 0 -44 0z"/>
+          <rect class="venn__frame" x="4" y="4" width="112" height="62"/>
+          <circle class="venn__set" cx="60" cy="35" r="22"/>
+          <text x="60" y="39">A</text>
+        </svg>
+      </div>
+      <p class="rule__f">\[ P(\bar A)=1-P(A) \]</p>
+      <p class="rule__text">\(\bar A\) (også skrevet \(A^c\)) er «\(A\) inntreffer ikke». Ofte lettere å regne ut det motsatte og trekke fra 1.</p>
+      <p class="rule__ex"><span>Eksempel</span> \(P(\text{ikke sekser})=1-\tfrac16=\tfrac56\).</p>
+    </div>
+
+    <div class="rule">
+      <div class="rule__head">
+        <h3>Snitt</h3>
+        <svg class="venn" viewBox="0 0 120 70" role="img" aria-label="Området der A og B overlapper er skravert">
+          <defs><clipPath id="venn-clip-a1"><circle cx="48" cy="35" r="22"/></clipPath></defs>
+          <rect class="venn__frame" x="4" y="4" width="112" height="62"/>
+          <circle class="venn__shade" cx="72" cy="35" r="22" clip-path="url(#venn-clip-a1)"/>
+          <circle class="venn__set" cx="48" cy="35" r="22"/>
+          <circle class="venn__set" cx="72" cy="35" r="22"/>
+          <text x="38" y="39">A</text><text x="82" y="39">B</text>
+        </svg>
+      </div>
+      <p class="rule__f">\[ A\cap B \;=\; \text{«både } A \text{ og } B\text{»} \]</p>
+      <p class="rule__text">Snittet er utfallene som ligger i begge hendelsene. Sannsynligheten finner du med multiplikasjonsregelen (under betinget sannsynlighet).</p>
+      <p class="rule__ex"><span>Eksempel</span> Kortstokk, \(A\) = hjerter, \(B\) = bildekort (knekt, dame, konge): \(A\cap B\) er de 3 bildekortene i hjerter, \(P(A\cap B)=3/52\approx 0.058\).</p>
+    </div>
+
+    <div class="rule">
+      <div class="rule__head">
+        <h3>Union (addisjonssetningen)</h3>
+        <svg class="venn" viewBox="0 0 120 70" role="img" aria-label="Hele A og hele B er skravert">
+          <rect class="venn__frame" x="4" y="4" width="112" height="62"/>
+          <circle class="venn__shade" cx="48" cy="35" r="22"/>
+          <circle class="venn__shade" cx="72" cy="35" r="22"/>
+          <circle class="venn__set" cx="48" cy="35" r="22"/>
+          <circle class="venn__set" cx="72" cy="35" r="22"/>
+          <text x="38" y="39">A</text><text x="82" y="39">B</text>
+        </svg>
+      </div>
+      <p class="rule__f">\[ P(A\cup B)=P(A)+P(B)-P(A\cap B) \]</p>
+      <p class="rule__text">«\(A\) eller \(B\) eller begge». Snittet trekkes fra fordi det ellers telles to ganger.</p>
+      <p class="rule__ex"><span>Eksempel</span> Hjerter eller bildekort: \(\tfrac{13}{52}+\tfrac{12}{52}-\tfrac{3}{52}=\tfrac{22}{52}\approx 0.423\).</p>
+    </div>
+
+    <div class="rule">
+      <div class="rule__head">
+        <h3>Disjunkte hendelser</h3>
+        <svg class="venn" viewBox="0 0 120 70" role="img" aria-label="A og B overlapper ikke">
+          <rect class="venn__frame" x="4" y="4" width="112" height="62"/>
+          <circle class="venn__set" cx="34" cy="35" r="20"/>
+          <circle class="venn__set" cx="86" cy="35" r="20"/>
+          <text x="34" y="39">A</text><text x="86" y="39">B</text>
+        </svg>
+      </div>
+      <p class="rule__f">\[ A\cap B=\varnothing \quad\Rightarrow\quad P(A\cup B)=P(A)+P(B) \]</p>
+      <p class="rule__text">Disjunkte (gjensidig utelukkende) hendelser kan ikke inntreffe samtidig, så snittet er tomt.</p>
+      <p class="rule__ex"><span>Eksempel</span> Én terning, \(A=\{1,2\}\), \(B=\{5,6\}\): \(P(A\cup B)=\tfrac26+\tfrac26=\tfrac46\).</p>
+    </div>
+  </section>
+
+  <section id="f-betinget" data-short="Betinget og uavhengig">
+    <h2>Betinget sannsynlighet og uavhengighet</h2>
+
+    <div class="rule">
+      <h3>Betinget sannsynlighet</h3>
+      <p class="rule__f">\[ P(A\mid B)=\frac{P(A\cap B)}{P(B)} \]</p>
+      <p class="rule__text">Sannsynligheten for \(A\) når vi <em>vet</em> at \(B\) har inntruffet. Utfallsrommet krymper til \(B\).</p>
+      <p class="rule__ex"><span>Eksempel</span> \(P(\text{bildekort}\mid\text{hjerter})=\dfrac{3/52}{13/52}=\tfrac{3}{13}\approx 0.231\).</p>
+    </div>
+
+    <div class="rule">
+      <h3>Generell multiplikasjonsregel</h3>
+      <p class="rule__f">\[ P(A\cap B)=P(A)\,P(B\mid A)=P(B)\,P(A\mid B) \]</p>
+      <p class="rule__text">Snittet er «først \(A\), deretter \(B\) gitt \(A\)». I et hendelsestre: multipliser langs greinen.</p>
+      <p class="rule__ex"><span>Eksempel</span> To kort uten tilbakelegging, begge ess: \(\tfrac{4}{52}\cdot\tfrac{3}{51}=\tfrac{1}{221}\approx 0.0045\).</p>
+    </div>
+
+    <div class="rule">
+      <h3>Uavhengige hendelser</h3>
+      <p class="rule__f">\[ P(A\mid B)=P(A) \quad\Longleftrightarrow\quad P(A\cap B)=P(A)\,P(B) \]</p>
+      <p class="rule__text">At \(B\) har skjedd, endrer ikke sannsynligheten for \(A\). For flere uavhengige hendelser: \(P(A_1\cap\dots\cap A_n)=P(A_1)\cdots P(A_n)\).</p>
+      <p class="rule__ex"><span>Eksempel</span> To terningkast, begge seksere: \(\tfrac16\cdot\tfrac16=\tfrac{1}{36}\approx 0.028\).</p>
+      <p class="rule__note">Disjunkt er <strong>ikke</strong> det samme som uavhengig. Disjunkte hendelser med positiv sannsynlighet er alltid avhengige: skjer den ene, kan den andre ikke skje.</p>
+    </div>
+
+    <div class="rule">
+      <h3>«Minst én»</h3>
+      <p class="rule__f">\[ P(\text{minst én})=1-P(\text{ingen}) \]</p>
+      <p class="rule__text">Med \(n\) uavhengige forsøk som hver lykkes med sannsynlighet \(p\): \(1-(1-p)^n\).</p>
+      <p class="rule__ex"><span>Eksempel</span> Minst én sekser på 4 kast: \(1-(5/6)^4\approx 0.518\).</p>
+    </div>
+  </section>
+
+  <section id="f-bayes" data-short="Bayes">
+    <h2>Total sannsynlighet og Bayes</h2>
+
+    <div class="rule">
+      <h3>Total sannsynlighet</h3>
+      <p class="rule__f">\[ P(B)=\sum_{k=1}^{n}P(B\mid A_k)\,P(A_k) \]</p>
+      <p class="rule__text">Når nøyaktig én av \(A_1,\dots,A_n\) inntreffer (en oppdeling). I hendelsestreet: summen av alle greinene som ender i \(B\). Med to grener: \(P(B)=P(B\mid A)P(A)+P(B\mid\bar A)P(\bar A)\).</p>
+    </div>
+
+    <div class="rule">
+      <h3>Bayes' regel</h3>
+      <p class="rule__f">\[ P(A_i\mid B)=\frac{P(B\mid A_i)\,P(A_i)}{\sum_{k}P(B\mid A_k)\,P(A_k)} \]</p>
+      <p class="rule__text">«Snur» betingelsen: fra \(P(B\mid A)\), som oppgaven gir, til \(P(A\mid B)\), som den spør om. Én grein delt på summen av greinene.</p>
+      <p class="rule__ex"><span>Eksempel</span> 2 % er syke. Testen er positiv hos 95 % av de syke og 10 % av de friske.
+        \(P(+)=0.95\cdot0.02+0.10\cdot0.98=0.117\), så \(P(\text{syk}\mid +)=\dfrac{0.019}{0.117}\approx 0.162\).</p>
+      <p class="rule__note">Ikke bland \(P(+\mid\text{syk})\) (høy, testen er god) med \(P(\text{syk}\mid +)\) (kan være lav når sykdommen er sjelden).</p>
+    </div>
+  </section>
+
+  <section id="f-kombinatorikk" data-short="Kombinatorikk">
+    <h2>Kombinatorikk</h2>
+
+    <div class="rule">
+      <h3>Antall måter å velge \(k\) av \(n\)</h3>
+      <div class="dtable-wrap"><table class="dtable">
+        <thead><tr><th></th><th>Uten tilbakelegging</th><th>Med tilbakelegging</th></tr></thead>
+        <tbody>
+          <tr><td>Ordnet</td><td>\(P_{n,k}=\dfrac{n!}{(n-k)!}\)</td><td>\(n^k\)</td></tr>
+          <tr><td>Uordnet</td><td>\(\dbinom{n}{k}=\dfrac{n!}{k!\,(n-k)!}\)</td><td>\(\dbinom{n+k-1}{k}\)</td></tr>
+        </tbody>
+      </table></div>
+      <p class="rule__text">«Ordnet» betyr at rekkefølgen teller. \(n\) ulike ting kan stilles i \(n!\) rekkefølger. Multiplikasjonsprinsippet: \(m\) valg etterfulgt av \(n\) valg gir \(m\cdot n\) muligheter.</p>
+      <p class="rule__ex"><span>Eksempel</span> Komité på 3 av 10: \(\binom{10}{3}=120\). Leder, nestleder og sekretær: \(P_{10,3}=720\). Firesifret PIN: \(10^4\).</p>
+    </div>
+
+    <div class="rule">
+      <h3>Trekking fra en pott (hypergeometrisk)</h3>
+      <p class="rule__f">\[ P(X=x)=\frac{\binom{M}{x}\binom{N-M}{n-x}}{\binom{N}{n}} \]</p>
+      <p class="rule__text">\(N\) enheter, hvorav \(M\) «spesielle». Trekk \(n\) uten tilbakelegging. \(X\) = antall spesielle i utvalget.</p>
+      <p class="rule__ex"><span>Eksempel</span> 20 enheter, 5 defekte, trekk 4. Nøyaktig én defekt: \(\dfrac{\binom51\binom{15}{3}}{\binom{20}{4}}=\dfrac{5\cdot455}{4845}\approx 0.470\).</p>
+    </div>
+  </section>
+
+  <section id="f-variabler" data-short="E og Var">
+    <h2>Forventning og varians</h2>
+
+    <div class="rule">
+      <h3>Diskret stokastisk variabel</h3>
+      <p class="rule__f">\[ \begin{gathered} \mu=E(X)=\sum_i x_i\,P(X=x_i) \\ \sigma^2=\operatorname{Var}(X)=\sum_i x_i^2\,P(X=x_i)-\mu^2 \end{gathered} \]</p>
+      <p class="rule__text">Standardavviket er \(\sigma=\sqrt{\operatorname{Var}(X)}\). Sjekk at sannsynlighetene summerer til 1.</p>
+      <p class="rule__ex"><span>Eksempel</span> \(P(X=4,5,6,7)=0.2,\,0.4,\,0.3,\,0.1\): \(\mu=5.3\), \(E(X^2)=28.9\), \(\sigma^2=28.9-5.3^2=0.81\).</p>
+    </div>
+
+    <div class="rule">
+      <h3>Kontinuerlig stokastisk variabel</h3>
+      <p class="rule__f">\[ \begin{gathered} P(a&lt;X\le b)=\int_a^b f(x)\,dx \\ \int_{-\infty}^{\infty}f(x)\,dx=1 \end{gathered} \]</p>
+      <p class="rule__f">\[ \begin{gathered} \mu=\int_{-\infty}^{\infty}x\,f(x)\,dx \\ \sigma^2=\int_{-\infty}^{\infty}x^2 f(x)\,dx-\mu^2 \end{gathered} \]</p>
+      <p class="rule__text">\(f\) er tettheten. For kontinuerlige variable er \(P(X=x)=0\), så \(&lt;\) og \(\le\) gir samme svar. Kumulativ fordeling: \(F(x)=P(X\le x)\).</p>
+    </div>
+
+    <div class="rule">
+      <h3>Regneregler</h3>
+      <p class="rule__f">\[ \begin{gathered} E(aX+b)=a\,E(X)+b \\ \operatorname{Var}(aX+b)=a^2\operatorname{Var}(X) \end{gathered} \]</p>
+      <p class="rule__f">\[ \begin{gathered} E\Bigl(\sum a_iX_i\Bigr)=\sum a_i\,E(X_i) \\ \operatorname{Var}\Bigl(\sum a_iX_i\Bigr)=\sum a_i^2\operatorname{Var}(X_i)\ \ \text{(uavhengige)} \end{gathered} \]</p>
+      <p class="rule__text">Konstanten \(b\) påvirker ikke variansen, og \(a\) kvadreres. Også ved differanse <em>legges</em> variansene sammen: \(\operatorname{Var}(X-Y)=\operatorname{Var}(X)+\operatorname{Var}(Y)\).</p>
+      <p class="rule__ex"><span>Eksempel</span> Med \(\mu=5.3\), \(\sigma^2=0.81\): \(E(2X+3)=13.6\), \(\operatorname{Var}(2X+3)=4\cdot0.81=3.24\).</p>
+    </div>
+
+    <div class="rule">
+      <h3>Gjennomsnitt og sum av \(n\) uavhengige</h3>
+      <p class="rule__f">\[ \begin{gathered} E(\bar X)=\mu,\quad \operatorname{Var}(\bar X)=\frac{\sigma^2}{n} \\ E\Bigl(\sum X_i\Bigr)=n\mu,\quad \operatorname{Var}\Bigl(\sum X_i\Bigr)=n\sigma^2 \end{gathered} \]</p>
+      <p class="rule__text">Standardavviket til gjennomsnittet er \(\sigma/\sqrt n\), til summen \(\sqrt n\,\sigma\).</p>
+    </div>
+  </section>
+
+  <section id="f-diskrete" data-short="Diskrete">
+    <h2>Diskrete fordelinger</h2>
+
+    <div class="rule">
+      <h3>Binomisk \(\mathrm{Bin}(n,p)\)</h3>
+      <p class="rule__f">\[ \begin{gathered} P(X=x)=\binom{n}{x}p^x(1-p)^{n-x} \\ \mu=np,\qquad \sigma^2=np(1-p) \end{gathered} \]</p>
+      <p class="rule__text">Antall suksesser i \(n\) uavhengige forsøk med samme suksessannsynlighet \(p\) i hvert.</p>
+      <p class="rule__ex"><span>Eksempel</span> \(n=10\), \(p=0.2\): \(P(X=2)=\binom{10}{2}0.2^2\,0.8^8\approx 0.302\).</p>
+    </div>
+
+    <div class="rule">
+      <h3>Hypergeometrisk \(\mathrm{Hyp}(N,M,n)\)</h3>
+      <p class="rule__f">\[ \begin{gathered} \mu=n\frac{M}{N} \\ \sigma^2=n\frac{M}{N}\Bigl(1-\frac{M}{N}\Bigr)\frac{N-n}{N-1} \end{gathered} \]</p>
+      <p class="rule__text">Som binomisk, men <em>uten</em> tilbakelegging fra en endelig pott (punktsannsynligheten står under kombinatorikk).</p>
+    </div>
+
+    <div class="rule">
+      <h3>Poisson \(\mathrm{Poisson}(\lambda t)\)</h3>
+      <p class="rule__f">\[ \begin{gathered} P(X=x)=\frac{(\lambda t)^x}{x!}e^{-\lambda t} \\ \mu=\sigma^2=\lambda t \end{gathered} \]</p>
+      <p class="rule__text">Antall hendelser som skjer tilfeldig i tid eller rom med rate \(\lambda\). Skaler raten til riktig intervall først.</p>
+      <p class="rule__ex"><span>Eksempel</span> 0.35 per sekund i 20 sekunder: \(\lambda t=7\), \(P(X=5)=\dfrac{7^5}{5!}e^{-7}\approx 0.128\).</p>
+    </div>
+
+    <div class="rule">
+      <h3>«Minst», «færre enn», «mellom»</h3>
+      <p class="rule__f">\[ \begin{gathered} P(X\ge 3)=1-P(X\le 2) \\ P(X&lt;4)=P(X\le 3) \\ P(2\le X\le 4)=P(X\le 4)-P(X\le 1) \end{gathered} \]</p>
+      <p class="rule__text">For heltallsvariable avgjør det om grensen er med. Skriv ulikheten om til \(P(X\le\cdot)\) før du slår opp.</p>
+    </div>
+  </section>
+
+  <section id="f-kontinuerlige" data-short="Kontinuerlige">
+    <h2>Kontinuerlige fordelinger</h2>
+
+    <div class="rule">
+      <h3>Eksponentialfordeling</h3>
+      <p class="rule__f">\[ \begin{gathered} f(x)=\lambda e^{-\lambda x},\qquad P(X\le x)=1-e^{-\lambda x} \\ \mu=\frac1\lambda,\qquad \sigma^2=\frac{1}{\lambda^2} \end{gathered} \]</p>
+      <p class="rule__text">Levetid og ventetid til neste hendelse. Hukommelsesløs: \(P(X&gt;s+t\mid X&gt;s)=P(X&gt;t)\).</p>
+      <p class="rule__ex"><span>Eksempel</span> Forventet levetid 2000 timer gir \(\lambda=1/2000\). \(P(X&gt;1000)=e^{-0.5}\approx 0.607\).</p>
+    </div>
+
+    <div class="rule">
+      <h3>Normalfordeling \(N(\mu,\sigma)\)</h3>
+      <p class="rule__f">\[ \begin{gathered} Z=\frac{X-\mu}{\sigma}\sim N(0,1) \\ P(X\le x)=G\!\left(\frac{x-\mu}{\sigma}\right) \end{gathered} \]</p>
+      <p class="rule__f">\[ \begin{gathered} P(X&gt;x)=1-G(z),\qquad G(-z)=1-G(z) \\ P(a&lt;X&lt;b)=G(z_b)-G(z_a) \end{gathered} \]</p>
+      <p class="rule__text">Standardiser og slå opp i Tabell A. Baklengs (fra sannsynlighet til grense): finn \(z\) i Tabell B og regn \(x=\mu+z\sigma\).</p>
+      <p class="rule__ex"><span>Eksempel</span> \(X\sim N(50,\,0.8)\): \(P(X&gt;51.2)=1-G(1.5)=1-0.9332=0.0668\).</p>
+    </div>
+
+    <div class="rule">
+      <h3>Summer av normalfordelte</h3>
+      <p class="rule__f">\[ aX+bY\sim N\!\left(a\mu_X+b\mu_Y,\ \sqrt{a^2\sigma_X^2+b^2\sigma_Y^2}\right) \]</p>
+      <p class="rule__text">Gjelder eksakt når \(X\) og \(Y\) er uavhengige og normalfordelte. Sum og gjennomsnitt av normalfordelte er normalfordelt for alle \(n\).</p>
+    </div>
+  </section>
+
+  <section id="f-sgt" data-short="SGT">
+    <h2>Sentralgrenseteoremet og tilnærminger</h2>
+
+    <div class="rule">
+      <h3>Sentralgrenseteoremet</h3>
+      <p class="rule__f">\[ \begin{gathered} \bar X\approx N\!\left(\mu,\ \frac{\sigma}{\sqrt n}\right) \\ \sum_{i=1}^n X_i\approx N\!\left(n\mu,\ \sqrt n\,\sigma\right) \qquad (n\ge 30) \end{gathered} \]</p>
+      <p class="rule__text">For uavhengige, likt fordelte \(X_i\), uansett hvilken fordeling de har. Er \(X_i\) normalfordelte, gjelder det eksakt.</p>
+      <p class="rule__note">Vanligste feil: \(\sqrt n\) og \(n\) byttes. Gjennomsnitt deler \(\sigma\) på \(\sqrt n\), sum ganger \(\sigma\) med \(\sqrt n\).</p>
+    </div>
+
+    <div class="rule">
+      <h3>Heltallskorreksjon</h3>
+      <p class="rule__f">\[ \begin{gathered} P(X\le x)\approx G\!\left(\frac{x+\tfrac12-\mu}{\sigma}\right) \\ P(X\ge x)\approx 1-G\!\left(\frac{x-\tfrac12-\mu}{\sigma}\right) \end{gathered} \]</p>
+      <p class="rule__text">Brukes når en heltallsvariabel (binomisk, poisson, hypergeometrisk) tilnærmes med normalfordelingen.</p>
+    </div>
+
+    <div class="rule">
+      <h3>Når kan du tilnærme?</h3>
+      <div class="dtable-wrap"><table class="dtable">
+        <thead><tr><th>Fra</th><th>Til</th><th>Når</th></tr></thead>
+        <tbody>
+          <tr><td>\(\mathrm{Hyp}(N,M,n)\)</td><td>\(\mathrm{Bin}(n,\,M/N)\)</td><td>\(N\ge 10n\)</td></tr>
+          <tr><td>\(\mathrm{Bin}(n,p)\)</td><td>\(\mathrm{Poisson}(np)\)</td><td>\(n&gt;10,\ p&lt;0.1\)</td></tr>
+          <tr><td>\(\mathrm{Bin}(n,p)\)</td><td>\(N\!\left(np,\sqrt{np(1-p)}\right)\)</td><td>\(np(1-p)\ge 5\)</td></tr>
+          <tr><td>\(\mathrm{Poisson}(\lambda t)\)</td><td>\(N\!\left(\lambda t,\sqrt{\lambda t}\right)\)</td><td>\(\lambda t\ge 10\)</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <section id="f-estimering" data-short="Konfidensintervall">
+    <h2>Estimering og konfidensintervall</h2>
+
+    <div class="rule">
+      <h3>Estimatorer</h3>
+      <p class="rule__f">\[ \begin{gathered} \bar X=\frac1n\sum X_i,\qquad \hat p=\frac{X}{n} \\ S^2=\frac{1}{n-1}\sum (X_i-\bar X)^2 \end{gathered} \]</p>
+      <p class="rule__text">Utvalgsvariansen deler på \(n-1\), ikke \(n\). Alle intervallene har formen <em>estimat ± kvantil · standardfeil</em>.</p>
+    </div>
+
+    <div class="rule">
+      <h3>Konfidensintervall for \(\mu\)</h3>
+      <p class="rule__f">\[ \begin{gathered} \bar X\pm z_{\alpha/2}\,\frac{\sigma}{\sqrt n}\quad(\sigma\text{ kjent}) \\ \bar X\pm t_{\alpha/2}\,\frac{S}{\sqrt n}\quad(\sigma\text{ ukjent},\ \nu=n-1) \end{gathered} \]</p>
+      <p class="rule__text">Krever normalfordelte \(X_i\) eller \(n\ge 30\). For 95 % er \(z_{0.025}=1.960\), for 99 % er \(z_{0.005}=2.576\).</p>
+      <p class="rule__ex"><span>Eksempel</span> \(\bar x=52.0\), \(\sigma=4\), \(n=16\), 95 %: \(52.0\pm1.960\cdot\tfrac{4}{4}\), altså \([50.04,\ 53.96]\).</p>
+    </div>
+
+    <div class="rule">
+      <h3>Konfidensintervall for \(p\)</h3>
+      <p class="rule__f">\[ \hat p\pm z_{\alpha/2}\sqrt{\frac{\hat p(1-\hat p)}{n}} \qquad \text{krever } n\hat p(1-\hat p)\ge 5 \]</p>
+    </div>
+
+    <div class="rule">
+      <h3>Hvor stort utvalg?</h3>
+      <p class="rule__f">\[ L=2\,z_{\alpha/2}\frac{\sigma}{\sqrt n}\quad\Rightarrow\quad n\ge\left(\frac{2\,z_{\alpha/2}\,\sigma}{L}\right)^2 \]</p>
+      <p class="rule__text">\(L\) er lengden på intervallet. Rund alltid <strong>opp</strong>.</p>
+      <p class="rule__ex"><span>Eksempel</span> \(\sigma=10\), \(L\le 10\), 95 %: \(n\ge(2\cdot1.96\cdot10/10)^2=15.37\), altså 16.</p>
+    </div>
+  </section>
+
+  <section id="f-hypotese" data-short="Hypotesetest">
+    <h2>Hypotesetesting</h2>
+
+    <div class="rule">
+      <h3>Testobservator for \(\mu\) og \(p\)</h3>
+      <p class="rule__f">\[ \begin{gathered} Z=\frac{\bar X-\mu_0}{\sigma/\sqrt n} \\ T=\frac{\bar X-\mu_0}{S/\sqrt n}\ \ (\nu=n-1) \\ Z=\frac{\hat p-p_0}{\sqrt{p_0(1-p_0)/n}} \end{gathered} \]</p>
+      <p class="rule__text">Regnes ut som om \(H_0\) er sann. Framgang: hypoteser, testobservator, forkastningsområde, regn ut, konkluder i ord.</p>
+    </div>
+
+    <div class="rule">
+      <h3>Forkastningsområde</h3>
+      <div class="dtable-wrap"><table class="dtable">
+        <thead><tr><th>\(H_1\)</th><th>Forkast \(H_0\) hvis</th><th>Kritisk verdi for \(\bar X\)</th></tr></thead>
+        <tbody>
+          <tr><td>\(\mu&gt;\mu_0\)</td><td>\(Z&gt;z_\alpha\)</td><td>\(k=\mu_0+z_\alpha\,\sigma/\sqrt n\)</td></tr>
+          <tr><td>\(\mu&lt;\mu_0\)</td><td>\(Z&lt;-z_\alpha\)</td><td>\(k=\mu_0-z_\alpha\,\sigma/\sqrt n\)</td></tr>
+          <tr><td>\(\mu\neq\mu_0\)</td><td>\(|Z|&gt;z_{\alpha/2}\)</td><td>\(k=\mu_0\pm z_{\alpha/2}\,\sigma/\sqrt n\)</td></tr>
+        </tbody>
+      </table></div>
+      <p class="rule__text">Med \(T\): bytt \(z\) med \(t\) (\(\nu=n-1\)) og \(\sigma\) med \(S\).</p>
+    </div>
+
+    <div class="rule">
+      <h3>p-verdi</h3>
+      <p class="rule__f">\[ p=P(\text{minst like ekstremt resultat}\mid H_0) \qquad \text{forkast } H_0 \text{ hvis } p&lt;\alpha \]</p>
+      <p class="rule__text">Ensidig høyre: \(p=1-G(z_{\text{obs}})\). Tosidig: gang den ensidige p-verdien med 2.</p>
+    </div>
+
+    <div class="rule">
+      <h3>Feiltyper og teststyrke</h3>
+      <p class="rule__f">\[ \begin{gathered} P(\text{type I})=\alpha,\qquad P(\text{type II})=\beta \\ \gamma(\mu_1)=1-\beta=P(\text{forkaste }H_0\mid\mu=\mu_1) \end{gathered} \]</p>
+      <p class="rule__text">Type I: forkaste en sann \(H_0\). Type II: beholde en gal \(H_0\). Teststyrke (høyresidig): finn \(k\) under \(H_0\), og regn så med \(\mu_1\):</p>
+      <p class="rule__f">\[ \gamma(\mu_1)=P(\bar X&gt;k\mid\mu_1)=1-G\!\left(\frac{k-\mu_1}{\sigma/\sqrt n}\right) \]</p>
+    </div>
+  </section>
+
+  <section id="f-regresjon" data-short="Regresjon">
+    <h2>Lineær regresjon</h2>
+
+    <div class="rule">
+      <h3>Nøkkelstørrelser</h3>
+      <p class="rule__f">\[ S_X^2=\frac{\sum(x_i-\bar x)^2}{n-1},\quad S_Y^2=\frac{\sum(y_i-\bar y)^2}{n-1},\quad S_{XY}=\frac{\sum(x_i-\bar x)(y_i-\bar y)}{n-1} \]</p>
+    </div>
+
+    <div class="rule">
+      <h3>Linjen og korrelasjonen</h3>
+      <p class="rule__f">\[ \begin{gathered} \hat\beta=\frac{S_{XY}}{S_X^2},\qquad \hat\alpha=\bar y-\hat\beta\,\bar x \\ \hat y=\hat\alpha+\hat\beta x,\qquad R=\frac{S_{XY}}{S_X\,S_Y} \end{gathered} \]</p>
+      <p class="rule__text">\(\hat\beta\) er endringen i \(y\) når \(x\) øker med 1. \(-1\le R\le 1\); nær \(\pm1\) betyr sterk lineær sammenheng.</p>
+    </div>
+
+    <div class="rule">
+      <h3>Konfidensintervall for \(\beta\)</h3>
+      <p class="rule__f">\[ \begin{gathered} \hat\beta\pm t_{\alpha/2}\cdot\frac{\sqrt{S_X^2S_Y^2-S_{XY}^2}}{S_X^2\sqrt{n-2}} \\ \nu=n-2 \end{gathered} \]</p>
+      <p class="rule__text">Inneholder intervallet ikke 0, er det en signifikant lineær sammenheng.</p>
+    </div>
+  </section>
+
+  <section id="f-kvantiler" data-short="Kvantiler">
+    <h2>Kvantiler</h2>
+
+    <div class="rule">
+      <h3>Standard normalfordeling (Tabell B)</h3>
+      <div class="dtable-wrap"><table class="dtable">
+        <thead><tr><th>\(\alpha\)</th><th>0.10</th><th>0.05</th><th>0.025</th><th>0.01</th><th>0.005</th><th>0.001</th></tr></thead>
+        <tbody><tr><td>\(z_\alpha\)</td><td>1.282</td><td>1.645</td><td>1.960</td><td>2.326</td><td>2.576</td><td>3.090</td></tr></tbody>
+      </table></div>
+      <p class="rule__text">\(P(Z&gt;z_\alpha)=\alpha\). Ensidig test bruker \(z_\alpha\), tosidig test og symmetrisk intervall bruker \(z_{\alpha/2}\).
+        Hele t-tabellen og flere \(G(z)\)-verdier står i <a data-site-href="subjects/statistikk/oppgaver/10-formelsamling.html">Formelsamling og tabeller</a>.</p>
+    </div>
+  </section>
+
+</div>
