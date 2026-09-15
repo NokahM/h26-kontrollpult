@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Uke 33 · HTTP, port 80/443 og REST — TSD3060 · H26</title>
   <meta name="description" content="Hvorfor webtjenere ikke kan binde port 80 direkte, demonisering, og REST som CRUD over HTTP — med hallotjener.c som gjennomgående eksempel.">
+  <meta name="color-scheme" content="light dark">
   <link rel="stylesheet" href="../../../assets/css/main.css">
 </head>
 <body class="theme-tsd3060">
@@ -13,33 +14,34 @@
 
     <aside class="sidebar">
       <div class="sidebar__head">
-        <span class="sidebar__brand">H26 · <strong>KONTROLLPULT</strong></span>
+        <span class="sidebar__brand"><strong>H26</strong> kontrollpult</span>
       </div>
       <nav class="sidebar__nav">
-        <div class="sidebar__group-label">Emner</div>
-        <a class="navlink" href="../../../index.html">
-          <span class="navlink__dot" data-status="active" style="color:#5eead4"></span>
+        <a class="navlink" data-subject="h26" href="../../../index.html">
+          <span class="navlink__dot" data-status="active"></span>
           <span class="navlink__label"><span class="navlink__code">H26</span><span class="navlink__name">Oversikt</span></span>
         </a>
-        <a class="navlink" href="../../mos/index.html">
-          <span class="navlink__dot" data-status="active" style="color:#57f27c"></span>
+
+        <div class="sidebar__group-label">Emner</div>
+        <a class="navlink" data-subject="mos" href="../../mos/index.html">
+          <span class="navlink__dot" data-status="active"></span>
           <span class="navlink__label"><span class="navlink__code">MoS</span><span class="navlink__name">Maskinvare og sikkerhet</span></span>
         </a>
-        <a class="navlink" data-active="true" href="../index.html">
-          <span class="navlink__dot" data-status="active" style="color:#35c7f0"></span>
+        <a class="navlink" data-subject="tsd3060" data-active="true" href="../index.html">
+          <span class="navlink__dot" data-status="active"></span>
           <span class="navlink__label"><span class="navlink__code">TSD3060</span><span class="navlink__name">Sikre webtjenester</span></span>
         </a>
         <div class="sidebar__group-label">Konte</div>
-        <a class="navlink" href="../../statistikk/index.html">
-          <span class="navlink__dot" data-status="active" style="color:#d98b2b"></span>
+        <a class="navlink" data-subject="statistikk" href="../../statistikk/index.html">
+          <span class="navlink__dot" data-status="active"></span>
           <span class="navlink__label"><span class="navlink__code">STAT</span><span class="navlink__name">Statistikk</span></span>
         </a>
-        <a class="navlink" href="../../fysikk2/index.html">
-          <span class="navlink__dot" data-status="pending" style="color:#a78bfa"></span>
+        <a class="navlink" data-subject="fysikk2" href="../../fysikk2/index.html">
+          <span class="navlink__dot" data-status="pending"></span>
           <span class="navlink__label"><span class="navlink__code">FYS2-EL</span><span class="navlink__name">Elektrisitetslære</span></span>
         </a>
       </nav>
-      <div class="sidebar__foot">H26 · sist oppdatert 2026-09-02</div>
+      <div class="sidebar__foot">Oppdatert 2. september 2026</div>
     </aside>
 
     <div class="main">
@@ -47,13 +49,13 @@
         <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
         </button>
-        <a class="topbar__back" href="../index.html">← TSD3060</a>
-        <div class="topbar__crumb"><span>·</span> Uke 33</div>
+        <a class="topbar__back" href="../index.html">TSD3060</a>
+        <div class="topbar__crumb">Uke 33</div>
       </header>
 
       <main class="content">
         <header class="page-header">
-          <div class="page-header__eyebrow"><span class="page-header__trace"></span>TSD3060 · UKE 33</div>
+          <div class="page-header__eyebrow">TSD3060 uke 33</div>
           <h1>HTTP, port 80/443 og REST</h1>
           <p class="page-header__desc">Hvorfor en vanlig bruker ikke bare kan binde port 80, hvordan en tjener gjøres terminaluavhengig, og hvordan REST bruker HTTP-verb som CRUD-operasjoner — alt bygget rundt én liten HTTP-tjener i C.</p>
           <span class="page-header__status" data-status="active"><i></i>pensum + notater</span>
@@ -217,7 +219,7 @@ execvp(argv[0], argv);  // erstatter denne prosessen med det angitte programmet<
 
         <nav class="chapter-nav">
           <span></span>
-          <a data-dir="next" href="34-sqlite-injeksjon-autentisering.html"><small>neste</small>Uke 34 · SQLite, injeksjon og autentisering →</a>
+          <a data-dir="next" href="34-sqlite-injeksjon-autentisering.html"><small>neste</small>Uke 34: SQLite, injeksjon og autentisering</a>
         </nav>
       </main>
     </div>
