@@ -159,13 +159,19 @@
         rec.label = info.label; rec.title = info.title; persist();
       }
 
-      var row = H.h('div.task__status', {}, [
-        H.h('span.task__status-label', { text: 'Status' }),
-        picker(H, taskKey, info, 'Status for ' + info.label)
-      ]);
-      var head = task.querySelector('.task__head');
-      if (head) head.insertAdjacentElement('afterend', row);
-      else task.insertBefore(row, task.firstChild);
+      // Velgeren står til høyre i samme rad som «Løsningsforslag». Den legges
+      // utenfor <summary> (ellers ville et klikk også slå ut løsningen) og
+      // plasseres over raden med CSS.
+      var foot = H.h('div.task__foot');
+      var sol = task.querySelector(':scope > .sol');
+      if (sol) {
+        sol.insertAdjacentElement('beforebegin', foot);
+        foot.appendChild(sol);
+      } else {
+        task.appendChild(foot);
+        foot.classList.add('task__foot--solo');
+      }
+      foot.appendChild(picker(H, taskKey, info, 'Status for ' + info.label));
 
       var syncTask = function () { task.setAttribute('data-state', stateOf(taskKey)); };
       syncTask();

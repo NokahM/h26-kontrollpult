@@ -776,16 +776,16 @@ mjx-container[display="true"] { margin: .9rem 0 !important; }
 
 /* Oppgaveboks */
 .task[data-state]:not([data-state="ikke-gjort"]) { box-shadow: inset 4px 0 0 var(--st-c); }
-.task__status {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: .4rem .75rem;
-  padding: .5rem 1.1rem;
-  border-bottom: 1px solid var(--line);
+.task__foot { position: relative; margin-top: 1rem; }
+.task__foot > .sol { margin-top: 0; }
+.task__foot > .sol > summary { min-height: 3rem; }
+.task__foot > .status-picker {
+  position: absolute;
+  top: .5rem;
+  right: 1.1rem;
 }
-.task__status-label { font-size: .8125rem; font-weight: 600; color: var(--faint); }
+.task__foot--solo { display: flex; justify-content: flex-end; padding: .5rem 1.1rem; border-top: 1px solid var(--line); }
+.task__foot--solo > .status-picker { position: static; }
 
 /* Kapittelside */
 .page-status {
