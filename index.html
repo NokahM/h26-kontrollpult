@@ -8,61 +8,10 @@
   <meta name="color-scheme" content="light dark">
   <link rel="stylesheet" href="assets/css/main.css">
 </head>
-<body class="theme-landing">
-  <div class="scrim" data-sidebar-toggle></div>
+<body class="theme-landing" data-updated="2026-09-14">
   <div class="app-shell">
 
-    <aside class="sidebar">
-      <div class="sidebar__head">
-        <span class="sidebar__brand"><strong>H26</strong> kontrollpult</span>
-      </div>
-      <nav class="sidebar__nav">
-        <a class="navlink" data-subject="h26" data-active="true" href="index.html">
-          <span class="navlink__dot" data-status="active"></span>
-          <span class="navlink__label">
-            <span class="navlink__code">H26</span>
-            <span class="navlink__name">Oversikt</span>
-          </span>
-        </a>
-
-        <div class="sidebar__group-label">Emner</div>
-
-        <a class="navlink" data-subject="mos" href="subjects/mos/index.html">
-          <span class="navlink__dot" data-status="active"></span>
-          <span class="navlink__label">
-            <span class="navlink__code">MoS</span>
-            <span class="navlink__name">Maskinvare og sikkerhet</span>
-          </span>
-        </a>
-
-        <a class="navlink" data-subject="tsd3060" href="subjects/tsd3060/index.html">
-          <span class="navlink__dot" data-status="active"></span>
-          <span class="navlink__label">
-            <span class="navlink__code">TSD3060</span>
-            <span class="navlink__name">Sikre webtjenester</span>
-          </span>
-        </a>
-
-        <div class="sidebar__group-label">Konte</div>
-
-        <a class="navlink" data-subject="statistikk" href="subjects/statistikk/index.html">
-          <span class="navlink__dot" data-status="active"></span>
-          <span class="navlink__label">
-            <span class="navlink__code">STAT</span>
-            <span class="navlink__name">Statistikk</span>
-          </span>
-        </a>
-
-        <a class="navlink" data-subject="fysikk2" href="subjects/fysikk2/index.html">
-          <span class="navlink__dot" data-status="pending"></span>
-          <span class="navlink__label">
-            <span class="navlink__code">FYS2-EL</span>
-            <span class="navlink__name">Elektrisitetslære</span>
-          </span>
-        </a>
-      </nav>
-      <div class="sidebar__foot">Oppdatert 14. september 2026</div>
-    </aside>
+    <aside class="sidebar"></aside>
 
     <div class="main">
       <header class="topbar">
@@ -75,44 +24,10 @@
       <main class="content">
         <section class="hero">
           <h1>Høstsemesteret 2026</h1>
-          <p>Kapitler, laboppgaver og eksamensøving for fire emner. To går som vanlig undervisning, to tas som kontinuasjonseksamen.</p>
+          <p>Kapitler, laboppgaver og eksamensøving for fire emner. MoS og TSD3060 går som vanlig undervisning, statistikk og fysikk 2 tas som kontinuasjonseksamen.</p>
         </section>
 
-        <ul class="rack">
-          <li>
-            <a class="module" data-subject="mos" data-status="active" href="subjects/mos/index.html">
-              <span class="module__code">MoS</span>
-              <h2 class="module__name"><span>Maskinvare og sikkerhet</span></h2>
-              <p class="module__desc">Bootloadere, SWD og UART, Bluetooth Low Energy, MQTT, effektanalyse og spenningsglitching.</p>
-              <p class="module__status"><b>6</b> kapitler med lab</p>
-            </a>
-          </li>
-          <li>
-            <a class="module" data-subject="tsd3060" data-status="active" href="subjects/tsd3060/index.html">
-              <span class="module__code">TSD3060</span>
-              <h2 class="module__name"><span>Utvikling av sikre webtjenester</span></h2>
-              <p class="module__desc">HTTP-tjenere i C, SQL-injeksjon og autentisering, chroot og konteinere, pluss mønstre fra åtte tidligere eksamener.</p>
-              <p class="module__status"><b>3</b> kapitler, uke 33–35</p>
-            </a>
-          </li>
-          <li>
-            <a class="module" data-subject="statistikk" data-status="active" href="subjects/statistikk/index.html">
-              <span class="module__code">STAT</span>
-              <h2 class="module__name"><span>Statistikk</span></h2>
-              <p class="module__desc">Eksamensoppgaver fra 13 tidligere sett, sortert på tema, med løsningsforslag du slår ut når du er klar.</p>
-              <p class="module__status"><b>88</b> oppgaver, kontefag</p>
-            </a>
-          </li>
-          <li>
-            <a class="module" data-subject="fysikk2" data-status="pending" href="subjects/fysikk2/index.html">
-              <span class="module__code">FYS2-EL</span>
-              <h2 class="module__name"><span>Fysikk 2, elektrisitetslære</span></h2>
-              <p class="module__desc">Tomt foreløpig. Pensum, øvinger og tidligere eksamenssett legges inn når de er klare.</p>
-              <p class="module__status"><b>0</b> ressurser, kontefag</p>
-            </a>
-          </li>
-        </ul>
-
+        <div class="overview" data-overview></div>
       </main>
     </div>
   </div>

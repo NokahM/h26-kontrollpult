@@ -36,12 +36,18 @@ site/
   subjects/<emne>/guides/       temasider (MoS, TSD3060)
   subjects/statistikk/oppgaver/ eksamensoppgaver etter tema, med løsningsforslag
   assets/css/main.css           delt stilark + tema-tokens per emne
-  assets/js/main.js             sidepanel: skjul/vis, lagres i localStorage
+  assets/js/main.js             emneliste (SUBJECTS) → sidemeny, tittelfelt, innholdsfortegnelse, forside
   assets/js/math.js             laster MathJax fra CDN (kun statistikk-sidene)
   assets/resources/<emne>/      ressursfiler (IKKE i git, se .gitignore)
 ```
 
 ## Legge til ressurser
+
+**Ny side i et emne**: legg den inn i riktig gruppe i `SUBJECTS` øverst i
+`assets/js/main.js`. Sidemenyen, forsideoversikten og «Blad x av y» i
+tittelfeltet bygges fra den listen. Innholdsfortegnelsen i høyrekolonnen lages
+automatisk fra `.section__label`, `.prose h2` og `.task` på siden. Sett
+`data-updated="ÅÅÅÅ-MM-DD"` på `<body>` for datoen i tittelfeltet.
 
 **MoS**: filene i `assets/resources/mos/` er kopiert fra `../MoS/` i
 prosjektroten. Legg nye filer i mappen og en tilhørende rad i
@@ -83,16 +89,18 @@ Pages-side. Lenkene på MoS-siden fungerer lokalt og i et privat repo, men
 filene følger ikke med i en offentlig publisering med mindre du bevisst
 velger noe annet (privat repo, eller fjerne filene fra `.gitignore`).
 
-## Tema per emne
+## Design
 
-Designet er en ringperm med skilleark: sidene er papir på grå kartong, og
-hvert emne har en egen fanefarge. Hver side setter `<body class="theme-…">`,
-og lenker i sidepanelet og arkene på forsiden har `data-subject="…"`. Begge
-deler velger et par CSS-variabler i `assets/css/main.css`: `--tab` (fargen på
-fanen) og `--accent` (emnefargen brukt som tekst, altså lenker, nummer og
-markører). Fanene er det eneste stedet emnefargen brukes som flate.
+Laget for PC-skjerm i 16:10. Rotskriften skalerer med skjermbredden (16 px ved
+1440 piksler, rundt 18 px ved 1920), så hele layouten vokser jevnt med skjermen.
 
-Mørk modus følger systeminnstillingen (`prefers-color-scheme`) og bruker de
-samme variablene.
+Oppsettet har tre kolonner: sidemeny med sidene i gjeldende emne, en lesekolonne
+på omtrent 44rem, og en høyrekolonne med tittelfelt og «På denne siden».
+Tittelfeltet (emne, del, omfang, blad, oppdatert) er lånt fra tekniske tegninger.
 
-Skrift: Schibsted Grotesk til grensesnitt og titler, Literata til lesetekst.
+Hver side setter `<body class="theme-…">`, som velger emnefargen `--accent` i
+`assets/css/main.css`. Fargen brukes kun som tekst: kode, nummer, markering av
+gjeldende side. Mørk modus følger systeminnstillingen.
+
+Skrift: Barlow og Barlow Semi Condensed til grensesnitt og titler, Literata til
+lesetekst. Formlene rendres av MathJax.
