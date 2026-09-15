@@ -34,32 +34,39 @@ html { font-size: clamp(15px, calc(.5vw + 8.8px), 20px); }
   --font-read: 'Literata', Georgia, serif;
   --font-code: ui-monospace, 'Cascadia Mono', Consolas, monospace;
 
-  --bg: #ffffff;
-  --side: #f3f5f7;
+  --bg: #f4f5f7;
+  --side: #e9ecf0;
   --ink: #16202c;
-  --muted: #56616e;
-  --faint: #86909b;
-  --line: #e3e7eb;
-  --line-2: #c7ced6;
-  --hover: #e9edf1;
-  --code-bg: #f3f5f7;
+  --muted: #505b68;
+  --faint: #5f6975;
+  --line: #dde1e6;
+  --line-2: #bfc6ce;
+  --hover: #dfe3e8;
+  --code-bg: #e8ebef;
 
   --c-h26: #16202c;
-  --c-mos: #1b7646;
-  --c-tsd3060: #1f5eab;
-  --c-statistikk: #a85600;
-  --c-fysikk2: #6743bd;
+  --c-mos: #1a6e42;
+  --c-tsd3060: #1d58a0;
+  --c-statistikk: #9a4f00;
+  --c-fysikk2: #6140b3;
 
   --accent: var(--c-h26);
+
+  --st-forstatt: #1a7f52;
+  --st-repeter: #a87b00;
+  --st-uklart: #bf3a28;
+
+  color-scheme: light;
 }
 
+/* Mørkt tema: følger systemet, med mindre temavelgeren i toppfeltet overstyrer */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg: #15191e;
     --side: #1b2026;
     --ink: #e3e7ec;
     --muted: #a0a9b3;
-    --faint: #75808b;
+    --faint: #8a949f;
     --line: #283038;
     --line-2: #3a444e;
     --hover: #232a31;
@@ -70,7 +77,36 @@ html { font-size: clamp(15px, calc(.5vw + 8.8px), 20px); }
     --c-tsd3060: #72aaf0;
     --c-statistikk: #eea14b;
     --c-fysikk2: #aa8ff2;
+
+    --st-forstatt: #4cc38a;
+    --st-repeter: #e8b930;
+    --st-uklart: #f0715f;
+
+    color-scheme: dark;
   }
+}
+:root[data-theme="dark"] {
+  --bg: #15191e;
+  --side: #1b2026;
+  --ink: #e3e7ec;
+  --muted: #a0a9b3;
+  --faint: #8a949f;
+  --line: #283038;
+  --line-2: #3a444e;
+  --hover: #232a31;
+  --code-bg: #1e242a;
+
+  --c-h26: #e3e7ec;
+  --c-mos: #62c98f;
+  --c-tsd3060: #72aaf0;
+  --c-statistikk: #eea14b;
+  --c-fysikk2: #aa8ff2;
+
+  --st-forstatt: #4cc38a;
+  --st-repeter: #e8b930;
+  --st-uklart: #f0715f;
+
+  color-scheme: dark;
 }
 
 body.theme-mos, [data-subject="mos"]               { --accent: var(--c-mos); }
@@ -708,18 +744,6 @@ mjx-container[display="true"] { margin: .9rem 0 !important; }
    Status på oppgaver og kapitler (status.js)
    ========================================================================== */
 
-:root {
-  --st-forstatt: #1f8a5b;
-  --st-repeter: #d19a00;
-  --st-uklart: #c63d2b;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --st-forstatt: #4cc38a;
-    --st-repeter: #e8b930;
-    --st-uklart: #f0715f;
-  }
-}
 [data-state="forstatt"] { --st-c: var(--st-forstatt); }
 [data-state="repeter"]  { --st-c: var(--st-repeter); }
 [data-state="uklart"]   { --st-c: var(--st-uklart); }
@@ -932,3 +956,23 @@ mjx-container[display="true"] { margin: .9rem 0 !important; }
   border-radius: var(--radius);
   color: var(--ink);
 }
+
+/* ---- temavelger (toppfeltet) --------------------------------------------- */
+
+.theme-switch {
+  margin-left: auto;
+  display: inline-flex;
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.theme-switch button {
+  padding: .15rem .6rem;
+  font-size: .8125rem;
+  color: var(--muted);
+  border-left: 1px solid var(--line-2);
+}
+.theme-switch button:first-child { border-left: 0; }
+.theme-switch button:hover { background: var(--hover); color: var(--ink); }
+.theme-switch button[aria-pressed="true"] { background: var(--hover); color: var(--ink); font-weight: 600; }
+.theme-switch button:focus-visible { outline-offset: -3px; }

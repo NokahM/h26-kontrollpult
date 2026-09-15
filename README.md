@@ -126,7 +126,13 @@ Tittelfeltet (emne, del, omfang, blad, oppdatert) er lånt fra tekniske tegninge
 
 Hver side setter `<body class="theme-…">`, som velger emnefargen `--accent` i
 `assets/css/main.css`. Fargen brukes kun som tekst: kode, nummer, markering av
-gjeldende side. Mørk modus følger systeminnstillingen.
+gjeldende side.
+
+Temaet velges oppe til høyre i toppfeltet: Lys, Mørk eller System (standard).
+Valget lagres i `localStorage` (`h26-theme`) og settes av et lite skript i
+`<head>`, så siden ikke blinker ved lasting. Det lyse temaet har lysegrå bunn
+(`#f4f5f7`), og emne- og statusfargene er mørkere enn i det mørke temaet slik at
+teksten holder minst 4,5:1 i kontrast.
 
 Skrift: Barlow og Barlow Semi Condensed til grensesnitt og titler, Literata til
 lesetekst. Formlene rendres av MathJax.

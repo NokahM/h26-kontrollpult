@@ -331,6 +331,35 @@
     });
   }
 
+  /* ---- tema: lys / mørk / som systemet ---------------------------------- */
+
+  // Valget settes allerede i <head> (det lille skriptet der) så siden ikke blinker
+  var THEME_KEY = 'h26-theme';
+  function buildThemeSwitch() {
+    var bar = document.querySelector('.topbar');
+    if (!bar) return;
+    var group = h('div.theme-switch', { role: 'group', 'aria-label': 'Tema' });
+    [['light', 'Lys'], ['dark', 'Mørk'], ['', 'System']].forEach(function (opt) {
+      var btn = h('button', { type: 'button', 'data-theme-opt': opt[0], text: opt[1] });
+      btn.addEventListener('click', function () {
+        if (opt[0]) root.setAttribute('data-theme', opt[0]); else root.removeAttribute('data-theme');
+        try {
+          if (opt[0]) localStorage.setItem(THEME_KEY, opt[0]); else localStorage.removeItem(THEME_KEY);
+        } catch (e) { /* lagring blokkert: valget gjelder bare denne siden */ }
+        sync();
+      });
+      group.appendChild(btn);
+    });
+    function sync() {
+      var cur = root.getAttribute('data-theme') || '';
+      [].forEach.call(group.children, function (b) {
+        b.setAttribute('aria-pressed', b.getAttribute('data-theme-opt') === cur ? 'true' : 'false');
+      });
+    }
+    sync();
+    bar.appendChild(group);
+  }
+
   /* ---- sidepanel skjul/vis ---------------------------------------------- */
 
   function stored() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
@@ -358,6 +387,8 @@
         store(next);
       });
     });
+
+    buildThemeSwitch();
 
     window.H26.ready = true;
     document.dispatchEvent(new CustomEvent('h26:ready'));
