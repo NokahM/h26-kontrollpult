@@ -126,15 +126,37 @@ emnesiden, som henter alle oppgavesidene for å liste oppgaver uten status.
 - **Én dristig ting:** resten skal være stille. Her ble det tittelfeltet fra tekniske tegninger.
 - **Iterasjon:** første redesign (ringperm) ble testet og forkastet. Brukeren ville ha «rent, stilig, ingeniør/matematikk». Test tidlig, og vær villig til å kaste.
 
-### 3.2 Skalering for én skjermtype (16:10, bare PC)
+### 3.2 Flytende skala etter tilgjengelig bredde
 
-Rotskriften skalerer med skjermbredden, så hele layouten vokser jevnt:
+Første versjon skalerte rotskriften med skjermbredden (`vw`) med tak på 20 px,
+og hovedkolonnen hadde fast maksbredde. Resultatet var mye tomrom på store
+skjermer og når sidemenyen var lukket. Målt tomrom på hver side før endringen:
+157 px ved 1920 med meny og 568 px ved 2560 uten meny.
+
+Løsningen er å skalere etter bredden som faktisk er tilgjengelig for innholdet,
+og la hovedkolonnen fylle resten:
 
 ```css
-html { font-size: clamp(15px, calc(.5vw + 8.8px), 20px); }  /* 16 px ved 1440, ~18 px ved 1920 */
+html {
+  --sidebar-px: clamp(240px, 16vw, 440px);        /* sidemenyen i px/vw, IKKE rem (unngår sirkelreferanse) */
+  --avail: calc(100vw - var(--sidebar-px));
+  font-size: clamp(14px, calc(4px + var(--avail) / 100), 26px);
+}
+html[data-sidebar="collapsed"] { --avail: 100vw; }   /* lukket meny → frigjort plass brukes */
+
+.content.has-rail {
+  grid-template-columns: minmax(0, 1fr) var(--rail-w);  /* hovedkolonnen fyller */
+  max-width: 92rem; margin-inline: auto;                 /* tak for ultrabrede skjermer */
+}
 ```
 
-Alle mål står i `rem`, så sidemeny, kolonner og luft følger med.
+- **Alt i rem:** tekst, kolonner og luft vokser i samme forhold, så siden ser lik ut på 1280, 1440, 1920 og 2560 px, bare større. Etter endringen er tomrommet bare den vanlige innrykksmargen.
+- **Den faste delen (`4px`):** gjør at Ctrl + og Ctrl − fortsatt forstørrer. Ren `vw`-skalering ville opphevet zoom.
+- **16:9 mot 16:10:** skalaen følger bredden, så samme bredde gir samme oppsett. 16:9 viser bare litt mindre i høyden.
+- **Windows-skalering:** 125 % på en 1920×1080-skjerm gir 1536 CSS-piksler, og oppsettet følger det.
+- **Lesbar linjelengde:** vanlig tekst holder `--measure` (46rem), mens oppgaver, tabeller og brede formler bruker hele kolonnen. Visningsformler som får plass innenfor tekstbredden, sentreres over teksten via en `pageReady`-krok i MathJax som setter klassen `formula-in-measure`.
+- **Paneler og kort** med bredde i både `rem` og `vw` må ha romslig `vw`-del (`min(40rem, 56vw)`), ellers blir de relativt smalere når skriften vokser.
+- **Lange ord i smale kolonner:** `overflow-wrap: anywhere; hyphens: auto`.
 
 ### 3.3 Tre kolonner, sentrert i ledig plass
 
@@ -454,7 +476,7 @@ Dette ble testet på denne måten:
 
 - [ ] Én datakilde (manifest) for navigasjon og metadata
 - [ ] Rotadresse fra `document.currentScript`, virker på `file://`, localhost og Pages
-- [ ] Rotskrift som skalerer (`clamp` + `vw`) når målskjermen er kjent
+- [ ] Flytende skala etter *tilgjengelig* bredde (`clamp` + `vw` minus faste paneler), hovedkolonne `1fr` med tak
 - [ ] Tema-tokens med lys, mørk og systemstandard, pluss skript i `<head>` mot blinking
 - [ ] Kontrast regnet ut mot alle bakgrunner
 - [ ] `?v=N` på alle skript og stilark, økes ved hver endring

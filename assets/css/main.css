@@ -17,13 +17,22 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 ul, ol { margin: 0; padding: 0; }
 h1, h2, h3, h4, p, dl, dd { margin: 0; }
 
-/* 16 px ved 1440 bredde, ~18 px ved 1920, maks 20 px */
-html { font-size: clamp(15px, calc(.5vw + 8.8px), 20px); }
+/* Flytende skala: rotskriften følger bredden som faktisk er tilgjengelig for
+   innholdet (skjermbredde minus sidemenyen når den er åpen). Hele oppsettet står
+   i rem, så tekst, kolonner og luft vokser i samme forhold og fyller skjermen.
+   Den faste delen (4px) gjør at zoom med Ctrl +/− fortsatt virker.
+   1440 med meny: 16 px · 1920 med meny: ~20 px · 2560 med meny: ~25.5 px · tak 26 px */
+html {
+  --sidebar-px: clamp(240px, 16vw, 440px);
+  --avail: calc(100vw - var(--sidebar-px));
+  font-size: clamp(14px, calc(4px + var(--avail) / 100), 26px);
+}
+html[data-sidebar="collapsed"] { --avail: 100vw; }
 
 :root {
-  --sidebar-w: 16rem;
+  --sidebar-w: var(--sidebar-px);
   --topbar-h: 3.25rem;
-  --main-w: 56rem;
+  --content-max: 92rem;
   --measure: 46rem;
   --rail-w: 12rem;
   --radius: 4px;
@@ -272,8 +281,9 @@ html[data-sidebar="collapsed"] .sidebar { visibility: hidden; }
 .content { padding: 2.75rem 2.5rem 6rem; }
 .content.has-rail {
   display: grid;
-  grid-template-columns: minmax(0, var(--main-w)) var(--rail-w);
-  justify-content: center;
+  grid-template-columns: minmax(0, 1fr) var(--rail-w);
+  max-width: var(--content-max);
+  margin-inline: auto;
   column-gap: 2.5rem;
 }
 .content__main { min-width: 0; counter-reset: sec; }
@@ -427,6 +437,7 @@ code {
    oppgaver får hele kolonnebredden */
 .page-header,
 .prose > p:not(:has(mjx-container[display="true"])),
+.prose > p.formula-in-measure,
 .prose > ul, .prose > ol, .prose > h2, .prose > h3,
 .callout { max-width: var(--measure); }
 
@@ -1022,7 +1033,7 @@ mjx-container[display="true"] { margin: .9rem 0 !important; }
   right: 0;
   bottom: 0;
   z-index: 20;
-  width: min(40rem, 48vw);
+  width: min(40rem, 56vw);
   display: flex;
   flex-direction: column;
   /* Litt gjennomsiktig: siden bak skimtes, men formlene holder seg lesbare */
@@ -1300,3 +1311,6 @@ mjx-container[display="true"] { margin: .9rem 0 !important; }
 }
 .pin-card__resize:focus-visible { outline-offset: -2px; }
 .pin-card.is-resizing { user-select: none; }
+
+/* Lange ord i sidemenyen («Sentralgrenseteoremet») brytes i stedet for å kollidere med tallet */
+.navlink__title { overflow-wrap: anywhere; hyphens: auto; }

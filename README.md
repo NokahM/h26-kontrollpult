@@ -151,8 +151,10 @@ panelet. For å gi fysikk 2 et formelpanel senere: lag
 
 ## Design
 
-Laget for PC-skjerm i 16:10. Rotskriften skalerer med skjermbredden (16 px ved
-1440 piksler, rundt 18 px ved 1920), så hele layouten vokser jevnt med skjermen.
+Laget for PC-skjerm. Rotskriften skalerer med bredden som er tilgjengelig for
+innholdet (skjermbredde minus sidemenyen når den er åpen), og hovedkolonnen
+fyller resten. Hele layouten står i rem og ser derfor lik ut på 16:10 og 16:9 i
+alle størrelser, bare større eller mindre. Lukkes sidemenyen, brukes plassen.
 
 Oppsettet har tre kolonner: sidemeny med sidene i gjeldende emne, en lesekolonne
 på omtrent 44rem, og en høyrekolonne med tittelfelt og «På denne siden».
