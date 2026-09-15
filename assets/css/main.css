@@ -282,6 +282,7 @@ html[data-sidebar="collapsed"] .sidebar { visibility: hidden; }
 .content.has-rail {
   display: grid;
   grid-template-columns: minmax(0, 1fr) var(--rail-w);
+  width: 100%;          /* ellers krymper den til innholdet i flex-kolonnen (margin: auto) */
   max-width: var(--content-max);
   margin-inline: auto;
   column-gap: 2.5rem;
