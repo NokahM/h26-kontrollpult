@@ -1223,3 +1223,40 @@ mjx-container[display="true"] { margin: .9rem 0 !important; }
 @media (prefers-reduced-motion: reduce) {
   .pin-card.is-new, .pin-card.is-flash { animation: none; }
 }
+
+/* ---- symboloversikt øverst i formelpanelet ------------------------------- */
+
+.rule.rule--symbols {
+  margin: .7rem 0 .2rem;
+  padding: .85rem 1rem .9rem;
+  border: 1px solid var(--line-2);
+  border-radius: calc(var(--radius) + 2px);
+  background: color-mix(in srgb, var(--side) 55%, transparent);
+}
+.rule.rule--symbols[data-rule]:hover { background: color-mix(in srgb, var(--accent) 8%, color-mix(in srgb, var(--side) 55%, transparent)); }
+.symbols__group {
+  margin-top: .85rem;
+  font-size: .75rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+.rule--symbols h3 + .symbols__group { margin-top: .5rem; }
+.symbols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 1.25rem;
+  margin-top: .15rem;
+}
+.symbols > div {
+  display: grid;
+  grid-template-columns: minmax(4.4rem, auto) minmax(0, 1fr);
+  column-gap: .6rem;
+  align-items: baseline;
+  padding: .3rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.symbols dt { white-space: nowrap; }
+.symbols dd { font-family: var(--font-read); font-size: .8125rem; line-height: 1.4; }
+.symbols mjx-container { font-size: 92% !important; }
+.pin-card .symbols { grid-template-columns: minmax(0, 1fr); }
+.pin-card:has(.rule--symbols) .pin-card__body.rule { background: none; border: 0; }
