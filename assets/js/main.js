@@ -5,6 +5,9 @@
 //   * høyrekolonnen: tittelfelt + «På denne siden» (fra overskriftene)
 //   * emneoversikten på forsiden
 // Ny side? Legg den til i riktig gruppe under, og lenk den fra emnesiden.
+// track: 'page' gir siden én status (kapitler, uker); track: 'tasks' gir hver
+// .task på siden egen status, og tasks: N er antallet oppgaver på siden.
+// Statusene selv håndteres av status.js.
 (function () {
   var root = document.documentElement;
   var script = document.currentScript;
@@ -20,12 +23,12 @@
       href: 'subjects/mos/index.html',
       groups: [
         { label: 'Kapitler', items: [
-          { n: '1', title: 'Introduksjon', part: 'Kapittel 1', href: 'subjects/mos/guides/01-intro.html' },
-          { n: '2', title: 'Bootloader, SWD og UART', part: 'Kapittel 2', meta: 'lab 1', href: 'subjects/mos/guides/02-bootloader-swd-uart.html' },
-          { n: '3', title: 'Bluetooth Low Energy', part: 'Kapittel 3', meta: 'lab 2', href: 'subjects/mos/guides/03-ble.html' },
-          { n: '4', title: 'MicroPython og MQTT', part: 'Kapittel 4', meta: 'lab 3', href: 'subjects/mos/guides/04-micropython-mqtt.html' },
-          { n: '5', title: 'Effektanalyse', part: 'Kapittel 5', meta: 'lab 4', href: 'subjects/mos/guides/05-effektanalyse.html' },
-          { n: '6', title: 'Glitching', part: 'Kapittel 6', meta: 'lab 5', href: 'subjects/mos/guides/06-glitching.html' }
+          { n: '1', title: 'Introduksjon', part: 'Kapittel 1', track: 'page', href: 'subjects/mos/guides/01-intro.html' },
+          { n: '2', title: 'Bootloader, SWD og UART', part: 'Kapittel 2', track: 'page', meta: 'lab 1', href: 'subjects/mos/guides/02-bootloader-swd-uart.html' },
+          { n: '3', title: 'Bluetooth Low Energy', part: 'Kapittel 3', track: 'page', meta: 'lab 2', href: 'subjects/mos/guides/03-ble.html' },
+          { n: '4', title: 'MicroPython og MQTT', part: 'Kapittel 4', track: 'page', meta: 'lab 3', href: 'subjects/mos/guides/04-micropython-mqtt.html' },
+          { n: '5', title: 'Effektanalyse', part: 'Kapittel 5', track: 'page', meta: 'lab 4', href: 'subjects/mos/guides/05-effektanalyse.html' },
+          { n: '6', title: 'Glitching', part: 'Kapittel 6', track: 'page', meta: 'lab 5', href: 'subjects/mos/guides/06-glitching.html' }
         ] }
       ]
     },
@@ -37,9 +40,9 @@
       href: 'subjects/tsd3060/index.html',
       groups: [
         { label: 'Uker', items: [
-          { n: '33', title: 'HTTP, port 80/443 og REST', part: 'Uke 33', href: 'subjects/tsd3060/guides/33-http-rest.html' },
-          { n: '34', title: 'SQLite, injeksjon og autentisering', part: 'Uke 34', href: 'subjects/tsd3060/guides/34-sqlite-injeksjon-autentisering.html' },
-          { n: '35', title: 'chroot og konteinere', part: 'Uke 35', href: 'subjects/tsd3060/guides/35-chroot-konteinere.html' }
+          { n: '33', title: 'HTTP, port 80/443 og REST', part: 'Uke 33', track: 'page', href: 'subjects/tsd3060/guides/33-http-rest.html' },
+          { n: '34', title: 'SQLite, injeksjon og autentisering', part: 'Uke 34', track: 'page', href: 'subjects/tsd3060/guides/34-sqlite-injeksjon-autentisering.html' },
+          { n: '35', title: 'chroot og konteinere', part: 'Uke 35', track: 'page', href: 'subjects/tsd3060/guides/35-chroot-konteinere.html' }
         ] },
         { label: 'Eksamen', items: [
           { title: 'Eksamensoversikt', part: 'Eksamensforberedelse', href: 'subjects/tsd3060/guides/eksamensoversikt.html' }
@@ -61,15 +64,15 @@
           { title: 'Formelsamling og tabeller', part: 'Vedlegg', href: 'subjects/statistikk/oppgaver/10-formelsamling.html' }
         ] },
         { label: 'Oppgaver etter tema', items: [
-          { n: '1', title: 'Sannsynlighet og hendelsestre', meta: '10', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/01-sannsynlighet.html' },
-          { n: '2', title: 'Kombinatorikk og hypergeometrisk', meta: '8', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/02-kombinatorikk.html' },
-          { n: '3', title: 'Diskrete fordelinger', meta: '12', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/03-diskrete-fordelinger.html' },
-          { n: '4', title: 'Tetthet og eksponentialfordeling', meta: '7', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/04-kontinuerlige-fordelinger.html' },
-          { n: '5', title: 'Normalfordeling', meta: '11', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/05-normalfordeling.html' },
-          { n: '6', title: 'Sentralgrenseteoremet', meta: '10', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/06-sentralgrenseteoremet.html' },
-          { n: '7', title: 'Konfidensintervall', meta: '12', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/07-konfidensintervall.html' },
-          { n: '8', title: 'Hypotesetesting', meta: '13', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/08-hypotesetesting.html' },
-          { n: '9', title: 'Regresjon og korrelasjon', meta: '5', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/09-regresjon.html' }
+          { n: '1', title: 'Sannsynlighet og hendelsestre', meta: '10', tasks: 10, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/01-sannsynlighet.html' },
+          { n: '2', title: 'Kombinatorikk og hypergeometrisk', meta: '8', tasks: 8, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/02-kombinatorikk.html' },
+          { n: '3', title: 'Diskrete fordelinger', meta: '12', tasks: 12, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/03-diskrete-fordelinger.html' },
+          { n: '4', title: 'Tetthet og eksponentialfordeling', meta: '7', tasks: 7, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/04-kontinuerlige-fordelinger.html' },
+          { n: '5', title: 'Normalfordeling', meta: '11', tasks: 11, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/05-normalfordeling.html' },
+          { n: '6', title: 'Sentralgrenseteoremet', meta: '10', tasks: 10, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/06-sentralgrenseteoremet.html' },
+          { n: '7', title: 'Konfidensintervall', meta: '12', tasks: 12, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/07-konfidensintervall.html' },
+          { n: '8', title: 'Hypotesetesting', meta: '13', tasks: 13, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/08-hypotesetesting.html' },
+          { n: '9', title: 'Regresjon og korrelasjon', meta: '5', tasks: 5, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/09-regresjon.html' }
         ] }
       ]
     },
@@ -89,6 +92,8 @@
   function bare(u) { return decodeURI(u.split('#')[0].split('?')[0]); }
   var HERE = bare(location.href);
   function isHere(href) { return bare(abs(href)) === HERE; }
+  // Stabil nøkkel for en side: 'statistikk/oppgaver/05-normalfordeling'
+  function pageKey(href) { return href.replace(/^subjects\//, '').replace(/\.html$/, ''); }
 
   // h('a.navlink', {href: …}, [children]) — liten DOM-bygger
   function h(tag, attrs, kids) {
@@ -141,7 +146,9 @@
       'aria-current': current ? 'page' : null,
       target: item.external ? '_blank' : null,
       rel: item.external ? 'noopener' : null,
-      'data-subject': subjectId || null
+      'data-subject': subjectId || null,
+      'data-key': item.track ? pageKey(item.href) : null,
+      'data-track': item.track || null
     }, [
       h('span.navlink__n', { text: item.n || '' }),
       h('span.navlink__title', { text: item.title }),
@@ -208,6 +215,7 @@
 
     var statusEl = content.querySelector('.page-header__status');
     var scope = statusEl ? statusEl.textContent.trim() : '';
+    scope = scope.replace(/^(\d+) oppgaver · (\d+) sett$/, '$1 oppgaver fra $2 eksamenssett');
     var updated = formatDate(document.body.getAttribute('data-updated'));
 
     // «Blad 5 av 12»: sidens plass blant emnets sider, oversikten medregnet
@@ -226,7 +234,7 @@
       ]), 'titleblock__cell--wide'),
       cell('Del', page ? page.part : '', 'titleblock__cell--wide'),
       cell('Omfang', scope || subject.scope, 'titleblock__cell--wide'),
-      cell('Blad', sheet),
+      cell('Blad', sheet, 'titleblock__cell--sheet'),
       cell('Oppdatert', updated || '–')
     ]);
 
@@ -261,7 +269,7 @@
         num ? h('span.toc__num', { text: num }) : null,
         h('span.toc__text', { text: label.trim() })
       ]);
-      list.appendChild(h('li.toc__item.toc__item--l' + level, {}, [a]));
+      list.appendChild(h('li.toc__item.toc__item--l' + level, { 'data-task': level === 2 ? t.id : null }, [a]));
       entries.push({ target: t, link: a });
     });
 
@@ -317,6 +325,7 @@
         h('h2.subject__name', { id: 'emne-' + s.id }, [h('a', { href: abs(s.href), text: s.name })]),
         h('p.subject__desc', { text: s.desc }),
         h('p.subject__scope', { text: s.scope }),
+        h('div.subject__progress', { 'data-progress': s.id }),
         list
       ]));
     });
@@ -328,6 +337,9 @@
   function store(v) { try { localStorage.setItem(KEY, v); } catch (e) { /* privat modus */ } }
 
   root.setAttribute('data-sidebar', stored() || 'expanded');
+
+  // Delt med status.js
+  window.H26 = { SUBJECTS: SUBJECTS, subject: subject, page: page, abs: abs, h: h, pageKey: pageKey, isHere: isHere };
 
   function init() {
     var aside = document.querySelector('.sidebar');
@@ -346,6 +358,9 @@
         store(next);
       });
     });
+
+    window.H26.ready = true;
+    document.dispatchEvent(new CustomEvent('h26:ready'));
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

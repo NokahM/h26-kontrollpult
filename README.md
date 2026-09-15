@@ -37,6 +37,7 @@ site/
   subjects/statistikk/oppgaver/ eksamensoppgaver etter tema, med løsningsforslag
   assets/css/main.css           delt stilark + tema-tokens per emne
   assets/js/main.js             emneliste (SUBJECTS) → sidemeny, tittelfelt, innholdsfortegnelse, forside
+  assets/js/status.js           status på oppgaver og kapitler (lagres i nettleseren)
   assets/js/math.js             laster MathJax fra CDN (kun statistikk-sidene)
   assets/resources/<emne>/      ressursfiler (IKKE i git, se .gitignore)
 ```
@@ -88,6 +89,31 @@ det bør ikke havne i et repo som pushes til en offentlig GitHub
 Pages-side. Lenkene på MoS-siden fungerer lokalt og i et privat repo, men
 filene følger ikke med i en offentlig publisering med mindre du bevisst
 velger noe annet (privat repo, eller fjerne filene fra `.gitignore`).
+
+## Status på oppgaver og kapitler
+
+Hver statistikkoppgave og hvert kapittel eller hver uke i MoS og TSD3060 kan få
+en av fire statuser: ikke gjort (standard), forstått, må repeteres og ikke
+forstått. Det styres av `track` i `SUBJECTS` i `main.js`: `track: 'page'` gir
+siden én status, og `track: 'tasks'` gir hver `<article class="task" id="…">` på
+siden egen status. Oppgavens `id` er nøkkelen, så ikke endre id-en på en
+oppgave som allerede har fått status.
+
+Du setter status i oppgaveboksen eller øverst og nederst på kapittelsiden.
+Oversikten vises flere steder:
+
+- **Høyrekolonnen:** fremdrift for siden. Klikk på en status for å filtrere
+  innholdslisten.
+- **Sidemenyen:** en fremdriftsstolpe per tema eller kapittel.
+- **Emnesiden:** fire kolonner med lenker til nøyaktig hvilke oppgaver og
+  kapitler som har hver status.
+- **Forsiden:** en fremdriftslinje per emne.
+
+Statusene lagres i nettleserens `localStorage` (`h26-status`). Lagringen er
+knyttet til adressen, så localhost og GitHub Pages har hver sin. Bruk «Last ned
+statusfil» og «Hent statusfil» nederst på forsiden for sikkerhetskopi eller
+flytting. Emnesiden henter oppgavesidene for å liste oppgaver uten status, og
+det virker bare over http (localhost eller GitHub Pages), ikke fra `file://`.
 
 ## Design
 
