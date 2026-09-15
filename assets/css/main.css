@@ -780,6 +780,7 @@ mjx-container[display="true"] { margin: .9rem 0 !important; }
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: .4rem .75rem;
   padding: .5rem 1.1rem;
   border-bottom: 1px solid var(--line);
