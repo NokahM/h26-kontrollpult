@@ -129,7 +129,7 @@ Innholdet ligger i en egen fil per emne, for statistikk
 `subjects/statistikk/formler.html`. Hver `<section id="…" data-short="…">` blir
 en hopp-lenke, og hver regel er en `<div class="rule">` med overskrift, formel
 (`\[ … \]`), forklaring og eventuelt eksempel. Flere formler i samme regel
-stables med `egin{gathered} … \ … \end{gathered}` så de får plass i
+stables med `\begin{gathered} … \\ … \end{gathered}` så de får plass i
 panelet. For å gi fysikk 2 et formelpanel senere: lag
 `subjects/fysikk2/formler.html` og sett `formulas` på emnet. Filen hentes med
 `fetch`, så panelet virker via localhost og GitHub Pages, ikke fra `file://`.
