@@ -85,8 +85,14 @@ velger noe annet (privat repo, eller fjerne filene fra `.gitignore`).
 
 ## Tema per emne
 
-Hver side setter `<body class="theme-…">`, som bytter ut et sett
-CSS-variabler i `assets/css/main.css` (`--bg`, `--surface`, `--accent`,
-osv.). Sidepanelet (`.sidebar`) holder seg i et nøytralt "konsoll"-tema på
-tvers av hele siden — det er kun innholdsområdet på hver side, samt
-forhåndsvisning av "modulene" på landingssiden, som bytter farge per emne.
+Designet er en ringperm med skilleark: sidene er papir på grå kartong, og
+hvert emne har en egen fanefarge. Hver side setter `<body class="theme-…">`,
+og lenker i sidepanelet og arkene på forsiden har `data-subject="…"`. Begge
+deler velger et par CSS-variabler i `assets/css/main.css`: `--tab` (fargen på
+fanen) og `--accent` (emnefargen brukt som tekst, altså lenker, nummer og
+markører). Fanene er det eneste stedet emnefargen brukes som flate.
+
+Mørk modus følger systeminnstillingen (`prefers-color-scheme`) og bruker de
+samme variablene.
+
+Skrift: Schibsted Grotesk til grensesnitt og titler, Literata til lesetekst.
