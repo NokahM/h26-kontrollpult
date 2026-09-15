@@ -7,6 +7,9 @@ temaside per emne.
 **Live:** https://nokahm.github.io/h26-kontrollpult/ (GitHub Pages, deployes
 automatisk fra `main`).
 
+Teknikkene og mønstrene bak siden (arkitektur, temaer, lagring, formelpanel,
+testing) er samlet i [`docs/teknikker.md`](docs/teknikker.md) for gjenbruk.
+
 ## Emner
 
 | Kode      | Emne                              | Status |
