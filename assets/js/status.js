@@ -320,6 +320,16 @@
     var entries = null;      // alle oppgaver/kapitler når de er hentet
     var partial = false;     // true hvis noen sider ikke kunne hentes
     var expanded = {};
+    var open = false;        // oppgavelistene er skjult til du ber om dem
+    function toggle(e) {
+      // Behold tastaturfokus på knappen du trykket, selv om seksjonen tegnes på nytt
+      var col = e.currentTarget.closest('.status-col');
+      var sel = col ? '.status-col[data-state="' + col.getAttribute('data-state') + '"] .status-col__toggle' : '.status-overview__toggle';
+      open = !open;
+      render();
+      var again = section.querySelector(sel);
+      if (again) again.focus();
+    }
 
     function fromStore() {
       // Kapitler kjenner vi fra emnelisten, oppgaver med status fra lagringen
@@ -344,22 +354,32 @@
       var c = subjectCounts(H, subject);
       section.innerHTML = '';
 
+      var toggleBtn = H.h('button.status-overview__toggle', {
+        type: 'button', 'aria-expanded': String(open), 'aria-controls': 'status-cols',
+        text: open ? 'Skjul oppgavene' : 'Vis oppgavene'
+      });
+      toggleBtn.addEventListener('click', toggle);
       section.appendChild(H.h('div.status-overview__head', {}, [
         H.h('h2.section__label', { id: 'status-oversikt', text: 'Status' }),
-        H.h('p.status-overview__sum', { text: c.forstatt + ' av ' + c.total + ' forstått' })
+        H.h('p.status-overview__sum', { text: c.forstatt + ' av ' + c.total + ' forstått' }),
+        toggleBtn
       ]));
       section.appendChild(bar(H, c, 'statusbar--wide'));
 
-      var cols = H.h('div.status-cols');
+      var cols = H.h('div.status-cols', { id: 'status-cols', 'data-open': String(open) });
       STATES.forEach(function (st) {
         var items = list.filter(function (e) { return stateOf(e.key) === st.id; });
-        var col = H.h('div.status-col', { 'data-state': st.id }, [
-          H.h('h3.status-col__title', {}, [
-            H.h('span.status-dot', { 'data-state': st.id, 'aria-hidden': 'true' }),
-            st.label,
-            H.h('span.status-col__count', { text: String(c[st.id]) })
-          ])
+        var titleBtn = H.h('button.status-col__toggle', { type: 'button', 'aria-expanded': String(open), 'aria-controls': 'status-cols' }, [
+          H.h('span.status-dot', { 'data-state': st.id, 'aria-hidden': 'true' }),
+          st.label,
+          H.h('span.status-col__count', { text: String(c[st.id]) })
         ]);
+        titleBtn.addEventListener('click', toggle);
+        var col = H.h('div.status-col', { 'data-state': st.id }, [
+          H.h('h3.status-col__title', {}, [titleBtn])
+        ]);
+        cols.appendChild(col);
+        if (!open) return;
 
         if (!items.length) {
           var emptyText = st.id === 'ikke-gjort' && !entries && c[st.id]
@@ -383,7 +403,6 @@
             col.appendChild(more);
           }
         }
-        cols.appendChild(col);
       });
       section.appendChild(cols);
     }
