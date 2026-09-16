@@ -161,7 +161,18 @@
     <h2>Betinget sannsynlighet og uavhengighet</h2>
 
     <div class="rule">
-      <h3>Betinget sannsynlighet</h3>
+      <div class="rule__head">
+        <h3>Betinget sannsynlighet</h3>
+        <svg class="venn" viewBox="0 0 120 70" role="img" aria-label="Hele B er markert som det nye utfallsrommet, og delen av B som også er A er uthevet">
+          <defs><clipPath id="venn-clip-cond"><circle cx="48" cy="35" r="22"/></clipPath></defs>
+          <rect class="venn__frame" x="4" y="4" width="112" height="62"/>
+          <circle class="venn__shade venn__shade--soft" cx="72" cy="35" r="22"/>
+          <circle class="venn__shade" cx="72" cy="35" r="22" clip-path="url(#venn-clip-cond)"/>
+          <circle class="venn__set" cx="48" cy="35" r="22"/>
+          <circle class="venn__set venn__set--focus" cx="72" cy="35" r="22"/>
+          <text x="36" y="39">A</text><text x="86" y="39">B</text>
+        </svg>
+      </div>
       <p class="rule__f">\[ P(A\mid B)=\frac{P(A\cap B)}{P(B)} \]</p>
       <p class="rule__text">Sannsynligheten for \(A\) når vi <em>vet</em> at \(B\) har inntruffet. Utfallsrommet krymper til \(B\).</p>
       <p class="rule__ex"><span>Eksempel</span> \(P(\text{bildekort}\mid\text{hjerter})=\dfrac{3/52}{13/52}=\tfrac{3}{13}\approx 0.231\).</p>
@@ -194,13 +205,38 @@
     <h2>Total sannsynlighet og Bayes</h2>
 
     <div class="rule">
-      <h3>Total sannsynlighet</h3>
+      <div class="rule__head">
+        <h3>Total sannsynlighet</h3>
+        <svg class="venn venn--wide" viewBox="0 0 140 70" role="img" aria-label="Utfallsrommet delt i A1, A2 og A3, med B som strekker seg over alle tre">
+          <rect class="venn__frame" x="4" y="4" width="132" height="62"/>
+          <line class="venn__frame" x1="48" y1="4" x2="48" y2="66"/>
+          <line class="venn__frame" x1="92" y1="4" x2="92" y2="66"/>
+          <ellipse class="venn__shade venn__shade--soft" cx="70" cy="42" rx="52" ry="16"/>
+          <ellipse class="venn__set venn__set--focus" cx="70" cy="42" rx="52" ry="16"/>
+          <text x="26" y="18">A₁</text><text x="70" y="18">A₂</text><text x="114" y="18">A₃</text>
+          <text x="70" y="46" class="venn__label-b">B</text>
+        </svg>
+      </div>
       <p class="rule__f">\[ P(B)=\sum_{k=1}^{n}P(B\mid A_k)\,P(A_k) \]</p>
       <p class="rule__text">Når nøyaktig én av \(A_1,\dots,A_n\) inntreffer (en oppdeling). I hendelsestreet: summen av alle greinene som ender i \(B\). Med to grener: \(P(B)=P(B\mid A)P(A)+P(B\mid\bar A)P(\bar A)\).</p>
     </div>
 
     <div class="rule">
-      <h3>Bayes' regel</h3>
+      <div class="rule__head">
+        <h3>Bayes' regel</h3>
+        <svg class="venn venn--wide tree" viewBox="0 0 140 70" role="img" aria-label="Hendelsestre med to greiner som ender i B, uthevet">
+          <line class="tree__line tree__line--hit" x1="14" y1="35" x2="60" y2="18"/>
+          <line class="tree__line" x1="14" y1="35" x2="60" y2="52"/>
+          <line class="tree__line tree__line--hit" x1="64" y1="18" x2="112" y2="10"/>
+          <line class="tree__line" x1="64" y1="18" x2="112" y2="28"/>
+          <line class="tree__line tree__line--hit" x1="64" y1="52" x2="112" y2="44"/>
+          <line class="tree__line" x1="64" y1="52" x2="112" y2="62"/>
+          <circle class="tree__node" cx="14" cy="35" r="2"/>
+          <text x="60" y="15">A</text><text x="60" y="62">Ā</text>
+          <text x="122" y="13" class="tree__hit">B</text><text x="122" y="31">B̄</text>
+          <text x="122" y="47" class="tree__hit">B</text><text x="122" y="65">B̄</text>
+        </svg>
+      </div>
       <p class="rule__f">\[ P(A_i\mid B)=\frac{P(B\mid A_i)\,P(A_i)}{\sum_{k}P(B\mid A_k)\,P(A_k)} \]</p>
       <p class="rule__text">«Snur» betingelsen: fra \(P(B\mid A)\), som oppgaven gir, til \(P(A\mid B)\), som den spør om. Én grein delt på summen av greinene.</p>
       <p class="rule__ex"><span>Eksempel</span> 2 % er syke. Testen er positiv hos 95 % av de syke og 10 % av de friske.

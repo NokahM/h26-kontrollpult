@@ -1150,6 +1150,16 @@ mjx-container[display="true"] { margin: .9rem 0 !important; }
 .venn__set { fill: none; stroke: var(--ink); stroke-width: 1.3; }
 .venn__shade { fill: color-mix(in srgb, var(--accent) 24%, transparent); }
 .venn text { font-family: var(--font-read); font-style: italic; font-size: 12px; fill: var(--ink); text-anchor: middle; }
+.venn--wide { width: 9rem; }
+.pin-card .venn--wide { width: 9em; }
+.venn__shade--soft { fill: color-mix(in srgb, var(--accent) 11%, transparent); }
+.venn__set--focus { stroke: var(--accent); stroke-width: 1.6; }
+.venn__label-b { font-size: 11px; fill: var(--accent); }
+.tree__line { stroke: var(--line-2); stroke-width: 1.3; fill: none; }
+.tree__line--hit { stroke: var(--accent); stroke-width: 1.8; }
+.tree__node { fill: var(--ink); stroke: none; }
+.tree text { font-size: 11px; }
+.tree .tree__hit { fill: var(--accent); }
 
 /* ---- festede regler ------------------------------------------------------ */
 
