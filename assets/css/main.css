@@ -1186,7 +1186,8 @@ mjx-container[display="true"] { margin: .9rem 0 !important; }
   background: color-mix(in srgb, var(--bg) 74%, transparent);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  border: 1px solid var(--line-2);
+  /* Litt bredere og mørkere kant enn ellers, så kortet løsner fra siden bak */
+  border: 1.5px solid color-mix(in srgb, var(--ink) 32%, var(--bg));
   border-radius: calc(var(--radius) + 2px);
   box-shadow: 0 12px 32px -14px rgba(10, 16, 24, .38);
 }
