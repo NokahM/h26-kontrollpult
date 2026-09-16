@@ -268,7 +268,7 @@
         t.id = id;
       }
       used[t.id] = true;
-      var a = h('a.toc__link', { href: '#' + t.id }, [
+      var a = h('a.toc__link', { href: '#' + t.id, title: (num ? num + ' · ' : '') + label.trim() }, [
         num ? h('span.toc__num', { text: num }) : null,
         h('span.toc__text', { text: label.trim() })
       ]);

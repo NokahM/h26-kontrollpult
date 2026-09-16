@@ -34,7 +34,7 @@ html[data-sidebar="collapsed"] { --avail: 100vw; }
   --topbar-h: 3.25rem;
   --content-max: 92rem;
   --measure: 56rem;
-  --rail-w: 12rem;
+  --rail-w: 16rem;
   --radius: 4px;
   --ease: 160ms ease;
 
@@ -291,14 +291,18 @@ html[data-sidebar="collapsed"] .sidebar { visibility: hidden; }
 
 .rail {
   position: sticky;
-  top: calc(var(--topbar-h) + 2.75rem);
+  top: calc(var(--topbar-h) + 2rem);
   align-self: start;
-  max-height: calc(100vh - var(--topbar-h) - 4.5rem);
+  max-height: calc(100vh - var(--topbar-h) - 3rem);
   overflow-y: auto;
+  overflow-x: hidden;
+  /* Fast plass til rullelisten, så den ikke legger seg over tallene */
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  padding: 2px 2px 1rem;
+  gap: 1.25rem;
+  padding: 2px 2px .5rem;
 }
 
 /* Tittelfelt, som nederst til høyre på en teknisk tegning */
@@ -309,7 +313,7 @@ html[data-sidebar="collapsed"] .sidebar { visibility: hidden; }
   font-size: .8125rem;
 }
 .titleblock__cell {
-  padding: .4rem .55rem .5rem;
+  padding: .35rem .55rem .45rem;
   border-top: 1px solid var(--line-2);
   min-width: 0;
 }
@@ -321,12 +325,13 @@ html[data-sidebar="collapsed"] .sidebar { visibility: hidden; }
 .titleblock__code { display: block; font-family: var(--font-head); font-size: 1.125rem; font-weight: 700; color: var(--accent); line-height: 1.2; }
 .titleblock__name { display: block; font-weight: 500; }
 
-.toc__label { font-size: .8125rem; font-weight: 600; color: var(--faint); margin-bottom: .5rem; }
+.toc__label { font-size: .8125rem; font-weight: 600; color: var(--faint); margin-bottom: .35rem; }
 .toc__list { list-style: none; border-left: 1px solid var(--line); }
 .toc__link {
   display: flex;
   flex-direction: column;
-  padding: .28rem 0 .28rem .85rem;
+  gap: .05rem;
+  padding: .2rem 0 .2rem .85rem;
   margin-left: -1px;
   border-left: 2px solid transparent;
   font-size: .8125rem;
@@ -335,6 +340,11 @@ html[data-sidebar="collapsed"] .sidebar { visibility: hidden; }
 }
 .toc__item--l1 .toc__link { flex-direction: row; gap: .45rem; }
 .toc__item--l2 .toc__link { padding-left: 1.35rem; }
+/* Oppgavene på én linje hver, så hele lista får plass uten å rulle */
+.toc__item--l2 .toc__link { flex-direction: row; align-items: baseline; gap: .4rem; }
+.toc__item--l2 .toc__num { white-space: nowrap; }
+.toc__item--l2 .toc__link { font-size: .8125rem; line-height: 1.25; }
+.toc__item--l2 .toc__text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .toc__link:hover { color: var(--ink); }
 .toc__link[aria-current="true"] { color: var(--ink); border-left-color: var(--accent); font-weight: 600; }
 .toc__num { color: var(--accent); font-variant-numeric: tabular-nums; font-weight: 600; }
@@ -840,7 +850,7 @@ mjx-container[display="true"] { margin: .9rem 0 !important; }
 .sourcebar + .page-status { margin-top: -1.25rem; }
 
 /* Høyrekolonnen */
-.progress__label { font-size: .8125rem; font-weight: 600; color: var(--faint); margin-bottom: .5rem; }
+.progress__label { font-size: .8125rem; font-weight: 600; color: var(--faint); margin-bottom: .4rem; }
 .progress .statusbar { margin-bottom: .55rem; }
 .progress__legend { list-style: none; }
 .progress__item {
@@ -849,9 +859,8 @@ mjx-container[display="true"] { margin: .9rem 0 !important; }
   grid-template-columns: .6rem minmax(0, 1fr) auto;
   align-items: center;
   column-gap: .5rem;
-  padding: .2rem .35rem;
-  margin-left: -.35rem;
-  box-sizing: content-box;
+  padding: .15rem .35rem;
+  margin-inline: -.35rem;
   border-radius: var(--radius);
   font-size: .8125rem;
   text-align: left;
