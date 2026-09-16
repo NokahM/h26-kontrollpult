@@ -63,6 +63,7 @@
       groups: [
         { label: 'Start her', items: [
           { title: 'Eksamensoversikt', part: 'Eksamensforberedelse', href: 'subjects/statistikk/oppgaver/00-eksamensoversikt.html' },
+          { title: 'Prioritering', part: 'Eksamensforberedelse', href: 'subjects/statistikk/oppgaver/prioritering.html' },
           { title: 'Formelsamling og tabeller', part: 'Vedlegg', href: 'subjects/statistikk/oppgaver/10-formelsamling.html' }
         ] },
         { label: 'Oppgaver etter tema', items: [
