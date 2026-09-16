@@ -33,7 +33,7 @@ html[data-sidebar="collapsed"] { --avail: 100vw; }
   --sidebar-w: var(--sidebar-px);
   --topbar-h: 3.25rem;
   --content-max: 92rem;
-  --measure: 46rem;
+  --measure: 56rem;
   --rail-w: 12rem;
   --radius: 4px;
   --ease: 160ms ease;

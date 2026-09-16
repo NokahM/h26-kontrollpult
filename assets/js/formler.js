@@ -40,7 +40,7 @@
     if (ready()) return window.MathJax.startup.promise;
     if (!document.getElementById('MathJax-script') && !document.querySelector('script[src*="assets/js/math.js"]')) {
       var s = document.createElement('script');
-      s.src = H.abs('assets/js/math.js?v=17');
+      s.src = H.abs('assets/js/math.js?v=18');
       document.head.appendChild(s);
     }
     return new Promise(function (resolve) {
