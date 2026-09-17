@@ -863,24 +863,23 @@ mjx-container[display="true"] { margin: .9rem 0 !important; }
   margin-inline: -.35rem;
   border-radius: var(--radius);
   font-size: .8125rem;
-  text-align: left;
   color: var(--muted);
 }
-.progress__item:hover { background: var(--hover); color: var(--ink); }
-.progress__item[aria-pressed="true"] { background: var(--hover); color: var(--ink); font-weight: 600; }
 .progress__count { font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 600; }
 
 .toc__item[data-state] .toc__num::before {
   content: "";
   display: inline-block;
-  width: .5rem;
-  height: .5rem;
+  width: .6rem;
+  height: .6rem;
   margin-right: .4rem;
   border-radius: 2px;
   background: var(--st-c);
-  vertical-align: .05em;
+  vertical-align: -.02em;
 }
-.toc__item[data-state="ikke-gjort"] .toc__num::before { background: transparent; box-shadow: inset 0 0 0 1.5px var(--line-2); }
+/* Hvit boks = ikke gjort, samme i høyrekolonnens fargeforklaring */
+.toc__item[data-state="ikke-gjort"] .toc__num::before,
+.progress .status-dot[data-state="ikke-gjort"] { background: #fff; box-shadow: inset 0 0 0 1px var(--line-2); }
 
 /* Sidemenyen */
 .navlink .statusbar--nav { grid-column: 2 / -1; height: 3px; margin-top: .35rem; }

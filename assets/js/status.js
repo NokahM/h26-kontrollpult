@@ -178,7 +178,7 @@
       onChange(syncTask);
     });
 
-    // Høyrekolonnen: fremdrift for siden, filter og markører i innholdslisten
+    // Høyrekolonnen: fremdrift for siden og fargede markører i innholdslisten
     var rail = document.querySelector('.rail');
     if (!rail || !tasks.length) return;
 
@@ -187,7 +187,6 @@
     var titleblock = rail.querySelector('.titleblock');
     titleblock.insertAdjacentElement('afterend', box);
 
-    var filter = null;
     function render() {
       var c = pageCounts(H, item, tasks.length);
       box.innerHTML = '';
@@ -195,30 +194,18 @@
       box.appendChild(bar(H, c));
       var legend = H.h('ul.progress__legend');
       STATES.forEach(function (st) {
-        var b = H.h('button.progress__item', {
-          type: 'button',
-          'data-state': st.id,
-          'aria-pressed': filter === st.id ? 'true' : 'false',
-          title: filter === st.id ? 'Vis alle oppgaver' : 'Vis bare «' + st.label.toLowerCase() + '» i listen under'
-        }, [
+        legend.appendChild(H.h('li.progress__item', { 'data-state': st.id, title: st.long }, [
           H.h('span.status-dot', { 'data-state': st.id, 'aria-hidden': 'true' }),
           H.h('span.progress__name', { text: st.label }),
           H.h('span.progress__count', { text: String(c[st.id]) })
-        ]);
-        b.addEventListener('click', function () {
-          filter = filter === st.id ? null : st.id;
-          render();
-        });
-        legend.appendChild(H.h('li', {}, [b]));
+        ]));
       });
       box.appendChild(legend);
 
       if (toc) {
-        toc.setAttribute('data-filter', filter || '');
         [].forEach.call(toc.querySelectorAll('[data-task]'), function (li) {
           var st = stateOf(key + '#' + li.getAttribute('data-task'));
           li.setAttribute('data-state', st);
-          li.hidden = !!filter && st !== filter;
         });
       }
 
