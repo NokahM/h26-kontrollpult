@@ -718,6 +718,9 @@ code {
   transition: transform var(--ease);
 }
 .sol[open] > summary::before { transform: translateY(-.15rem) rotate(45deg); }
+/* Egen bakgrunn dekker statusstripen til oppgaven: raden er nøytral, grå ved hover */
+.sol > summary { background: var(--bg); }
+.task .sol:not([open]) > summary { border-radius: 0 0 calc(var(--radius) - 1px) calc(var(--radius) - 1px); }
 .sol > summary:hover { background: var(--hover); }
 .sol__body { padding: .2rem 1.1rem 1.25rem; font-family: var(--font-read); }
 .sol__body p { margin-top: .8rem; font-size: 1.0625rem; line-height: 1.7; }
