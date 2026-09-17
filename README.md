@@ -101,14 +101,18 @@ Hver statistikkoppgave og hvert kapittel eller hver uke i MoS og TSD3060 kan få
 en av fire statuser: ikke gjort (standard), forstått, må repeteres og ikke
 forstått. Det styres av `track` i `SUBJECTS` i `main.js`: `track: 'page'` gir
 siden én status, og `track: 'tasks'` gir hver `<article class="task" id="…">` på
-siden egen status. Oppgavens `id` er nøkkelen, så ikke endre id-en på en
-oppgave som allerede har fått status.
+siden egen status (sett også `tasks: N` til antallet oppgaver på siden).
+Oppgavens `id` er nøkkelen, så ikke endre id-en på en oppgave som allerede har
+fått status. Alt dette er felles for alle emnene: en ny oppgaveside i et annet
+emne får status, fremdrift og fargekoder uten ekstra kode.
 
 Du setter status i oppgaveboksen eller øverst og nederst på kapittelsiden.
 Oversikten vises flere steder:
 
-- **Høyrekolonnen:** fremdrift for siden. Klikk på en status for å filtrere
-  innholdslisten.
+- **Høyrekolonnen:** fremdrift for siden med antall per status (bare
+  fargeforklaring, ikke klikkbar). Hver oppgave i «På denne siden» har en
+  fargekodet boks: hvit = ikke gjort, rød = ikke forstått, gul = må repeteres,
+  grønn = forstått.
 - **Sidemenyen:** en fremdriftsstolpe per tema eller kapittel.
 - **Emnesiden:** fire kolonner med lenker til nøyaktig hvilke oppgaver og
   kapitler som har hver status.
