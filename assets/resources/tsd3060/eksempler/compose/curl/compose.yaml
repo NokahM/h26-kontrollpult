@@ -1,0 +1,12 @@
+services:
+
+  web:
+    image:      docker.io/library/httpd
+    ports:
+      - 8080:80
+
+  curl:
+    build:      .
+    command:    sh
+    stdin_open: true
+    tty:        true

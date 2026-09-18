@@ -1,0 +1,12 @@
+<xml-eksempel
+  xmlns:tekst = "http://debbie.usn.no/navnerom/tekst"
+  xmlns:tall  = "http://debbie.usn.no/navnerom/tall"
+  >
+
+  <tekst:punkt> første punkt </tekst:punkt>
+  <tekst:punkt> andre punkt  </tekst:punkt>
+
+  <tall:punkt>  x=1; y=2     </tall:punkt>
+  <tall:punkt>  x=3; y=4     </tall:punkt>
+
+</xml-eksempel>

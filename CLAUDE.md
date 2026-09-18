@@ -27,6 +27,7 @@ Statisk studieside (HTML/CSS/vanilla JS, ingen byggesteg) for høstsemesteret
 - **Cache-busting:** etter endringer i CSS/JS, øk `?v=N` på asset-lenkene i
   alle HTML-sidene.
 - **Kun desktop** (16:10). Ingen mobil-layout.
-- **Kursmateriell** (`assets/resources/*/*`) er med vilje utenfor git.
+- **Kursmateriell** (`assets/resources/*/*`) er med vilje utenfor git. Unntak:
+  TSD3060-kode i `assets/resources/tsd3060/{eksempler,losninger}/` publiseres.
 - **Studieinnhold:** riktig fremgangsmåte slik den forventes på eksamen er
   viktigere enn eksakt svar.

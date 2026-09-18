@@ -4,6 +4,13 @@
 assets/resources/*/*
 !assets/resources/*/.gitkeep
 
+# Exception: TSD3060 example code and solutions from the course system are
+# published on purpose (the user considers them open source). Non-code files
+# such as the PDF stay local.
+!assets/resources/tsd3060/eksempler/
+!assets/resources/tsd3060/losninger/
+assets/resources/tsd3060/**/*.pdf
+
 # OS
 .DS_Store
 Thumbs.db

@@ -1,0 +1,16 @@
+bokliste {
+      background-color: #448888;
+      display:          table;
+}
+
+bok {
+     display:          table-row;
+     background-color: darkgreen;
+     text-align:       center;
+}
+
+bokid {
+     background-color: red;
+     font-family:      "Times New Roman";
+     font-size:        32px;
+}

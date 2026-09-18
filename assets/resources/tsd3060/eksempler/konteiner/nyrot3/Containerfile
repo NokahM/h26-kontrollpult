@@ -1,0 +1,7 @@
+FROM       localhost/ny_rot2:latest
+COPY       hallo.txt /home/trix/
+COPY       passwd /etc/
+RUN        sed -i 's/tux/trix/g' /etc/passwd
+WORKDIR    /home/trix
+USER       trix
+ENTRYPOINT /bin/sh

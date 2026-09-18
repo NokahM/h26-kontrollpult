@@ -1,0 +1,17 @@
+/* body/xml-eksempel-stilen ble laget ved å be
+   ChatGPT om CSS som etterligner utseendet på
+   en gammeldags monokrom skjerm. */
+
+xml-eksempel, body {
+    background-color: black;
+    color:            lime;
+    font-family:      'Courier New', monospace;
+    }
+
+    punkt {
+    display:             list-item;
+    list-style-position: inside;
+    list-style-type:     decimal;
+    }
+
+    .tall {color: lightblue;} #utvalgt {color: red}

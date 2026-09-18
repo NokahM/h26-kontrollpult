@@ -1,0 +1,22 @@
+<postal_codes status="ok" hits="1" totalHits="1" page="0" perPage="0">
+  <postal_code>
+    <postal_code>3112</postal_code>
+    <city>TØNSBERG</city>
+    <category>G</category>
+    <primary_county>VESTFOLD</primary_county>
+    <additional_counties/>
+    <primary_municipality_number>NO-3905</primary_municipality_number>
+    <primary_municipality>TØNSBERG</primary_municipality>
+    <additional_municipalities/>
+    <mailbox>true</mailbox>
+    <po_box>false</po_box>
+    <x_gateadresser/>
+    <y_gateadresser/>
+    <x_postbokser/>
+    <y_postbokser/>
+    <latitude_gateadresser/>
+    <longitude_gateadresser/>
+    <latitude_postbokser/>
+    <longitude_postbokser/>
+  </postal_code>
+</postal_codes>

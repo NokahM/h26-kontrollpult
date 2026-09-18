@@ -1,0 +1,13 @@
+<dokument>
+  <avsnitt>
+    tekstavsnitt
+  </avsnitt>
+  <nummerert_liste>
+    <punkt>
+      første punkt
+    </punkt>
+    <punkt>
+      andre punkt
+    </punkt>
+  </nummerert_liste>
+</dokument>

@@ -1,0 +1,21 @@
+services:
+
+  sh1:
+    image:      busybox
+    command:    sh
+    stdin_open: true
+    tty:        true
+    networks:
+     - n1
+
+  sh2:
+    image:      alpine
+    command:    sh
+    stdin_open: true
+    tty:        true
+    networks:
+      - n1
+      - n2
+networks:
+  n1:
+  n2:
