@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Uke 38 · CGI og HTML-skjema — TSD3060 · H26</title>
+  <meta name="description" content="Common Gateway Interface: hvordan webtjeneren kjører et program per forespørsel, miljøvariablene det arver, fordeler og ulemper, og HTML-skjema med GET og POST.">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=25">
+</head>
+<body class="theme-tsd3060" data-updated="2026-09-18">
+  <div class="app-shell">
+
+    <aside class="sidebar"></aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">TSD3060</a>
+        <div class="topbar__crumb">Uke 38</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow">TSD3060 uke 38</div>
+          <h1>CGI og HTML-skjema</h1>
+          <p class="page-header__desc">Hvordan en webtjener lar et vanlig program lage svaret: Common Gateway Interface, miljøvariablene programmet arver, og HTML-skjema som sender brukerens input med GET eller POST.</p>
+          <span class="page-header__status" data-status="active"><i></i>pensum + notater</span>
+        </header>
+
+        <article class="prose">
+          <h2>Common Gateway Interface</h2>
+          <p><strong>CGI</strong> er en spesifikasjon (<a href="https://datatracker.ietf.org/doc/html/rfc3875" target="_blank" rel="noopener">RFC 3875</a>, CGI 1.1) for hvordan en webtjener og et CGI-program kommuniserer. Det fungerer slik:</p>
+          <ul>
+            <li>Filen URL-en peker på, CGI-programmet, <em>kjøres</em> av webtjeneren i stedet for å sendes som den er.</li>
+            <li>Det programmet skriver til standard ut, sendes til klienten som <strong>kroppen</strong> i HTTP-responsen.</li>
+            <li>Webtjeneren sender <em>begynnelsen</em> av responshodet (statuslinja). CGI-programmet sender <em>slutten</em> av hodet, for eksempel <code>Content-Type</code>, og <strong>den tomme linja</strong> som skiller hodet fra kroppen.</li>
+          </ul>
+          <p>Slik håndterer tjeneren en POST-forespørsel, i pseudokode. Det er de samme systemkallene som i hallotjener og NOHUP-oppgaven fra uke 33:</p>
+          <pre class="codeblock">// Webtjeneren:
+if (0 == fork()) {       // ny prosess behandler forespørselen
+    dup2(...)            // socketen blir STDIN og STDOUT
+    read(...)            // leser hodet til og med den tomme linja
+    write(...)           // skriver begynnelsen av responshodet
+    setenv(...)          // setter miljøvariabler
+    exec(CGI-program)    // prosessen erstattes av CGI-programmet
+}
+
+// CGI-programmet:
+write(resten av responshodet + tom linje)
+write(responskroppen)
+exit()</pre>
+          <p>Merk at en <em>ny prosess</em> startes for hver forespørsel. Det er både det som gjør CGI enkelt, og den største ulempen.</p>
+
+          <h2>Inndata til CGI-programmet</h2>
+          <p>Programmet får informasjon om forespørselen på tre måter:</p>
+          <ol>
+            <li><strong>Miljøvariabler</strong> som webtjeneren setter, og som programmet arver gjennom <code>fork()</code> og <code>exec()</code>.</li>
+            <li><strong>Stien og spørrestrengen i URL-en</strong> (via <code>PATH_INFO</code> og <code>QUERY_STRING</code>).</li>
+            <li><strong>Standard inn</strong>: kroppen i forespørselen, for eksempel ved POST.</li>
+          </ol>
+          <p>CGI-programmet kan <strong>ikke</strong> regne med å få EOF når det leser kroppen, for socketen er fortsatt åpen. Tjeneren setter derfor <code>CONTENT_LENGTH</code>, slik at programmet vet hvor mange byte det skal lese. Verdien kommer fra <code>Content-Length</code> i forespørselshodet. Du kan se hva klienten sender:</p>
+          <pre class="codeblock">nc -l -p 5555 &amp;
+curl -D - -d "kropp" -X POST localhost:5555</pre>
+
+          <h3>Miljøvariabler</h3>
+          <div class="dtable-wrap">
+            <table class="dtable">
+              <thead><tr><th>Variabel</th><th>Innhold</th></tr></thead>
+              <tbody>
+                <tr><td colspan="2"><strong>Basert på forespørselen</strong></td></tr>
+                <tr><td><code>REQUEST_METHOD</code></td><td>GET, HEAD, POST, PUT, DELETE …</td></tr>
+                <tr><td><code>QUERY_STRING</code></td><td>Det som står etter <code>?</code> i URL-en</td></tr>
+                <tr><td><code>CONTENT_TYPE</code></td><td>MIME-typen til kroppen</td></tr>
+                <tr><td><code>CONTENT_LENGTH</code></td><td>Lengden av kroppen i byte</td></tr>
+                <tr><td><code>PATH_INFO</code>, <code>PATH_TRANSLATED</code></td><td>Ekstra sti etter programnavnet, og den oversatt til en filsti</td></tr>
+                <tr><td><code>SCRIPT_NAME</code></td><td>Stien til CGI-programmet</td></tr>
+                <tr><td><code>SERVER_PROTOCOL</code>, <code>SERVER_PORT</code></td><td>For eksempel <code>HTTP/1.1</code> og <code>80</code></td></tr>
+                <tr><td><code>REMOTE_ADDR</code>, <code>REMOTE_HOST</code></td><td>Klientens adresse og vertsnavn</td></tr>
+                <tr><td><code>AUTH_TYPE</code>, <code>REMOTE_USER</code>, <code>REMOTE_IDENT</code></td><td>Autentiseringsmetode og brukernavn (for eksempel ved Basic Auth, uke 34)</td></tr>
+                <tr><td colspan="2"><strong>Uavhengig av forespørselen</strong></td></tr>
+                <tr><td><code>SERVER_SOFTWARE</code></td><td>Navn og versjon på webtjeneren</td></tr>
+                <tr><td><code>SERVER_NAME</code></td><td>Tjenerens vertsnavn</td></tr>
+                <tr><td><code>GATEWAY_INTERFACE</code></td><td>CGI-versjonen, for eksempel <code>CGI/1.1</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>I tillegg blir hvert felt i HTTP-hodet til en miljøvariabel med prefikset <code>HTTP_</code> og store bokstaver: <code>User-Agent</code> blir <code>HTTP_USER_AGENT</code>, og <code>Cookie</code> blir <code>HTTP_COOKIE</code>. Det enkleste CGI-programmet viser alle:</p>
+          <pre class="codeblock">#!/bin/sh
+# miljo.cgi
+echo "Content-type:text/plain;charset=utf-8"   # slutten av responshodet
+echo                                           # tom linje: hodet er ferdig
+env | sort                                     # kroppen</pre>
+
+          <h2>Fordeler og ulemper</h2>
+          <div class="dtable-wrap">
+            <table class="dtable">
+              <thead><tr><th>Fordeler</th><th>Ulemper</th></tr></thead>
+              <tbody>
+                <tr><td>Enkelt</td><td>En ny prosess per forespørsel: ressurskrevende, med konkurranse om minne, disk og CPU</td></tr>
+                <tr><td>Uavhengig av programmeringsspråk</td><td>All kommunikasjon mellom klient og database eller andre tjenester går via webtjeneren, som kan bli en flaskehals</td></tr>
+                <tr><td>Uavhengig av webtjener</td><td>Tjeneren må ofte konvertere til HTML for hver respons</td></tr>
+                <tr><td>Stor utbredelse, tidligere de facto-standard</td><td>Tilstandsløst (arvet fra HTTP) og uten transaksjonsstøtte: programmet må logge inn og ut av databasen for hver forespørsel</td></tr>
+                <tr><td></td><td>Ved feil i brukerinput må tjeneren enten be brukeren gå tilbake, eller sende hele skjemaet på nytt, ferdig utfylt</td></tr>
+                <tr><td></td><td><strong>Sikkerhet:</strong> mange CGI-programmer starter et skall, og brukerinput kan da inneholde kode som blir utført (kommandoinjeksjon, uke 34)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Input fra URL-en</h2>
+          <p>Det som står etter <code>?</code> i en lenke, havner i <code>QUERY_STRING</code>:</p>
+          <pre class="codeblock">&lt;!-- hallo_1.html --&gt;
+Si hallo til:
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="hallo_1.cgi?Arne"&gt;Arne&lt;/a&gt;
+  &lt;li&gt;&lt;a href="hallo_1.cgi?Bjarne"&gt;Bjarne&lt;/a&gt;
+  &lt;li&gt;&lt;a href="hallo_1.cgi?Cathrine"&gt;Cathrine&lt;/a&gt;
+&lt;/ul&gt;</pre>
+          <pre class="codeblock">#!/bin/sh
+# hallo_1.cgi
+echo "Content-type:text/plain;charset=utf-8"
+echo
+echo "Hallo $QUERY_STRING. Ha en fin dag :-)"</pre>
+
+          <h2>HTML-skjema</h2>
+          <p>Et <code>&lt;form&gt;</code> lager spørrestrengen for oss. Med standardmetoden GET sender nettleseren feltene som <code>navn=verdi</code>-par, URL-kodet og skilt med <code>&amp;</code>, i URL-en til programmet i <code>action</code>:</p>
+          <pre class="codeblock">&lt;!-- hallo_2.html --&gt;
+&lt;form action="hallo_2.cgi"&gt;
+  &lt;input type="text" name="navn"&gt;
+  &lt;input type="submit"&gt;
+&lt;/form&gt;</pre>
+          <pre class="codeblock">#!/bin/sh
+# hallo_2.cgi -- skriver "navn=Ola+Nordmann" for input "Ola Nordmann"
+echo "Content-type:text/plain;charset=utf-8"
+echo
+echo "Variabelen QUERY_STRING: $QUERY_STRING"</pre>
+          <p>Verdiene er <strong>URL-kodet</strong>: mellomrom blir <code>+</code>, og tegn som <code>ø</code> og <code>&amp;</code> blir <code>%C3%B8</code> og <code>%26</code>. Programmet må selv dekode dem.</p>
+          <p><strong>Hallo_3</strong> skriver HTML i stedet for ren tekst. Da endres <code>Content-type</code>, og kroppen blir et helt HTML-dokument, her med en heredoc:</p>
+          <pre class="codeblock">#!/bin/sh
+# hallo_3.cgi
+echo "Content-type:text/html;charset=utf-8"
+echo
+cat &lt;&lt; EOF
+&lt;!doctype html&gt;
+&lt;html&gt;
+  &lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;title&gt;Hallo_3&lt;/title&gt;&lt;/head&gt;
+  &lt;body&gt;Variabelen QUERY_STRING: $QUERY_STRING&lt;/body&gt;
+&lt;/html&gt;
+EOF</pre>
+          <p class="callout">Å skrive brukerinput rett inn i HTML er utrygt: inneholder input <code>&lt;script&gt;</code>, blir det kjørt i nettleseren (cross-site scripting). Input må dekodes, valideres og HTML-escapes (<code>&lt;</code> → <code>&amp;lt;</code>) før det skrives ut. Det er samme prinsipp som forberedte SQL-kommandoer i uke 34: data skal aldri tolkes som kode.</p>
+          <p><strong>Hallo_4</strong> skriver ut skjemaet selv. Da er skjema og behandling samme program, og brukeren ser resultatet under skjemaet:</p>
+          <pre class="codeblock">#!/bin/sh
+# hallo_4.cgi
+echo "Content-type:text/html;charset=utf-8"
+echo
+cat &lt;&lt; EOF
+&lt;!doctype html&gt;
+&lt;html&gt;
+  &lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;title&gt;Hallo_4&lt;/title&gt;&lt;/head&gt;
+  &lt;body&gt;
+    &lt;form action=hallo_4.cgi&gt;
+      &lt;input type=text name=fornavn&gt;&lt;br&gt;
+      &lt;input type=text name=etternavn&gt;&lt;br&gt;
+      &lt;input type=submit&gt;
+    &lt;/form&gt;
+    QUERY_STRING:&lt;br&gt;$QUERY_STRING
+  &lt;/body&gt;
+&lt;/html&gt;
+EOF</pre>
+
+          <h3>POST i stedet for GET</h3>
+          <p><strong>Hallo_5</strong> bruker <code>method='post'</code>. Da havner feltene i <em>kroppen</em> til forespørselen og ikke i URL-en, og programmet leser dem fra standard inn. <code>action</code> er utelatt, så skjemaet sendes til samme URL som det kom fra:</p>
+          <pre class="codeblock">#!/bin/sh
+# hallo_5.cgi
+echo "Content-type:text/html;charset=utf-8"
+echo
+read BODY
+cat &lt;&lt; EOF
+&lt;!doctype html&gt;
+&lt;html&gt;
+  &lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;title&gt;Hallo_5&lt;/title&gt;&lt;/head&gt;
+  &lt;body&gt;
+    &lt;form method='post'&gt;
+      &lt;input type=text name='fornavn' placeholder='fornavn'&gt;&lt;br&gt;
+      &lt;input type=text name='etternavn' placeholder='etternavn'&gt;&lt;br&gt;
+      &lt;input type=submit&gt;
+    &lt;/form&gt;
+    &lt;pre&gt;
+Info om HTTP-forespørsel:
+-------------------------
+Kroppens innhold: $BODY
+Metode:           $REQUEST_METHOD
+Kroppens lengde:  $CONTENT_LENGTH
+    &lt;/pre&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+EOF</pre>
+          <p><code>read BODY</code> leser én linje, og det virker her fordi skjemadata ikke inneholder linjeskift. Mer robust er å lese akkurat <code>CONTENT_LENGTH</code> byte, som spesifikasjonen sier: <code>BODY=$(head -c "$CONTENT_LENGTH")</code>.</p>
+          <p>Du kan sende samme POST fra kommandolinja:</p>
+          <pre class="codeblock">curl -d "fornavn=Thomas&amp;etternavn=Nordli" -X POST http://localhost/cgi-bin/hallo_5.cgi | lynx -stdin</pre>
+          <div class="dtable-wrap">
+            <table class="dtable">
+              <thead><tr><th></th><th>GET</th><th>POST</th></tr></thead>
+              <tbody>
+                <tr><td>Hvor dataene ligger</td><td>I URL-en</td><td>I kroppen</td></tr>
+                <tr><td>CGI-programmet leser</td><td><code>QUERY_STRING</code></td><td>stdin, <code>CONTENT_LENGTH</code> byte</td></tr>
+                <tr><td>Synlig i historikk, logger og bokmerker</td><td>Ja</td><td>Nei</td></tr>
+                <tr><td>Egnet for</td><td>Oppslag uten sideeffekter</td><td>Endringer og sensitive data (passord)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Prøve selv med busybox</h2>
+          <p>Busybox sin <code>httpd</code> kjører CGI-programmer som ligger i <code>cgi-bin/</code> under webroten. Programmene må være kjørbare:</p>
+          <pre class="codeblock">mkdir -p www/cgi-bin
+cp miljo.cgi hallo_*.cgi www/cgi-bin/ &amp;&amp; chmod +x www/cgi-bin/*.cgi
+busybox httpd -f -p 8080 -h www    # -h: webroten ("home")
+# http://localhost:8080/cgi-bin/miljo.cgi</pre>
+        </article>
+
+        <section class="section">
+          <div class="section__label">Øvinger for uke 38</div>
+          <div class="reslist">
+            <div class="res">
+              <span class="res__num">·</span>
+              <div><div class="res__title">Hallo CGI</div><div class="res__sub">Få et halloverden-CGI-skript til å kjøre i busybox <code>httpd</code> (skriptet i <code>cgi-bin/</code> under webroten) og vises i en nettleser. Utskriften skal være et gyldig HTML5-dokument, sjekk med <a href="https://validator.w3.org/" target="_blank" rel="noopener">validator.w3.org</a>. Få det så til å kjøre i en konteiner.</div></div>
+            </div>
+            <div class="res">
+              <span class="res__num">·</span>
+              <div><div class="res__title"><a href="https://www.w3schools.com/html/html_forms.asp" target="_blank" rel="noopener">HTML-skjematutorial</a></div><div class="res__sub">HTML Forms, Form Elements, Input Types og Input Attributes.</div></div>
+            </div>
+            <div class="res">
+              <span class="res__num">·</span>
+              <div><div class="res__title">REST-API</div><div class="res__sub">Lag et CGI-program med HTML-skjema som brukergrensesnitt til REST-API-et fra uke 33 (eller din utvidelse). Kjør grensesnittet og REST-API-et i hver sin konteiner. Tips: podman-compose.</div></div>
+            </div>
+          </div>
+        </section>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="37-html-xml-css.html"><small>forrige</small>Uke 37: HTML, XML og CSS</a>
+          <a data-dir="next" href="eksamensoversikt.html"><small>neste</small>Eksamensoversikt</a>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js?v=25"></script>
+  <script src="../../../assets/js/status.js?v=25"></script>
+  <script src="../../../assets/js/formler.js?v=25"></script>
+</body>
+</html>

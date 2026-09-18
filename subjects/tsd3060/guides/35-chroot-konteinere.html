@@ -7,7 +7,7 @@
   <meta name="description" content="Fra chroot() til namespaces og manuell konteinerhåndtering med unshare og nsenter — hva en konteiner faktisk består av.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../../assets/css/main.css?v=24">
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=25">
 </head>
 <body class="theme-tsd3060" data-updated="2026-09-02">
   <div class="app-shell">
@@ -102,6 +102,10 @@ $ sudo nsenter -t &lt;PID&gt; -a chroot $PWD/nyrot sh</pre>
             </div>
             <div class="res">
               <span class="res__num">·</span>
+              <div><div class="res__title">Utilgjengelig logg</div><div class="res__sub">Skriv om hallotjener slik at den logger klientenes IP-adresser i <code>/var/log/hallo/</code> og deretter endrer rotkatalogen til <code>/var/hallo/</code>, slik at prosessen ikke lenger har noen gyldig sti til loggen. Lag et skript som viser at kravene er oppfylt.</div></div>
+            </div>
+            <div class="res">
+              <span class="res__num">·</span>
               <div><div class="res__title">REST-konteiner</div><div class="res__sub">Få REST-API-et fra uke 33 (eller din egen utvidelse av det) til å kjøre inni en unshare-konteiner.</div></div>
             </div>
           </div>
@@ -109,14 +113,14 @@ $ sudo nsenter -t &lt;PID&gt; -a chroot $PWD/nyrot sh</pre>
 
         <nav class="chapter-nav">
           <a data-dir="prev" href="34-sqlite-injeksjon-autentisering.html"><small>forrige</small>Uke 34: SQLite, injeksjon og autentisering</a>
-          <a data-dir="next" href="eksamensoversikt.html"><small>neste</small>Eksamensoversikt</a>
+          <a data-dir="next" href="36-podman-docker-compose.html"><small>neste</small>Uke 36: Podman, Docker og Compose</a>
         </nav>
       </main>
     </div>
   </div>
 
-  <script src="../../../assets/js/main.js?v=24"></script>
-  <script src="../../../assets/js/status.js?v=24"></script>
-  <script src="../../../assets/js/formler.js?v=24"></script>
+  <script src="../../../assets/js/main.js?v=25"></script>
+  <script src="../../../assets/js/status.js?v=25"></script>
+  <script src="../../../assets/js/formler.js?v=25"></script>
 </body>
 </html>

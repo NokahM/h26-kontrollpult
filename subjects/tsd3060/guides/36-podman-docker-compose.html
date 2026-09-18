@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Uke 36 · Podman, Docker og Compose — TSD3060 · H26</title>
+  <meta name="description" content="Fra håndlaget chroot-rot til konteinerbilder med Podman/Docker: import, Containerfile, lag, cgroup-begrensninger, nettverk og podman-compose.">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=25">
+</head>
+<body class="theme-tsd3060" data-updated="2026-09-18">
+  <div class="app-shell">
+
+    <aside class="sidebar"></aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">TSD3060</a>
+        <div class="topbar__crumb">Uke 36</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow">TSD3060 uke 36</div>
+          <h1>Podman, Docker og Compose</h1>
+          <p class="page-header__desc">Uke 35 bygde en konteiner for hånd med chroot og unshare. Nå gjør vi det samme med et konteinerverktøy: rotkatalogen blir et <em>bilde</em>, bildene bygges i lag med en Containerfile, og Compose kobler flere konteinere sammen i egne nettverk.</p>
+          <span class="page-header__status" data-status="active"><i></i>pensum + notater</span>
+        </header>
+
+        <article class="prose">
+          <h2>Fra rotkatalog til konteinerbilde</h2>
+          <p>Et <strong>konteinerbilde</strong> (container image) er i bunn og grunn et filsystem pakket som en tar-fil, pluss litt metadata om hva som skal kjøres. Rotkatalogen <code>nyrot/</code> fra uke 35 (med busybox) kan derfor gjøres om til et bilde direkte:</p>
+          <pre class="codeblock">tar -czf nyrot.tar.gz -C nyrot .     # pakker filsystemet i en "tar-ball"
+sudo apt install podman
+podman import - nyrot &lt; nyrot.tar.gz  # lager bildet "nyrot" i Podmans bildelager
+podman image ls                      # lister bildene</pre>
+          <p>Så kan vi starte konteinere basert på bildet:</p>
+          <pre class="codeblock">podman run nyrot                     # feiler: bildet sier ikke hva som skal kjøres
+podman run nyrot pwd                 # vi oppgir kommandoen selv
+podman container ps                  # tilsynelatende ingen konteinere ...
+podman container ps -a               # ... men de avsluttede ligger igjen ("zombiekonteinere")
+podman container rm -a               # sletter alle
+podman run --rm nyrot ps             # --rm: slett konteineren når prosessen avslutter</pre>
+          <p>Et skall trenger både stdin og en terminal. Uten dem avslutter <code>sh</code> med en gang:</p>
+          <pre class="codeblock">podman run --rm nyrot sh                           # problem: ingen stdin/terminal
+podman run --interactive --tty --rm nyrot sh       # løsning
+podman run -it --rm nyrot sh                       # samme i kortform</pre>
+          <p>Med <code>-c</code> kan vi gi en <em>konteinerfilinstruksjon</em> allerede ved import, slik at bildet selv vet hva det skal starte:</p>
+          <pre class="codeblock">podman import -c 'ENTRYPOINT /bin/sh' nyrot.tar.gz nyrot
+podman run -it --rm nyrot</pre>
+          <p>Alt dette fungerer likt med Docker: bytt <code>podman</code> med <code>docker</code>. Forskjellen er at Podman ikke trenger en bakgrunnsdemon som kjører som root, og konteinerne kan kjøres av en vanlig bruker (rootless).</p>
+
+          <h2>Nytt bilde fra en endret konteiner</h2>
+          <p>Endringer du gjør i en kjørende konteiner, havner ikke i bildet. For å ta vare på dem kan du eksportere konteinerens filsystem og importere det som et nytt bilde:</p>
+          <pre class="codeblock">podman run -it --rm nyrot
+  # ... gjør endringer, f.eks. legg inn /etc/passwd, /home/tux og /root
+  # Ctrl-p Ctrl-q  -- kobler fra (detach) uten å stoppe konteineren
+podman export &lt;navn/id&gt; &gt; nyrot2.tar.gz
+podman stop -a -t1                   # rydder opp
+podman import nyrot2.tar.gz nyrot2</pre>
+
+          <h2>Containerfile: bygge videre på et eksisterende bilde</h2>
+          <p>Den vanlige måten er å beskrive bildet i en <strong>Containerfile</strong> (Docker kaller den <code>Dockerfile</code>, formatet er det samme). Hver instruksjon bygger videre på bildet fra forrige linje:</p>
+          <pre class="codeblock"># bildet vi bygger videre på
+FROM localhost/nyrot2:latest
+# kopier fra byggekatalogen inn i bildet
+COPY hallo.txt /home/trix/
+COPY passwd /etc/
+# kjøres i bildet under bygging
+RUN sed -i 's/tux/trix/g' /etc/passwd
+# arbeidskatalog og bruker når konteineren starter (ikke root)
+WORKDIR /home/trix
+USER trix
+# hva som startes
+ENTRYPOINT /bin/sh</pre>
+          <p>Kommentarer i en Containerfile må stå på egen linje. En <code>#</code> etter en instruksjon blir tolket som en del av den.</p>
+          <pre class="codeblock">mkdir -p nyrot3 &amp;&amp; echo hallo &gt; nyrot3/hallo.txt
+# legg Containerfile (og passwd) i nyrot3/
+podman build -t nyrot3 nyrot3/       # katalogen er "byggekonteksten"</pre>
+          <p>Legg merke til <code>USER trix</code>: prinsippet om minst mulig rettigheter fra uke 33 gjelder inni konteineren også.</p>
+
+          <h2>Lag og historie</h2>
+          <p>Et bilde består av <strong>lag</strong>. Hver instruksjon som endrer filsystemet (<code>COPY</code>, <code>RUN</code>) gir et nytt lag oppå de forrige. Lagene deles mellom bilder og mellomlagres, så en ny bygging gjør bare om lagene som er endret:</p>
+          <pre class="codeblock">podman image ls -a                   # viser også de mellomliggende lagene
+podman history localhost/nyrot3:latest</pre>
+          <p>Sammenlign med det offisielle busybox-bildet:</p>
+          <pre class="codeblock">podman image search --format '{{.Name}}\t{{.Official}}' docker.io/busybox
+podman image pull docker.io/library/busybox
+podman image ls -a                   # sammenlign størrelsen
+podman history docker.io/library/busybox:latest</pre>
+          <p>Bilder som mangler lokalt, lastes ned automatisk ved første <code>run</code>, og gjenbrukes fra mellomlageret neste gang:</p>
+          <pre class="codeblock">podman image rm -a
+podman run -it --rm --name sh1 busybox echo hei      # laster ned
+podman run -it --rm --name sh1 busybox echo hallo    # bruker mellomlageret</pre>
+
+          <h2>Begrensninger med cgroups</h2>
+          <p>Navnerom (uke 35) bestemmer hva en konteiner kan <em>se</em>. <strong>cgroups</strong> (control groups) bestemmer hvor mye den kan <em>bruke</em> av minne og CPU. Det beskytter verten og de andre konteinerne mot en konteiner som går amok, for eksempel under et tjenestenektangrep:</p>
+          <pre class="codeblock">podman run -dit --rm -m 8m --name sh1 busybox        # maks 8 MB minne
+podman container inspect sh1 | jq .[].HostConfig.Memory
+
+sudo podman run -it --rm --cpuset-cpus 0 busybox nproc   # kun CPU 0 -&gt; nproc gir 1
+sudo podman run -dit --rm --name sh1 --cpu-shares 512 busybox
+sudo podman container inspect sh1 | grep -i cpu</pre>
+          <p><code>--cpu-shares</code> er en <em>relativ vekt</em> (standard 1024). Den begrenser bare når det er konkurranse om CPU-en: 512 betyr halvparten så mye CPU-tid som en konteiner med standardvekt.</p>
+
+          <h2>Nettverk</h2>
+          <p>Uten videre havner konteinere i standardnettverket <code>podman</code>. Hver konteiner får en egen IP-adresse i nettverkets subnett:</p>
+          <pre class="codeblock">podman run -dit --name sh1 --rm busybox
+podman attach sh1                    # frakobling: Ctrl-p Ctrl-q
+podman network ls
+podman network inspect podman | jq .[].subnets[]
+podman exec sh1 ip -o -4 a           # konteinerens IP-adresse
+podman stop sh1</pre>
+          <p>For å nå en tjeneste i konteineren utenfra må en port på verten videresendes (NAT) til konteinerens port med <code>-p vert:konteiner</code>:</p>
+          <pre class="codeblock">$ podman run -p 8080:80 -it --rm --name web alpine
+# apk add busybox-extras curl
+# httpd                              # busybox sin webtjener
+# echo Det virket &gt; index.html
+# curl localhost                     # fra verten: curl localhost:8080</pre>
+          <p>Det samme som Containerfile:</p>
+          <pre class="codeblock">FROM alpine
+RUN apk add busybox-extras curl
+RUN echo Det virket &gt; index.html
+EXPOSE 80
+ENTRYPOINT httpd -f</pre>
+          <p><code>-f</code> holder httpd i forgrunnen. Uten den demoniserer httpd seg, hovedprosessen avslutter, og da stopper konteineren.</p>
+          <p><strong>Egendefinerte nettverk</strong> gir segmentering: konteinere kan bare snakke med hverandre hvis de deler et nettverk. En konteiner kan være koblet til flere nettverk samtidig:</p>
+          <pre class="codeblock">podman network create n1; podman network create n2; podman network create n3
+
+podman run -dit --name sh1 --rm --network n1 busybox sh
+podman run -dit --name sh2 --rm --network n2 busybox sh     # sh1 og sh2 ser ikke hverandre
+podman network connect n1 sh2                               # nå er sh2 i både n1 og n2
+podman container inspect sh2 | jq '.[].NetworkSettings.Networks'
+podman run -dit --name sh3 --rm --network n1 --network n2 --network n3 busybox sh
+podman exec sh3 ip -o -4 a                                  # ett grensesnitt per nettverk
+
+podman stop -a -t1; podman network prune                    # rydder opp</pre>
+          <p>I egendefinerte nettverk kan konteinerne nå hverandre ved <em>navn</em> (innebygd DNS), ikke bare ved IP-adresse.</p>
+
+          <h2>Compose: flere konteinere i én fil</h2>
+          <p>Med mange konteinere og nettverk blir kommandolinjene lange. <strong>Compose</strong> beskriver hele oppsettet i en YAML-fil (<code>sudo apt install podman-compose</code>):</p>
+          <pre class="codeblock"># shell.yaml
+services:
+  sh1:
+    image: busybox
+    command: sh
+    stdin_open: true      # tilsvarer -i
+    tty: true             # tilsvarer -t
+    networks:
+      - n1
+  sh2:
+    image: alpine
+    command: sh
+    stdin_open: true
+    tty: true
+    networks:
+      - n1
+      - n2
+networks:
+  n1:
+  n2:</pre>
+          <pre class="codeblock">podman-compose -f shell.yaml up --detach
+podman-compose -f shell.yaml down</pre>
+          <p>Et eksempel med en offisiell webtjener (Apache) og en klientkonteiner:</p>
+          <pre class="codeblock"># web.yaml
+services:
+  web:
+    image: docker.io/library/httpd
+    ports:
+      - 8080:80
+  sh:
+    image: alpine
+    command: sh
+    stdin_open: true
+    tty: true</pre>
+          <pre class="codeblock">podman search -f is-official docker.io/httpd   # finn det offisielle bildet
+podman-compose -f web.yaml up -d
+curl localhost:8080                            # fra verten, via portvideresendingen
+podman container exec -it compose_web_1 bash   # inn i web-konteineren
+
+podman attach compose_sh_1                     # inn i klientkonteineren:
+  echo -en 'GET / HTTP/1.1\r\nHost: web\r\nConnection: close\r\n\r\n' | nc web 80
+  apk add curl
+  curl -v web                                  # tjenestenavnet "web" er et vertsnavn</pre>
+          <p>Compose kan også bygge bildet selv fra en Dockerfile i stedet for å hente et ferdig bilde, med <code>build:</code> i stedet for <code>image:</code>:</p>
+          <pre class="codeblock"># curl/Dockerfile
+FROM alpine
+RUN apk add curl
+CMD sh
+
+# curl/compose.yaml
+services:
+  web:
+    image: docker.io/library/httpd
+    ports:
+      - 8080:80
+  curl:
+    build: .              # bygg fra Dockerfile i samme katalog
+    command: sh
+    stdin_open: true
+    tty: true</pre>
+          <pre class="codeblock">cd curl/ &amp;&amp; podman-compose up -d
+podman attach curl_curl_1
+curl web</pre>
+
+          <h2>Oppsummert</h2>
+          <div class="dtable-wrap">
+            <table class="dtable">
+              <thead><tr><th>Mekanisme</th><th>Hva den gir</th><th>Verktøy</th></tr></thead>
+              <tbody>
+                <tr><td>chroot / bildets filsystem</td><td>Eget filtre</td><td><code>import</code>, <code>build</code></td></tr>
+                <tr><td>Navnerom</td><td>Egne PID-er, nettverk, vertsnavn …</td><td>settes opp av <code>podman run</code></td></tr>
+                <tr><td>cgroups</td><td>Grenser for minne og CPU</td><td><code>-m</code>, <code>--cpuset-cpus</code>, <code>--cpu-shares</code></td></tr>
+                <tr><td>Nettverk</td><td>Segmentering og portvideresending</td><td><code>network create</code>, <code>-p</code></td></tr>
+                <tr><td>Compose</td><td>Flere konteinere og nettverk i én fil</td><td><code>podman-compose</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <section class="section">
+          <div class="section__label">Øvinger for uke 36</div>
+          <div class="reslist">
+            <div class="res">
+              <span class="res__num">·</span>
+              <div><div class="res__title">Hallotjener med Podman</div><div class="res__sub">Lag en tar-ball med busybox-filsystem og importer den. Skriv en Containerfile som bygger på dette bildet og kopierer inn hallotjener, bygg og start et skall og kjør tjeneren derfra. Bytt deretter til <code>docker.io/busybox</code> som grunnlag, og la hallotjener starte automatisk. Får du den demonisert?</div></div>
+            </div>
+            <div class="res">
+              <span class="res__num">·</span>
+              <div><div class="res__title">REST-konteiner i Podman</div><div class="res__sub">Få REST-API-et fra uke 33 (eller din utvidelse av det) til å kjøre i én eller flere Podman-konteinere.</div></div>
+            </div>
+            <div class="res">
+              <span class="res__num">·</span>
+              <div><div class="res__title"><a href="https://github.com/docker/labs/tree/master/beginner/" target="_blank" rel="noopener">Docker for beginners</a></div><div class="res__sub">Veiledning: Setup, 1.0 Running your first container og 2.0 Webapps with Docker.</div></div>
+            </div>
+            <div class="res">
+              <span class="res__num">·</span>
+              <div><div class="res__title">Docker og sikkerhet: <a href="https://github.com/docker/labs/blob/master/security/cgroups/README.md" target="_blank" rel="noopener">cgroups</a>, <a href="https://github.com/docker/labs/blob/master/security/capabilities/README.md" target="_blank" rel="noopener">capabilities</a> og <a href="https://github.com/docker/labs/blob/master/security/userns/README.md" target="_blank" rel="noopener">namespaces</a></div><div class="res__sub">Tre veiledninger fra Docker labs.</div></div>
+            </div>
+            <div class="res">
+              <span class="res__num">·</span>
+              <div><div class="res__title">podman-nettverk</div><div class="res__sub">Uten compose: lag to nettverk, én konteiner i hvert, og en tredje konteiner koblet til begge. Undersøk hvem som har kontakt med hvem.</div></div>
+            </div>
+            <div class="res">
+              <span class="res__num">·</span>
+              <div><div class="res__title">podmanbegrensninger</div><div class="res__sub">Lag en konteiner med begrenset minne og en med begrenset CPU, og kontroller at begrensningene virker. Først uten compose, deretter med.</div></div>
+            </div>
+            <div class="res">
+              <span class="res__num">·</span>
+              <div><div class="res__title">podman-compose</div><div class="res__sub">Lag en compose-fil med to konteinere: en webtjener og et interaktivt skall med en tekstbasert webklient. Se websiden fra verten og fra skallkonteineren.</div></div>
+            </div>
+          </div>
+        </section>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="35-chroot-konteinere.html"><small>forrige</small>Uke 35: chroot og konteinere</a>
+          <a data-dir="next" href="37-html-xml-css.html"><small>neste</small>Uke 37: HTML, XML og CSS</a>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js?v=25"></script>
+  <script src="../../../assets/js/status.js?v=25"></script>
+  <script src="../../../assets/js/formler.js?v=25"></script>
+</body>
+</html>

@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>TSD3060 — Sikre webtjenester · H26</title>
-  <meta name="description" content="Utvikling av sikre webtjenester (TSD3060) — kapittelguider for uke 33-35: HTTP/REST, SQLite/injeksjon/autentisering, chroot/konteinere.">
+  <meta name="description" content="Utvikling av sikre webtjenester (TSD3060) — kapittelguider for uke 33-38: HTTP/REST, SQLite/injeksjon/autentisering, chroot/konteinere, Podman/Compose, HTML/XML/CSS og CGI.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../assets/css/main.css?v=24">
+  <link rel="stylesheet" href="../../assets/css/main.css?v=25">
 </head>
-<body class="theme-tsd3060" data-updated="2026-09-02">
+<body class="theme-tsd3060" data-updated="2026-09-18">
   <div class="app-shell">
 
     <aside class="sidebar"></aside>
@@ -27,8 +27,8 @@
         <header class="page-header">
           <div class="page-header__eyebrow">TSD3060</div>
           <h1>Utvikling av sikre webtjenester</h1>
-          <p class="page-header__desc">Læreres egne forelesningsnotater, omskrevet til kapitler: HTTP-tjenere fra bunnen, SQL-injeksjon og autentisering, og hvordan en konteiner faktisk er bygget opp av chroot og navnerom.</p>
-          <span class="page-header__status" data-status="active"><i></i>3 kapitler · uke 33&#8211;35</span>
+          <p class="page-header__desc">Læreres egne forelesningsnotater, omskrevet til kapitler: HTTP-tjenere fra bunnen, SQL-injeksjon og autentisering, konteinere fra chroot og navnerom til Podman og Compose, og hvordan tjeneren leverer HTML, XML og CGI-svar.</p>
+          <span class="page-header__status" data-status="active"><i></i>6 kapitler · uke 33&#8211;38</span>
         </header>
 
         <section class="section">
@@ -55,6 +55,27 @@
                 <div class="res__sub">namespaces, unshare, nsenter</div>
               </div>
             </div>
+            <div class="res">
+              <span class="res__num">36</span>
+              <div>
+                <div class="res__title"><a href="guides/36-podman-docker-compose.html">Podman, Docker og Compose</a></div>
+                <div class="res__sub">Containerfile, lag, cgroups, nettverk, podman-compose</div>
+              </div>
+            </div>
+            <div class="res">
+              <span class="res__num">37</span>
+              <div>
+                <div class="res__title"><a href="guides/37-html-xml-css.html">HTML, XML og CSS</a></div>
+                <div class="res__sub">Semistrukturerte data, velformet og gyldig XML, DTD, CSS</div>
+              </div>
+            </div>
+            <div class="res">
+              <span class="res__num">38</span>
+              <div>
+                <div class="res__title"><a href="guides/38-cgi-html-skjema.html">CGI og HTML-skjema</a></div>
+                <div class="res__sub">Miljøvariabler, QUERY_STRING, GET og POST</div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -73,7 +94,7 @@
 
         <section class="section">
           <div class="section__label">Kurssystem</div>
-          <p class="callout">Resten av semesteret (uke 36 og utover) ligger foreløpig kun i det opprinnelige kurssystemet — det fylles på her etter hvert som pensum blir klart. De fullstendige eksamensoppgavene med sensorveiledninger og et eldre prosjekteksempel finnes også kun der (eksamensoversikten her er en mønsteranalyse, ikke en full gjengivelse).</p>
+          <p class="callout">Etter planen kommer JavaScript i uke 39 og repetisjon i uke 40. Uke 41 er det ingen undervisning. Kapitlene fylles på her etter hvert som notatene kommer i kurssystemet. De fullstendige eksamensoppgavene med sensorveiledninger og et eldre prosjekteksempel finnes også kun der (eksamensoversikten her er en mønsteranalyse, ikke en full gjengivelse).</p>
           <a class="btn" href="https://debbie.usn.no/tsd3060/" target="_blank" rel="noopener">
             Åpne kurssystem (debbie.usn.no)
           </a>
@@ -83,8 +104,8 @@
     </div>
   </div>
 
-  <script src="../../assets/js/main.js?v=24"></script>
-  <script src="../../assets/js/status.js?v=24"></script>
-  <script src="../../assets/js/formler.js?v=24"></script>
+  <script src="../../assets/js/main.js?v=25"></script>
+  <script src="../../assets/js/status.js?v=25"></script>
+  <script src="../../assets/js/formler.js?v=25"></script>
 </body>
 </html>

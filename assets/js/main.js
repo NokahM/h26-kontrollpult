@@ -36,14 +36,17 @@
     {
       id: 'tsd3060', code: 'TSD3060', course: 'TSD3060', kind: 'emne', short: 'Sikre webtjenester',
       name: 'Utvikling av sikre webtjenester',
-      desc: 'HTTP-tjenere i C, SQL-injeksjon og autentisering, chroot og konteinere.',
-      scope: '3 uker og eksamensoversikt',
+      desc: 'HTTP-tjenere i C, SQL-injeksjon og autentisering, konteinere, HTML/XML/CSS og CGI.',
+      scope: '6 uker og eksamensoversikt',
       href: 'subjects/tsd3060/index.html',
       groups: [
         { label: 'Uker', items: [
           { n: '33', title: 'HTTP, port 80/443 og REST', part: 'Uke 33', track: 'page', href: 'subjects/tsd3060/guides/33-http-rest.html' },
           { n: '34', title: 'SQLite, injeksjon og autentisering', part: 'Uke 34', track: 'page', href: 'subjects/tsd3060/guides/34-sqlite-injeksjon-autentisering.html' },
-          { n: '35', title: 'chroot og konteinere', part: 'Uke 35', track: 'page', href: 'subjects/tsd3060/guides/35-chroot-konteinere.html' }
+          { n: '35', title: 'chroot og konteinere', part: 'Uke 35', track: 'page', href: 'subjects/tsd3060/guides/35-chroot-konteinere.html' },
+          { n: '36', title: 'Podman, Docker og Compose', part: 'Uke 36', track: 'page', href: 'subjects/tsd3060/guides/36-podman-docker-compose.html' },
+          { n: '37', title: 'HTML, XML og CSS', part: 'Uke 37', track: 'page', href: 'subjects/tsd3060/guides/37-html-xml-css.html' },
+          { n: '38', title: 'CGI og HTML-skjema', part: 'Uke 38', track: 'page', href: 'subjects/tsd3060/guides/38-cgi-html-skjema.html' }
         ] },
         { label: 'Eksamen', items: [
           { title: 'Eksamensoversikt', part: 'Eksamensforberedelse', href: 'subjects/tsd3060/guides/eksamensoversikt.html' }

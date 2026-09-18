@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Uke 37 · HTML, XML og CSS — TSD3060 · H26</title>
+  <meta name="description" content="Semistrukturerte data og dokumenter som trær: HTML og HTML5, XML med velformethet, navnerom, DTD og XML Schema, og CSS for både HTML og XML.">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=25">
+</head>
+<body class="theme-tsd3060" data-updated="2026-09-18">
+  <div class="app-shell">
+
+    <aside class="sidebar"></aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">TSD3060</a>
+        <div class="topbar__crumb">Uke 37</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow">TSD3060 uke 37</div>
+          <h1>HTML, XML og CSS</h1>
+          <p class="page-header__desc">Det webtjenestene våre sender tilbake: semistrukturerte data og dokumenter som trær. HTML for innhold i nettleseren, XML for data med egendefinert struktur, og CSS for utseendet til begge.</p>
+          <span class="page-header__status" data-status="active"><i></i>pensum + notater</span>
+        </header>
+
+        <article class="prose">
+          <h2>Semistrukturerte data</h2>
+          <p>Mye data har ikke den faste tabellstrukturen en relasjonsdatabase krever, men har likevel <em>en viss</em> struktur. Slike data kalles <strong>semistrukturerte</strong>. De kan</p>
+          <ul>
+            <li>være irregulære og ufullstendige,</li>
+            <li>ha en struktur som endres ofte,</li>
+            <li>være skjemaløse, med bare begrensninger på selve dataene.</li>
+          </ul>
+          <p>JSON og XML er typiske eksempler. Skjemaet bygges ofte <em>når dataene leses inn</em>, i stedet for å være definert på forhånd som i en relasjonsdatabase. Spørringer mot slike data er som regel <strong>navigerende</strong> (du går gjennom en trestruktur og finner data etter posisjon) og ikke <strong>deklarative</strong> som SQL.</p>
+          <p><strong>SGML</strong> (Standard Generalized Markup Language, ISO-standard fra 1986) er en tidlig standard for å definere slike oppmerkingsspråk. Den skiller struktur fra data, lar brukeren definere strukturen selv med en DTD, og er idégrunnlaget for både HTML og XML. Den høye kompleksiteten bremset utbredelsen.</p>
+
+          <h2>Dokumentet som tre</h2>
+          <p>Et dokument med et tekstavsnitt og en nummerert liste med to punkter er et tre: dokumentet er roten, avsnittet og lista er barn, og hvert punkt er barn av lista. Samme tre kan skrives i HTML eller XML:</p>
+          <pre class="codeblock">&lt;!doctype html&gt;
+&lt;html&gt;
+  &lt;head&gt;&lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;Tekstavsnitt&lt;/p&gt;
+    &lt;ol&gt;
+      &lt;li&gt;første punkt&lt;/li&gt;
+      &lt;li&gt;andre punkt&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+          <pre class="codeblock">&lt;?xml version="1.0"?&gt;
+&lt;dokument&gt;
+  &lt;avsnitt&gt;tekstavsnitt&lt;/avsnitt&gt;
+  &lt;nummerert_liste&gt;
+    &lt;punkt&gt;første punkt&lt;/punkt&gt;
+    &lt;punkt&gt;andre punkt&lt;/punkt&gt;
+  &lt;/nummerert_liste&gt;
+&lt;/dokument&gt;</pre>
+          <p>Forskjellen: i HTML er elementnavnene faste og har kjent betydning (<code>ol</code> er en nummerert liste). I XML finner du på navnene selv, og de sier ingenting om hvordan dokumentet skal vises.</p>
+
+          <h2>HTML</h2>
+          <p><strong>HyperText Markup Language</strong> er oppmerkingsspråket for webdokumenter, utviklet av Tim Berners-Lee og andre på CERN, med plattformuavhengighet som mål: det skulle virke på ulike PC-er og PDA-er, og i dag på telefoner, TV-er, biler og kjøleskap.</p>
+          <div class="dtable-wrap">
+            <table class="dtable">
+              <thead><tr><th class="num">År</th><th>Hendelse</th></tr></thead>
+              <tbody>
+                <tr><td class="num">1991</td><td>Første liste over HTML-tagger</td></tr>
+                <tr><td class="num">1995</td><td>Standardisert av IETF (RFC 1866), basert på SGML</td></tr>
+                <tr><td class="num">2014</td><td>HTML5 fra W3C. I dag vedlikeholdes standarden av WHATWG som en «levende standard»</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p><strong>HTML5</strong> erstatter HTML 4.01 og er ikke lenger basert på SGML. Standarden prøver å gjøre tilleggsmoduler (plugins) overflødige og inkluderer:</p>
+          <ul>
+            <li>DOM (Document Object Model) med API for JavaScript,</li>
+            <li>egne elementer for lyd, video og tegning (<code>audio</code>, <code>video</code>, <code>canvas</code>),</li>
+            <li>semantiske elementer (<code>section</code>, <code>article</code>, <code>header</code>, <code>nav</code>),</li>
+            <li>støtte for SVG (vektorgrafikk) og MathML (matematisk notasjon).</li>
+          </ul>
+          <p>HTML-spesifikasjonen deler elementene inn i seks typer:</p>
+          <div class="dtable-wrap">
+            <table class="dtable">
+              <thead><tr><th>Type</th><th>Kjennetegn</th><th>Eksempler</th></tr></thead>
+              <tbody>
+                <tr><td>Void elements</td><td>Uten innhold og uten slutt-tagg</td><td><code>br</code>, <code>hr</code>, <code>img</code>, <code>input</code>, <code>link</code>, <code>meta</code></td></tr>
+                <tr><td>Template</td><td>Mal som ikke vises direkte</td><td><code>template</code></td></tr>
+                <tr><td>Raw text</td><td>Innholdet tolkes ikke som HTML</td><td><code>script</code>, <code>style</code></td></tr>
+                <tr><td>Escapable raw text</td><td>Bare tekst, men entiteter som <code>&amp;amp;</code> tolkes</td><td><code>textarea</code>, <code>title</code></td></tr>
+                <tr><td>Foreign elements</td><td>Fra navnerommene til MathML og SVG</td><td><code>math</code>, <code>svg</code></td></tr>
+                <tr><td>Normal elements</td><td>Alle andre tillatte elementer</td><td><code>p</code>, <code>div</code>, <code>a</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Et minimalt, gyldig HTML5-dokument:</p>
+          <pre class="codeblock">&lt;!doctype html&gt;
+&lt;html lang="no"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;Tittel&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Overskrift&lt;/h1&gt;
+    &lt;p&gt;Vanlig tekst i et avsnitt. Linjeskift må kodes med &lt;br&gt;.
+       Vi kan referere til andre URL-er med &lt;i&gt;hyperlenker&lt;/i&gt;:&lt;/p&gt;
+    &lt;a href="http://www.usn.no" id="123"&gt;Hyperlenke&lt;/a&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+
+          <h2>XML</h2>
+          <p><strong>eXtensible Markup Language</strong> er laget for å representere semistrukturerte data. Et XML-dokument består av elementer. Et element har en start-tagg, en slutt-tagg og innholdet mellom dem, som kan være andre elementer, tekst og <em>entitetsreferanser</em> (for tegn som ikke finnes på tastaturet, reserverte tegn som <code>&amp;lt;</code>, og «snarveier» til tekst eller eksterne filer). Elementer kan også ha attributter.</p>
+          <p>Et XML-dokument er <strong>velformet</strong> (well-formed) når</p>
+          <ol>
+            <li>ett rotelement inneholder alle de andre elementene,</li>
+            <li>elementene er nøstet i en trestruktur uten overlapping (<code>&lt;a&gt;&lt;b&gt;&lt;/a&gt;&lt;/b&gt;</code> er ulovlig),</li>
+            <li>alle ikke-tomme elementer har både start- og slutt-tagg.</li>
+          </ol>
+          <p>XML 1.0 <em>bør</em> ha en XML-deklarasjon først (<code>&lt;?xml version="1.0"?&gt;</code>). XML 1.1 <em>må</em> ha den.</p>
+          <p>Mange API-er svarer med XML. Eksempel fra Posten:</p>
+          <pre class="codeblock">URL="https://adressesok.posten.no/api/v1/postal_codes.xml?postal_code=3112"
+curl -s $URL | xq &gt; 3112.xml</pre>
+
+          <h3>Navnerom</h3>
+          <p>Med <strong>navnerom</strong> kan et dokument bruke elementer fra ulike kilder uten navnekollisjon. Navnerommet identifiseres med en URI (globalt unik), og får et lokalt prefiks i dokumentet. Standardnavnerommet har ikke prefiks:</p>
+          <pre class="codeblock">&lt;xml-eksempel
+    xmlns:tekst="http://debbie.usn.no/navnerom/tekst"
+    xmlns:tall="http://debbie.usn.no/navnerom/tall"&gt;
+  &lt;tekst:punkt&gt;første punkt&lt;/tekst:punkt&gt;
+  &lt;tekst:punkt&gt;andre punkt&lt;/tekst:punkt&gt;
+  &lt;tall:punkt&gt;x=1; y=2&lt;/tall:punkt&gt;
+  &lt;tall:punkt&gt;x=3; y=4&lt;/tall:punkt&gt;
+&lt;/xml-eksempel&gt;</pre>
+          <p>Her er <code>tekst:punkt</code> og <code>tall:punkt</code> to forskjellige elementtyper, selv om begge heter <code>punkt</code>.</p>
+
+          <h3>Gyldig XML: DTD og XML Schema</h3>
+          <p>Velformet betyr at syntaksen er riktig. <strong>Gyldig</strong> (valid) betyr i tillegg at dokumentet følger en bestemt innholdsmodell: hvilke elementer som er lov, i hvilken rekkefølge og hvor mange. Innholdsmodellen beskrives med en <strong>DTD</strong> (Document Type Definition) eller et <strong>XML Schema</strong>. Ingen av dem er påkrevd.</p>
+          <p>En DTD har fire typer deklarasjoner: element, attributtliste, entitet og notasjon.</p>
+          <pre class="codeblock">&lt;!ELEMENT bokliste (bok+)&gt;                    &lt;!-- én eller flere bok --&gt;
+&lt;!ELEMENT bok (tittel, etternavn, fornavn)&gt;    &lt;!-- akkurat disse, i denne rekkefølgen --&gt;
+&lt;!ELEMENT tittel (#PCDATA)&gt;                    &lt;!-- tekst --&gt;
+&lt;!ELEMENT etternavn (#PCDATA)&gt;
+&lt;!ELEMENT fornavn (#PCDATA)&gt;
+&lt;!ATTLIST bok id CDATA #REQUIRED&gt;             &lt;!-- bok må ha attributtet id --&gt;</pre>
+          <div class="dtable-wrap">
+            <table class="dtable">
+              <thead><tr><th></th><th>DTD</th><th>XML Schema (W3C)</th></tr></thead>
+              <tbody>
+                <tr><td>Skrevet i</td><td>Egen syntaks, ikke XML</td><td>XML</td></tr>
+                <tr><td>Navnerom</td><td>Ikke støttet</td><td>Støttet</td></tr>
+                <tr><td>Datatyper</td><td>Svært begrenset (i praksis bare tekst)</td><td>Mange (heltall, dato, …), knyttet til hvert element</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>XML Schema løser altså begrensningene ved DTD. Det gir mer uttrykkskraft, og webapplikasjoner kan utveksle XML robust uten egne ad hoc-verktøy for kontroll. For en sikker webtjeneste betyr det at mottatte data kan <em>valideres</em> mot et skjema før de brukes.</p>
+
+          <h2>CSS</h2>
+          <p><strong>Cascading Style Sheets</strong> bestemmer utseendet, og ble foreslått av Håkon Wium Lie fra Halden. CSS kan styre visningen av både HTML og XML, men kan ikke endre strukturen i dokumentet. Du kan prøve i nettleserkonsollet: <code>document.body.style.backgroundColor="red"</code>.</p>
+          <p>Syntaksen er en <em>selektor</em>, som velger elementer i dokumentet, fulgt av navn–verdi-par:</p>
+          <pre class="codeblock">selektor { navn: verdi; navn: verdi; ... }</pre>
+          <p>Elementer kan grupperes i <strong>klasser</strong> (<code>.navn</code>), og enkeltelementer kan få en <strong>id</strong> (<code>#navn</code>):</p>
+          <pre class="codeblock">.sitat     { color: green }
+.hypotese  { color: blue }
+#viktigste { color: red }
+
+&lt;p class="hypotese"&gt;dette blir et blått avsnitt&lt;/p&gt;
+&lt;p class="sitat"&gt;dette blir et grønt avsnitt&lt;/p&gt;
+&lt;p id="viktigste"&gt;dette blir rødt&lt;/p&gt;</pre>
+          <p>Noen pseudoklasser og pseudoelementer: <code>:link</code>, <code>:visited</code>, <code>:active</code>, <code>::first-line</code> og <code>::first-letter</code>.</p>
+
+          <h3>Fire måter å bruke CSS i HTML</h3>
+          <pre class="codeblock">&lt;!-- 1. I et style-element i head --&gt;
+&lt;style media="screen"&gt; p { color: gray } &lt;/style&gt;
+
+&lt;!-- 2. Lenke til egen stilfil --&gt;
+&lt;link rel="stylesheet" href="stil.css"&gt;
+
+&lt;!-- 3. Importere en stilfil i et stilsett --&gt;
+&lt;style&gt;
+  @import url(http://...);
+  i { color: red }
+&lt;/style&gt;
+
+&lt;!-- 4. Som attributt på elementet (selektoren er underforstått) --&gt;
+&lt;i style="color: red"&gt;Dette blir kursiv og rødt&lt;/i&gt;</pre>
+
+          <h3>CSS i XML</h3>
+          <p>XML-elementer har ingen innebygd visning, så nettleseren viser bare treet. Med en <code>xml-stylesheet</code>-instruksjon kan en CSS-fil bestemme hvordan hvert element vises:</p>
+          <pre class="codeblock">&lt;?xml version="1.0"?&gt;
+&lt;?xml-stylesheet type="text/css" href="bok1.css"?&gt;
+&lt;bokliste&gt;
+  &lt;bok&gt;
+    &lt;bokid&gt;02&lt;/bokid&gt;
+    &lt;tittel&gt;Notater til DA-ODA2000&lt;/tittel&gt;
+    &lt;forfatterId&gt;12345&lt;/forfatterId&gt;
+  &lt;/bok&gt;
+  ...
+&lt;/bokliste&gt;</pre>
+          <pre class="codeblock">/* bok1.css */
+bokliste { background-color: #448888; display: table; }
+bok      { display: table-row; background-color: darkgreen; text-align: center; }
+bokid    { background-color: red; font-family: "Times New Roman"; font-size: 32px; }</pre>
+          <p>Her gjør <code>display</code> om vilkårlige XML-elementer til en tabell og tabellrader. Samme idé gir en nummerert liste av <code>punkt</code>-elementene i navneromseksempelet:</p>
+          <pre class="codeblock">punkt { display: list-item; list-style-position: inside; list-style-type: decimal; }</pre>
+
+          <h2>Sammenstilling</h2>
+          <p>En liten nettside som lenker til eksemplene over. Alt kan serveres fra en konteiner med busybox sin <code>httpd</code> (se uke 36):</p>
+          <pre class="codeblock">&lt;!DOCTYPE html&gt;
+&lt;html lang="no"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;HTML-eksempel&lt;/title&gt;
+    &lt;link rel="stylesheet" href="css-eksempel.css"&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href="html-eksempel.html"&gt;html&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="xml-eksempel.xml"&gt;xml&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="css-eksempel.css"&gt;css&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="bok1.xml"&gt;bok1&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+        </article>
+
+        <section class="section">
+          <div class="section__label">Øvinger for uke 37</div>
+          <div class="reslist">
+            <div class="res">
+              <span class="res__num">·</span>
+              <div><div class="res__title"><a href="https://www.w3schools.com/html/" target="_blank" rel="noopener">HTML-tutorial</a></div><div class="res__sub">Introduction, Basic, Elements, Attributes, Headings, Paragraphs, Formatting, Links, Head, Images, Tables og Lists.</div></div>
+            </div>
+            <div class="res">
+              <span class="res__num">·</span>
+              <div><div class="res__title"><a href="https://www.w3schools.com/xml/" target="_blank" rel="noopener">XML-tutorial</a></div><div class="res__sub">Introduction, How to use, Tree, Syntax, Elements, Attributes, Namespaces og Display.</div></div>
+            </div>
+            <div class="res">
+              <span class="res__num">·</span>
+              <div><div class="res__title"><a href="https://www.w3schools.com/xml/xml_dtd_intro.asp" target="_blank" rel="noopener">DTD</a> og <a href="https://www.w3schools.com/xml/xml_schema.asp" target="_blank" rel="noopener">XML Schema</a></div><div class="res__sub">To veiledninger på w3schools.</div></div>
+            </div>
+            <div class="res">
+              <span class="res__num">·</span>
+              <div><div class="res__title"><a href="https://www.w3schools.com/css/default.asp" target="_blank" rel="noopener">CSS-tutorial</a></div><div class="res__sub">Frem til og med Backgrounds.</div></div>
+            </div>
+            <div class="res">
+              <span class="res__num">·</span>
+              <div><div class="res__title">Web-side</div><div class="res__sub">Lag en side med minst ett bilde, en egen CSS-fil og en lenke til en egen XML-fil med en timeliste (dato, starttid, sluttid, person-id), og skriv en DTD til XML-fila. Server siden med busybox <code>httpd</code> på tre måter: i en unshare-konteiner, i en Podman/Docker-konteiner fra et importert tar-bilde, og fra et bilde bygd med en Containerfile. Lag til slutt en compose-fil for en av de to siste.</div></div>
+            </div>
+            <div class="res">
+              <span class="res__num">·</span>
+              <div><div class="res__title">REST-API</div><div class="res__sub">Stilsett REST-API-et fra uke 33 (eller din utvidelse). Utfordring: bytt fra JSON til XML i datautvekslingen, og lag DTD eller XML Schema slik at klienten kan avgjøre om dataene fra tjeneren er gyldige.</div></div>
+            </div>
+          </div>
+        </section>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="36-podman-docker-compose.html"><small>forrige</small>Uke 36: Podman, Docker og Compose</a>
+          <a data-dir="next" href="38-cgi-html-skjema.html"><small>neste</small>Uke 38: CGI og HTML-skjema</a>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js?v=25"></script>
+  <script src="../../../assets/js/status.js?v=25"></script>
+  <script src="../../../assets/js/formler.js?v=25"></script>
+</body>
+</html>
