@@ -435,6 +435,34 @@ a.tag:hover { border-color: var(--accent); color: var(--accent); }
   color: var(--muted);
 }
 
+/* Fallgruve: praktisk advarsel om noe som ofte går galt når man kjører koden.
+   Ravgul strek markerer; teksten holder vanlig blekkfarge for kontrast. */
+.pitfall {
+  max-width: var(--measure);
+  margin: 1.5rem 0;
+  padding: .8rem 1.1rem .9rem;
+  border-left: 3px solid var(--st-repeter);
+  background: color-mix(in srgb, var(--st-repeter) 7%, var(--bg));
+  font-family: var(--font-read);
+  line-height: 1.65;
+  color: var(--ink);
+}
+.pitfall__title {
+  display: flex; align-items: center; gap: .45rem;
+  margin-bottom: .3rem;
+  font-family: var(--font-ui);
+  font-weight: 600;
+}
+.pitfall__title::before {
+  content: '!';
+  display: inline-grid; place-items: center;
+  width: 1.15rem; height: 1.15rem; border-radius: 50%;
+  background: var(--st-repeter); color: var(--bg);
+  font-size: .75rem; font-weight: 700;
+}
+.pitfall p { margin: .35rem 0 0; }
+.pitfall pre.codeblock { margin: .5rem 0 0; }
+
 code {
   font-family: var(--font-code);
   font-size: .86em;

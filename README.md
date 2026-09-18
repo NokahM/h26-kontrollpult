@@ -86,6 +86,16 @@ kurssystem (debbie.usn.no). Innlogging er *bevisst* ikke lagt inn i denne
 nettsiden eller i git — se den lokale filen `TSD3060-nettside.txt` i
 `H26`-mappen (ett nivå over `site/`).
 
+Eksempelkoden og løsningsforslagene fra kurssystemet (`eksempler/` og
+`losninger/`) er speilet til `assets/resources/tsd3060/` og lenket fra hver
+ukeside (kodelenkene øverst). Som annet kursmateriell er de utenfor git, så
+lenkene virker bare lokalt. Kompilerte programmer, tar-baller og ferdige
+rotfilsystemer er med vilje utelatt. Hent på nytt ved å speile de to
+katalogene fra debbie (Basic Auth, kataloglisting er på).
+
+Praktiske fallgruver og feil i kursets eksempler markeres med
+`<div class="pitfall">` (tittel i `.pitfall__title`).
+
 ## Hvorfor ressursfilene ikke er i git
 
 `assets/resources/*/*` er ekskludert i `.gitignore`. Kursmateriell

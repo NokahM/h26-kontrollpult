@@ -7,7 +7,7 @@
   <meta name="description" content="Hvorfor webtjenere ikke kan binde port 80 direkte, demonisering, og REST som CRUD over HTTP — med hallotjener.c som gjennomgående eksempel.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../../assets/css/main.css?v=25">
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=26">
 </head>
 <body class="theme-tsd3060" data-updated="2026-09-02">
   <div class="app-shell">
@@ -30,6 +30,26 @@
           <p class="page-header__desc">Hvorfor en vanlig bruker ikke bare kan binde port 80, hvordan en tjener gjøres terminaluavhengig, og hvordan REST bruker HTTP-verb som CRUD-operasjoner — alt bygget rundt én liten HTTP-tjener i C.</p>
           <span class="page-header__status" data-status="active"><i></i>pensum + notater</span>
         </header>
+
+        <div class="sourcebar">
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/hallotjener.c" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · hallotjener.c</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/hallorespons.asis" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · hallorespons.asis</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/close.c" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · close.c</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/starter.c" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · starter.c</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/steng_socket.c" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · steng_socket.c</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/statisk.sh" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · statisk.sh</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/dynamisk.sh" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · dynamisk.sh</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/fordeler.sh" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · fordeler.sh</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/get.sh" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · get.sh</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/post.sh" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · post.sh</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/put.sh" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · put.sh</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/delete.sh" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · delete.sh</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/p.db" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · p.db</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/losninger/404.c" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">løsning · 404.c</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/losninger/http-ekko-1.c" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">løsning · http-ekko-1.c</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/losninger/http-ekko-2.c" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">løsning · http-ekko-2.c</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/losninger/nohup.c" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">løsning · nohup.c</a>
+        </div>
 
         <article class="prose">
           <h2>hallotjener.c — den minste HTTP-tjeneren som virker</h2>
@@ -58,6 +78,12 @@ while (1) {
 }</pre>
           <p>Denne strukturen — <code>socket → bind → listen → accept → fork</code> — er selve grunnmønsteret for en blokkerende, forkende TCP-tjener, og går igjen i alle eksemplene resten av dette kapittelet bygger videre på.</p>
 
+          <div class="pitfall">
+            <div class="pitfall__title">Fallgruve: filene fra debbie må gjøres kjørbare, og Windows-linjeskift ødelegger skript</div>
+            <p>Filer du laster ned, mister kjøreretten. Kjør <code>chmod +x *.sh *.cgi</code> før du bruker dem. Jobb i hjemmekatalogen i WSL (<code>~</code>), ikke under <code>/mnt/c/</code>.</p>
+            <p>Har du redigert et skript i en Windows-editor, kan linjene ende på <code>\r\n</code>. Da feiler skriptet med <code>/bin/sh^M: bad interpreter</code> eller <code>$'\r': command not found</code>. Fiks det med <code>sed -i 's/\r$//' fil.sh</code>, og velg «LF» nede til høyre i VS Code.</p>
+          </div>
+
           <h2>Hvorfor port 80/443 er et problem</h2>
           <p>Standardportene for webtrafikk (80 for HTTP, 443 for HTTPS) er under 1024 — såkalte «privilegerte porter» som på Unix-lignende systemer krever root-rettigheter å binde til. Å kjøre selve webtjeneren som root er farlig: en feil i koden er da også en rot-sårbarhet. Vanlige løsninger:</p>
           <ul>
@@ -81,13 +107,27 @@ while (1) {
           </div>
           <p>Referanse: Lennert (1987), <em>«How To Write a UNIX Daemon»</em> — sitert i blant annet W. Richard Stevens' <em>UNIX Network Programming</em>.</p>
 
+          <div class="pitfall">
+            <div class="pitfall__title">Fallgruve: «Address already in use» etter demonisering</div>
+            <p>En demonisert tjener lever videre uten terminal, så Ctrl-C når den ikke. Startes den på nytt, er porten fortsatt opptatt. Finn og stopp den gamle:</p>
+            <pre class="codeblock">ss -ltnp | grep 55556      # hvem lytter på porten?
+pkill hallotjener</pre>
+          </div>
+
           <h2>Hodeslutt og vognretur: en fallgruve i egen protokollparsing</h2>
           <p>HTTP skiller hode fra kropp med en tom linje, og linjeskift i selve protokollen er formelt <code>\r\n</code> (CRLF) — ikke bare <code>\n</code>. Skriver man sin egen enkle parser (som i skript-eksemplene under) og tester med bare <code>\n</code>, godtar mange enkle tjenere det likevel — men en ordentlig webtjener som Apache vil svare <code>400 Bad Request</code>:</p>
-          <pre class="codeblock">echo -en 'GET / HTTP/1.1\nHost: debbie\nConnection: close\n\n' | nc debbie.usn.no 80 | head -1
-# → 400 Bad Request
+          <pre class="codeblock"># → 400 Bad Request
+echo -en 'GET / HTTP/1.1\nHost: debbie\nConnection: close\n\n' \
+  | nc debbie.usn.no 80 | head -1
 
-echo -en 'GET / HTTP/1.1\r\nHost: debbie\r\nConnection: close\r\n\r\n' | nc debbie.usn.no 80 | head -1
-# → riktig respons, fordi vognretur er med</pre>
+# → riktig respons, fordi vognretur er med
+echo -en 'GET / HTTP/1.1\r\nHost: debbie\r\nConnection: close\r\n\r\n' \
+  | nc debbie.usn.no 80 | head -1</pre>
+
+          <div class="pitfall">
+            <div class="pitfall__title">Feil i kursets eksempel: hallotjener.c bruker bare <code>\n</code></div>
+            <p><code>hallotjener.c</code> skriver <code>"HTTP/1.1 200 OK\n"</code> og tom linje som <code>"\n"</code>. curl og nettlesere godtar det, men etter standarden skal hver linje i hodet slutte med <code>\r\n</code>, som i avsnittet over. Bruk <code>\r\n</code> i egne løsninger og på eksamen.</p>
+          </div>
 
           <h2>REST: HTTP-verb som CRUD</h2>
           <p>REST bruker selve HTTP-metoden som handling, og stien som mål for handlingen — <em>samlingen</em> eller <em>elementet</em> den gjelder for:</p>
@@ -109,6 +149,20 @@ elif [ "$MET" = "PUT"    ]; then exec ./put.sh
 else printf "HTTP/1.1 405 Method not allowed\r\n\r\n"
 fi</pre>
           <p><code>get.sh</code> er den enkleste: uten radnummer i stien listes hele tabellen, med radnummer hentes bare den ene raden — begge veier ender i en <code>SELECT ... FROM $TABELL</code> formattert som JSON. <code>post.sh</code> og <code>put.sh</code> må derimot først lese <code>Content-Length</code> fra HTTP-hodet for å vite hvor mange byte HTTP-kroppen inneholder, siden en socket ikke har noe naturlig sluttmerke for kroppen slik den har for hodet (den tomme linja).</p>
+
+          <div class="pitfall">
+            <div class="pitfall__title">Fallgruve: slik får du REST-eksempelet til å kjøre</div>
+            <p>Skriptene trenger verktøy som ikke alltid er installert: <code>sudo apt install sqlite3 jq</code>. Kompiler <code>starter.c</code> og <code>steng_socket.c</code> (utfilen <code>steng_socket</code>, uten <code>.c</code>). Stå i katalogen med skriptene og <code>p.db</code>, for alle stiene er relative (<code>./p.db</code>, <code>./get.sh</code>).</p>
+            <p><code>starter</code> kjører skriptet med <code>env -i</code>, altså med et tomt miljø. Derfor må skriptet oppgis med sti: <code>./starter ./fordeler.sh</code>, ikke <code>./starter fordeler.sh</code>. Tjeneren lytter på port 8888.</p>
+          </div>
+
+          <div class="pitfall">
+            <div class="pitfall__title">Feil i kursets eksempel: statisk.sh lar klienten lese hvilken som helst fil</div>
+            <p><code>statisk.sh</code> setter <code>FILSTI=.</code> foran stien fra forespørselen uten å sjekke den. En klient kan derfor gå ut av katalogen med <code>..</code> (<em>path traversal</em>):</p>
+            <pre class="codeblock">curl --path-as-is http://localhost:8888/../../../../etc/passwd</pre>
+            <p>(<code>--path-as-is</code> hindrer curl i å fjerne <code>..</code> selv.) En sikker tjener må avvise stier som inneholder <code>..</code>, eller slå opp den ekte stien og sjekke at den ligger under webroten. Siste linje, <code>exec ./steng_socket // hjelper ...</code>, er heller ikke en kommentar: <code>//</code> er ikke kommentartegn i sh, så ordene sendes som argumenter. Det er ufarlig her, men kommentarer i sh starter med <code>#</code>.</p>
+            <p>Også <code>get.sh</code> og <code>delete.sh</code> limer <code>$RAD</code> fra URL-en rett inn i SQL. Det er nettopp det uke 34-øvingen går ut på å fikse.</p>
+          </div>
 
           <div class="note"><strong>Videre lesning (V3 — støttelitteratur for socketprogrammering):</strong> kapitlene om sockets, domener, adresser og TCP-klient/tjener-programmering i <em>Linux Socket Programming by Example</em> dekker det teoretiske grunnlaget for <code>socket()</code>/<code>bind()</code>/<code>listen()</code>/<code>accept()</code>-mønsteret over.</div>
         </article>
@@ -195,8 +249,8 @@ execvp(argv[0], argv);  // erstatter denne prosessen med det angitte programmet<
     </div>
   </div>
 
-  <script src="../../../assets/js/main.js?v=25"></script>
-  <script src="../../../assets/js/status.js?v=25"></script>
-  <script src="../../../assets/js/formler.js?v=25"></script>
+  <script src="../../../assets/js/main.js?v=26"></script>
+  <script src="../../../assets/js/status.js?v=26"></script>
+  <script src="../../../assets/js/formler.js?v=26"></script>
 </body>
 </html>

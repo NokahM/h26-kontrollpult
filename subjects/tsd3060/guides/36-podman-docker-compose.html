@@ -7,7 +7,7 @@
   <meta name="description" content="Fra håndlaget chroot-rot til konteinerbilder med Podman/Docker: import, Containerfile, lag, cgroup-begrensninger, nettverk og podman-compose.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../../assets/css/main.css?v=25">
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=26">
 </head>
 <body class="theme-tsd3060" data-updated="2026-09-18">
   <div class="app-shell">
@@ -31,6 +31,16 @@
           <span class="page-header__status" data-status="active"><i></i>pensum + notater</span>
         </header>
 
+        <div class="sourcebar">
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/konteiner/nyrot3/Containerfile" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · konteiner/nyrot3/Containerfile</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/konteiner/nyrot3/passwd" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · konteiner/nyrot3/passwd</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/konteiner/nyrot3/hallo.txt" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · konteiner/nyrot3/hallo.txt</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/compose/shell.yaml" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · compose/shell.yaml</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/compose/web.yaml" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · compose/web.yaml</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/compose/curl/Dockerfile" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · compose/curl/Dockerfile</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/compose/curl/compose.yaml" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · compose/curl/compose.yaml</a>
+        </div>
+
         <article class="prose">
           <h2>Fra rotkatalog til konteinerbilde</h2>
           <p>Et <strong>konteinerbilde</strong> (container image) er i bunn og grunn et filsystem pakket som en tar-fil, pluss litt metadata om hva som skal kjøres. Rotkatalogen <code>nyrot/</code> fra uke 35 (med busybox) kan derfor gjøres om til et bilde direkte:</p>
@@ -53,6 +63,11 @@ podman run -it --rm nyrot sh                       # samme i kortform</pre>
           <pre class="codeblock">podman import -c 'ENTRYPOINT /bin/sh' nyrot.tar.gz nyrot
 podman run -it --rm nyrot</pre>
           <p>Alt dette fungerer likt med Docker: bytt <code>podman</code> med <code>docker</code>. Forskjellen er at Podman ikke trenger en bakgrunnsdemon som kjører som root, og konteinerne kan kjøres av en vanlig bruker (rootless).</p>
+
+          <div class="pitfall">
+            <div class="pitfall__title">Fallgruve: «short-name did not resolve»</div>
+            <p>På Ubuntu og Debian vet ikke Podman alltid hvor <code>busybox</code> eller <code>alpine</code> skal hentes fra, og feiler med <code>short-name "busybox" did not resolve to an alias</code>. Skriv fullt navn, <code>docker.io/library/busybox</code>, eller legg til <code>unqualified-search-registries = ["docker.io"]</code> i <code>/etc/containers/registries.conf</code>.</p>
+          </div>
 
           <h2>Nytt bilde fra en endret konteiner</h2>
           <p>Endringer du gjør i en kjørende konteiner, havner ikke i bildet. For å ta vare på dem kan du eksportere konteinerens filsystem og importere det som et nytt bilde:</p>
@@ -83,6 +98,16 @@ ENTRYPOINT /bin/sh</pre>
 podman build -t nyrot3 nyrot3/       # katalogen er "byggekonteksten"</pre>
           <p>Legg merke til <code>USER trix</code>: prinsippet om minst mulig rettigheter fra uke 33 gjelder inni konteineren også.</p>
 
+          <div class="pitfall">
+            <div class="pitfall__title">Fallgruve: egne C-programmer i busybox- og Alpine-bilder</div>
+            <p>Et program kompilert i WSL er dynamisk lenket mot glibc. Alpine bruker et annet C-bibliotek (musl), og busybox-bildet har ikke nødvendigvis det samme som du har. Resultatet er den samme villedende <code>No such file or directory</code>/<code>not found</code> som i uke 35. Kompiler med <code>gcc -static</code>, eller kompiler inni bildet (<code>RUN apk add gcc musl-dev</code>).</p>
+          </div>
+
+          <div class="pitfall">
+            <div class="pitfall__title">Fallgruve: en demonisert tjener stopper konteineren</div>
+            <p>En konteiner lever bare så lenge hovedprosessen (PID 1 i konteineren) lever. Hvis <code>hallotjener</code> demoniserer seg, avslutter opphavet, og da stopper konteineren og tar demonen med seg. I en konteiner skal tjeneren kjøre i forgrunnen. Det er <code>podman run -d</code> som gjør den terminaluavhengig. Samme grunn til at <code>httpd</code> trenger <code>-f</code> under.</p>
+          </div>
+
           <h2>Lag og historie</h2>
           <p>Et bilde består av <strong>lag</strong>. Hver instruksjon som endrer filsystemet (<code>COPY</code>, <code>RUN</code>) gir et nytt lag oppå de forrige. Lagene deles mellom bilder og mellomlagres, så en ny bygging gjør bare om lagene som er endret:</p>
           <pre class="codeblock">podman image ls -a                   # viser også de mellomliggende lagene
@@ -107,6 +132,11 @@ sudo podman run -dit --rm --name sh1 --cpu-shares 512 busybox
 sudo podman container inspect sh1 | grep -i cpu</pre>
           <p><code>--cpu-shares</code> er en <em>relativ vekt</em> (standard 1024). Den begrenser bare når det er konkurranse om CPU-en: 512 betyr halvparten så mye CPU-tid som en konteiner med standardvekt.</p>
 
+          <div class="pitfall">
+            <div class="pitfall__title">Fallgruve: <code>podman</code> og <code>sudo podman</code> er to separate verdener</div>
+            <p>Rootless Podman (vanlig bruker) og <code>sudo podman</code> har hvert sitt bildelager og hver sin konteinerliste. Et bilde du bygde uten sudo, finnes ikke for <code>sudo podman run</code>, og <code>podman ps</code> viser ikke konteinere startet med sudo. Hold deg til én av dem i samme øving. Notatene bruker sudo bare for CPU-begrensningene.</p>
+          </div>
+
           <h2>Nettverk</h2>
           <p>Uten videre havner konteinere i standardnettverket <code>podman</code>. Hver konteiner får en egen IP-adresse i nettverkets subnett:</p>
           <pre class="codeblock">podman run -dit --name sh1 --rm busybox
@@ -128,6 +158,11 @@ RUN echo Det virket &gt; index.html
 EXPOSE 80
 ENTRYPOINT httpd -f</pre>
           <p><code>-f</code> holder httpd i forgrunnen. Uten den demoniserer httpd seg, hovedprosessen avslutter, og da stopper konteineren.</p>
+          <div class="pitfall">
+            <div class="pitfall__title">Fallgruve: port 80 på verten krever root</div>
+            <p>Som vanlig bruker gir <code>podman run -p 80:80</code> feilen <code>rootlessport cannot expose privileged port 80</code>. Det er samme regel som for hallotjener i uke 33. Bruk en port over 1023 på verten (<code>-p 8080:80</code>). Inni konteineren går port 80 fint.</p>
+          </div>
+
           <p><strong>Egendefinerte nettverk</strong> gir segmentering: konteinere kan bare snakke med hverandre hvis de deler et nettverk. En konteiner kan være koblet til flere nettverk samtidig:</p>
           <pre class="codeblock">podman network create n1; podman network create n2; podman network create n3
 
@@ -186,6 +221,11 @@ podman attach compose_sh_1                     # inn i klientkonteineren:
   echo -en 'GET / HTTP/1.1\r\nHost: web\r\nConnection: close\r\n\r\n' | nc web 80
   apk add curl
   curl -v web                                  # tjenestenavnet "web" er et vertsnavn</pre>
+          <div class="pitfall">
+            <div class="pitfall__title">Fallgruve: konteinernavnene i Compose avhenger av katalognavnet</div>
+            <p><code>podman-compose</code> navngir konteinerne <code>&lt;katalog&gt;_&lt;tjeneste&gt;_1</code>. Eksemplene lå i katalogen <code>compose/</code> på debbie, derav <code>compose_web_1</code>. Hos deg kan navnet være et annet, og nyere versjoner bruker bindestrek. Sjekk med <code>podman ps</code> før <code>attach</code> eller <code>exec</code>.</p>
+          </div>
+
           <p>Compose kan også bygge bildet selv fra en Dockerfile i stedet for å hente et ferdig bilde, med <code>build:</code> i stedet for <code>image:</code>:</p>
           <pre class="codeblock"># curl/Dockerfile
 FROM alpine
@@ -264,8 +304,8 @@ curl web</pre>
     </div>
   </div>
 
-  <script src="../../../assets/js/main.js?v=25"></script>
-  <script src="../../../assets/js/status.js?v=25"></script>
-  <script src="../../../assets/js/formler.js?v=25"></script>
+  <script src="../../../assets/js/main.js?v=26"></script>
+  <script src="../../../assets/js/status.js?v=26"></script>
+  <script src="../../../assets/js/formler.js?v=26"></script>
 </body>
 </html>

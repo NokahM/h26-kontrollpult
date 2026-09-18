@@ -7,7 +7,7 @@
   <meta name="description" content="Semistrukturerte data og dokumenter som trær: HTML og HTML5, XML med velformethet, navnerom, DTD og XML Schema, og CSS for både HTML og XML.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../../assets/css/main.css?v=25">
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=26">
 </head>
 <body class="theme-tsd3060" data-updated="2026-09-18">
   <div class="app-shell">
@@ -30,6 +30,19 @@
           <p class="page-header__desc">Det webtjenestene våre sender tilbake: semistrukturerte data og dokumenter som trær. HTML for innhold i nettleseren, XML for data med egendefinert struktur, og CSS for utseendet til begge.</p>
           <span class="page-header__status" data-status="active"><i></i>pensum + notater</span>
         </header>
+
+        <div class="sourcebar">
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/uke37/index.html" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · uke37/index.html</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/uke37/html-eksempel.html" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · uke37/html-eksempel.html</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/uke37/xml-eksempel.xml" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · uke37/xml-eksempel.xml</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/uke37/nanverom-eksempel.xml" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · uke37/nanverom-eksempel.xml</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/uke37/css-eksempel.css" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · uke37/css-eksempel.css</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/grunnleggende.html" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · grunnleggende.html</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/bok0.xml" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · bok0.xml</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/bok1.xml" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · bok1.xml</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/bok1.css" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · bok1.css</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/3112.xml" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · 3112.xml</a>
+        </div>
 
         <article class="prose">
           <h2>Semistrukturerte data</h2>
@@ -126,6 +139,13 @@
           <pre class="codeblock">URL="https://adressesok.posten.no/api/v1/postal_codes.xml?postal_code=3112"
 curl -s $URL | xq &gt; 3112.xml</pre>
 
+          <p><code>xq</code> er ikke installert som standard. <code>xmllint --format -</code> gir samme pene utskrift.</p>
+
+          <div class="pitfall">
+            <div class="pitfall__title">Fallgruve: XML tilgir ingenting</div>
+            <p>HTML-parseren i nettleseren retter opp feil i stillhet. XML-parseren gir opp ved første feil og viser en feilmelding i stedet for dokumentet. Vanlige årsaker: en slutt-tagg som mangler, <code>&amp;</code> som ikke er skrevet <code>&amp;amp;</code>, og store/små bokstaver som ikke stemmer (<code>&lt;Bok&gt;…&lt;/bok&gt;</code>). XML skiller mellom store og små bokstaver.</p>
+          </div>
+
           <h3>Navnerom</h3>
           <p>Med <strong>navnerom</strong> kan et dokument bruke elementer fra ulike kilder uten navnekollisjon. Navnerommet identifiseres med en URI (globalt unik), og får et lokalt prefiks i dokumentet. Standardnavnerommet har ikke prefiks:</p>
           <pre class="codeblock">&lt;xml-eksempel
@@ -158,6 +178,15 @@ curl -s $URL | xq &gt; 3112.xml</pre>
             </table>
           </div>
           <p>XML Schema løser altså begrensningene ved DTD. Det gir mer uttrykkskraft, og webapplikasjoner kan utveksle XML robust uten egne ad hoc-verktøy for kontroll. For en sikker webtjeneste betyr det at mottatte data kan <em>valideres</em> mot et skjema før de brukes.</p>
+
+          <div class="pitfall">
+            <div class="pitfall__title">Fallgruve: nettleseren sjekker ikke DTD-en</div>
+            <p>Nettleseren sjekker bare at dokumentet er velformet. Om det er <em>gyldig</em> etter DTD-en, må du sjekke selv (<code>sudo apt install libxml2-utils</code>):</p>
+            <pre class="codeblock">&lt;!DOCTYPE timeliste SYSTEM "timeliste.dtd"&gt;     &lt;!-- i XML-fila, rett etter deklarasjonen --&gt;
+
+xmllint --noout --valid timeliste.xml                  # mot DTD
+xmllint --noout --schema timeliste.xsd timeliste.xml   # mot XML Schema</pre>
+          </div>
 
           <h2>CSS</h2>
           <p><strong>Cascading Style Sheets</strong> bestemmer utseendet, og ble foreslått av Håkon Wium Lie fra Halden. CSS kan styre visningen av både HTML og XML, men kan ikke endre strukturen i dokumentet. Du kan prøve i nettleserkonsollet: <code>document.body.style.backgroundColor="red"</code>.</p>
@@ -266,8 +295,8 @@ bokid    { background-color: red; font-family: "Times New Roman"; font-size: 32p
     </div>
   </div>
 
-  <script src="../../../assets/js/main.js?v=25"></script>
-  <script src="../../../assets/js/status.js?v=25"></script>
-  <script src="../../../assets/js/formler.js?v=25"></script>
+  <script src="../../../assets/js/main.js?v=26"></script>
+  <script src="../../../assets/js/status.js?v=26"></script>
+  <script src="../../../assets/js/formler.js?v=26"></script>
 </body>
 </html>

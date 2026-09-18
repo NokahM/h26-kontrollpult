@@ -7,7 +7,7 @@
   <meta name="description" content="Fra chroot() til namespaces og manuell konteinerhåndtering med unshare og nsenter — hva en konteiner faktisk består av.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../../assets/css/main.css?v=25">
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=26">
 </head>
 <body class="theme-tsd3060" data-updated="2026-09-02">
   <div class="app-shell">
@@ -30,6 +30,13 @@
           <p class="page-header__desc">Hva en «konteiner» egentlig består av under panseret: chroot() som avgrenser filsystemet, namespaces som avgrenser alt annet, og hvordan man bygger en konteiner for hånd med unshare og nsenter.</p>
           <span class="page-header__status" data-status="active"><i></i>pensum + notater</span>
         </header>
+
+        <div class="sourcebar">
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/konteiner/rot.c" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · konteiner/rot.c</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/unshare-container.sh" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · unshare-container.sh</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/unshare-container2.sh" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · unshare-container2.sh</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/unshare-container3.sh" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · unshare-container3.sh</a>
+        </div>
 
         <article class="prose">
           <h2>Hva ordet «konteiner» faktisk betyr</h2>
@@ -55,6 +62,17 @@ $ cd nyrot &amp;&amp; sudo chroot . /busybox sh
 # /busybox --install bin      # installerer symlenker for standardkommandoer</pre>
           <p>Men <code>/etc/passwd</code> og <code>/proc</code> finnes ikke automatisk der inne — de må eksplisitt kopieres inn eller monteres (<code>mount -t proc proc /proc</code>) om man vil at brukeroppslag eller <code>ps</code> skal fungere som forventet i fengselet.</p>
 
+          <div class="pitfall">
+            <div class="pitfall__title">Fallgruve: «No such file or directory» for et program som finnes</div>
+            <p>Et vanlig kompilert program er <em>dynamisk lenket</em>. Det trenger C-biblioteket (<code>libc.so.6</code>) og lasteren <code>/lib64/ld-linux-x86-64.so.2</code>, og ingen av dem finnes i den nye roten. Kjernen melder at <em>lasteren</em> mangler, med samme feilmelding som om programmet selv manglet. Det er derfor svært forvirrende.</p>
+            <pre class="codeblock">file hallotjener      # "dynamically linked" eller "statically linked"?
+ldd hallotjener       # hvilke bibliotek trengs?
+
+gcc -static hallotjener.c -o hallotjener     # løsning: statisk lenking
+file $(which busybox)                        # dynamisk? da: sudo apt install busybox-static</pre>
+            <p>Det samme gjelder alt du kopierer inn i en chroot eller konteiner, også i uke 36–38. REST-eksempelet trenger i tillegg <code>sqlite3</code> og <code>jq</code>, som ikke finnes i busybox. De må kopieres inn sammen med bibliotekene <code>ldd</code> viser, eller så kan du bruke et Alpine-bilde med <code>apk add sqlite jq</code> (uke 36).</p>
+          </div>
+
           <h2>namespaces(7) — isolerer alt chroot ikke gjør</h2>
           <p>Der chroot bare avgrenser filsystemsynet, gir <strong>navnerom</strong> en prosess sin egen, private versjon av andre globale ressurser — ressursene finnes fortsatt på vertssystemet, men under andre navn/tellere sett fra innsiden:</p>
           <table style="width:100%; margin-top:1rem; border-collapse:collapse; font-size:.86rem;">
@@ -77,6 +95,12 @@ sudo unshare --mount-proc=$PWD/nyrot/proc --fork chroot nyrot/ sh
 # Med eget PID-navnerom -- prosessen ser nå seg selv som PID 1:
 sudo unshare --mount-proc=$PWD/nyrot/proc --pid --fork chroot nyrot/ sh</pre>
 
+          <div class="pitfall">
+            <div class="pitfall__title">Fallgruve: <code>--pid</code> uten <code>--fork</code>, og unshare uten sudo</div>
+            <p>Uten <code>--fork</code> havner ikke <code>unshare</code> selv i det nye PID-navnerommet, bare barna. Første kommando blir PID 1, og når den avslutter, feiler alle nye prosesser med <code>Cannot allocate memory</code>. Bruk alltid <code>--pid --fork</code> sammen.</p>
+            <p>Gir <code>unshare --user</code> <code>Operation not permitted</code> uten sudo, har distribusjonen skrudd av brukernavnerom for vanlige brukere. Se kommentaren i <code>unshare-container3.sh</code>, eller kjør med <code>sudo</code>.</p>
+          </div>
+
           <h2>Å bygge en konteiner for hånd</h2>
           <p>Kombinerer man chroot med flere navnerom samtidig, får man noe som begynner å ligne det Docker/Podman gjør automatisk — bare manuelt, ett flagg om gangen:</p>
           <pre class="codeblock">$ mkdir -p nyrot/{bin,proc,etc}
@@ -87,6 +111,17 @@ $ sudo unshare -inpufCT --mount-proc=proc chroot . bin/sh</pre>
           <pre class="codeblock">$ ps aux | grep '/bin/sh$'         # finn PID-en til skallet inni konteineren
 $ sudo nsenter -t &lt;PID&gt; -a chroot $PWD/nyrot sh</pre>
           <p>Et viktig poeng som ofte overses: en konteiner er ikke en «ting» som eksisterer uavhengig av prosessene sine. En konteiner <em>er</em> bare en samling prosesser som deler et sett navnerom og en chroot-rot — dør alle prosessene, finnes konteineren rett og slett ikke lenger. Det er ingen egen «konteiner-enhet» å slå av; den forsvinner av seg selv.</p>
+          <div class="pitfall">
+            <div class="pitfall__title">Fallgruve: chroot er ikke et fengsel av seg selv (gjelder «Utilgjengelig logg»)</div>
+            <p><code>chroot()</code> krever root og endrer <em>ikke</em> arbeidskatalogen. Rekkefølgen i tjeneren må derfor være:</p>
+            <ol>
+              <li>Åpne loggfila (mens stien fortsatt finnes).</li>
+              <li><code>chroot("/var/hallo")</code>, deretter <code>chdir("/")</code>. Uten <code>chdir</code> står prosessen fortsatt i en katalog utenfor fengselet.</li>
+              <li>Gi fra deg root: <code>setgid()</code> <em>før</em> <code>setuid()</code>. Etter <code>setuid()</code> har du ikke lov til å endre gruppe.</li>
+            </ol>
+            <p>En prosess som fortsatt er root inne i en chroot, kan bryte seg ut. Tjeneren må også være statisk lenket (se over).</p>
+          </div>
+
         </article>
 
         <section class="section">
@@ -119,8 +154,8 @@ $ sudo nsenter -t &lt;PID&gt; -a chroot $PWD/nyrot sh</pre>
     </div>
   </div>
 
-  <script src="../../../assets/js/main.js?v=25"></script>
-  <script src="../../../assets/js/status.js?v=25"></script>
-  <script src="../../../assets/js/formler.js?v=25"></script>
+  <script src="../../../assets/js/main.js?v=26"></script>
+  <script src="../../../assets/js/status.js?v=26"></script>
+  <script src="../../../assets/js/formler.js?v=26"></script>
 </body>
 </html>

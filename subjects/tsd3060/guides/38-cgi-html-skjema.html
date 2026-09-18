@@ -7,7 +7,7 @@
   <meta name="description" content="Common Gateway Interface: hvordan webtjeneren kjører et program per forespørsel, miljøvariablene det arver, fordeler og ulemper, og HTML-skjema med GET og POST.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../../assets/css/main.css?v=25">
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=26">
 </head>
 <body class="theme-tsd3060" data-updated="2026-09-18">
   <div class="app-shell">
@@ -30,6 +30,20 @@
           <p class="page-header__desc">Hvordan en webtjener lar et vanlig program lage svaret: Common Gateway Interface, miljøvariablene programmet arver, og HTML-skjema som sender brukerens input med GET eller POST.</p>
           <span class="page-header__status" data-status="active"><i></i>pensum + notater</span>
         </header>
+
+        <div class="sourcebar">
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/miljo.cgi" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · miljo.cgi</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/hallo_1.html" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · hallo_1.html</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/hallo_1.cgi" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · hallo_1.cgi</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/hallo_2.html" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · hallo_2.html</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/hallo_2.cgi" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · hallo_2.cgi</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/hallo_3.html" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · hallo_3.html</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/hallo_3.cgi" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · hallo_3.cgi</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/hallo_4.cgi" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · hallo_4.cgi</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/hallo_5.cgi" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · hallo_5.cgi</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/rest-test.cgi" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · rest-test.cgi</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/rest-api/Dockerfile" target="_blank" rel="noopener" title="Lokal kopi fra debbie.usn.no (ikke publisert)">kode · rest-api/Dockerfile</a>
+        </div>
 
         <article class="prose">
           <h2>Common Gateway Interface</h2>
@@ -219,6 +233,20 @@ EOF</pre>
 cp miljo.cgi hallo_*.cgi www/cgi-bin/ &amp;&amp; chmod +x www/cgi-bin/*.cgi
 busybox httpd -f -p 8080 -h www    # -h: webroten ("home")
 # http://localhost:8080/cgi-bin/miljo.cgi</pre>
+          <div class="pitfall">
+            <div class="pitfall__title">Fallgruve: når CGI-skriptet gir 500 eller tom side</div>
+            <p>Gå gjennom denne lista:</p>
+            <ol>
+              <li>Skriptet er kjørbart (<code>chmod +x</code>) og ligger i <code>cgi-bin/</code>.</li>
+              <li>Linjeskiftene er LF, ikke Windows-CRLF (se uke 33).</li>
+              <li>Tolken i første linje finnes <em>der skriptet kjører</em>. <code>#!/bin/bash</code> virker ikke i et busybox-bilde, men <code>#!/bin/sh</code> gjør det.</li>
+              <li>Skriptet skriver <code>Content-type</code> <em>og</em> en tom linje før kroppen.</li>
+            </ol>
+            <p>Test skriptet direkte i terminalen først, med miljøvariablene tjeneren ellers ville satt:</p>
+            <pre class="codeblock">REQUEST_METHOD=GET QUERY_STRING='navn=Ola' ./hallo_2.cgi
+echo -n 'fornavn=Ola' | REQUEST_METHOD=POST CONTENT_LENGTH=11 ./hallo_5.cgi</pre>
+          </div>
+
         </article>
 
         <section class="section">
@@ -234,7 +262,7 @@ busybox httpd -f -p 8080 -h www    # -h: webroten ("home")
             </div>
             <div class="res">
               <span class="res__num">·</span>
-              <div><div class="res__title">REST-API</div><div class="res__sub">Lag et CGI-program med HTML-skjema som brukergrensesnitt til REST-API-et fra uke 33 (eller din utvidelse). Kjør grensesnittet og REST-API-et i hver sin konteiner. Tips: podman-compose.</div></div>
+              <div><div class="res__title">REST-API</div><div class="res__sub">Lag et CGI-program med HTML-skjema som brukergrensesnitt til REST-API-et fra uke 33 (eller din utvidelse). Kjør grensesnittet og REST-API-et i hver sin konteiner. Tips: podman-compose. Eksempelet <code>rest-api/Dockerfile</code> fra prosjektet 2023–2024 viser et oppsett med Apache og CGI, men <code>index.cgi</code> som det kopierer inn, ligger ikke på debbie. Den må du skrive selv.</div></div>
             </div>
           </div>
         </section>
@@ -247,8 +275,8 @@ busybox httpd -f -p 8080 -h www    # -h: webroten ("home")
     </div>
   </div>
 
-  <script src="../../../assets/js/main.js?v=25"></script>
-  <script src="../../../assets/js/status.js?v=25"></script>
-  <script src="../../../assets/js/formler.js?v=25"></script>
+  <script src="../../../assets/js/main.js?v=26"></script>
+  <script src="../../../assets/js/status.js?v=26"></script>
+  <script src="../../../assets/js/formler.js?v=26"></script>
 </body>
 </html>
