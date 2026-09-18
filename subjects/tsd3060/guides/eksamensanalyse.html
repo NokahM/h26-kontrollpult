@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Eksamensanalyse — TSD3060 · H26</title>
+  <meta name="description" content="Alle åtte eksamenssett i TSD3060 (2022–2026) med sensorveiledning, summert oppgave for oppgave: format, poeng per tema, gjengangere, hva sensor vil ha, og svakhetene i det tilbakevendende eksamenssystemet.">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=27">
+</head>
+<body class="theme-tsd3060" data-updated="2026-09-18">
+  <div class="app-shell">
+
+    <aside class="sidebar"></aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">TSD3060</a>
+        <div class="topbar__crumb">Eksamensanalyse</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow">TSD3060 eksamensforberedelse</div>
+          <h1>Eksamensanalyse</h1>
+          <p class="page-header__desc">Alle åtte eksamenssett fra 2022–2023 til 2025–2026, lest sammen med sensorveiledningene og summert oppgave for oppgave: hvilke formater som brukes, hvor poengene ligger, hva som går igjen, og hva sensor gir uttelling for.</p>
+          <span class="page-header__status" data-status="active"><i></i>8 sett · 800 prosentpoeng</span>
+        </header>
+
+        <article class="prose">
+          <h2>Rammene for eksamen</h2>
+          <p><strong>Eksamen avgjør trolig hele karakteren.</strong> Emnet har ingen obligatoriske innleveringer i kurssystemet, og i underveisevalueringen for 2025–2026 skriver studentene at det er «veldig fint at det ikke er obliger i faget». Emneplanen, som sier dette offisielt, fikk jeg ikke lest automatisk. Sjekk vurderingsform, varighet og hjelpemidler i emneplanen eller i Canvas.</p>
+          <p>Hvert sett er verdt 100 %, fordelt på 4–8 oppgaver. Den største enkeltoppgaven er «Kodebeskrivelse» på 40–45 %. Hver oppgave er merket med prosentvekt, og deloppgaver uten egen vekt teller likt (står i sensorveiledningen for 2024–2025).</p>
+          <p>Karakterfordelingen på <a href="https://www.karakterweb.no/usn/tsd3060" target="_blank" rel="noopener">karakterweb.no</a> er basert på 46 kandidater (perioden står ikke oppgitt): ingen A, 6 B, 10 C, 7 D, 11 E og 12 F. Det gir omtrent 26 % stryk, og halvparten av kandidatene fikk E eller F. Det lønner seg å få grunnmuren helt på plass før du går i dybden.</p>
+
+          <h2>Tre formater</h2>
+          <p>Settene faller i tre typer. Ordinær eksamen har vært <strong>kodegjennomgang</strong> alle de tre siste årene, mens konte varierer fritt.</p>
+          <div class="dtable-wrap">
+            <table class="dtable">
+              <thead><tr><th>Format</th><th>Sett</th><th>Hva du får</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Kodegjennomgang</strong></td><td>2025–26 ord, 2024–25 ord, 2023–24 ord, 2023–24 konte</td><td>Et helt lite system (Containerfile, compose.yaml, HTML, JS, et tjenerskript) listet bakerst. Forklar filene, beskriv koden, vurder sikkerheten og foreslå en forbedring.</td></tr>
+                <tr><td><strong>Scenario</strong></td><td>2025–26 konte, 2022–23 konte</td><td>En tekstbeskrivelse av et system (to konteinere, eller en innloggingsmelding i XML). «Forklar og vis med eksempel» hvordan du ville bygget delene.</td></tr>
+                <tr><td><strong>Begreper</strong></td><td>2024–25 konte, delvis 2022–23 ord</td><td>Frittstående oppgaver på 10–16 %: forklar begrepet, gi et eksempel, og vurder om det bidrar til sikkerhet.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Alle settene, oppgave for oppgave</h2>
+          <div class="dtable-wrap">
+            <table class="dtable">
+              <thead><tr><th>Sett</th><th>Format</th><th>Oppgaver (vekt i %)</th></tr></thead>
+              <tbody>
+                <tr><td class="num">2025–26 ord</td><td>Kode: to konteinere, web + REST-API i shell</td><td>Systemet og filene 15 · Kodebeskrivelse 45 · Subresource integrity (SRI) 15 · Samme opphav 10 · Konteinerbilder 15</td></tr>
+                <tr><td class="num">2025–26 konte</td><td>Scenario: API i konteiner A, to klienter</td><td>Klient i nettleser (HTML + fetch) 20 · Konteiner B med klient uten JavaScript (skjema → tjener → curl) 30 · Passordhashing i systemet 30 · Samme opphav 20</td></tr>
+                <tr><td class="num">2024–25 ord</td><td>Kode: samme system som 2025–26</td><td>Overordnet 5 · Filenes roller 10 · Kodebeskrivelse 45 · Vurder og forbedre autentiseringen 20 · Funksjon for å endre eget passord 20</td></tr>
+                <tr><td class="num">2024–25 konte</td><td>Begreper</td><td>Demonisering 12 · Portnummer 12 · chroot 12 · OS-virtualisering 12 (annullert, feil i oppgaven) · DTD 12 · Informasjonskapsler 12 · Samme opphav 12 · Konteinere 16</td></tr>
+                <tr><td class="num">2023–24 ord</td><td>Kode: busybox httpd + CGI, XML/DTD</td><td>Systemet og filene 20 · Dockerfile linje for linje 20 · abc.cgi 20 · index.html 20 · Sikkerhet (konteiner, compose, innlogging) 20</td></tr>
+                <tr><td class="num">2023–24 konte</td><td>Kode: «bidrag»-system, CGI + XML/DTD</td><td>Anvendelse 4 · Filenes roller 12 · Kjørested 4 · Kodebeskrivelse linje for linje 40 · Vurder og forbedre autentiseringen 20 · Funksjon for nye poster 20</td></tr>
+                <tr><td class="num">2022–23 ord</td><td>Blandet: kodeutdrag + begreper</td><td>C-ekkotjener, chroot og navnerom 30 · xyz.html/xyz.js 30 · Informasjonskapsler i autentisering 15 · Service worker, OS-virtualisering, samme opphav 25</td></tr>
+                <tr><td class="num">2022–23 konte</td><td>Scenario: innloggingsmelding i XML</td><td>Forklar meldingen 10 · Bruk i autentiseringen 10 · Klientkode 15 · Tjeneren mottar og lager sesjon 20 · Sesjon over tilstandsløs HTTP 20 · Samme opphav 5 · Kjernemekanismer for konteinere 20</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Hvor poengene ligger</h2>
+          <p>Hver oppgave er plassert i ett tema og summert over alle åtte settene (800 prosentpoeng). «Sett» er hvor mange av de åtte som spør <em>direkte</em> om temaet. Konteinerfiler og innloggingskode finnes også i koden til nesten alle kodesettene, selv når det ikke er en egen oppgave om dem.</p>
+          <div class="barlist" role="table" aria-label="Prosentpoeng per tema over åtte eksamenssett">
+            <div class="barlist__row barlist__row--head" role="row"><span role="columnheader">Tema</span><span aria-hidden="true"></span><span class="barlist__num" role="columnheader">Poeng</span><span class="barlist__num" role="columnheader">Andel</span><span class="barlist__num" role="columnheader">Sett</span></div>
+            <div class="barlist__row" role="row" title="Forklare gitt kode: 308 av 800 poeng (38,5 %), i 6 av 8 sett"><span role="cell">Forklare gitt kode (filer, system, linje for linje)</span><span class="barlist__track" aria-hidden="true"><span class="barlist__bar" style="display:block;width:100%"></span></span><span class="barlist__num" role="cell">308</span><span class="barlist__num" role="cell">38.5 %</span><span class="barlist__num" role="cell">6/8</span></div>
+            <div class="barlist__row" role="row" title="Autentisering og sesjoner: 157 av 800 poeng (19,6 %), i 7 av 8 sett"><span role="cell">Autentisering, hashing og sesjoner</span><span class="barlist__track" aria-hidden="true"><span class="barlist__bar" style="display:block;width:51%"></span></span><span class="barlist__num" role="cell">157</span><span class="barlist__num" role="cell">19.6 %</span><span class="barlist__num" role="cell">7/8</span></div>
+            <div class="barlist__row" role="row" title="Bygge eller utvide systemet: 105 av 800 poeng (13,1 %), i 4 av 8 sett"><span role="cell">Bygge eller utvide systemet (skriv kode)</span><span class="barlist__track" aria-hidden="true"><span class="barlist__bar" style="display:block;width:34.1%"></span></span><span class="barlist__num" role="cell">105</span><span class="barlist__num" role="cell">13.1 %</span><span class="barlist__num" role="cell">4/8</span></div>
+            <div class="barlist__row" role="row" title="Konteinere, chroot og navnerom: 105 av 800 poeng (13,1 %), i 5 av 8 sett"><span role="cell">Konteinere, chroot, navnerom, bilder</span><span class="barlist__track" aria-hidden="true"><span class="barlist__bar" style="display:block;width:34.1%"></span></span><span class="barlist__num" role="cell">105</span><span class="barlist__num" role="cell">13.1 %</span><span class="barlist__num" role="cell">5/8</span></div>
+            <div class="barlist__row" role="row" title="Samme opphav og CORS: 52 av 800 poeng (6,5 %), i 5 av 8 sett"><span role="cell">Samme opphav (same-origin policy) og CORS</span><span class="barlist__track" aria-hidden="true"><span class="barlist__bar" style="display:block;width:16.9%"></span></span><span class="barlist__num" role="cell">52</span><span class="barlist__num" role="cell">6.5 %</span><span class="barlist__num" role="cell">5/8</span></div>
+            <div class="barlist__row" role="row" title="Demonisering og port 80: 24 av 800 poeng (3,0 %), i 1 av 8 sett"><span role="cell">Demonisering og port 80/443</span><span class="barlist__track" aria-hidden="true"><span class="barlist__bar" style="display:block;width:7.8%"></span></span><span class="barlist__num" role="cell">24</span><span class="barlist__num" role="cell">3.0 %</span><span class="barlist__num" role="cell">1/8</span></div>
+            <div class="barlist__row" role="row" title="Subresource integrity: 15 av 800 poeng (1,9 %), i 1 av 8 sett"><span role="cell">Subresource integrity (SRI)</span><span class="barlist__track" aria-hidden="true"><span class="barlist__bar" style="display:block;width:4.9%"></span></span><span class="barlist__num" role="cell">15</span><span class="barlist__num" role="cell">1.9 %</span><span class="barlist__num" role="cell">1/8</span></div>
+            <div class="barlist__row" role="row" title="DTD: 12 av 800 poeng (1,5 %), i 1 av 8 sett"><span role="cell">DTD og gyldig XML</span><span class="barlist__track" aria-hidden="true"><span class="barlist__bar" style="display:block;width:3.9%"></span></span><span class="barlist__num" role="cell">12</span><span class="barlist__num" role="cell">1.5 %</span><span class="barlist__num" role="cell">1/8</span></div>
+            <div class="barlist__row" role="row" title="Service workers: 10 av 800 poeng (1,3 %), i 1 av 8 sett"><span role="cell">Service workers</span><span class="barlist__track" aria-hidden="true"><span class="barlist__bar" style="display:block;width:3.2%"></span></span><span class="barlist__num" role="cell">10</span><span class="barlist__num" role="cell">1.3 %</span><span class="barlist__num" role="cell">1/8</span></div>
+          </div>
+          <p>De siste 12 poengene er oppgaven om OS-virtualisering i 2024–25 konte, som ble annullert. Oppgaver som «lag en funksjon så bare innloggede kan endre passord» er plassert under «Bygge eller utvide», selv om de også handler om autentisering. Til sammen handler over halvparten av poengene om å <em>forstå et system</em> og om <em>innlogging</em>.</p>
+
+          <h2>Mønstrene</h2>
+          <h3>Ordinær eksamen: samme system to år på rad</h3>
+          <p>2024–25 og 2025–26 ordinær bruker nesten identisk kode, og oppgavene har samme skjelett:</p>
+          <ul>
+            <li><strong>Filer og system (15 %):</strong> hva gjør hver fil, og hvordan henger de sammen?</li>
+            <li><strong>Kodebeskrivelse (45 %):</strong> alle deler av koden, med hva som skjer på tjener og klient.</li>
+            <li><strong>2–3 vurderingsoppgaver (10–20 % hver):</strong> «gi en vurdering … foreslå en forbedring … begrunn». Temaet roterer: autentisering og passordfunksjon (2024–25), så SRI, samme opphav og grunnbilder (2025–26).</li>
+          </ul>
+          <p>Neste vurderingsoppgave vil trolig gjelde en ny side av samme system. Svakhetene lenger ned er gode kandidater.</p>
+
+          <h3>Innloggingen har blitt tryggere for hvert år</h3>
+          <ul>
+            <li><strong>2023–24:</strong> passordet lagres og sammenlignes i klartekst, og det finnes ingen sesjon. Brukeren sender e-post og passord ved hver endring.</li>
+            <li><strong>2024–26:</strong> saltet hash med <code>mkpasswd</code>, ny sesjons-ID med <code>uuidgen</code> ved hver innlogging, og <code>Set-cookie: SESJONSID=…; SameSite=Strict</code>.</li>
+          </ul>
+          <p>Vurder-og-forbedre-oppgaven har derfor fått et bedre utgangspunkt, og svaret må gå lenger enn «bruk hash».</p>
+
+          <h3>Samme opphav: 5 av 8 sett, alltid samme kjerne</h3>
+          <p>Poengene sensor ser etter er de samme hver gang:</p>
+          <ul>
+            <li>Regelen håndheves i <em>nettleseren</em>.</li>
+            <li>Opphav er protokoll + vert + port.</li>
+            <li>Tjeneren gir unntak med <code>Access-Control-Allow-*</code> i responshodet (CORS).</li>
+            <li>Regelen stopper ikke curl eller andre klienter enn nettlesere.</li>
+          </ul>
+          <p>I 2025–26 konte fikk den som skjønte at regelen bare beskytter nettleserklienten (ikke konteiner-til-konteiner-kallet), uttelling for det.</p>
+
+          <h3>Temaer som har forsvunnet</h3>
+          <ul>
+            <li><strong>Service workers:</strong> bare 2022–23.</li>
+            <li><strong>XML og DTD:</strong> brukt i koden i 2023–24 og som egen oppgave i 2024–25 konte. Etterpå er det JSON og <code>jq</code>.</li>
+            <li><strong>Demonisering og port 80:</strong> spurt om i 2024–25 konte, og i forløperemnet siden 2018. Lite i poeng, men lett å få uttelling på.</li>
+          </ul>
+
+          <h2>Systemet du bør kunne utenat</h2>
+          <p>Slik fungerer eksamenssystemet fra 2024–2026. Det bygger rett på eksemplene fra uke 33, 36 og 38:</p>
+          <div class="dtable-wrap">
+            <table class="dtable">
+              <thead><tr><th>Fil</th><th>Rolle</th><th>Kjøres</th></tr></thead>
+              <tbody>
+                <tr><td><code>s.sh</code></td><td>Kompilerer <code>db.c</code> statisk, lager databasen med én testbruker, og kjører <code>podman-compose down/build/up</code>. Et utviklingsverktøy, ikke en del av systemet i drift.</td><td>verten</td></tr>
+                <tr><td><code>compose.yaml</code></td><td>To tjenester: <code>web</code> (port 8080→80) og <code>db</code> (port 1234→80).</td><td>verten</td></tr>
+                <tr><td><code>web/Containerfile</code></td><td><code>FROM busybox</code>, kopierer <code>index.*</code>, starter <code>httpd -f</code>.</td><td>bygging</td></tr>
+                <tr><td><code>db/Containerfile</code></td><td><code>FROM alpine</code>, <code>apk add sqlite jq uuidgen</code>, kopierer <code>db</code>, databasen og <code>db.sh</code>, starter <code>/db</code>.</td><td>bygging</td></tr>
+                <tr><td><code>web/index.html</code> + <code>index.js</code></td><td>Felt og knapper. Knappene kaller <code>fetch()</code> mot <code>http://localhost:1234</code> med <code>credentials: 'include'</code>.</td><td>nettleseren</td></tr>
+                <tr><td><code>db/db.c</code></td><td><code>starter.c</code> fra uke 33: socket → bind → listen → accept → fork, <code>dup2</code> til stdin/stdout, så <code>execlp("env", "env", "-i", "./db.sh")</code>.</td><td>db-konteineren</td></tr>
+                <tr><td><code>db/db.sh</code></td><td>REST-API-et. Leser forespørselslinja og hodet fra stdin, skriver svar og CORS-hoder til stdout, og gjør innlogging og SQL mot SQLite.</td><td>db-konteineren</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Sensor vil at du viser at du skjønner <em>sammenhengen</em>. Å lese fra stdin i <code>db.sh</code> betyr å lese klientens forespørsel. Å skrive til stdout betyr å skrive HTTP-svaret. Det nettleseren gjør med hodelinjene (<code>Set-cookie</code>, <code>Access-Control-Allow-Origin</code>), hører også med. Skjelettet til <code>db.sh</code> står på <a href="eksamensoversikt.html">eksamensoversikten</a>.</p>
+
+          <h2>Svakheter du bør ha klare</h2>
+          <p>Dette er min egen gjennomgang av koden i 2025–26 ordinær. Svakhetene står ikke i sensorveiledningen, men passer rett inn i en «gi en vurdering, foreslå en forbedring»-oppgave. Sensorveiledningen sier selv at tiltak utenfor pensum, som pepper, anti-CSRF-token og sanering av input, også gir poeng.</p>
+          <div class="dtable-wrap">
+            <table class="dtable">
+              <thead><tr><th>Svakhet</th><th>Hvor</th><th>Forbedring</th></tr></thead>
+              <tbody>
+                <tr><td><strong>SQL-injeksjon</strong>: brukerid fra URL-en, verdier fra JSON-kroppen og til og med sesjons-ID-en fra informasjonskapselen limes rett inn i SQL. En forfalsket kapsel kan i prinsippet omgå innloggingen.</td><td><code>db.sh</code> 45, 77, 91, 96–98, 104, 109</td><td>Forberedte kommandoer, eller streng validering (UUID-format for sesjons-ID) før bruk (uke 34)</td></tr>
+                <tr><td><strong>Ingen tilgangskontroll per bruker</strong>: en innlogget bruker kan endre og slette <em>hvem som helst</em>, fordi <code>$RAD</code> fra URL-en aldri sammenlignes med den innloggede <code>$BRUKERID</code>.</td><td><code>db.sh</code> 103–112</td><td>Krev at <code>$RAD = $BRUKERID</code> for PUT og DELETE</td></tr>
+                <tr><td><strong>Passordet skrives til loggen</strong> (stderr havner i <code>podman logs</code>).</td><td><code>db.sh</code> 52–53</td><td>Fjern feilsøkingsutskriftene</td></tr>
+                <tr><td><strong>POST lagrer passordet i klartekst</strong> i kolonnen <code>passordhash</code>.</td><td><code>db.sh</code> 96–98</td><td>Hash med tilfeldig salt før lagring</td></tr>
+                <tr><td><strong>Fast salt</strong> (<code>123456789</code>): samme passord gir samme hash for alle.</td><td><code>s.sh</code> 12</td><td>Tilfeldig salt per bruker</td></tr>
+                <tr><td><strong>Kapselen mangler</strong> <code>HttpOnly</code>, <code>Secure</code> og <code>Max-Age</code>, og alt går over HTTP.</td><td><code>db.sh</code> 60</td><td>HTTPS, alle tre attributtene, utløpstid på sesjonen</td></tr>
+                <tr><td><code>SameSite=Strict</code> hjelper ikke mellom web og db: <code>localhost:8080</code> og <code>:1234</code> er samme <em>site</em> (porten teller ikke), men ulikt <em>opphav</em>.</td><td><code>db.sh</code> 60</td><td>Forklar forskjellen, og la CORS-listen være smal</td></tr>
+                <tr><td><strong>Tjeneren kjører som root</strong> i konteineren, og databasen er skrivbar for alle.</td><td><code>db/Containerfile</code> 4, 6</td><td><code>USER</code>, minste rettighet (uke 33 og 36)</td></tr>
+                <tr><td><strong>Grunnbilder uten fast versjon</strong> fra docker.io: stor tillit til leverandøren.</td><td>begge Containerfile</td><td>Fast versjon eller digest, eller bygg eget grunnbilde (sensors eget forslag i 2025–26)</td></tr>
+                <tr><td><strong>Alltid <code>200 OK</code></strong>, også ved feil og «Ikke innlogget»: statuslinja skrives før noe er sjekket.</td><td><code>db.sh</code> 19</td><td>401, 404 og 405 der det passer</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Slik gir sensor uttelling</h2>
+          <p>Dette står gjentatte ganger i sensorveiledningene:</p>
+          <ul>
+            <li><strong>Eksempel er påkrevd.</strong> «Besvarelsen må inneholde et eksempel for å få full uttelling.» Vis kode eller pseudokode, også når oppgaven bare sier «forklar».</li>
+            <li><strong>Begrunnelsen teller mye.</strong> «Begrunnelse må være med for å få full pott», og i flere oppgaver skal begrunnelsen telle minst 50 %. Et svar uten konkret eksempel på en «gi et eksempel»-oppgave gir null.</li>
+            <li><strong>Vis sammenhengen i kodebeskrivelsen.</strong> Du trenger ikke gå linje for linje, men alle delene må med, og hva som skjer <em>hos mottakeren</em> skal fram.</li>
+            <li><strong>Vurderinger gir poeng når de er begrunnet.</strong> Emnet vektlegger <em>angrepsflate</em> og <em>tillit til leverandør</em>, så bruk de begrepene.</li>
+            <li><strong>Plasser sikkerheten riktig.</strong> Hashing skal skje på tjeneren som har databasen, aldri i klienten. Samme opphav håndheves i nettleseren, men tillatelsen deklareres av tjeneren.</li>
+            <li><strong>Les oppgaveteksten til punkt og prikke.</strong> Ett bidrag per e-post (primærnøkkel) var avgjørende for full pott i 2023–24 konte.</li>
+          </ul>
+
+          <h2>Feil i oppgavesett og sensorveiledninger</h2>
+          <p>Det er nyttig å kjenne til disse, slik at du ikke lærer feil. Påpeker du en feil i koden på eksamen, viser det forståelse:</p>
+          <ul>
+            <li><strong>2025–26 ord, sensorveiledningen til «Opphav»:</strong> den begynner med «I vanlige nettlesere er SRI implementert …». Det skal være samme opphav (SOP), ikke SRI.</li>
+            <li><strong>2024–25 konte:</strong> oppgaven om OS-virtualisering ble annullert fordi den skulle hett «operativsystemnivåvirtualisering».</li>
+            <li><strong>2023–24 ord, index.html:</strong> svaret bytter om de to knappene. Det riktige er at skjemaet sender GET med data i URL-en (<code>QUERY_STRING</code>), og at JavaScript-knappen sender PUT med XML i kroppen (stdin).</li>
+            <li><strong>2023–24 konte:</strong> <code>&lt;head&gt;</code> kalles «HTTP-hodet». Det er HTML-dokumentets hode, som ikke har noe med HTTP-hodet å gjøre.</li>
+            <li><strong>2022–23 ord, xyz.js:</strong> variabelen heter <code>u</code>, men <code>fetch(url, …)</code> bruker <code>url</code>, som gir en ReferenceError. Sensorveiledningen nevner det ikke.</li>
+          </ul>
+
+          <h2>Fra forløperen DA-NAN3000 (2015–2018)</h2>
+          <p>Kurssystemet har også utdrag fra 5-timers skriftlige eksamener i forløperemnet. Disse temaene har blitt spurt om i over ti år:</p>
+          <ul>
+            <li>demonisering trinn for trinn</li>
+            <li>chroot og navnerom</li>
+            <li>konteinerbilde mot konteiner</li>
+            <li>cgroups, navnerom, capabilities og AppArmor</li>
+            <li>statisk lenking i konteinere</li>
+            <li>en Dockerfile for et C-program</li>
+            <li>velformet mot gyldig XML</li>
+            <li>REST med CGI på tjeneren og AJAX/fetch i klienten</li>
+          </ul>
+          <p>Tjenersiden er den samme i dag. Klientsiden har gått fra Android til nettleser.</p>
+
+          <h2>Hva du må kunne, i prioritert rekkefølge</h2>
+          <ol>
+            <li><strong>Lese og forklare et helt system</strong> (38 % av poengene): Containerfile, compose.yaml, HTML og JS med <code>fetch</code>, et tjenerskript i shell, og <code>starter.c</code>-mønsteret. Øv på å forklare hver fil og hva stdin og stdout er koblet til. <a href="33-http-rest.html">Uke 33</a>, <a href="36-podman-docker-compose.html">36</a>, <a href="38-cgi-html-skjema.html">38</a>.</li>
+            <li><strong>Autentisering</strong> (20 %): saltet hash på tjeneren, ny sesjons-ID ved innlogging (sesjonsfiksering), <code>Set-cookie</code>/<code>Cookie</code>, kapselattributtene, HTTPS. Ha en ferdig «vurder og forbedre»-liste klar. <a href="34-sqlite-injeksjon-autentisering.html">Uke 34</a>.</li>
+            <li><strong>Skrive kode selv</strong> (13 %): en klient i nettleseren med <code>fetch</code>, en klient uten JavaScript (HTML-skjema → CGI → <code>curl</code>), og en ny REST-funksjon i <code>db.sh</code>. <a href="38-cgi-html-skjema.html">Uke 38</a>.</li>
+            <li><strong>Konteinere</strong> (13 %): chroot, navnerom, cgroups, bilde mot konteiner, lag og <code>RUN</code>-sammenslåing, grunnbilder og angrepsflate. <a href="35-chroot-konteinere.html">Uke 35</a>, <a href="36-podman-docker-compose.html">36</a>.</li>
+            <li><strong>Samme opphav og CORS</strong> (7 %, men i 5 av 8 sett): lær de fire kjernepunktene over utenat.</li>
+            <li><strong>Resten</strong>: demonisering og port 80 (uke 33), SRI, DTD (uke 37). Små poengsummer, men raske å lære.</li>
+          </ol>
+        </article>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="eksamensoversikt.html"><small>forrige</small>Eksamensoversikt</a>
+          <span></span>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js?v=27"></script>
+  <script src="../../../assets/js/status.js?v=27"></script>
+  <script src="../../../assets/js/formler.js?v=27"></script>
+</body>
+</html>

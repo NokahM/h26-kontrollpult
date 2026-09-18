@@ -435,6 +435,27 @@ a.tag:hover { border-color: var(--accent); color: var(--accent); }
   color: var(--muted);
 }
 
+/* Stolpeliste: én serie, verdier ved hver stolpe, tabellen er tekstvisningen.
+   Stolpefargen er validert mot begge flater (dataviz-validatoren); mørkt tema
+   bruker et mørkere trinn enn --accent, som er for lyst til flater. */
+.barlist { margin-top: 1rem; font-family: var(--font-ui); font-size: .9375rem; }
+.barlist__row {
+  display: grid;
+  grid-template-columns: minmax(14rem, 19rem) minmax(0, 1fr) 3.2rem 4.2rem 3rem;
+  gap: .9rem; align-items: center;
+  padding: .3rem .4rem; border-radius: var(--radius);
+}
+.barlist__row:not(.barlist__row--head):hover { background: var(--hover); }
+.barlist__row--head { color: var(--muted); font-size: .8125rem; padding-bottom: .1rem; }
+.barlist__track { height: .7rem; }
+.barlist__bar { height: 100%; min-width: 2px; background: var(--bar, var(--accent)); border-radius: 0 4px 4px 0; }
+.barlist__num { text-align: right; font-variant-numeric: tabular-nums; color: var(--ink); }
+.barlist__row--head .barlist__num { color: var(--muted); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) body.theme-tsd3060 { --bar: #5b97e3; }
+}
+:root[data-theme="dark"] body.theme-tsd3060 { --bar: #5b97e3; }
+
 /* Fallgruve: praktisk advarsel om noe som ofte går galt når man kjører koden.
    Ravgul strek markerer; teksten holder vanlig blekkfarge for kontrast. */
 .pitfall {

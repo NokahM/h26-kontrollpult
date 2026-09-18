@@ -49,7 +49,8 @@
           { n: '38', title: 'CGI og HTML-skjema', part: 'Uke 38', track: 'page', href: 'subjects/tsd3060/guides/38-cgi-html-skjema.html' }
         ] },
         { label: 'Eksamen', items: [
-          { title: 'Eksamensoversikt', part: 'Eksamensforberedelse', href: 'subjects/tsd3060/guides/eksamensoversikt.html' }
+          { title: 'Eksamensoversikt', part: 'Eksamensforberedelse', href: 'subjects/tsd3060/guides/eksamensoversikt.html' },
+          { title: 'Eksamensanalyse', part: 'Eksamensforberedelse', href: 'subjects/tsd3060/guides/eksamensanalyse.html' }
         ] },
         { label: 'Andre steder', items: [
           { title: 'Kurssystemet', meta: 'debbie', external: true, href: 'https://debbie.usn.no/tsd3060/' }

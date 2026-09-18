@@ -7,7 +7,7 @@
   <meta name="description" content="Mønstre fra åtte tidligere TSD3060-eksamener (2022-2023 til 2025-2026): hva som går igjen, og hva som sannsynligvis dukker opp igjen.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../../assets/css/main.css?v=26">
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=27">
 </head>
 <body class="theme-tsd3060" data-updated="2026-09-02">
   <div class="app-shell">
@@ -31,12 +31,14 @@
           <span class="page-header__status" data-status="active"><i></i>basert på 8 eksamenssett</span>
         </header>
 
+        <p class="callout">Poeng per tema, alle oppgavene med vekt, sensors vurderingskriterier og svakhetene i eksamenssystemet står på <a href="eksamensanalyse.html">eksamensanalysen</a>.</p>
+
         <article class="prose">
           <h2>To eksamensformater — begge kan dukke opp, uansett ordinær/konte</h2>
           <p>Eksamenene faller stort sett i to bøtter, og hvilken det blir er ikke pålitelig knyttet til om det er ordinær eller konte-eksamen:</p>
           <ul>
             <li><strong>Kodegjennomgang.</strong> Ett komplett, lite web-system (som regel <code>compose.yaml</code>/<code>Dockerfile</code> + en HTML-side + en JS-fil med <code>fetch()</code>-kall + et server-skript i shell/CGI som snakker med SQLite) er listet opp i sin helhet bakerst i oppgavesettet. Du skal forklare hva filene gjør sammen, gå linje for linje gjennom deler av koden, vurdere autentiseringsmekanismen og foreslå en konkret forbedring. Dette er det klart vanligste formatet — 6 av 8 sett følger det.</li>
-            <li><strong>Begrepssjekkliste.</strong> En rekke frittstående deloppgaver (10&#8211;16 % hver) som hver spør «forklar X, gi et eksempel, og vurder om/hvordan X bidrar til sikkerhet» — for temaer som demonisering, chroot, cookies, samme opphav, konteinere. To av åtte sett (2024&#8211;2025 konte, 2022&#8211;2023 konte) følger dette formatet.</li>
+            <li><strong>Begrepssjekkliste.</strong> En rekke frittstående deloppgaver (10&#8211;16 % hver) som hver spør «forklar X, gi et eksempel, og vurder om/hvordan X bidrar til sikkerhet» — for temaer som demonisering, chroot, cookies, samme opphav, konteinere. Ett sett (2024&#8211;2025 konte) følger dette formatet helt, og 2022&#8211;2023 ordinær delvis. De to andre konte-settene (2025&#8211;2026 og 2022&#8211;2023) er scenario-oppgaver: «forklar og vis med eksempel hvordan du ville bygget …».</li>
           </ul>
           <div class="note"><strong>Konsekvens:</strong> uansett hvilket format det blir, må du kunne <em>begge</em> ferdighetene — lese fremmed kode linje for linje <em>og</em> forklare enkeltbegreper isolert med eksempel.</div>
 
@@ -54,12 +56,12 @@
             <tbody>
               <tr style="border-bottom:1px solid var(--line)">
                 <td style="padding:.6rem .3rem"><strong>Autentisering</strong> (hashing+salt, sesjonskapsel, kritiser & forbedre)</td>
-                <td style="padding:.6rem .3rem">8 / 8</td>
-                <td style="padding:.6rem .3rem">Nesten ordrett samme spørsmål tre år på rad: <em>«Gi en vurdering av autentiseringsmekanismen som brukes i systemet. Foreslå en forbedring. Begrunn svaret.»</em> Koden bruker gjennomgående <code>mkpasswd</code> med salt + en <code>SESJONSID</code>-informasjonskapsel satt med <code>SameSite=Strict</code>.</td>
+                <td style="padding:.6rem .3rem">7 / 8</td>
+                <td style="padding:.6rem .3rem">Ordrett samme spørsmål i 2023&#8211;2024 konte og 2024&#8211;2025 ordinær: <em>«Gi en vurdering av autentiseringsmekanismen som brukes i systemet. Foreslå en forbedring. Begrunn svaret.»</em> Koden i 2024&#8211;2026 bruker <code>mkpasswd</code> med salt + en <code>SESJONSID</code>-informasjonskapsel satt med <code>SameSite=Strict</code>.</td>
               </tr>
               <tr style="border-bottom:1px solid var(--line)">
                 <td style="padding:.6rem .3rem"><strong>Konteinere / OS-nivå-virtualisering</strong> (chroot, namespaces, Docker/Podman)</td>
-                <td style="padding:.6rem .3rem">8 / 8</td>
+                <td style="padding:.6rem .3rem">5 / 8 direkte</td>
                 <td style="padding:.6rem .3rem">Enten direkte («forklar chroot», «hvilke Linux-kjernemekanismer gir konteinerisering») eller indirekte via en <code>Dockerfile</code>/<code>Containerfile</code> som skal forklares linje for linje — inkludert hvorfor flere <code>RUN</code>-linjer bør slås sammen til én (lagdeling/image-størrelse).</td>
               </tr>
               <tr style="border-bottom:1px solid var(--line)">
@@ -79,8 +81,8 @@
               </tr>
               <tr>
                 <td style="padding:.6rem .3rem">DTD/XML-validering (<code>xmllint --xpath</code>)</td>
-                <td style="padding:.6rem .3rem">2 / 8 &#8212; kun 2023&#8211;2024</td>
-                <td style="padding:.6rem .3rem">Brukt begge sittinger i 2023&#8211;2024, men erstattet med JSON i både 2024&#8211;2025 og 2025&#8211;2026-eksamenene. Trolig utfaset &#8212; lavere prioritet enn de andre.</td>
+                <td style="padding:.6rem .3rem">3 / 8 &#8212; 2023&#8211;2025</td>
+                <td style="padding:.6rem .3rem">XML med DTD i koden begge sittinger i 2023&#8211;2024, og DTD som egen oppgave (12 %) i 2024&#8211;2025 konte. Kodeeksemplene bruker JSON fra 2024&#8211;2025 ordinær. Lavere prioritet, men ikke borte.</td>
               </tr>
             </tbody>
           </table>
@@ -119,19 +121,19 @@ fi</pre>
             <li>Valider/sanitiser input før det brukes i SQL &#8212; flere av eksemplene limer variabler rett inn i SQL-strenger igjen (se injeksjon, uke 34) selv i «ordinær»-eksamenskoden.</li>
           </ul>
 
-          <div class="note"><strong>Ikke lenger sett:</strong> service workers (kun 2022&#8211;2023) og DTD/XML (kun 2023&#8211;2024) dukket opp én gang/ett år og har siden blitt byttet ut &#8212; lavest prioritet av det som faktisk har vært spurt om.</div>
+          <div class="note"><strong>Ikke lenger sett:</strong> service workers (kun 2022&#8211;2023) dukket opp bare i 2022&#8211;2023, og DTD/XML sist i 2024&#8211;2025 konte &#8212; lavest prioritet av det som faktisk har vært spurt om.</div>
         </article>
 
         <nav class="chapter-nav">
           <a data-dir="prev" href="38-cgi-html-skjema.html"><small>forrige</small>Uke 38: CGI og HTML-skjema</a>
-          <span></span>
+          <a data-dir="next" href="eksamensanalyse.html"><small>neste</small>Eksamensanalyse</a>
         </nav>
       </main>
     </div>
   </div>
 
-  <script src="../../../assets/js/main.js?v=26"></script>
-  <script src="../../../assets/js/status.js?v=26"></script>
-  <script src="../../../assets/js/formler.js?v=26"></script>
+  <script src="../../../assets/js/main.js?v=27"></script>
+  <script src="../../../assets/js/status.js?v=27"></script>
+  <script src="../../../assets/js/formler.js?v=27"></script>
 </body>
 </html>
