@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prosjekt — MoS · H26</title>
+  <meta name="description" content="Fusée Gelée (CVE-2018-6242) i Tegra X1: hvor miniprosjektet møter kapittel 1–6 i pensum, og hvor det tydelig ikke gjør det.">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=30">
+</head>
+<body class="theme-mos" data-updated="2026-09-21">
+  <div class="app-shell">
+
+    <aside class="sidebar"></aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">MoS</a>
+        <div class="topbar__crumb">Prosjekt</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow">MoS · miniprosjekt</div>
+          <h1>Fusée Gelée og pensum</h1>
+          <p class="page-header__desc">Miniprosjektet analyserer Fusée Gelée (CVE-2018-6242) — bootROM-sårbarheten i NVIDIA Tegra X1 som brukes til å hacke en Nintendo Switch v1. Denne siden går kapittel for kapittel: hvor prosjektet faktisk bygger på pensum, og hvor koblingen er svak eller rett og slett fraværende.</p>
+          <span class="page-header__status" data-status="active"><i></i>rapport + 10 min muntlig presentasjon</span>
+        </header>
+
+        <div class="sourcebar">
+          <a class="tag" href="https://switch.hacks.guide/fusee_gelee" target="_blank" rel="noopener">kilde · Fusée Gelée writeup</a>
+          <a class="tag" href="https://nvd.nist.gov/vuln/detail/CVE-2018-6242" target="_blank" rel="noopener">kilde · CVE-2018-6242 (NVD)</a>
+          <a class="tag" href="https://nvidia.custhelp.com/app/answers/detail/a_id/4660" target="_blank" rel="noopener">kilde · NVIDIA security notice</a>
+        </div>
+
+        <p class="callout"><strong>Kort om prosjektet:</strong> Nintendo Switch v1 (HAC-001) bruker Tegra X1 (T210). Dens bootROM (IROM) håndterer en USB-kontrollforespørsel (<code>GET_STATUS</code>) feil — svarlengden settes til feltet <code>wLength</code> fra angriperen i stedet for de faktiske 2 byte, så en DMA-kopiering på opptil 65 535 byte skriver over kjørestacken og gir kodeeksekvering på høyeste privilegienivå (EL3/PL3), <em>før</em> noen signatursjekk har kjørt. Fordi IROM er en maske-ROM, finnes ingen programvarefiks — bare en ny brikkerevisjon (T214/Mariko) retter feilen.</p>
+
+        <article class="prose">
+          <h2>Oversikt: styrken på koblingen, kapittel for kapittel</h2>
+          <p>Vurderingen under er min egen, ikke pensums — men den er nyttig for å vise en eksaminator at du forstår <em>hvorfor</em> prosjektet passer inn der det gjør, og like bevisst hvorfor det ikke gjør det andre steder. Å late som alt henger sammen er en svakere presentasjon enn å vise nøyaktig hvor grensen går.</p>
+
+          <div class="dtable-wrap">
+            <table class="dtable">
+            <thead>
+              <tr>
+                <th>Kapittel</th>
+                <th>Kobling</th>
+                <th>Styrke</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a href="01-intro.html">1 · Introduksjon</a></td>
+                <td>Chain of trust — IROM <em>er</em> «den uforanderlige førstetrinns bootloaderen» fra kapittelet, ordrett</td>
+                <td><span class="hit">Sterk</span></td>
+              </tr>
+              <tr>
+                <td><a href="02-bootloader-swd-uart.html">2 · Bootloader, SWD, UART</a></td>
+                <td>Samme mønster som APPROTECT/CTRL-AP: en tiltenkt recovery-vei blir angrepsvei</td>
+                <td><span class="hit">Sterk</span></td>
+              </tr>
+              <tr>
+                <td><a href="03-ble.html">3 · Bluetooth Low Energy</a></td>
+                <td>Begge er protokollhåndterere som stoler på ekstern input — men trådløst vs. fysisk USB er reelt forskjellige angrepsflater</td>
+                <td>Svak</td>
+              </tr>
+              <tr>
+                <td><a href="04-micropython-mqtt.html">4 · MicroPython, MQTT</a></td>
+                <td>SoC-begrepet passer direkte; ESP8266s seriell-ROM-bootloader er den ufarlige tvillingen av RCM</td>
+                <td>Moderat</td>
+              </tr>
+              <tr>
+                <td><a href="05-effektanalyse.html">5 · Effektanalyse</a></td>
+                <td>Fusée Gelée faller <em>utenfor</em> begge angrepsklassene forelesningen setter opp — nyttig å kunne forklare hvorfor</td>
+                <td>Moderat</td>
+              </tr>
+              <tr>
+                <td><a href="06-glitching.html">6 · Glitching</a></td>
+                <td>Samme mål (bryt en sjekk uten å røre koden) — men et heller kraftigere og mer pålitelig virkemiddel</td>
+                <td><span class="hit">Sterk</span></td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+
+          <h2>Kapittel 1 — chain of trust, ett skritt før den i det hele tatt starter</h2>
+          <p>Kapittel 1 definerer chain of trust som «en liten, uforanderlig førstetrinns bootloader (ofte brent inn i silisiumet på fabrikken)» som verifiserer neste trinn før den gir fra seg kontrollen. IROM i Tegra X1 er nøyaktig denne komponenten, ord for ord: en maske-ROM etset inn i brikken under fabrikasjon, som ikke kan slettes, reflashes eller patches i ettertid.</p>
+          <p>Kapittel 1 sier også: «klarer man å bryte tilliten ett eneste sted … er resten av kjeden verdiløs.» Fusée Gelée er den mest ekstreme illustrasjonen av akkurat den setningen som finnes i pensum: bruddet skjer i <em>selve det første leddet</em>, før noen signatursjekk i det hele tatt har kjørt. Bootloaderen som skal verifisere alt som kommer etter, blir selv kompromittert på EL3/PL3 — det høyeste privilegienivået i systemet — før tillitskjeden engang er i gang. Resten av kjeden (bootloader, TrustZone OS, Horizon) blir irrelevant, ikke fordi den er svak, men fordi angriperen aldri trenger å forholde seg til den.</p>
+
+          <h2>Kapittel 2 — to bakdører, ulik pris</h2>
+          <p>Strukturen er identisk: begge sårbarhetene misbruker et grensesnitt som er der <em>med vilje</em>, til et annet formål enn normal drift. CTRL-AP på nRF52 finnes for å kunne styre kretsen selv når andre access ports er sperret. RCM på Tegra X1 finnes for fabrikk- og feltgjenoppretting over USB. Ingen av dem er i seg selv en feil — feilen ligger i hva de tillater når de misbrukes.</p>
+          <p>Der de skiller lag, er verdt å få tydelig fram: å omgå APPROTECT krever <code>ERASEALL</code> — hele flashen slettes, og med den forsvinner både firmware <em>og</em> eventuelle hemmeligheter som lå der. Det er en reell sikkerhetsavveining: angriperen får debug-tilgang, men bare ved å ødelegge det hen ville stjålet. Fusée Gelée har ingen slik pris. Kodeeksekvering på EL3/PL3 oppnås uten å slette eller endre noe som helst — enheten fortsetter å se uberørt ut, og alle hemmeligheter brent inn i fuse-arrayet er fortsatt der, fullt lesbare for koden angriperen nå kjører. Samme underliggende mønster, men Tegra-varianten gir angriperen alt uten å måtte ofre noe.</p>
+
+          <h2>Kapittel 4 — SoC-begrepet og den ufarlige tvillingen</h2>
+          <p>Kapittel 4 definerer et System on Chip som «CPU, arbeidsminne, sekundærlagring og en samling periferigrensesnitt … integrert på én brikke», med ESP8266 som billig eksempel. Tegra X1 er samme type komponent i en helt annen skala: CPU-kompleks (4×Cortex-A57 + 4×Cortex-A53), en 256-kjerners GPU, en egen boot-/strømstyringsprosessor (BPMP) og et fuse-array for hemmeligheter, alt på én TSMC 20 nm-brikke.</p>
+          <p>Mer presist: <code>esptool</code> snakker med ESP8266 sin egen ROM-bootloader over seriellporten for å lese/skrive flash — en liten, fastbrent kodesnutt som eksponerer en enkel binærprotokoll for å laste inn data utenfra. Det er strukturelt <em>nøyaktig</em> mønsteret RCM implementerer på Tegra X1, bare over USB i stedet for UART. Poenget er ikke at ESP8266 er sårbar på samme måte — det er ikke dokumentert at den er det — men at «en liten bit fastbrent kode som snakker et enkelt binærprotokoll for å laste data ved oppstart» er et vanlig, ufarlig og nyttig mønster i seg selv. Fusée Gelée viser hva som skjer når akkurat den kodebiten har en feil, og ikke kan rettes i ettertid.</p>
+
+          <h2>Kapittel 5 og 6 — hvor passer Fusée Gelée i taksonomien pensum bruker?</h2>
+          <p>Kapittel 5 deler angrep med fysisk tilgang i to kategorier: <strong>feilinjeksjon</strong> (aktivt forstyrre kretsen — klokke-/spenningsglitching, elektromagnetisk injeksjon) og <strong>sidekanalanalyse</strong> (passivt observere noe kretsen lekker, som strømforbruk). Det er verdt å si høyt i presentasjonen: <strong>Fusée Gelée passer strengt tatt i ingen av dem.</strong> Det er ikke sidekanalanalyse — ingenting måles passivt. Og det er ikke feilinjeksjon slik kapittel 6 definerer det heller: ingen spenning eller klokke manipuleres analogt for å bryte en setup-/hold-tidsbetingelse. Sårbarheten er en klassisk, digital programvarefeil (CWE-119, en lengde uten grensesjekk) i en protokollhåndterer — som bare krever fysisk tilgang fordi RCM går over USB, ikke fordi selve angrepsmekanismen er elektrisk.</p>
+          <p>To konkrete forskjeller fra spenningsglitching i kapittel 6, verdt å ha klare til «hvorfor det?»-spørsmål:</p>
+          <ul>
+            <li><strong>Hva man oppnår.</strong> Glitching i kapittel 6 får typisk <em>én</em> instruksjon — en sammenligning eller et betinget hopp — til å gi feil svar, uten at ny kode noensinne kjøres. Fusée Gelée overskriver returadressen på stacken og oppnår <em>vilkårlig kodeeksekvering</em>: angriperen kjører sin egen, fullstendige payload på EL3/PL3. Det er en kategorisk sterkere konsekvens enn å snu utfallet av én if-sjekk.</li>
+            <li><strong>Pålitelighet.</strong> Kapittel 6 beskriver glitching som et søkeproblem — posisjon og bredde sveipes systematisk fordi timingen er en analog, probabilistisk affære. Fusée Gelée er deterministisk: er offset til returadressen kjent (den er offentlig dokumentert), virker samme <code>wLength</code>-verdi hver eneste gang, uten sveip.</li>
+          </ul>
+          <p>Kapittel 6 påpeker selv at APPROTECT-omgåelsen i kapittel 2 og spenningsglitching har «samme underliggende mål … men løst på det elektriske laget i stedet for via debug-porten». Fusée Gelée er en tredje løsning på det samme underliggende målet — bryt en sikkerhetssjekk uten å kjenne hemmeligheten den beskytter — løst verken via debug-porten eller det elektriske laget, men i selve programvarelogikken til bootROM-ens egen protokollparser.</p>
+
+          <div class="note"><strong>Bruk skillet aktivt i presentasjonen.</strong> Å plassere Fusée Gelée <em>utenfor</em> feilinjeksjon/sidekanal-taksonomien er en sterkere observasjon enn å late som den passer i en av dem — det viser at du forstår rammeverket faget bruker, ikke bare det ene caset du har fordypet deg i. Det er nøyaktig den typen resonnement en muntlig eksaminator kan følge opp med «hvorfor det?» på.</div>
+
+          <h2>Kapittel 3 — den svakeste koblingen</h2>
+          <p>Ærlig sagt er dette den tynneste. GAP/GATT i kapittel 3 er en trådløs protokoll for tilkoblede enheter; RCM er et fysisk USB-grensesnitt som krever at man kortslutter en pinne og kobler en kabel. Det eneste reelle fellestrekket er abstrakt: begge er en protokollhåndterer på enheten som stoler på strukturert input utenfra (en GATT-skriving vs. en USB control-transfer), og i begge tilfeller definerer feltene i forespørselen hva enheten gjør med dem. Det er for tynt til å bygge en presentasjonsdel på — ta det med som ett resonnerende sammenligningspunkt om det kommer opp, ikke som en egen bolk.</p>
+
+          <div class="note"><strong>Formelle krav:</strong> miniprosjektet er den sjette av TSD3050 sine seks arbeidskrav — se <a href="emneplan.html">emneplanen</a> for detaljer om vurderingsform og de andre kravene.</div>
+        </article>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="emneplan.html"><small>forrige</small>Emneplan</a>
+          <span></span>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js?v=30"></script>
+  <script src="../../../assets/js/status.js?v=30"></script>
+  <script src="../../../assets/js/formler.js?v=30"></script>
+</body>
+</html>
