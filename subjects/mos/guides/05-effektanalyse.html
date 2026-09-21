@@ -46,7 +46,7 @@
           <p>Denne enkleste formen kalles <strong>Simple Power Analysis (SPA)</strong>: man leser strømforbruket direkte som en graf over tid og prøver å kjenne igjen programflyt — løkker, forgreininger, funksjonskall — rett fra formen på kurven. Det finnes også mer avanserte varianter (dekket i pensumboka) som statistisk sammenligner mange tusen målinger for å trekke ut <em>hvilke data</em> som ble behandlet, selv når selve kontrollflyten er identisk uansett input — det er langt vanskeligere å forsvare seg mot, siden konstant-tid-kode (som fjerner de åpenbare forgreiningene) ikke hjelper alene.</p>
 
           <h2>Hvordan man faktisk måler strømforbruk</h2>
-          <p>Man måler sjelden strøm direkte — i stedet setter man inn en liten, kjent <strong>shunt-motstand</strong> i strømbanen til target-kretsen og måler spenningsfallet over den med et oscilloskop. Ohms lov (<code>V = I × R</code>) gjør spenningsmålingen om til en strømkurve: med en kjent motstandsverdi og en målt spenning kan strømmen regnes ut direkte og fortløpende, synkronisert med et trigger-signal fra target-programmet.</p>
+          <p>Man måler sjelden strøm direkte — i stedet setter man inn en liten, kjent <strong>shunt-motstand</strong> i strømbanen til target-kretsen og måler spenningsfallet over den med et oscilloskop. Ohms lov \(V = I \times R\) gjør spenningsmålingen om til en strømkurve: med en kjent motstandsverdi og en målt spenning kan strømmen regnes ut direkte og fortløpende, synkronisert med et trigger-signal fra target-programmet.</p>
           <p>Denne labben bruker et <strong>ChipWhisperer Nano</strong> — et lite verktøy som samler target-programmerer, oscilloskop og seriellport i én pakke, slik at man slipper å koble sammen flere separate instrumenter for å komme i gang.</p>
 
           <h2>Referanse: den opprinnelige DPA-artikkelen</h2>
@@ -90,5 +90,6 @@
   <script src="../../../assets/js/main.js?v=27"></script>
   <script src="../../../assets/js/status.js?v=27"></script>
   <script src="../../../assets/js/formler.js?v=27"></script>
+  <script src="../../../assets/js/math.js?v=27"></script>
 </body>
 </html>

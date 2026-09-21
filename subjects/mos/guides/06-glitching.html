@@ -44,10 +44,14 @@
           <h2>Hvorfor det fungerer: setup- og hold-tid</h2>
           <p>En synkron krets består av flip-flops (register) forbundet med kombinatorisk logikk, alle styrt av samme klokke. For at kretsen skal virke pålitelig, må to tidsbetingelser holde for hvert register:</p>
           <ul>
-            <li><strong>Setup time constraint</strong> — signalet inn til neste register må ha rukket å stabilisere seg <em>før</em> klokkeflanken. Dette setter en øvre grense for klokkefrekvensen: <code>T_c ≥ t_pcq + t_pd + t_setup</code>, der <code>t_pd</code> er forplantningsforsinkelsen gjennom den kombinatoriske logikken.</li>
-            <li><strong>Hold time constraint</strong> — signalet må forbli stabilt en kort stund <em>etter</em> klokkeflanken: <code>t_ccq + t_cd &gt; t_hold</code>. Holder ikke dette, fungerer ikke kretsen pålitelig ved <em>noen</em> klokkefrekvens.</li>
+            <li><strong>Setup time constraint</strong> — signalet inn til neste register må ha rukket å stabilisere seg <em>før</em> klokkeflanken. Dette setter en øvre grense for klokkefrekvensen:
+              \[ T_c \ge t_{pcq} + t_{pd} + t_{setup} \]
+              der \(t_{pd}\) er forplantningsforsinkelsen gjennom den kombinatoriske logikken.</li>
+            <li><strong>Hold time constraint</strong> — signalet må forbli stabilt en kort stund <em>etter</em> klokkeflanken:
+              \[ t_{ccq} + t_{cd} &gt; t_{hold} \]
+              Holder ikke dette, fungerer ikke kretsen pålitelig ved <em>noen</em> klokkefrekvens.</li>
           </ul>
-          <p>Poenget for glitching: <code>t_pd</code> — forplantningsforsinkelsen gjennom logikken — er ikke konstant. Den avhenger av forsyningsspenningen, fordi transistorer bytter tregere ved lavere spenning. Senker man <code>V_DD</code> kortvarig og presist nok, øker <code>t_pd</code> nok til å bryte setup time-betingelsen for akkurat det ene registeret som er midt i en instruksjonsutførelse akkurat da — signalet rekker ikke stabilisere seg før klokkeflanken, og registeret fanger opp feil verdi. Resten av kretsen fortsetter helt normalt; det er bare den ene instruksjonen som får feil resultat.</p>
+          <p>Poenget for glitching: \(t_{pd}\) — forplantningsforsinkelsen gjennom logikken — er ikke konstant. Den avhenger av forsyningsspenningen, fordi transistorer bytter tregere ved lavere spenning. Senker man \(V_{DD}\) kortvarig og presist nok, øker \(t_{pd}\) nok til å bryte setup time-betingelsen for akkurat det ene registeret som er midt i en instruksjonsutførelse akkurat da — signalet rekker ikke stabilisere seg før klokkeflanken, og registeret fanger opp feil verdi. Resten av kretsen fortsetter helt normalt; det er bare den ene instruksjonen som får feil resultat.</p>
 
           <h2>Glitch-vinduet: posisjon og bredde</h2>
           <p>To parametere avgjør hva et spenningsglitch faktisk treffer:</p>
@@ -98,5 +102,6 @@
   <script src="../../../assets/js/main.js?v=27"></script>
   <script src="../../../assets/js/status.js?v=27"></script>
   <script src="../../../assets/js/formler.js?v=27"></script>
+  <script src="../../../assets/js/math.js?v=27"></script>
 </body>
 </html>
