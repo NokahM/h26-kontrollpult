@@ -30,6 +30,9 @@
           { n: '4', title: 'MicroPython og MQTT', part: 'Kapittel 4', track: 'page', meta: 'lab 3', href: 'subjects/mos/guides/04-micropython-mqtt.html' },
           { n: '5', title: 'Effektanalyse', part: 'Kapittel 5', track: 'page', meta: 'lab 4', href: 'subjects/mos/guides/05-effektanalyse.html' },
           { n: '6', title: 'Glitching', part: 'Kapittel 6', track: 'page', meta: 'lab 5', href: 'subjects/mos/guides/06-glitching.html' }
+        ] },
+        { label: 'Om emnet', items: [
+          { title: 'Emneplan', part: 'Om emnet', href: 'subjects/mos/guides/emneplan.html' }
         ] }
       ]
     },

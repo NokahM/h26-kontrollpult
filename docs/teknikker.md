@@ -461,6 +461,23 @@ Dette ble testet på denne måten:
 - **Innhold i PDF:** `pdftotext -layout` for å sammenligne med offisielle løsningsforslag.
 - **Tallkontroll:** Python eller `scipy.stats` for kvantiler, for eksempel $\chi^2_{0.025}$ med 80 frihetsgrader.
 
+### 7.4 Hente emneplaner fra USN
+
+Emneplansiden (`usn.no/studier/studie-og-emneplaner/#/emne/…`) er en
+enkeltsideapplikasjon som tegner innholdet i en shadow DOM, så den lar seg
+verken hente med en vanlig HTTP-forespørsel eller lese ut av `--dump-dom`.
+Webkomponenten bak henter dataene fra et åpent JSON-endepunkt:
+
+```bash
+curl "https://s293.usn.no/v2/emneplan/TSD3050_1_2026_H%C3%98ST"   # s294 er reserven
+```
+
+Svaret har `emneplandata[]` med én oppføring per språk (`B` bokmål, `E`
+engelsk). `metadata` inneholder studiepoeng, semester, institutt og
+`updateTime`, mens hele planteksten ligger som HTML i `metadata.infotyper`.
+Endepunktet ble funnet ved å spore `<usn-study>` til webpack-biten
+`webcomponents-study.module.*.js` og lese `_endpoints` der.
+
 ---
 
 ## 8. Innhold for læring
