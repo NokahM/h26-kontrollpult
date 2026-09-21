@@ -55,6 +55,9 @@
           { title: 'Eksamensoversikt', part: 'Eksamensforberedelse', href: 'subjects/tsd3060/guides/eksamensoversikt.html' },
           { title: 'Eksamensanalyse', part: 'Eksamensforberedelse', href: 'subjects/tsd3060/guides/eksamensanalyse.html' }
         ] },
+        { label: 'Om emnet', items: [
+          { title: 'Emneplan', part: 'Om emnet', href: 'subjects/tsd3060/guides/emneplan.html' }
+        ] },
         { label: 'Andre steder', items: [
           { title: 'Kurssystemet', meta: 'debbie', external: true, href: 'https://debbie.usn.no/tsd3060/' }
         ] }
