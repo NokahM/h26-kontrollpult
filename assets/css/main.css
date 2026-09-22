@@ -375,6 +375,15 @@ html[data-sidebar="collapsed"] .sidebar { visibility: hidden; }
   color: var(--muted);
   text-wrap: pretty;
 }
+.page-header__en {
+  display: block;
+  margin-top: .3rem;
+  font-family: var(--font-read);
+  font-size: 1.05rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--faint);
+}
 
 .section { margin-top: 3rem; }
 .section__label {
