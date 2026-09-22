@@ -40,15 +40,16 @@
 
             <h3>De fire spørsmålsformene</h3>
             <ol>
-              <li><strong>«Sannsynlighet for over/under en grense»</strong> — standardiser, slå opp. Husk \(P(X&gt;x)=1-G(z)\).</li>
-              <li><strong>«Mellom to grenser»</strong> — \(G(z_2)-G(z_1)\). Er grensene symmetriske om \(\mu\), blir det \(2G(z)-1\).</li>
+              <li><strong>«Sannsynlighet for over/under en grense»</strong> — standardiser, slå opp. Tabell A gir alltid \(P(Z\le z)\), aldri «større enn». Spør oppgaven om «over», bruker du komplementregelen: \(P(X\le x)\) og \(P(X&gt;x)\) dekker til sammen <em>alle</em> utfall uten overlapp, så de må summere til 1 — derfor \(P(X&gt;x)=1-G(z)\).</li>
+              <li><strong>«Mellom to grenser»</strong> — \(P(z_1&lt;Z&lt;z_2)=G(z_2)-G(z_1)\) (arealet under \(z_2\), minus arealet under \(z_1\)). Er grensene symmetriske om \(\mu\) (\(z_1=-z_2=-z\)), gir symmetrien \(G(-z)=1-G(z)\) at uttrykket forenkles til \(G(z)-(1-G(z))=2G(z)-1\).</li>
               <li><strong>Baklengs: «hva må grensen/forventningen være …»</strong> — her bruker du <strong>Tabell B</strong> (kvantiler) i stedet. Sett opp \(\frac{k-\mu}{\sigma}=\pm z_\alpha\) og løs.</li>
-              <li><strong>«Minst én / den største av n»</strong> — gå via komplementet: \(P(X_{\max}&gt;k)=1-P(X\le k)^n\).</li>
+              <li><strong>«Minst én / den største av n»</strong> — gå via komplementet: «minst én/den største over \(k\)» er motsatt av «<em>alle</em> høyst \(k\)». Med uavhengighet er fellessannsynligheten for at alle \(n\) ligger under \(k\) lik <em>produktet</em> av enkeltsannsynlighetene, så \(P(X_{\max}&gt;k)=1-P(X\le k)^n\).</li>
             </ol>
 
             <div class="note"><strong>Negative z-verdier:</strong> mange tabeller stopper på \(z=0\). Bruk symmetrien \(G(-z)=1-G(z)\).</div>
             <div class="note"><strong>Benytt riktig tabell:</strong> går du <em>fra</em> en x-verdi <em>til</em> en sannsynlighet, er det Tabell A. Går du <em>fra</em> en sannsynlighet <em>til</em> en x-verdi, er det Tabell B. De mest brukte kvantilene: \(z_{0.10}=1.282\), \(z_{0.05}=1.645\), \(z_{0.025}=1.960\), \(z_{0.01}=2.326\), \(z_{0.005}=2.576\), \(z_{0.001}=3.090\).</div>
             <div class="note"><strong>Enheter:</strong> mai 2025 O3b ber om garantitid i <em>hele måneder</em> mens fordelingen er gitt i <em>år</em>. Gjør om først (\(\mu=144\), \(\sigma=30\) måneder), ellers blir avrundingen feil.</div>
+            <div class="note"><strong>Sum/gjennomsnitt av uavhengige normalfordelte:</strong> forventningen adderes alltid (\(E(\sum X_i)=\sum E(X_i)\)), men variansen adderes <em>bare</em> fordi variablene er uavhengige. Standardavviket er roten av <em>summen av variansene</em>, ikke summen av standardavvikene: \(\sigma_{\sum}=\sqrt{n}\,\sigma\) for en sum, \(\sigma_{\bar X}=\sigma/\sqrt{n}\) for et gjennomsnitt.</div>
           </article>
         </section>
 
@@ -86,13 +87,16 @@
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
                 <h4>a)</h4>
-                <p>\[ P(X&gt;51.2)=1-G\!\left(\frac{51.2-50}{0.80}\right)=1-G(1.50)=1-0.9332=0.0668 \]</p>
+                <p>Oppgaven spør om «større enn», men Tabell A gir bare \(P(Z\le z)\). Hendelsene \(X\le 51.2\) og \(X&gt;51.2\) er komplementære — de dekker til sammen <em>alle</em> mulige utfall og overlapper ikke — så sannsynlighetene deres må summere til 1. Derfor er \(P(X&gt;51.2)=1-P(X\le 51.2)=1-G(z)\), der \(1\)-tallet kommer fra dette sannsynlighetsaksiomet (arealet under hele fordelingen er 1), ikke fra noe spesielt ved akkurat denne oppgaven.</p>
+                <p>\[ z=\frac{51.2-50}{0.80}=1.50 \]</p>
+                <p>\[ P(X&gt;51.2)=1-G(1.50)=1-0.9332=0.0668 \]</p>
                 <h4>b) Baklengs — Tabell B</h4>
-                <p>\[ G\!\left(\frac{c-50}{0.80}\right)=0.001 \quad\Rightarrow\quad \frac{c-50}{0.80}=-z_{0.001}=-3.090 \]</p>
+                <p>Vi skal finne \(c\) slik at \(P(X&lt;c)=0.001\) — et svært lite areal helt ute i venstre hale, så \(z\) må bli negativ. Tabell B gir deg \(z_\alpha\) definert ved \(G(z_\alpha)=1-\alpha\) (arealet <em>til høyre</em> for \(z_\alpha\) er \(\alpha\)). Ved symmetrien \(G(-z)=1-G(z)\) blir \(G(-z_{0.001})=1-G(z_{0.001})=1-0.999=0.001\) — nøyaktig det vi trenger. Derfor bruker vi \(z=-z_{0.001}\):</p>
+                <p>\[ \frac{c-50}{0.80}=-z_{0.001}=-3.090 \]</p>
                 <p>\[ c=50-3.090\cdot 0.80=47.53\ \text{ohm} \]</p>
                 <h4>c) Sum av uavhengige normalfordelte</h4>
-                <p>Summen \(Y=X_1+\dots+X_{20}\) er <em>eksakt</em> normalfordelt (ikke bare tilnærmet — de enkelte variablene er jo normalfordelte):</p>
-                <p>\[ \mu_Y=20\cdot 50=1000,\qquad \sigma_Y=\sqrt{20}\cdot 0.80\approx 3.578 \]</p>
+                <p>Summen \(Y=X_1+\dots+X_{20}\) er <em>eksakt</em> normalfordelt (ikke bare tilnærmet — de enkelte variablene er jo normalfordelte). Forventningen adderes alltid, uansett uavhengighet: \(E(Y)=\sum E(X_i)=20\cdot 50=1000\). Variansen adderes <em>fordi</em> variablene er uavhengige (da blir kovariansleddene null): \(\operatorname{Var}(Y)=\sum\operatorname{Var}(X_i)=20\cdot 0.80^2\). Standardavviket er kvadratroten av <em>summen av variansene</em>, ikke summen av standardavvikene — derfor \(\sigma_Y=\sqrt{20}\cdot 0.80\), <strong>ikke</strong> \(20\cdot 0.80\):</p>
+                <p>\[ \mu_Y=20\cdot 50=1000,\qquad \sigma_Y=\sqrt{20\cdot 0.80^2}=\sqrt{20}\cdot 0.80\approx 3.578 \]</p>
                 <p>\[ P(Y&lt;999)=G\!\left(\frac{999-1000}{3.578}\right)=G(-0.28)\approx 0.39 \]</p>
                 <div class="answer"><b>a) 0.067 · b) 47.5 ohm · c) ca. 0.39.</b> Merk \(\sigma_Y=\sqrt n\,\sigma\), ikke \(n\sigma\).</div>
               </div>
@@ -147,7 +151,8 @@
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
                 <h4>a)</h4>
-                <p>Grensene ligger symmetrisk om \(\mu\), så bruk \(2G(z)-1\):</p>
+                <p>Grensene 9.95 og 10.05 ligger like langt fra \(\mu=10\) på hver side, altså \(z_1=-z\) og \(z_2=z\) for samme \(z\). Symmetrien \(G(-z)=1-G(z)\) gir da</p>
+                <p>\[ P(z_1&lt;Z&lt;z_2)=G(z)-G(-z)=G(z)-(1-G(z))=2G(z)-1 \]</p>
                 <p>\[ z=\frac{0.05}{0.03}=1.67 \quad\Rightarrow\quad P=2G(1.67)-1=2\cdot 0.9525-1=0.905\approx 0.91 \]</p>
                 <h4>b)</h4>
                 <p>Regn om til måneder først: \(\mu=12\cdot 12=144\), \(\sigma=2.5\cdot 12=30\). La garantitiden være \(k\) måneder. Kravet er \(P(X&lt;k)\le 0.05\):</p>
@@ -207,7 +212,7 @@
                 <h4>a)</h4>
                 <p>\[ P(X&lt;50)=G\!\left(\frac{50-38}{8}\right)=G(1.50)=0.9332 \]</p>
                 <h4>b) Maks-triks</h4>
-                <p>«Den tyngste veier over 50» er det motsatte av «alle 14 veier høyst 50». Med uavhengighet:</p>
+                <p>«Den tyngste av 14 veier over 50» er komplementet til «<em>alle</em> 14 veier høyst 50» — igjen to hendelser som dekker alle utfall uten overlapp. Fordi potetene er uavhengige, er sannsynligheten for at <em>alle</em> 14 samtidig veier høyst 50 gram lik <em>produktet</em> av enkeltsannsynlighetene (det er selve definisjonen av uavhengighet: fellessannsynlighet = produkt): \(P(X_1\le 50,\dots,X_{14}\le 50)=P(X\le 50)^{14}\). Deretter komplementregelen som i a):</p>
                 <p>\[ P(X_{\max}&gt;50)=1-P(X\le 50)^{14}=1-0.9332^{14}\approx 0.62 \]</p>
                 <div class="answer"><b>a) 0.933 · b) 0.62.</b> Dette komplementtrikset er verdt å kunne utenat — «minst én av n», «den største av n» og «den minste av n» løses alle slik.</div>
               </div>
