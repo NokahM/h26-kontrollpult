@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Formelsamling og tabeller — Statistikk · H26</title>
-  <meta name="description" content="Formelarket du får utdelt, pluss kvantilene du trenger oftest — samlet slik de faktisk brukes.">
+  <meta name="description" content="Formelarket du får utdelt og tabell A, B og C — samlet slik de faktisk brukes.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
   <link rel="stylesheet" href="../../../assets/css/main.css?v=31">
 </head>
-<body class="theme-statistikk" data-updated="2026-09-14">
+<body class="theme-statistikk" data-updated="2026-09-22">
   <div class="app-shell">
 
     <aside class="sidebar"></aside>
@@ -27,14 +27,14 @@
         <header class="page-header">
           <div class="page-header__eyebrow">PB2030 vedlegg</div>
           <h1>Formelsamling og tabeller</h1>
-          <p class="page-header__desc">Formelarket du får utdelt, pluss kvantilene du trenger oftest — samlet slik de faktisk brukes.</p>
+          <p class="page-header__desc">Formelarket du får utdelt og tabell A, B og C — samlet slik de faktisk brukes.</p>
           <span class="page-header__status" data-status="active"><i></i>vedlegg</span>
         </header>
 
         <section class="section">
           <div class="section__label">Om vedlegget</div>
           <article class="prose">
-            <p>Fra og med mai 2023 leveres eksamen ut med et fast formelark og tre tabeller. Under er innholdet i formelarket gjengitt, gruppert etter hvordan det faktisk brukes i oppgavene — pluss de kvantilverdiene som går igjen, slik at du slipper å bla.</p>
+            <p>Fra og med mai 2023 leveres eksamen ut med et fast formelark og tre tabeller. Under er innholdet i formelarket gjengitt, gruppert etter hvordan det faktisk brukes i oppgavene — pluss de tre tabellene (A, B og C) nederst på siden.</p>
             <div class="note">Formelarket er identisk fra 2023 til 2026, bortsett fra årstallet i toppteksten. Tabellene er Tabell A (kumulative sannsynligheter for standard normalfordeling), Tabell B (kvantiler i standard normalfordeling) og Tabell C (kvantiler i student t-fordeling), hentet fra <a href="https://nettressurser.no/statistikk" target="_blank" rel="noopener">nettressurser.no/statistikk</a>.</div>
           </article>
         </section>
@@ -152,45 +152,10 @@
         </section>
 
         <section class="section">
-          <div class="section__label">Kvantiler du trenger oftest</div>
+          <div class="section__label">Tabeller</div>
           <article class="prose">
-            <h3 id="tabellB">Tabell B — standard normalfordeling</h3>
-            <p>\(z_\alpha\) er verdien der \(P(Z&gt;z_\alpha)=\alpha\).</p>
-            <div class="dtable-wrap"><table class="dtable">
-              <thead><tr><th class="num">\(\alpha\)</th><th class="num">0.10</th><th class="num">0.05</th><th class="num">0.025</th><th class="num">0.01</th><th class="num">0.005</th><th class="num">0.001</th></tr></thead>
-              <tbody><tr><td class="num">\(z_\alpha\)</td><td class="num">1.282</td><td class="num">1.645</td><td class="num">1.960</td><td class="num">2.326</td><td class="num">2.576</td><td class="num">3.090</td></tr></tbody>
-            </table></div>
-            <p><strong>Ensidig test</strong> på nivå \(\alpha\) bruker \(z_\alpha\). <strong>Tosidig test</strong> og <strong>symmetrisk konfidensintervall</strong> på nivå \(\alpha\) bruker \(z_{\alpha/2}\) — altså 1.960 for 95 % og 2.576 for 99 %.</p>
-
-            <h3>Tabell C — student t-fordeling</h3>
-            <p>\(t_\alpha\) med \(\nu\) frihetsgrader. Bruk \(\nu=n-1\) for konfidensintervall og tester for \(\mu\), og \(\nu=n-2\) for regresjon.</p>
-            <div class="dtable-wrap"><table class="dtable">
-              <thead><tr><th class="num">\(\nu\)</th><th class="num">\(t_{0.10}\)</th><th class="num">\(t_{0.05}\)</th><th class="num">\(t_{0.025}\)</th><th class="num">\(t_{0.01}\)</th><th class="num">\(t_{0.005}\)</th></tr></thead>
-              <tbody>
-                <tr><td class="num">1</td><td class="num">3.078</td><td class="num">6.314</td><td class="num">12.706</td><td class="num">31.821</td><td class="num">63.657</td></tr>
-                <tr><td class="num">2</td><td class="num">1.886</td><td class="num">2.920</td><td class="num">4.303</td><td class="num">6.965</td><td class="num">9.925</td></tr>
-                <tr><td class="num">3</td><td class="num">1.638</td><td class="num">2.353</td><td class="num">3.182</td><td class="num">4.541</td><td class="num">5.841</td></tr>
-                <tr><td class="num">4</td><td class="num">1.533</td><td class="num">2.132</td><td class="num">2.776</td><td class="num">3.747</td><td class="num">4.604</td></tr>
-                <tr><td class="num">5</td><td class="num">1.476</td><td class="num">2.015</td><td class="num">2.571</td><td class="num">3.365</td><td class="num">4.032</td></tr>
-                <tr><td class="num">6</td><td class="num">1.440</td><td class="num">1.943</td><td class="num">2.447</td><td class="num">3.143</td><td class="num">3.707</td></tr>
-                <tr><td class="num">7</td><td class="num">1.415</td><td class="num">1.895</td><td class="num">2.365</td><td class="num">2.998</td><td class="num">3.499</td></tr>
-                <tr><td class="num">8</td><td class="num">1.397</td><td class="num">1.860</td><td class="num">2.306</td><td class="num">2.896</td><td class="num">3.355</td></tr>
-                <tr><td class="num">9</td><td class="num">1.383</td><td class="num">1.833</td><td class="num">2.262</td><td class="num">2.821</td><td class="num">3.250</td></tr>
-                <tr><td class="num">10</td><td class="num">1.372</td><td class="num">1.812</td><td class="num">2.228</td><td class="num">2.764</td><td class="num">3.169</td></tr>
-                <tr><td class="num">11</td><td class="num">1.363</td><td class="num">1.796</td><td class="num">2.201</td><td class="num">2.718</td><td class="num">3.106</td></tr>
-                <tr><td class="num">12</td><td class="num">1.356</td><td class="num">1.782</td><td class="num">2.179</td><td class="num">2.681</td><td class="num">3.055</td></tr>
-                <tr><td class="num">15</td><td class="num">1.341</td><td class="num">1.753</td><td class="num">2.131</td><td class="num">2.602</td><td class="num">2.947</td></tr>
-                <tr><td class="num">20</td><td class="num">1.325</td><td class="num">1.725</td><td class="num">2.086</td><td class="num">2.528</td><td class="num">2.845</td></tr>
-                <tr><td class="num">30</td><td class="num">1.310</td><td class="num">1.697</td><td class="num">2.042</td><td class="num">2.457</td><td class="num">2.750</td></tr>
-                <tr><td class="num">60</td><td class="num">1.296</td><td class="num">1.671</td><td class="num">2.000</td><td class="num">2.390</td><td class="num">2.660</td></tr>
-                <tr><td class="num">120</td><td class="num">1.289</td><td class="num">1.658</td><td class="num">1.980</td><td class="num">2.358</td><td class="num">2.617</td></tr>
-                <tr><td class="num">\(\infty\)</td><td class="num">1.282</td><td class="num">1.645</td><td class="num">1.960</td><td class="num">2.326</td><td class="num">2.576</td></tr>
-              </tbody>
-            </table></div>
-            <div class="note">Nederste rad er identisk med z-kvantilene — t-fordelingen går mot normalfordelingen når \(\nu\) vokser. Derfor godtar løsningsforslagene å erstatte \(t\) med \(z\) når \(n\) er stor (fra rundt 60 frihetsgrader er forskjellen under 2 %).</div>
-
-            <h3 id="tabellA">Tabell A — \(G(z)=P(Z\le z)\)</h3>
-            <p>Rad = \(z\) med én desimal, kolonne = andre desimal. \(G(1.50)\) finner du på rad <strong>1.5</strong>, kolonne <strong>0.00</strong> → 0.9332. \(G(1.67)\) er rad 1.6, kolonne 0.07 → 0.9525.</p>
+            <h2 id="tabellA">Tabell A — kumulativ standard normalfordeling</h2>
+            <p>Cellene er \(G(z)=P(Z\le z)\). Rad = \(z\) med én desimal, kolonne = andre desimal. \(G(1.50)\) finner du på rad <strong>1.5</strong>, kolonne <strong>0.00</strong> → 0.9332. \(G(1.67)\) er rad 1.6, kolonne 0.07 → 0.9525.</p>
             <div class="dtable-wrap"><table class="dtable">
               <thead><tr><th class="num">z</th><th class="num">0.00</th><th class="num">0.01</th><th class="num">0.02</th><th class="num">0.03</th><th class="num">0.04</th><th class="num">0.05</th><th class="num">0.06</th><th class="num">0.07</th><th class="num">0.08</th><th class="num">0.09</th></tr></thead>
               <tbody>
@@ -237,6 +202,42 @@
               </tbody>
             </table></div>
             <p>For negative \(z\): \(G(-z)=1-G(z)\) — slå opp \(-z\) som positiv og trekk fra 1.</p>
+
+            <h2 id="tabellB">Tabell B — kvantiler i standard normalfordeling</h2>
+            <p>\(z_\alpha\) er verdien der \(P(Z&gt;z_\alpha)=\alpha\).</p>
+            <div class="dtable-wrap"><table class="dtable">
+              <thead><tr><th class="num">\(\alpha\)</th><th class="num">0.10</th><th class="num">0.05</th><th class="num">0.025</th><th class="num">0.01</th><th class="num">0.005</th><th class="num">0.001</th></tr></thead>
+              <tbody><tr><td class="num">\(z_\alpha\)</td><td class="num">1.282</td><td class="num">1.645</td><td class="num">1.960</td><td class="num">2.326</td><td class="num">2.576</td><td class="num">3.090</td></tr></tbody>
+            </table></div>
+            <p><strong>Ensidig test</strong> på nivå \(\alpha\) bruker \(z_\alpha\). <strong>Tosidig test</strong> og <strong>symmetrisk konfidensintervall</strong> på nivå \(\alpha\) bruker \(z_{\alpha/2}\) — altså 1.960 for 95 % og 2.576 for 99 %.</p>
+
+            <h2 id="tabellC">Tabell C — kvantiler i student t-fordeling</h2>
+            <p>\(t_\alpha\) med \(\nu\) frihetsgrader. Bruk \(\nu=n-1\) for konfidensintervall og tester for \(\mu\), og \(\nu=n-2\) for regresjon.</p>
+            <div class="dtable-wrap"><table class="dtable">
+              <thead><tr><th class="num">\(\nu\)</th><th class="num">\(t_{0.10}\)</th><th class="num">\(t_{0.05}\)</th><th class="num">\(t_{0.025}\)</th><th class="num">\(t_{0.01}\)</th><th class="num">\(t_{0.005}\)</th></tr></thead>
+              <tbody>
+                <tr><td class="num">1</td><td class="num">3.078</td><td class="num">6.314</td><td class="num">12.706</td><td class="num">31.821</td><td class="num">63.657</td></tr>
+                <tr><td class="num">2</td><td class="num">1.886</td><td class="num">2.920</td><td class="num">4.303</td><td class="num">6.965</td><td class="num">9.925</td></tr>
+                <tr><td class="num">3</td><td class="num">1.638</td><td class="num">2.353</td><td class="num">3.182</td><td class="num">4.541</td><td class="num">5.841</td></tr>
+                <tr><td class="num">4</td><td class="num">1.533</td><td class="num">2.132</td><td class="num">2.776</td><td class="num">3.747</td><td class="num">4.604</td></tr>
+                <tr><td class="num">5</td><td class="num">1.476</td><td class="num">2.015</td><td class="num">2.571</td><td class="num">3.365</td><td class="num">4.032</td></tr>
+                <tr><td class="num">6</td><td class="num">1.440</td><td class="num">1.943</td><td class="num">2.447</td><td class="num">3.143</td><td class="num">3.707</td></tr>
+                <tr><td class="num">7</td><td class="num">1.415</td><td class="num">1.895</td><td class="num">2.365</td><td class="num">2.998</td><td class="num">3.499</td></tr>
+                <tr><td class="num">8</td><td class="num">1.397</td><td class="num">1.860</td><td class="num">2.306</td><td class="num">2.896</td><td class="num">3.355</td></tr>
+                <tr><td class="num">9</td><td class="num">1.383</td><td class="num">1.833</td><td class="num">2.262</td><td class="num">2.821</td><td class="num">3.250</td></tr>
+                <tr><td class="num">10</td><td class="num">1.372</td><td class="num">1.812</td><td class="num">2.228</td><td class="num">2.764</td><td class="num">3.169</td></tr>
+                <tr><td class="num">11</td><td class="num">1.363</td><td class="num">1.796</td><td class="num">2.201</td><td class="num">2.718</td><td class="num">3.106</td></tr>
+                <tr><td class="num">12</td><td class="num">1.356</td><td class="num">1.782</td><td class="num">2.179</td><td class="num">2.681</td><td class="num">3.055</td></tr>
+                <tr><td class="num">15</td><td class="num">1.341</td><td class="num">1.753</td><td class="num">2.131</td><td class="num">2.602</td><td class="num">2.947</td></tr>
+                <tr><td class="num">20</td><td class="num">1.325</td><td class="num">1.725</td><td class="num">2.086</td><td class="num">2.528</td><td class="num">2.845</td></tr>
+                <tr><td class="num">30</td><td class="num">1.310</td><td class="num">1.697</td><td class="num">2.042</td><td class="num">2.457</td><td class="num">2.750</td></tr>
+                <tr><td class="num">60</td><td class="num">1.296</td><td class="num">1.671</td><td class="num">2.000</td><td class="num">2.390</td><td class="num">2.660</td></tr>
+                <tr><td class="num">120</td><td class="num">1.289</td><td class="num">1.658</td><td class="num">1.980</td><td class="num">2.358</td><td class="num">2.617</td></tr>
+                <tr><td class="num">\(\infty\)</td><td class="num">1.282</td><td class="num">1.645</td><td class="num">1.960</td><td class="num">2.326</td><td class="num">2.576</td></tr>
+              </tbody>
+            </table></div>
+            <div class="note">Nederste rad er identisk med z-kvantilene — t-fordelingen går mot normalfordelingen når \(\nu\) vokser. Derfor godtar løsningsforslagene å erstatte \(t\) med \(z\) når \(n\) er stor (fra rundt 60 frihetsgrader er forskjellen under 2 %).</div>
+
           </article>
         </section>
 
