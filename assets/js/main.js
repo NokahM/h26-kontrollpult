@@ -35,7 +35,8 @@
           { title: 'Emneplan', part: 'Om emnet', href: 'subjects/mos/guides/emneplan.html' }
         ] },
         { label: 'Miniprosjekt', items: [
-          { title: 'Fusée Gelée og pensum', part: 'Miniprosjekt', href: 'subjects/mos/guides/prosjekt.html' }
+          { title: 'Fusée Gelée og pensum', part: 'Miniprosjekt', href: 'subjects/mos/guides/prosjekt.html' },
+          { title: 'Rapportsammendrag', part: 'Miniprosjekt', href: 'subjects/mos/guides/prosjekt-rapport.html' }
         ] }
       ]
     },

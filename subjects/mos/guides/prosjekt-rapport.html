@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rapportsammendrag — MoS · H26</title>
+  <meta name="description" content="Sammendrag av miniprosjektrapporten om Fusée Gelée (CVE-2018-6242): sårbarheten, exploit-kjeden, verktøyhistorikk og fiksen i Tegra X1.">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=30">
+</head>
+<body class="theme-mos" data-updated="2026-09-22">
+  <div class="app-shell">
+
+    <aside class="sidebar"></aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">MoS</a>
+        <div class="topbar__crumb">Rapportsammendrag</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow">MoS · miniprosjekt</div>
+          <h1>Fusée Gelée: rapportsammendrag</h1>
+          <p class="page-header__desc">Kortversjon av miniprosjektrapporten «Fusée Gelée: Teknisk analyse av en USB-bufferoverflyt i Boot ROM på NVIDIA Tegra X1 (CVE-2018-6242)». Full rapport med referanser ligger som PDF nederst; denne siden er et sammendrag til repetisjon og eksamensforberedelse, ikke en erstatning.</p>
+          <span class="page-header__status" data-status="active"><i></i>rapport ferdig — se <a href="prosjekt.html">koblingen til pensum</a></span>
+        </header>
+
+        <div class="sourcebar">
+          <a class="tag" href="../../../assets/resources/mos/Fusee_Gelee_rapport_no.pdf" target="_blank" rel="noopener">rapport · norsk (pdf)</a>
+          <a class="tag" href="../../../assets/resources/mos/Fusee_Gelee_report_en.pdf" target="_blank" rel="noopener">report · english (pdf)</a>
+          <a class="tag" href="https://switch.hacks.guide/fusee_gelee" target="_blank" rel="noopener">kilde · Fusée Gelée writeup</a>
+          <a class="tag" href="https://nvd.nist.gov/vuln/detail/CVE-2018-6242" target="_blank" rel="noopener">kilde · CVE-2018-6242 (NVD)</a>
+        </div>
+
+        <p class="callout"><strong>Kjernen i saken:</strong> Nintendo Switch v1 (HAC-001, 2017) bruker NVIDIA Tegra X1 (T210). USB Recovery Mode (RCM) i brikkens Boot ROM henter svarlengden til enkelte USB control-forespørsler direkte fra det angriperkontrollerte <code>wLength</code>-feltet (opptil 65 535 byte), i stedet for å begrense den til datamengden som faktisk finnes. En angriper med fysisk USB-tilgang kan derfor overskrive kjørestacken og få kodeeksekvering på det høyeste ARM-privilegienivået (TrustZone PL3/EL3), <em>før</em> noen signaturverifisering finner sted. Feilen ligger i maske-ROM og kan aldri programvarepatches — eneste løsning var en ny brikkerevisjon (T210B01/T214, «Mariko»), levert fra juli 2019.</p>
+
+        <article class="prose">
+          <h2>1. Historisk kontekst i korte trekk</h2>
+          <p>Fusée Gelée oppstod ikke isolert — den er ett ledd i tre tiår med Nintendo-konsollhacking, med et gjenkjennelig mønster: en fabrikkfunksjon (her RCM) som misbrukes, et hobbyistmiljø som offentliggjør, og en kommersiell piratkopieringsgruppe som utnytter samme feil.</p>
+          <div class="dtable-wrap">
+            <table class="dtable">
+              <thead><tr><th>Når</th><th>Hva</th></tr></thead>
+              <tbody>
+                <tr><td>mar. 2017</td><td>Switch (HAC-001/T210) lanseres; ReSwitched slipper PegaSwitch (nettleser-exploit, ikke kodekjøring)</td></tr>
+                <tr><td>jan. 2018</td><td>Team Xecuter teaser en kommersiell Switch-modchip, uavhengig av ReSwitched</td></tr>
+                <tr><td>18. jan. 2018</td><td>Første private commit mot det som blir Atmosphère — <em>før</em> Fusée Gelée er offentlig</td></tr>
+                <tr><td>24. apr. 2018</td><td>Lekkasje av en fungerende zero-day tvinger ReSwitched til å slippe writeup + <code>fusee-launcher</code> ~2 måneder tidligere enn planlagt; fail0verflow slipper uavhengig «shofEL2» samtidig; CVE-2018-6242 tildeles</td></tr>
+                <tr><td>mai&#8211;jun. 2018</td><td>Team Xecuter kommersialiserer samme feil som SX Pro/SX OS</td></tr>
+                <tr><td>jul. 2018</td><td>Kate Temkin forlater ReSwitched etter et omstridt tillitsbrudd (community-drama, ikke uavhengig verifisert)</td></tr>
+                <tr><td>midten 2018&#8211;</td><td>«iPatch» lukker feilen i silisium for <em>nyproduserte</em> T210-brikker — retter ingenting for eksisterende enheter</td></tr>
+                <tr><td>okt. 2018</td><td>Atmosphère v0.7.0, første offisielle CFW-slipp</td></tr>
+                <tr><td>jul. 2019</td><td>Mariko (T210B01/T214) med ny, rettet Boot ROM — Switch Lite og senere OLED leveres med denne fra dag én</td></tr>
+                <tr><td>2020&#8211;2023</td><td>Føderal straffesak mot Team Xecuter (Bowser dømt og løslatt, Louarn uutlevert i Frankrike, Chen aldri pågrepet)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>2. Tegra X1-arkitektur og Recovery Mode</h2>
+          <p>BPMP (Boot and Power Management Processor) er en liten hjelpeprosessor som kjører aller først i oppstartssekvensen, på TrustZone PL3/EL3 — det høyeste ARM-privilegienivået. Boot ROM-en dens (IROM, maske-ROM, kan ikke patches) utgjør root of trust for hele kjeden, og håndterer blant annet USB Recovery Mode: en fabrikkstøttefunksjon ment for å laste et lite oppstartsbilde inn i IRAM ved førstegangsflashing eller «murstein»-gjenoppretting.</p>
+          <p>På Switch aktiveres RCM ved å holde VOL+ inne mens HOME-signalet trigges — normalt via høyre Joy-Con, men det samme signalet kan reproduseres ved å kortslutte pin 10 på kontakten mot GND («RCM-jig»). At Tegra-brikker generelt kan tvinges inn i RCM var allerede offentlig kjent fra NVIDIAs egen Jetson-dokumentasjon (<code>FORCE_RECOVERY</code>-pinne); det Switch-spesifikke arbeidet var å finne hvilken fysisk pinne på Nintendos egen Joy-Con-kontakt signalet var rutet til.</p>
+
+          <h2>3. Sårbarheten (CVE-2018-6242)</h2>
+          <p>NVD beskriver feilen som en bufferoverflyt i BootROM Recovery Mode, utnyttbar av en angriper med fysisk USB-tilgang som kan tvinge enheten inn i RCM. Klassifisert som <strong>CWE-119</strong> (manglende grensekontroll på minnebuffer), med CVSS v3.0-score 6,8 (Medium) — moderat kun fordi fysisk tilgang kreves; konsekvensen ved oppfylt forutsetning er total kompromittering.</p>
+          <p><strong>Rotårsak:</strong> tre USB control-forespørsler (<code>GET_CONFIGURATION</code>, <code>GET_INTERFACE</code>, <code>GET_STATUS</code>) henter svarlengden direkte fra det 16-bit, angriperkontrollerte <code>wLength</code>-feltet i stedet for å begrense den til den faktiske datastørrelsen:</p>
+          <pre class="codeblock">memcpy(dma_buffer, data_to_tx, size_to_tx);  // size_to_tx = wLength, ukontrollert</pre>
+          <p>De to DMA-mellomlagringsbufferne (<code>0x40005000</code>, <code>0x40009000</code>) ligger rett under den aktive eksekveringsstacken i IRAM. En angriper skriver først fritt innhold inn i disse via den ordinære opplastingsprotokollen, og utløser deretter en overdimensjonert control-transfer som kopierer langt forbi bufferet og inn i stacken — klassisk stack smashing, utløst eksternt over USB. En ekstra detalj gjør dette til en fullt kontrollerbar primitiv: lengdefeltet på selve RCM-opplastingen valideres først <em>etter</em> at hele payloaden allerede er kopiert inn i minnet, så angriperen kan forberede et helt selvvalgt minnebilde før selve overflyten utløses.</p>
+
+          <h2>4. Exploit-kjeden</h2>
+          <div class="steps">
+            <div class="step">
+              <h4>Fysisk oppsett</h4>
+              <p>Kortslutt pin 10 på Joy-Con-kontakten mot GND; hold VOL+ og slå på strømmen &#8594; enheten går inn i RCM.</p>
+            </div>
+            <div class="step">
+              <h4>USB-enumerering</h4>
+              <p>Koble til via USB-C; verten leser en 16-byte enhets-ID fra endepunkt <code>0x81 IN</code>.</p>
+            </div>
+            <div class="step">
+              <h4>Payload-opplasting</h4>
+              <p>Skriv en utformet payload i biter på <code>0x1000</code> byte, med veksling mellom de to DMA-bufferne.</p>
+            </div>
+            <div class="step">
+              <h4>Bufferjustering</h4>
+              <p>Fyll ut overføringen slik at aktiv buffer er høybufferet (<code>0x40009000</code>), rett under stacken.</p>
+            </div>
+            <div class="step">
+              <h4>Utløs overflyten</h4>
+              <p>Send en overdimensjonert <code>GET_STATUS</code>/<code>ENDPOINT</code>-forespørsel &#8594; den sårbare <code>memcpy()</code> skriver inn på stacken.</p>
+            </div>
+            <div class="step">
+              <h4>Kapre returadressen</h4>
+              <p>Stacken overskrives med en angriperkontrollert peker til en liten omdirigeringsstubb kalt <em>Intermezzo</em> (<code>0x4001F000</code>).</p>
+            </div>
+            <div class="step">
+              <h4>Flytt og kjør</h4>
+              <p>Intermezzo flytter først sin egen hale unna fare, kopierer deretter den endelige payloaden til <code>0x40010000</code> og hopper dit — nødvendig fordi akkurat det adresseområdet er ødelagt av overflyten mens den pågår.</p>
+            </div>
+            <div class="step">
+              <h4>Kodekjøring på PL3/EL3</h4>
+              <p>BPMP kjører angriperkode med fulle privilegier — f.eks. for å laste egendefinert fastvare (Atmosphère via <code>hekate</code>).</p>
+            </div>
+          </div>
+          <p>Denne to-trinns indirekten («Intermezzo») er det som gjør det mulig å levere en vilkårlig stor endelig payload selv om måladressen midlertidig er ubrukelig under selve overflyten — et lite stykke selv-modifiserende, posisjonsuavhengig kode på bare 124 byte.</p>
+
+          <h2>5. Verktøyet rundt feilen har fortsatt å utvikle seg</h2>
+          <p>Selve sårbarheten er frosset i tid siden 2018 — vendor/product-ID, blokkstørrelser og til og med Intermezzo-maskinkoden er identiske byte for byte i alle senere verktøy. Det som <em>har</em> endret seg er plattformstøtte og robusthet i PC-verktøyet som utløser den:</p>
+          <div class="dtable-wrap">
+            <table class="dtable">
+              <thead><tr><th>Verktøy</th><th>Utgitt</th><th>Plattformer</th></tr></thead>
+              <tbody>
+                <tr><td><code>fusee-launcher</code></td><td>apr. 2018</td><td>Linux, macOS (ingen Windows-støtte)</td></tr>
+                <tr><td>TegraRcmSmash / TegraRcmGUI</td><td>apr.&#8211;mai 2018</td><td>Windows</td></tr>
+                <tr><td>OmniRCM</td><td>jul. 2026</td><td>Windows, Linux, macOS, Android, iOS, ChromeOS</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>OmniRCM (2026) skiller nå presist mellom en patchet Mariko-enhet, en iPatch'et v1-enhet og en genuint vellykket exploit, utelukkende fra USB-nivå feilsignaturer — en presisjon ingen tidligere verktøy hadde, selv om selve maskinvareatferden er uendret siden 2018. Rapporten diskuterer, som en åpen og ubekreftet hypotese, om AI-assistert utvikling («vibe coding») kan ha bidratt til OmniRCMs uvanlig raske, flerplattforms utviklingsløp — men finner ingen direkte bevis i noen retning.</p>
+
+          <h2>6. Fiksen</h2>
+          <p>Fordi feilen ligger i maske-ROM, er den fysisk uforanderlig etter fabrikasjon — ingen fastvare- eller OS-oppdatering kan rette den. To distinkte tiltak må skilles fra hverandre:</p>
+          <div class="dtable-wrap">
+            <table class="dtable">
+              <thead><tr><th>Populasjon</th><th>Brikke</th><th>Utnyttbar?</th></tr></thead>
+              <tbody>
+                <tr><td>Original v1</td><td>T210</td><td><span class="hit">Ja &#8212; permanent</span></td></tr>
+                <tr><td>iPatch'et v1 (fra midten av 2018)</td><td>T210 (senere maske)</td><td>Nei &#8212; rettet i silisium, men bare for nyproduserte brikker</td></tr>
+                <tr><td>Mariko (fra jul. 2019)</td><td>T210B01 / T214</td><td>Nei &#8212; helt ny Boot ROM</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Fordi de to første radene deler samme kort <em>og</em> samme brikkemodell, kan en gitt HAC-001-enhet ikke klassifiseres ut fra det ytre alene — kun ut fra faktisk Boot ROM-oppførsel eller community-innsamlede serienummerdata.</p>
+
+          <h2>7. Implikasjoner</h2>
+          <ul>
+            <li><strong>Root of trust er per design et enkeltpunkt for feil</strong> — enhver senere sikkerhetsmekanisme (signaturverifisering, TrustZone-isolasjon, fuse-hemmeligheter) er irrelevant så snart en angriper kontrollerer kodekjøringen før disse mekanismene i det hele tatt nås.</li>
+            <li><strong>Uforanderlighet gjør en ordinær feil permanent</strong> — en vanlig, velkjent feilklasse (CWE-119) blir, plassert i mask-ROM, permanent for hele levetiden til allerede produserte enheter.</li>
+            <li><strong>Ikke et engangstilfelle</strong> — <em>checkm8</em> (2019) er et strukturelt nært beslektet, ikke-patchbart USB DFU-avvik i Apples Boot ROM (A5&#8211;A11), som styrker at USB-gjenopprettingsprotokoller i mask-ROM fortjener særlig konservativ grensekontroll.</li>
+          </ul>
+
+          <div class="note"><strong>Se også:</strong> <a href="prosjekt.html">kapittel-for-kapittel-koblingen til pensum</a> for hvordan denne saken brukes i selve presentasjonen og eksamen.</div>
+        </article>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="prosjekt.html"><small>forrige</small>Fusée Gelée og pensum</a>
+          <span></span>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js?v=30"></script>
+  <script src="../../../assets/js/status.js?v=30"></script>
+  <script src="../../../assets/js/formler.js?v=30"></script>
+</body>
+</html>
