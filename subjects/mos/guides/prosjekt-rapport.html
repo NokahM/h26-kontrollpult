@@ -38,7 +38,7 @@
           <a class="tag" href="https://nvd.nist.gov/vuln/detail/CVE-2018-6242" target="_blank" rel="noopener">kilde · CVE-2018-6242 (NVD)</a>
         </div>
 
-        <p class="callout"><strong>Kjernen i saken:</strong> Nintendo Switch v1 (HAC-001, 2017) bruker NVIDIA Tegra X1 (T210). USB Recovery Mode (RCM) i brikkens Boot ROM henter svarlengden til enkelte USB control-forespørsler direkte fra det angriperkontrollerte <code>wLength</code>-feltet (opptil 65 535 byte), i stedet for å begrense den til datamengden som faktisk finnes. En angriper med fysisk USB-tilgang kan derfor overskrive kjørestacken og få kodeeksekvering på det høyeste ARM-privilegienivået (TrustZone PL3/EL3), <em>før</em> noen signaturverifisering finner sted. Feilen ligger i maske-ROM og kan aldri programvarepatches — eneste løsning var en ny brikkerevisjon (T210B01/T214, «Mariko»), levert fra juli 2019.</p>
+        <p class="callout"><strong>Kjernen i saken:</strong> Nintendo Switch v1 (HAC-001, 2017) bruker NVIDIA Tegra X1 (T210). USB Recovery Mode (RCM) i brikkens Boot ROM henter svarlengden til enkelte USB control-forespørsler direkte fra det angriperkontrollerte <code>wLength</code>-feltet (opptil 65 535 byte), i stedet for å begrense den til datamengden som faktisk finnes. En angriper med fysisk USB-tilgang kan derfor overskrive kjørestacken og få kodeeksekvering på oppstartsprosessoren (BPMP), <em>før</em> noen signaturverifisering finner sted — og derfra starte hovedprosessorene med egen kode på det høyeste ARM-privilegienivået (TrustZone PL3/EL3). Feilen ligger i maske-ROM og kan aldri programvarepatches på solgte enheter; nye brikker ble rettet på fabrikken, først med ipatches i fuses (fra midten av 2018) og så med en ny brikkerevisjon (T210B01/T214, «Mariko», 2019).</p>
 
         <article class="prose">
           <h2>1. Historisk kontekst i korte trekk</h2>
@@ -53,7 +53,7 @@
                 <tr><td>24. apr. 2018</td><td>Lekkasje av en fungerende zero-day tvinger ReSwitched til å slippe writeup + <code>fusee-launcher</code> ~2 måneder tidligere enn planlagt; fail0verflow slipper uavhengig «shofEL2» samtidig; CVE-2018-6242 tildeles</td></tr>
                 <tr><td>mai&#8211;jun. 2018</td><td>Team Xecuter kommersialiserer samme feil som SX Pro/SX OS</td></tr>
                 <tr><td>jul. 2018</td><td>Kate Temkin forlater ReSwitched etter et omstridt tillitsbrudd (community-drama, ikke uavhengig verifisert)</td></tr>
-                <tr><td>midten 2018&#8211;</td><td>«iPatch» lukker feilen i silisium for <em>nyproduserte</em> T210-brikker — retter ingenting for eksisterende enheter</td></tr>
+                <tr><td>midten 2018&#8211;</td><td>«iPatch» lukker feilen via fuses for <em>nyproduserte</em> T210-brikker — retter ingenting for eksisterende enheter</td></tr>
                 <tr><td>okt. 2018</td><td>Atmosphère v0.7.0, første offisielle CFW-slipp</td></tr>
                 <tr><td>jul. 2019</td><td>Mariko (T210B01/T214) med ny, rettet Boot ROM — Switch Lite og senere OLED leveres med denne fra dag én</td></tr>
                 <tr><td>2020&#8211;2023</td><td>Føderal straffesak mot Team Xecuter (Bowser dømt og løslatt, Louarn uutlevert i Frankrike, Chen aldri pågrepet)</td></tr>
@@ -62,7 +62,7 @@
           </div>
 
           <h2>2. Tegra X1-arkitektur og Recovery Mode</h2>
-          <p>BPMP (Boot and Power Management Processor) er en liten hjelpeprosessor som kjører aller først i oppstartssekvensen, på TrustZone PL3/EL3 — det høyeste ARM-privilegienivået. Boot ROM-en dens (IROM, maske-ROM, kan ikke patches) utgjør root of trust for hele kjeden, og håndterer blant annet USB Recovery Mode: en fabrikkstøttefunksjon ment for å laste et lite oppstartsbilde inn i IRAM ved førstegangsflashing eller «murstein»-gjenoppretting.</p>
+          <p>BPMP (Boot and Power Management Processor) er en liten hjelpeprosessor som kjører aller først i oppstartssekvensen. Det er en ARM7TDMI, en eldre kjerne uten TrustZone eller privilegienivåer som EL3 — de finnes bare på Cortex-kjernene i hovedklyngen (CCPLEX). BPMP har likevel full tilgang til brikken før sikkerhetslåsene er satt. Boot ROM-en dens (IROM, maske-ROM, kan bare justeres med ipatches i fuses før salg) utgjør root of trust for hele kjeden, og håndterer blant annet USB Recovery Mode: en fabrikkstøttefunksjon ment for å laste et lite oppstartsbilde inn i IRAM ved førstegangsflashing eller «murstein»-gjenoppretting.</p>
           <p>På Switch aktiveres RCM ved å holde VOL+ inne mens HOME-signalet trigges — normalt via høyre Joy-Con, men det samme signalet kan reproduseres ved å kortslutte pin 10 på kontakten mot GND («RCM-jig»). At Tegra-brikker generelt kan tvinges inn i RCM var allerede offentlig kjent fra NVIDIAs egen Jetson-dokumentasjon (<code>FORCE_RECOVERY</code>-pinne); det Switch-spesifikke arbeidet var å finne hvilken fysisk pinne på Nintendos egen Joy-Con-kontakt signalet var rutet til.</p>
 
           <h2>3. Sårbarheten (CVE-2018-6242)</h2>
@@ -102,8 +102,8 @@
               <p>Intermezzo flytter først sin egen hale unna fare, kopierer deretter den endelige payloaden til <code>0x40010000</code> og hopper dit — nødvendig fordi akkurat det adresseområdet er ødelagt av overflyten mens den pågår.</p>
             </div>
             <div class="step">
-              <h4>Kodekjøring på PL3/EL3</h4>
-              <p>BPMP kjører angriperkode med fulle privilegier — f.eks. for å laste egendefinert fastvare (Atmosphère via <code>hekate</code>).</p>
+              <h4>Kodekjøring på BPMP</h4>
+              <p>Angriperkode med full tilgang til brikken — f.eks. <code>hekate</code>, som starter hovedprosessorene med egendefinert fastvare (Atmosphère) på PL3/EL3.</p>
             </div>
           </div>
           <p>Denne to-trinns indirekten («Intermezzo») er det som gjør det mulig å levere en vilkårlig stor endelig payload selv om måladressen midlertidig er ubrukelig under selve overflyten — et lite stykke selv-modifiserende, posisjonsuavhengig kode på bare 124 byte.</p>
@@ -129,7 +129,7 @@
               <thead><tr><th>Populasjon</th><th>Brikke</th><th>Utnyttbar?</th></tr></thead>
               <tbody>
                 <tr><td>Original v1</td><td>T210</td><td><span class="hit">Ja &#8212; permanent</span></td></tr>
-                <tr><td>iPatch'et v1 (fra midten av 2018)</td><td>T210 (senere maske)</td><td>Nei &#8212; rettet i silisium, men bare for nyproduserte brikker</td></tr>
+                <tr><td>iPatch'et v1 (fra midten av 2018)</td><td>T210 (samme maske, nye ipatches i fuses)</td><td>Nei &#8212; rettet på fabrikken, men bare for nyproduserte brikker</td></tr>
                 <tr><td>Mariko (fra jul. 2019)</td><td>T210B01 / T214</td><td>Nei &#8212; helt ny Boot ROM</td></tr>
               </tbody>
             </table>
