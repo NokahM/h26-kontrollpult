@@ -38,6 +38,7 @@ site/
   subjects/<emne>/index.html    én side per emne
   subjects/<emne>/guides/       temasider (MoS, TSD3060)
   subjects/statistikk/oppgaver/ eksamensoppgaver etter tema, med løsningsforslag
+  subjects/statistikk/quiz/     quizene (oppgavesett 2–5 fra emnet), med løsningsforslag
   assets/css/main.css           delt stilark + tema-tokens per emne
   assets/js/main.js             emneliste (SUBJECTS) → sidemeny, tittelfelt, innholdsfortegnelse, forside
   assets/js/status.js           status på oppgaver og kapitler (lagres i nettleseren)
@@ -64,6 +65,12 @@ tidligere PB2030-eksamenssett (juni 2020 – mai 2026), gruppert etter tema i
 stedet for etter sitting, hver med et løsningsforslag som ligger skjult i et
 `<details class="sol">`-element. Eksamens-PDF-ene ligger i
 `assets/resources/statistikk/` (utenfor git, se under).
+
+`subjects/statistikk/quiz/` har én side per quiz (oppgavesettene fra
+emnet), nummerert fra 1 med tema i navnet, for eksempel
+`quiz3-normalfordeling-sgt.html`. PDF-ene ligger med samme navn i
+`assets/resources/statistikk/`. Delspørsmål som inngår i en oblig, er merket
+med `<span class="tag">oblig</span>`.
 
 Sidene er vanlig, håndredigerbar HTML — legg til en ny oppgave ved å kopiere en
 eksisterende `<article class="task">`-blokk. Matematikken skrives som LaTeX
