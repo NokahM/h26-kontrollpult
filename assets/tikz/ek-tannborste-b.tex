@@ -1,0 +1,21 @@
+%% ek-tannborste-b
+%% alt: Betinget sannsynlighet: arealet over 4 år delt på arealet over 1 år er 0.16
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=9cm, xmin=0, xmax=6.6, ymax=0.43333,
+  xtick={0,1,4,6}, xticklabels={{$0$},{$1$},{$4$},{$6$}}]
+\addplot[areal2, domain=1:6, samples=100] {(x>=0)*(x<=6)*(1/3-x/18)} \closedcycle;
+\addplot[areal, domain=4:6, samples=100] {(x>=0)*(x<=6)*(1/3-x/18)} \closedcycle;
+\addplot[domain=0:6.6, samples=160] {(x>=0)*(x<=6)*(1/3-x/18)};
+\draw[hjelp] (axis cs:0,0) -- (axis cs:0,0.33333);
+\draw[hjelp] (axis cs:1,0) -- (axis cs:1,0.27778);
+\draw[hjelp] (axis cs:4,0) -- (axis cs:4,0.11111);
+\draw[hjelp] (axis cs:6,0) -- (axis cs:6,0);
+\node[font=\small, text=hi] at (axis cs:2.5,0.1) {$P(T\ge 1)=0.694$};
+\draw[acc, line width=0.4pt] (axis cs:5.4,0.11667) -- (axis cs:4.585,0.03931);
+\node[font=\small, text=acc, above] at (axis cs:5.4,0.11667) {$P(T\ge 4)=0.111$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,18 @@
+%% ek-nodnummer
+%% alt: Eksponentialtetthet med rate 0.1; arealet mellom 10 og 15 minutter er 0.145
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=0, xmax=42, ymax=0.13,
+  xtick={0,10,15}, xticklabels={{$0$},{$10$},{$15$}}]
+\addplot[areal, domain=10:15, samples=100] {exp(-x/10)/10} \closedcycle;
+\addplot[domain=0:42, samples=160] {exp(-x/10)/10};
+\draw[hjelp] (axis cs:0,0) -- (axis cs:0,0.1);
+\draw[hjelp] (axis cs:10,0) -- (axis cs:10,0.03679);
+\draw[hjelp] (axis cs:15,0) -- (axis cs:15,0.02231);
+\draw[acc, line width=0.4pt] (axis cs:21,0.042) -- (axis cs:12.1875,0.01478);
+\node[font=\small, text=acc, above] at (axis cs:21,0.042) {$0.145$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

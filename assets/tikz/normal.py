@@ -149,6 +149,69 @@ def spredning(name, alt, xs, ys, a, b, xlabel, ylabel, lo, hi, ci=None, pred=Non
     return name
 
 
+def tetthet(name, alt, f, fpy, lo, hi, areas, ticks, width='10cm', note=None, extra='', curves=(), ymax=None):
+    """Vilkårlig tetthet f (pgfplots-uttrykk i x) med skraverte arealer.
+
+    fpy       samme funksjon i Python, for plassering av etiketter
+    areas     [(a, b, farge, etikett[, (x, y)])], b=None betyr hi; y som andel av toppen
+    curves    ekstra kurver [(uttrykk, stil)], for eksempel en forskjøvet kopi
+    ticks     [(x, tekst)]; hver får en stiplet hjelpelinje opp til kurven
+    """
+    xs = [lo + (hi - lo) * i / 400 for i in range(401)]
+    peak = ymax or max(fpy(x) for x in xs)
+    body = []
+    for a, b, col, lab, *_ in areas:
+        b = hi if b is None else b
+        body.append(r'\addplot[%s, domain=%s:%s, samples=100] {%s} \closedcycle;'
+                    % ('areal' if col == 'acc' else 'areal2', fmt(a), fmt(b), f))
+    for expr, style in curves:
+        body.append(r'\addplot[%s] {%s};' % (style, expr))
+    body.append(r'\addplot[domain=%s:%s, samples=160] {%s};' % (fmt(lo), fmt(hi), f))
+    for x, _ in ticks:
+        body.append(r'\draw[hjelp] (axis cs:%s,0) -- (axis cs:%s,%s);' % (fmt(x), fmt(x), fmt(fpy(x))))
+    for a, b, col, lab, *pos in areas:
+        b = hi if b is None else b
+        col = 'acc' if col == 'acc' else 'hi'
+        # etiketten står der halve arealet er passert
+        n = 200
+        w = [(fpy(a + (b - a) * (i + 0.5) / n)) for i in range(n)]
+        tot, acc_, xc = sum(w), 0, a
+        for i, v in enumerate(w):
+            acc_ += v
+            if acc_ >= tot / 2:
+                xc = a + (b - a) * (i + 0.5) / n
+                break
+        gc = fpy(xc)
+        if pos:
+            px, py = pos[0][0], pos[0][1] * peak
+            if a < px < b and py < 0.8 * fpy(px):
+                label(body, col, px, py, lab)
+            else:
+                body.append(r'\draw[%s, line width=0.4pt] (axis cs:%s,%s) -- (axis cs:%s,%s);'
+                            % (col, fmt(px), fmt(py), fmt(xc), fmt(0.5 * gc)))
+                body.append(r'\node[font=\small, text=%s, above] at (axis cs:%s,%s) {%s};' % (col, fmt(px), fmt(py), lab))
+        else:
+            label(body, col, xc, 0.4 * gc, lab)
+    xt = ','.join(fmt(x) for x, t in ticks if t is not None)
+    xl = ','.join('{$%s$}' % t for _, t in ticks if t is not None)
+    src = r'''%% {note}
+%% alt: {alt}
+\documentclass[tikz,border=2pt]{{standalone}}
+\input{{felles}}
+\begin{{document}}
+\begin{{tikzpicture}}
+\begin{{axis}}[kurve, width={width}, xmin={lo}, xmax={hi}, ymax={ymax},
+  xtick={{{xt}}}, xticklabels={{{xl}}}]
+{body}
+{extra}\end{{axis}}
+\end{{tikzpicture}}
+\end{{document}}
+'''.format(note=note or name, alt=alt, width=width, lo=fmt(lo), hi=fmt(hi), ymax=fmt(1.3 * peak),
+           xt=xt, xl=xl, body='\n'.join(body), extra=extra)
+    open(os.path.join(HERE, name + '.tex'), 'w', encoding='utf-8', newline='\n').write(src)
+    return name
+
+
 def label(body, col, x, y, text):
     body.append(r'\node[font=\small, text=%s] at (axis cs:%s,%s) {%s};' % (col, fmt(x), fmt(y), text))
 

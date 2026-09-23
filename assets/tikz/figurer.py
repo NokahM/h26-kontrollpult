@@ -283,3 +283,68 @@ spredning('rg-gjodsel', 'Kornavling mot gjødselmengde med linja y = 0.743 + 1.2
           linelab=(r'below right', 2.34, 3.72, r'$\hat y=0.743+1.297x$'))
 
 
+# ---- 04 Tetthet og eksponentialfordeling ---------------------------------------
+import math
+from normal import tetthet
+
+
+def ekspo(mu):
+    return 'exp(-x/%s)/%s' % (fmt(mu), fmt(mu)), (lambda x: math.exp(-x / mu) / mu if x >= 0 else 0)
+
+
+def omstart(f, s, lo, hi):
+    """Kurven forskjøvet s til høyre: «klokka starter på nytt» ved s."""
+    import re
+    g = re.sub(r'(?<![a-z])x(?![a-z])', '(x-%s)' % fmt(s), f)   # bare frittstående x, ikke x-en i exp
+    return g, 'mut, dashed, domain=%s:%s, samples=100' % (fmt(s), fmt(hi))
+
+
+f, fp = ekspo(1)
+g, gs = omstart(f, 1.6, 0, 4.5)
+tetthet('ek-hukommelse', 'Hukommelsesløshet: kurven startet på nytt ved s (stiplet) har samme areal fra s til s pluss t som den opprinnelige fra 0 til t',
+        f, fp, 0, 4.5, [(0, 1.0, 'acc', r'$P(T\le t)$', (0.45, 0.25))],
+        [(0, '0'), (1.0, 't'), (1.6, 's'), (2.6, 's+t')], width='9.5cm', curves=[(g, gs)],
+        extra=r'\addplot[areal2, domain=1.6:2.6, samples=60] {%s} \closedcycle;' % g + '\n'
+        + r'\draw[hi, line width=0.4pt] (axis cs:3.4,0.62) -- (axis cs:2.05,0.3);' '\n'
+        + r'\node[font=\small, text=hi, above] at (axis cs:3.4,0.62) {$P(T\le s+t\mid T>s)$};' '\n')
+
+tetthet('ek-respons', 'Tettheten t ganger e opphøyd i minus t; arealet fra 0 til 5 dager er 0.96',
+        'x*exp(-x)', lambda x: x * math.exp(-x), 0, 8, [(0, 5, 'acc', r'$P(T\le 5)=0.96$', (4.2, 0.62))],
+        [(0, '0'), (2, r'\mu=2'), (5, '5')])
+tb = '(x>=0)*(x<=6)*(1/3-x/18)'
+tbp = lambda x: (1 / 3 - x / 18) if 0 <= x <= 6 else 0
+tetthet('ek-tannborste-a', 'Trekantet tetthet på 0 til 6 år; arealet over 2 år er 4/9',
+        tb, tbp, 0, 6.6, [(2, 6, 'acc', r'$\tfrac49\approx 0.444$', (3.1, 0.3))],
+        [(0, '0'), (2, '2'), (6, '6')], width='9cm')
+tetthet('ek-tannborste-b', 'Betinget sannsynlighet: arealet over 4 år delt på arealet over 1 år er 0.16',
+        tb, tbp, 0, 6.6, [(1, 6, 'hi', r'$P(T\ge 1)=0.694$', (2.5, 0.3)), (4, 6, 'acc', r'$P(T\ge 4)=0.111$', (5.4, 0.35))],
+        [(0, '0'), (1, '1'), (4, '4'), (6, '6')], width='9cm')
+
+f, fp = ekspo(3000)
+tetthet('ek-komponent', 'Eksponentialtetthet med forventning 3000 timer; arealet over 1000 timer er 0.72',
+        f, fp, 0, 12000, [(1000, None, 'acc', r'$P(T>1000)=0.72$', (6400, 0.5))],
+        [(0, '0'), (1000, '1000'), (3000, r'\mu=3000')])
+f, fp = ekspo(24)
+tetthet('ek-brikke', 'Eksponentialtetthet med forventning 24 måneder; arealet under 15 måneder er 0.465',
+        f, fp, 0, 96, [(0, 15, 'acc', r'$P(T<15)=0.465$', (30, 0.55))],
+        [(0, '0'), (15, '15'), (24, r'\mu=24')])
+f, fp = ekspo(3.2)
+g, gs = omstart(f, 2, 0, 12)
+tetthet('ek-programmerer', 'Hukommelsesløshet: arealet fra 2 til 4.5 under kurven startet på nytt ved 2 er likt arealet fra 0 til 2.5, 0.54',
+        f, fp, 0, 12, [(0, 2.5, 'acc', r'$P(T\le 2.5)$', (0.9, 0.32))],
+        [(0, '0'), (2, '2'), (2.5, None), (4.5, '4.5')], curves=[(g, gs)],
+        extra=r'\addplot[areal2, domain=2:4.5, samples=60] {%s} \closedcycle;' % g + '\n'
+        + r'\draw[hi, line width=0.4pt] (axis cs:7.2,0.2) -- (axis cs:3.6,0.12);' '\n'
+        + r'\node[font=\small, text=hi, above] at (axis cs:7.2,0.2) {$P(T\le 4.5\mid T>2)=0.54$};' '\n')
+f, fp = ekspo(10)
+tetthet('ek-nodnummer', 'Eksponentialtetthet med rate 0.1; arealet mellom 10 og 15 minutter er 0.145',
+        f, fp, 0, 42, [(10, 15, 'acc', r'$0.145$', (21, 0.42))],
+        [(0, '0'), (10, '10'), (15, '15')])
+
+# ---- Quiz 3 O3 --------------------------------------------------------------
+tetthet('ek-levetid', 'Tettheten t/5 ganger e opphøyd i minus t i andre over 10; P(T større enn 3 gitt T større enn 1) er 0.407 delt på 0.905',
+        'x/5*exp(-x^2/10)', lambda x: x / 5 * math.exp(-x * x / 10), 0, 9,
+        [(1, None, 'hi', r'$P(T\ge 1)=0.905$', (0.7, 1.02)), (3, None, 'acc', r'$P(T\ge 3)=0.407$', (6.0, 0.5))],
+        [(0, '0'), (1, '1'), (3, '3')])
+
+

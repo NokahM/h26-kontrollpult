@@ -1,0 +1,17 @@
+%% ek-tannborste-a
+%% alt: Trekantet tetthet på 0 til 6 år; arealet over 2 år er 4/9
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=9cm, xmin=0, xmax=6.6, ymax=0.43333,
+  xtick={0,2,6}, xticklabels={{$0$},{$2$},{$6$}}]
+\addplot[areal, domain=2:6, samples=100] {(x>=0)*(x<=6)*(1/3-x/18)} \closedcycle;
+\addplot[domain=0:6.6, samples=160] {(x>=0)*(x<=6)*(1/3-x/18)};
+\draw[hjelp] (axis cs:0,0) -- (axis cs:0,0.33333);
+\draw[hjelp] (axis cs:2,0) -- (axis cs:2,0.22222);
+\draw[hjelp] (axis cs:6,0) -- (axis cs:6,0);
+\node[font=\small, text=acc] at (axis cs:3.1,0.1) {$\tfrac49\approx 0.444$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,18 @@
+%% ek-brikke
+%% alt: Eksponentialtetthet med forventning 24 måneder; arealet under 15 måneder er 0.465
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=0, xmax=96, ymax=0.05417,
+  xtick={0,15,24}, xticklabels={{$0$},{$15$},{$\mu=24$}}]
+\addplot[areal, domain=0:15, samples=100] {exp(-x/24)/24} \closedcycle;
+\addplot[domain=0:96, samples=160] {exp(-x/24)/24};
+\draw[hjelp] (axis cs:0,0) -- (axis cs:0,0.04167);
+\draw[hjelp] (axis cs:15,0) -- (axis cs:15,0.0223);
+\draw[hjelp] (axis cs:24,0) -- (axis cs:24,0.01533);
+\draw[acc, line width=0.4pt] (axis cs:30,0.02292) -- (axis cs:6.3375,0.016);
+\node[font=\small, text=acc, above] at (axis cs:30,0.02292) {$P(T<15)=0.465$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

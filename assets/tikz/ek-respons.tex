@@ -1,0 +1,18 @@
+%% ek-respons
+%% alt: Tettheten t ganger e opphøyd i minus t; arealet fra 0 til 5 dager er 0.96
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=0, xmax=8, ymax=0.47824,
+  xtick={0,2,5}, xticklabels={{$0$},{$\mu=2$},{$5$}}]
+\addplot[areal, domain=0:5, samples=100] {x*exp(-x)} \closedcycle;
+\addplot[domain=0:8, samples=160] {x*exp(-x)};
+\draw[hjelp] (axis cs:0,0) -- (axis cs:0,0);
+\draw[hjelp] (axis cs:2,0) -- (axis cs:2,0.27067);
+\draw[hjelp] (axis cs:5,0) -- (axis cs:5,0.03369);
+\draw[acc, line width=0.4pt] (axis cs:4.2,0.22809) -- (axis cs:1.6125,0.16076);
+\node[font=\small, text=acc, above] at (axis cs:4.2,0.22809) {$P(T\le 5)=0.96$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

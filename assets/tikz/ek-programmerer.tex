@@ -1,0 +1,22 @@
+%% ek-programmerer
+%% alt: Hukommelsesløshet: arealet fra 2 til 4.5 under kurven startet på nytt ved 2 er likt arealet fra 0 til 2.5, 0.54
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=0, xmax=12, ymax=0.40625,
+  xtick={0,2,4.5}, xticklabels={{$0$},{$2$},{$4.5$}}]
+\addplot[areal, domain=0:2.5, samples=100] {exp(-x/3.2)/3.2} \closedcycle;
+\addplot[mut, dashed, domain=2:12, samples=100] {exp(-(x-2)/3.2)/3.2};
+\addplot[domain=0:12, samples=160] {exp(-x/3.2)/3.2};
+\draw[hjelp] (axis cs:0,0) -- (axis cs:0,0.3125);
+\draw[hjelp] (axis cs:2,0) -- (axis cs:2,0.16727);
+\draw[hjelp] (axis cs:2.5,0) -- (axis cs:2.5,0.14307);
+\draw[hjelp] (axis cs:4.5,0) -- (axis cs:4.5,0.07658);
+\node[font=\small, text=acc] at (axis cs:0.9,0.1) {$P(T\le 2.5)$};
+\addplot[areal2, domain=2:4.5, samples=60] {exp(-(x-2)/3.2)/3.2} \closedcycle;
+\draw[hi, line width=0.4pt] (axis cs:7.2,0.2) -- (axis cs:3.6,0.12);
+\node[font=\small, text=hi, above] at (axis cs:7.2,0.2) {$P(T\le 4.5\mid T>2)=0.54$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

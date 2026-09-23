@@ -1,0 +1,21 @@
+%% ek-levetid
+%% alt: Tettheten t/5 ganger e opphøyd i minus t i andre over 10; P(T større enn 3 gitt T større enn 1) er 0.407 delt på 0.905
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=0, xmax=9, ymax=0.35262,
+  xtick={0,1,3}, xticklabels={{$0$},{$1$},{$3$}}]
+\addplot[areal2, domain=1:9, samples=100] {x/5*exp(-x^2/10)} \closedcycle;
+\addplot[areal, domain=3:9, samples=100] {x/5*exp(-x^2/10)} \closedcycle;
+\addplot[domain=0:9, samples=160] {x/5*exp(-x^2/10)};
+\draw[hjelp] (axis cs:0,0) -- (axis cs:0,0);
+\draw[hjelp] (axis cs:1,0) -- (axis cs:1,0.18097);
+\draw[hjelp] (axis cs:3,0) -- (axis cs:3,0.24394);
+\draw[hi, line width=0.4pt] (axis cs:0.7,0.27667) -- (axis cs:2.82,0.12732);
+\node[font=\small, text=hi, above] at (axis cs:0.7,0.27667) {$P(T\ge 1)=0.905$};
+\draw[acc, line width=0.4pt] (axis cs:6,0.13562) -- (axis cs:4.005,0.08054);
+\node[font=\small, text=acc, above] at (axis cs:6,0.13562) {$P(T\ge 3)=0.407$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,18 @@
+%% ek-komponent
+%% alt: Eksponentialtetthet med forventning 3000 timer; arealet over 1000 timer er 0.72
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=0, xmax=12000, ymax=0.00043,
+  xtick={0,1000,3000}, xticklabels={{$0$},{$1000$},{$\mu=3000$}}]
+\addplot[areal, domain=1000:12000, samples=100] {exp(-x/3000)/3000} \closedcycle;
+\addplot[domain=0:12000, samples=160] {exp(-x/3000)/3000};
+\draw[hjelp] (axis cs:0,0) -- (axis cs:0,0.00033);
+\draw[hjelp] (axis cs:1000,0) -- (axis cs:1000,0.00024);
+\draw[hjelp] (axis cs:3000,0) -- (axis cs:3000,0.00012);
+\draw[acc, line width=0.4pt] (axis cs:6400,0.00017) -- (axis cs:3007.5,0.00006);
+\node[font=\small, text=acc, above] at (axis cs:6400,0.00017) {$P(T>1000)=0.72$};
+\end{axis}
+\end{tikzpicture}
+\end{document}
