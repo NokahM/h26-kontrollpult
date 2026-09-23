@@ -1,0 +1,122 @@
+%% sg-tunnel
+%% alt: Binomisk fordeling med n = 1000 og p = 0.76 rundt 800: minst 800 biler svarer til arealet over 799.5
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=711.4, xmax=818.6, ymax=0.0384,
+  xtick={720,740,760,780,799.5}, xticklabels={{$720$},{$740$},{$760$},{$780$},{$799.5$}}]
+\draw[mut, line width=0.4pt] (axis cs:711.5,0) rectangle (axis cs:712.5,0.00007);
+\draw[mut, line width=0.4pt] (axis cs:712.5,0) rectangle (axis cs:713.5,0.00008);
+\draw[mut, line width=0.4pt] (axis cs:713.5,0) rectangle (axis cs:714.5,0.00011);
+\draw[mut, line width=0.4pt] (axis cs:714.5,0) rectangle (axis cs:715.5,0.00013);
+\draw[mut, line width=0.4pt] (axis cs:715.5,0) rectangle (axis cs:716.5,0.00017);
+\draw[mut, line width=0.4pt] (axis cs:716.5,0) rectangle (axis cs:717.5,0.00021);
+\draw[mut, line width=0.4pt] (axis cs:717.5,0) rectangle (axis cs:718.5,0.00027);
+\draw[mut, line width=0.4pt] (axis cs:718.5,0) rectangle (axis cs:719.5,0.00033);
+\draw[mut, line width=0.4pt] (axis cs:719.5,0) rectangle (axis cs:720.5,0.00041);
+\draw[mut, line width=0.4pt] (axis cs:720.5,0) rectangle (axis cs:721.5,0.0005);
+\draw[mut, line width=0.4pt] (axis cs:721.5,0) rectangle (axis cs:722.5,0.00061);
+\draw[mut, line width=0.4pt] (axis cs:722.5,0) rectangle (axis cs:723.5,0.00075);
+\draw[mut, line width=0.4pt] (axis cs:723.5,0) rectangle (axis cs:724.5,0.0009);
+\draw[mut, line width=0.4pt] (axis cs:724.5,0) rectangle (axis cs:725.5,0.00109);
+\draw[mut, line width=0.4pt] (axis cs:725.5,0) rectangle (axis cs:726.5,0.00131);
+\draw[mut, line width=0.4pt] (axis cs:726.5,0) rectangle (axis cs:727.5,0.00156);
+\draw[mut, line width=0.4pt] (axis cs:727.5,0) rectangle (axis cs:728.5,0.00185);
+\draw[mut, line width=0.4pt] (axis cs:728.5,0) rectangle (axis cs:729.5,0.00219);
+\draw[mut, line width=0.4pt] (axis cs:729.5,0) rectangle (axis cs:730.5,0.00257);
+\draw[mut, line width=0.4pt] (axis cs:730.5,0) rectangle (axis cs:731.5,0.00301);
+\draw[mut, line width=0.4pt] (axis cs:731.5,0) rectangle (axis cs:732.5,0.0035);
+\draw[mut, line width=0.4pt] (axis cs:732.5,0) rectangle (axis cs:733.5,0.00406);
+\draw[mut, line width=0.4pt] (axis cs:733.5,0) rectangle (axis cs:734.5,0.00467);
+\draw[mut, line width=0.4pt] (axis cs:734.5,0) rectangle (axis cs:735.5,0.00535);
+\draw[mut, line width=0.4pt] (axis cs:735.5,0) rectangle (axis cs:736.5,0.0061);
+\draw[mut, line width=0.4pt] (axis cs:736.5,0) rectangle (axis cs:737.5,0.00692);
+\draw[mut, line width=0.4pt] (axis cs:737.5,0) rectangle (axis cs:738.5,0.00781);
+\draw[mut, line width=0.4pt] (axis cs:738.5,0) rectangle (axis cs:739.5,0.00877);
+\draw[mut, line width=0.4pt] (axis cs:739.5,0) rectangle (axis cs:740.5,0.0098);
+\draw[mut, line width=0.4pt] (axis cs:740.5,0) rectangle (axis cs:741.5,0.01089);
+\draw[mut, line width=0.4pt] (axis cs:741.5,0) rectangle (axis cs:742.5,0.01203);
+\draw[mut, line width=0.4pt] (axis cs:742.5,0) rectangle (axis cs:743.5,0.01323);
+\draw[mut, line width=0.4pt] (axis cs:743.5,0) rectangle (axis cs:744.5,0.01447);
+\draw[mut, line width=0.4pt] (axis cs:744.5,0) rectangle (axis cs:745.5,0.01575);
+\draw[mut, line width=0.4pt] (axis cs:745.5,0) rectangle (axis cs:746.5,0.01705);
+\draw[mut, line width=0.4pt] (axis cs:746.5,0) rectangle (axis cs:747.5,0.01835);
+\draw[mut, line width=0.4pt] (axis cs:747.5,0) rectangle (axis cs:748.5,0.01966);
+\draw[mut, line width=0.4pt] (axis cs:748.5,0) rectangle (axis cs:749.5,0.02095);
+\draw[mut, line width=0.4pt] (axis cs:749.5,0) rectangle (axis cs:750.5,0.0222);
+\draw[mut, line width=0.4pt] (axis cs:750.5,0) rectangle (axis cs:751.5,0.0234);
+\draw[mut, line width=0.4pt] (axis cs:751.5,0) rectangle (axis cs:752.5,0.02454);
+\draw[mut, line width=0.4pt] (axis cs:752.5,0) rectangle (axis cs:753.5,0.02559);
+\draw[mut, line width=0.4pt] (axis cs:753.5,0) rectangle (axis cs:754.5,0.02654);
+\draw[mut, line width=0.4pt] (axis cs:754.5,0) rectangle (axis cs:755.5,0.02739);
+\draw[mut, line width=0.4pt] (axis cs:755.5,0) rectangle (axis cs:756.5,0.02811);
+\draw[mut, line width=0.4pt] (axis cs:756.5,0) rectangle (axis cs:757.5,0.02869);
+\draw[mut, line width=0.4pt] (axis cs:757.5,0) rectangle (axis cs:758.5,0.02912);
+\draw[mut, line width=0.4pt] (axis cs:758.5,0) rectangle (axis cs:759.5,0.02941);
+\draw[mut, line width=0.4pt] (axis cs:759.5,0) rectangle (axis cs:760.5,0.02953);
+\draw[mut, line width=0.4pt] (axis cs:760.5,0) rectangle (axis cs:761.5,0.02949);
+\draw[mut, line width=0.4pt] (axis cs:761.5,0) rectangle (axis cs:762.5,0.02929);
+\draw[mut, line width=0.4pt] (axis cs:762.5,0) rectangle (axis cs:763.5,0.02893);
+\draw[mut, line width=0.4pt] (axis cs:763.5,0) rectangle (axis cs:764.5,0.02842);
+\draw[mut, line width=0.4pt] (axis cs:764.5,0) rectangle (axis cs:765.5,0.02776);
+\draw[mut, line width=0.4pt] (axis cs:765.5,0) rectangle (axis cs:766.5,0.02697);
+\draw[mut, line width=0.4pt] (axis cs:766.5,0) rectangle (axis cs:767.5,0.02606);
+\draw[mut, line width=0.4pt] (axis cs:767.5,0) rectangle (axis cs:768.5,0.02503);
+\draw[mut, line width=0.4pt] (axis cs:768.5,0) rectangle (axis cs:769.5,0.02392);
+\draw[mut, line width=0.4pt] (axis cs:769.5,0) rectangle (axis cs:770.5,0.02272);
+\draw[mut, line width=0.4pt] (axis cs:770.5,0) rectangle (axis cs:771.5,0.02146);
+\draw[mut, line width=0.4pt] (axis cs:771.5,0) rectangle (axis cs:772.5,0.02016);
+\draw[mut, line width=0.4pt] (axis cs:772.5,0) rectangle (axis cs:773.5,0.01883);
+\draw[mut, line width=0.4pt] (axis cs:773.5,0) rectangle (axis cs:774.5,0.01749);
+\draw[mut, line width=0.4pt] (axis cs:774.5,0) rectangle (axis cs:775.5,0.01615);
+\draw[mut, line width=0.4pt] (axis cs:775.5,0) rectangle (axis cs:776.5,0.01483);
+\draw[mut, line width=0.4pt] (axis cs:776.5,0) rectangle (axis cs:777.5,0.01354);
+\draw[mut, line width=0.4pt] (axis cs:777.5,0) rectangle (axis cs:778.5,0.01229);
+\draw[mut, line width=0.4pt] (axis cs:778.5,0) rectangle (axis cs:779.5,0.01109);
+\draw[mut, line width=0.4pt] (axis cs:779.5,0) rectangle (axis cs:780.5,0.00995);
+\draw[mut, line width=0.4pt] (axis cs:780.5,0) rectangle (axis cs:781.5,0.00887);
+\draw[mut, line width=0.4pt] (axis cs:781.5,0) rectangle (axis cs:782.5,0.00787);
+\draw[mut, line width=0.4pt] (axis cs:782.5,0) rectangle (axis cs:783.5,0.00694);
+\draw[mut, line width=0.4pt] (axis cs:783.5,0) rectangle (axis cs:784.5,0.00608);
+\draw[mut, line width=0.4pt] (axis cs:784.5,0) rectangle (axis cs:785.5,0.0053);
+\draw[mut, line width=0.4pt] (axis cs:785.5,0) rectangle (axis cs:786.5,0.00459);
+\draw[mut, line width=0.4pt] (axis cs:786.5,0) rectangle (axis cs:787.5,0.00395);
+\draw[mut, line width=0.4pt] (axis cs:787.5,0) rectangle (axis cs:788.5,0.00338);
+\draw[mut, line width=0.4pt] (axis cs:788.5,0) rectangle (axis cs:789.5,0.00288);
+\draw[mut, line width=0.4pt] (axis cs:789.5,0) rectangle (axis cs:790.5,0.00243);
+\draw[mut, line width=0.4pt] (axis cs:790.5,0) rectangle (axis cs:791.5,0.00205);
+\draw[mut, line width=0.4pt] (axis cs:791.5,0) rectangle (axis cs:792.5,0.00171);
+\draw[mut, line width=0.4pt] (axis cs:792.5,0) rectangle (axis cs:793.5,0.00142);
+\draw[mut, line width=0.4pt] (axis cs:793.5,0) rectangle (axis cs:794.5,0.00117);
+\draw[mut, line width=0.4pt] (axis cs:794.5,0) rectangle (axis cs:795.5,0.00096);
+\draw[mut, line width=0.4pt] (axis cs:795.5,0) rectangle (axis cs:796.5,0.00078);
+\draw[mut, line width=0.4pt] (axis cs:796.5,0) rectangle (axis cs:797.5,0.00064);
+\draw[mut, line width=0.4pt] (axis cs:797.5,0) rectangle (axis cs:798.5,0.00051);
+\draw[mut, line width=0.4pt] (axis cs:798.5,0) rectangle (axis cs:799.5,0.00041);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:799.5,0) rectangle (axis cs:800.5,0.00033);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:800.5,0) rectangle (axis cs:801.5,0.00026);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:801.5,0) rectangle (axis cs:802.5,0.0002);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:802.5,0) rectangle (axis cs:803.5,0.00016);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:803.5,0) rectangle (axis cs:804.5,0.00012);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:804.5,0) rectangle (axis cs:805.5,0.00009);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:805.5,0) rectangle (axis cs:806.5,0.00007);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:806.5,0) rectangle (axis cs:807.5,0.00006);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:807.5,0) rectangle (axis cs:808.5,0.00004);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:808.5,0) rectangle (axis cs:809.5,0.00003);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:809.5,0) rectangle (axis cs:810.5,0.00002);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:810.5,0) rectangle (axis cs:811.5,0.00002);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:811.5,0) rectangle (axis cs:812.5,0.00001);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:812.5,0) rectangle (axis cs:813.5,0.00001);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:813.5,0) rectangle (axis cs:814.5,0.00001);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:814.5,0) rectangle (axis cs:815.5,0);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:815.5,0) rectangle (axis cs:816.5,0);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:816.5,0) rectangle (axis cs:817.5,0);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:817.5,0) rectangle (axis cs:818.5,0);
+\addplot[domain=711.5:818.5] {gauss(760,13.50555)};
+\draw[hjelp, acc, line width=0.8pt] (axis cs:799.5,0) -- (axis cs:799.5,0.03308);
+\draw[acc, line width=0.4pt] (axis cs:810,0.00886) -- (axis cs:801,0.00013);
+\node[font=\small, text=acc, above] at (axis cs:810,0.00886) {$P(X\ge 800)$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

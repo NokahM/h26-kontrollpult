@@ -197,3 +197,57 @@ test('ht-fart-test', 'Venstresidig test for andel: p-verdien 0.087 er arealet un
      0.43, se, k, 0.40, '<', 0.335, 0.51, xlab=r'\hat p', p=0.087, plab=r'$p=0.087$', klab='k=0.394')
 
 
+# ---- 06 Sentralgrenseteoremet: heltallskorreksjon --------------------------
+# Søylene er de eksakte sannsynlighetene; kurven er normaltilnærmingen.
+from math import comb, exp, factorial, sqrt
+from normal import stolper
+
+
+def binom(n, p):
+    return {k: comb(n, k) * p ** k * (1 - p) ** (n - k) for k in range(n + 1)}
+
+
+def poisson(lam, kmax):
+    return {k: exp(-lam) * lam ** k / factorial(k) for k in range(kmax + 1)}
+
+
+def sumfordeling(enkel, n):
+    """Fordelingen til summen av n uavhengige kopier av {verdi: sannsynlighet}."""
+    tot = {0: 1.0}
+    for _ in range(n):
+        ny = {}
+        for a, pa in tot.items():
+            for b, pb in enkel.items():
+                ny[a + b] = ny.get(a + b, 0) + pa * pb
+        tot = ny
+    return tot
+
+
+stolper('sg-prinsipp', 'Binomisk fordeling med n = 20 og p = 0.4: søylene 0 til 6 dekker 0 til 6.5 på aksen, så normalarealet tas med til 6.5',
+        binom(20, 0.4), 0, 16, 8, sqrt(20 * 0.4 * 0.6), 6.5, '<',
+        [(0, '0'), (4, '4'), (6.5, '6.5'), (8, '8'), (12, '12'), (16, '16')],
+        lab=r'$P(X\le 6)$', labpos=(2.2, 0.62), width='9.5cm')
+stolper('sg-tunnel', 'Binomisk fordeling med n = 1000 og p = 0.76 rundt 800: minst 800 biler svarer til arealet over 799.5',
+        binom(1000, 0.76), 712, 818, 760, sqrt(1000 * 0.76 * 0.24), 799.5, '>',
+        [(720, '720'), (740, '740'), (760, '760'), (780, '780'), (799.5, '799.5')],
+        lab=r'$P(X\ge 800)$', labpos=(810, 0.3))
+stolper('sg-mynt', 'Binomisk fordeling med n = 1000 og p = 0.5 rundt 476: 476 eller færre kron svarer til arealet under 476.5',
+        binom(1000, 0.5), 445, 555, 500, sqrt(250), 476.5, '<',
+        [(450, '450'), (476.5, '476.5'), (500, '500'), (525, '525'), (550, '550')],
+        lab=r'$P(X\le 476)$', labpos=(456, 0.62))
+stolper('sg-terninger', 'Summen av 200 terninger rundt 670: høyst 670 øyne svarer til arealet under 670.5',
+        sumfordeling({i: 1 / 6 for i in range(1, 7)}, 200), 616, 784, 700, sqrt(200 * 35 / 12), 670.5, '<',
+        [(620, '620'), (650, '650'), (670.5, '670.5'), (700, '700'), (740, '740'), (780, '780')],
+        lab=r'$P(Y\le 670)$', labpos=(632, 0.62))
+stolper('sg-poisson', 'Poissonfordeling med forventning 50: høyst 40 svarer til arealet under 40.5',
+        poisson(50, 90), 26, 74, 50, sqrt(50), 40.5, '<',
+        [(30, '30'), (40.5, '40.5'), (50, '50'), (60, '60'), (70, '70')],
+        lab=r'$P(X\le 40)$', labpos=(31, 0.62))
+
+# ---- Quiz 3 O1 --------------------------------------------------------------
+stolper('sg-biler', 'Summen av biler i 100 husstander rundt 120: høyst 120 biler svarer til arealet under 120.5',
+        sumfordeling({0: 0.18, 1: 0.54, 2: 0.25, 3: 0.03}, 100), 88, 138, 113, sqrt(53.31), 120.5, '<',
+        [(90, '90'), (100, '100'), (113, '113'), (120.5, '120.5'), (130, '130')],
+        lab=r'$P(S\le 120)$', labpos=(95, 0.75))
+
+

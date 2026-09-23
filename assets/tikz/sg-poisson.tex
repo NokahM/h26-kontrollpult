@@ -1,0 +1,64 @@
+%% sg-poisson
+%% alt: Poissonfordeling med forventning 50: høyst 40 svarer til arealet under 40.5
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=25.4, xmax=74.6, ymax=0.07334,
+  xtick={30,40.5,50,60,70}, xticklabels={{$30$},{$40.5$},{$50$},{$60$},{$70$}}]
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:25.5,0) rectangle (axis cs:26.5,0.00007);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:26.5,0) rectangle (axis cs:27.5,0.00013);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:27.5,0) rectangle (axis cs:28.5,0.00024);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:28.5,0) rectangle (axis cs:29.5,0.00041);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:29.5,0) rectangle (axis cs:30.5,0.00068);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:30.5,0) rectangle (axis cs:31.5,0.00109);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:31.5,0) rectangle (axis cs:32.5,0.00171);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:32.5,0) rectangle (axis cs:33.5,0.00259);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:33.5,0) rectangle (axis cs:34.5,0.0038);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:34.5,0) rectangle (axis cs:35.5,0.00543);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:35.5,0) rectangle (axis cs:36.5,0.00755);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:36.5,0) rectangle (axis cs:37.5,0.0102);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:37.5,0) rectangle (axis cs:38.5,0.01342);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:38.5,0) rectangle (axis cs:39.5,0.0172);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:39.5,0) rectangle (axis cs:40.5,0.0215);
+\draw[mut, line width=0.4pt] (axis cs:40.5,0) rectangle (axis cs:41.5,0.02622);
+\draw[mut, line width=0.4pt] (axis cs:41.5,0) rectangle (axis cs:42.5,0.03121);
+\draw[mut, line width=0.4pt] (axis cs:42.5,0) rectangle (axis cs:43.5,0.03629);
+\draw[mut, line width=0.4pt] (axis cs:43.5,0) rectangle (axis cs:44.5,0.04124);
+\draw[mut, line width=0.4pt] (axis cs:44.5,0) rectangle (axis cs:45.5,0.04583);
+\draw[mut, line width=0.4pt] (axis cs:45.5,0) rectangle (axis cs:46.5,0.04981);
+\draw[mut, line width=0.4pt] (axis cs:46.5,0) rectangle (axis cs:47.5,0.05299);
+\draw[mut, line width=0.4pt] (axis cs:47.5,0) rectangle (axis cs:48.5,0.0552);
+\draw[mut, line width=0.4pt] (axis cs:48.5,0) rectangle (axis cs:49.5,0.05633);
+\draw[mut, line width=0.4pt] (axis cs:49.5,0) rectangle (axis cs:50.5,0.05633);
+\draw[mut, line width=0.4pt] (axis cs:50.5,0) rectangle (axis cs:51.5,0.05522);
+\draw[mut, line width=0.4pt] (axis cs:51.5,0) rectangle (axis cs:52.5,0.0531);
+\draw[mut, line width=0.4pt] (axis cs:52.5,0) rectangle (axis cs:53.5,0.05009);
+\draw[mut, line width=0.4pt] (axis cs:53.5,0) rectangle (axis cs:54.5,0.04638);
+\draw[mut, line width=0.4pt] (axis cs:54.5,0) rectangle (axis cs:55.5,0.04216);
+\draw[mut, line width=0.4pt] (axis cs:55.5,0) rectangle (axis cs:56.5,0.03765);
+\draw[mut, line width=0.4pt] (axis cs:56.5,0) rectangle (axis cs:57.5,0.03302);
+\draw[mut, line width=0.4pt] (axis cs:57.5,0) rectangle (axis cs:58.5,0.02847);
+\draw[mut, line width=0.4pt] (axis cs:58.5,0) rectangle (axis cs:59.5,0.02413);
+\draw[mut, line width=0.4pt] (axis cs:59.5,0) rectangle (axis cs:60.5,0.0201);
+\draw[mut, line width=0.4pt] (axis cs:60.5,0) rectangle (axis cs:61.5,0.01648);
+\draw[mut, line width=0.4pt] (axis cs:61.5,0) rectangle (axis cs:62.5,0.01329);
+\draw[mut, line width=0.4pt] (axis cs:62.5,0) rectangle (axis cs:63.5,0.01055);
+\draw[mut, line width=0.4pt] (axis cs:63.5,0) rectangle (axis cs:64.5,0.00824);
+\draw[mut, line width=0.4pt] (axis cs:64.5,0) rectangle (axis cs:65.5,0.00634);
+\draw[mut, line width=0.4pt] (axis cs:65.5,0) rectangle (axis cs:66.5,0.0048);
+\draw[mut, line width=0.4pt] (axis cs:66.5,0) rectangle (axis cs:67.5,0.00358);
+\draw[mut, line width=0.4pt] (axis cs:67.5,0) rectangle (axis cs:68.5,0.00263);
+\draw[mut, line width=0.4pt] (axis cs:68.5,0) rectangle (axis cs:69.5,0.00191);
+\draw[mut, line width=0.4pt] (axis cs:69.5,0) rectangle (axis cs:70.5,0.00136);
+\draw[mut, line width=0.4pt] (axis cs:70.5,0) rectangle (axis cs:71.5,0.00096);
+\draw[mut, line width=0.4pt] (axis cs:71.5,0) rectangle (axis cs:72.5,0.00067);
+\draw[mut, line width=0.4pt] (axis cs:72.5,0) rectangle (axis cs:73.5,0.00046);
+\draw[mut, line width=0.4pt] (axis cs:73.5,0) rectangle (axis cs:74.5,0.00031);
+\addplot[domain=25.5:74.5] {gauss(50,7.07107)};
+\draw[hjelp, acc, line width=0.8pt] (axis cs:40.5,0) -- (axis cs:40.5,0.06319);
+\draw[acc, line width=0.4pt] (axis cs:31,0.03498) -- (axis cs:39,0.0086);
+\node[font=\small, text=acc, above] at (axis cs:31,0.03498) {$P(X\le 40)$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

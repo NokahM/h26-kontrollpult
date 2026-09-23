@@ -1,0 +1,32 @@
+%% sg-prinsipp
+%% alt: Binomisk fordeling med n = 20 og p = 0.4: søylene 0 til 6 dekker 0 til 6.5 på aksen, så normalarealet tas med til 6.5
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=9.5cm, xmin=-0.6, xmax=16.6, ymax=0.23672,
+  xtick={0,4,6.5,8,12,16}, xticklabels={{$0$},{$4$},{$6.5$},{$8$},{$12$},{$16$}}]
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:-0.5,0) rectangle (axis cs:0.5,0.00004);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:0.5,0) rectangle (axis cs:1.5,0.00049);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:1.5,0) rectangle (axis cs:2.5,0.00309);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:2.5,0) rectangle (axis cs:3.5,0.01235);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:3.5,0) rectangle (axis cs:4.5,0.03499);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:4.5,0) rectangle (axis cs:5.5,0.07465);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:5.5,0) rectangle (axis cs:6.5,0.12441);
+\draw[mut, line width=0.4pt] (axis cs:6.5,0) rectangle (axis cs:7.5,0.16588);
+\draw[mut, line width=0.4pt] (axis cs:7.5,0) rectangle (axis cs:8.5,0.17971);
+\draw[mut, line width=0.4pt] (axis cs:8.5,0) rectangle (axis cs:9.5,0.15974);
+\draw[mut, line width=0.4pt] (axis cs:9.5,0) rectangle (axis cs:10.5,0.11714);
+\draw[mut, line width=0.4pt] (axis cs:10.5,0) rectangle (axis cs:11.5,0.07099);
+\draw[mut, line width=0.4pt] (axis cs:11.5,0) rectangle (axis cs:12.5,0.0355);
+\draw[mut, line width=0.4pt] (axis cs:12.5,0) rectangle (axis cs:13.5,0.01456);
+\draw[mut, line width=0.4pt] (axis cs:13.5,0) rectangle (axis cs:14.5,0.00485);
+\draw[mut, line width=0.4pt] (axis cs:14.5,0) rectangle (axis cs:15.5,0.00129);
+\draw[mut, line width=0.4pt] (axis cs:15.5,0) rectangle (axis cs:16.5,0.00027);
+\addplot[domain=-0.5:16.5] {gauss(8,2.19089)};
+\draw[hjelp, acc, line width=0.8pt] (axis cs:6.5,0) -- (axis cs:6.5,0.20394);
+\draw[acc, line width=0.4pt] (axis cs:2.2,0.1129) -- (axis cs:5,0.03732);
+\node[font=\small, text=acc, above] at (axis cs:2.2,0.1129) {$P(X\le 6)$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

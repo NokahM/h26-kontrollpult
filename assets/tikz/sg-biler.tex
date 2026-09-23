@@ -1,0 +1,66 @@
+%% sg-biler
+%% alt: Summen av biler i 100 husstander rundt 120: høyst 120 biler svarer til arealet under 120.5
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=87.4, xmax=138.6, ymax=0.07103,
+  xtick={90,100,113,120.5,130}, xticklabels={{$90$},{$100$},{$113$},{$120.5$},{$130$}}]
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:87.5,0) rectangle (axis cs:88.5,0.00013);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:88.5,0) rectangle (axis cs:89.5,0.00022);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:89.5,0) rectangle (axis cs:90.5,0.00035);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:90.5,0) rectangle (axis cs:91.5,0.00054);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:91.5,0) rectangle (axis cs:92.5,0.00081);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:92.5,0) rectangle (axis cs:93.5,0.00121);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:93.5,0) rectangle (axis cs:94.5,0.00177);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:94.5,0) rectangle (axis cs:95.5,0.00253);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:95.5,0) rectangle (axis cs:96.5,0.00354);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:96.5,0) rectangle (axis cs:97.5,0.00487);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:97.5,0) rectangle (axis cs:98.5,0.00655);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:98.5,0) rectangle (axis cs:99.5,0.00865);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:99.5,0) rectangle (axis cs:100.5,0.01119);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:100.5,0) rectangle (axis cs:101.5,0.01419);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:101.5,0) rectangle (axis cs:102.5,0.01766);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:102.5,0) rectangle (axis cs:103.5,0.02154);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:103.5,0) rectangle (axis cs:104.5,0.02577);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:104.5,0) rectangle (axis cs:105.5,0.03024);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:105.5,0) rectangle (axis cs:106.5,0.03481);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:106.5,0) rectangle (axis cs:107.5,0.03931);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:107.5,0) rectangle (axis cs:108.5,0.04354);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:108.5,0) rectangle (axis cs:109.5,0.04732);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:109.5,0) rectangle (axis cs:110.5,0.05046);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:110.5,0) rectangle (axis cs:111.5,0.05279);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:111.5,0) rectangle (axis cs:112.5,0.05421);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:112.5,0) rectangle (axis cs:113.5,0.05462);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:113.5,0) rectangle (axis cs:114.5,0.05402);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:114.5,0) rectangle (axis cs:115.5,0.05243);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:115.5,0) rectangle (axis cs:116.5,0.04996);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:116.5,0) rectangle (axis cs:117.5,0.04672);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:117.5,0) rectangle (axis cs:118.5,0.0429);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:118.5,0) rectangle (axis cs:119.5,0.03867);
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:119.5,0) rectangle (axis cs:120.5,0.03422);
+\draw[mut, line width=0.4pt] (axis cs:120.5,0) rectangle (axis cs:121.5,0.02974);
+\draw[mut, line width=0.4pt] (axis cs:121.5,0) rectangle (axis cs:122.5,0.02537);
+\draw[mut, line width=0.4pt] (axis cs:122.5,0) rectangle (axis cs:123.5,0.02126);
+\draw[mut, line width=0.4pt] (axis cs:123.5,0) rectangle (axis cs:124.5,0.01749);
+\draw[mut, line width=0.4pt] (axis cs:124.5,0) rectangle (axis cs:125.5,0.01413);
+\draw[mut, line width=0.4pt] (axis cs:125.5,0) rectangle (axis cs:126.5,0.01122);
+\draw[mut, line width=0.4pt] (axis cs:126.5,0) rectangle (axis cs:127.5,0.00874);
+\draw[mut, line width=0.4pt] (axis cs:127.5,0) rectangle (axis cs:128.5,0.00669);
+\draw[mut, line width=0.4pt] (axis cs:128.5,0) rectangle (axis cs:129.5,0.00503);
+\draw[mut, line width=0.4pt] (axis cs:129.5,0) rectangle (axis cs:130.5,0.00372);
+\draw[mut, line width=0.4pt] (axis cs:130.5,0) rectangle (axis cs:131.5,0.0027);
+\draw[mut, line width=0.4pt] (axis cs:131.5,0) rectangle (axis cs:132.5,0.00192);
+\draw[mut, line width=0.4pt] (axis cs:132.5,0) rectangle (axis cs:133.5,0.00135);
+\draw[mut, line width=0.4pt] (axis cs:133.5,0) rectangle (axis cs:134.5,0.00093);
+\draw[mut, line width=0.4pt] (axis cs:134.5,0) rectangle (axis cs:135.5,0.00063);
+\draw[mut, line width=0.4pt] (axis cs:135.5,0) rectangle (axis cs:136.5,0.00042);
+\draw[mut, line width=0.4pt] (axis cs:136.5,0) rectangle (axis cs:137.5,0.00027);
+\draw[mut, line width=0.4pt] (axis cs:137.5,0) rectangle (axis cs:138.5,0.00017);
+\addplot[domain=87.5:138.5] {gauss(113,7.30137)};
+\draw[hjelp, acc, line width=0.8pt] (axis cs:120.5,0) -- (axis cs:120.5,0.0612);
+\draw[acc, line width=0.4pt] (axis cs:95,0.04098) -- (axis cs:119,0.01933);
+\node[font=\small, text=acc, above] at (axis cs:95,0.04098) {$P(S\le 120)$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

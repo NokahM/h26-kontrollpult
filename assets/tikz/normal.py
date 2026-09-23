@@ -62,6 +62,51 @@ class Dist:
         return 'gauss(%s,%s)' % (fmt(mu), fmt(s))
 
 
+def stolper(name, alt, pmf, lo, hi, mu, s, cut, side, ticks, width='10cm', note=None, lab=None, labpos=None):
+    """Søylediagram for en heltallsvariabel med normaltilnærmingen oppå.
+
+    pmf       {k: P(X=k)}; søylene k i [lo, hi] tegnes med bredde 1 rundt k
+    cut       grensen med heltallskorreksjon (for eksempel 476.5)
+    side      '<' fyller søylene under cut, '>' søylene over
+    ticks     [(x, tekst)] under aksen; cut får alltid en stiplet linje
+    lab       tekst for hendelsen, labpos (x, y som andel av toppen) med ledelinje
+    """
+    D = Dist()
+    peak = max(max(pmf[k] for k in range(lo, hi + 1)), D.pdf(mu, mu, s))
+    body = []
+    for k in range(lo, hi + 1):
+        inside = k < cut if side == '<' else k > cut
+        body.append(r'\draw[%s, line width=0.4pt] (axis cs:%s,0) rectangle (axis cs:%s,%s);'
+                    % ('mut, fill=acc, fill opacity=0.35' if inside else 'mut', fmt(k - 0.5), fmt(k + 0.5), fmt(pmf[k])))
+    body.append(r'\addplot[domain=%s:%s] {%s};' % (fmt(lo - 0.5), fmt(hi + 0.5), D.expr(mu, s)))
+    body.append(r'\draw[hjelp, acc, line width=0.8pt] (axis cs:%s,0) -- (axis cs:%s,%s);'
+                % (fmt(cut), fmt(cut), fmt(1.12 * peak)))
+    if lab:
+        px, py = labpos
+        kin = int(cut - 1.5) if side == '<' else int(cut + 1.5)
+        body.append(r'\draw[acc, line width=0.4pt] (axis cs:%s,%s) -- (axis cs:%s,%s);'
+                    % (fmt(px), fmt(py * peak), fmt(kin), fmt(0.5 * pmf[kin])))
+        body.append(r'\node[font=\small, text=acc, above] at (axis cs:%s,%s) {%s};' % (fmt(px), fmt(py * peak), lab))
+    xt = ','.join(fmt(x) for x, _ in ticks)
+    xl = ','.join('{$%s$}' % t for _, t in ticks)
+    src = r'''%% {note}
+%% alt: {alt}
+\documentclass[tikz,border=2pt]{{standalone}}
+\input{{felles}}
+\begin{{document}}
+\begin{{tikzpicture}}
+\begin{{axis}}[kurve, width={width}, xmin={lo}, xmax={hi}, ymax={ymax},
+  xtick={{{xt}}}, xticklabels={{{xl}}}]
+{body}
+\end{{axis}}
+\end{{tikzpicture}}
+\end{{document}}
+'''.format(note=note or name, alt=alt, width=width, lo=fmt(lo - 0.6), hi=fmt(hi + 0.6), ymax=fmt(1.3 * peak),
+           xt=xt, xl=xl, body='\n'.join(body))
+    open(os.path.join(HERE, name + '.tex'), 'w', encoding='utf-8', newline='\n').write(src)
+    return name
+
+
 def label(body, col, x, y, text):
     body.append(r'\node[font=\small, text=%s] at (axis cs:%s,%s) {%s};' % (col, fmt(x), fmt(y), text))
 
