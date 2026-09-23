@@ -486,6 +486,23 @@ Endepunktet ble funnet ved å spore `<usn-study>` til webpack-biten
 - **Samme notasjon overalt:** som på eksamens formelark, for eksempel $N(\mu,\sigma)$ med standardavvik, $G(z)$ og $z_\alpha$.
 - **Hver regel i formelpanelet:** formel, én setning på vanlig norsk og et utregnet eksempel. Eksemplene regnes ut på nytt før de publiseres.
 - **Kjente feller** som korte merknader: $P(A\mid B)$ mot $P(B\mid A)$, disjunkt mot uavhengig, $\sqrt n$ mot $n$.
+- **Nummerering som i originalen:** oppgavelister får bokstaver som standard (`.task__q ol`). Bruker oppgavesettet 1, 2, 3 eller i, ii, iii, settes `<ol type="1">` eller `<ol type="i">`. Mange korte punkter (hendelser a–n) får `class="cols"` og står i et rutenett med fire kolonner.
+
+### 8.1 Figurer med TikZ (hendelsestre)
+
+MathJax kan ikke tegne TikZ, så figurene bygges lokalt med ekte LaTeX og limes
+inn som inline SVG:
+
+1. Skriv figuren i `assets/tikz/<navn>.tex` (`standalone`-klassen). Farge `acc`
+   (`#FF0000`) blir aksentfargen på siden, og alt svart følger teksten.
+2. Kjør `python assets/tikz/build.py <navn>.tex`. Det krever `latex` og
+   `dvisvgm` (MiKTeX). Skriptet lager `<navn>.svg` med `currentColor`, klassen
+   `tikz-acc`, id-er med filnavnet som prefiks og bredde i em.
+3. Lim SVG-en inn i siden der figuren skal stå, med en `aria-label` og en
+   kommentar om hvilken `.tex`-fil den er bygd fra.
+
+SVG-en må ligge inline, ikke i `<img>`, ellers følger den ikke temaet.
+Prefiksene på id-ene hindrer kollisjoner når flere figurer står på samme side.
 
 ---
 
