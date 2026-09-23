@@ -488,21 +488,52 @@ Endepunktet ble funnet ved å spore `<usn-study>` til webpack-biten
 - **Kjente feller** som korte merknader: $P(A\mid B)$ mot $P(B\mid A)$, disjunkt mot uavhengig, $\sqrt n$ mot $n$.
 - **Nummerering som i originalen:** oppgavelister får bokstaver som standard (`.task__q ol`). Bruker oppgavesettet 1, 2, 3 eller i, ii, iii, settes `<ol type="1">` eller `<ol type="i">`. Mange korte punkter (hendelser a–n) får `class="cols"` og står i et rutenett med fire kolonner.
 
-### 8.1 Figurer med TikZ (hendelsestre)
+### 8.1 Figurer med TikZ og pgfplots
 
-MathJax kan ikke tegne TikZ, så figurene bygges lokalt med ekte LaTeX og limes
-inn som inline SVG:
+MathJax kan ikke tegne TikZ. Figurene bygges derfor lokalt med ekte LaTeX
+(`latex` og `dvisvgm`, for eksempel MiKTeX) og ligger som inline SVG i sidene.
+Alt ligger i `assets/tikz/`:
 
-1. Skriv figuren i `assets/tikz/<navn>.tex` (`standalone`-klassen). Farge `acc`
-   (`#FF0000`) blir aksentfargen på siden, og alt svart følger teksten.
-2. Kjør `python assets/tikz/build.py <navn>.tex`. Det krever `latex` og
-   `dvisvgm` (MiKTeX). Skriptet lager `<navn>.svg` med `currentColor`, klassen
-   `tikz-acc`, id-er med filnavnet som prefiks og bredde i em.
-3. Lim SVG-en inn i siden der figuren skal stå, med en `aria-label` og en
-   kommentar om hvilken `.tex`-fil den er bygd fra.
+| Fil | Innhold |
+|---|---|
+| `felles.tex` | Felles oppsett: farger, `gauss`, `tdens`, stilene `tre`, `kurve`, `plott`, `areal`. Hver figur starter med `\input{felles}`. |
+| `tre-*.tex`, `venn-*.tex`, `urne-*.tex` | Håndskrevne figurer. Rediger dem direkte. |
+| `figurer.py` | Tallene bak alle genererte figurer (normal- og t-kurver, tester, søyler, regresjon, tettheter). |
+| `normal.py` | Generatorene `figure`, `stolper`, `spredning`, `tetthet`, `punktfordeling`, `intervaller`. |
+| `build.py` | Bygger `.tex` → `.svg` og legger SVG-en inn i sidene. |
 
-SVG-en må ligge inline, ikke i `<img>`, ellers følger den ikke temaet.
-Prefiksene på id-ene hindrer kollisjoner når flere figurer står på samme side.
+**Arbeidsflyt**
+
+1. Ny eller endret generert figur: rediger `figurer.py` og kjør
+   `python assets/tikz/figurer.py`. Det skriver `.tex`-filene på nytt, så de
+   genererte `.tex`-filene skal ikke redigeres for hånd.
+2. Kjør `python assets/tikz/build.py` for alle figurer, eller med filnavn for
+   noen få. Skriptet skriver ut hvilke sider hver figur havnet på, og «IKKE
+   BRUKT» hvis den mangler markør.
+3. I siden står figuren mellom markørene
+   `<!-- tikz:<navn> -->` og `<!-- /tikz:<navn> -->`. `build.py` bytter ut alt
+   mellom dem, så en ny figur trenger bare to tomme markører der den skal stå.
+
+**Hva `build.py` gjør med SVG-en**
+
+- **Farger:** svart blir `currentColor`, så figuren følger lyst og mørkt tema. Plassholderfargene
+  `acc` (#FF0000), `mut` (#00FF00) og `hi` (#0000FF) i `felles.tex` blir
+  `var(--accent)`, `var(--muted)` og `var(--st-forstatt)` via et `style`-attributt.
+- **Id-er:** får filnavnet som prefiks, så flere figurer kan stå på samme side.
+- **Bredde:** settes i em ut fra punktstørrelsen, så teksten i figuren blir omtrent like stor som brødteksten.
+- **Tilgjengelighet:** linja `% alt: …` øverst i `.tex`-fila blir `aria-label`.
+
+**Regler som sparte tid**
+
+- **Etiketter:** bare grenseverdier står som tall under aksen. Forventninger står som
+  navn over kurvetoppene, ellers kolliderer merkene. α, p og γ står ute i
+  halen med ledelinje ned til arealet.
+- **Gjennomsiktighet:** bruk `fill opacity`, ikke `opacity`. dvisvgm lar `opacity` smitte over
+  på neste tegneoperasjon.
+- **TeX-etiketter:** skriv `<` og `>` rett i TeX-etiketter. HTML-entiteter hører bare hjemme i
+  sidene.
+- **Heredoc i Bash:** Bash-verktøyets heredoc gjør `\\` om til `\`. Python-skript med
+  TeX-strenger skrives derfor som filer, med råstrenger.
 
 ---
 

@@ -45,6 +45,7 @@ site/
   assets/js/formler.js          formelpanelet (Σ-knappen i toppfeltet)
   subjects/statistikk/formler.html  innholdet i formelpanelet for statistikk
   assets/js/math.js             laster MathJax fra CDN (kun statistikk-sidene)
+  assets/tikz/                  figurene (TikZ/pgfplots → inline SVG), se docs/teknikker.md §8.1
   assets/resources/<emne>/      ressursfiler (IKKE i git, se .gitignore)
 ```
 
@@ -71,6 +72,13 @@ emnet), nummerert fra 1 med tema i navnet, for eksempel
 `quiz3-normalfordeling-sgt.html`. PDF-ene ligger med samme navn i
 `assets/resources/statistikk/`. Delspørsmål som inngår i en oblig, er merket
 med `<span class="tag">oblig</span>`.
+
+**Figurer**: løsningene har 71 figurer (hendelsestrær, normalkurver med
+skraverte arealer, testfigurer med forkastingsområde og teststyrke, søyler for
+heltallskorreksjon, regresjonsplott og tettheter). De er tegnet i TikZ/pgfplots
+og ligger som inline SVG mellom `<!-- tikz:navn -->`-markører. Tallene bak
+figurene står i `assets/tikz/figurer.py`. Se `docs/teknikker.md` §8.1 for
+hvordan du endrer eller lager nye.
 
 Sidene er vanlig, håndredigerbar HTML — legg til en ny oppgave ved å kopiere en
 eksisterende `<article class="task">`-blokk. Matematikken skrives som LaTeX
