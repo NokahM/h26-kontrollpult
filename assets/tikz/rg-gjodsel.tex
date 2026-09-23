@@ -1,0 +1,16 @@
+%% rg-gjodsel
+%% alt: Kornavling mot gjødselmengde med linja y = 0.743 + 1.297x og 95 prosent-intervallet for stigningstallet
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[plott, width=9cm, xmin=1.85, xmax=2.55,
+  xlabel={gjødsel $x$}, ylabel={avling $y$}]
+\addplot[mut, dashed, line width=0.5pt, domain=1.85:2.55] {3.61+0.76*(x-2.21)};
+\addplot[mut, dashed, line width=0.5pt, domain=1.85:2.55] {3.61+1.83*(x-2.21)};
+\addplot[acc, line width=0.9pt, domain=1.85:2.55] {0.743+1.297*x};
+\addplot[only marks, mark=*, mark size=1.8pt] coordinates {(2.1,3.4) (2.3,3.8) (1.9,3.2) (2.1,3.3) (2.2,3.6) (2.4,3.9) (2.5,3.8) (2.1,3.5) (2.2,3.7) (2.3,3.9)};
+\node[font=\small, text=acc, below right] at (axis cs:2.34,3.72) {$\hat y=0.743+1.297x$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

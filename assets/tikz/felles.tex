@@ -35,6 +35,12 @@
     ymin=0, enlarge x limits=false, clip=false, samples=120,
     xtick style={draw=none}, tick label style={font=\small}, scaled x ticks=false,
     every axis plot/.append style={line width=0.7pt}},
+  % spredningsplott med vanlige akser
+  plott/.style={
+    width=9cm, height=5.6cm, axis lines=left, clip mode=individual,
+    tick label style={font=\small}, label style={font=\small},
+    scaled ticks=false, /pgf/number format/1000 sep={\,},
+    enlarge x limits=0.02, enlarge y limits=0.08},
   areal/.style={draw=none, fill=acc, fill opacity=0.3},
   areal2/.style={draw=none, fill=hi, fill opacity=0.3},
 }

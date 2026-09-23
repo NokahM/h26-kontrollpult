@@ -107,6 +107,48 @@ def stolper(name, alt, pmf, lo, hi, mu, s, cut, side, ticks, width='10cm', note=
     return name
 
 
+def spredning(name, alt, xs, ys, a, b, xlabel, ylabel, lo, hi, ci=None, pred=None, ylim=None,
+              width='9cm', note=None, linelab=None):
+    """Spredningsplott med minste kvadraters linje y = a + b x.
+
+    ci        (b_lav, b_høy): tegner to svake linjer gjennom (x̄, ȳ) med disse stigningstallene
+    pred      x-verdi for prognose: punkt på linja med prikkede hjelpelinjer til aksene
+    """
+    xm, ym = sum(xs) / len(xs), sum(ys) / len(ys)
+    body = []
+    if ci:
+        for bb in ci:
+            body.append(r'\addplot[mut, dashed, line width=0.5pt, domain=%s:%s] {%s+%s*(x-%s)};'
+                        % (fmt(lo), fmt(hi), fmt(ym), fmt(bb), fmt(xm)))
+    body.append(r'\addplot[acc, line width=0.9pt, domain=%s:%s] {%s+%s*x};' % (fmt(lo), fmt(hi), fmt(a), fmt(b)))
+    body.append(r'\addplot[only marks, mark=*, mark size=1.8pt] coordinates {%s};'
+                % ' '.join('(%s,%s)' % (fmt(x), fmt(y)) for x, y in zip(xs, ys)))
+    if pred is not None:   # krever ylim, så hjelpelinjene vet hvor aksene går
+        yp = a + b * pred
+        body.append(r'\draw[mut, densely dotted, line width=0.7pt] (axis cs:%s,%s) -- (axis cs:%s,%s) -- (axis cs:%s,%s);'
+                    % (fmt(pred), fmt(ylim[0]), fmt(pred), fmt(yp), fmt(lo), fmt(yp)))
+        body.append(r'\addplot[only marks, mark=o, mark size=2.6pt, acc, line width=0.8pt] coordinates {(%s,%s)};' % (fmt(pred), fmt(yp)))
+    if linelab:
+        body.append(r'\node[font=\small, text=acc, %s] at (axis cs:%s,%s) {%s};' % linelab)
+    ylo, yhi = ylim if ylim else (None, None)
+    src = r'''%% {note}
+%% alt: {alt}
+\documentclass[tikz,border=2pt]{{standalone}}
+\input{{felles}}
+\begin{{document}}
+\begin{{tikzpicture}}
+\begin{{axis}}[plott, width={width}, xmin={lo}, xmax={hi}{ylims},
+  xlabel={{{xlabel}}}, ylabel={{{ylabel}}}]
+{body}
+\end{{axis}}
+\end{{tikzpicture}}
+\end{{document}}
+'''.format(note=note or name, alt=alt, width=width, lo=fmt(lo), hi=fmt(hi), xlabel=xlabel, ylabel=ylabel,
+           ylims='' if ylo is None else ', ymin=%s, ymax=%s' % (fmt(ylo), fmt(yhi)), body='\n'.join(body))
+    open(os.path.join(HERE, name + '.tex'), 'w', encoding='utf-8', newline='\n').write(src)
+    return name
+
+
 def label(body, col, x, y, text):
     body.append(r'\node[font=\small, text=%s] at (axis cs:%s,%s) {%s};' % (col, fmt(x), fmt(y), text))
 

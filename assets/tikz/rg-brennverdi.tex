@@ -1,0 +1,18 @@
+%% rg-brennverdi
+%% alt: Brennverdi mot fuktprosent med linja y = 5.82 - 0.067x; prognosen ved 15 prosent ligger utenfor dataene
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[plott, width=9cm, xmin=10, xmax=55, ymin=2, ymax=5.4,
+  xlabel={fuktprosent $x$}, ylabel={brennverdi $y$ (kWh/kg)}]
+\addplot[mut, dashed, line width=0.5pt, domain=10:55] {3.475+-0.1*(x-35)};
+\addplot[mut, dashed, line width=0.5pt, domain=10:55] {3.475+-0.03*(x-35)};
+\addplot[acc, line width=0.9pt, domain=10:55] {5.82+-0.067*x};
+\addplot[only marks, mark=*, mark size=1.8pt] coordinates {(20,4.6) (30,3.7) (40,3) (50,2.6)};
+\draw[mut, densely dotted, line width=0.7pt] (axis cs:15,2) -- (axis cs:15,4.815) -- (axis cs:10,4.815);
+\addplot[only marks, mark=o, mark size=2.6pt, acc, line width=0.8pt] coordinates {(15,4.815)};
+\node[font=\small, text=acc, above right] at (axis cs:36,3.45) {$\hat y=5.82-0.067x$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

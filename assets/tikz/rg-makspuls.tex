@@ -1,0 +1,18 @@
+%% rg-makspuls
+%% alt: Makspuls mot alder med linja y = 222.3 - 1.14x og prognose 182 for en 35-åring
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[plott, width=9cm, xmin=22, xmax=48, ymin=165, ymax=200,
+  xlabel={alder $x$}, ylabel={makspuls $y$}]
+\addplot[mut, dashed, line width=0.5pt, domain=22:48] {180.3+-1.51*(x-36.8)};
+\addplot[mut, dashed, line width=0.5pt, domain=22:48] {180.3+-0.77*(x-36.8)};
+\addplot[acc, line width=0.9pt, domain=22:48] {222.3+-1.14*x};
+\addplot[only marks, mark=*, mark size=1.8pt] coordinates {(30,186) (38,183) (41,171) (38,177) (29,191) (39,177) (46,175) (41,176) (42,171) (24,196)};
+\draw[mut, densely dotted, line width=0.7pt] (axis cs:35,165) -- (axis cs:35,182.4) -- (axis cs:22,182.4);
+\addplot[only marks, mark=o, mark size=2.6pt, acc, line width=0.8pt] coordinates {(35,182.4)};
+\node[font=\small, text=acc, above right] at (axis cs:23.5,166) {$\hat y=222.3-1.14x$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

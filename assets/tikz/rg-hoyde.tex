@@ -1,0 +1,18 @@
+%% rg-hoyde
+%% alt: Vekt mot kroppshøyde med linja y = -50.77 + 0.739x og prognose 78.6 kg for 175 cm
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[plott, width=9cm, xmin=152, xmax=195, ymin=55, ymax=100,
+  xlabel={høyde $x$ (cm)}, ylabel={vekt $y$ (kg)}]
+\addplot[mut, dashed, line width=0.5pt, domain=152:195] {79.2+0.22*(x-175.8)};
+\addplot[mut, dashed, line width=0.5pt, domain=152:195] {79.2+1.26*(x-175.8)};
+\addplot[acc, line width=0.9pt, domain=152:195] {-50.77+0.739*x};
+\addplot[only marks, mark=*, mark size=1.8pt] coordinates {(156,65) (183,78) (169,75) (191,94) (180,84)};
+\draw[mut, densely dotted, line width=0.7pt] (axis cs:175,55) -- (axis cs:175,78.555) -- (axis cs:152,78.555);
+\addplot[only marks, mark=o, mark size=2.6pt, acc, line width=0.8pt] coordinates {(175,78.555)};
+\node[font=\small, text=acc, below right] at (axis cs:185,84) {$\hat y=-50.77+0.739x$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

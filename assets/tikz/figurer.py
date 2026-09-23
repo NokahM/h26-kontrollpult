@@ -251,3 +251,35 @@ stolper('sg-biler', 'Summen av biler i 100 husstander rundt 120: høyst 120 bile
         lab=r'$P(S\le 120)$', labpos=(95, 0.75))
 
 
+# ---- 09 Regresjon ------------------------------------------------------------
+# Punktene, minste kvadraters linje (acc) og to stiplede linjer gjennom (x̄, ȳ) med
+# stigningstallene i 95 %-intervallet for beta.
+from normal import spredning
+
+spredning('rg-brennverdi', 'Brennverdi mot fuktprosent med linja y = 5.82 - 0.067x; prognosen ved 15 prosent ligger utenfor dataene',
+          [20, 30, 40, 50], [4.6, 3.7, 3.0, 2.6], 5.82, -0.067, 'fuktprosent $x$', 'brennverdi $y$ (kWh/kg)',
+          10, 55, ci=(-0.10, -0.03), pred=15, ylim=(2, 5.4),
+          linelab=(r'above right', 36, 3.45, r'$\hat y=5.82-0.067x$'))
+spredning('rg-makspuls', 'Makspuls mot alder med linja y = 222.3 - 1.14x og prognose 182 for en 35-åring',
+          [30, 38, 41, 38, 29, 39, 46, 41, 42, 24], [186, 183, 171, 177, 191, 177, 175, 176, 171, 196],
+          222.3, -1.14, 'alder $x$', 'makspuls $y$', 22, 48, ci=(-1.51, -0.77), pred=35, ylim=(165, 200),
+          linelab=(r'above right', 23.5, 166, r'$\hat y=222.3-1.14x$'))
+spredning('rg-poteter', 'Potetvekt mot lengde med linja y = -10.9 + 14.75x; den stiplede vifta viser hvor stort spennet i stigningstall er',
+          [6.0, 6.4, 6.8, 7.2, 7.6], [82, 77, 88, 100, 100], 89.4 - 14.75 * 6.8, 14.75, 'lengde $x$ (cm)', 'vekt $y$ (g)',
+          5.8, 7.8, ci=(1.2, 28), linelab=(r'below right', 7.0, 91, r'$\hat y=-10.9+14.75x$'))
+spredning('rg-hoyde', 'Vekt mot kroppshøyde med linja y = -50.77 + 0.739x og prognose 78.6 kg for 175 cm',
+          [156, 183, 169, 191, 180], [65, 78, 75, 94, 84], -50.77, 0.739, 'høyde $x$ (cm)', 'vekt $y$ (kg)',
+          152, 195, ci=(0.22, 1.26), pred=175, ylim=(55, 100),
+          linelab=(r'below right', 185, 84, r'$\hat y=-50.77+0.739x$'))
+spredning('rg-svevestov', 'Svevestøv mot år med linja y = 1177.1 - 92.86x og prognose 434 tonn for år 8, utenfor dataene',
+          [1, 2, 3, 4, 5, 6, 7], [1105, 998, 882, 781, 702, 625, 547], 1177.1, -92.86, 'år $x$ (1 = 2012)', 'svevestøv $y$ (tonn)',
+          0.5, 8.5, ci=(-102.3, -83.4), pred=8, ylim=(380, 1150),
+          linelab=(r'above right', 4.2, 800, r'$\hat y=1177.1-92.86x$'))
+
+# ---- Quiz 4 O3 ------------------------------------------------------------------
+spredning('rg-gjodsel', 'Kornavling mot gjødselmengde med linja y = 0.743 + 1.297x og 95 prosent-intervallet for stigningstallet',
+          [2.1, 2.3, 1.9, 2.1, 2.2, 2.4, 2.5, 2.1, 2.2, 2.3], [3.4, 3.8, 3.2, 3.3, 3.6, 3.9, 3.8, 3.5, 3.7, 3.9],
+          0.743, 1.297, 'gjødsel $x$', 'avling $y$', 1.85, 2.55, ci=(0.76, 1.83),
+          linelab=(r'below right', 2.34, 3.72, r'$\hat y=0.743+1.297x$'))
+
+

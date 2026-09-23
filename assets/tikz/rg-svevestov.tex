@@ -1,0 +1,18 @@
+%% rg-svevestov
+%% alt: Svevestøv mot år med linja y = 1177.1 - 92.86x og prognose 434 tonn for år 8, utenfor dataene
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[plott, width=9cm, xmin=0.5, xmax=8.5, ymin=380, ymax=1150,
+  xlabel={år $x$ (1 = 2012)}, ylabel={svevestøv $y$ (tonn)}]
+\addplot[mut, dashed, line width=0.5pt, domain=0.5:8.5] {805.71429+-102.3*(x-4)};
+\addplot[mut, dashed, line width=0.5pt, domain=0.5:8.5] {805.71429+-83.4*(x-4)};
+\addplot[acc, line width=0.9pt, domain=0.5:8.5] {1177.1+-92.86*x};
+\addplot[only marks, mark=*, mark size=1.8pt] coordinates {(1,1105) (2,998) (3,882) (4,781) (5,702) (6,625) (7,547)};
+\draw[mut, densely dotted, line width=0.7pt] (axis cs:8,380) -- (axis cs:8,434.22) -- (axis cs:0.5,434.22);
+\addplot[only marks, mark=o, mark size=2.6pt, acc, line width=0.8pt] coordinates {(8,434.22)};
+\node[font=\small, text=acc, above right] at (axis cs:4.2,800) {$\hat y=1177.1-92.86x$};
+\end{axis}
+\end{tikzpicture}
+\end{document}
