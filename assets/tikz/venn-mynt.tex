@@ -1,0 +1,28 @@
+% Quiz 1 O1: tre myntkast. A = nøyaktig 2 mynt, B = maks én kron, C = mynt i første kast.
+% alt: Venn-diagram for tre myntkast: A ligger inne i B, C skjærer begge; de åtte utfallene står i sine områder
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}[scale=0.95, u/.style={font=\small}]
+\draw[line width=0.5pt] (0,0) rectangle (9,5);
+\node[font=\small, anchor=north west] at (0.1,4.95) {$\Omega$};
+% B (maks én kron) med A (nøyaktig to mynt) inni, og C (mynt i første kast)
+\fill[hi, fill opacity=0.18] (5.4,2.5) circle (1.7);
+\fill[acc, fill opacity=0.25] (3.6,2.5) circle (1.25);
+\draw[line width=0.6pt] (3.3,2.5) circle (2.1);
+\draw[acc, line width=0.7pt] (3.6,2.5) circle (1.25);
+\draw[hi, line width=0.7pt] (5.4,2.5) circle (1.7);
+\node[font=\small] at (1.35,4.25) {$B$};
+\node[font=\small, text=acc] at (2.75,3.3) {$A$};
+\node[font=\small, text=hi] at (7.05,4.05) {$C$};
+% utfallene
+\node[u] at (2.95,2.5) {$\mathrm{KMM}$};
+\node[u] at (4.3,2.95) {$\mathrm{MKM}$};
+\node[u] at (4.3,2.05) {$\mathrm{MMK}$};
+\node[u] at (5.1,1.35) {$\mathrm{MMM}$};
+\node[u] at (6.45,2.5) {$\mathrm{MKK}$};
+\node[u] at (8.1,4.2) {$\mathrm{KKK}$};
+\node[u] at (8.1,0.75) {$\mathrm{KKM}$};
+\node[u] at (0.9,0.75) {$\mathrm{KMK}$};
+\end{tikzpicture}
+\end{document}
