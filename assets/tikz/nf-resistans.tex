@@ -1,0 +1,24 @@
+%% nf-resistans
+%% alt: Samme intervall 49 til 51: 0.38 for én motstand, 0.74 for gjennomsnittet av fem
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=43, xmax=57, ymax=0.58012,
+  xtick={49,50,51}, xticklabels={{$49$},{$50$},{$51$}}, xticklabel style={align=center}]
+\addplot[areal2, domain=49:51] {gauss(50,2)} \closedcycle;
+\addplot[areal, domain=49:51] {gauss(50,0.894)} \closedcycle;
+\addplot[mut, domain=43:57] {gauss(50,2)};
+\addplot[domain=43:57] {gauss(50,0.894)};
+\draw[hjelp] (axis cs:49,0) -- (axis cs:49,0.23871);
+\draw[hjelp] (axis cs:50,0) -- (axis cs:50,0.44624);
+\draw[hjelp] (axis cs:51,0) -- (axis cs:51,0.23871);
+\node[font=\small, text=hi] at (axis cs:54.6,0.0714) {a) $0.38$};
+\node[font=\small, text=acc] at (axis cs:46.9,0.27667) {b) $0.74$};
+\node[font=\small, text=mut] at (axis cs:46.0,0.095) {$R$};
+\node[font=\small] at (axis cs:51.35,0.36) {$\bar R$};
+\draw[acc, line width=0.4pt] (axis cs:47.8,0.26) -- (axis cs:49.5,0.15);
+\draw[hi, line width=0.4pt] (axis cs:53.9,0.07) -- (axis cs:50.8,0.04);
+\end{axis}
+\end{tikzpicture}
+\end{document}

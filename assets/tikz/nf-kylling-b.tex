@@ -1,0 +1,18 @@
+%% nf-kylling-b
+%% alt: Med forventning 1.85 kg veier 80 prosent over 1.6 kg og 20 prosent under
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=0.77, xmax=2.93, ymax=1.72875,
+  xtick={1.6,1.85}, xticklabels={{$1.6$\\[-1pt]{\footnotesize$z=-0.842$}},{$\mu=1.85$}}, xticklabel style={align=center}]
+\addplot[areal2, domain=0.77:1.6] {gauss(1.85,0.3)} \closedcycle;
+\addplot[areal, domain=1.6:2.93] {gauss(1.85,0.3)} \closedcycle;
+\addplot[domain=0.77:2.93] {gauss(1.85,0.3)};
+\draw[hjelp] (axis cs:1.6,0) -- (axis cs:1.6,0.93971);
+\draw[hjelp] (axis cs:1.85,0) -- (axis cs:1.85,1.32981);
+\node[font=\small, text=hi] at (axis cs:1.46765,0.22431) {$0.20$};
+\node[font=\small, text=acc] at (axis cs:2.05227,0.40258) {$0.80$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,17 @@
+%% nf-stoy-c
+%% alt: Forventningen flyttes fra 40 til 37.2 dB slik at 90 prosent av målingene er under 50 dB
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=1.2, xmax=76, ymax=0.05186,
+  xtick={37.2,50}, xticklabels={{$\mu=37.2$},{$50$\\[-1pt]{\footnotesize$z=1.282$}}}, xticklabel style={align=center}]
+\addplot[areal, domain=1.2:50] {gauss(37.2,10)} \closedcycle;
+\addplot[mut, domain=1.2:76] {gauss(40,10)};
+\addplot[domain=1.2:76] {gauss(37.2,10)};
+\draw[hjelp] (axis cs:37.2,0) -- (axis cs:37.2,0.03989);
+\draw[hjelp] (axis cs:50,0) -- (axis cs:50,0.0242);
+\node[font=\small, text=acc] at (axis cs:30.45761,0.01208) {$0.90$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

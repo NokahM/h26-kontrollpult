@@ -1,0 +1,17 @@
+%% nf-handtemp
+%% alt: N(33.5, 1.5): arealet mellom 31.0 og 34.0 grader er 0.582, ikke symmetrisk
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=28.1, xmax=38.9, ymax=0.34575,
+  xtick={31,34}, xticklabels={{$31.0$\\[-1pt]{\footnotesize$z=-1.67$}},{$34.0$\\[-1pt]{\footnotesize$z=0.33$}}}, xticklabel style={align=center}]
+\addplot[areal, domain=31:34] {gauss(33.5,1.5)} \closedcycle;
+\addplot[domain=28.1:38.9] {gauss(33.5,1.5)};
+\draw[hjelp] (axis cs:31,0) -- (axis cs:31,0.06632);
+\draw[hjelp] (axis cs:33.5,0) -- (axis cs:33.5,0.26596);
+\draw[hjelp] (axis cs:34,0) -- (axis cs:34,0.25159);
+\node[font=\small, text=acc] at (axis cs:32.59839,0.08436) {$0.582$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,21 @@
+%% nf-stoy
+%% alt: N(40, 10): a) over 60 dB er 0.023, b) mellom 50 og 60 dB er 0.136
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=11cm, xmin=10, xmax=76, ymax=0.05186,
+  xtick={40,50,60}, xticklabels={{$40$},{$50$\\[-1pt]{\footnotesize$z=1.00$}},{$60$\\[-1pt]{\footnotesize$z=2.00$}}}, xticklabel style={align=center}]
+\addplot[areal, domain=60:76] {gauss(40,10)} \closedcycle;
+\addplot[areal2, domain=50:60] {gauss(40,10)} \closedcycle;
+\addplot[domain=10:76] {gauss(40,10)};
+\draw[hjelp] (axis cs:40,0) -- (axis cs:40,0.03989);
+\draw[hjelp] (axis cs:50,0) -- (axis cs:50,0.0242);
+\draw[hjelp] (axis cs:60,0) -- (axis cs:60,0.0054);
+\draw[acc, line width=0.4pt] (axis cs:62.74945,0.00135) -- (axis cs:62.74945,0.01178);
+\node[font=\small, text=acc, above] at (axis cs:62.74945,0.01178) {a) $0.023$};
+\draw[hi, line width=0.4pt] (axis cs:53.3644,0.00735) -- (axis cs:53.3644,0.02511);
+\node[font=\small, text=hi, above] at (axis cs:53.3644,0.02511) {b) $0.136$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

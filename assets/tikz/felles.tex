@@ -22,16 +22,16 @@
   up/.style={p, above, sloped}, dn/.style={p, below, sloped},
   leaf/.style={anchor=west, xshift=0.35cm},
   rot/.style={circle, fill, inner sep=1.4pt},
+  hjelp/.style={mut, dashed, line width=0.5pt},
 }
 
 \pgfplotsset{
   % kurve uten y-akse: bare x-aksen med de merkene figuren trenger
   kurve/.style={
-    width=11cm, height=4.6cm, axis lines*=bottom, axis y line=none,
+    width=11cm, height=4.6cm, axis x line*=bottom, hide y axis,
     ymin=0, enlarge x limits=false, clip=false, samples=120,
     xtick style={draw=none}, tick label style={font=\small},
     every axis plot/.append style={line width=0.7pt}},
   areal/.style={draw=none, fill=acc, fill opacity=0.3},
   areal2/.style={draw=none, fill=hi, fill opacity=0.3},
-  hjelp/.style={mut, dashed, line width=0.5pt},
 }

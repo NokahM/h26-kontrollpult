@@ -1,0 +1,16 @@
+%% nf-eksamen
+%% alt: N(57.9, 14): arealet over 60 prosent riktig er 0.44
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=7.5, xmax=108.3, ymax=0.03704,
+  xtick={60}, xticklabels={{$60$\\[-1pt]{\footnotesize$z=0.15$}}}, xticklabel style={align=center}]
+\addplot[areal, domain=60:108.3] {gauss(57.9,14)} \closedcycle;
+\addplot[domain=7.5:108.3] {gauss(57.9,14)};
+\draw[hjelp] (axis cs:57.9,0) -- (axis cs:57.9,0.0285);
+\draw[hjelp] (axis cs:60,0) -- (axis cs:60,0.02818);
+\node[font=\small, text=acc] at (axis cs:68.69791,0.00804) {$0.44$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,16 @@
+%% nf-mandel
+%% alt: N(38, 8): arealet under 50 gram er 0.9332
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=9, xmax=67, ymax=0.06483,
+  xtick={38,50}, xticklabels={{$38$},{$50$\\[-1pt]{\footnotesize$z=1.50$}}}, xticklabel style={align=center}]
+\addplot[areal, domain=9:50] {gauss(38,8)} \closedcycle;
+\addplot[domain=9:67] {gauss(38,8)};
+\draw[hjelp] (axis cs:38,0) -- (axis cs:38,0.04987);
+\draw[hjelp] (axis cs:50,0) -- (axis cs:50,0.01619);
+\node[font=\small, text=acc] at (axis cs:32.6059,0.0151) {$0.9332$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

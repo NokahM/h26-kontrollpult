@@ -1,0 +1,17 @@
+%% nf-appelsiner-b
+%% alt: N(270, 15): de 10 prosent letteste veier under k = 250.8
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=220, xmax=320, ymax=0.03457,
+  xtick={250.77,270}, xticklabels={{$k=250.8$\\[-1pt]{\footnotesize$z=-1.282$}},{$270$}}, xticklabel style={align=center}]
+\addplot[areal, domain=220:250.77] {gauss(270,15)} \closedcycle;
+\addplot[domain=220:320] {gauss(270,15)};
+\draw[hjelp] (axis cs:250.77,0) -- (axis cs:250.77,0.01169);
+\draw[hjelp] (axis cs:270,0) -- (axis cs:270,0.0266);
+\draw[acc, line width=0.4pt] (axis cs:245.35264,0.0031) -- (axis cs:245.35264,0.01275);
+\node[font=\small, text=acc, above] at (axis cs:245.35264,0.01275) {$0.10$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

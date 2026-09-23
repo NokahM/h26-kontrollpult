@@ -1,0 +1,17 @@
+%% nf-appelsiner-a
+%% alt: N(270, 15): arealet mellom 255 og 300 er 0.82
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=220, xmax=320, ymax=0.03457,
+  xtick={255,270,300}, xticklabels={{$255$\\[-1pt]{\footnotesize$z=-1.00$}},{$270$},{$300$\\[-1pt]{\footnotesize$z=2.00$}}}, xticklabel style={align=center}]
+\addplot[areal, domain=255:300] {gauss(270,15)} \closedcycle;
+\addplot[domain=220:320] {gauss(270,15)};
+\draw[hjelp] (axis cs:255,0) -- (axis cs:255,0.01613);
+\draw[hjelp] (axis cs:270,0) -- (axis cs:270,0.0266);
+\draw[hjelp] (axis cs:300,0) -- (axis cs:300,0.0036);
+\node[font=\small, text=acc] at (axis cs:279.58668,0.00824) {$0.82$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

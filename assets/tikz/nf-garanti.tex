@@ -1,0 +1,17 @@
+%% nf-garanti
+%% alt: N(144, 30) måneder: 5 prosent av motorene ryker før k = 94.65 måneder
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=36, xmax=252, ymax=0.01729,
+  xtick={94.65,144}, xticklabels={{$k=94.65$\\[-1pt]{\footnotesize$z=-1.645$}},{$144$}}, xticklabel style={align=center}]
+\addplot[areal, domain=36:94.65] {gauss(144,30)} \closedcycle;
+\addplot[domain=36:252] {gauss(144,30)};
+\draw[hjelp] (axis cs:94.65,0) -- (axis cs:94.65,0.00344);
+\draw[hjelp] (axis cs:144,0) -- (axis cs:144,0.0133);
+\draw[acc, line width=0.4pt] (axis cs:85.238,0.00088) -- (axis cs:85.238,0.00488);
+\node[font=\small, text=acc, above] at (axis cs:85.238,0.00488) {$0.05$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

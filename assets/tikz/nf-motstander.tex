@@ -1,0 +1,21 @@
+%% nf-motstander
+%% alt: N(50, 0.8): a) arealet over 51.2 er 0.0668, b) arealet under c = 47.53 er 0.001
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=47, xmax=53, ymax=0.64828,
+  xtick={47.528,50,51.2}, xticklabels={{$c=47.53$\\[-1pt]{\footnotesize$z=-3.090$}},{$50$},{$51.2$\\[-1pt]{\footnotesize$z=1.50$}}}, xticklabel style={align=center}]
+\addplot[areal, domain=51.2:53] {gauss(50,0.8)} \closedcycle;
+\addplot[areal2, domain=47:47.528] {gauss(50,0.8)} \closedcycle;
+\addplot[domain=47:53] {gauss(50,0.8)};
+\draw[hjelp] (axis cs:47.528,0) -- (axis cs:47.528,0.00421);
+\draw[hjelp] (axis cs:50,0) -- (axis cs:50,0.49868);
+\draw[hjelp] (axis cs:51.2,0) -- (axis cs:51.2,0.1619);
+\draw[acc, line width=0.4pt] (axis cs:51.4659,0.04187) -- (axis cs:51.4659,0.20276);
+\node[font=\small, text=acc, above] at (axis cs:51.4659,0.20276) {a) $0.0668$};
+\draw[hi, line width=0.4pt] (axis cs:47.38687,0.00108) -- (axis cs:47.38687,0.11211);
+\node[font=\small, text=hi, above] at (axis cs:47.38687,0.11211) {b) $0.001$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

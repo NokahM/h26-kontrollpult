@@ -1,0 +1,20 @@
+%% nf-co2
+%% alt: N(930, 290): 1) over 1020 ppm er 0.378, 2) de øverste 6 prosent ligger over 1381 ppm
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=0, xmax=1860, ymax=0.00179,
+  xtick={1020,1380.9}, xticklabels={{$1020$\\[-1pt]{\footnotesize$z=0.31$}},{$x=1381$\\[-1pt]{\footnotesize$z=1.555$}}}, xticklabel style={align=center}]
+\addplot[areal, domain=1020:1860] {gauss(930,290)} \closedcycle;
+\addplot[areal2, domain=1380.9:1860] {gauss(930,290)} \closedcycle;
+\addplot[domain=0:1860] {gauss(930,290)};
+\draw[hjelp] (axis cs:930,0) -- (axis cs:930,0.00138);
+\draw[hjelp] (axis cs:1020,0) -- (axis cs:1020,0.00131);
+\draw[hjelp] (axis cs:1380.9,0) -- (axis cs:1380.9,0.00041);
+\node[font=\small, text=acc] at (axis cs:1190,0.00034) {1) $0.378$};
+\draw[hi, line width=0.4pt] (axis cs:1474.02065,0.00011) -- (axis cs:1474.02065,0.00054);
+\node[font=\small, text=hi, above] at (axis cs:1474.02065,0.00054) {2) $0.06$};
+\end{axis}
+\end{tikzpicture}
+\end{document}
