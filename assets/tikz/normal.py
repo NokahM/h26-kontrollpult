@@ -212,6 +212,71 @@ def tetthet(name, alt, f, fpy, lo, hi, areas, ticks, width='10cm', note=None, ex
     return name
 
 
+def punktfordeling(name, alt, pmf, mean, width='8cm', note=None, xname='x', meanlab=None):
+    """Søylediagram for en liten punktfordeling, med sannsynligheten over hver søyle og E(X) markert."""
+    peak = max(pmf.values())
+    body = []
+    for k, p in sorted(pmf.items()):
+        body.append(r'\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:%s,0) rectangle (axis cs:%s,%s);'
+                    % (fmt(k - 0.35), fmt(k + 0.35), fmt(p)))
+        txt = ('%.4f' % p).rstrip('0')
+        txt = txt + '0' * max(0, 2 - len(txt.split('.')[1]))     # minst to desimaler: 0.10, ikke 0.1
+        body.append(r'\node[font=\footnotesize, above] at (axis cs:%s,%s) {$%s$};' % (fmt(k), fmt(p), txt))
+    body.append(r'\draw[hi, line width=0.9pt] (axis cs:%s,0) -- (axis cs:%s,%s);' % (fmt(mean), fmt(mean), fmt(1.22 * peak)))
+    body.append(r'\node[font=\small, text=hi, above] at (axis cs:%s,%s) {%s};'
+                % (fmt(mean), fmt(1.22 * peak), meanlab or r'$E(X)=%s$' % fmt(mean)))
+    ks = sorted(pmf)
+    src = r'''%% {note}
+%% alt: {alt}
+\documentclass[tikz,border=2pt]{{standalone}}
+\input{{felles}}
+\begin{{document}}
+\begin{{tikzpicture}}
+\begin{{axis}}[kurve, width={width}, height=4.4cm, xmin={lo}, xmax={hi}, ymax={ymax},
+  xtick={{{xt}}}, xlabel={{${xname}$}}, label style={{font=\small}}]
+{body}
+\end{{axis}}
+\end{{tikzpicture}}
+\end{{document}}
+'''.format(note=note or name, alt=alt, width=width, lo=fmt(ks[0] - 0.7), hi=fmt(ks[-1] + 0.7), ymax=fmt(1.45 * peak),
+           xt=','.join(str(k) for k in ks), xname=xname, body='\n'.join(body))
+    open(os.path.join(HERE, name + '.tex'), 'w', encoding='utf-8', newline='\n').write(src)
+    return name
+
+
+def intervaller(name, alt, mu, se, n_int, seed, width='10cm', note=None):
+    """n_int simulerte 95 %-intervaller x̄ ± 1.96·se; de som ikke dekker mu, tegnes i aksentfarge."""
+    import random
+    rnd = random.Random(seed)
+    body = [r'\draw[hi, line width=0.9pt] (axis cs:%s,0.3) -- (axis cs:%s,%s);' % (fmt(mu), fmt(mu), fmt(n_int + 0.7))]
+    miss = 0
+    for i in range(n_int):
+        xb = rnd.gauss(mu, se)
+        lo, hi = xb - 1.96 * se, xb + 1.96 * se
+        bom = not (lo <= mu <= hi)
+        miss += bom
+        col = 'acc, line width=1.1pt' if bom else 'line width=0.6pt'
+        y = n_int - i
+        body.append(r'\draw[%s] (axis cs:%s,%s) -- (axis cs:%s,%s);' % (col, fmt(lo), y, fmt(hi), y))
+        body.append(r'\fill[%s] (axis cs:%s,%s) circle (1.1pt);' % ('acc' if bom else 'mut', fmt(xb), y))
+    body.append(r'\node[font=\small, text=hi, above] at (axis cs:%s,%s) {$\mu$};' % (fmt(mu), fmt(n_int + 0.7)))
+    src = r'''%% {note}
+%% alt: {alt}
+\documentclass[tikz,border=2pt]{{standalone}}
+\input{{felles}}
+\begin{{document}}
+\begin{{tikzpicture}}
+\begin{{axis}}[kurve, width={width}, height=6cm, xmin={lo}, xmax={hi}, ymin=0, ymax={ymax}, xtick=\empty]
+{body}
+\end{{axis}}
+\end{{tikzpicture}}
+\end{{document}}
+'''.format(note=note or name, alt=alt, width=width, lo=fmt(mu - 4.2 * se), hi=fmt(mu + 4.2 * se), ymax=n_int + 1.6,
+           body='\n'.join(body))
+    open(os.path.join(HERE, name + '.tex'), 'w', encoding='utf-8', newline='\n').write(src)
+    return miss
+
+
 def label(body, col, x, y, text):
     body.append(r'\node[font=\small, text=%s] at (axis cs:%s,%s) {%s};' % (col, fmt(x), fmt(y), text))
 

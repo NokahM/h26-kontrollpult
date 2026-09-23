@@ -1,0 +1,24 @@
+% 02 Kombinatorikk: modellen bak den hypergeometriske fordelingen.
+% alt: En urne med N = 10 kuler, M = 4 spesielle; n = 3 trekkes uten tilbakelegging, og X teller de spesielle i utvalget
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}[
+  s/.style={circle, draw=acc, fill=acc, fill opacity=0.45, draw opacity=1, minimum size=5.5mm, inner sep=0pt},
+  v/.style={circle, draw=mut, minimum size=5.5mm, inner sep=0pt}]
+% urnen
+\draw[line width=0.6pt, rounded corners=3pt] (0,2.6) -- (0,0) -- (3.4,0) -- (3.4,2.6);
+\foreach \x/\y/\t in {0.5/0.45/s, 1.2/0.45/v, 1.9/0.45/s, 2.6/0.45/v,
+                      0.85/1.1/v, 1.55/1.1/s, 2.25/1.1/v, 2.95/1.1/v,
+                      1.2/1.75/s, 1.9/1.75/v}
+  \node[\t] at (\x,\y) {};
+\node[font=\small, anchor=north] at (1.7,-0.15) {$N=10$ kuler, $M=4$ spesielle};
+% trekket
+\draw[-{Stealth[length=2.5mm]}, line width=0.6pt] (3.9,1.3) -- node[above, font=\small] {trekk $n=3$} node[below, font=\small] {uten tilbakelegging} (7.1,1.3);
+% utvalget
+\node[s] at (7.8,1.3) {};
+\node[v] at (8.5,1.3) {};
+\node[v] at (9.2,1.3) {};
+\node[font=\small, anchor=north] at (8.5,0.6) {$X=1$ spesiell};
+\end{tikzpicture}
+\end{document}

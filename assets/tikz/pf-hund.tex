@@ -1,0 +1,21 @@
+%% pf-hund
+%% alt: Punktfordeling for antall løste oppgaver: 0.08, 0.34, 0.48 og 0.10, med forventning 1.60
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=8cm, height=4.4cm, xmin=-0.7, xmax=3.7, ymax=0.696,
+  xtick={0,1,2,3}, xlabel={$x$}, label style={font=\small}]
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:-0.35,0) rectangle (axis cs:0.35,0.08);
+\node[font=\footnotesize, above] at (axis cs:0,0.08) {$0.08$};
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:0.65,0) rectangle (axis cs:1.35,0.34);
+\node[font=\footnotesize, above] at (axis cs:1,0.34) {$0.34$};
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:1.65,0) rectangle (axis cs:2.35,0.48);
+\node[font=\footnotesize, above] at (axis cs:2,0.48) {$0.48$};
+\draw[mut, fill=acc, fill opacity=0.35, line width=0.4pt] (axis cs:2.65,0) rectangle (axis cs:3.35,0.1);
+\node[font=\footnotesize, above] at (axis cs:3,0.1) {$0.10$};
+\draw[hi, line width=0.9pt] (axis cs:1.6,0) -- (axis cs:1.6,0.5856);
+\node[font=\small, text=hi, above] at (axis cs:1.6,0.5856) {$E(X)=1.60$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

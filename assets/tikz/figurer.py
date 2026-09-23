@@ -348,3 +348,17 @@ tetthet('ek-levetid', 'Tettheten t/5 ganger e opphøyd i minus t i andre over 10
         [(0, '0'), (1, '1'), (3, '3')])
 
 
+# ---- 07 Konfidensintervall ------------------------------------------------------
+from normal import intervaller, punktfordeling
+
+intervaller('ki-dekning', '25 simulerte 95 prosent-intervaller rundt den ukjente forventningen; to av dem bommer',
+            0, 1, 25, seed=2)
+
+# ---- Quiz 2 -------------------------------------------------------------------
+punktfordeling('pf-hund', 'Punktfordeling for antall løste oppgaver: 0.08, 0.34, 0.48 og 0.10, med forventning 1.60',
+               {0: 0.08, 1: 0.34, 2: 0.48, 3: 0.10}, 1.60, meanlab=r'$E(X)=1.60$')
+punktfordeling('pf-terning', 'Antall kast til første sekser, maks fem: sannsynligheten hoper seg opp på 5, forventning 3.59',
+               {k: (5 / 6) ** (k - 1) / 6 for k in range(1, 5)} | {5: (5 / 6) ** 4}, 3.589,
+               meanlab=r'$E(X)\approx 3.59$')
+
+

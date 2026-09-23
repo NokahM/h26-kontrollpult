@@ -1,0 +1,62 @@
+%% ki-dekning
+%% alt: 25 simulerte 95 prosent-intervaller rundt den ukjente forventningen; to av dem bommer
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, height=6cm, xmin=-4.2, xmax=4.2, ymin=0, ymax=26.6, xtick=\empty]
+\draw[hi, line width=0.9pt] (axis cs:0,0.3) -- (axis cs:0,25.7);
+\draw[acc, line width=1.1pt] (axis cs:0.37817,25) -- (axis cs:4.29817,25);
+\fill[acc] (axis cs:2.33817,25) circle (1.1pt);
+\draw[line width=0.6pt] (axis cs:-2.62285,24) -- (axis cs:1.29715,24);
+\fill[mut] (axis cs:-0.66285,24) circle (1.1pt);
+\draw[line width=0.6pt] (axis cs:-1.56514,23) -- (axis cs:2.35486,23);
+\fill[mut] (axis cs:0.39486,23) circle (1.1pt);
+\draw[line width=0.6pt] (axis cs:-1.81348,22) -- (axis cs:2.10652,22);
+\fill[mut] (axis cs:0.14652,22) circle (1.1pt);
+\draw[line width=0.6pt] (axis cs:-1.12485,21) -- (axis cs:2.79515,21);
+\fill[mut] (axis cs:0.83515,21) circle (1.1pt);
+\draw[line width=0.6pt] (axis cs:-3.36211,20) -- (axis cs:0.55789,20);
+\fill[mut] (axis cs:-1.40211,20) circle (1.1pt);
+\draw[line width=0.6pt] (axis cs:-2.37478,19) -- (axis cs:1.54522,19);
+\fill[mut] (axis cs:-0.41478,19) circle (1.1pt);
+\draw[line width=0.6pt] (axis cs:-2.71146,18) -- (axis cs:1.20854,18);
+\fill[mut] (axis cs:-0.75146,18) circle (1.1pt);
+\draw[line width=0.6pt] (axis cs:-3.03463,17) -- (axis cs:0.88537,17);
+\fill[mut] (axis cs:-1.07463,17) circle (1.1pt);
+\draw[line width=0.6pt] (axis cs:-2.80383,16) -- (axis cs:1.11617,16);
+\fill[mut] (axis cs:-0.84383,16) circle (1.1pt);
+\draw[line width=0.6pt] (axis cs:-2.47245,15) -- (axis cs:1.44755,15);
+\fill[mut] (axis cs:-0.51245,15) circle (1.1pt);
+\draw[line width=0.6pt] (axis cs:-2.24679,14) -- (axis cs:1.67321,14);
+\fill[mut] (axis cs:-0.28679,14) circle (1.1pt);
+\draw[line width=0.6pt] (axis cs:-2.8667,13) -- (axis cs:1.0533,13);
+\fill[mut] (axis cs:-0.9067,13) circle (1.1pt);
+\draw[line width=0.6pt] (axis cs:-1.53799,12) -- (axis cs:2.38201,12);
+\fill[mut] (axis cs:0.42201,12) circle (1.1pt);
+\draw[line width=0.6pt] (axis cs:-2.50751,11) -- (axis cs:1.41249,11);
+\fill[mut] (axis cs:-0.54751,11) circle (1.1pt);
+\draw[acc, line width=1.1pt] (axis cs:-5.15781,10) -- (axis cs:-1.23781,10);
+\fill[acc] (axis cs:-3.19781,10) circle (1.1pt);
+\draw[line width=0.6pt] (axis cs:-0.76932,9) -- (axis cs:3.15068,9);
+\fill[mut] (axis cs:1.19068,9) circle (1.1pt);
+\draw[line width=0.6pt] (axis cs:-2.35188,8) -- (axis cs:1.56812,8);
+\fill[mut] (axis cs:-0.39188,8) circle (1.1pt);
+\draw[line width=0.6pt] (axis cs:-2.70335,7) -- (axis cs:1.21665,7);
+\fill[mut] (axis cs:-0.74335,7) circle (1.1pt);
+\draw[line width=0.6pt] (axis cs:-1.69161,6) -- (axis cs:2.22839,6);
+\fill[mut] (axis cs:0.26839,6) circle (1.1pt);
+\draw[line width=0.6pt] (axis cs:-1.73007,5) -- (axis cs:2.18993,5);
+\fill[mut] (axis cs:0.22993,5) circle (1.1pt);
+\draw[line width=0.6pt] (axis cs:-1.9072,4) -- (axis cs:2.0128,4);
+\fill[mut] (axis cs:0.0528,4) circle (1.1pt);
+\draw[line width=0.6pt] (axis cs:-2.81446,3) -- (axis cs:1.10554,3);
+\fill[mut] (axis cs:-0.85446,3) circle (1.1pt);
+\draw[line width=0.6pt] (axis cs:-1.76841,2) -- (axis cs:2.15159,2);
+\fill[mut] (axis cs:0.19159,2) circle (1.1pt);
+\draw[line width=0.6pt] (axis cs:-3.49744,1) -- (axis cs:0.42256,1);
+\fill[mut] (axis cs:-1.53744,1) circle (1.1pt);
+\node[font=\small, text=hi, above] at (axis cs:0,25.7) {$\mu$};
+\end{axis}
+\end{tikzpicture}
+\end{document}
