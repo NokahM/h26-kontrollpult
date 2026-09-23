@@ -1,0 +1,19 @@
+%% ht-husky-t
+%% alt: T-test med 11 frihetsgrader: t = 1.73 ligger under den kritiske verdien 2.201, så H0 beholdes
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=-4.2, xmax=4.6, ymax=0.52649,
+  xtick={0,2.201}, xticklabels={{$0$},{$t_{0.025}=2.201$}}, xticklabel style={align=center}]
+\addplot[areal, domain=2.201:4.6] {tdens(11,0.38999)} \closedcycle;
+\addplot[domain=-4.2:4.6] {tdens(11,0.38999)};
+\draw[hjelp] (axis cs:0,0) -- (axis cs:0,0.38999);
+\draw[hjelp] (axis cs:2.201,0) -- (axis cs:2.201,0.04367);
+\draw[line width=0.9pt] (axis cs:1.73,0) -- (axis cs:1.73,0.28079);
+\node[font=\small, above] at (axis cs:1.73,0.28079) {$t=1.73$};
+\draw[acc, line width=0.4pt] (axis cs:3.5,0.1014) -- (axis cs:2.58459,0.01131);
+\node[font=\small, text=acc, above] at (axis cs:3.5,0.1014) {$0.025$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

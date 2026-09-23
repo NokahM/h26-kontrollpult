@@ -4,7 +4,7 @@
 \input{felles}
 \begin{document}
 \begin{tikzpicture}
-\begin{axis}[kurve, width=11.5cm, xmin=210.5, xmax=231, ymax=0.17287,
+\begin{axis}[kurve, width=11.5cm, xmin=210.5, xmax=231, ymax=0.17952,
   xtick={215,218,220,229.27}, xticklabels={{$215$\\[-1pt]{\footnotesize$z=-1.67$}},{$218$\\[-1pt]{\footnotesize$z=-0.67$}},{$220$},{$v=229.3$\\[-1pt]{\footnotesize$z=3.090$}}}, xticklabel style={align=center}]
 \addplot[areal, domain=210.5:215] {gauss(220,3)} \closedcycle;
 \addplot[areal2, domain=218:220] {gauss(220,3)} \closedcycle;
@@ -16,7 +16,8 @@
 \draw[hjelp] (axis cs:229.27,0) -- (axis cs:229.27,0.00112);
 \draw[acc, line width=0.4pt] (axis cs:214.08273,0.00855) -- (axis cs:214.08273,0.04827);
 \node[font=\small, text=acc, above] at (axis cs:214.08273,0.04827) {a) $0.048$};
-\node[font=\small, text=hi] at (axis cs:213.6,0.10904) {b) $0.25$};
+\draw[hi, line width=0.4pt] (axis cs:213.6,0.10904) -- (axis cs:219.05394,0.06327);
+\node[font=\small, text=hi, above] at (axis cs:213.6,0.10904) {b) $0.25$};
 \draw[acc, line width=0.4pt] (axis cs:229.77275,0.0003) -- (axis cs:229.77275,0.02992);
 \node[font=\small, text=acc, above] at (axis cs:229.77275,0.02992) {c) $0.001$};
 \draw[hi, line width=0.4pt] (axis cs:214.9,0.1) -- (axis cs:218.9,0.07);

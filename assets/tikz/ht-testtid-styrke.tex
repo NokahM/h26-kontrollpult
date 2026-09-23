@@ -1,0 +1,24 @@
+%% ht-testtid-styrke
+%% alt: Teststyrke for testtid: arealet under k = 33.42 når forventningen er 32 er 0.93
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=28.6, xmax=38.6, ymax=0.56013,
+  xtick={33.41832}, xticklabels={{$k=33.42$}}, xticklabel style={align=center}]
+\addplot[areal2, domain=28.6:33.41832] {gauss(35,0.96151)} \closedcycle;
+\addplot[areal, domain=28.6:33.41832] {gauss(32,0.96151)} \closedcycle;
+\addplot[mut, domain=28.6:38.6] {gauss(35,0.96151)};
+\addplot[domain=28.6:38.6] {gauss(32,0.96151)};
+\draw[hjelp] (axis cs:35,0) -- (axis cs:35,0.41491);
+\draw[hjelp] (axis cs:33.41832,0) -- (axis cs:33.41832,0.13979);
+\draw[hjelp] (axis cs:32,0) -- (axis cs:32,0.41491);
+\draw[hi, line width=0.4pt] (axis cs:34.37983,0.20746) -- (axis cs:33.12273,0.03084);
+\node[font=\small, text=hi, above] at (axis cs:34.37983,0.20746) {$\alpha$};
+\draw[acc, line width=0.4pt] (axis cs:29.88468,0.2282) -- (axis cs:31.35178,0.16528);
+\node[font=\small, text=acc, above] at (axis cs:29.88468,0.2282) {$\gamma(32)=0.93$};
+\node[font=\small, text=mut, above right, inner xsep=1pt] at (axis cs:35,0.42321) {$H_0:\ \mu_0=35$};
+\node[font=\small, above left, inner xsep=1pt] at (axis cs:32,0.42321) {$\mu=32$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

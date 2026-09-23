@@ -4,7 +4,7 @@
 \input{felles}
 \begin{document}
 \begin{tikzpicture}
-\begin{axis}[kurve, width=9cm, xmin=-3.6, xmax=3.6, ymax=0.51862,
+\begin{axis}[kurve, width=9cm, xmin=-3.6, xmax=3.6, ymax=0.53857,
   xtick={0,1.2}, xticklabels={{$0$},{$z$}}, xticklabel style={align=center}]
 \addplot[areal, domain=-3.6:1.2] {gauss(0,1)} \closedcycle;
 \addplot[areal2, domain=1.2:3.6] {gauss(0,1)} \closedcycle;
@@ -12,7 +12,8 @@
 \draw[hjelp] (axis cs:0,0) -- (axis cs:0,0.39894);
 \draw[hjelp] (axis cs:1.2,0) -- (axis cs:1.2,0.19419);
 \node[font=\small, text=acc] at (axis cs:-0.67424,0.12078) {$G(z)$};
-\node[font=\small, text=hi] at (axis cs:2.45,0.1117) {$1-G(z)$};
+\draw[hi, line width=0.4pt] (axis cs:2.45,0.1117) -- (axis cs:1.57512,0.05769);
+\node[font=\small, text=hi, above] at (axis cs:2.45,0.1117) {$1-G(z)$};
 \end{axis}
 \end{tikzpicture}
 \end{document}

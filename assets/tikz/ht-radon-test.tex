@@ -1,0 +1,23 @@
+%% ht-radon-test
+%% alt: Z-test for radon: gjennomsnittet 215.42 ligger under k = 223.74; p-verdien er 0.142
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=150, xmax=262, ymax=0.03731,
+  xtick={223.74353}, xticklabels={{$k=223.74$}}, xticklabel style={align=center}]
+\addplot[areal2, domain=215.42:262] {gauss(200,14.43376)} \closedcycle;
+\addplot[areal, domain=223.74353:262] {gauss(200,14.43376)} \closedcycle;
+\addplot[domain=150:262] {gauss(200,14.43376)};
+\draw[hjelp] (axis cs:200,0) -- (axis cs:200,0.02764);
+\draw[hjelp] (axis cs:223.74353,0) -- (axis cs:223.74353,0.00714);
+\draw[line width=0.9pt] (axis cs:215.42,0) -- (axis cs:215.42,0.0199);
+\node[font=\small, above] at (axis cs:215.42,0.0199) {$\bar x=215.42$};
+\draw[hi, line width=0.4pt] (axis cs:243.2291,0.01437) -- (axis cs:218.80312,0.00592);
+\node[font=\small, text=hi, above] at (axis cs:243.2291,0.01437) {$p=0.142$};
+\draw[acc, line width=0.4pt] (axis cs:243.2291,0.00719) -- (axis cs:228.29043,0.00202);
+\node[font=\small, text=acc, above] at (axis cs:243.2291,0.00719) {$\alpha=0.05$};
+\node[font=\small, above, inner xsep=1pt] at (axis cs:200,0.02819) {$H_0:\ \mu_0=200$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

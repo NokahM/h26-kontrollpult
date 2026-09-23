@@ -1,0 +1,24 @@
+%% ht-ved-styrke
+%% alt: Teststyrke for fuktprosent: arealet over k = 23.11 under kurven med forventning 25 er 0.84
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=14, xmax=31.5, ymax=0.28499,
+  xtick={23.10876}, xticklabels={{$k=23.11$}}, xticklabel style={align=center}]
+\addplot[areal2, domain=23.10876:31.5] {gauss(20,1.88982)} \closedcycle;
+\addplot[areal, domain=23.10876:31.5] {gauss(25,1.88982)} \closedcycle;
+\addplot[mut, domain=14:31.5] {gauss(20,1.88982)};
+\addplot[domain=14:31.5] {gauss(25,1.88982)};
+\draw[hjelp] (axis cs:20,0) -- (axis cs:20,0.2111);
+\draw[hjelp] (axis cs:23.10876,0) -- (axis cs:23.10876,0.12794);
+\draw[hjelp] (axis cs:25,0) -- (axis cs:25,0.2111);
+\draw[hi, line width=0.4pt] (axis cs:21.21894,0.10555) -- (axis cs:23.64046,0.01651);
+\node[font=\small, text=hi, above] at (axis cs:21.21894,0.10555) {$\alpha$};
+\draw[acc, line width=0.4pt] (axis cs:29.15761,0.11611) -- (axis cs:26.2738,0.0841);
+\node[font=\small, text=acc, above] at (axis cs:29.15761,0.11611) {$\gamma(25)=0.84$};
+\node[font=\small, text=mut, above left, inner xsep=1pt] at (axis cs:20,0.21532) {$H_0:\ \mu_0=20$};
+\node[font=\small, above right, inner xsep=1pt] at (axis cs:25,0.21532) {$\mu=25$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

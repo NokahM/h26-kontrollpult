@@ -1,0 +1,23 @@
+%% ht-resistans-test
+%% alt: Tosidig Z-test for resistans: gjennomsnittet 50.4 ligger godt innenfor grensene 48.25 og 51.75
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=46.5, xmax=53.5, ymax=0.60214,
+  xtick={48.24692,50,51.75308}, xticklabels={{$48.25$\\[-1pt]{\footnotesize$z=-1.96$}},{$\mu_0=50$},{$51.75$\\[-1pt]{\footnotesize$z=1.96$}}}, xticklabel style={align=center}]
+\addplot[areal, domain=46.5:48.24692] {gauss(50,0.89443)} \closedcycle;
+\addplot[areal, domain=51.75308:53.5] {gauss(50,0.89443)} \closedcycle;
+\addplot[domain=46.5:53.5] {gauss(50,0.89443)};
+\draw[hjelp] (axis cs:48.24692,0) -- (axis cs:48.24692,0.06534);
+\draw[hjelp] (axis cs:50,0) -- (axis cs:50,0.44603);
+\draw[hjelp] (axis cs:51.75308,0) -- (axis cs:51.75308,0.06534);
+\draw[line width=0.9pt] (axis cs:50.4,0) -- (axis cs:50.4,0.45711);
+\node[font=\small, above] at (axis cs:50.4,0.45711) {$\bar x=50.4$};
+\draw[acc, line width=0.4pt] (axis cs:47.2,0.11597) -- (axis cs:47.99583,0.01812);
+\node[font=\small, text=acc, above] at (axis cs:47.2,0.11597) {$0.025$};
+\draw[acc, line width=0.4pt] (axis cs:52.8,0.11597) -- (axis cs:52.00417,0.01812);
+\node[font=\small, text=acc, above] at (axis cs:52.8,0.11597) {$0.025$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

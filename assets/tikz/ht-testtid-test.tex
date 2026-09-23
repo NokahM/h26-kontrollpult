@@ -1,0 +1,20 @@
+%% ht-testtid-test
+%% alt: Venstresidig Z-test for testtid: forkastingsområdet under k = 33.42, og gjennomsnittet 33.1 ligger i det
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=30.8, xmax=38.8, ymax=0.56013,
+  xtick={33.41832}, xticklabels={{$k=33.42$}}, xticklabel style={align=center}]
+\addplot[areal, domain=30.8:33.41832] {gauss(35,0.96151)} \closedcycle;
+\addplot[domain=30.8:38.8] {gauss(35,0.96151)};
+\draw[hjelp] (axis cs:35,0) -- (axis cs:35,0.41491);
+\draw[hjelp] (axis cs:33.41832,0) -- (axis cs:33.41832,0.10724);
+\draw[line width=0.9pt] (axis cs:33.1,0) -- (axis cs:33.1,0.29874);
+\node[font=\small, above] at (axis cs:33.1,0.29874) {$\bar x=33.1$};
+\draw[acc, line width=0.4pt] (axis cs:32.12028,0.10788) -- (axis cs:33.2825,0.04208);
+\node[font=\small, text=acc, above] at (axis cs:32.12028,0.10788) {$\alpha=0.05$};
+\node[font=\small, above, inner xsep=1pt] at (axis cs:35,0.42321) {$H_0:\ \mu_0=35$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

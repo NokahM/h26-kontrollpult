@@ -1,0 +1,20 @@
+%% ht-hand-test
+%% alt: Venstresidig Z-test for håndtemperatur: gjennomsnittet 31.01 ligger langt under k = 32.68
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=30.5, xmax=35.4, ymax=1.07714,
+  xtick={32.6775}, xticklabels={{$k=32.68$}}, xticklabel style={align=center}]
+\addplot[areal, domain=30.5:32.6775] {gauss(33.5,0.5)} \closedcycle;
+\addplot[domain=30.5:35.4] {gauss(33.5,0.5)};
+\draw[hjelp] (axis cs:33.5,0) -- (axis cs:33.5,0.79788);
+\draw[hjelp] (axis cs:32.6775,0) -- (axis cs:32.6775,0.20622);
+\draw[line width=0.9pt] (axis cs:31.01,0) -- (axis cs:31.01,0.57448);
+\node[font=\small, above] at (axis cs:31.01,0.57448) {$\bar x=31.01$};
+\draw[acc, line width=0.4pt] (axis cs:32.0025,0.20745) -- (axis cs:32.51995,0.05843);
+\node[font=\small, text=acc, above] at (axis cs:32.0025,0.20745) {$\alpha=0.05$};
+\node[font=\small, above, inner xsep=1pt] at (axis cs:33.5,0.81384) {$H_0:\ \mu_0=33.5$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

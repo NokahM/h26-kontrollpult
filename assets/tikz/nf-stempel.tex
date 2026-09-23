@@ -4,7 +4,7 @@
 \input{felles}
 \begin{document}
 \begin{tikzpicture}
-\begin{axis}[kurve, width=10cm, xmin=9.89, xmax=10.11, ymax=17.2875,
+\begin{axis}[kurve, width=10cm, xmin=9.89, xmax=10.11, ymax=17.9524,
   xtick={9.95,10,10.05}, xticklabels={{$9.95$\\[-1pt]{\footnotesize$z=-1.67$}},{$10$},{$10.05$\\[-1pt]{\footnotesize$z=1.67$}}}, xticklabel style={align=center}]
 \addplot[areal, domain=9.95:10.05] {gauss(10,0.03)} \closedcycle;
 \addplot[domain=9.89:10.11] {gauss(10,0.03)};

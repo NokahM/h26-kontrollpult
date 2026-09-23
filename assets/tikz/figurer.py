@@ -4,7 +4,25 @@
     python assets/tikz/build.py          # bygger SVG og legger dem inn i sidene
 Rediger tallene her og kjør begge på nytt; .tex-filene skal ikke redigeres for hånd.
 """
-from normal import figure as nf
+from normal import figure as nf, Dist, fmt
+
+
+def navn(items, nu=None):
+    """Etiketter over kurvetoppene: [(mu, sigma, tekst, farge)].
+
+    Med to kurver forankres navnene utover (venstre kurve mot venstre, høyre mot høyre),
+    så de ikke kolliderer når toppene står tett."""
+    D = Dist(nu)
+    peak = max(D.pdf(mu, mu, s) for mu, s, _, _ in items)
+    mus = [mu for mu, _, _, _ in items]
+    out = ''
+    for mu, s, t, col in items:
+        anchor = 'above'
+        if len(items) > 1:
+            anchor = 'above left' if mu == min(mus) else 'above right'
+        out += r'\node[font=\small%s, %s, inner xsep=1pt] at (axis cs:%s,%s) {%s};' % (
+            ', text=' + col if col else '', anchor, fmt(mu), fmt(D.pdf(mu, mu, s) + 0.02 * peak), t) + '\n'
+    return out
 
 # ---- 05 Normalfordeling ---------------------------------------------------
 nf('nf-g-av-z', 'Standard normalkurve: G(z) er arealet til venstre for z, 1 minus G(z) arealet til høyre',
@@ -73,3 +91,109 @@ nf('nf-co2', 'N(930, 290): 1) over 1020 ppm er 0.378, 2) de øverste 6 prosent l
    0, 1860, [(930, 290, '')],
    [(930, 290, 1020, None, 'acc', '1) $0.378$', (1190, 0.25)), (930, 290, 1380.9, None, 'hi', '2) $0.06$')],
    [(930, None, None), (1020, '1020', '0.31'), (1380.9, 'x=1381', '1.555')])
+
+
+# ---- 08 Hypotesetesting -----------------------------------------------------
+# Regler for plassering: bare grensene står som tall under aksen; forventningene står
+# som navn over kurvetoppene. alpha og p står ute i halen, stablet, med ledelinje.
+def test(name, alt, mu0, se, k, xbar, side, lo, hi, xlab=r'\bar x', p=None, plab=None,
+         alab=r'$\alpha=0.05$', klab=None, width='10cm'):
+    d = 1 if side == '>' else -1
+    xl = k + d * 1.35 * se
+    rej = (mu0, se, k, None, 'acc', alab, (xl, 0.26)) if d > 0 else (mu0, se, None, k, 'acc', alab, (xl, 0.26))
+    areas = [rej]
+    if p is not None:   # p-verdien skraveres fra observert verdi og utover
+        pa = (mu0, se, xbar, None, 'hi', plab, (xl, 0.52)) if d > 0 else (mu0, se, None, xbar, 'hi', plab, (xl, 0.52))
+        inner = abs(xbar - mu0) < abs(k - mu0)          # det største arealet tegnes først
+        areas = [pa, rej] if inner else [rej, pa]
+    nf(name, alt, lo, hi, [(mu0, se, '')], areas,
+       [(mu0, None, None), (k, klab or 'k=%s' % fmt(round(k, 2)), None)],
+       obs=[(xbar, r'$%s=%s$' % (xlab, fmt(xbar)))],
+       extra=navn([(mu0, se, r'$H_0:\ \mu_0=%s$' % fmt(mu0), '')]), width=width)
+
+
+def styrke(name, alt, mu0, mu1, se, k, side, lo, hi, gam, width='10cm'):
+    d = 1 if side == '>' else -1
+    if d > 0:
+        areas = [(mu0, se, k, None, 'hi', r'$\alpha$', (k - 1.0 * se, 0.5)),
+                 (mu1, se, k, None, 'acc', r'$\gamma(%s)=%s$' % (fmt(mu1), gam), (mu1 + 2.2 * se, 0.55))]
+    else:
+        areas = [(mu0, se, None, k, 'hi', r'$\alpha$', (k + 1.0 * se, 0.5)),
+                 (mu1, se, None, k, 'acc', r'$\gamma(%s)=%s$' % (fmt(mu1), gam), (mu1 - 2.2 * se, 0.55))]
+    nf(name, alt, lo, hi, [(mu0, se, 'mut'), (mu1, se, '')], areas,
+       [(mu0, None, None), (k, 'k=%s' % fmt(round(k, 2)), None), (mu1, None, None)],
+       extra=navn([(mu0, se, r'$H_0:\ \mu_0=%s$' % fmt(mu0), 'mut'), (mu1, se, r'$\mu=%s$' % fmt(mu1), '')]),
+       width=width)
+
+
+nf('ht-styrke-prinsipp', 'Forkastingsområdet til høyre for k: under H0 er arealet alfa, under den sanne fordelingen er arealet teststyrken gamma, og resten beta',
+   -3.2, 5.8, [(0, 1, 'mut'), (2.6, 1, '')],
+   [(0, 1, 1.645, None, 'hi', r'$\alpha$', (0.55, 0.52)), (2.6, 1, 1.645, None, 'acc', r'$\gamma$', (3.2, 0.3))],
+   [(0, None, None), (1.645, 'k', None), (2.6, None, None)],
+   extra=navn([(0, 1, r'$H_0:\ \mu=\mu_0$', 'mut'), (2.6, 1, r'sann: $\mu=\mu_1$', '')])
+   + r'\node[font=\small] at (axis cs:1.22,0.045) {$\beta$};' '\n', width='10.5cm')
+
+se = 5 / 7 ** 0.5; k = 20 + 1.645 * se
+test('ht-ved-test', 'Z-test for fuktprosent: forkastingsområdet over k = 23.11, og gjennomsnittet 23.7 ligger i det',
+     20, se, k, 23.7, '>', 14, 27.5)
+styrke('ht-ved-styrke', 'Teststyrke for fuktprosent: arealet over k = 23.11 under kurven med forventning 25 er 0.84',
+       20, 25, se, k, '>', 14, 31.5, '0.84')
+
+se = 4.3 / 20 ** 0.5; k = 35 - 1.645 * se
+test('ht-testtid-test', 'Venstresidig Z-test for testtid: forkastingsområdet under k = 33.42, og gjennomsnittet 33.1 ligger i det',
+     35, se, k, 33.1, '<', 30.8, 38.8)
+styrke('ht-testtid-styrke', 'Teststyrke for testtid: arealet under k = 33.42 når forventningen er 32 er 0.93',
+       35, 32, se, k, '<', 28.6, 38.6, '0.93')
+
+se = 20 / 20 ** 0.5; k = 100 + 1.645 * se
+test('ht-hotell-test', 'Z-test for hotellpris: gjennomsnittet 120 ligger langt inne i forkastingsområdet over k = 107.36',
+     100, se, k, 120, '>', 84, 123)
+styrke('ht-hotell-styrke', 'Teststyrke for hotellpris: arealet over k = 107.36 når forventningen er 110 er 0.72',
+       100, 110, se, k, '>', 84, 126, '0.72')
+
+test('ht-kjottdeig-test', 'Z-test for fettinnhold: p-verdien 0.075 er arealet over 15.44, større enn alfa = 0.05 over k = 15.645',
+     14, 1, 14 + 1.645, 15.44, '>', 10.4, 18.2, p=0.075, plab=r'$p=0.075$', klab='k=15.645')
+
+se = 0.5; k = 33.5 - 1.645 * se
+test('ht-hand-test', 'Venstresidig Z-test for håndtemperatur: gjennomsnittet 31.01 ligger langt under k = 32.68',
+     33.5, se, k, 31.01, '<', 30.5, 35.4)
+styrke('ht-hand-styrke', 'Teststyrke for håndtemperatur: arealet under k = 32.68 når forventningen er 32 er 0.91',
+       33.5, 32, se, k, '<', 30.1, 35.4, '0.91')
+
+nf('ht-husky-t', 'T-test med 11 frihetsgrader: t = 1.73 ligger under den kritiske verdien 2.201, så H0 beholdes',
+   -4.2, 4.6, [(0, 1, '')], [(0, 1, 2.201, None, 'acc', r'$0.025$', (3.5, 0.26))],
+   [(0, '0', None), (2.201, 't_{0.025}=2.201', None)], obs=[(1.73, '$t=1.73$')], nu=11)
+nf('ht-endret-t', 'Tosidig T-test med 8 frihetsgrader: t = -1.25 ligger godt innenfor grensene pluss minus 3.355',
+   -5, 5, [(0, 1, '')],
+   [(0, 1, None, -3.355, 'acc', r'$0.005$', (-4.2, 0.22)), (0, 1, 3.355, None, 'acc', r'$0.005$', (4.2, 0.22))],
+   [(-3.355, '-3.355', None), (0, '0', None), (3.355, '3.355', None)], obs=[(-1.25, '$t=-1.25$')], nu=8)
+
+se = (0.6 * 0.4 / 100) ** 0.5; k = 0.6 + 1.645 * se
+test('ht-medisin-test', 'Test for andel: forkastingsområdet over k = 0.681 har areal 0.05, p-verdien over 0.70 er 0.021',
+     0.6, se, k, 0.70, '>', 0.43, 0.80, xlab=r'\hat p', p=0.021, plab=r'$p=0.021$', klab='k=0.681')
+
+nf('ht-mynt', 'Tosidig test med 100 000 kast: H0 beholdes mellom 49 690 og 50 310; under p = 0.496 er arealet der 0.28',
+   49060, 50560, [(50000, 158.1, 'mut'), (49600, 158.0, '')],
+   [(49600, 158.0, 49690, 50310, 'acc', r'$0.28$', (49860, 0.3))],
+   [(49600, None, None), (49690, '49\\,690', None), (50000, None, None), (50310, '50\\,310', None)],
+   extra=navn([(50000, 158.1, r'$H_0:\ p=0.5$', 'mut'), (49600, 158.0, r'$p=0.496$', '')]),
+   width='11cm')
+
+se = 2 / 5 ** 0.5
+nf('ht-resistans-test', 'Tosidig Z-test for resistans: gjennomsnittet 50.4 ligger godt innenfor grensene 48.25 og 51.75',
+   46.5, 53.5, [(50, se, '')],
+   [(50, se, None, 50 - 1.96 * se, 'acc', r'$0.025$', (47.2, 0.26)), (50, se, 50 + 1.96 * se, None, 'acc', r'$0.025$', (52.8, 0.26))],
+   [(50 - 1.96 * se, '48.25', '-1.96'), (50, r'\mu_0=50', None), (50 + 1.96 * se, '51.75', '1.96')],
+   obs=[(50.4, r'$\bar x=50.4$')])
+
+# ---- Quiz 4 ---------------------------------------------------------------
+se = 50 / 12 ** 0.5; k = 200 + 1.645 * se
+test('ht-radon-test', 'Z-test for radon: gjennomsnittet 215.42 ligger under k = 223.74; p-verdien er 0.142',
+     200, se, k, 215.42, '>', 150, 262, p=0.142, plab=r'$p=0.142$')
+styrke('ht-radon-styrke', 'Teststyrke for radon: arealet over k = 223.74 når forventningen er 226 er 0.564',
+       200, 226, se, k, '>', 150, 276, '0.564')
+se = (0.43 * 0.57 / 500) ** 0.5; k = 0.43 - 1.645 * se
+test('ht-fart-test', 'Venstresidig test for andel: p-verdien 0.087 er arealet under 0.40, større enn alfa = 0.05',
+     0.43, se, k, 0.40, '<', 0.335, 0.51, xlab=r'\hat p', p=0.087, plab=r'$p=0.087$', klab='k=0.394')
+
+

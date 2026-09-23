@@ -1,0 +1,23 @@
+%% ht-medisin-test
+%% alt: Test for andel: forkastingsområdet over k = 0.681 har areal 0.05, p-verdien over 0.70 er 0.021
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=0.43, xmax=0.8, ymax=10.99356,
+  xtick={0.68059}, xticklabels={{$k=0.681$}}, xticklabel style={align=center}]
+\addplot[areal, domain=0.68059:0.8] {gauss(0.6,0.04899)} \closedcycle;
+\addplot[areal2, domain=0.7:0.8] {gauss(0.6,0.04899)} \closedcycle;
+\addplot[domain=0.43:0.8] {gauss(0.6,0.04899)};
+\draw[hjelp] (axis cs:0.6,0) -- (axis cs:0.6,8.14338);
+\draw[hjelp] (axis cs:0.68059,0) -- (axis cs:0.68059,2.10474);
+\draw[line width=0.9pt] (axis cs:0.7,0) -- (axis cs:0.7,5.86323);
+\node[font=\small, above] at (axis cs:0.7,5.86323) {$\hat p=0.7$};
+\draw[acc, line width=0.4pt] (axis cs:0.74672,2.11728) -- (axis cs:0.68858,0.79416);
+\node[font=\small, text=acc, above] at (axis cs:0.74672,2.11728) {$\alpha=0.05$};
+\draw[hi, line width=0.4pt] (axis cs:0.74672,4.23456) -- (axis cs:0.71339,0.27954);
+\node[font=\small, text=hi, above] at (axis cs:0.74672,4.23456) {$p=0.021$};
+\node[font=\small, above, inner xsep=1pt] at (axis cs:0.6,8.30624) {$H_0:\ \mu_0=0.6$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

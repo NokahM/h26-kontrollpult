@@ -1,0 +1,24 @@
+%% ht-hotell-styrke
+%% alt: Teststyrke for hotellpris: arealet over k = 107.36 når forventningen er 110 er 0.72
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=84, xmax=126, ymax=0.12043,
+  xtick={107.35666}, xticklabels={{$k=107.36$}}, xticklabel style={align=center}]
+\addplot[areal2, domain=107.35666:126] {gauss(100,4.47214)} \closedcycle;
+\addplot[areal, domain=107.35666:126] {gauss(110,4.47214)} \closedcycle;
+\addplot[mut, domain=84:126] {gauss(100,4.47214)};
+\addplot[domain=84:126] {gauss(110,4.47214)};
+\draw[hjelp] (axis cs:100,0) -- (axis cs:100,0.08921);
+\draw[hjelp] (axis cs:107.35666,0) -- (axis cs:107.35666,0.07491);
+\draw[hjelp] (axis cs:110,0) -- (axis cs:110,0.08921);
+\draw[hi, line width=0.4pt] (axis cs:102.88453,0.0446) -- (axis cs:108.32536,0.00789);
+\node[font=\small, text=hi, above] at (axis cs:102.88453,0.0446) {$\alpha$};
+\draw[acc, line width=0.4pt] (axis cs:119.8387,0.04906) -- (axis cs:113.01519,0.03554);
+\node[font=\small, text=acc, above] at (axis cs:119.8387,0.04906) {$\gamma(110)=0.72$};
+\node[font=\small, text=mut, above left, inner xsep=1pt] at (axis cs:100,0.09099) {$H_0:\ \mu_0=100$};
+\node[font=\small, above right, inner xsep=1pt] at (axis cs:110,0.09099) {$\mu=110$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

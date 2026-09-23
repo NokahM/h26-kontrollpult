@@ -1,0 +1,24 @@
+%% ht-radon-styrke
+%% alt: Teststyrke for radon: arealet over k = 223.74 når forventningen er 226 er 0.564
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=150, xmax=276, ymax=0.03731,
+  xtick={223.74353}, xticklabels={{$k=223.74$}}, xticklabel style={align=center}]
+\addplot[areal2, domain=223.74353:276] {gauss(200,14.43376)} \closedcycle;
+\addplot[areal, domain=223.74353:276] {gauss(226,14.43376)} \closedcycle;
+\addplot[mut, domain=150:276] {gauss(200,14.43376)};
+\addplot[domain=150:276] {gauss(226,14.43376)};
+\draw[hjelp] (axis cs:200,0) -- (axis cs:200,0.02764);
+\draw[hjelp] (axis cs:223.74353,0) -- (axis cs:223.74353,0.0273);
+\draw[hjelp] (axis cs:226,0) -- (axis cs:226,0.02764);
+\draw[hi, line width=0.4pt] (axis cs:209.30977,0.01382) -- (axis cs:230.29508,0.00153);
+\node[font=\small, text=hi, above] at (axis cs:209.30977,0.01382) {$\alpha$};
+\draw[acc, line width=0.4pt] (axis cs:257.75426,0.0152) -- (axis cs:235.72938,0.01101);
+\node[font=\small, text=acc, above] at (axis cs:257.75426,0.0152) {$\gamma(226)=0.564$};
+\node[font=\small, text=mut, above left, inner xsep=1pt] at (axis cs:200,0.02819) {$H_0:\ \mu_0=200$};
+\node[font=\small, above right, inner xsep=1pt] at (axis cs:226,0.02819) {$\mu=226$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,20 @@
+%% ht-hotell-test
+%% alt: Z-test for hotellpris: gjennomsnittet 120 ligger langt inne i forkastingsområdet over k = 107.36
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=84, xmax=123, ymax=0.12043,
+  xtick={107.35666}, xticklabels={{$k=107.36$}}, xticklabel style={align=center}]
+\addplot[areal, domain=107.35666:123] {gauss(100,4.47214)} \closedcycle;
+\addplot[domain=84:123] {gauss(100,4.47214)};
+\draw[hjelp] (axis cs:100,0) -- (axis cs:100,0.08921);
+\draw[hjelp] (axis cs:107.35666,0) -- (axis cs:107.35666,0.02306);
+\draw[line width=0.9pt] (axis cs:120,0) -- (axis cs:120,0.06423);
+\node[font=\small, above] at (axis cs:120,0.06423) {$\bar x=120$};
+\draw[acc, line width=0.4pt] (axis cs:113.39405,0.02319) -- (axis cs:108.76565,0.00653);
+\node[font=\small, text=acc, above] at (axis cs:113.39405,0.02319) {$\alpha=0.05$};
+\node[font=\small, above, inner xsep=1pt] at (axis cs:100,0.09099) {$H_0:\ \mu_0=100$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

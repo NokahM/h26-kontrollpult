@@ -1,0 +1,23 @@
+%% ht-fart-test
+%% alt: Venstresidig test for andel: p-verdien 0.087 er arealet under 0.40, større enn alfa = 0.05
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=0.335, xmax=0.51, ymax=24.32524,
+  xtick={0.39358}, xticklabels={{$k=0.394$}}, xticklabel style={align=center}]
+\addplot[areal2, domain=0.335:0.4] {gauss(0.43,0.02214)} \closedcycle;
+\addplot[areal, domain=0.335:0.39358] {gauss(0.43,0.02214)} \closedcycle;
+\addplot[domain=0.335:0.51] {gauss(0.43,0.02214)};
+\draw[hjelp] (axis cs:0.43,0) -- (axis cs:0.43,18.0187);
+\draw[hjelp] (axis cs:0.39358,0) -- (axis cs:0.39358,4.65712);
+\draw[line width=0.9pt] (axis cs:0.4,0) -- (axis cs:0.4,12.97346);
+\node[font=\small, above] at (axis cs:0.4,12.97346) {$\hat p=0.4$};
+\draw[hi, line width=0.4pt] (axis cs:0.36369,9.36972) -- (axis cs:0.3866,1.31973);
+\node[font=\small, text=hi, above] at (axis cs:0.36369,9.36972) {$p=0.087$};
+\draw[acc, line width=0.4pt] (axis cs:0.36369,4.68486) -- (axis cs:0.3866,1.31973);
+\node[font=\small, text=acc, above] at (axis cs:0.36369,4.68486) {$\alpha=0.05$};
+\node[font=\small, above, inner xsep=1pt] at (axis cs:0.43,18.37907) {$H_0:\ \mu_0=0.43$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

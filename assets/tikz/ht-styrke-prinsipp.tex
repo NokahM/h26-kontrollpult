@@ -1,0 +1,24 @@
+%% ht-styrke-prinsipp
+%% alt: Forkastingsområdet til høyre for k: under H0 er arealet alfa, under den sanne fordelingen er arealet teststyrken gamma, og resten beta
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10.5cm, xmin=-3.2, xmax=5.8, ymax=0.53857,
+  xtick={1.645}, xticklabels={{$k$}}, xticklabel style={align=center}]
+\addplot[areal2, domain=1.645:5.8] {gauss(0,1)} \closedcycle;
+\addplot[areal, domain=1.645:5.8] {gauss(2.6,1)} \closedcycle;
+\addplot[mut, domain=-3.2:5.8] {gauss(0,1)};
+\addplot[domain=-3.2:5.8] {gauss(2.6,1)};
+\draw[hjelp] (axis cs:0,0) -- (axis cs:0,0.39894);
+\draw[hjelp] (axis cs:1.645,0) -- (axis cs:1.645,0.25285);
+\draw[hjelp] (axis cs:2.6,0) -- (axis cs:2.6,0.39894);
+\draw[hi, line width=0.4pt] (axis cs:0.55,0.20745) -- (axis cs:1.92168,0.03148);
+\node[font=\small, text=hi, above] at (axis cs:0.55,0.20745) {$\alpha$};
+\node[font=\small, text=acc] at (axis cs:3.2,0.11968) {$\gamma$};
+\node[font=\small, text=mut, above left, inner xsep=1pt] at (axis cs:0,0.40692) {$H_0:\ \mu=\mu_0$};
+\node[font=\small, above right, inner xsep=1pt] at (axis cs:2.6,0.40692) {sann: $\mu=\mu_1$};
+\node[font=\small] at (axis cs:1.22,0.045) {$\beta$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

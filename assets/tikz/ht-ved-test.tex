@@ -1,0 +1,20 @@
+%% ht-ved-test
+%% alt: Z-test for fuktprosent: forkastingsområdet over k = 23.11, og gjennomsnittet 23.7 ligger i det
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=14, xmax=27.5, ymax=0.28499,
+  xtick={23.10876}, xticklabels={{$k=23.11$}}, xticklabel style={align=center}]
+\addplot[areal, domain=23.10876:27.5] {gauss(20,1.88982)} \closedcycle;
+\addplot[domain=14:27.5] {gauss(20,1.88982)};
+\draw[hjelp] (axis cs:20,0) -- (axis cs:20,0.2111);
+\draw[hjelp] (axis cs:23.10876,0) -- (axis cs:23.10876,0.05456);
+\draw[line width=0.9pt] (axis cs:23.7,0) -- (axis cs:23.7,0.15199);
+\node[font=\small, above] at (axis cs:23.7,0.15199) {$\bar x=23.7$};
+\draw[acc, line width=0.4pt] (axis cs:25.66002,0.05489) -- (axis cs:24.23121,0.00861);
+\node[font=\small, text=acc, above] at (axis cs:25.66002,0.05489) {$\alpha=0.05$};
+\node[font=\small, above, inner xsep=1pt] at (axis cs:20,0.21532) {$H_0:\ \mu_0=20$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,22 @@
+%% ht-mynt
+%% alt: Tosidig test med 100 000 kast: H0 beholdes mellom 49 690 og 50 310; under p = 0.496 er arealet der 0.28
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=11cm, xmin=49060, xmax=50560, ymax=0.00341,
+  xtick={49690,50310}, xticklabels={{$49\,690$},{$50\,310$}}, xticklabel style={align=center}]
+\addplot[areal, domain=49690:50310] {gauss(49600,158)} \closedcycle;
+\addplot[mut, domain=49060:50560] {gauss(50000,158.1)};
+\addplot[domain=49060:50560] {gauss(49600,158)};
+\draw[hjelp] (axis cs:49600,0) -- (axis cs:49600,0.00252);
+\draw[hjelp] (axis cs:49690,0) -- (axis cs:49690,0.00215);
+\draw[hjelp] (axis cs:50000,0) -- (axis cs:50000,0.00252);
+\draw[hjelp] (axis cs:50310,0) -- (axis cs:50310,0.00037);
+\draw[acc, line width=0.4pt] (axis cs:49860,0.00076) -- (axis cs:49767.13329,0.00072);
+\node[font=\small, text=acc, above] at (axis cs:49860,0.00076) {$0.28$};
+\node[font=\small, text=mut, above right, inner xsep=1pt] at (axis cs:50000,0.00257) {$H_0:\ p=0.5$};
+\node[font=\small, above left, inner xsep=1pt] at (axis cs:49600,0.00258) {$p=0.496$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

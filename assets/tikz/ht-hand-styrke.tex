@@ -1,0 +1,24 @@
+%% ht-hand-styrke
+%% alt: Teststyrke for håndtemperatur: arealet under k = 32.68 når forventningen er 32 er 0.91
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=30.1, xmax=35.4, ymax=1.07714,
+  xtick={32.6775}, xticklabels={{$k=32.68$}}, xticklabel style={align=center}]
+\addplot[areal2, domain=30.1:32.6775] {gauss(33.5,0.5)} \closedcycle;
+\addplot[areal, domain=30.1:32.6775] {gauss(32,0.5)} \closedcycle;
+\addplot[mut, domain=30.1:35.4] {gauss(33.5,0.5)};
+\addplot[domain=30.1:35.4] {gauss(32,0.5)};
+\draw[hjelp] (axis cs:33.5,0) -- (axis cs:33.5,0.79788);
+\draw[hjelp] (axis cs:32.6775,0) -- (axis cs:32.6775,0.3186);
+\draw[hjelp] (axis cs:32,0) -- (axis cs:32,0.79788);
+\draw[hi, line width=0.4pt] (axis cs:33.1775,0.39894) -- (axis cs:32.52566,0.05975);
+\node[font=\small, text=hi, above] at (axis cs:33.1775,0.39894) {$\alpha$};
+\draw[acc, line width=0.4pt] (axis cs:30.9,0.43884) -- (axis cs:31.66281,0.3178);
+\node[font=\small, text=acc, above] at (axis cs:30.9,0.43884) {$\gamma(32)=0.91$};
+\node[font=\small, text=mut, above right, inner xsep=1pt] at (axis cs:33.5,0.81384) {$H_0:\ \mu_0=33.5$};
+\node[font=\small, above left, inner xsep=1pt] at (axis cs:32,0.81384) {$\mu=32$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

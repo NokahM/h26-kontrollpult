@@ -1,0 +1,23 @@
+%% ht-kjottdeig-test
+%% alt: Z-test for fettinnhold: p-verdien 0.075 er arealet over 15.44, større enn alfa = 0.05 over k = 15.645
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[kurve, width=10cm, xmin=10.4, xmax=18.2, ymax=0.53857,
+  xtick={15.645}, xticklabels={{$k=15.645$}}, xticklabel style={align=center}]
+\addplot[areal2, domain=15.44:18.2] {gauss(14,1)} \closedcycle;
+\addplot[areal, domain=15.645:18.2] {gauss(14,1)} \closedcycle;
+\addplot[domain=10.4:18.2] {gauss(14,1)};
+\draw[hjelp] (axis cs:14,0) -- (axis cs:14,0.39894);
+\draw[hjelp] (axis cs:15.645,0) -- (axis cs:15.645,0.10311);
+\draw[line width=0.9pt] (axis cs:15.44,0) -- (axis cs:15.44,0.28724);
+\node[font=\small, above] at (axis cs:15.44,0.28724) {$\bar x=15.44$};
+\draw[hi, line width=0.4pt] (axis cs:16.995,0.20745) -- (axis cs:15.95998,0.02922);
+\node[font=\small, text=hi, above] at (axis cs:16.995,0.20745) {$p=0.075$};
+\draw[acc, line width=0.4pt] (axis cs:16.995,0.10372) -- (axis cs:15.95998,0.02922);
+\node[font=\small, text=acc, above] at (axis cs:16.995,0.10372) {$\alpha=0.05$};
+\node[font=\small, above, inner xsep=1pt] at (axis cs:14,0.40692) {$H_0:\ \mu_0=14$};
+\end{axis}
+\end{tikzpicture}
+\end{document}

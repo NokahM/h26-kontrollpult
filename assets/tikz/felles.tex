@@ -12,6 +12,9 @@
 % Normaltetthet med forventning #1 og standardavvik #2
 \pgfmathdeclarefunction{gauss}{2}{%
   \pgfmathparse{exp(-((x-#1)^2)/(2*#2^2))/(#2*sqrt(2*pi))}}
+% t-tetthet med #1 frihetsgrader; #2 er normeringskonstanten (regnet ut i normal.py)
+\pgfmathdeclarefunction{tdens}{2}{%
+  \pgfmathparse{#2*(1+x^2/#1)^(-(#1+1)/2)}}
 % Eksponentialtetthet med rate #1
 \pgfmathdeclarefunction{expdens}{1}{\pgfmathparse{#1*exp(-#1*x)}}
 
@@ -30,7 +33,7 @@
   kurve/.style={
     width=11cm, height=4.6cm, axis x line*=bottom, hide y axis,
     ymin=0, enlarge x limits=false, clip=false, samples=120,
-    xtick style={draw=none}, tick label style={font=\small},
+    xtick style={draw=none}, tick label style={font=\small}, scaled x ticks=false,
     every axis plot/.append style={line width=0.7pt}},
   areal/.style={draw=none, fill=acc, fill opacity=0.3},
   areal2/.style={draw=none, fill=hi, fill opacity=0.3},
