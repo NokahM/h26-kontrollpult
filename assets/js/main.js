@@ -72,7 +72,7 @@
       formulas: 'subjects/statistikk/formler.html',
       name: 'Statistikk',
       desc: 'Eksamensoppgaver fra 13 tidligere sett, sortert på tema, med løsningsforslag.',
-      scope: '88 oppgaver fra 13 sett',
+      scope: '88 oppgaver og 4 quizer',
       href: 'subjects/statistikk/index.html',
       groups: [
         { label: 'Start her', items: [
@@ -90,6 +90,12 @@
           { n: '7', title: 'Konfidensintervall', meta: '12', tasks: 12, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/07-konfidensintervall.html' },
           { n: '8', title: 'Hypotesetesting', meta: '13', tasks: 13, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/08-hypotesetesting.html' },
           { n: '9', title: 'Regresjon og korrelasjon', meta: '5', tasks: 5, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/09-regresjon.html' }
+        ] },
+        { label: 'Quiz', items: [
+          { n: 'Q1', title: 'Sannsynlighet', meta: '4', tasks: 4, track: 'tasks', part: 'Quiz med løsning', href: 'subjects/statistikk/quiz/quiz1-sannsynlighet.html' },
+          { n: 'Q2', title: 'Diskrete fordelinger', meta: '5', tasks: 5, track: 'tasks', part: 'Quiz med løsning', href: 'subjects/statistikk/quiz/quiz2-diskrete-fordelinger.html' },
+          { n: 'Q3', title: 'Normalfordeling og SGT', meta: '3', tasks: 3, track: 'tasks', part: 'Quiz med løsning', href: 'subjects/statistikk/quiz/quiz3-normalfordeling-sgt.html' },
+          { n: 'Q4', title: 'Hypotesetest og regresjon', meta: '4', tasks: 4, track: 'tasks', part: 'Quiz med løsning', href: 'subjects/statistikk/quiz/quiz4-hypotesetest-regresjon.html' }
         ] }
       ]
     },

@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quiz 1: Sannsynlighet — Statistikk · H26</title>
+  <meta name="description" content="Oppgavesett 2 i PB2030: utfallsrom, hendelser, betinget sannsynlighet, uavhengighet, hendelsestre og kombinatorikk.">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=32">
+</head>
+<body class="theme-statistikk" data-updated="2026-09-23">
+  <div class="app-shell">
+
+    <aside class="sidebar"></aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">Statistikk</a>
+        <div class="topbar__crumb">Quiz 1: Sannsynlighet</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow">PB2030 quiz med løsning</div>
+          <h1>Quiz 1: Sannsynlighet</h1>
+          <span class="page-header__en">sample space · conditional probability · independence · combinatorics</span>
+          <p class="page-header__desc">Oppgavesett 2 fra emnet: utfallsrom og hendelser for tre myntkast, betinget sannsynlighet og uavhengighet, hendelsestre og trekking uten tilbakelegging.</p>
+          <span class="page-header__status" data-status="active"><i></i>4 oppgaver · kapittel 3</span>
+        </header>
+
+        <section class="section">
+          <div class="section__label">Om oppgavesettet</div>
+          <article class="prose">
+            <p>Originalen er <a href="../../../assets/resources/statistikk/quiz1-sannsynlighet.pdf" target="_blank" rel="noopener">Oppgavesett 2 (PDF)</a> (virker bare lokalt). Settet hører til kapittel 3 i læreboka. Samme ferdigheter øves med eksamensoppgaver på <a href="../oppgaver/01-sannsynlighet.html">Sannsynlighet og hendelsestre</a> og <a href="../oppgaver/02-kombinatorikk.html">Kombinatorikk og hypergeometrisk</a>.</p>
+            <p>Oppgave 1 er delt i to kort her fordi den har ti punkter.</p>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section__label">Oppgaver</div>
+          <div class="tasknav">
+            <a href="#o1a">1.1–1.7 · utfallsrom og hendelser</a>
+            <a href="#o1b">1.8–1.10 · betinget og uavhengig</a>
+            <a href="#o2">2 · matematikk og høyere utdanning</a>
+            <a href="#o3">3 · sjokoladefabrikken</a>
+          </div>
+
+          <article class="task" id="o1a">
+            <header class="task__head">
+              <span class="task__src">Quiz 1 O1.1–7</span>
+              <span class="task__title">Tre myntkast: utfallsrom og hendelser</span>
+              <span class="task__tags"><span class="tag">utfallsrom</span><span class="tag">mengdeoperasjoner</span><span class="tag">addisjonsregelen</span></span>
+            </header>
+            <div class="task__q">
+              <p>I et myntkast er \(P(K)=P(M)=\tfrac12\) for kron (K) og mynt (M). Kaster vi mynten tre ganger, er det rimelig å anta at kastene er uavhengige.</p>
+              <ol>
+                <li>Hvor mange utfall består utfallsrommet for tre myntkast av?</li>
+                <li>Skriv opp alle utfallene i utfallsrommet.</li>
+                <li>Anta at kastene er uavhengige, og finn sannsynlighetene for alle utfallene med produktregelen for uavhengige hendelser.</li>
+                <li>Bruk den uniforme modellen, der alle utfallene er like sannsynlige, til å finne sannsynlighetene. Får du det samme som i punkt 3?</li>
+                <li>La A = nøyaktig 2 mynt i tre kast, og B = maksimum én kron i tre kast. Hvilke utfall består disse hendelsene av: a) \(A\) b) \(\bar A\) c) \(B\) d) \(\bar B\) e) \(A\cup B\) f) \(A\cap B\) g) \(\overline{A\cup B}\) h) \(\overline{A\cap B}\) i) \(A\cup\bar B\) j) \(\bar A\cup B\) k) \(\bar A\cup\bar B\) l) \(A\cap\bar B\) m) \(\bar A\cap B\) n) \(\bar A\cap\bar B\)</li>
+                <li>Beregn sannsynlighetene for alle 14 hendelsene i punkt 5.</li>
+                <li>Sjekk om addisjonsregelen \(P(A\cup B)=P(A)+P(B)-P(A\cap B)\) stemmer for A og B.</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>1. Antall utfall</h4>
+                <p>Hvert kast har 2 utfall, og kastene gjøres etter hverandre, så multiplikasjonsprinsippet gir</p>
+                <p>\[ 2\cdot 2\cdot 2=2^3=8 \]</p>
+                <h4>2. Utfallsrommet</h4>
+                <p>\[ \Omega=\{KKK,\ KKM,\ KMK,\ MKK,\ KMM,\ MKM,\ MMK,\ MMM\} \]</p>
+                <h4>3. Produktregelen</h4>
+                <p>Kastene er uavhengige, så for eksempel</p>
+                <p>\[ P(KMK)=P(K)\cdot P(M)\cdot P(K)=\tfrac12\cdot\tfrac12\cdot\tfrac12=\tfrac18 \]</p>
+                <p>Alle åtte utfall består av tre faktorer lik \(\tfrac12\), så hvert utfall får sannsynlighet \(\tfrac18\).</p>
+                <h4>4. Uniform modell</h4>
+                <p>\[ P(\text{utfall})=\frac{1}{|\Omega|}=\frac18 \]</p>
+                <p>Samme svar. Den uniforme modellen er gyldig her nettopp fordi mynten er rettferdig og kastene uavhengige.</p>
+                <h4>5. Hendelsene</h4>
+                <p>\(A\) er utfallene med nøyaktig to M. \(B\) er utfallene med 0 eller 1 K, altså tre M eller to M. Legg merke til at \(A\subset B\): alle utfall med nøyaktig to mynt har maksimum én kron. Det forenkler resten mye.</p>
+                <div class="dtable-wrap"><table class="dtable">
+                  <thead><tr><th>Hendelse</th><th>Utfall</th><th>Forenkling</th><th class="num">Antall</th></tr></thead>
+                  <tbody>
+                    <tr><td>a) \(A\)</td><td>KMM, MKM, MMK</td><td></td><td class="num">3</td></tr>
+                    <tr><td>b) \(\bar A\)</td><td>KKK, KKM, KMK, MKK, MMM</td><td></td><td class="num">5</td></tr>
+                    <tr><td>c) \(B\)</td><td>KMM, MKM, MMK, MMM</td><td></td><td class="num">4</td></tr>
+                    <tr><td>d) \(\bar B\)</td><td>KKK, KKM, KMK, MKK</td><td></td><td class="num">4</td></tr>
+                    <tr><td>e) \(A\cup B\)</td><td>KMM, MKM, MMK, MMM</td><td>\(=B\)</td><td class="num">4</td></tr>
+                    <tr><td>f) \(A\cap B\)</td><td>KMM, MKM, MMK</td><td>\(=A\)</td><td class="num">3</td></tr>
+                    <tr><td>g) \(\overline{A\cup B}\)</td><td>KKK, KKM, KMK, MKK</td><td>\(=\bar B\)</td><td class="num">4</td></tr>
+                    <tr><td>h) \(\overline{A\cap B}\)</td><td>KKK, KKM, KMK, MKK, MMM</td><td>\(=\bar A\)</td><td class="num">5</td></tr>
+                    <tr><td>i) \(A\cup\bar B\)</td><td>alle unntatt MMM</td><td>\(=\overline{\{MMM\}}\)</td><td class="num">7</td></tr>
+                    <tr><td>j) \(\bar A\cup B\)</td><td>alle åtte</td><td>\(=\Omega\)</td><td class="num">8</td></tr>
+                    <tr><td>k) \(\bar A\cup\bar B\)</td><td>KKK, KKM, KMK, MKK, MMM</td><td>\(=\bar A\)</td><td class="num">5</td></tr>
+                    <tr><td>l) \(A\cap\bar B\)</td><td>ingen</td><td>\(=\emptyset\)</td><td class="num">0</td></tr>
+                    <tr><td>m) \(\bar A\cap B\)</td><td>MMM</td><td></td><td class="num">1</td></tr>
+                    <tr><td>n) \(\bar A\cap\bar B\)</td><td>KKK, KKM, KMK, MKK</td><td>\(=\bar B\)</td><td class="num">4</td></tr>
+                  </tbody>
+                </table></div>
+                <p>Du kan kontrollere g), h), k) og n) med De Morgans lover: \(\overline{A\cup B}=\bar A\cap\bar B\) og \(\overline{A\cap B}=\bar A\cup\bar B\). Derfor er g) = n) og h) = k).</p>
+                <h4>6. Sannsynlighetene</h4>
+                <p>Med uniform modell er \(P(E)=\dfrac{\text{antall utfall i }E}{8}\), altså antallet i tabellen delt på 8:</p>
+                <div class="dtable-wrap"><table class="dtable">
+                  <thead><tr><th>a</th><th>b</th><th>c</th><th>d</th><th>e</th><th>f</th><th>g</th><th>h</th><th>i</th><th>j</th><th>k</th><th>l</th><th>m</th><th>n</th></tr></thead>
+                  <tbody><tr><td>3/8</td><td>5/8</td><td>1/2</td><td>1/2</td><td>1/2</td><td>3/8</td><td>1/2</td><td>5/8</td><td>7/8</td><td>1</td><td>5/8</td><td>0</td><td>1/8</td><td>1/2</td></tr></tbody>
+                </table></div>
+                <h4>7. Addisjonsregelen</h4>
+                <p>\[ P(A)+P(B)-P(A\cap B)=\frac38+\frac48-\frac38=\frac48=\frac12 \]</p>
+                <div class="answer"><b>8 utfall, hvert med sannsynlighet 1/8.</b> Addisjonsregelen gir \(\tfrac12\), som er det samme som \(P(A\cup B)=P(B)=\tfrac48\) fra tabellen, så regelen stemmer.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="o1b">
+            <header class="task__head">
+              <span class="task__src">Quiz 1 O1.8–10</span>
+              <span class="task__title">Tre myntkast: betinget sannsynlighet og uavhengighet</span>
+              <span class="task__tags"><span class="tag">betinget</span><span class="tag">uavhengighet</span><span class="tag">komplement</span></span>
+            </header>
+            <div class="task__q">
+              <p>Fortsettelse av forrige kort, med de samme hendelsene A og B.</p>
+              <ol start="8">
+                <li>La C være mynt (M) i første kast av tre. Beregn a) \(P(A\mid C)\) og b) \(P(B\mid C)\).</li>
+                <li>Er følgende hendelser uavhengige: a) A og C, b) B og C, c) A og B, d) A, B og C? Begrunn svaret.</li>
+                <li>Vi kaster en mynt gjentatte ganger og stopper når vi får første kron, men kaster maksimalt \(n\) ganger.
+                  <br>a) Hva er utfallsrommet?
+                  <br>b) Hvis sannsynligheten for å få en kron i forsøket skal være over 0.99, hva må \(n\) minst være?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>8. Betingede sannsynligheter</h4>
+                <p>\(C=\{MKK,\ MKM,\ MMK,\ MMM\}\), så \(P(C)=\tfrac48=\tfrac12\).</p>
+                <p>\(A\cap C=\{MKM,\ MMK\}\) og \(B\cap C=\{MKM,\ MMK,\ MMM\}\).</p>
+                <p>\[ P(A\mid C)=\frac{P(A\cap C)}{P(C)}=\frac{2/8}{4/8}=\frac12,\qquad P(B\mid C)=\frac{P(B\cap C)}{P(C)}=\frac{3/8}{4/8}=\frac34 \]</p>
+                <h4>9. Uavhengighet</h4>
+                <p>Definisjonen: \(E\) og \(F\) er uavhengige hvis og bare hvis \(P(E\cap F)=P(E)\cdot P(F)\), eller tilsvarende \(P(E\mid F)=P(E)\).</p>
+                <ul>
+                  <li><strong>a) A og C:</strong> \(P(A\cap C)=\tfrac28=\tfrac14\), mens \(P(A)P(C)=\tfrac38\cdot\tfrac12=\tfrac{3}{16}\). Ikke like, så de er <strong>avhengige</strong>. Det ser du også av \(P(A\mid C)=\tfrac12\neq\tfrac38=P(A)\): mynt i første kast gjør «nøyaktig to mynt» mer sannsynlig.</li>
+                  <li><strong>b) B og C:</strong> \(P(B\cap C)=\tfrac38\), mens \(P(B)P(C)=\tfrac12\cdot\tfrac12=\tfrac14\). <strong>Avhengige.</strong></li>
+                  <li><strong>c) A og B:</strong> \(A\subset B\), så \(P(A\cap B)=P(A)=\tfrac38\), mens \(P(A)P(B)=\tfrac{3}{16}\). <strong>Avhengige.</strong> Vet du at A har skjedd, vet du at B har skjedd.</li>
+                  <li><strong>d) A, B og C:</strong> For at tre hendelser skal være uavhengige, må alle parene være uavhengige og i tillegg \(P(A\cap B\cap C)=P(A)P(B)P(C)\). Parene er allerede avhengige, så de tre er <strong>ikke uavhengige</strong>.</li>
+                </ul>
+                <h4>10 a) Utfallsrommet</h4>
+                <p>Forsøket stopper ved første K, eller etter \(n\) kast uten K:</p>
+                <p>\[ \Omega=\{K,\ MK,\ MMK,\ \dots,\ \underbrace{M\cdots M}_{n-1}K,\ \underbrace{M\cdots M}_{n}\} \]</p>
+                <p>Det er \(n+1\) utfall, og de er <em>ikke</em> like sannsynlige, så den uniforme modellen kan ikke brukes her.</p>
+                <h4>10 b) Minste n</h4>
+                <p>Bruk komplementet. Ingen kron på \(n\) uavhengige kast har sannsynlighet \((\tfrac12)^n\):</p>
+                <p>\[ P(\text{minst én K})=1-\left(\tfrac12\right)^n&gt;0.99 \iff \left(\tfrac12\right)^n&lt;0.01 \iff n&gt;\frac{\ln 100}{\ln 2}=6.64 \]</p>
+                <div class="answer"><b>a) \(P(A\mid C)=\tfrac12\), \(P(B\mid C)=\tfrac34\) · 9) ingen av parene er uavhengige · 10 b) \(n\ge 7\).</b> Kontroll: \((\tfrac12)^6=0.0156\) er for mye, \((\tfrac12)^7=0.0078\) holder.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="o2">
+            <header class="task__head">
+              <span class="task__src">Quiz 1 O2</span>
+              <span class="task__title">Matematikkarakter og høyere utdanning</span>
+              <span class="task__tags"><span class="tag">hendelsestre</span><span class="tag">total sannsynlighet</span><span class="tag">bayes</span></span>
+            </header>
+            <div class="task__q">
+              <p>Sannsynligheten for å få minst karakter 3 i matematikk på videregående skole (VGS) er 0.89. Det er 0.77 sannsynlighet for at man tar høyere utdanning, gitt at man har minst karakter 3 i matematikk på VGS. Videre er det 0.95 sannsynlighet for at man ikke tar høyere utdanning hvis man ikke har minst karakter 3 i matematikk.</p>
+              <ol>
+                <li>Tegn et hendelsestre for oppgaven og vis alle sannsynlighetene på tegningen.</li>
+                <li>Hva er sannsynligheten for at en tilfeldig valgt elev tar høyere utdanning?</li>
+                <li>Hva er sannsynligheten for at en tilfeldig valgt elev fikk minst karakter 3 i matematikk, gitt at vedkommende tar høyere utdanning?</li>
+                <li>En rådgiver anbefaler at man tar høyere utdanning hvis man har minst karakter 3, og at man ikke tar høyere utdanning hvis man ikke har det. Hva er sannsynligheten for at en tilfeldig valgt elev følger anbefalingen?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>La \(G\) = minst karakter 3 i matematikk og \(H\) = tar høyere utdanning. Oppgitt: \(P(G)=0.89\), \(P(H\mid G)=0.77\) og \(P(\bar H\mid\bar G)=0.95\). Komplementene gir resten: \(P(\bar G)=0.11\), \(P(\bar H\mid G)=0.23\) og \(P(H\mid\bar G)=0.05\).</p>
+                <h4>1. Hendelsestre</h4>
+                <p>Første forgrening er karakteren (den kommer først i tid), andre er utdanning. Sluttsannsynlighetene er produktet langs grenen.</p>
+                <div class="dtable-wrap"><table class="dtable">
+                  <thead><tr><th>1. gren</th><th class="num">P</th><th>2. gren</th><th class="num">P(· | 1. gren)</th><th class="num">Produkt</th></tr></thead>
+                  <tbody>
+                    <tr><td>\(G\)</td><td class="num">0.89</td><td>\(H\)</td><td class="num">0.77</td><td class="num">\(P(G\cap H)=0.6853\)</td></tr>
+                    <tr><td></td><td class="num"></td><td>\(\bar H\)</td><td class="num">0.23</td><td class="num">\(P(G\cap\bar H)=0.2047\)</td></tr>
+                    <tr><td>\(\bar G\)</td><td class="num">0.11</td><td>\(H\)</td><td class="num">0.05</td><td class="num">\(P(\bar G\cap H)=0.0055\)</td></tr>
+                    <tr><td></td><td class="num"></td><td>\(\bar H\)</td><td class="num">0.95</td><td class="num">\(P(\bar G\cap\bar H)=0.1045\)</td></tr>
+                  </tbody>
+                </table></div>
+                <p>Kontroll: de fire produktene summerer seg til 1.</p>
+                <h4>2. Total sannsynlighet</h4>
+                <p>\[ P(H)=P(G)P(H\mid G)+P(\bar G)P(H\mid\bar G)=0.89\cdot 0.77+0.11\cdot 0.05=0.6853+0.0055=0.6908 \]</p>
+                <h4>3. Bayes</h4>
+                <p>\[ P(G\mid H)=\frac{P(G\cap H)}{P(H)}=\frac{0.6853}{0.6908}\approx 0.992 \]</p>
+                <h4>4. Følger anbefalingen</h4>
+                <p>Å følge anbefalingen er de to disjunkte grenene \(G\cap H\) og \(\bar G\cap\bar H\):</p>
+                <p>\[ P\bigl((G\cap H)\cup(\bar G\cap\bar H)\bigr)=0.6853+0.1045=0.7898 \]</p>
+                <div class="answer"><b>2) 0.691 · 3) 0.992 · 4) 0.790.</b></div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="o3">
+            <header class="task__head">
+              <span class="task__src">Quiz 1 O3</span>
+              <span class="task__title">Gullbilletter i sjokoladefabrikken</span>
+              <span class="task__tags"><span class="tag">hypergeometrisk</span><span class="tag">permutasjoner</span><span class="tag">hendelsestre</span></span>
+            </header>
+            <div class="task__q">
+              <p>Willy Wonka legger 15 gullbilletter sammen med 15 tilfeldig valgte av hans 10 000 innpakkede sjokoladeplater.</p>
+              <ol>
+                <li>Du kjøper 5 sjokoladeplater blant disse 10 000. Hva er sannsynligheten for at du får
+                  <br>a) én sjokoladeplate med gullbillett inni?
+                  <br>b) tre sjokoladeplater med gullbillett inni hver?
+                  <br>c) minst én sjokoladeplate med gullbillett inni?</li>
+                <li>Fra de 15 studentene som fikk gullbillett, lages 3 grupper. Hver gruppe får en leder som trekkes tilfeldig fra de 15: den første som trekkes blir leder i gruppe 1, den andre i gruppe 2 og den tredje i gruppe 3.
+                  <br>a) Hvor mange ulike kombinasjoner av gruppeledere er mulig? Begrunn svaret.
+                  <br>b) Du ønsker å være leder i gruppe 2. Hva er sannsynligheten for dette?
+                  <br>c) Du og to av vennene dine vil være gruppeledere. Hva er sannsynligheten for at dere tre blir gruppeledere?</li>
+                <li>I en boks ved inngangen er det 19 mørkesjokoladeplater med bringebær (\(B\)) og 17 melkesjokoladeplater (\(M\)) igjen. Du trekker 3 plater.
+                  <br>a) Lag et hendelsestre for de 3 trekkene og beregn alle de betingede sannsynlighetene langs grenene.
+                  <br>b) Hva er sannsynligheten for at du trekker to mørkesjokoladeplater med bringebær og én melkesjokoladeplate?
+                  <br>c) Hva er sannsynligheten for at du trekker minst én mørkesjokoladeplate?
+                  <br>d) Hva er sannsynligheten for at du trekker høyst to mørkesjokoladeplater med bringebær?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>1. Hypergeometrisk fordeling</h4>
+                <p>Du trekker 5 av \(N=10\,000\) plater <em>uten tilbakelegging</em>, og \(M=15\) av dem er «spesielle». Antallet gullbilletter \(X\) er da hypergeometrisk fordelt:</p>
+                <p>\[ P(X=k)=\frac{\binom{15}{k}\binom{9985}{5-k}}{\binom{10\,000}{5}} \]</p>
+                <p>\[ \text{a)}\quad P(X=1)=\frac{\binom{15}{1}\binom{9985}{4}}{\binom{10\,000}{5}}\approx 0.00746 \]</p>
+                <p>\[ \text{b)}\quad P(X=3)=\frac{\binom{15}{3}\binom{9985}{2}}{\binom{10\,000}{5}}\approx 2.7\cdot 10^{-8} \]</p>
+                <p>\[ \text{c)}\quad P(X\ge 1)=1-P(X=0)=1-\frac{\binom{9985}{5}}{\binom{10\,000}{5}}\approx 0.00748 \]</p>
+                <div class="note"><strong>Binomisk tilnærming:</strong> Utvalget (5) er bitte lite i forhold til populasjonen (10 000), så det er nesten det samme som å trekke med tilbakelegging. Med \(p=15/10\,000=0.0015\) gir binomisk fordeling \(P(X=1)=5\cdot 0.0015\cdot 0.9985^4\approx 0.00746\), altså samme svar. Sensorveiledningene godtar begge, men nevn at det er en tilnærming.</div>
+                <h4>2 a) Ordnede utvalg</h4>
+                <p>Rekkefølgen betyr noe (leder i gruppe 1 ≠ leder i gruppe 2), og samme person kan ikke trekkes to ganger. Det er et ordnet utvalg uten tilbakelegging:</p>
+                <p>\[ 15\cdot 14\cdot 13=\frac{15!}{12!}=2730 \]</p>
+                <h4>2 b) Leder i gruppe 2</h4>
+                <p>Av symmetri har hver av de 15 like stor sjanse for å være nummer to i trekningen:</p>
+                <p>\[ P=\frac{14\cdot 1\cdot 13}{2730}=\frac{182}{2730}=\frac{1}{15}\approx 0.067 \]</p>
+                <p>Telleren: 14 valg for leder 1 (alle unntatt deg), 1 valg for leder 2 (deg), 13 for leder 3.</p>
+                <h4>2 c) Dere tre blir ledere</h4>
+                <p>Dere tre kan fordele de tre lederrollene på \(3!=6\) måter:</p>
+                <p>\[ P=\frac{3!}{2730}=\frac{6}{2730}=\frac{1}{455}\approx 0.0022 \]</p>
+                <p>Eller uordnet: bare én av \(\binom{15}{3}=455\) mulige trioer er deres.</p>
+                <h4>3 a) Hendelsestre</h4>
+                <p>36 plater totalt. Hvert trekk endrer innholdet i boksen, så sannsynlighetene er betingede:</p>
+                <div class="dtable-wrap"><table class="dtable">
+                  <thead><tr><th>1. trekk</th><th>2. trekk</th><th>3. trekk</th><th class="num">Sannsynlighet for grenen</th></tr></thead>
+                  <tbody>
+                    <tr><td>\(B\ \tfrac{19}{36}\)</td><td>\(B\ \tfrac{18}{35}\)</td><td>\(B\ \tfrac{17}{34}\) · \(M\ \tfrac{17}{34}\)</td><td class="num">BBB 0.1357 · BBM 0.1357</td></tr>
+                    <tr><td></td><td>\(M\ \tfrac{17}{35}\)</td><td>\(B\ \tfrac{18}{34}\) · \(M\ \tfrac{16}{34}\)</td><td class="num">BMB 0.1357 · BMM 0.1206</td></tr>
+                    <tr><td>\(M\ \tfrac{17}{36}\)</td><td>\(B\ \tfrac{19}{35}\)</td><td>\(B\ \tfrac{18}{34}\) · \(M\ \tfrac{16}{34}\)</td><td class="num">MBB 0.1357 · MBM 0.1206</td></tr>
+                    <tr><td></td><td>\(M\ \tfrac{16}{35}\)</td><td>\(B\ \tfrac{19}{34}\) · \(M\ \tfrac{15}{34}\)</td><td class="num">MMB 0.1206 · MMM 0.0952</td></tr>
+                  </tbody>
+                </table></div>
+                <h4>3 b) To B og én M</h4>
+                <p>Enten summerer du grenene BBM, BMB og MBB (3 · 0.1357), eller du teller kombinasjoner:</p>
+                <p>\[ P=\frac{\binom{19}{2}\binom{17}{1}}{\binom{36}{3}}=\frac{171\cdot 17}{7140}=\frac{2907}{7140}\approx 0.407 \]</p>
+                <h4>3 c) Minst én B</h4>
+                <p>\[ P(\text{minst én }B)=1-P(MMM)=1-\frac{\binom{17}{3}}{\binom{36}{3}}=1-\frac{680}{7140}\approx 0.905 \]</p>
+                <h4>3 d) Høyst to B</h4>
+                <p>\[ P(\text{høyst to }B)=1-P(BBB)=1-\frac{\binom{19}{3}}{\binom{36}{3}}=1-\frac{969}{7140}\approx 0.864 \]</p>
+                <div class="answer"><b>1) a) 0.00746 b) \(2.7\cdot10^{-8}\) c) 0.00748 · 2) a) 2730 b) 1/15 c) 1/455 · 3) b) 0.407 c) 0.905 d) 0.864.</b></div>
+              </div>
+            </details>
+          </article>
+        </section>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="../index.html"><small>forrige</small>Statistikk</a>
+          <a data-dir="next" href="quiz2-diskrete-fordelinger.html"><small>neste</small>Quiz 2: Diskrete fordelinger</a>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js?v=32"></script>
+  <script src="../../../assets/js/status.js?v=32"></script>
+  <script src="../../../assets/js/formler.js?v=32"></script>
+  <script src="../../../assets/js/math.js?v=32"></script>
+</body>
+</html>

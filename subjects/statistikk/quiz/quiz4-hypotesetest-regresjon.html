@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quiz 4: Hypotesetest og regresjon — Statistikk · H26</title>
+  <meta name="description" content="Oppgavesett 5 i PB2030: konfidensintervall, Z- og T-test, forkastningsgrense, p-verdi, teststyrke, test for andel og lineær regresjon.">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=32">
+</head>
+<body class="theme-statistikk" data-updated="2026-09-23">
+  <div class="app-shell">
+
+    <aside class="sidebar"></aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">Statistikk</a>
+        <div class="topbar__crumb">Quiz 4: Hypotesetest og regresjon</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow">PB2030 quiz med løsning</div>
+          <h1>Quiz 4: Hypotesetest og regresjon</h1>
+          <span class="page-header__en">confidence interval · Z-test · T-test · p-value · power · linear regression</span>
+          <p class="page-header__desc">Oppgavesett 5: radonmålinger med konfidensintervall, Z-test, p-verdi, teststyrke og T-test, en tilnærmet test for andel, og regresjon mellom gjødsel og kornavling.</p>
+          <span class="page-header__status" data-status="active"><i></i>4 oppgaver · oppgavesett 5</span>
+        </header>
+
+        <section class="section">
+          <div class="section__label">Om oppgavesettet</div>
+          <article class="prose">
+            <p>Originalen er <a href="../../../assets/resources/statistikk/quiz4-hypotesetest-regresjon.pdf" target="_blank" rel="noopener">Oppgavesett 5 (PDF)</a> (virker bare lokalt). Oppgave 1 er delt i to kort: a–g med kjent \(\sigma\) (Z) og h–j med ukjent \(\sigma\) (T). Mer trening finner du på <a href="../oppgaver/07-konfidensintervall.html">Konfidensintervall</a>, <a href="../oppgaver/08-hypotesetesting.html">Hypotesetesting</a> og <a href="../oppgaver/09-regresjon.html">Regresjon og korrelasjon</a>.</p>
+            <div class="note"><strong>Oppskriften for en hypotesetest:</strong> (1) skriv \(H_0\) og \(H_1\), (2) velg testobservator og si hvilken fordeling den har under \(H_0\), (3) regn ut verdien, (4) sammenlign med kritisk verdi <em>eller</em> p-verdi, (5) konkluder i ord og i konteksten. Sensor gir poeng for hvert steg.</div>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section__label">Oppgaver</div>
+          <div class="tasknav">
+            <a href="#o1z">1 a–g · radon, kjent σ</a>
+            <a href="#o1t">1 h–j · radon, ukjent σ</a>
+            <a href="#o2">2 · fartsovertredelser</a>
+            <a href="#o3">3 · gjødsel og kornavling</a>
+          </div>
+
+          <article class="task" id="o1z">
+            <header class="task__head">
+              <span class="task__src">Quiz 4 O1a–g</span>
+              <span class="task__title">Radonstråling: KI, Z-test, p-verdi og teststyrke</span>
+              <span class="task__tags"><span class="tag">z-intervall</span><span class="tag">Z-test</span><span class="tag">p-verdi</span><span class="tag">teststyrke</span></span>
+            </header>
+            <div class="task__q">
+              <p>Radonstråling (Bq/m³) målt i 12 boliger:</p>
+              <p style="text-align:center">213, 250, 204, 216, 242, 209, 168, 197, 175, 308, 197, 206</p>
+              <p>Målingene kommer fra en normalfordelt variabel med ukjent forventning \(\mu\) og kjent standardavvik \(\sigma=50\).</p>
+              <ol type="a">
+                <li>Lag et 95 % symmetrisk konfidensintervall for \(\mu\).</li>
+                <li>Man mistenker at \(\mu\) er høyere enn faregrensen \(\mu_0=200\), og vil teste \(H_0:\mu\le 200\) mot \(H_1:\mu&gt;200\) på 5 % signifikansnivå. Bestem forkastningsgrensen \(k\) når vi forkaster \(H_0\) for \(\bar x&gt;k\).</li>
+                <li>Finn verdien av testobservatoren \(Z\) i den høyresidige Z-testen.</li>
+                <li>Hva er konklusjonen av Z-testen?</li>
+                <li>Beregn p-verdien som målingene gir.</li>
+                <li>Kan vi forkaste \(H_0\) på 5 % nivå basert på p-verdien?</li>
+                <li>Bestem teststyrken til testen i tilfellet \(\mu=226\).</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <p>Felles størrelser: \(n=12\), \(\sum x_i=2585\) og</p>
+                <p>\[ \bar x=\frac{2585}{12}=215.42,\qquad \frac{\sigma}{\sqrt n}=\frac{50}{\sqrt{12}}=14.43 \]</p>
+                <h4>a) Konfidensintervall, kjent σ</h4>
+                <p>\[ \bar x\pm z_{0.025}\frac{\sigma}{\sqrt n}=215.42\pm 1.96\cdot 14.43=215.42\pm 28.29 \]</p>
+                <p>Vi er 95 % sikre på at forventet radonstråling i området ligger mellom 187.1 og 243.7 Bq/m³.</p>
+                <h4>b) Forkastningsgrense</h4>
+                <p>Høyresidig test, så all \(\alpha=0.05\) legges i høyre hale: \(z_{0.05}=1.645\).</p>
+                <p>\[ k=\mu_0+z_{0.05}\frac{\sigma}{\sqrt n}=200+1.645\cdot 14.43=223.74 \]</p>
+                <h4>c) Testobservatoren</h4>
+                <p>Under \(H_0\) (med \(\mu=200\)) er \(Z=\dfrac{\bar X-\mu_0}{\sigma/\sqrt n}\sim N(0,1)\):</p>
+                <p>\[ Z=\frac{215.42-200}{14.43}=1.07 \]</p>
+                <h4>d) Konklusjon</h4>
+                <p>\(Z=1.07&lt;z_{0.05}=1.645\), og tilsvarende er \(\bar x=215.42&lt;k=223.74\). Vi <strong>forkaster ikke</strong> \(H_0\). Målingene gir ikke grunnlag på 5 % nivå for å påstå at forventet radonstråling er over faregrensen på 200.</p>
+                <h4>e) p-verdi</h4>
+                <p>p-verdien er sannsynligheten, under \(H_0\), for å få et resultat minst så ekstremt som det vi fikk:</p>
+                <p>\[ p=P(Z\ge 1.07)=1-G(1.07)=1-0.8577=0.142 \]</p>
+                <h4>f)</h4>
+                <p>\(p=0.142&gt;0.05\), så nei, vi kan ikke forkaste \(H_0\). Det er samme konklusjon som i d), og slik må det være: de to metodene er ekvivalente.</p>
+                <h4>g) Teststyrke</h4>
+                <p>Styrken er sannsynligheten for å forkaste \(H_0\) når den sanne forventningen er \(\mu=226\). Vi forkaster når \(\bar X&gt;k\), og nå er \(\bar X\sim N(226,\ 14.43)\):</p>
+                <p>\[ \gamma(226)=P(\bar X&gt;223.74\mid\mu=226)=1-G\!\left(\frac{223.74-226}{14.43}\right) \]</p>
+                <p>\[ =1-G(-0.16)=G(0.16)=0.564 \]</p>
+                <div class="answer"><b>a) [187.1, 243.7] · b) k = 223.74 · c) Z = 1.07 · d) ikke forkast · e) p = 0.142 · f) nei · g) styrke ≈ 0.56.</b> Selv om den sanne verdien er 226, oppdager testen det bare i litt over halvparten av tilfellene. Med 12 målinger er testen svak.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="o1t">
+            <header class="task__head">
+              <span class="task__src">Quiz 4 O1h–j</span>
+              <span class="task__title">Radonstråling: utvalgsstandardavvik og T-test</span>
+              <span class="task__tags"><span class="tag">utvalgsstandardavvik</span><span class="tag">T-test</span></span>
+            </header>
+            <div class="task__q">
+              <p>Samme målinger som på forrige kort.</p>
+              <ol type="a" start="8">
+                <li>Regn ut standardavviket til utvalget.</li>
+                <li>Anta nå at \(\sigma\) ikke er kjent. Finn verdien av testobservatoren \(T\) i en høyresidig T-test av \(H_0:\mu\le 200\) mot \(H_1:\mu&gt;200\) på 5 % nivå.</li>
+                <li>Hva er konklusjonen av T-testen?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>h) Utvalgsstandardavvik</h4>
+                <p>Del på \(n-1\), ikke \(n\). Med \(\sum x_i^2=572\,153\):</p>
+                <p>\[ \sum(x_i-\bar x)^2=\sum x_i^2-\frac{\bigl(\sum x_i\bigr)^2}{n}=572\,153-\frac{2585^2}{12}=15\,300.9 \]</p>
+                <p>\[ S=\sqrt{\frac{15\,300.9}{11}}=\sqrt{1391.0}\approx 37.30 \]</p>
+                <h4>i) T-observatoren</h4>
+                <p>Under \(H_0\) er \(T=\dfrac{\bar X-\mu_0}{S/\sqrt n}\) t-fordelt med \(n-1=11\) frihetsgrader:</p>
+                <p>\[ T=\frac{215.42-200}{37.30/\sqrt{12}}=\frac{15.42}{10.77}\approx 1.43 \]</p>
+                <h4>j) Konklusjon</h4>
+                <p>Kritisk verdi: \(t_{0.05}\) med 11 frihetsgrader er \(1.796\). Siden \(T=1.43&lt;1.796\), <strong>forkaster vi ikke</strong> \(H_0\). Heller ikke med ukjent \(\sigma\) gir målingene grunnlag for å si at forventet radonstråling er over 200 Bq/m³.</p>
+                <div class="answer"><b>h) S ≈ 37.30 · i) T ≈ 1.43 · j) ikke forkast (1.43 &lt; 1.796).</b> Legg merke til at \(S=37.3\) er lavere enn den oppgitte \(\sigma=50\). Derfor blir \(T\) større enn \(Z\), men det er likevel ikke nok.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="o2">
+            <header class="task__head">
+              <span class="task__src">Quiz 4 O2</span>
+              <span class="task__title">Andel bilister over fartsgrensen</span>
+              <span class="task__tags"><span class="tag">test for andel</span><span class="tag">p-verdi</span></span>
+            </header>
+            <div class="task__q">
+              <p>Over tid har andelen bilister som kjører for fort forbi et målepunkt, vært 0.43. Etter tiltak kjørte 200 av 500 bilister for fort. La \(p\) være andelen som kjører for fort etter tiltakene.</p>
+              <ol type="a">
+                <li>Basert på en tilnærmet Z-test av \(H_0:p\ge 0.43\) mot \(H_1:p&lt;0.43\), finn p-verdien som observasjonene gir. (p-verdien er noe annet enn andelen \(p\).)</li>
+                <li>Hva er det laveste signifikansnivået man kan sette for testen som gir forkastning av \(H_0\) med disse observasjonene?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>a)</h4>
+                <p>\(\hat p=\dfrac{200}{500}=0.40\). Under \(H_0\) (med \(p_0=0.43\)) er testobservatoren tilnærmet standard normalfordelt fordi \(n\) er stor (\(np_0(1-p_0)=122\ge 5\)):</p>
+                <p>\[ Z=\frac{\hat p-p_0}{\sqrt{p_0(1-p_0)/n}}=\frac{0.40-0.43}{\sqrt{0.43\cdot 0.57/500}}=\frac{-0.03}{0.02214}\approx -1.36 \]</p>
+                <p>Bruk \(p_0\) i nevneren, ikke \(\hat p\), fordi testobservatoren skal ha kjent fordeling <em>under \(H_0\)</em>. Testen er venstresidig, så p-verdien er arealet til venstre:</p>
+                <p>\[ \text{p-verdi}=P(Z\le -1.36)=G(-1.36)=1-0.9131=0.087 \]</p>
+                <h4>b)</h4>
+                <p>Vi forkaster \(H_0\) når p-verdi \(\le\alpha\). Det laveste nivået som gir forkastning, er derfor p-verdien selv.</p>
+                <div class="answer"><b>a) p-verdi ≈ 0.087 · b) \(\alpha\approx 8.7\,\%\).</b> På det vanlige 5 %-nivået kan vi altså <em>ikke</em> si at tiltakene har virket.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="o3">
+            <header class="task__head">
+              <span class="task__src">Quiz 4 O3</span>
+              <span class="task__title">Gjødselmengde og kornavling</span>
+              <span class="task__tags"><span class="tag">korrelasjon</span><span class="tag">minste kvadrater</span><span class="tag">KI for β</span></span>
+            </header>
+            <div class="task__q">
+              <p>Sammenhengen mellom gjødselmengde \(x\) og kornavling \(Y\) antas å følge en lineærnormal modell \(Y_i=\alpha+\beta x_i+e_i\), der \(e_i\sim N(0,\sigma)\) er uavhengige og \(\sigma\) er ukjent.</p>
+              <div class="dtable-wrap"><table class="dtable">
+                <thead><tr><th class="num">\(x\)</th><th class="num">2.1</th><th class="num">2.3</th><th class="num">1.9</th><th class="num">2.1</th><th class="num">2.2</th><th class="num">2.4</th><th class="num">2.5</th><th class="num">2.1</th><th class="num">2.2</th><th class="num">2.3</th></tr></thead>
+                <tbody><tr><td class="num">\(y\)</td><td class="num">3.4</td><td class="num">3.8</td><td class="num">3.2</td><td class="num">3.3</td><td class="num">3.6</td><td class="num">3.9</td><td class="num">3.8</td><td class="num">3.5</td><td class="num">3.7</td><td class="num">3.9</td></tr></tbody>
+              </table></div>
+              <p><strong>Nøkkeltall:</strong> \(\sum x_i=22.1\), \(\sum y_i=36.1\), \(\sum x_i^2=49.11\), \(\sum y_i^2=130.89\), \(\sum x_iy_i=80.13\)</p>
+              <ol type="a">
+                <li>Bestem den empiriske korrelasjonskoeffisienten \(r\).</li>
+                <li>Bestem minste kvadraters estimat for \(\beta\).</li>
+                <li>Bestem minste kvadraters estimat for \(\alpha\).</li>
+                <li>Bestem et 95 % symmetrisk konfidensintervall for \(\beta\).</li>
+                <li>Stigningstallet til den ukjente regresjonslinja \(y=\alpha+\beta x\) er \(\beta\). Forklar hva \(\beta\) betyr i denne konteksten.</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>Fra rå summer til sentrerte summer</h4>
+                <p>Nøkkeltallene er rå summer, så gjør dem om først (\(n=10\)):</p>
+                <p>\[ \sum(x_i-\bar x)^2=\sum x_i^2-\frac{(\sum x_i)^2}{n}=49.11-\frac{22.1^2}{10}=0.269 \]</p>
+                <p>\[ \sum(y_i-\bar y)^2=130.89-\frac{36.1^2}{10}=0.569 \]</p>
+                <p>\[ \sum(x_i-\bar x)(y_i-\bar y)=\sum x_iy_i-\frac{\sum x_i\sum y_i}{n}=80.13-\frac{22.1\cdot 36.1}{10}=0.349 \]</p>
+                <p>og \(\bar x=2.21\), \(\bar y=3.61\).</p>
+                <h4>a) Korrelasjon</h4>
+                <p>\[ r=\frac{0.349}{\sqrt{0.269\cdot 0.569}}=\frac{0.349}{0.3912}\approx 0.892 \]</p>
+                <p>En sterk, positiv lineær sammenheng.</p>
+                <h4>b) \(\hat\beta\)</h4>
+                <p>\[ \hat\beta=\frac{\sum(x_i-\bar x)(y_i-\bar y)}{\sum(x_i-\bar x)^2}=\frac{0.349}{0.269}\approx 1.297 \]</p>
+                <h4>c) \(\hat\alpha\)</h4>
+                <p>\[ \hat\alpha=\bar y-\hat\beta\bar x=3.61-1.297\cdot 2.21\approx 0.743 \]</p>
+                <p>Regresjonslinja er \(\hat y=0.743+1.297x\).</p>
+                <h4>d) Konfidensintervall for β</h4>
+                <p>\(\nu=n-2=8\) frihetsgrader gir \(t_{0.025}=2.306\):</p>
+                <p>\[ \frac{\sqrt{0.269\cdot 0.569-0.349^2}}{0.269\sqrt{8}}=\frac{\sqrt{0.15306-0.12180}}{0.7608}=\frac{0.1768}{0.7608}=0.2324 \]</p>
+                <p>\[ 1.297\pm 2.306\cdot 0.2324=1.297\pm 0.536 \]</p>
+                <h4>e) Tolkning</h4>
+                <p>\(\beta\) er den <strong>forventede økningen i kornavling når gjødselmengden øker med én enhet</strong>. Intervallet i d) sier at vi med 95 % sikkerhet kan si at én ekstra enhet gjødsel øker forventet avling med mellom 0.76 og 1.83 vektenheter. Hele intervallet er positivt, så sammenhengen er signifikant på 5 % nivå. Det gjelder bare innenfor det gjødselområdet vi har data for (ca. 1.9–2.5).</p>
+                <div class="answer"><b>a) r ≈ 0.892 · b) \(\hat\beta\approx 1.297\) · c) \(\hat\alpha\approx 0.743\) · d) \(\beta\in[0.76,\ 1.83]\).</b></div>
+              </div>
+            </details>
+          </article>
+        </section>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="quiz3-normalfordeling-sgt.html"><small>forrige</small>Quiz 3: Normalfordeling og SGT</a>
+          <a data-dir="next" href="../oppgaver/00-eksamensoversikt.html"><small>neste</small>Eksamensoversikt</a>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js?v=32"></script>
+  <script src="../../../assets/js/status.js?v=32"></script>
+  <script src="../../../assets/js/formler.js?v=32"></script>
+  <script src="../../../assets/js/math.js?v=32"></script>
+</body>
+</html>

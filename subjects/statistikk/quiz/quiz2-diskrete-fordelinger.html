@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quiz 2: Diskrete fordelinger — Statistikk · H26</title>
+  <meta name="description" content="Oppgavesett 3 og Oblig 3 i PB2030: punktsannsynligheter, forventning og varians, poisson, hypergeometrisk, binomisk og geometrisk fordeling, og stokastisk simulering.">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=32">
+</head>
+<body class="theme-statistikk" data-updated="2026-09-23">
+  <div class="app-shell">
+
+    <aside class="sidebar"></aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">Statistikk</a>
+        <div class="topbar__crumb">Quiz 2: Diskrete fordelinger</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow">PB2030 quiz med løsning</div>
+          <h1>Quiz 2: Diskrete fordelinger</h1>
+          <span class="page-header__en">expectation · variance · Poisson · hypergeometric · binomial · simulation</span>
+          <p class="page-header__desc">Oppgavesett 3 med Oblig 3: forventning og varians fra en tabell, et terningspill, poisson og hypergeometrisk fordeling, binomisk fordeling og en stokastisk simulering i Python.</p>
+          <span class="page-header__status" data-status="active"><i></i>5 oppgaver · oblig 3</span>
+        </header>
+
+        <section class="section">
+          <div class="section__label">Om oppgavesettet</div>
+          <article class="prose">
+            <p>Originalen er <a href="../../../assets/resources/statistikk/quiz2-diskrete-fordelinger.pdf" target="_blank" rel="noopener">Oppgavesett 3 (PDF)</a> (virker bare lokalt). Delspørsmålene som er merket rødt i PDF-en, inngår i Obligatorisk oppgave 3 på Canvas. Her har de merket <span class="tag">oblig</span> i oppgaveteksten, og tagglinja på hvert kort lister dem.</p>
+            <p>Flere eksamensoppgaver med samme ferdigheter finner du på <a href="../oppgaver/03-diskrete-fordelinger.html">Diskrete fordelinger</a> og <a href="../oppgaver/02-kombinatorikk.html">Kombinatorikk og hypergeometrisk</a>.</p>
+            <div class="note"><strong>Tre formler du bruker i hele settet:</strong> \(E(X)=\sum x\,P(X=x)\), \(\operatorname{Var}(X)=E(X^2)-\bigl(E(X)\bigr)^2\) og \(E\bigl(g(X)\bigr)=\sum g(x)\,P(X=x)\). Det siste betyr at du aldri trenger å finne fordelingen til \(X^3+2\) for å finne forventningen.</div>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section__label">Oppgaver</div>
+          <div class="tasknav">
+            <a href="#o1">1 · hundetreneren</a>
+            <a href="#o2">2 · terningspillet</a>
+            <a href="#o3">3 · byggeklosser</a>
+            <a href="#o4">4 a–d · vinflasker</a>
+            <a href="#o4sim">4 e–f · simulering</a>
+          </div>
+
+          <article class="task" id="o1">
+            <header class="task__head">
+              <span class="task__src">Quiz 2 O1</span>
+              <span class="task__title">Hundetreneren</span>
+              <span class="task__tags"><span class="tag">E og Var fra tabell</span><span class="tag">E(g(X))</span><span class="tag">oblig: b, d, e</span></span>
+            </header>
+            <div class="task__q">
+              <p>En hundetrener gir hunder tre ulike oppgaver og ser om de klarer å løse dem. La \(X\) være antall oppgaver av de tre som en tilfeldig hund klarer å løse:</p>
+              <div class="dtable-wrap"><table class="dtable">
+                <thead><tr><th>\(x\)</th><th class="num">0</th><th class="num">1</th><th class="num">2</th><th class="num">3</th></tr></thead>
+                <tbody><tr><td>\(P(X=x)\)</td><td class="num">0.08</td><td class="num">0.34</td><td class="num">??</td><td class="num">0.10</td></tr></tbody>
+              </table></div>
+              <ol type="a">
+                <li>Bestem \(P(X=2)\).</li>
+                <li>Finn sannsynligheten for at en tilfeldig hund klarer å løse flere enn én oppgave. <span class="tag">oblig</span></li>
+                <li>Finn forventningsverdien til \(X\).</li>
+                <li>Bestem variansen og standardavviket til \(X\). <span class="tag">oblig</span></li>
+                <li>Hunden får to godbiter for hver oppgave den løser. Hva er det forventede antallet godbiter? <span class="tag">oblig</span></li>
+                <li>Anta i stedet at hunden får \(X^3+2\) godbiter. Hva blir nå det forventede antallet godbiter?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>a)</h4>
+                <p>Punktsannsynlighetene summerer seg alltid til 1:</p>
+                <p>\[ P(X=2)=1-(0.08+0.34+0.10)=0.48 \]</p>
+                <h4>b)</h4>
+                <p>\[ P(X&gt;1)=P(X=2)+P(X=3)=0.48+0.10=0.58 \]</p>
+                <h4>c)</h4>
+                <p>\[ E(X)=0\cdot 0.08+1\cdot 0.34+2\cdot 0.48+3\cdot 0.10=1.60 \]</p>
+                <h4>d)</h4>
+                <p>\[ E(X^2)=0^2\cdot 0.08+1^2\cdot 0.34+2^2\cdot 0.48+3^2\cdot 0.10=0.34+1.92+0.90=3.16 \]</p>
+                <p>\[ \operatorname{Var}(X)=E(X^2)-\bigl(E(X)\bigr)^2=3.16-1.60^2=0.60,\qquad \sigma_X=\sqrt{0.60}\approx 0.775 \]</p>
+                <h4>e)</h4>
+                <p>Antallet godbiter er \(2X\). Forventning er lineær, \(E(aX+b)=aE(X)+b\):</p>
+                <p>\[ E(2X)=2\cdot E(X)=2\cdot 1.60=3.2 \]</p>
+                <h4>f)</h4>
+                <p>\(X^3\) er ikke lineær, så \(E(X^3)\neq\bigl(E(X)\bigr)^3\). Regn \(E(X^3)\) direkte fra tabellen:</p>
+                <p>\[ E(X^3)=0\cdot 0.08+1\cdot 0.34+8\cdot 0.48+27\cdot 0.10=0.34+3.84+2.70=6.88 \]</p>
+                <p>\[ E(X^3+2)=E(X^3)+2=8.88 \]</p>
+                <div class="answer"><b>a) 0.48 · b) 0.58 · c) 1.60 · d) Var = 0.60, σ ≈ 0.775 · e) 3.2 · f) 8.88.</b> En vanlig feil i f) er å regne \(1.6^3+2=6.10\).</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="o2">
+            <header class="task__head">
+              <span class="task__src">Quiz 2 O2</span>
+              <span class="task__title">Trill til første sekser, maks fem ganger</span>
+              <span class="task__tags"><span class="tag">avkortet geometrisk</span><span class="tag">forventning</span><span class="tag">oblig: c</span></span>
+            </header>
+            <div class="task__q">
+              <p>Vi triller en vanlig terning maksimalt 5 ganger og stopper hvis vi får en sekser. La \(X\) være antall ganger vi må trille i et tilfeldig forsøk.</p>
+              <ol type="a">
+                <li>Hva er verdimengden til \(X\)?</li>
+                <li>Finn punktsannsynlighetene \(P(X=x)\).</li>
+                <li>Finn forventningsverdien til \(X\). <span class="tag">oblig</span></li>
+                <li>Vi tjener \(y_s=1000\) kroner hvis vi bare trenger å trille tre eller færre ganger, og taper \(y_t\) kroner hvis vi må trille fire eller flere ganger. La \(Y\) være netto inntekt i en tilfeldig runde. Hva må \(y_t\) være for at \(E(Y)=0\)? Hva blir da standardavviket til \(Y\)?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>a)</h4>
+                <p>\(X\in\{1,2,3,4,5\}\). Vi trenger minst ett kast, og vi stopper senest etter det femte.</p>
+                <h4>b)</h4>
+                <p>\(X=k\) for \(k\le 4\) betyr «ikke sekser» \(k-1\) ganger og så sekser. \(X=5\) betyr bare at de fire første ikke var seksere. Det femte kastet gjøres uansett, og hva det viser, spiller ingen rolle.</p>
+                <p>\[ P(X=k)=\left(\tfrac56\right)^{k-1}\cdot\tfrac16,\quad k=1,2,3,4,\qquad P(X=5)=\left(\tfrac56\right)^{4} \]</p>
+                <div class="dtable-wrap"><table class="dtable">
+                  <thead><tr><th>\(x\)</th><th class="num">1</th><th class="num">2</th><th class="num">3</th><th class="num">4</th><th class="num">5</th></tr></thead>
+                  <tbody>
+                    <tr><td>\(P(X=x)\)</td><td class="num">\(\tfrac16\)</td><td class="num">\(\tfrac{5}{36}\)</td><td class="num">\(\tfrac{25}{216}\)</td><td class="num">\(\tfrac{125}{1296}\)</td><td class="num">\(\tfrac{625}{1296}\)</td></tr>
+                    <tr><td>desimal</td><td class="num">0.1667</td><td class="num">0.1389</td><td class="num">0.1157</td><td class="num">0.0965</td><td class="num">0.4823</td></tr>
+                  </tbody>
+                </table></div>
+                <p>Kontroll: summen er 1.</p>
+                <h4>c)</h4>
+                <p>\[ E(X)=1\cdot 0.1667+2\cdot 0.1389+3\cdot 0.1157+4\cdot 0.0965+5\cdot 0.4823\approx 3.589 \]</p>
+                <p>Eksakt: \(E(X)=\tfrac{4651}{1296}\approx 3.589\).</p>
+                <h4>d)</h4>
+                <p>\[ P(X\le 3)=1-\left(\tfrac56\right)^3=\tfrac{91}{216}\approx 0.4213,\qquad P(X\ge 4)=\left(\tfrac56\right)^3=\tfrac{125}{216}\approx 0.5787 \]</p>
+                <p>\(Y\) tar to verdier, \(1000\) og \(-y_t\):</p>
+                <p>\[ E(Y)=1000\cdot\tfrac{91}{216}-y_t\cdot\tfrac{125}{216}=0\iff y_t=\frac{91\,000}{125}=728 \]</p>
+                <p>Når \(E(Y)=0\), er \(\operatorname{Var}(Y)=E(Y^2)\):</p>
+                <p>\[ \operatorname{Var}(Y)=1000^2\cdot\tfrac{91}{216}+728^2\cdot\tfrac{125}{216}=421\,296+306\,704=728\,000 \]</p>
+                <p>\[ \sigma_Y=\sqrt{728\,000}\approx 853 \]</p>
+                <div class="answer"><b>a) {1, …, 5} · c) E(X) ≈ 3.59 · d) \(y_t=728\) kr, \(\sigma_Y\approx 853\) kr.</b></div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="o3">
+            <header class="task__head">
+              <span class="task__src">Quiz 2 O3</span>
+              <span class="task__title">Byggeklosser: skadede esker og fargede klosser</span>
+              <span class="task__tags"><span class="tag">poisson</span><span class="tag">hypergeometrisk</span><span class="tag">oblig: b, d, e</span></span>
+            </header>
+            <div class="task__q">
+              <p>En robot sorterer ut esker som er skadet i pakkeprosessen. Skadede esker ankommer uavhengig av hverandre, og sannsynligheten endrer seg ikke med tiden. Roboten sorterer ut 300 esker i timen i gjennomsnitt.</p>
+              <ol type="a">
+                <li>La \(X\) være antall esker roboten sorterer ut i løpet av ett minutt. Hvilken fordeling har \(X\)? Begrunn svaret.</li>
+                <li>Bestem \(P(X\ge 7)\). <span class="tag">oblig</span></li>
+                <li>Bestem forventning og standardavvik for hvor mange esker som sorteres ut på ett minutt.</li>
+              </ol>
+              <p>En eske inneholder 10 gule og 20 blå klosser.</p>
+              <ol type="a" start="4">
+                <li>Man trekker to tilfeldige klosser uten tilbakelegging. Hva er sannsynligheten for at begge er gule? <span class="tag">oblig</span></li>
+                <li>Hva er det forventede antallet gule klosser man får når man trekker to? <span class="tag">oblig</span></li>
+                <li>Truls trekker fem klosser uten tilbakelegging. Fire av dem er blå, men vi får ikke vite fargen på den femte. Så trekker Anne to nye klosser fra samme eske. Hva er sannsynligheten for at Anne får to gule?</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>a)</h4>
+                <p>\(X\) er <strong>poissonfordelt</strong>. Begrunnelsen er de tre poissonforutsetningene, som alle står i oppgaveteksten:</p>
+                <ul>
+                  <li>vi teller hendelser i et kontinuerlig intervall (tid),</li>
+                  <li>hendelsene skjer uavhengig av hverandre,</li>
+                  <li>intensiteten er konstant over tid.</li>
+                </ul>
+                <p>Parameteren er forventet antall i intervallet: \(\lambda=300/60=5\) per minutt.</p>
+                <h4>b)</h4>
+                <p>\[ P(X\ge 7)=1-P(X\le 6)=1-\sum_{k=0}^{6}\frac{5^k}{k!}e^{-5}=1-0.7622=0.2378 \]</p>
+                <p>\(P(X\le 6)\) står i poissontabellen. Uten tabell summerer du de sju leddene.</p>
+                <h4>c)</h4>
+                <p>For poisson er forventning og varians like:</p>
+                <p>\[ E(X)=\lambda=5,\qquad \sigma_X=\sqrt{\lambda}=\sqrt5\approx 2.24 \]</p>
+                <h4>d)</h4>
+                <p>\[ P(\text{to gule})=\frac{\binom{10}{2}}{\binom{30}{2}}=\frac{45}{435}\approx 0.103 \]</p>
+                <p>Eller med produktregelen: \(\tfrac{10}{30}\cdot\tfrac{9}{29}=0.103\).</p>
+                <h4>e)</h4>
+                <p>Antallet gule \(G\) er hypergeometrisk med \(N=30\), \(M=10\) og \(n=2\):</p>
+                <p>\[ E(G)=n\cdot\frac{M}{N}=2\cdot\frac{10}{30}=\frac23\approx 0.667 \]</p>
+                <p>Kontroll fra fordelingen: \(P(G=1)=\tfrac{10\cdot 20}{435}\) og \(P(G=2)=\tfrac{45}{435}\) gir \(E(G)=\tfrac{200+90}{435}=\tfrac23\).</p>
+                <h4>f)</h4>
+                <p>Etter at fire blå er tatt ut, er det 10 gule og 16 blå igjen. Den femte klossen Truls trakk, er gul med sannsynlighet \(\tfrac{10}{26}\). Del opp etter fargen på den (total sannsynlighet):</p>
+                <ul>
+                  <li>Femte gul (\(\tfrac{10}{26}\)): igjen er 9 gule og 16 blå, 25 totalt.</li>
+                  <li>Femte blå (\(\tfrac{16}{26}\)): igjen er 10 gule og 15 blå, 25 totalt.</li>
+                </ul>
+                <p>\[ P=\frac{10}{26}\cdot\frac{\binom{9}{2}}{\binom{25}{2}}+\frac{16}{26}\cdot\frac{\binom{10}{2}}{\binom{25}{2}}=\frac{10\cdot 36+16\cdot 45}{26\cdot 300}=\frac{1080}{7800}\approx 0.138 \]</p>
+                <div class="note"><strong>Snarvei:</strong> En kloss vi ikke kjenner fargen på, gir ingen informasjon. Da er det som om den aldri ble trukket, og Anne trekker i praksis to av de 26 klossene (10 gule og 16 blå): \(\binom{10}{2}/\binom{26}{2}=45/325\approx 0.138\). Samme svar. Bruk gjerne total sannsynlighet på eksamen, siden den viser fremgangsmåten.</div>
+                <div class="answer"><b>a) Poisson(5) · b) 0.238 · c) E = 5, σ ≈ 2.24 · d) 0.103 · e) 2/3 · f) 0.138.</b></div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="o4">
+            <header class="task__head">
+              <span class="task__src">Quiz 2 O4a–d</span>
+              <span class="task__title">Feilkorkede vinflasker</span>
+              <span class="task__tags"><span class="tag">binomisk</span><span class="tag">geometrisk</span><span class="tag">oblig: b, c</span></span>
+            </header>
+            <div class="task__q">
+              <p>8 % av vinflaskene er feilvare på grunn av feil ved korkingen. Korkingen av flaskene er uavhengig, slik at sannsynligheten for feilvare er den samme for hver flaske. En kasse inneholder 12 flasker, og en palle inneholder 672 flasker.</p>
+              <ol type="a">
+                <li>Vi tester alle flaskene i en kasse. La \(X\) være antall feilvarer i kassen. Forklar hvorfor \(X\) er binomisk fordelt.</li>
+                <li>Finn sannsynligheten for at en kasse inneholder i) ingen feilvarer og ii) færre enn tre feilvarer. <span class="tag">oblig</span></li>
+                <li>Finn forventet antall feilvarer i en kasse og standardavviket. <span class="tag">oblig</span></li>
+                <li>Vi åpner flasker fra en ny palle. La \(Y\) være antall flasker vi må åpne før vi finner den første som er feilvare. Finn \(P(Y\le 3)\).</li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>a)</h4>
+                <p>De fire forutsetningene for binomisk fordeling er oppfylt:</p>
+                <ul>
+                  <li>et fast antall forsøk, \(n=12\) flasker,</li>
+                  <li>hvert forsøk har to utfall, feilvare eller ikke,</li>
+                  <li>sannsynligheten er den samme for hver flaske, \(p=0.08\),</li>
+                  <li>forsøkene er uavhengige.</li>
+                </ul>
+                <p>\(X\) teller antall «suksesser», så \(X\sim\text{Bin}(12,\ 0.08)\).</p>
+                <h4>b)</h4>
+                <p>\[ P(X=k)=\binom{12}{k}0.08^k\,0.92^{12-k} \]</p>
+                <p>\[ \text{i)}\quad P(X=0)=0.92^{12}\approx 0.368 \]</p>
+                <p>\[ \text{ii)}\quad P(X&lt;3)=P(X=0)+P(X=1)+P(X=2)=0.3677+0.3837+0.1835\approx 0.935 \]</p>
+                <p>der \(P(X=1)=12\cdot 0.08\cdot 0.92^{11}\) og \(P(X=2)=66\cdot 0.08^2\cdot 0.92^{10}\).</p>
+                <h4>c)</h4>
+                <p>\[ E(X)=np=12\cdot 0.08=0.96,\qquad \sigma_X=\sqrt{np(1-p)}=\sqrt{12\cdot 0.08\cdot 0.92}\approx 0.940 \]</p>
+                <h4>d)</h4>
+                <p>\(Y\) er geometrisk fordelt: vi gjentar uavhengige forsøk til første feilvare, og \(Y\) teller forsøkene til og med den første feilvaren. At \(Y\le 3\) er det samme som at minst én av de tre første flaskene er feilvare:</p>
+                <p>\[ P(Y\le 3)=1-P(\text{de tre første er gode})=1-0.92^3\approx 0.221 \]</p>
+                <div class="note"><strong>Tolkning:</strong> Teller man bare de gode flaskene <em>før</em> den første feilvaren, blir svaret \(1-0.92^4\approx 0.284\). Den vanlige definisjonen av geometrisk fordeling i læreboka teller forsøkene til og med første suksess. Skriv hvilken tolkning du bruker.</div>
+                <div class="answer"><b>b) i) 0.368 ii) 0.935 · c) E = 0.96, σ ≈ 0.940 · d) 0.221.</b></div>
+              </div>
+            </details>
+          </article>
+
+          <article class="task" id="o4sim">
+            <header class="task__head">
+              <span class="task__src">Quiz 2 O4e–f</span>
+              <span class="task__title">Stokastisk simulering av vinkasser og paller</span>
+              <span class="task__tags"><span class="tag">simulering</span><span class="tag">python</span><span class="tag">normaltilnærming</span></span>
+            </header>
+            <div class="task__q">
+              <p>Simuler \(M\) kasser med \(n=12\) flasker. For hver flaske trekkes et tilfeldig tall \(r\in[0,1)\), og flasken er feilvare hvis \(r&lt;p\). Sammenlign histogrammet, gjennomsnittet og standardavviket med den binomiske fordelingen. Koden står i PDF-en.</p>
+              <ol type="a" start="5">
+                <li>
+                  i) Plott histogrammet fra simuleringen og fra den binomiske fordelingen for \(M=10\), \(M=1000\) og et stort \(M\) (50 000–100 000). Kjør flere ganger. Er histogrammet likt fra gang til gang? Forklar hvorfor.
+                  <br>ii) Skriv ut gjennomsnitt og standardavvik for de tre verdiene av \(M\), og sammenlign med \(\mu\) og \(\sigma\) fra den binomiske fordelingen.
+                </li>
+                <li>
+                  Simuler antall feilvarer på en palle i stedet (\(n=672\)), og plott bare intervallet \(\mu\pm 3\sigma\).
+                  <br>i) Plott begge histogrammene med for eksempel \(M=10\,000\).
+                  <br>ii) Skriv ut gjennomsnitt og standardavvik, og sammenlign med de teoretiske verdiene.
+                  <br>iii) Fordelingen ligner nå en kontinuerlig fordeling. Hvilken? (Hint: regel 5.20 i læreboka.)
+                </li>
+              </ol>
+            </div>
+            <details class="sol">
+              <summary>Løsningsforslag</summary>
+              <div class="sol__body">
+                <h4>Samlet skript</h4>
+                <p>Kodebitene fra PDF-en satt sammen. Endre <code>n</code> og <code>M</code> øverst. Plottegrensen \(\mu\pm3\sigma\) brukes bare for palla, der den ikke kan bli negativ.</p>
+<pre class="codeblock">import numpy as np
+import math
+import matplotlib.pyplot as plt
+
+n = 12        # flasker per kasse (672 for en palle)
+p = 0.08      # sannsynlighet for feilvare
+M = 1000      # antall kasser vi simulerer
+
+# Simulering: M kasser, n flasker i hver
+X = np.zeros(M)
+for i in range(M):
+    for j in range(n):
+        r = np.random.rand()
+        if r &lt; p:
+            X[i] = X[i] + 1
+
+# Teoretisk binomisk fordeling
+P = np.zeros(n + 1)
+for k in range(0, n + 1):
+    P[k] = math.comb(n, k) * p**k * (1 - p)**(n - k)
+
+XBar = sum(X) / M
+mu = n * p
+VarX = (sum(np.square(X)) - M * XBar**2) / (M - 1)
+SDX = np.sqrt(VarX)
+sigma = np.sqrt(n * p * (1 - p))
+print('Gjennomsnitt fra simulering:', XBar, ' teoretisk mu:', mu)
+print('Standardavvik fra simulering:', SDX, ' teoretisk sigma:', sigma)
+
+# Plottegrenser: hele verdimengden for en kasse, mu ± 3 sigma for en palle
+if n &gt; 100:
+    Min = math.floor(mu) - 3 * math.floor(sigma)
+    Max = math.floor(mu) + 3 * math.floor(sigma)
+else:
+    Min, Max = 0, n
+
+fig, axes = plt.subplots(1, 2, sharey=True, figsize=(12, 6))
+plt.subplot(1, 2, 1)
+plt.hist(X, bins=np.arange(Min - 0.5, Max + 0.5, 1), density=True, ec='white')
+plt.xlabel('antall feilvarer')
+plt.ylabel('relativ frekvens fra simulering')
+plt.subplot(1, 2, 2)
+plt.bar(range(Min, Max + 1, 1), P[Min:Max + 1], color='orange')
+plt.xlabel('antall feilvarer')
+plt.ylabel('teoretisk sannsynlighet ved binomisk fordeling')
+plt.show()</pre>
+                <p>Løkkene er trege for store \(M\). Den vektoriserte versjonen <code>X = (np.random.rand(M, n) &lt; p).sum(axis=1)</code> gjør det samme og klarer \(M=100\,000\) på et øyeblikk.</p>
+
+                <h4>e) i) Histogrammene</h4>
+                <ul>
+                  <li><strong>\(M=10\):</strong> Histogrammet endrer seg mye fra kjøring til kjøring og ligner dårlig på den binomiske fordelingen. Ti kasser er for lite til at de relative frekvensene stabiliserer seg.</li>
+                  <li><strong>\(M=1000\):</strong> Formen kjennes igjen (topp ved 0 og 1, lang hale mot høyre), men søylene varierer fortsatt synlig mellom kjøringene.</li>
+                  <li><strong>\(M\approx 100\,000\):</strong> Histogrammet er nesten likt hver gang og nesten identisk med den binomiske fordelingen.</li>
+                </ul>
+                <p><strong>Hvorfor:</strong> Tallene er (pseudo)tilfeldige, så hver kjøring gir et nytt utvalg. Relativ frekvens er et estimat av sannsynligheten, og variansen i estimatet er \(\tfrac{p_k(1-p_k)}{M}\). Den går mot 0 når \(M\) vokser. Dette er <strong>de store talls lov</strong>: relativ frekvens \(\to P(X=k)\) når \(M\to\infty\).</p>
+
+                <h4>e) ii) Gjennomsnitt og standardavvik</h4>
+                <p>Teori: \(\mu=np=0.96\) og \(\sigma=\sqrt{np(1-p)}\approx 0.940\). Tallene fra simuleringen varierer, men typisk:</p>
+                <div class="dtable-wrap"><table class="dtable">
+                  <thead><tr><th>\(M\)</th><th class="num">\(\bar X\)</th><th class="num">\(S_X\)</th><th>Kommentar</th></tr></thead>
+                  <tbody>
+                    <tr><td class="num">10</td><td class="num">0.6 – 1.4</td><td class="num">0.5 – 1.3</td><td>langt fra teorien, stor variasjon</td></tr>
+                    <tr><td class="num">1000</td><td class="num">≈ 0.93 – 0.99</td><td class="num">≈ 0.90 – 0.98</td><td>nær, avvik i andre desimal</td></tr>
+                    <tr><td class="num">100 000</td><td class="num">≈ 0.960</td><td class="num">≈ 0.940</td><td>treffer på 2–3 desimaler</td></tr>
+                  </tbody>
+                </table></div>
+                <p>Usikkerheten i \(\bar X\) er \(\sigma/\sqrt M\): \(0.30\) for \(M=10\), \(0.030\) for \(M=1000\) og \(0.003\) for \(M=100\,000\). Hundre ganger flere simuleringer gir altså bare ti ganger mer presisjon.</p>
+
+                <h4>f) Palle, n = 672</h4>
+                <p>Teori:</p>
+                <p>\[ \mu=672\cdot 0.08=53.76,\qquad \sigma=\sqrt{672\cdot 0.08\cdot 0.92}=\sqrt{49.46}\approx 7.03 \]</p>
+                <p><strong>Hvorfor plottekoden virker:</strong> Nesten all sannsynlighet ligger innenfor \(\mu\pm3\sigma\), det vil si mellom \(53-3\cdot 7=32\) og \(53+21=74\) feilvarer. Utenfor er søylene så små at de ikke synes, så det er bortkastet å plotte alle 673 verdiene. For en kasse blir \(0.96-3\cdot 0.94\) negativ, og da ville <code>P[Min:Max+1]</code> få en negativ startindeks.</p>
+                <p><strong>i–ii)</strong> Med \(M=10\,000\) ligger \(\bar X\) typisk innenfor \(53.76\pm 0.15\) og \(S_X\) nær \(7.0\). Usikkerheten i \(\bar X\) er \(7.03/\sqrt{10\,000}\approx 0.07\).</p>
+                <p><strong>iii)</strong> Histogrammet er symmetrisk og klokkeformet: det er <strong>normalfordelingen</strong>. Regel 5.20 sier at \(\text{Bin}(n,p)\) kan tilnærmes med \(N\bigl(np,\ \sqrt{np(1-p)}\bigr)\) når \(np(1-p)\) er stor nok (tommelfingerregel: \(\ge 5\)). Her er \(np(1-p)=49.5\), så den holder godt. For en kasse er \(np(1-p)=0.88\), og derfor er den fordelingen så skjev.</p>
+                <div class="answer"><b>Kasse: μ = 0.96, σ ≈ 0.940 · palle: μ = 53.76, σ ≈ 7.03 · iii) normalfordelingen \(N(53.76,\ 7.03)\).</b> Hovedpoenget: simuleringen nærmer seg teorien når \(M\) vokser (de store talls lov).</div>
+              </div>
+            </details>
+          </article>
+        </section>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="quiz1-sannsynlighet.html"><small>forrige</small>Quiz 1: Sannsynlighet</a>
+          <a data-dir="next" href="quiz3-normalfordeling-sgt.html"><small>neste</small>Quiz 3: Normalfordeling og SGT</a>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js?v=32"></script>
+  <script src="../../../assets/js/status.js?v=32"></script>
+  <script src="../../../assets/js/formler.js?v=32"></script>
+  <script src="../../../assets/js/math.js?v=32"></script>
+</body>
+</html>
