@@ -1,4 +1,4 @@
-<svg class='tikz' role='img' style='width:46.3em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-70.00782 -68.297893 393.171867 300.227317'>
+<svg class='tikz' role='img' aria-label='Hendelsestre for tre trekk uten tilbakelegging av B og M' style='width:46.3em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-70.00782 -68.297893 393.171867 300.227317'>
 <defs>
 <path stroke='none' id='tre-sjokolade-g0-49' d='M2.725778-5.729514C2.725778-5.953674 2.716812-5.971606 2.492653-5.971606C1.936737-5.397758 1.111831-5.397758 .833873-5.397758V-5.119801C1.004234-5.119801 1.551183-5.119801 2.035367-5.352927V-.71731C2.035367-.385554 2.008468-.277958 1.174595-.277958H.887671V0C1.210461-.026899 2.008468-.026899 2.37609-.026899S3.550685-.026899 3.873474 0V-.277958H3.58655C2.752677-.277958 2.725778-.385554 2.725778-.71731V-5.729514Z'/>
 <path stroke='none' id='tre-sjokolade-g0-51' d='M2.734745-3.156164C3.568618-3.469988 3.963138-4.124533 3.963138-4.743213C3.963138-5.433624 3.200996-5.971606 2.268493-5.971606S.636613-5.44259 .636613-4.761146C.636613-4.465255 .833873-4.294894 1.093898-4.294894S1.542217-4.483188 1.542217-4.743213C1.542217-5.057036 1.327024-5.191532 1.022167-5.191532C1.255293-5.56812 1.802242-5.747447 2.241594-5.747447C2.985803-5.747447 3.129265-5.155666 3.129265-4.734247C3.129265-4.465255 3.075467-4.034869 2.851308-3.694147C2.57335-3.29066 2.259527-3.272727 1.999502-3.254795C1.775342-3.236862 1.75741-3.236862 1.685679-3.236862C1.604981-3.227895 1.53325-3.218929 1.53325-3.120299C1.53325-3.003736 1.604981-3.003736 1.75741-3.003736H2.178829C2.958904-3.003736 3.299626-2.37609 3.299626-1.524284C3.299626-.376588 2.689913-.053798 2.232628-.053798C2.062267-.053798 1.192528-.09863 .789041-.762142C1.111831-.71731 1.362889-.941469 1.362889-1.246326C1.362889-1.542217 1.13873-1.730511 .878705-1.730511C.654545-1.730511 .385554-1.596015 .385554-1.219427C.385554-.42142 1.219427 .19726 2.259527 .19726C3.380324 .19726 4.214197-.609714 4.214197-1.524284C4.214197-2.304359 3.595517-2.96787 2.734745-3.156164Z'/>
@@ -38,12 +38,12 @@
 <use stroke='none' x='-68.034893' y='81.858679' xlink:href='#tre-sjokolade-g1-66'/>
 </g>
 <path d='M126.6011-38.7973L205.0471-55.4413' stroke='currentColor' fill='none' stroke-width='.49814' stroke-miterlimit='10'/>
-<g class='tikz-acc' transform='matrix(1 0 0 1 228.0549 -138.2964)'>
+<g transform='matrix(1 0 0 1 228.0549 -138.2964)' style='fill:var(--accent)'>
 <use stroke='none' x='-66.839379' y='76.059777' xlink:href='#tre-sjokolade-g0-49'/>
 <use stroke='none' x='-62.231689' y='76.059777' xlink:href='#tre-sjokolade-g0-55'/>
 </g>
-<rect stroke='none' x='-66.839379' y='79.417836' height='.398484' width='9.215381' transform='matrix(1 0 0 1 228.0549 -138.2964)' class='tikz-acc'/>
-<g class='tikz-acc' transform='matrix(1 0 0 1 228.0549 -138.2964)'>
+<rect stroke='none' x='-66.839379' y='79.417836' height='.398484' width='9.215381' transform='matrix(1 0 0 1 228.0549 -138.2964)' style='fill:var(--accent)'/>
+<g transform='matrix(1 0 0 1 228.0549 -138.2964)' style='fill:var(--accent)'>
 <use stroke='none' x='-66.839379' y='87.939864' xlink:href='#tre-sjokolade-g0-51'/>
 <use stroke='none' x='-62.231689' y='87.939864' xlink:href='#tre-sjokolade-g0-52'/>
 </g>
@@ -51,21 +51,21 @@
 <use stroke='none' x='-68.034893' y='81.858679' xlink:href='#tre-sjokolade-g1-77'/>
 </g>
 <path d='M126.6011-35.5973L203.6991-19.2383' stroke='currentColor' fill='none' stroke-width='.49814' stroke-miterlimit='10'/>
-<g class='tikz-acc' transform='matrix(1 0 0 1 227.3819 -94.4608)'>
+<g transform='matrix(1 0 0 1 227.3819 -94.4608)' style='fill:var(--accent)'>
 <use stroke='none' x='-66.839379' y='76.059777' xlink:href='#tre-sjokolade-g0-49'/>
 <use stroke='none' x='-62.231689' y='76.059777' xlink:href='#tre-sjokolade-g0-55'/>
 </g>
-<rect stroke='none' x='-66.839379' y='79.417836' height='.398484' width='9.215381' transform='matrix(1 0 0 1 227.3819 -94.4608)' class='tikz-acc'/>
-<g class='tikz-acc' transform='matrix(1 0 0 1 227.3819 -94.4608)'>
+<rect stroke='none' x='-66.839379' y='79.417836' height='.398484' width='9.215381' transform='matrix(1 0 0 1 227.3819 -94.4608)' style='fill:var(--accent)'/>
+<g transform='matrix(1 0 0 1 227.3819 -94.4608)' style='fill:var(--accent)'>
 <use stroke='none' x='-66.839379' y='87.939864' xlink:href='#tre-sjokolade-g0-51'/>
 <use stroke='none' x='-62.231689' y='87.939864' xlink:href='#tre-sjokolade-g0-52'/>
 </g>
-<g class='tikz-acc' transform='matrix(1 0 0 1 134.5119 -108.5336)'>
+<g transform='matrix(1 0 0 1 134.5119 -108.5336)' style='fill:var(--accent)'>
 <use stroke='none' x='-66.839379' y='76.059777' xlink:href='#tre-sjokolade-g0-49'/>
 <use stroke='none' x='-62.231689' y='76.059777' xlink:href='#tre-sjokolade-g0-56'/>
 </g>
-<rect stroke='none' x='-66.839379' y='79.417836' height='.398484' width='9.215381' transform='matrix(1 0 0 1 134.5119 -108.5336)' class='tikz-acc'/>
-<g class='tikz-acc' transform='matrix(1 0 0 1 134.5119 -108.5336)'>
+<rect stroke='none' x='-66.839379' y='79.417836' height='.398484' width='9.215381' transform='matrix(1 0 0 1 134.5119 -108.5336)' style='fill:var(--accent)'/>
+<g transform='matrix(1 0 0 1 134.5119 -108.5336)' style='fill:var(--accent)'>
 <use stroke='none' x='-66.839379' y='87.939864' xlink:href='#tre-sjokolade-g0-51'/>
 <use stroke='none' x='-62.231689' y='87.939864' xlink:href='#tre-sjokolade-g0-53'/>
 </g>
@@ -77,12 +77,12 @@
 <use stroke='none' x='-68.034893' y='81.858679' xlink:href='#tre-sjokolade-g1-66'/>
 </g>
 <path d='M127.9491 40.2891L205.0471 23.9297' stroke='currentColor' fill='none' stroke-width='.49814' stroke-miterlimit='10'/>
-<g class='tikz-acc' transform='matrix(1 0 0 1 228.7289 -59.0691)'>
+<g transform='matrix(1 0 0 1 228.7289 -59.0691)' style='fill:var(--accent)'>
 <use stroke='none' x='-66.839379' y='76.059777' xlink:href='#tre-sjokolade-g0-49'/>
 <use stroke='none' x='-62.231689' y='76.059777' xlink:href='#tre-sjokolade-g0-56'/>
 </g>
-<rect stroke='none' x='-66.839379' y='79.417836' height='.398484' width='9.215381' transform='matrix(1 0 0 1 228.7289 -59.0691)' class='tikz-acc'/>
-<g class='tikz-acc' transform='matrix(1 0 0 1 228.7289 -59.0691)'>
+<rect stroke='none' x='-66.839379' y='79.417836' height='.398484' width='9.215381' transform='matrix(1 0 0 1 228.7289 -59.0691)' style='fill:var(--accent)'/>
+<g transform='matrix(1 0 0 1 228.7289 -59.0691)' style='fill:var(--accent)'>
 <use stroke='none' x='-66.839379' y='87.939864' xlink:href='#tre-sjokolade-g0-51'/>
 <use stroke='none' x='-62.231689' y='87.939864' xlink:href='#tre-sjokolade-g0-52'/>
 </g>
@@ -90,30 +90,30 @@
 <use stroke='none' x='-68.034893' y='81.858679' xlink:href='#tre-sjokolade-g1-77'/>
 </g>
 <path d='M127.9491 44.0586L203.6991 60.1328' stroke='currentColor' fill='none' stroke-width='.49814' stroke-miterlimit='10'/>
-<g class='tikz-acc' transform='matrix(1 0 0 1 228.0549 -14.9478)'>
+<g transform='matrix(1 0 0 1 228.0549 -14.9478)' style='fill:var(--accent)'>
 <use stroke='none' x='-66.839379' y='76.059777' xlink:href='#tre-sjokolade-g0-49'/>
 <use stroke='none' x='-62.231689' y='76.059777' xlink:href='#tre-sjokolade-g0-54'/>
 </g>
-<rect stroke='none' x='-66.839379' y='79.417836' height='.398484' width='9.215381' transform='matrix(1 0 0 1 228.0549 -14.9478)' class='tikz-acc'/>
-<g class='tikz-acc' transform='matrix(1 0 0 1 228.0549 -14.9478)'>
+<rect stroke='none' x='-66.839379' y='79.417836' height='.398484' width='9.215381' transform='matrix(1 0 0 1 228.0549 -14.9478)' style='fill:var(--accent)'/>
+<g transform='matrix(1 0 0 1 228.0549 -14.9478)' style='fill:var(--accent)'>
 <use stroke='none' x='-66.839379' y='87.939864' xlink:href='#tre-sjokolade-g0-51'/>
 <use stroke='none' x='-62.231689' y='87.939864' xlink:href='#tre-sjokolade-g0-52'/>
 </g>
-<g class='tikz-acc' transform='matrix(1 0 0 1 133.8382 -44.9961)'>
+<g transform='matrix(1 0 0 1 133.8382 -44.9961)' style='fill:var(--accent)'>
 <use stroke='none' x='-66.839379' y='76.059777' xlink:href='#tre-sjokolade-g0-49'/>
 <use stroke='none' x='-62.231689' y='76.059777' xlink:href='#tre-sjokolade-g0-55'/>
 </g>
-<rect stroke='none' x='-66.839379' y='79.417836' height='.398484' width='9.215381' transform='matrix(1 0 0 1 133.8382 -44.9961)' class='tikz-acc'/>
-<g class='tikz-acc' transform='matrix(1 0 0 1 133.8382 -44.9961)'>
+<rect stroke='none' x='-66.839379' y='79.417836' height='.398484' width='9.215381' transform='matrix(1 0 0 1 133.8382 -44.9961)' style='fill:var(--accent)'/>
+<g transform='matrix(1 0 0 1 133.8382 -44.9961)' style='fill:var(--accent)'>
 <use stroke='none' x='-66.839379' y='87.939864' xlink:href='#tre-sjokolade-g0-51'/>
 <use stroke='none' x='-62.231689' y='87.939864' xlink:href='#tre-sjokolade-g0-53'/>
 </g>
-<g class='tikz-acc' transform='matrix(1 0 0 1 38.0224 -46.509)'>
+<g transform='matrix(1 0 0 1 38.0224 -46.509)' style='fill:var(--accent)'>
 <use stroke='none' x='-66.839379' y='76.059777' xlink:href='#tre-sjokolade-g0-49'/>
 <use stroke='none' x='-62.231689' y='76.059777' xlink:href='#tre-sjokolade-g0-57'/>
 </g>
-<rect stroke='none' x='-66.839379' y='79.417836' height='.398484' width='9.215381' transform='matrix(1 0 0 1 38.0224 -46.509)' class='tikz-acc'/>
-<g class='tikz-acc' transform='matrix(1 0 0 1 38.0224 -46.509)'>
+<rect stroke='none' x='-66.839379' y='79.417836' height='.398484' width='9.215381' transform='matrix(1 0 0 1 38.0224 -46.509)' style='fill:var(--accent)'/>
+<g transform='matrix(1 0 0 1 38.0224 -46.509)' style='fill:var(--accent)'>
 <use stroke='none' x='-66.839379' y='87.939864' xlink:href='#tre-sjokolade-g0-51'/>
 <use stroke='none' x='-62.231689' y='87.939864' xlink:href='#tre-sjokolade-g0-54'/>
 </g>
@@ -129,12 +129,12 @@
 <use stroke='none' x='-68.034893' y='81.858679' xlink:href='#tre-sjokolade-g1-66'/>
 </g>
 <path d='M126.6011 119.9414L205.0471 103.3008' stroke='currentColor' fill='none' stroke-width='.49814' stroke-miterlimit='10'/>
-<g class='tikz-acc' transform='matrix(1 0 0 1 228.0549 20.4443)'>
+<g transform='matrix(1 0 0 1 228.0549 20.4443)' style='fill:var(--accent)'>
 <use stroke='none' x='-66.839379' y='76.059777' xlink:href='#tre-sjokolade-g0-49'/>
 <use stroke='none' x='-62.231689' y='76.059777' xlink:href='#tre-sjokolade-g0-56'/>
 </g>
-<rect stroke='none' x='-66.839379' y='79.417836' height='.398484' width='9.215381' transform='matrix(1 0 0 1 228.0549 20.4443)' class='tikz-acc'/>
-<g class='tikz-acc' transform='matrix(1 0 0 1 228.0549 20.4443)'>
+<rect stroke='none' x='-66.839379' y='79.417836' height='.398484' width='9.215381' transform='matrix(1 0 0 1 228.0549 20.4443)' style='fill:var(--accent)'/>
+<g transform='matrix(1 0 0 1 228.0549 20.4443)' style='fill:var(--accent)'>
 <use stroke='none' x='-66.839379' y='87.939864' xlink:href='#tre-sjokolade-g0-51'/>
 <use stroke='none' x='-62.231689' y='87.939864' xlink:href='#tre-sjokolade-g0-52'/>
 </g>
@@ -142,21 +142,21 @@
 <use stroke='none' x='-68.034893' y='81.858679' xlink:href='#tre-sjokolade-g1-77'/>
 </g>
 <path d='M126.6011 123.1445L203.6991 139.5039' stroke='currentColor' fill='none' stroke-width='.49814' stroke-miterlimit='10'/>
-<g class='tikz-acc' transform='matrix(1 0 0 1 227.3819 64.2793)'>
+<g transform='matrix(1 0 0 1 227.3819 64.2793)' style='fill:var(--accent)'>
 <use stroke='none' x='-66.839379' y='76.059777' xlink:href='#tre-sjokolade-g0-49'/>
 <use stroke='none' x='-62.231689' y='76.059777' xlink:href='#tre-sjokolade-g0-54'/>
 </g>
-<rect stroke='none' x='-66.839379' y='79.417836' height='.398484' width='9.215381' transform='matrix(1 0 0 1 227.3819 64.2793)' class='tikz-acc'/>
-<g class='tikz-acc' transform='matrix(1 0 0 1 227.3819 64.2793)'>
+<rect stroke='none' x='-66.839379' y='79.417836' height='.398484' width='9.215381' transform='matrix(1 0 0 1 227.3819 64.2793)' style='fill:var(--accent)'/>
+<g transform='matrix(1 0 0 1 227.3819 64.2793)' style='fill:var(--accent)'>
 <use stroke='none' x='-66.839379' y='87.939864' xlink:href='#tre-sjokolade-g0-51'/>
 <use stroke='none' x='-62.231689' y='87.939864' xlink:href='#tre-sjokolade-g0-52'/>
 </g>
-<g class='tikz-acc' transform='matrix(1 0 0 1 135.1856 49.9213)'>
+<g transform='matrix(1 0 0 1 135.1856 49.9213)' style='fill:var(--accent)'>
 <use stroke='none' x='-66.839379' y='76.059777' xlink:href='#tre-sjokolade-g0-49'/>
 <use stroke='none' x='-62.231689' y='76.059777' xlink:href='#tre-sjokolade-g0-57'/>
 </g>
-<rect stroke='none' x='-66.839379' y='79.417836' height='.398484' width='9.215381' transform='matrix(1 0 0 1 135.1856 49.9213)' class='tikz-acc'/>
-<g class='tikz-acc' transform='matrix(1 0 0 1 135.1856 49.9213)'>
+<rect stroke='none' x='-66.839379' y='79.417836' height='.398484' width='9.215381' transform='matrix(1 0 0 1 135.1856 49.9213)' style='fill:var(--accent)'/>
+<g transform='matrix(1 0 0 1 135.1856 49.9213)' style='fill:var(--accent)'>
 <use stroke='none' x='-66.839379' y='87.939864' xlink:href='#tre-sjokolade-g0-51'/>
 <use stroke='none' x='-62.231689' y='87.939864' xlink:href='#tre-sjokolade-g0-53'/>
 </g>
@@ -168,12 +168,12 @@
 <use stroke='none' x='-68.034893' y='81.858679' xlink:href='#tre-sjokolade-g1-66'/>
 </g>
 <path d='M127.9491 199.0277L205.0471 182.6717' stroke='currentColor' fill='none' stroke-width='.49814' stroke-miterlimit='10'/>
-<g class='tikz-acc' transform='matrix(1 0 0 1 228.7289 99.6713)'>
+<g transform='matrix(1 0 0 1 228.7289 99.6713)' style='fill:var(--accent)'>
 <use stroke='none' x='-66.839379' y='76.059777' xlink:href='#tre-sjokolade-g0-49'/>
 <use stroke='none' x='-62.231689' y='76.059777' xlink:href='#tre-sjokolade-g0-57'/>
 </g>
-<rect stroke='none' x='-66.839379' y='79.417836' height='.398484' width='9.215381' transform='matrix(1 0 0 1 228.7289 99.6713)' class='tikz-acc'/>
-<g class='tikz-acc' transform='matrix(1 0 0 1 228.7289 99.6713)'>
+<rect stroke='none' x='-66.839379' y='79.417836' height='.398484' width='9.215381' transform='matrix(1 0 0 1 228.7289 99.6713)' style='fill:var(--accent)'/>
+<g transform='matrix(1 0 0 1 228.7289 99.6713)' style='fill:var(--accent)'>
 <use stroke='none' x='-66.839379' y='87.939864' xlink:href='#tre-sjokolade-g0-51'/>
 <use stroke='none' x='-62.231689' y='87.939864' xlink:href='#tre-sjokolade-g0-52'/>
 </g>
@@ -181,30 +181,30 @@
 <use stroke='none' x='-68.034893' y='81.858679' xlink:href='#tre-sjokolade-g1-77'/>
 </g>
 <path d='M127.9491 202.8007L203.6991 218.8707' stroke='currentColor' fill='none' stroke-width='.49814' stroke-miterlimit='10'/>
-<g class='tikz-acc' transform='matrix(1 0 0 1 228.0549 143.7923)'>
+<g transform='matrix(1 0 0 1 228.0549 143.7923)' style='fill:var(--accent)'>
 <use stroke='none' x='-66.839379' y='76.059777' xlink:href='#tre-sjokolade-g0-49'/>
 <use stroke='none' x='-62.231689' y='76.059777' xlink:href='#tre-sjokolade-g0-53'/>
 </g>
-<rect stroke='none' x='-66.839379' y='79.417836' height='.398484' width='9.215381' transform='matrix(1 0 0 1 228.0549 143.7923)' class='tikz-acc'/>
-<g class='tikz-acc' transform='matrix(1 0 0 1 228.0549 143.7923)'>
+<rect stroke='none' x='-66.839379' y='79.417836' height='.398484' width='9.215381' transform='matrix(1 0 0 1 228.0549 143.7923)' style='fill:var(--accent)'/>
+<g transform='matrix(1 0 0 1 228.0549 143.7923)' style='fill:var(--accent)'>
 <use stroke='none' x='-66.839379' y='87.939864' xlink:href='#tre-sjokolade-g0-51'/>
 <use stroke='none' x='-62.231689' y='87.939864' xlink:href='#tre-sjokolade-g0-52'/>
 </g>
-<g class='tikz-acc' transform='matrix(1 0 0 1 134.5119 114.0303)'>
+<g transform='matrix(1 0 0 1 134.5119 114.0303)' style='fill:var(--accent)'>
 <use stroke='none' x='-66.839379' y='76.059777' xlink:href='#tre-sjokolade-g0-49'/>
 <use stroke='none' x='-62.231689' y='76.059777' xlink:href='#tre-sjokolade-g0-54'/>
 </g>
-<rect stroke='none' x='-66.839379' y='79.417836' height='.398484' width='9.215381' transform='matrix(1 0 0 1 134.5119 114.0303)' class='tikz-acc'/>
-<g class='tikz-acc' transform='matrix(1 0 0 1 134.5119 114.0303)'>
+<rect stroke='none' x='-66.839379' y='79.417836' height='.398484' width='9.215381' transform='matrix(1 0 0 1 134.5119 114.0303)' style='fill:var(--accent)'/>
+<g transform='matrix(1 0 0 1 134.5119 114.0303)' style='fill:var(--accent)'>
 <use stroke='none' x='-66.839379' y='87.939864' xlink:href='#tre-sjokolade-g0-51'/>
 <use stroke='none' x='-62.231689' y='87.939864' xlink:href='#tre-sjokolade-g0-53'/>
 </g>
-<g class='tikz-acc' transform='matrix(1 0 0 1 37.7195 51.7413)'>
+<g transform='matrix(1 0 0 1 37.7195 51.7413)' style='fill:var(--accent)'>
 <use stroke='none' x='-66.839379' y='76.059777' xlink:href='#tre-sjokolade-g0-49'/>
 <use stroke='none' x='-62.231689' y='76.059777' xlink:href='#tre-sjokolade-g0-55'/>
 </g>
-<rect stroke='none' x='-66.839379' y='79.417836' height='.398484' width='9.215381' transform='matrix(1 0 0 1 37.7195 51.7413)' class='tikz-acc'/>
-<g class='tikz-acc' transform='matrix(1 0 0 1 37.7195 51.7413)'>
+<rect stroke='none' x='-66.839379' y='79.417836' height='.398484' width='9.215381' transform='matrix(1 0 0 1 37.7195 51.7413)' style='fill:var(--accent)'/>
+<g transform='matrix(1 0 0 1 37.7195 51.7413)' style='fill:var(--accent)'>
 <use stroke='none' x='-66.839379' y='87.939864' xlink:href='#tre-sjokolade-g0-51'/>
 <use stroke='none' x='-62.231689' y='87.939864' xlink:href='#tre-sjokolade-g0-54'/>
 </g>

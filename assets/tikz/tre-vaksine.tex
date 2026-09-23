@@ -1,0 +1,22 @@
+% 01 Mai 2022 O2: ikke syk (F) og bivirkninger (B).
+% alt: Hendelsestre: blir ikke syk F eller syk, deretter bivirkninger B eller ikke
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}[tre, level distance=3.1cm,
+  level 1/.style={sibling distance=2.6cm}, level 2/.style={sibling distance=1.3cm}]
+\node[rot] {}
+  child { node {$F$}
+    child { node (L00) {$B$} edge from parent node[up] {$0.31$} }
+    child { node (L01) {$\bar B$} edge from parent node[dn] {$0.69$} }
+    edge from parent node[up] {$0.65$} }
+  child { node {$\bar F$}
+    child { node (L10) {$B$} edge from parent node[up] {$0.15$} }
+    child { node (L11) {$\bar B$} edge from parent node[dn] {$0.85$} }
+    edge from parent node[dn] {$0.35$} };
+\node[leaf] at (L00.east) {$P(F\cap B)=0.2015$};
+\node[leaf, text=acc] at (L01.east) {$P(F\cap\bar B)=0.4485$};
+\node[leaf] at (L10.east) {$P(\bar F\cap B)=0.0525$};
+\node[leaf, text=acc] at (L11.east) {$P(\bar F\cap\bar B)=0.2975$};
+\end{tikzpicture}
+\end{document}

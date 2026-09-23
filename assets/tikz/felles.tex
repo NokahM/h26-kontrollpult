@@ -1,0 +1,37 @@
+% Felles oppsett for figurene. Brukes med \input{felles} etter \documentclass.
+% Fargene er plassholdere som build.py bytter til CSS-variabler:
+%   svart -> tekstfarge, acc -> --accent, mut -> --muted, hi -> --st-forstatt
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta, positioning, calc}
+\definecolor{acc}{HTML}{FF0000}
+\definecolor{mut}{HTML}{00FF00}
+\definecolor{hi}{HTML}{0000FF}
+
+% Normaltetthet med forventning #1 og standardavvik #2
+\pgfmathdeclarefunction{gauss}{2}{%
+  \pgfmathparse{exp(-((x-#1)^2)/(2*#2^2))/(#2*sqrt(2*pi))}}
+% Eksponentialtetthet med rate #1
+\pgfmathdeclarefunction{expdens}{1}{\pgfmathparse{#1*exp(-#1*x)}}
+
+\tikzset{
+  % hendelsestre som vokser mot høyre
+  tre/.style={grow'=right, edge from parent/.style={draw, line width=0.5pt}},
+  p/.style={font=\small, text=acc, inner sep=2pt},
+  up/.style={p, above, sloped}, dn/.style={p, below, sloped},
+  leaf/.style={anchor=west, xshift=0.35cm},
+  rot/.style={circle, fill, inner sep=1.4pt},
+}
+
+\pgfplotsset{
+  % kurve uten y-akse: bare x-aksen med de merkene figuren trenger
+  kurve/.style={
+    width=11cm, height=4.6cm, axis lines*=bottom, axis y line=none,
+    ymin=0, enlarge x limits=false, clip=false, samples=120,
+    xtick style={draw=none}, tick label style={font=\small},
+    every axis plot/.append style={line width=0.7pt}},
+  areal/.style={draw=none, fill=acc, fill opacity=0.3},
+  areal2/.style={draw=none, fill=hi, fill opacity=0.3},
+  hjelp/.style={mut, dashed, line width=0.5pt},
+}

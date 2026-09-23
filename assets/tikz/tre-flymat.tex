@@ -1,0 +1,28 @@
+% 01 Mai 2023 O1: antall bestilte måltider (X) og matallergi (A).
+% alt: Hendelsestre: 0, 1 eller 2 bestilte måltider, deretter matallergi A eller ikke
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}[tre, level distance=3.1cm,
+  level 1/.style={sibling distance=2.7cm}, level 2/.style={sibling distance=1.3cm}]
+\node[rot] {}
+  child { node {$X=0$}
+    child { node (L00) {$A$} edge from parent node[up] {$0.44$} }
+    child { node (L01) {$\bar A$} edge from parent node[dn] {$0.56$} }
+    edge from parent node[up] {$0.12$} }
+  child { node {$X=1$}
+    child { node (L10) {$A$} edge from parent node[up] {$0.08$} }
+    child { node (L11) {$\bar A$} edge from parent node[dn] {$0.92$} }
+    edge from parent node[up] {$0.36$} }
+  child { node {$X=2$}
+    child { node (L20) {$A$} edge from parent node[up] {$0.03$} }
+    child { node (L21) {$\bar A$} edge from parent node[dn] {$0.97$} }
+    edge from parent node[dn] {$0.52$} };
+\node[leaf, text=acc] at (L00.east) {$0.12\cdot 0.44=0.0528$};
+\node[leaf] at (L01.east) {$0.12\cdot 0.56=0.0672$};
+\node[leaf, text=acc] at (L10.east) {$0.36\cdot 0.08=0.0288$};
+\node[leaf] at (L11.east) {$0.36\cdot 0.92=0.3312$};
+\node[leaf, text=acc] at (L20.east) {$0.52\cdot 0.03=0.0156$};
+\node[leaf] at (L21.east) {$0.52\cdot 0.97=0.5044$};
+\end{tikzpicture}
+\end{document}

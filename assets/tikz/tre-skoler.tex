@@ -1,0 +1,28 @@
+% 01 Mai 2024 O1: skole (S1, S2, S3) og ståkarakter (G).
+% alt: Hendelsestre: skole 1, 2 eller 3, deretter ståkarakter G eller ikke
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}[tre, level distance=3.1cm,
+  level 1/.style={sibling distance=2.7cm}, level 2/.style={sibling distance=1.3cm}]
+\node[rot] {}
+  child { node {$S_1$}
+    child { node (L00) {$G$} edge from parent node[up] {$0.70$} }
+    child { node (L01) {$\bar G$} edge from parent node[dn] {$0.30$} }
+    edge from parent node[up] {$0.5$} }
+  child { node {$S_2$}
+    child { node (L10) {$G$} edge from parent node[up] {$0.60$} }
+    child { node (L11) {$\bar G$} edge from parent node[dn] {$0.40$} }
+    edge from parent node[up] {$0.3$} }
+  child { node {$S_3$}
+    child { node (L20) {$G$} edge from parent node[up] {$0.55$} }
+    child { node (L21) {$\bar G$} edge from parent node[dn] {$0.45$} }
+    edge from parent node[dn] {$0.2$} };
+\node[leaf, text=acc] at (L00.east) {$P(S_1\cap G)=0.35$};
+\node[leaf] at (L01.east) {$P(S_1\cap\bar G)=0.15$};
+\node[leaf, text=acc] at (L10.east) {$P(S_2\cap G)=0.18$};
+\node[leaf] at (L11.east) {$P(S_2\cap\bar G)=0.12$};
+\node[leaf, text=acc] at (L20.east) {$P(S_3\cap G)=0.11$};
+\node[leaf] at (L21.east) {$P(S_3\cap\bar G)=0.09$};
+\end{tikzpicture}
+\end{document}

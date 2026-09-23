@@ -1,0 +1,22 @@
+% 01 Des 2020 O1: ingeniør (I1, I2) og feil i anslaget (F).
+% alt: Hendelsestre: ingeniør 1 eller 2, deretter feil F eller ikke
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}[tre, level distance=3.1cm,
+  level 1/.style={sibling distance=2.6cm}, level 2/.style={sibling distance=1.3cm}]
+\node[rot] {}
+  child { node {$I_1$}
+    child { node (L00) {$F$} edge from parent node[up] {$0.02$} }
+    child { node (L01) {$\bar F$} edge from parent node[dn] {$0.98$} }
+    edge from parent node[up] {$0.80$} }
+  child { node {$I_2$}
+    child { node (L10) {$F$} edge from parent node[up] {$0.04$} }
+    child { node (L11) {$\bar F$} edge from parent node[dn] {$0.96$} }
+    edge from parent node[dn] {$0.20$} };
+\node[leaf, text=acc] at (L00.east) {$P(I_1\cap F)=0.016$};
+\node[leaf] at (L01.east) {$P(I_1\cap\bar F)=0.784$};
+\node[leaf, text=acc] at (L10.east) {$P(I_2\cap F)=0.008$};
+\node[leaf] at (L11.east) {$P(I_2\cap\bar F)=0.192$};
+\end{tikzpicture}
+\end{document}

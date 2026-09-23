@@ -1,0 +1,22 @@
+% 01 Okt 2024 O3: har sykdommen (X) og positiv test (S).
+% alt: Hendelsestre: syk X eller frisk, deretter positiv test S eller negativ
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}[tre, level distance=3.1cm,
+  level 1/.style={sibling distance=2.6cm}, level 2/.style={sibling distance=1.3cm}]
+\node[rot] {}
+  child { node {$X$}
+    child { node (L00) {$S$} edge from parent node[up] {$0.99$} }
+    child { node (L01) {$\bar S$} edge from parent node[dn] {$0.01$} }
+    edge from parent node[up] {$0.005$} }
+  child { node {$\bar X$}
+    child { node (L10) {$S$} edge from parent node[up] {$0.01$} }
+    child { node (L11) {$\bar S$} edge from parent node[dn] {$0.99$} }
+    edge from parent node[dn] {$0.995$} };
+\node[leaf, text=acc] at (L00.east) {$P(X\cap S)=0.00495$};
+\node[leaf] at (L01.east) {$P(X\cap\bar S)=0.00005$};
+\node[leaf, text=acc] at (L10.east) {$P(\bar X\cap S)=0.00995$};
+\node[leaf] at (L11.east) {$P(\bar X\cap\bar S)=0.98505$};
+\end{tikzpicture}
+\end{document}

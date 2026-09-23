@@ -1,0 +1,22 @@
+% 01 Okt 2022 O2: slipper ut for mye (A) og testen sier det (B).
+% alt: Hendelsestre: bilen slipper ut for mye A eller ikke, deretter testen viser høyt utslipp B eller ikke
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}[tre, level distance=3.1cm,
+  level 1/.style={sibling distance=2.6cm}, level 2/.style={sibling distance=1.3cm}]
+\node[rot] {}
+  child { node {$A$}
+    child { node (L00) {$B$} edge from parent node[up] {$0.98$} }
+    child { node (L01) {$\bar B$} edge from parent node[dn] {$0.02$} }
+    edge from parent node[up] {$0.20$} }
+  child { node {$\bar A$}
+    child { node (L10) {$B$} edge from parent node[up] {$0.15$} }
+    child { node (L11) {$\bar B$} edge from parent node[dn] {$0.85$} }
+    edge from parent node[dn] {$0.80$} };
+\node[leaf, text=acc] at (L00.east) {$P(A\cap B)=0.196$};
+\node[leaf] at (L01.east) {$P(A\cap\bar B)=0.004$};
+\node[leaf, text=acc] at (L10.east) {$P(\bar A\cap B)=0.120$};
+\node[leaf] at (L11.east) {$P(\bar A\cap\bar B)=0.680$};
+\end{tikzpicture}
+\end{document}

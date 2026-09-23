@@ -763,7 +763,6 @@ code {
 
 /* TikZ-figurer bygd med assets/tikz/build.py og limt inn som inline SVG */
 .tikz { display: block; max-width: 100%; height: auto; margin: 1.25rem auto; }
-.tikz-acc { fill: var(--accent); }
 
 .sol { margin-top: 1rem; border-top: 1px solid var(--line); }
 .sol > summary {

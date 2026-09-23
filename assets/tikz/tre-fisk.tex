@@ -1,0 +1,22 @@
+% 01 Okt 2023 O1: hunnfisk (F) og smittet (V).
+% alt: Hendelsestre: hunn F eller hann, deretter smittet V eller ikke
+\documentclass[tikz,border=2pt]{standalone}
+\input{felles}
+\begin{document}
+\begin{tikzpicture}[tre, level distance=3.1cm,
+  level 1/.style={sibling distance=2.6cm}, level 2/.style={sibling distance=1.3cm}]
+\node[rot] {}
+  child { node {$F$}
+    child { node (L00) {$V$} edge from parent node[up] {$0.05$} }
+    child { node (L01) {$\bar V$} edge from parent node[dn] {$0.95$} }
+    edge from parent node[up] {$0.8$} }
+  child { node {$\bar F$}
+    child { node (L10) {$V$} edge from parent node[up] {$0.30$} }
+    child { node (L11) {$\bar V$} edge from parent node[dn] {$0.70$} }
+    edge from parent node[dn] {$0.2$} };
+\node[leaf, text=acc] at (L00.east) {$P(F\cap V)=0.04$};
+\node[leaf] at (L01.east) {$P(F\cap\bar V)=0.76$};
+\node[leaf, text=acc] at (L10.east) {$P(\bar F\cap V)=0.06$};
+\node[leaf] at (L11.east) {$P(\bar F\cap\bar V)=0.14$};
+\end{tikzpicture}
+\end{document}
