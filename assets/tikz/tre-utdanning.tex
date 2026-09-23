@@ -1,0 +1,26 @@
+% Quiz 1 O2: karakter i matematikk (G) og høyere utdanning (H).
+\documentclass[tikz,border=2pt]{standalone}
+\definecolor{acc}{HTML}{FF0000}  % blir aksentfargen på siden (se build.py)
+\begin{document}
+\begin{tikzpicture}[
+  grow'=right, level distance=3.2cm,
+  level 1/.style={sibling distance=2.6cm},
+  level 2/.style={sibling distance=1.3cm},
+  edge from parent/.style={draw, line width=0.5pt},
+  p/.style={font=\small, text=acc, inner sep=2pt},
+  leaf/.style={anchor=west, xshift=0.35cm}]
+\node[circle, fill, inner sep=1.4pt] {}
+  child { node (G) {$G$}
+    child { node (GH) {$H$} edge from parent node[p, above, sloped] {$0.77$} }
+    child { node (GnH) {$\bar H$} edge from parent node[p, below, sloped] {$0.23$} }
+    edge from parent node[p, above, sloped] {$0.89$} }
+  child { node (nG) {$\bar G$}
+    child { node (nGH) {$H$} edge from parent node[p, above, sloped] {$0.05$} }
+    child { node (nGnH) {$\bar H$} edge from parent node[p, below, sloped] {$0.95$} }
+    edge from parent node[p, below, sloped] {$0.11$} };
+\node[leaf] at (GH.east)   {$P(G\cap H)=0.89\cdot 0.77=0.6853$};
+\node[leaf] at (GnH.east)  {$P(G\cap \bar H)=0.89\cdot 0.23=0.2047$};
+\node[leaf] at (nGH.east)  {$P(\bar G\cap H)=0.11\cdot 0.05=0.0055$};
+\node[leaf] at (nGnH.east) {$P(\bar G\cap \bar H)=0.11\cdot 0.95=0.1045$};
+\end{tikzpicture}
+\end{document}

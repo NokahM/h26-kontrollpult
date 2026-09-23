@@ -1,0 +1,44 @@
+% Quiz 1 O3.3: tre trekk uten tilbakelegging, 19 B og 17 M.
+\documentclass[tikz,border=2pt]{standalone}
+\definecolor{acc}{HTML}{FF0000}  % blir aksentfargen på siden (se build.py)
+\begin{document}
+\begin{tikzpicture}[
+  grow'=right, level distance=3.3cm,
+  level 1/.style={sibling distance=5.6cm},
+  level 2/.style={sibling distance=2.8cm},
+  level 3/.style={sibling distance=1.4cm},
+  edge from parent/.style={draw, line width=0.5pt},
+  p/.style={font=\small, text=acc, inner sep=2pt},
+  up/.style={p, above=1pt}, dn/.style={p, below=1pt},
+  leaf/.style={anchor=west, xshift=0.35cm}]
+\node[circle, fill, inner sep=1.4pt] {}
+  child { node {$B$}
+    child { node {$B$}
+      child { node (BBB) {$B$} edge from parent node[up] {$\displaystyle\frac{17}{34}$} }
+      child { node (BBM) {$M$} edge from parent node[dn] {$\displaystyle\frac{17}{34}$} }
+      edge from parent node[up] {$\displaystyle\frac{18}{35}$} }
+    child { node {$M$}
+      child { node (BMB) {$B$} edge from parent node[up] {$\displaystyle\frac{18}{34}$} }
+      child { node (BMM) {$M$} edge from parent node[dn] {$\displaystyle\frac{16}{34}$} }
+      edge from parent node[dn] {$\displaystyle\frac{17}{35}$} }
+    edge from parent node[up] {$\displaystyle\frac{19}{36}$} }
+  child { node {$M$}
+    child { node {$B$}
+      child { node (MBB) {$B$} edge from parent node[up] {$\displaystyle\frac{18}{34}$} }
+      child { node (MBM) {$M$} edge from parent node[dn] {$\displaystyle\frac{16}{34}$} }
+      edge from parent node[up] {$\displaystyle\frac{19}{35}$} }
+    child { node {$M$}
+      child { node (MMB) {$B$} edge from parent node[up] {$\displaystyle\frac{19}{34}$} }
+      child { node (MMM) {$M$} edge from parent node[dn] {$\displaystyle\frac{15}{34}$} }
+      edge from parent node[dn] {$\displaystyle\frac{16}{35}$} }
+    edge from parent node[dn] {$\displaystyle\frac{17}{36}$} };
+\node[leaf] at (BBB.east) {$P(BBB)=0.1357$};
+\node[leaf] at (BBM.east) {$P(BBM)=0.1357$};
+\node[leaf] at (BMB.east) {$P(BMB)=0.1357$};
+\node[leaf] at (BMM.east) {$P(BMM)=0.1206$};
+\node[leaf] at (MBB.east) {$P(MBB)=0.1357$};
+\node[leaf] at (MBM.east) {$P(MBM)=0.1206$};
+\node[leaf] at (MMB.east) {$P(MMB)=0.1206$};
+\node[leaf] at (MMM.east) {$P(MMM)=0.0952$};
+\end{tikzpicture}
+\end{document}

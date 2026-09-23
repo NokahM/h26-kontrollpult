@@ -753,6 +753,17 @@ code {
 .task__q li { margin-top: .4rem; padding-left: .2rem; }
 .task__q ol { list-style: lower-alpha; }
 .task__q li::marker { color: var(--accent); font-weight: 600; }
+/* Følger nummereringen i originalen: <ol type="1"> for 1, 2, 3 og <ol type="i"> for i, ii, iii */
+.task__q ol[type="1"] { list-style: decimal; }
+.task__q ol[type="i"] { list-style: lower-roman; }
+.task__q li > ol { margin-top: .35rem; }
+/* Mange korte punkter (for eksempel hendelser a–n) i kolonner */
+.task__q ol.cols { display: grid; grid-template-columns: repeat(4, 1fr); column-gap: 2rem; padding-left: 2rem; }
+.task__q ol.cols > li { margin-top: .2rem; }
+
+/* TikZ-figurer bygd med assets/tikz/build.py og limt inn som inline SVG */
+.tikz { display: block; max-width: 100%; height: auto; margin: 1.25rem auto; }
+.tikz-acc { fill: var(--accent); }
 
 .sol { margin-top: 1rem; border-top: 1px solid var(--line); }
 .sol > summary {
