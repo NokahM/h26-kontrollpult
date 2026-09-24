@@ -9,6 +9,8 @@
 // .task på siden egen status, og tasks: N er antallet oppgaver på siden.
 // Statusene selv håndteres av status.js.
 // formulas: '…/formler.html' gir emnet et formelpanel (formler.js).
+// reminders: [{ id, title, html }] gir et påminnelsesbanner øverst på alle emnets
+// sider og på forsiden (buildReminders).
 (function () {
   var root = document.documentElement;
   var script = document.currentScript;
@@ -70,6 +72,17 @@
     {
       id: 'statistikk', code: 'PB2030', course: 'PB2030', kind: 'konte',
       formulas: 'subjects/statistikk/formler.html',
+      reminders: [
+        { id: 'kalkulator', title: 'Øv på kalkulatoren før eksamen',
+          html: '<p>Du må kunne regne ut normalfordelte sannsynligheter direkte på kalkulatoren. ' +
+                'Kommandoene står i <strong>avsnitt 5.10 i læreboka</strong>. Øv til du gjør det uten å slå opp:</p>' +
+                '<ul><li><i>P</i>(<i>X</i> ≤ <i>x</i>), <i>P</i>(<i>X</i> &gt; <i>x</i>) og <i>P</i>(<i>a</i> &lt; <i>X</i> &lt; <i>b</i>) ' +
+                'rett fra <i>N</i>(μ, σ), uten å standardisere først</li>' +
+                '<li>baklengs: finne grensen <i>x</i> når sannsynligheten er gitt (kvantil)</li>' +
+                '<li>de andre fordelingskommandoene i samme avsnitt</li></ul>' +
+                '<p>Kontroller mot svarene på <a data-site-href="subjects/statistikk/oppgaver/05-normalfordeling.html">Normalfordeling</a>. ' +
+                'Vis likevel fremgangsmåten i besvarelsen, med standardisering og hvilken fordeling du bruker.</p>' }
+      ],
       name: 'Statistikk',
       desc: 'Eksamensoppgaver fra 13 tidligere sett, sortert på tema, med løsningsforslag.',
       scope: '88 oppgaver og 4 quizer',
@@ -232,6 +245,8 @@
 
   function buildRail(content) {
     var mainCol = h('div.content__main');
+    var rem = buildReminders([subject], false);
+    if (rem) mainCol.appendChild(rem);
     while (content.firstChild) mainCol.appendChild(content.firstChild);
     content.appendChild(mainCol);
     content.classList.add('has-rail');
@@ -323,6 +338,55 @@
     }
   }
 
+  /* ---- påminnelser ------------------------------------------------------ */
+
+  // reminders i SUBJECTS vises øverst på alle emnets sider og på forsiden.
+  // «Jeg har øvd» krymper banneret til en smal linje, men fjerner det aldri.
+  var RKEY = 'h26-paaminnelser';
+  function doneMap() { try { return JSON.parse(localStorage.getItem(RKEY) || '{}'); } catch (e) { return {}; } }
+
+  function reminderEl(s, r, showCode) {
+    var key = s.id + '/' + r.id;
+    var el = h('aside.reminder', { role: 'note', 'aria-label': 'Påminnelse', 'data-subject': s.id });
+    var title = h('strong.reminder__title');
+    var icon = h('span.reminder__icon', { 'aria-hidden': 'true' });
+    var btn = h('button.reminder__toggle', { type: 'button' });
+    var body = h('div.reminder__body');
+    body.innerHTML = r.html;
+    [].forEach.call(body.querySelectorAll('[data-site-href]'), function (a) {
+      a.setAttribute('href', abs(a.getAttribute('data-site-href')));
+    });
+    function sync() {
+      var done = !!doneMap()[key];
+      if (done) el.setAttribute('data-done', 'true'); else el.removeAttribute('data-done');
+      title.textContent = (done ? 'Øvd: ' : '') + r.title;
+      icon.textContent = done ? '✓' : '!';
+      btn.textContent = done ? 'Vis påminnelsen igjen' : 'Jeg har øvd';
+    }
+    btn.addEventListener('click', function () {
+      var m = doneMap();
+      if (m[key]) delete m[key]; else m[key] = new Date().toISOString().slice(0, 10);
+      try { localStorage.setItem(RKEY, JSON.stringify(m)); } catch (e) { /* lagring blokkert */ }
+      sync();
+    });
+    el.appendChild(h('div.reminder__head', {}, [
+      icon,
+      showCode ? h('span.reminder__code', { text: s.code }) : null,
+      title, btn
+    ]));
+    el.appendChild(body);
+    sync();
+    return el;
+  }
+
+  function buildReminders(list, showCode) {
+    var wrap = h('div.reminders');
+    list.forEach(function (s) {
+      (s.reminders || []).forEach(function (r) { wrap.appendChild(reminderEl(s, r, showCode)); });
+    });
+    return wrap.children.length ? wrap : null;
+  }
+
   /* ---- forside: emneoversikt -------------------------------------------- */
 
   function buildOverview(host) {
@@ -406,7 +470,11 @@
     if (aside && !aside.children.length) buildSidebar(aside);
 
     var overview = document.querySelector('[data-overview]');
-    if (overview) buildOverview(overview);
+    if (overview) {
+      var rems = buildReminders(SUBJECTS, true);
+      if (rems) overview.parentNode.insertBefore(rems, overview);
+      buildOverview(overview);
+    }
 
     var content = document.querySelector('.content');
     if (content && subject) buildRail(content);

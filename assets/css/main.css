@@ -491,6 +491,51 @@ a.tag:hover { border-color: var(--accent); color: var(--accent); }
   font-size: .75rem; font-weight: 700;
 }
 .pitfall p { margin: .35rem 0 0; }
+
+/* Påminnelse fra SUBJECTS[].reminders: øverst på alle emnets sider og på forsiden.
+   «Jeg har øvd» krymper den til én grønn linje, men fjerner den aldri. */
+.reminders { display: grid; gap: .75rem; margin-bottom: 1.75rem; }
+.reminder {
+  max-width: var(--measure);
+  padding: .9rem 1.15rem 1rem;
+  border: 2px solid var(--st-uklart);
+  border-left-width: 6px;
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--st-uklart) 9%, var(--bg));
+  font-family: var(--font-read);
+  line-height: 1.6;
+  color: var(--ink);
+}
+.reminder__head { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
+.reminder__icon {
+  display: inline-grid; place-items: center; flex: none;
+  width: 1.5rem; height: 1.5rem; border-radius: 50%;
+  background: var(--st-uklart); color: var(--bg);
+  font-family: var(--font-ui); font-size: .9rem; font-weight: 700;
+  animation: reminder-pulse 2.4s ease-in-out infinite;
+}
+@keyframes reminder-pulse { 50% { transform: scale(1.18); } }
+@media (prefers-reduced-motion: reduce) { .reminder__icon { animation: none; } }
+.reminder__code { font-family: var(--font-ui); font-weight: 700; color: var(--st-uklart); }
+.reminder__title { font-family: var(--font-head); font-size: 1.2rem; font-weight: 700; }
+.reminder__toggle {
+  margin-left: auto;
+  padding: .2rem .7rem;
+  border: 1px solid var(--line-2); border-radius: var(--radius);
+  background: var(--bg); color: var(--muted);
+  font: 500 .8125rem var(--font-ui); cursor: pointer;
+}
+.reminder__toggle:hover { background: var(--hover); color: var(--ink); }
+.reminder__body p { margin: .5rem 0 0; }
+.reminder__body a { color: inherit; font-weight: 600; text-decoration: underline; text-decoration-color: var(--st-uklart); text-underline-offset: 2px; }
+.reminder__body ul { margin: .4rem 0 0; padding-left: 1.3rem; }
+.reminder__body li { margin-top: .2rem; }
+.reminder[data-done] { padding: .45rem 1rem; border-width: 1px 1px 1px 4px; border-color: var(--st-forstatt);
+  background: color-mix(in srgb, var(--st-forstatt) 7%, var(--bg)); }
+.reminder[data-done] .reminder__body { display: none; }
+.reminder[data-done] .reminder__icon { background: var(--st-forstatt); animation: none; }
+.reminder[data-done] .reminder__title { font-size: 1rem; font-weight: 600; }
+.reminder[data-done] .reminder__code { color: var(--st-forstatt); }
 .pitfall pre.codeblock { margin: .5rem 0 0; }
 
 code {
