@@ -72,17 +72,6 @@
     {
       id: 'statistikk', code: 'PB2030', course: 'PB2030', kind: 'konte',
       formulas: 'subjects/statistikk/formler.html',
-      reminders: [
-        { id: 'kalkulator', title: 'Øv på kalkulatoren før eksamen',
-          html: '<p>Du må kunne regne ut normalfordelte sannsynligheter direkte på kalkulatoren. ' +
-                'Kommandoene står i <strong>avsnitt 5.10 i læreboka</strong>. Øv til du gjør det uten å slå opp:</p>' +
-                '<ul><li><i>P</i>(<i>X</i> ≤ <i>x</i>), <i>P</i>(<i>X</i> &gt; <i>x</i>) og <i>P</i>(<i>a</i> &lt; <i>X</i> &lt; <i>b</i>) ' +
-                'rett fra <i>N</i>(μ, σ), uten å standardisere først</li>' +
-                '<li>baklengs: finne grensen <i>x</i> når sannsynligheten er gitt (kvantil)</li>' +
-                '<li>de andre fordelingskommandoene i samme avsnitt</li></ul>' +
-                '<p>Kontroller mot svarene på <a data-site-href="subjects/statistikk/oppgaver/05-normalfordeling.html">Normalfordeling</a>. ' +
-                'Vis likevel fremgangsmåten i besvarelsen, med standardisering og hvilken fordeling du bruker.</p>' }
-      ],
       name: 'Statistikk',
       desc: 'Eksamensoppgaver fra 13 tidligere sett, sortert på tema, med løsningsforslag.',
       scope: '88 oppgaver og 4 quizer',
@@ -93,15 +82,17 @@
           { title: 'Prioritering', part: 'Eksamensforberedelse', href: 'subjects/statistikk/oppgaver/prioritering.html' },
           { title: 'Formelsamling og tabeller', part: 'Vedlegg', href: 'subjects/statistikk/oppgaver/10-formelsamling.html' }
         ] },
+        // Sortert etter hvor mange av de 13 settene temaet er med i; ved likt
+        // antall etter andel av poengene i settene fra 2023 og senere.
         { label: 'Oppgaver etter tema', items: [
-          { n: '1', title: 'Sannsynlighet og hendelsestre', meta: '10', tasks: 10, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/01-sannsynlighet.html' },
-          { n: '2', title: 'Kombinatorikk og hypergeometrisk', meta: '8', tasks: 8, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/02-kombinatorikk.html' },
-          { n: '3', title: 'Diskrete fordelinger', meta: '12', tasks: 12, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/03-diskrete-fordelinger.html' },
-          { n: '4', title: 'Tetthet og eksponentialfordeling', meta: '7', tasks: 7, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/04-kontinuerlige-fordelinger.html' },
+          { n: '8', title: 'Hypotesetesting', meta: '13', tasks: 13, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/08-hypotesetesting.html' },
           { n: '5', title: 'Normalfordeling', meta: '11', tasks: 11, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/05-normalfordeling.html' },
           { n: '6', title: 'Sentralgrenseteoremet', meta: '10', tasks: 10, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/06-sentralgrenseteoremet.html' },
+          { n: '3', title: 'Diskrete fordelinger', meta: '12', tasks: 12, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/03-diskrete-fordelinger.html' },
+          { n: '1', title: 'Sannsynlighet og hendelsestre', meta: '10', tasks: 10, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/01-sannsynlighet.html' },
           { n: '7', title: 'Konfidensintervall', meta: '12', tasks: 12, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/07-konfidensintervall.html' },
-          { n: '8', title: 'Hypotesetesting', meta: '13', tasks: 13, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/08-hypotesetesting.html' },
+          { n: '2', title: 'Kombinatorikk og hypergeometrisk', meta: '8', tasks: 8, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/02-kombinatorikk.html' },
+          { n: '4', title: 'Tetthet og eksponentialfordeling', meta: '7', tasks: 7, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/04-kontinuerlige-fordelinger.html' },
           { n: '9', title: 'Regresjon og korrelasjon', meta: '5', tasks: 5, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/statistikk/oppgaver/09-regresjon.html' }
         ] },
         { label: 'Quiz', items: [

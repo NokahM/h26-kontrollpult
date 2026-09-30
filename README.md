@@ -157,8 +157,7 @@ Et emne kan ha `reminders` i `SUBJECTS` (`main.js`), hver med `id`, `title` og
 Bruk vanlig tekst og Unicode i `html`, ikke LaTeX, fordi forsiden ikke laster
 MathJax. «Jeg har øvd» krymper banneret til én grønn linje, men fjerner det
 aldri. Valget lagres i `localStorage` (`h26-paaminnelser`), og knappen angrer det.
-Statistikk har nå en påminnelse om å øve på kalkulatorkommandoene i avsnitt
-5.10 i læreboka.
+Ingen emner har påminnelser nå.
 
 ## Formelpanel
 
