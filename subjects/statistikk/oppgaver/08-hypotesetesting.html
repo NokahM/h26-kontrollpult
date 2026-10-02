@@ -151,14 +151,21 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>b) Hypoteser</h4>
-                <p>Klagene handler om at veden er <em>fuktigere</em> enn lovet, så testen er ensidig høyresidig:</p>
+                <h4>b) Hypotesetest</h4>
+                <p><strong>Steg 1 — Hypoteser.</strong> Produsenten lover «høyst 20», og klagene går ut på at veden er <em>fuktigere</em>. Det vi vil undersøke (høyere fuktprosent) blir \(H_1\), og \(H_0\) får likhetstegnet:</p>
                 <p>\[ H_0:\mu\le 20 \qquad\text{mot}\qquad H_1:\mu&gt;20 \]</p>
-                <p><strong>Alternativ 1 — z-observator.</strong> \(\bar x=165.9/7=23.7\), \(\sigma=5\), \(n=7\):</p>
-                <p>\[ z=\frac{23.7-20}{5/\sqrt 7}=1.958 \]</p>
-                <p>Siden \(1.958&gt;z_{0.05}=1.645\) forkastes \(H_0\).</p>
-                <p><strong>Alternativ 2 — kritisk verdi.</strong></p>
-                <p>\[ k=\mu_0+z_\alpha\frac{\sigma}{\sqrt n}=20+1.645\cdot\frac{5}{\sqrt 7}=23.11 \]</p>
+                <p>Testen er altså ensidig, høyresidig.</p>
+                <p><strong>Steg 2 — Testobservator.</strong> \(\sigma=5\) er kjent og observasjonene er normalfordelte, så vi bruker Z-test. Under \(H_0\) (med \(\mu=\mu_0=20\)) er</p>
+                <p>\[ Z=\frac{\bar X-\mu_0}{\sigma/\sqrt n}\sim N(0,1) \]</p>
+                <p><strong>Steg 3 — Forkastingsområde.</strong> Høyresidig test med \(\alpha=0.05\): forkast \(H_0\) dersom \(Z&gt;z_{0.05}=1.645\) (fra tabellen: \(G(1.645)=0.95\)).</p>
+                <p><strong>Steg 4 — Regn ut.</strong> Gjennomsnittet av de sju målingene:</p>
+                <p>\[ \bar x=\frac{19.2+23.4+21.9+26.1+24.9+33.6+16.8}{7}=\frac{165.9}{7}=23.7 \]</p>
+                <p>Standardfeilen er \(\sigma/\sqrt n=5/\sqrt 7=5/2.646=1.890\), og dermed</p>
+                <p>\[ z=\frac{23.7-20}{1.890}=\frac{3.7}{1.890}=1.958 \]</p>
+                <p>Siden \(1.958&gt;1.645\), ligger \(z\) i forkastingsområdet.</p>
+                <p><strong>Steg 5 — Konklusjon.</strong> \(H_0\) forkastes på 5 % signifikansnivå. Dataene gir grunnlag for å hevde at forventet fuktprosent er høyere enn 20, altså at produsentens påstand ikke holder.</p>
+                <p><strong>Samme test via kritisk verdi.</strong> Grensen i prosentenheter er</p>
+                <p>\[ k=\mu_0+z_\alpha\frac{\sigma}{\sqrt n}=20+1.645\cdot 1.890=23.11 \]</p>
                 <p>og \(\bar x=23.7&gt;23.11\) gir samme konklusjon.</p>
                 <!-- tikz:ht-ved-test --><svg class='tikz' role='img' style='width:28.2em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-70.008853 -66.684032 239.329748 85.974395'>
 <defs>
@@ -225,9 +232,11 @@
 </g>
 </g>
 </svg><!-- /tikz:ht-ved-test -->
-                <p><strong>Alternativ 3 — via konfidensintervallet.</strong> Fra a) er [20.6, 26.8] et symmetrisk 90 %-intervall. Det ensidige intervallet \([20.6,\ \infty\rangle\) har da konfidensgrad 95 %, og siden \(20&lt;20.6\) forkastes \(H_0\) på 5 % nivå.</p>
-                <p><strong>Konklusjon:</strong> dataene gir grunnlag for å hevde at veden har høyere fuktighetsprosent enn 20.</p>
+                <p><strong>Samme test via konfidensintervallet.</strong> Fra a) er [20.6, 26.8] et symmetrisk 90 %-intervall. Det har 5 % i hver hale, så det ensidige intervallet \([20.6,\ \infty\rangle\) har konfidensgrad 95 %. Siden \(\mu_0=20\) ligger utenfor (\(20&lt;20.6\)), forkastes \(H_0\) på 5 % nivå.</p>
                 <h4>c) Teststyrke</h4>
+                <p>Teststyrken \(\gamma(25)\) er sannsynligheten for å forkaste \(H_0\) dersom den sanne forventningen er \(\mu=25\). Fremgangsmåten er alltid den samme:</p>
+                <p><strong>1) Forkastingsområdet i prosentenheter.</strong> Det er bestemt under \(H_0\) og endrer seg ikke: forkast når \(\bar X&gt;k=23.11\) (fra b).</p>
+                <p><strong>2) Sannsynligheten for å havne der, nå med \(\mu=25\).</strong> Standardiser med den <em>sanne</em> forventningen 25, ikke med 20:</p>
                 <!-- tikz:ht-ved-styrke --><svg class='tikz' role='img' style='width:28.2em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-70.008853 -66.684032 239.326748 85.974395'>
 <defs>
 <path stroke='none' id='ht-ved-styrke-g0-11' d='M4.402491-2.107098C4.402491-3.443088 3.595517-3.963138 2.833375-3.963138C1.613948-3.963138 .385554-2.725778 .385554-1.43462C.385554-.511083 1.0132 .09863 1.882939 .09863C2.851308 .09863 3.58655-.475218 3.819676-.654545C3.936239-.206227 4.23213 .09863 4.671482 .09863C5.155666 .09863 5.451557-.376588 5.451557-.537983C5.451557-.636613 5.352927-.636613 5.326027-.636613C5.227397-.636613 5.218431-.600747 5.191532-.52005C5.092902-.260025 4.859776-.125529 4.698381-.125529C4.411457-.125529 4.411457-.923537 4.411457-1.102864C4.411457-1.219427 4.411457-1.23736 4.492154-1.33599C4.644583-1.524284 4.886675-1.838107 5.119801-2.295392C5.388792-2.824408 5.532254-3.371357 5.532254-3.425156C5.532254-3.434122 5.532254-3.523786 5.415691-3.523786C5.308095-3.523786 5.308095-3.496887 5.263263-3.353425C5.173599-3.039601 4.967372-2.358157 4.402491-1.604981V-2.107098ZM3.774844-.91457C3.550685-.726276 2.824408-.125529 1.909838-.125529C1.407721-.125529 1.075965-.457285 1.075965-1.102864C1.075965-1.488418 1.246326-2.37609 1.604981-2.949938C1.838107-3.317559 2.313325-3.738979 2.833375-3.738979C3.434122-3.738979 3.631382-3.200996 3.71208-2.663014C3.783811-2.178829 3.730012-1.318057 3.774844-.91457Z'/>
@@ -302,9 +311,10 @@
 </g>
 </g>
 </svg><!-- /tikz:ht-ved-styrke -->
-                <p>Bruk kritisk verdi \(k=23.11\), men standardiser nå med \(\mu=25\):</p>
-                <p>\[ \gamma(25)=P(\bar X&gt;23.11\mid\mu=25)=1-G\!\left(\frac{23.11-25}{5/\sqrt 7}\right)=1-G(-1.00)=0.84 \]</p>
-                <div class="answer"><b>\(H_0\) forkastes · \(\gamma(25)=0.84\).</b> Det betyr at hvis den virkelige fuktprosenten er 25, har testen 84 % sjanse for å avsløre at produsentens påstand er gal.</div>
+                <p>\[ \gamma(25)=P(\bar X&gt;23.11\mid\mu=25)=P\!\left(Z&gt;\frac{23.11-25}{1.890}\right)=P(Z&gt;-1.00) \]</p>
+                <p>\[ =1-G(-1.00)=1-0.1587=0.84 \]</p>
+                <p><strong>Hva det betyr:</strong> Hvis den virkelige forventede fuktprosenten er 25, vil testen forkaste \(H_0\), altså avsløre at produsentens påstand er gal, i 84 % av tilfellene. Sannsynligheten for type II-feil (å ikke oppdage det) er \(\beta=1-0.84=0.16\).</p>
+                <div class="answer"><b>b) \(z=1.958&gt;1.645\), \(H_0\) forkastes · c) \(\gamma(25)=0.84\).</b> Veden har høyere fuktprosent enn 20, og testen har 84 % sjanse for å oppdage det hvis den sanne verdien er 25.</div>
               </div>
             </details>
           </article>
@@ -326,14 +336,21 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>a)</h4>
-                <p>Vi undersøker om tiden er <em>redusert</em>, altså venstresidig test med \(\mu_0=35\):</p>
+                <h4>a) Hypotesetest</h4>
+                <p><strong>Steg 1 — Hypoteser.</strong> Vi vil undersøke om tiden har blitt <em>redusert</em>. Det blir \(H_1\), og \(H_0\) får likhetstegnet:</p>
                 <p>\[ H_0:\mu\ge 35 \qquad\text{mot}\qquad H_1:\mu&lt;35 \]</p>
-                <p>Forkast \(H_0\) dersom \(Z&lt;-z_\alpha\). Med \(\bar X=33.1\), \(n=20\), \(\sigma=4.3\):</p>
-                <p>\[ Z=\frac{33.1-35}{4.3/\sqrt{20}}=-1.976 \]</p>
-                <p>Siden \(-1.976&lt;-1.645\) forkastes \(H_0\): dataene støtter antakelsen om redusert testtid.</p>
+                <p>Testen er altså ensidig, venstresidig.</p>
+                <p><strong>Steg 2 — Testobservator.</strong> \(\sigma=4.3\) antas kjent og uendret, og tiden er normalfordelt, så vi bruker Z-test. Under \(H_0\) (med \(\mu=\mu_0=35\)) er</p>
+                <p>\[ Z=\frac{\bar X-\mu_0}{\sigma/\sqrt n}\sim N(0,1) \]</p>
+                <p><strong>Steg 3 — Forkastingsområde.</strong> Venstresidig test med \(\alpha=0.05\): forkast \(H_0\) dersom \(Z&lt;-z_{0.05}=-1.645\).</p>
+                <p><strong>Steg 4 — Regn ut.</strong> Standardfeilen er \(\sigma/\sqrt n=4.3/\sqrt{20}=4.3/4.472=0.9615\), og med \(\bar x=33.1\):</p>
+                <p>\[ z=\frac{33.1-35}{0.9615}=\frac{-1.9}{0.9615}=-1.976 \]</p>
+                <p>Siden \(-1.976&lt;-1.645\), ligger \(z\) i forkastingsområdet.</p>
+                <p><strong>Steg 5 — Konklusjon.</strong> \(H_0\) forkastes på 5 % signifikansnivå. Dataene gir grunnlag for å hevde at forventet testtid har blitt redusert fra 35 minutter.</p>
                 <h4>b) Kritisk verdi</h4>
-                <p>\[ k=\mu_0-z_\alpha\frac{\sigma}{\sqrt n}=35-1.645\cdot\frac{4.3}{\sqrt{20}}=33.42\ \text{min} \]</p>
+                <p>Den største gjennomsnittsverdien som gir forkasting, er grensen \(k\) der \(z\) akkurat treffer \(-1.645\):</p>
+                <p>\[ \frac{k-35}{0.9615}=-1.645 \quad\Rightarrow\quad k=35-1.645\cdot 0.9615=35-1.582=33.42\ \text{min} \]</p>
+                <p>Alle gjennomsnitt under 33.42 min gir forkasting. Kontroll mot a): \(33.1&lt;33.42\), som stemmer med at \(H_0\) ble forkastet.</p>
                 <!-- tikz:ht-testtid-test --><svg class='tikz' role='img' style='width:28.2em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-70.008853 -66.68404 239.326748 85.975295'>
 <defs>
 <path stroke='none' id='ht-testtid-test-g0-11' d='M4.402491-2.107098C4.402491-3.443088 3.595517-3.963138 2.833375-3.963138C1.613948-3.963138 .385554-2.725778 .385554-1.43462C.385554-.511083 1.0132 .09863 1.882939 .09863C2.851308 .09863 3.58655-.475218 3.819676-.654545C3.936239-.206227 4.23213 .09863 4.671482 .09863C5.155666 .09863 5.451557-.376588 5.451557-.537983C5.451557-.636613 5.352927-.636613 5.326027-.636613C5.227397-.636613 5.218431-.600747 5.191532-.52005C5.092902-.260025 4.859776-.125529 4.698381-.125529C4.411457-.125529 4.411457-.923537 4.411457-1.102864C4.411457-1.219427 4.411457-1.23736 4.492154-1.33599C4.644583-1.524284 4.886675-1.838107 5.119801-2.295392C5.388792-2.824408 5.532254-3.371357 5.532254-3.425156C5.532254-3.434122 5.532254-3.523786 5.415691-3.523786C5.308095-3.523786 5.308095-3.496887 5.263263-3.353425C5.173599-3.039601 4.967372-2.358157 4.402491-1.604981V-2.107098ZM3.774844-.91457C3.550685-.726276 2.824408-.125529 1.909838-.125529C1.407721-.125529 1.075965-.457285 1.075965-1.102864C1.075965-1.488418 1.246326-2.37609 1.604981-2.949938C1.838107-3.317559 2.313325-3.738979 2.833375-3.738979C3.434122-3.738979 3.631382-3.200996 3.71208-2.663014C3.783811-2.178829 3.730012-1.318057 3.774844-.91457Z'/>
@@ -400,6 +417,9 @@
 </g>
 </svg><!-- /tikz:ht-testtid-test -->
                 <h4>c) Teststyrke</h4>
+                <p>Vi skal finne \(\gamma(32)\), sannsynligheten for å forkaste \(H_0\) når den sanne forventningen er \(\mu=32\).</p>
+                <p><strong>1) Forkastingsområdet</strong> er fra b): forkast når \(\bar X&lt;33.42\).</p>
+                <p><strong>2) Standardiser med den sanne forventningen \(\mu=32\):</strong></p>
                 <!-- tikz:ht-testtid-styrke --><svg class='tikz' role='img' style='width:28.2em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-70.008853 -66.68404 239.326748 85.975295'>
 <defs>
 <path stroke='none' id='ht-testtid-styrke-g0-11' d='M4.402491-2.107098C4.402491-3.443088 3.595517-3.963138 2.833375-3.963138C1.613948-3.963138 .385554-2.725778 .385554-1.43462C.385554-.511083 1.0132 .09863 1.882939 .09863C2.851308 .09863 3.58655-.475218 3.819676-.654545C3.936239-.206227 4.23213 .09863 4.671482 .09863C5.155666 .09863 5.451557-.376588 5.451557-.537983C5.451557-.636613 5.352927-.636613 5.326027-.636613C5.227397-.636613 5.218431-.600747 5.191532-.52005C5.092902-.260025 4.859776-.125529 4.698381-.125529C4.411457-.125529 4.411457-.923537 4.411457-1.102864C4.411457-1.219427 4.411457-1.23736 4.492154-1.33599C4.644583-1.524284 4.886675-1.838107 5.119801-2.295392C5.388792-2.824408 5.532254-3.371357 5.532254-3.425156C5.532254-3.434122 5.532254-3.523786 5.415691-3.523786C5.308095-3.523786 5.308095-3.496887 5.263263-3.353425C5.173599-3.039601 4.967372-2.358157 4.402491-1.604981V-2.107098ZM3.774844-.91457C3.550685-.726276 2.824408-.125529 1.909838-.125529C1.407721-.125529 1.075965-.457285 1.075965-1.102864C1.075965-1.488418 1.246326-2.37609 1.604981-2.949938C1.838107-3.317559 2.313325-3.738979 2.833375-3.738979C3.434122-3.738979 3.631382-3.200996 3.71208-2.663014C3.783811-2.178829 3.730012-1.318057 3.774844-.91457Z'/>
@@ -473,9 +493,9 @@
 </g>
 </g>
 </svg><!-- /tikz:ht-testtid-styrke -->
-                <p>Forkasting skjer når \(\bar x&lt;33.42\). Med \(\mu=32\):</p>
-                <p>\[ \gamma(32)=P(\bar X&lt;33.42\mid\mu=32)=G\!\left(\frac{33.42-32}{4.3/\sqrt{20}}\right)=G(1.48)=0.93 \]</p>
-                <div class="answer"><b>a) \(H_0\) forkastes (\(z=-1.98\)) · b) \(k=33.42\) min · c) \(\gamma(32)=0.93\).</b></div>
+                <p>\[ \gamma(32)=P(\bar X&lt;33.42\mid\mu=32)=G\!\left(\frac{33.42-32}{0.9615}\right)=G(1.48)=0.93 \]</p>
+                <p><strong>Hva det betyr:</strong> Hvis forventet testtid egentlig er 32 minutter, vil testen med 20 elever oppdage at tiden er redusert i 93 % av tilfellene. Sannsynligheten for type II-feil er \(\beta=0.07\).</p>
+                <div class="answer"><b>a) \(z=-1.976&lt;-1.645\), \(H_0\) forkastes · b) \(k=33.42\) min · c) \(\gamma(32)=0.93\).</b></div>
               </div>
             </details>
           </article>
@@ -498,12 +518,21 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>a)</h4>
+                <h4>a) Hypotesetest</h4>
+                <p><strong>Steg 1 — Hypoteser.</strong> Harald mener prisen er høyst 100 euro, mens vennen påstår at den har blitt høyere. Det vi vil undersøke er vennens påstand, så den blir \(H_1\), og \(H_0\) får likhetstegnet:</p>
                 <p>\[ H_0:\mu\le 100 \qquad\text{mot}\qquad H_1:\mu&gt;100 \]</p>
-                <p>\[ Z=\frac{120-100}{20/\sqrt{20}}=\frac{20}{4.472}=4.472 \]</p>
-                <p>Siden \(4.472\gg z_{0.05}=1.645\) forkastes \(H_0\) klart: hotellprisen er høyere enn 100 euro.</p>
-                <h4>b)</h4>
-                <p>\[ k=100+1.645\cdot\frac{20}{\sqrt{20}}=107.36\ \text{euro} \]</p>
+                <p>Testen er altså ensidig, høyresidig.</p>
+                <p><strong>Steg 2 — Testobservator.</strong> \(\sigma=20\) er kjent og prisen er normalfordelt, så vi bruker Z-test. Under \(H_0\) (med \(\mu=\mu_0=100\)) er</p>
+                <p>\[ Z=\frac{\bar X-\mu_0}{\sigma/\sqrt n}\sim N(0,1) \]</p>
+                <p><strong>Steg 3 — Forkastingsområde.</strong> Høyresidig test med \(\alpha=0.05\): forkast \(H_0\) dersom \(Z&gt;z_{0.05}=1.645\).</p>
+                <p><strong>Steg 4 — Regn ut.</strong> Standardfeilen er \(\sigma/\sqrt n=20/\sqrt{20}=4.472\), og med \(\bar x=120\):</p>
+                <p>\[ z=\frac{120-100}{4.472}=\frac{20}{4.472}=4.472 \]</p>
+                <p>Siden \(4.472&gt;1.645\), ligger \(z\) godt inne i forkastingsområdet.</p>
+                <p><strong>Steg 5 — Konklusjon.</strong> \(H_0\) forkastes på 5 % signifikansnivå. Dataene gir grunnlag for å hevde at forventet hotellpris er høyere enn 100 euro, altså at vennen har rett.</p>
+                <h4>b) Kritisk verdi</h4>
+                <p>Den minste gjennomsnittsverdien som gir forkasting, er grensen \(k\) der \(z\) akkurat treffer \(1.645\):</p>
+                <p>\[ \frac{k-100}{4.472}=1.645 \quad\Rightarrow\quad k=100+1.645\cdot 4.472=100+7.36=107.36\ \text{euro} \]</p>
+                <p>Alle gjennomsnitt over 107.36 euro gir forkasting. Kontroll mot a): \(120&gt;107.36\).</p>
                 <!-- tikz:ht-hotell-test --><svg class='tikz' role='img' style='width:28.2em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-70.008853 -66.684031 239.326748 85.976695'>
 <defs>
 <path stroke='none' id='ht-hotell-test-g0-11' d='M4.402491-2.107098C4.402491-3.443088 3.595517-3.963138 2.833375-3.963138C1.613948-3.963138 .385554-2.725778 .385554-1.43462C.385554-.511083 1.0132 .09863 1.882939 .09863C2.851308 .09863 3.58655-.475218 3.819676-.654545C3.936239-.206227 4.23213 .09863 4.671482 .09863C5.155666 .09863 5.451557-.376588 5.451557-.537983C5.451557-.636613 5.352927-.636613 5.326027-.636613C5.227397-.636613 5.218431-.600747 5.191532-.52005C5.092902-.260025 4.859776-.125529 4.698381-.125529C4.411457-.125529 4.411457-.923537 4.411457-1.102864C4.411457-1.219427 4.411457-1.23736 4.492154-1.33599C4.644583-1.524284 4.886675-1.838107 5.119801-2.295392C5.388792-2.824408 5.532254-3.371357 5.532254-3.425156C5.532254-3.434122 5.532254-3.523786 5.415691-3.523786C5.308095-3.523786 5.308095-3.496887 5.263263-3.353425C5.173599-3.039601 4.967372-2.358157 4.402491-1.604981V-2.107098ZM3.774844-.91457C3.550685-.726276 2.824408-.125529 1.909838-.125529C1.407721-.125529 1.075965-.457285 1.075965-1.102864C1.075965-1.488418 1.246326-2.37609 1.604981-2.949938C1.838107-3.317559 2.313325-3.738979 2.833375-3.738979C3.434122-3.738979 3.631382-3.200996 3.71208-2.663014C3.783811-2.178829 3.730012-1.318057 3.774844-.91457Z'/>
@@ -571,7 +600,10 @@
 </g>
 </g>
 </svg><!-- /tikz:ht-hotell-test -->
-                <h4>c)</h4>
+                <h4>c) Teststyrke</h4>
+                <p>Vi skal finne \(\gamma(110)\), sannsynligheten for å forkaste \(H_0\) når den sanne forventningen er \(\mu=110\).</p>
+                <p><strong>1) Forkastingsområdet</strong> er fra b): forkast når \(\bar X&gt;107.36\).</p>
+                <p><strong>2) Standardiser med den sanne forventningen \(\mu=110\):</strong></p>
                 <!-- tikz:ht-hotell-styrke --><svg class='tikz' role='img' style='width:28.2em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-70.008853 -66.684031 239.326748 85.976695'>
 <defs>
 <path stroke='none' id='ht-hotell-styrke-g0-11' d='M4.402491-2.107098C4.402491-3.443088 3.595517-3.963138 2.833375-3.963138C1.613948-3.963138 .385554-2.725778 .385554-1.43462C.385554-.511083 1.0132 .09863 1.882939 .09863C2.851308 .09863 3.58655-.475218 3.819676-.654545C3.936239-.206227 4.23213 .09863 4.671482 .09863C5.155666 .09863 5.451557-.376588 5.451557-.537983C5.451557-.636613 5.352927-.636613 5.326027-.636613C5.227397-.636613 5.218431-.600747 5.191532-.52005C5.092902-.260025 4.859776-.125529 4.698381-.125529C4.411457-.125529 4.411457-.923537 4.411457-1.102864C4.411457-1.219427 4.411457-1.23736 4.492154-1.33599C4.644583-1.524284 4.886675-1.838107 5.119801-2.295392C5.388792-2.824408 5.532254-3.371357 5.532254-3.425156C5.532254-3.434122 5.532254-3.523786 5.415691-3.523786C5.308095-3.523786 5.308095-3.496887 5.263263-3.353425C5.173599-3.039601 4.967372-2.358157 4.402491-1.604981V-2.107098ZM3.774844-.91457C3.550685-.726276 2.824408-.125529 1.909838-.125529C1.407721-.125529 1.075965-.457285 1.075965-1.102864C1.075965-1.488418 1.246326-2.37609 1.604981-2.949938C1.838107-3.317559 2.313325-3.738979 2.833375-3.738979C3.434122-3.738979 3.631382-3.200996 3.71208-2.663014C3.783811-2.178829 3.730012-1.318057 3.774844-.91457Z'/>
@@ -649,12 +681,20 @@
 </g>
 </g>
 </svg><!-- /tikz:ht-hotell-styrke -->
-                <p>\[ \gamma(110)=P(\bar X&gt;107.36\mid\mu=110)=1-G\!\left(\frac{107.36-110}{4.472}\right)=1-G(-0.590)=0.72 \]</p>
-                <h4>d) Løs for n</h4>
-                <p>Kravet er \(\gamma(110)=0.95\). Generelt:</p>
-                <p>\[ \gamma(\mu_1)=1-G\!\left(z_\alpha-\frac{\mu_1-\mu_0}{\sigma/\sqrt n}\right)=0.95 \quad\Longrightarrow\quad z_\alpha-\frac{\mu_1-\mu_0}{\sigma/\sqrt n}=-z_{0.05} \]</p>
-                <p>\[ 1.645-\frac{10}{20/\sqrt n}=-1.645 \quad\Rightarrow\quad \frac{\sqrt n}{2}=2\cdot 1.645 \quad\Rightarrow\quad n=(4\cdot 1.645)^2=43.3 \]</p>
-                <div class="answer"><b>a) \(H_0\) forkastes · b) 107.36 euro · c) 0.72 · d) minst 44 målinger.</b> Legg merke til strukturen i d): kravet «styrke 0.95» blir til \(z_\alpha + z_\beta = \frac{\mu_1-\mu_0}{\sigma/\sqrt n}\).</div>
+                <p>\[ \gamma(110)=P(\bar X&gt;107.36\mid\mu=110)=1-G\!\left(\frac{107.36-110}{4.472}\right) \]</p>
+                <p>\[ =1-G(-0.59)=1-0.2776=0.72 \]</p>
+                <p><strong>Hva det betyr:</strong> Hvis forventet pris egentlig er 110 euro, vil testen med 20 hotellrom oppdage at prisen er over 100 i 72 % av tilfellene.</p>
+                <h4>d) Hvor mange målinger?</h4>
+                <p>Nå skal \(n\) bestemmes slik at \(\gamma(110)=0.95\). Vi gjør det samme som i b) og c), men lar \(n\) stå som ukjent.</p>
+                <p><strong>1) Kritisk verdi som funksjon av \(n\):</strong></p>
+                <p>\[ k=100+1.645\cdot\frac{20}{\sqrt n} \]</p>
+                <p><strong>2) Kravet til styrken.</strong> \(\gamma(110)=P(\bar X&gt;k\mid\mu=110)=0.95\) betyr at arealet til <em>venstre</em> for \(k\) under den sanne kurven skal være 0.05. Den standardiserte verdien av \(k\) må da være \(-z_{0.05}=-1.645\):</p>
+                <p>\[ \frac{k-110}{20/\sqrt n}=-1.645 \]</p>
+                <p><strong>3) Sett inn \(k\) og løs for \(n\):</strong></p>
+                <p>\[ \frac{100+1.645\cdot\frac{20}{\sqrt n}-110}{20/\sqrt n}=1.645-\frac{10}{20/\sqrt n}=1.645-\frac{\sqrt n}{2}=-1.645 \]</p>
+                <p>\[ \frac{\sqrt n}{2}=3.29 \quad\Rightarrow\quad \sqrt n=6.58 \quad\Rightarrow\quad n=43.3 \]</p>
+                <p><strong>4) Rund opp.</strong> \(n\) må være et helt tall, og \(n=43\) gir litt for lav styrke. Harald må altså ha minst 44 målinger.</p>
+                <div class="answer"><b>a) \(z=4.472&gt;1.645\), \(H_0\) forkastes · b) 107.36 euro · c) 0.72 · d) minst 44 målinger.</b> Legg merke til strukturen i d): kravet «styrke 0.95» blir til \(z_\alpha + z_\beta = \frac{\mu_1-\mu_0}{\sigma/\sqrt n}\), her \(1.645+1.645=\frac{10}{20/\sqrt n}\).</div>
               </div>
             </details>
           </article>
@@ -677,13 +717,22 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>a)</h4>
+                <h4>a) Hypotesetest</h4>
+                <p><strong>Steg 1 — Hypoteser.</strong> Pakken skal ikke ha mer enn 14 % fett, og vi vil kontrollere om fettinnholdet er <em>høyere</em>. Det blir \(H_1\):</p>
                 <p>\[ H_0:\mu\le 14 \qquad\text{mot}\qquad H_1:\mu&gt;14 \]</p>
-                <p>\[ z=\frac{15.44-14}{3/\sqrt 9}=\frac{1.44}{1}=1.44 \]</p>
-                <p>Siden \(1.44&lt;z_{0.05}=1.645\) kan \(H_0\) <strong>ikke</strong> forkastes. Dataene gir ikke grunnlag for å hevde at fettinnholdet er høyere enn 14 %.</p>
+                <p>Testen er altså ensidig, høyresidig.</p>
+                <p><strong>Steg 2 — Testobservator.</strong> \(\sigma=3\) er kjent og fettinnholdet er normalfordelt, så vi bruker Z-test. Under \(H_0\) (med \(\mu=\mu_0=14\)) er</p>
+                <p>\[ Z=\frac{\bar X-\mu_0}{\sigma/\sqrt n}\sim N(0,1) \]</p>
+                <p><strong>Steg 3 — Forkastingsområde.</strong> Høyresidig test med \(\alpha=0.05\): forkast \(H_0\) dersom \(Z&gt;z_{0.05}=1.645\).</p>
+                <p><strong>Steg 4 — Regn ut.</strong> Standardfeilen er \(\sigma/\sqrt n=3/\sqrt 9=3/3=1\), og med \(\bar x=15.44\):</p>
+                <p>\[ z=\frac{15.44-14}{1}=1.44 \]</p>
+                <p>Siden \(1.44&lt;1.645\), ligger \(z\) <strong>ikke</strong> i forkastingsområdet.</p>
+                <p><strong>Steg 5 — Konklusjon.</strong> \(H_0\) kan ikke forkastes på 5 % signifikansnivå. Dataene gir ikke grunnlag for å hevde at forventet fettinnhold er høyere enn 14 %.</p>
+                <div class="note"><strong>Formulering:</strong> skriv «\(H_0\) beholdes» eller «kan ikke forkastes», ikke «\(H_0\) er sann». Vi har bare ikke nok bevis mot den.</div>
                 <h4>b) p-verdi</h4>
-                <p>\[ p=P(\bar X&gt;15.44\mid\mu_0=14)=1-G(1.44)=1-0.9251=0.075 \]</p>
-                <p>Konsistent med a): \(0.075&gt;0.05\).</p>
+                <p>p-verdien er sannsynligheten for å få et resultat minst like ekstremt som det vi observerte, i retning av \(H_1\), gitt at \(H_0\) er sann. Testen er høyresidig, så «minst like ekstremt» betyr \(\bar X\ge 15.44\):</p>
+                <p>\[ p=P(\bar X\ge 15.44\mid\mu=14)=P(Z\ge 1.44)=1-G(1.44)=1-0.9251=0.075 \]</p>
+                <p>Siden \(p=0.075&gt;\alpha=0.05\), beholdes \(H_0\). Det stemmer med a).</p>
                 <!-- tikz:ht-kjottdeig-test --><svg class='tikz' role='img' style='width:28.2em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-70.008853 -66.684038 239.326748 85.979895'>
 <defs>
 <path stroke='none' id='ht-kjottdeig-test-g0-11' d='M4.402491-2.107098C4.402491-3.443088 3.595517-3.963138 2.833375-3.963138C1.613948-3.963138 .385554-2.725778 .385554-1.43462C.385554-.511083 1.0132 .09863 1.882939 .09863C2.851308 .09863 3.58655-.475218 3.819676-.654545C3.936239-.206227 4.23213 .09863 4.671482 .09863C5.155666 .09863 5.451557-.376588 5.451557-.537983C5.451557-.636613 5.352927-.636613 5.326027-.636613C5.227397-.636613 5.218431-.600747 5.191532-.52005C5.092902-.260025 4.859776-.125529 4.698381-.125529C4.411457-.125529 4.411457-.923537 4.411457-1.102864C4.411457-1.219427 4.411457-1.23736 4.492154-1.33599C4.644583-1.524284 4.886675-1.838107 5.119801-2.295392C5.388792-2.824408 5.532254-3.371357 5.532254-3.425156C5.532254-3.434122 5.532254-3.523786 5.415691-3.523786C5.308095-3.523786 5.308095-3.496887 5.263263-3.353425C5.173599-3.039601 4.967372-2.358157 4.402491-1.604981V-2.107098ZM3.774844-.91457C3.550685-.726276 2.824408-.125529 1.909838-.125529C1.407721-.125529 1.075965-.457285 1.075965-1.102864C1.075965-1.488418 1.246326-2.37609 1.604981-2.949938C1.838107-3.317559 2.313325-3.738979 2.833375-3.738979C3.434122-3.738979 3.631382-3.200996 3.71208-2.663014C3.783811-2.178829 3.730012-1.318057 3.774844-.91457Z'/>
@@ -767,12 +816,19 @@
                 <h4>c) Teststyrke ved \(\mu=14\)</h4>
                 <p>Her er \(\mu=\mu_0\), altså er \(H_0\) sann. Sannsynligheten for å forkaste en sann \(H_0\) er per definisjon signifikansnivået:</p>
                 <p>\[ \gamma(14)=\alpha=0.05 \]</p>
-                <p>Et lite «gotcha» — mange regner seg unødvendig fram til det samme.</p>
-                <h4>d)</h4>
-                <p>Forkastingsgrensen er \(k=14+1.645\cdot 3/\sqrt n\), og type II-feil er \(\beta=P(\bar X&lt;k\mid\mu=16)\):</p>
-                <p>\[ G\!\left(\frac{14+1.645\cdot 3/\sqrt n-16}{3/\sqrt n}\right)&lt;0.10 \quad\Rightarrow\quad 1.645-\frac{2\sqrt n}{3}&lt;-1.282 \]</p>
-                <p>\[ \sqrt n&gt;\frac{3(1.645+1.282)}{2}=4.39 \quad\Rightarrow\quad n&gt;19.3 \]</p>
-                <div class="answer"><b>a) \(H_0\) beholdes · b) \(p=0.075\) · c) 0.05 · d) minst 20 pakker.</b></div>
+                <p>Regner du det ut på vanlig måte, får du det samme: \(k=14+1.645\cdot 1=15.645\), og \(\gamma(14)=P(\bar X&gt;15.645\mid\mu=14)=1-G(1.645)=0.05\). Mange regner seg unødvendig fram til dette, så kjenn igjen situasjonen.</p>
+                <h4>d) Antall pakker</h4>
+                <p>Type II-feil er å <em>beholde</em> \(H_0\) selv om den er gal. Med \(\mu=16\) skal \(\beta(16)=P(\text{beholde }H_0\mid\mu=16)&lt;0.10\). Vi lar \(n\) stå som ukjent.</p>
+                <p><strong>1) Kritisk verdi som funksjon av \(n\).</strong> Forkast når \(\bar X&gt;k\), der</p>
+                <p>\[ k=14+1.645\cdot\frac{3}{\sqrt n} \]</p>
+                <p><strong>2) Sannsynligheten for å beholde \(H_0\) når \(\mu=16\).</strong> Standardiser \(k\) med den sanne forventningen 16:</p>
+                <p>\[ \beta(16)=P(\bar X\le k\mid\mu=16)=G\!\left(\frac{k-16}{3/\sqrt n}\right) \]</p>
+                <p>\[ =G\!\left(\frac{14+1.645\cdot 3/\sqrt n-16}{3/\sqrt n}\right)=G\!\left(1.645-\frac{2\sqrt n}{3}\right) \]</p>
+                <p><strong>3) Krav.</strong> \(G(x)&lt;0.10\) betyr \(x&lt;-z_{0.10}=-1.282\) (fra tabellen: \(G(-1.282)=0.10\)):</p>
+                <p>\[ 1.645-\frac{2\sqrt n}{3}&lt;-1.282 \quad\Rightarrow\quad \frac{2\sqrt n}{3}&gt;2.927 \]</p>
+                <p>\[ \sqrt n&gt;\frac{3\cdot 2.927}{2}=4.39 \quad\Rightarrow\quad n&gt;19.3 \]</p>
+                <p><strong>4) Rund opp og kontroller.</strong> Minst 20 pakker. Kontroll: \(n=20\) gir \(\beta=G(1.645-2.981)=G(-1.34)=0.09&lt;0.10\), mens \(n=19\) gir \(\beta=G(-1.26)=0.104\), som er for mye.</p>
+                <div class="answer"><b>a) \(z=1.44&lt;1.645\), \(H_0\) beholdes · b) \(p=0.075\) · c) 0.05 · d) minst 20 pakker.</b></div>
               </div>
             </details>
           </article>
@@ -794,14 +850,22 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>b)</h4>
-                <p>Mistanken er ensidig — <em>lavere</em> temperatur:</p>
+                <h4>b) Hypoteser</h4>
+                <p><strong>Steg 1 — Hypoteser.</strong> Mistanken er at stoffet gir <em>lavere</em> håndtemperatur enn normalt (33.5). Det blir \(H_1\), og \(H_0\) får likhetstegnet:</p>
                 <p>\[ H_0:\mu\ge 33.5 \qquad\text{mot}\qquad H_1:\mu&lt;33.5 \]</p>
-                <h4>c)</h4>
-                <p>Summen av de ni målingene er 279.1, altså \(\bar x=31.01\). Med \(\sigma=1.5\) kjent:</p>
-                <p>\[ z=\frac{31.01-33.5}{1.5/\sqrt 9}=\frac{-2.489}{0.5}=-4.98 \]</p>
-                <p>\[ p=G(-4.98)\approx 3\cdot 10^{-7} \]</p>
-                <p>p-verdien er langt under 0.05, så \(H_0\) forkastes klart: de med stoffet i blodet har lavere håndtemperatur.</p>
+                <p>Testen er altså ensidig, venstresidig.</p>
+                <h4>c) z-observator og p-verdi</h4>
+                <p><strong>Steg 2 — Testobservator.</strong> \(\sigma=1.5\) er kjent og temperaturen er normalfordelt, så vi bruker Z-test. Under \(H_0\) (med \(\mu=\mu_0=33.5\)) er</p>
+                <p>\[ Z=\frac{\bar X-\mu_0}{\sigma/\sqrt n}\sim N(0,1) \]</p>
+                <p><strong>Steg 3 — Forkastingsregel.</strong> Oppgaven ber om p-verdi, så vi forkaster \(H_0\) dersom \(p&lt;\alpha=0.05\). (Det er det samme som å forkaste når \(Z&lt;-1.645\).)</p>
+                <p><strong>Steg 4 — Regn ut.</strong> Gjennomsnittet av de ni målingene:</p>
+                <p>\[ \bar x=\frac{29.4+30.5+30.1+31.3+31.0+33.6+28.5+33.4+31.3}{9}=\frac{279.1}{9}=31.01 \]</p>
+                <p>Standardfeilen er \(\sigma/\sqrt n=1.5/\sqrt 9=1.5/3=0.5\), og dermed</p>
+                <p>\[ z=\frac{31.01-33.5}{0.5}=\frac{-2.49}{0.5}=-4.98 \]</p>
+                <p>Testen er venstresidig, så p-verdien er arealet til venstre for \(z\):</p>
+                <p>\[ p=P(Z\le -4.98)=G(-4.98)\approx 3\cdot 10^{-7} \]</p>
+                <p>\(z=-4.98\) er utenfor tabellen. Da holder det å skrive \(p\approx 0\) eller \(p&lt;0.0001\).</p>
+                <p><strong>Steg 5 — Konklusjon.</strong> Siden \(p&lt;0.05\), forkastes \(H_0\) på 5 % signifikansnivå. Dataene gir sterkt grunnlag for å hevde at personer med stoffet i blodet har lavere forventet håndtemperatur enn 33.5 grader.</p>
                 <!-- tikz:ht-hand-test --><svg class='tikz' role='img' style='width:28.2em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-70.008853 -66.684031 239.326748 85.977495'>
 <defs>
 <path stroke='none' id='ht-hand-test-g0-11' d='M4.402491-2.107098C4.402491-3.443088 3.595517-3.963138 2.833375-3.963138C1.613948-3.963138 .385554-2.725778 .385554-1.43462C.385554-.511083 1.0132 .09863 1.882939 .09863C2.851308 .09863 3.58655-.475218 3.819676-.654545C3.936239-.206227 4.23213 .09863 4.671482 .09863C5.155666 .09863 5.451557-.376588 5.451557-.537983C5.451557-.636613 5.352927-.636613 5.326027-.636613C5.227397-.636613 5.218431-.600747 5.191532-.52005C5.092902-.260025 4.859776-.125529 4.698381-.125529C4.411457-.125529 4.411457-.923537 4.411457-1.102864C4.411457-1.219427 4.411457-1.23736 4.492154-1.33599C4.644583-1.524284 4.886675-1.838107 5.119801-2.295392C5.388792-2.824408 5.532254-3.371357 5.532254-3.425156C5.532254-3.434122 5.532254-3.523786 5.415691-3.523786C5.308095-3.523786 5.308095-3.496887 5.263263-3.353425C5.173599-3.039601 4.967372-2.358157 4.402491-1.604981V-2.107098ZM3.774844-.91457C3.550685-.726276 2.824408-.125529 1.909838-.125529C1.407721-.125529 1.075965-.457285 1.075965-1.102864C1.075965-1.488418 1.246326-2.37609 1.604981-2.949938C1.838107-3.317559 2.313325-3.738979 2.833375-3.738979C3.434122-3.738979 3.631382-3.200996 3.71208-2.663014C3.783811-2.178829 3.730012-1.318057 3.774844-.91457Z'/>
@@ -872,6 +936,7 @@
 </g>
 </svg><!-- /tikz:ht-hand-test -->
                 <h4>d) Teststyrke</h4>
+                <p>Vi skal finne \(\gamma(32)\), sannsynligheten for å forkaste \(H_0\) når den sanne forventningen er \(\mu=32\).</p>
                 <!-- tikz:ht-hand-styrke --><svg class='tikz' role='img' style='width:28.2em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-70.008853 -66.684031 239.326748 85.977495'>
 <defs>
 <path stroke='none' id='ht-hand-styrke-g0-11' d='M4.402491-2.107098C4.402491-3.443088 3.595517-3.963138 2.833375-3.963138C1.613948-3.963138 .385554-2.725778 .385554-1.43462C.385554-.511083 1.0132 .09863 1.882939 .09863C2.851308 .09863 3.58655-.475218 3.819676-.654545C3.936239-.206227 4.23213 .09863 4.671482 .09863C5.155666 .09863 5.451557-.376588 5.451557-.537983C5.451557-.636613 5.352927-.636613 5.326027-.636613C5.227397-.636613 5.218431-.600747 5.191532-.52005C5.092902-.260025 4.859776-.125529 4.698381-.125529C4.411457-.125529 4.411457-.923537 4.411457-1.102864C4.411457-1.219427 4.411457-1.23736 4.492154-1.33599C4.644583-1.524284 4.886675-1.838107 5.119801-2.295392C5.388792-2.824408 5.532254-3.371357 5.532254-3.425156C5.532254-3.434122 5.532254-3.523786 5.415691-3.523786C5.308095-3.523786 5.308095-3.496887 5.263263-3.353425C5.173599-3.039601 4.967372-2.358157 4.402491-1.604981V-2.107098ZM3.774844-.91457C3.550685-.726276 2.824408-.125529 1.909838-.125529C1.407721-.125529 1.075965-.457285 1.075965-1.102864C1.075965-1.488418 1.246326-2.37609 1.604981-2.949938C1.838107-3.317559 2.313325-3.738979 2.833375-3.738979C3.434122-3.738979 3.631382-3.200996 3.71208-2.663014C3.783811-2.178829 3.730012-1.318057 3.774844-.91457Z'/>
@@ -949,9 +1014,12 @@
 </g>
 </g>
 </svg><!-- /tikz:ht-hand-styrke -->
-                <p>\[ k=33.5-1.645\cdot 0.5=32.68 \]</p>
+                <p><strong>1) Forkastingsområdet i grader.</strong> Venstresidig test, så vi forkaster når \(\bar X&lt;k\), der</p>
+                <p>\[ k=\mu_0-z_{0.05}\frac{\sigma}{\sqrt n}=33.5-1.645\cdot 0.5=32.68 \]</p>
+                <p><strong>2) Standardiser med den sanne forventningen \(\mu=32\):</strong></p>
                 <p>\[ \gamma(32)=P(\bar X&lt;32.68\mid\mu=32)=G\!\left(\frac{32.68-32}{0.5}\right)=G(1.36)=0.91 \]</p>
-                <div class="answer"><b>\(z=-4.98\), \(p\approx 0\), \(H_0\) forkastes · \(\gamma(32)=0.91\).</b> Tolkning: er den sanne forventede håndtemperaturen 32 grader, vil testen med 9 målinger oppdage det i 91 % av tilfellene.</div>
+                <p><strong>Hva det betyr:</strong> Hvis den sanne forventede håndtemperaturen er 32 grader, vil testen med 9 målinger oppdage at temperaturen er lavere enn normalt i 91 % av tilfellene. Sannsynligheten for type II-feil er \(\beta=0.09\).</p>
+                <div class="answer"><b>b) \(H_0:\mu\ge 33.5\) mot \(H_1:\mu&lt;33.5\) · c) \(z=-4.98\), \(p\approx 0\), \(H_0\) forkastes · d) \(\gamma(32)=0.91\).</b></div>
               </div>
             </details>
           </article>
@@ -984,20 +1052,34 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>a) Z-test, venstresidig</h4>
+                <h4>a) Z-test</h4>
+                <p><strong>Steg 1 — Hypoteser.</strong> Vi vil teste om forventet vekt er <em>mindre</em> enn 400 gram. Det blir \(H_1\):</p>
                 <p>\[ H_0:\mu\ge 400 \qquad\text{mot}\qquad H_1:\mu&lt;400 \]</p>
-                <p>\[ z=\frac{393-400}{10/\sqrt{10}}=\frac{-7}{3.162}=-2.214 \]</p>
-                <p>Siden \(-2.214&lt;-1.645\) forkastes \(H_0\).</p>
-                <p>Alternativt via kritisk verdi: \(k=400-1.645\cdot 3.162=394.8\), og \(393&lt;394.8\).</p>
+                <p>Testen er altså ensidig, venstresidig.</p>
+                <p><strong>Steg 2 — Testobservator.</strong> \(\sigma=10\) antas kjent og vekten er normalfordelt, så vi bruker Z-test. Under \(H_0\) (med \(\mu=\mu_0=400\)) er</p>
+                <p>\[ Z=\frac{\bar X-\mu_0}{\sigma/\sqrt n}\sim N(0,1) \]</p>
+                <p><strong>Steg 3 — Forkastingsområde.</strong> Venstresidig test med \(\alpha=0.05\): forkast \(H_0\) dersom \(Z&lt;-z_{0.05}=-1.645\).</p>
+                <p><strong>Steg 4 — Regn ut.</strong> Standardfeilen er \(\sigma/\sqrt n=10/\sqrt{10}=3.162\), og med \(\bar x=393\):</p>
+                <p>\[ z=\frac{393-400}{3.162}=\frac{-7}{3.162}=-2.214 \]</p>
+                <p>Siden \(-2.214&lt;-1.645\), ligger \(z\) i forkastingsområdet.</p>
+                <p><strong>Steg 5 — Konklusjon.</strong> \(H_0\) forkastes på 5 % signifikansnivå. Dataene gir grunnlag for å hevde at forventet vekt er mindre enn 400 gram.</p>
+                <p><strong>Samme test via kritisk verdi:</strong> \(k=400-1.645\cdot 3.162=394.8\) gram, og \(393&lt;394.8\) gir samme konklusjon.</p>
                 <h4>b) p-verdi</h4>
-                <p>\[ p=G(-2.214)=0.0136 \]</p>
-                <p>Siden \(0.0136&lt;0.05\) bekrefter p-verdien konklusjonen i a).</p>
-                <h4>c) T-test, samme data</h4>
-                <p>Nå må vi estimere standardavviket fra målingene:</p>
-                <p>\[ s=\sqrt{\frac{1}{n-1}\left(\sum x_i^2-n\bar x^2\right)}=3.97\ \text{gram} \]</p>
-                <p>\[ t=\frac{393-400}{3.97/\sqrt{10}}=-5.58 \]</p>
-                <p>Med \(\nu=9\) frihetsgrader er \(t_{0.05}=1.833\), og \(-5.58&lt;-1.833\) gir forkasting.</p>
-                <div class="answer"><b>Alle tre: \(H_0\) forkastes.</b> Interessant: t-testen er her <em>mye</em> mer overbevisende enn z-testen, fordi det faktiske utvalgsstandardavviket (3.97) er langt mindre enn det antatte (10).</div>
+                <p>Testen er venstresidig, så «minst like ekstremt» betyr et gjennomsnitt på 393 gram eller lavere, gitt at \(H_0\) er sann:</p>
+                <p>\[ p=P(\bar X\le 393\mid\mu=400)=P(Z\le -2.21)=G(-2.21)=0.0136 \]</p>
+                <p>Tolkning: Hvis posene virkelig veier 400 gram i snitt, er det bare 1.4 % sjanse for å få et så lavt gjennomsnitt. Siden \(0.0136&lt;0.05\), forkastes \(H_0\), som i a).</p>
+                <h4>c) T-test med de samme dataene</h4>
+                <p><strong>Steg 1 — Hypoteser.</strong> Som i a): \(H_0:\mu\ge 400\) mot \(H_1:\mu&lt;400\).</p>
+                <p><strong>Steg 2 — Testobservator.</strong> Nå er \(\sigma\) ukjent og må estimeres med \(S\), så vi bruker T-test. Under \(H_0\) er</p>
+                <p>\[ T=\frac{\bar X-\mu_0}{S/\sqrt n}\sim t_{n-1}=t_9 \]</p>
+                <p><strong>Steg 3 — Forkastingsområde.</strong> Med \(\nu=10-1=9\) frihetsgrader gir tabellen \(t_{0.05}=1.833\). Forkast \(H_0\) dersom \(T&lt;-1.833\).</p>
+                <p><strong>Steg 4 — Regn ut.</strong> Først utvalgsstandardavviket. Summen av kvadratene er \(\sum x_i^2=1\,544\,632\), og \(n\bar x^2=10\cdot 393^2=1\,544\,490\):</p>
+                <p>\[ s^2=\frac{1}{n-1}\left(\sum x_i^2-n\bar x^2\right)=\frac{1\,544\,632-1\,544\,490}{9}=\frac{142}{9}=15.78 \quad\Rightarrow\quad s=3.97\ \text{gram} \]</p>
+                <p>Standardfeilen er \(s/\sqrt n=3.97/3.162=1.256\), og</p>
+                <p>\[ t=\frac{393-400}{1.256}=\frac{-7}{1.256}=-5.57 \]</p>
+                <p>Siden \(-5.57&lt;-1.833\), ligger \(t\) i forkastingsområdet.</p>
+                <p><strong>Steg 5 — Konklusjon.</strong> \(H_0\) forkastes på 5 % signifikansnivå. Også uten kjent \(\sigma\) gir dataene grunnlag for å hevde at forventet vekt er under 400 gram.</p>
+                <div class="answer"><b>a) \(z=-2.214\), \(H_0\) forkastes · b) \(p=0.0136\) · c) \(t=-5.57\), \(H_0\) forkastes.</b> Interessant: t-testen er her <em>mye</em> mer overbevisende enn z-testen, fordi det faktiske utvalgsstandardavviket (3.97) er langt mindre enn det antatte (10).</div>
               </div>
             </details>
           </article>
@@ -1019,20 +1101,32 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>a)</h4>
-                <p>\(\sigma\) er ukjent (bare \(s\) oppgitt), så T-test. Med \(n=150\) er t-kvantilene praktisk talt lik z-kvantilene: \(t_{0.05}\approx 1.645\).</p>
-                <p>\[ t=\frac{29.97-30.00}{0.21/\sqrt{150}}=-1.75 \]</p>
-                <p>Siden \(-1.75&lt;-1.645\) forkastes \(H_0\): det er grunnlag for å hevde at konsentrasjonen er lavere enn 30.00.</p>
+                <h4>a) Hypotesetest</h4>
+                <p><strong>Steg 1 — Hypoteser.</strong> \(H_0\) er gitt i oppgaven. Vi vil undersøke om konsentrasjonen er <em>lavere</em> enn 30.00:</p>
+                <p>\[ H_0:\mu\ge 30.00 \qquad\text{mot}\qquad H_1:\mu&lt;30.00 \]</p>
+                <p>Testen er altså ensidig, venstresidig.</p>
+                <p><strong>Steg 2 — Testobservator.</strong> \(\sigma\) er ukjent (bare \(s=0.21\) er oppgitt), så vi bruker T-test. Fordelingen er ikke oppgitt, men \(n=150\) er stort, så sentralgrenseteoremet gir at \(\bar X\) er tilnærmet normalfordelt. Under \(H_0\) er</p>
+                <p>\[ T=\frac{\bar X-\mu_0}{S/\sqrt n}\sim t_{149} \]</p>
+                <p><strong>Steg 3 — Forkastingsområde.</strong> Med \(\nu=149\) er t-fordelingen praktisk talt lik standard normalfordeling, så \(t_{0.05}\approx z_{0.05}=1.645\). (Eksakt verdi er 1.655, og den gir samme konklusjon.) Forkast \(H_0\) dersom \(T&lt;-1.645\).</p>
+                <p><strong>Steg 4 — Regn ut.</strong> Standardfeilen er \(s/\sqrt n=0.21/\sqrt{150}=0.21/12.247=0.01715\), og med \(\bar x=29.97\):</p>
+                <p>\[ t=\frac{29.97-30.00}{0.01715}=\frac{-0.03}{0.01715}=-1.75 \]</p>
+                <p>Siden \(-1.75&lt;-1.645\), ligger \(t\) i forkastingsområdet.</p>
+                <p><strong>Steg 5 — Konklusjon.</strong> \(H_0\) forkastes på 5 % signifikansnivå. Det er grunnlag for å hevde at forventet konsentrasjon er lavere enn 30.00.</p>
                 <h4>b) Hvor mange beholdere?</h4>
-                <p>Kravet «p-verdi under 0.005» er det samme som å kreve signifikansnivå 0.005, altså \(t&lt;-t_{0.005}\approx -z_{0.005}=-2.58\):</p>
-                <p>\[ \frac{\bar x-\mu_0}{s/\sqrt n}&lt;-2.58 \quad\Rightarrow\quad n&gt;\left(\frac{s\cdot 2.58}{\mu_0-\bar x}\right)^2=\left(\frac{0.21\cdot 2.58}{0.03}\right)^2=326.2 \]</p>
-                <p>(Ulikhetstegnet snus når vi multipliserer med et negativt tall.) Altså over 326 beholdere. Sensurveiledningen godtar 326–338 avhengig av hvilket t-kvantil du bruker.</p>
+                <p><strong>1) Oversett kravet.</strong> «p-verdi lavere enn 0.005» er det samme som at \(H_0\) forkastes på signifikansnivå 0.005. Med stor \(n\) er \(t_{0.005}\approx z_{0.005}=2.58\), så kravet er</p>
+                <p>\[ t=\frac{\bar x-\mu_0}{s/\sqrt n}&lt;-2.58 \]</p>
+                <p><strong>2) Sett inn tallene</strong> (samme \(\bar x\) og \(s\) som i a), \(n\) ukjent):</p>
+                <p>\[ \frac{29.97-30.00}{0.21/\sqrt n}=\frac{-0.03\sqrt n}{0.21}&lt;-2.58 \]</p>
+                <p><strong>3) Løs for \(n\).</strong> Gang med \(-0.21/0.03\). Det er et negativt tall, så ulikhetstegnet snus:</p>
+                <p>\[ \sqrt n&gt;\frac{2.58\cdot 0.21}{0.03}=18.06 \quad\Rightarrow\quad n&gt;18.06^2=326.2 \]</p>
+                <p><strong>4) Rund opp.</strong> Testen måtte omfatte minst 327 beholdere. Sensurveiledningen godtar svar fra 326 til 338, avhengig av hvilket kvantil du bruker.</p>
                 <h4>c) Teststyrke med kjent σ</h4>
-                <p>Nå er \(\sigma\) kjent, så Z-test. \(H_0\) forkastes når</p>
-                <p>\[ \bar X&lt;\mu_0-z_{0.05}\frac{\sigma}{\sqrt n} \]</p>
-                <p>Med faktisk \(\mu=30.01\):</p>
-                <p>\[ \gamma=G\!\left(\frac{\mu_0-\mu}{\sigma/\sqrt n}-z_{0.05}\right)=G\!\left(\frac{30.00-30.01}{0.20/\sqrt{150}}-1.645\right)=G(-2.26)=0.012 \]</p>
-                <div class="answer"><b>a) \(H_0\) forkastes · b) over 326 beholdere · c) 0.012.</b> Punkt c) er egentlig en type I-feil-beregning i forkledning: \(\mu=30.01\) oppfyller jo \(H_0\), så 1.2 % er sannsynligheten for å ta feil den andre veien.</div>
+                <p>Nå er \(\sigma=0.20\) kjent, så testen er en Z-test. Standardfeilen er \(\sigma/\sqrt n=0.20/\sqrt{150}=0.01633\).</p>
+                <p><strong>1) Forkastingsområdet.</strong> Venstresidig test, så vi forkaster når \(\bar X&lt;k\), der</p>
+                <p>\[ k=\mu_0-z_{0.05}\frac{\sigma}{\sqrt n}=30.00-1.645\cdot 0.01633=30.00-0.0269=29.973 \]</p>
+                <p><strong>2) Standardiser med den faktiske forventningen \(\mu=30.01\):</strong></p>
+                <p>\[ P(\bar X&lt;29.973\mid\mu=30.01)=G\!\left(\frac{29.973-30.01}{0.01633}\right)=G(-2.26)=0.012 \]</p>
+                <div class="answer"><b>a) \(t=-1.75\), \(H_0\) forkastes · b) minst 327 beholdere · c) 0.012.</b> Punkt c) er egentlig en type I-feil-beregning i forkledning: \(\mu=30.01\) oppfyller jo \(H_0\), så 1.2 % er sannsynligheten for å forkaste en sann \(H_0\). Det er mindre enn \(\alpha\), fordi \(\mu\) ligger et stykke inn i \(H_0\)-området.</div>
               </div>
             </details>
           </article>
@@ -1049,12 +1143,17 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>Vi vet ikke om levetiden er normalfordelt, men \(n=61\) er stort nok til at sentralgrenseteoremet redder oss. Standardavviket er ukjent ⇒ venstresidig T-test.</p>
+                <p><strong>Steg 1 — Hypoteser.</strong> Forskningsgruppen påstår at \(\mu\ge 40\). Vi vil undersøke om levetiden er <em>mindre</em> enn 40, så det blir \(H_1\):</p>
                 <p>\[ H_0:\mu\ge 40 \qquad\text{mot}\qquad H_1:\mu&lt;40 \]</p>
-                <p>Tabell C med \(\nu=60\) gir \(t_{0.025}=2.00\) (eller tilnærmet \(z_{0.025}=1.96\)).</p>
-                <p>\[ t=\frac{38.2-40}{5.6/\sqrt{61}}=-2.51 \]</p>
-                <p>Siden \(|t|&gt;t_{0.025}\) forkastes \(H_0\).</p>
-                <div class="answer"><b>Ja — det er grunnlag for å tro at forventet levetid er under 40 måneder på 2.5 % signifikansnivå.</b> Konfidensintervallet i punkt b) ([36.5, 39.9], se <a href="07-konfidensintervall.html#okt2024">konfidensintervall</a>) sier det samme: 40 ligger utenfor.</div>
+                <p>Testen er altså ensidig, venstresidig.</p>
+                <p><strong>Steg 2 — Testobservator.</strong> \(\sigma\) er ukjent (bare \(s=5.6\) er oppgitt), så vi bruker T-test. Vi vet ikke om levetiden er normalfordelt, men \(n=61\) er stort nok til at sentralgrenseteoremet gir at \(\bar X\) er tilnærmet normalfordelt. Under \(H_0\) er</p>
+                <p>\[ T=\frac{\bar X-\mu_0}{S/\sqrt n}\sim t_{60} \]</p>
+                <p><strong>Steg 3 — Forkastingsområde.</strong> Signifikansnivået er 2.5 %. Tabell C med \(\nu=61-1=60\) gir \(t_{0.025}=2.000\) (tilnærmet \(z_{0.025}=1.96\)). Forkast \(H_0\) dersom \(T&lt;-2.000\).</p>
+                <p><strong>Steg 4 — Regn ut.</strong> Standardfeilen er \(s/\sqrt n=5.6/\sqrt{61}=5.6/7.810=0.717\), og med \(\bar x=38.2\):</p>
+                <p>\[ t=\frac{38.2-40}{0.717}=\frac{-1.8}{0.717}=-2.51 \]</p>
+                <p>Siden \(-2.51&lt;-2.000\), ligger \(t\) i forkastingsområdet.</p>
+                <p><strong>Steg 5 — Konklusjon.</strong> \(H_0\) forkastes på 2.5 % signifikansnivå. Det er grunnlag for å tro at forventet levetid for mus i fangenskap med denne maten er mindre enn 40 måneder.</p>
+                <div class="answer"><b>\(t=-2.51&lt;-2.000\): ja, det er grunnlag for å tro at forventet levetid er under 40 måneder.</b> Konfidensintervallet i punkt b) ([36.5, 39.9], se <a href="07-konfidensintervall.html#okt2024">konfidensintervall</a>) sier det samme: 40 ligger utenfor.</div>
               </div>
             </details>
           </article>
@@ -1077,11 +1176,21 @@
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
                 <h4>c) Undersøkelse A</h4>
+                <p><strong>Steg 1 — Hypoteser.</strong> Dyrlegen påstår at \(\mu\) <em>umulig kan være høyere</em> enn 455, altså \(\mu\le 455\). Det er påstanden vi vil prøve å forkaste, så den blir \(H_0\):</p>
                 <p>\[ H_0:\mu\le 455 \qquad\text{mot}\qquad H_1:\mu&gt;455 \]</p>
-                <p>Ensidig T-test, men \(n=81\) er stort så \(t_{0.025}\approx z_{0.025}=1.96\):</p>
-                <p>\[ t=\frac{461-455}{13/\sqrt{81}}=\frac{6}{1.444}=4.15 \ &gt;\ 1.96 \]</p>
-                <p>\(H_0\) forkastes. Snarvei: 455 ligger utenfor konfidensintervallet [458.2, 463.8] fra punkt a).</p>
+                <p>Testen er altså ensidig, høyresidig.</p>
+                <p><strong>Steg 2 — Testobservator.</strong> \(\sigma\) er ukjent (bare \(s\) er oppgitt), så vi bruker T-test. Under \(H_0\) er</p>
+                <p>\[ T=\frac{\bar X-\mu_0}{S/\sqrt n}\sim t_{n-1} \]</p>
+                <p><strong>Steg 3 — Forkastingsområde.</strong> Med \(n=81\) er \(\nu=80\), og tabellen gir \(t_{0.025}=1.990\). (Med så stor \(n\) går det også an å bruke \(z_{0.025}=1.96\).) Forkast \(H_0\) dersom \(T&gt;1.990\).</p>
+                <p><strong>Steg 4 — Regn ut.</strong> Standardfeilen er \(s/\sqrt n=13/\sqrt{81}=13/9=1.444\), og med \(\bar x=461\):</p>
+                <p>\[ t=\frac{461-455}{1.444}=\frac{6}{1.444}=4.15 \]</p>
+                <p>Siden \(4.15&gt;1.990\), ligger \(t\) i forkastingsområdet.</p>
+                <p><strong>Steg 5 — Konklusjon.</strong> \(H_0\) forkastes på 2.5 % signifikansnivå. Undersøkelse A gir grunnlag for å forkaste dyrlegens påstand: forventet fødselsvekt er høyere enn 455 gram.</p>
+                <p><strong>Snarvei:</strong> 455 ligger utenfor konfidensintervallet [458.2, 463.8] fra punkt a).</p>
                 <h4>d) Undersøkelse B</h4>
+                <p><strong>Steg 1 — Hypoteser.</strong> Som i c): \(H_0:\mu\le 455\) mot \(H_1:\mu&gt;455\).</p>
+                <p><strong>Steg 2 — Testobservator.</strong> T-test som i c), men nå med \(n=12\). Med så få målinger må fødselsvekten antas normalfordelt for at T-testen skal gjelde.</p>
+                <p><strong>Steg 3 — Forkastingsområde.</strong> \(n=12\) er lite, så vi må bruke t-kvantilet og kan ikke bytte til z. Med \(\nu=11\) gir tabellen \(t_{0.025}=2.201\). Forkast \(H_0\) dersom \(T&gt;2.201\).</p>
                 <!-- tikz:ht-husky-t --><svg class='tikz' role='img' style='width:28.2em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-70.008853 -70.008825 239.326748 74.147967'>
 <defs>
 <path stroke='none' id='ht-husky-t-g0-58' d='M1.494396-.358655C1.494396-.573848 1.321046-.723288 1.135741-.723288C.920548-.723288 .771108-.549938 .771108-.364633C.771108-.161395 .932503 0 1.135741 0C1.327024 0 1.494396-.167372 1.494396-.358655Z'/>
@@ -1140,14 +1249,20 @@
 </g>
 </g>
 </svg><!-- /tikz:ht-husky-t -->
-                <p>Her er \(n=12\) lite, så vi må bruke t-kvantilet for \(\nu=11\): \(t_{0.025}=2.201\).</p>
-                <p>\[ t=\frac{462-455}{14/\sqrt{12}}=1.73 \ &lt;\ 2.201 \]</p>
-                <p>\(H_0\) kan <strong>ikke</strong> forkastes. Samme avvik som i A (faktisk større: 7 mot 6 gram), men for få målinger til å være overbevisende.</p>
+                <p><strong>Steg 4 — Regn ut.</strong> Standardfeilen er \(s/\sqrt n=14/\sqrt{12}=14/3.464=4.041\), og med \(\bar x=462\):</p>
+                <p>\[ t=\frac{462-455}{4.041}=\frac{7}{4.041}=1.73 \]</p>
+                <p>Siden \(1.73&lt;2.201\), ligger \(t\) <strong>ikke</strong> i forkastingsområdet.</p>
+                <p><strong>Steg 5 — Konklusjon.</strong> \(H_0\) kan ikke forkastes på 2.5 % signifikansnivå. Undersøkelse B gir ikke grunnlag for å forkaste dyrlegens påstand. Avviket er like stort som i A (faktisk større: 7 mot 6 gram), men 12 målinger er for få til å være overbevisende.</p>
                 <h4>e) Finn n fra p-verdien</h4>
-                <p>p-verdien er sannsynligheten for å observere minst like stort avvik gitt \(H_0\):</p>
-                <p>\[ 0.0020=1-G\!\left(\frac{459-455}{15/\sqrt n}\right) \quad\Rightarrow\quad G(z)=0.9980 \quad\Rightarrow\quad z=2.88 \]</p>
-                <p>\[ \frac{4\sqrt n}{15}=2.88 \quad\Rightarrow\quad \sqrt n=10.8 \quad\Rightarrow\quad n\approx 117 \]</p>
-                <div class="answer"><b>c) forkastes · d) forkastes ikke · e) ca. 117 hunder.</b> Sammenlikningen c) mot d) er hele poenget: samme effekt, ulik \(n\), motsatt konklusjon.</div>
+                <p><strong>1) Sett opp p-verdien.</strong> Testen er høyresidig, så p-verdien er sannsynligheten for et minst like høyt gjennomsnitt, gitt \(H_0\):</p>
+                <p>\[ p=P(T\ge t)=0.0020 \]</p>
+                <p>En så liten p-verdi med et avvik på bare 4 gram tyder på at \(n\) er stor. Da kan vi tilnærme t-fordelingen med standard normalfordeling.</p>
+                <p><strong>2) Finn observatoren fra tabellen.</strong></p>
+                <p>\[ 1-G(z)=0.0020 \quad\Rightarrow\quad G(z)=0.9980 \quad\Rightarrow\quad z=2.88 \]</p>
+                <p><strong>3) Løs for \(n\).</strong> Observatoren er \(z=\frac{459-455}{15/\sqrt n}=\frac{4\sqrt n}{15}\), så</p>
+                <p>\[ \frac{4\sqrt n}{15}=2.88 \quad\Rightarrow\quad \sqrt n=\frac{2.88\cdot 15}{4}=10.8 \quad\Rightarrow\quad n=10.8^2\approx 117 \]</p>
+                <p>\(n\approx 117\) er stort, så z-tilnærmingen var rimelig.</p>
+                <div class="answer"><b>c) \(t=4.15&gt;1.990\), forkastes · d) \(t=1.73&lt;2.201\), forkastes ikke · e) ca. 117 hunder.</b> Sammenlikningen c) mot d) er hele poenget: samme effekt, ulik \(n\), motsatt konklusjon.</div>
               </div>
             </details>
           </article>
@@ -1164,11 +1279,15 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>«Endret seg» er tosidig:</p>
+                <p><strong>Steg 1 — Hypoteser.</strong> «Endret seg» kan være både opp og ned, så testen er tosidig:</p>
                 <p>\[ H_0:\mu=57.9 \qquad\text{mot}\qquad H_1:\mu\neq 57.9 \]</p>
-                <p>\(\sigma\) er ukjent, \(\nu=8\), \(t_{0.005}=3.355\):</p>
-                <p>\[ t=\frac{50.3-57.9}{18.31/\sqrt 9}=\frac{-7.6}{6.103}=-1.25 \]</p>
-                <p>Siden \(|{-1.25}|&lt;3.355\) beholdes \(H_0\).</p>
+                <p><strong>Steg 2 — Testobservator.</strong> \(\sigma\) er ukjent (bare \(s\) er oppgitt), så vi bruker T-test. Med bare 9 studenter må resultatene antas normalfordelte. Under \(H_0\) er</p>
+                <p>\[ T=\frac{\bar X-\mu_0}{S/\sqrt n}\sim t_{n-1}=t_8 \]</p>
+                <p><strong>Steg 3 — Forkastingsområde.</strong> Tosidig test med \(\alpha=0.01\) gir \(\alpha/2=0.005\) i hver hale. Med \(\nu=9-1=8\) gir tabellen \(t_{0.005}=3.355\). Forkast \(H_0\) dersom \(|T|&gt;3.355\).</p>
+                <p><strong>Steg 4 — Regn ut.</strong> Standardfeilen er \(s/\sqrt n=18.31/\sqrt 9=18.31/3=6.103\), og med \(\bar x=50.3\):</p>
+                <p>\[ t=\frac{50.3-57.9}{6.103}=\frac{-7.6}{6.103}=-1.25 \]</p>
+                <p>Siden \(|-1.25|=1.25&lt;3.355\), ligger \(t\) <strong>ikke</strong> i forkastingsområdet.</p>
+                <p><strong>Steg 5 — Konklusjon.</strong> \(H_0\) beholdes på 1 % signifikansnivå. Utvalget gir ikke grunnlag for å hevde at forventet resultat på matematikkeksamen har endret seg fra 57.9.</p>
                 <!-- tikz:ht-endret-t --><svg class='tikz' role='img' style='width:28.2em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-70.008853 -70.008875 239.333748 73.179565'>
 <defs>
 <path stroke='none' id='ht-endret-t-g0-0' d='M6.052304-2.0533C6.213699-2.0533 6.38406-2.0533 6.38406-2.25056C6.38406-2.438854 6.204732-2.438854 6.052304-2.438854H1.102864C.950436-2.438854 .771108-2.438854 .771108-2.25056C.771108-2.0533 .941469-2.0533 1.102864-2.0533H6.052304Z'/>
@@ -1235,9 +1354,9 @@
 </g>
 </g>
 </svg><!-- /tikz:ht-endret-t -->
-                <p><strong>Via p-verdi:</strong> tosidig gir \(p=2\cdot P(T&lt;-1.25)=0.248\), langt over \(\alpha=0.01\).</p>
+                <p><strong>Via p-verdi:</strong> Tosidig test, så begge halene teller: \(p=2\cdot P(T&lt;-1.25)=0.248\). Det er langt over \(\alpha=0.01\).</p>
                 <p><strong>Via konfidensintervall:</strong> \(\mu_0=57.9\) ligger innenfor 99 %-intervallet [29.8, 70.8] fra punkt d).</p>
-                <div class="answer"><b>\(H_0\) beholdes.</b> Alle tre veiene gir samme svar — vis gjerne minst to, det er billige poeng.</div>
+                <div class="answer"><b>\(|t|=1.25&lt;3.355\): \(H_0\) beholdes.</b> Alle tre veiene gir samme svar. Vis gjerne minst to, det er billige poeng.</div>
               </div>
             </details>
           </article>
@@ -1267,15 +1386,22 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>a)</h4>
+                <h4>a) Tilnærmet binomisk test</h4>
+                <p><strong>Steg 1 — Hypoteser.</strong> Vi vil undersøke om den nye medisinen er <em>bedre</em>, altså om andelen med effekt er større enn 0.60:</p>
                 <p>\[ H_0:p\le 0.60 \qquad\text{mot}\qquad H_1:p&gt;0.60 \]</p>
-                <p>Under \(H_0\) er \(\hat p\) tilnærmet normalfordelt med standardfeil \(\sqrt{p_0(1-p_0)/n}\):</p>
-                <p>\[ z=\frac{0.70-0.60}{\sqrt{\dfrac{0.60\cdot 0.40}{100}}}=\frac{0.10}{0.049}=2.04 \]</p>
-                <p>Siden \(2.04&gt;1.645\) forkastes \(H_0\): den nye medisinen ser ut til å være bedre.</p>
+                <p>Testen er altså ensidig, høyresidig.</p>
+                <p><strong>Steg 2 — Testobservator.</strong> Antall pasienter med effekt er \(X\sim\mathrm{Bin}(100,\,p)\), og andelen er \(\hat p=X/n\). Normaltilnærmingen er rimelig fordi \(np_0(1-p_0)=100\cdot 0.60\cdot 0.40=24\) er stort. Under \(H_0\) er</p>
+                <p>\[ Z=\frac{\hat p-p_0}{\sqrt{p_0(1-p_0)/n}}\approx N(0,1) \]</p>
+                <p>Merk at standardfeilen bruker \(p_0\), ikke \(\hat p\), fordi vi regner under antakelsen om at \(H_0\) er sann.</p>
+                <p><strong>Steg 3 — Forkastingsområde.</strong> Høyresidig test med \(\alpha=0.05\): forkast \(H_0\) dersom \(Z&gt;z_{0.05}=1.645\).</p>
+                <p><strong>Steg 4 — Regn ut.</strong> \(\hat p=70/100=0.70\), og standardfeilen er \(\sqrt{0.60\cdot 0.40/100}=\sqrt{0.0024}=0.049\):</p>
+                <p>\[ z=\frac{0.70-0.60}{0.049}=\frac{0.10}{0.049}=2.04 \]</p>
+                <p>Siden \(2.04&gt;1.645\), ligger \(z\) i forkastingsområdet.</p>
+                <p><strong>Steg 5 — Konklusjon.</strong> \(H_0\) forkastes på 5 % signifikansnivå. Dataene gir grunnlag for å hevde at den nye medisinen har effekt hos mer enn 60 % av pasientene, altså at den er bedre.</p>
                 <h4>b) Eksakt p-verdi</h4>
-                <p>Uten normaltilnærming, med \(X\sim\mathrm{Bin}(100,\,0.60)\):</p>
-                <p>\[ p=P(X\ge 70)=\sum_{x=70}^{100}\binom{100}{x}0.60^x\,0.40^{100-x}=0.0248 \]</p>
-                <p>(Den tilnærmede p-verdien er \(1-G(2.04)=0.021\).)</p>
+                <p>«Eksakt» betyr at vi bruker binomisk fordeling direkte, uten normaltilnærming. Under \(H_0\) er \(X\sim\mathrm{Bin}(100,\,0.60)\). Testen er høyresidig, så p-verdien er sannsynligheten for 70 eller flere med effekt:</p>
+                <p>\[ p=P(X\ge 70)=1-P(X\le 69)=\sum_{x=70}^{100}\binom{100}{x}0.60^x\,0.40^{100-x}=0.0248 \]</p>
+                <p>Tabellen dekker ikke \(n=100\), så summen regnes på kalkulator (binomcdf). Til sammenlikning gir normaltilnærmingen \(1-G(2.04)=0.021\).</p>
                 <!-- tikz:ht-medisin-test --><svg class='tikz' role='img' style='width:28.2em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-70.008853 -66.684038 239.329748 85.977295'>
 <defs>
 <path stroke='none' id='ht-medisin-test-g0-11' d='M4.402491-2.107098C4.402491-3.443088 3.595517-3.963138 2.833375-3.963138C1.613948-3.963138 .385554-2.725778 .385554-1.43462C.385554-.511083 1.0132 .09863 1.882939 .09863C2.851308 .09863 3.58655-.475218 3.819676-.654545C3.936239-.206227 4.23213 .09863 4.671482 .09863C5.155666 .09863 5.451557-.376588 5.451557-.537983C5.451557-.636613 5.352927-.636613 5.326027-.636613C5.227397-.636613 5.218431-.600747 5.191532-.52005C5.092902-.260025 4.859776-.125529 4.698381-.125529C4.411457-.125529 4.411457-.923537 4.411457-1.102864C4.411457-1.219427 4.411457-1.23736 4.492154-1.33599C4.644583-1.524284 4.886675-1.838107 5.119801-2.295392C5.388792-2.824408 5.532254-3.371357 5.532254-3.425156C5.532254-3.434122 5.532254-3.523786 5.415691-3.523786C5.308095-3.523786 5.308095-3.496887 5.263263-3.353425C5.173599-3.039601 4.967372-2.358157 4.402491-1.604981V-2.107098ZM3.774844-.91457C3.550685-.726276 2.824408-.125529 1.909838-.125529C1.407721-.125529 1.075965-.457285 1.075965-1.102864C1.075965-1.488418 1.246326-2.37609 1.604981-2.949938C1.838107-3.317559 2.313325-3.738979 2.833375-3.738979C3.434122-3.738979 3.631382-3.200996 3.71208-2.663014C3.783811-2.178829 3.730012-1.318057 3.774844-.91457Z'/>
@@ -1353,7 +1479,7 @@
 </g>
 </g>
 </svg><!-- /tikz:ht-medisin-test -->
-                <div class="answer"><b>a) \(H_0\) forkastes · b) \(p=0.025\).</b> Sammenhengen: p-verdien er det minste signifikansnivået der \(H_0\) forkastes. Siden \(0.025&lt;0.05\), forkastes den på 5 % nivå — men den ville <em>ikke</em> blitt forkastet på 1 % nivå.</div>
+                <div class="answer"><b>a) \(z=2.04&gt;1.645\), \(H_0\) forkastes · b) \(p=0.025\).</b> Sammenhengen: p-verdien er det minste signifikansnivået der \(H_0\) forkastes. Siden \(0.025&lt;0.05\), forkastes den på 5 % nivå, slik som i a). Men den ville <em>ikke</em> blitt forkastet på 1 % nivå.</div>
               </div>
             </details>
           </article>
@@ -1370,14 +1496,19 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>Steg 1 — hvor beholdes \(H_0\)?</h4>
-                <p>Tosidig test: \(H_0\) beholdes så lenge antall kron \(X\) ligger i</p>
-                <p>\[ \left[np_0-z_{0.025}\sqrt{np_0(1-p_0)},\ np_0+z_{0.025}\sqrt{np_0(1-p_0)}\right] \]</p>
-                <p>Med \(n=100\,000\) og \(p_0=0.5\) blir \(np_0=50\,000\) og \(\sqrt{np_0(1-p_0)}=158.1\):</p>
-                <p>\[ 50\,000\pm 1.96\cdot 158.1 \quad\Rightarrow\quad [49\,690,\ 50\,310] \]</p>
-                <h4>Steg 2 — hvor sannsynlig er det, gitt \(p=0.496\)?</h4>
-                <p>Nå skifter vi fordeling: \(X\) er tilnærmet normalfordelt med</p>
-                <p>\[ \mu=np=49\,600,\qquad \sigma=\sqrt{np(1-p)}=158.0 \]</p>
+                <p>Oppgaven spør om sannsynligheten for å <em>beholde</em> en gal \(H_0\), altså type II-feil \(\beta\). Fremgangsmåten er den samme som for teststyrke: finn først området der \(H_0\) beholdes (under \(H_0\)), og regn deretter sannsynligheten for å havne der med den sanne \(p\).</p>
+                <h4>Steg 1 — Hypoteser</h4>
+                <p>\[ H_0:p=0.5 \qquad\text{mot}\qquad H_1:p\neq 0.5 \]</p>
+                <p>Testen er tosidig, så \(\alpha=0.05\) deles i to haler med 0.025 i hver: \(z_{0.025}=1.96\).</p>
+                <h4>Steg 2 — Hvor beholdes \(H_0\)?</h4>
+                <p>Under \(H_0\) er antall kron \(X\sim\mathrm{Bin}(n,\,0.5)\), tilnærmet normalfordelt med</p>
+                <p>\[ np_0=100\,000\cdot 0.5=50\,000,\qquad \sqrt{np_0(1-p_0)}=\sqrt{100\,000\cdot 0.5\cdot 0.5}=\sqrt{25\,000}=158.1 \]</p>
+                <p>\(H_0\) beholdes så lenge \(X\) ligger innenfor \(1.96\) standardavvik fra \(50\,000\):</p>
+                <p>\[ 50\,000\pm 1.96\cdot 158.1=50\,000\pm 310 \quad\Rightarrow\quad [49\,690,\ 50\,310] \]</p>
+                <h4>Steg 3 — Hvor sannsynlig er det, gitt \(p=0.496\)?</h4>
+                <p>Nå skifter vi fordeling. Med den sanne \(p=0.496\) er \(X\) tilnærmet normalfordelt med</p>
+                <p>\[ \mu=np=100\,000\cdot 0.496=49\,600,\qquad \sigma=\sqrt{np(1-p)}=\sqrt{100\,000\cdot 0.496\cdot 0.504}=158.0 \]</p>
+                <p>Standardiser begge grensene med disse verdiene:</p>
                 <p>\[ P(49\,690&lt;X&lt;50\,310)=G\!\left(\frac{50\,310-49\,600}{158}\right)-G\!\left(\frac{49\,690-49\,600}{158}\right) \]</p>
                 <p>\[ =G(4.49)-G(0.57)=1.000-0.716=0.28 \]</p>
                 <!-- tikz:ht-mynt --><svg class='tikz' role='img' style='width:31.5em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-70.008853 -66.881133 267.654748 85.566397'>
@@ -1450,7 +1581,7 @@
 </g>
 </svg><!-- /tikz:ht-mynt -->
                 <p>Den grå kurven bestemmer hvor \(H_0\) beholdes (49 690 til 50 310). Arealet i det samme området under den sanne kurven er sannsynligheten for å beholde \(H_0\).</p>
-                <div class="answer"><b>Ca. 28 %.</b> Med 100 000 kast er testen så kraftig at selv et bittelite avvik (0.496 mot 0.500) blir oppdaget i 72 % av tilfellene — den beste illustrasjonen i hele oppgavesamlingen av at «statistisk signifikans» ikke er det samme som «praktisk betydning».</div>
+                <div class="answer"><b>Ca. 28 %.</b> Teststyrken er dermed \(\gamma(0.496)=1-0.28=0.72\). Med 100 000 kast er testen så kraftig at selv et bittelite avvik (0.496 mot 0.500) blir oppdaget i 72 % av tilfellene. Det er den beste illustrasjonen i hele oppgavesamlingen av at «statistisk signifikans» ikke er det samme som «praktisk betydning».</div>
               </div>
             </details>
           </article>
@@ -1467,10 +1598,17 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>«Avviker fra» er tosidig, og \(\sigma=2\) er kjent ⇒ Z-test:</p>
+                <p><strong>Steg 1 — Hypoteser.</strong> «Avviker fra» kan være både over og under 50, så testen er tosidig:</p>
                 <p>\[ H_0:\mu=50 \qquad\text{mot}\qquad H_1:\mu\neq 50 \]</p>
-                <p>\[ \bar x=\frac{252}{5}=50.4,\qquad z=\frac{50.4-50}{2/\sqrt 5}=\frac{0.4}{0.894}=0.447 \]</p>
-                <p>Forkastingskravet er \(|z|&gt;z_{0.025}=1.96\), og \(0.447\) er langt unna.</p>
+                <p><strong>Steg 2 — Testobservator.</strong> \(\sigma=2\) er kjent og resistansene er normalfordelte, så vi bruker Z-test. Under \(H_0\) (med \(\mu=\mu_0=50\)) er</p>
+                <p>\[ Z=\frac{\bar X-\mu_0}{\sigma/\sqrt n}\sim N(0,1) \]</p>
+                <p><strong>Steg 3 — Forkastingsområde.</strong> Tosidig test med \(\alpha=0.05\) gir 0.025 i hver hale. Forkast \(H_0\) dersom \(|Z|&gt;z_{0.025}=1.96\).</p>
+                <p><strong>Steg 4 — Regn ut.</strong> Gjennomsnittet av de fem målingene:</p>
+                <p>\[ \bar x=\frac{49+49+50+50+54}{5}=\frac{252}{5}=50.4 \]</p>
+                <p>Standardfeilen er \(\sigma/\sqrt n=2/\sqrt 5=2/2.236=0.894\), og dermed</p>
+                <p>\[ z=\frac{50.4-50}{0.894}=\frac{0.4}{0.894}=0.447 \]</p>
+                <p>Siden \(|0.447|&lt;1.96\), ligger \(z\) <strong>ikke</strong> i forkastingsområdet.</p>
+                <p><strong>Steg 5 — Konklusjon.</strong> \(H_0\) beholdes på 5 % signifikansnivå. Det er ikke grunnlag for å hevde at forventet resistans avviker fra 50 kΩ.</p>
                 <!-- tikz:ht-resistans-test --><svg class='tikz' role='img' style='width:28.2em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-70.008853 -66.978872 239.326748 93.969409'>
 <defs>
 <path stroke='none' id='ht-resistans-test-g0-0' d='M5.571108-1.809215C5.69863-1.809215 5.873973-1.809215 5.873973-1.992528S5.69863-2.175841 5.571108-2.175841H1.004234C.876712-2.175841 .70137-2.175841 .70137-1.992528S.876712-1.809215 1.004234-1.809215H5.571108Z'/>
@@ -1564,7 +1702,8 @@
 </g>
 </g>
 </svg><!-- /tikz:ht-resistans-test -->
-                <div class="answer"><b>\(H_0\) beholdes</b> — det er ikke signifikant avvik fra 50 kΩ. Samme konklusjon som via konfidensintervallet [48.65, 52.15], se <a href="07-konfidensintervall.html#mai2023">konfidensintervall</a>.</div>
+                <p><strong>Via p-verdi:</strong> Tosidig test, så begge halene teller: \(p=2\cdot\big(1-G(0.45)\big)=2\cdot(1-0.6736)=0.65\). Det er langt over 0.05.</p>
+                <div class="answer"><b>\(|z|=0.447&lt;1.96\): \(H_0\) beholdes.</b> Det er ikke signifikant avvik fra 50 kΩ. Samme konklusjon som via konfidensintervallet [48.65, 52.15], se <a href="07-konfidensintervall.html#mai2023">konfidensintervall</a>.</div>
               </div>
             </details>
           </article>
