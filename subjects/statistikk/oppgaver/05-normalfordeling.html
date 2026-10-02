@@ -313,10 +313,15 @@
 </g>
 </g>
 </svg><!-- /tikz:nf-appelsiner-a -->
-                <h4>a)</h4>
-                <p>\[ P(255&lt;X&lt;300)=G\!\left(\frac{300-270}{15}\right)-G\!\left(\frac{255-270}{15}\right)=G(2.00)-G(-1.00) \]</p>
-                <p>\[ =0.9772-0.1587=0.82 \]</p>
-                <h4>b) Baklengs</h4>
+                <p>La \(X\) være vekten av en tilfeldig appelsin, \(X\sim N(270,\,15)\).</p>
+                <h4>a) Mellom to grenser</h4>
+                <p><strong>Hva spørres om?</strong> \(P(255&lt;X&lt;300)\): arealet mellom to grenser.</p>
+                <p><strong>Standardiser begge grensene.</strong></p>
+                <p>\[ z_1=\frac{255-270}{15}=\frac{-15}{15}=-1.00,\qquad z_2=\frac{300-270}{15}=\frac{30}{15}=2.00 \]</p>
+                <p><strong>Regel.</strong> Arealet under den øvre grensen minus arealet under den nedre. Grensene er ikke symmetriske om 270, så vi kan ikke bruke \(2G(z)-1\):</p>
+                <p>\[ P(255&lt;X&lt;300)=G(2.00)-G(-1.00)=0.9772-0.1587=0.82 \]</p>
+                <p><strong>Svar.</strong> 82 % av appelsinene veier mellom 255 og 300 gram.</p>
+                <h4>b) Baklengs: grensen for de 10 % letteste</h4>
                 <!-- tikz:nf-appelsiner-b --><svg class='tikz' role='img' style='width:28.2em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-70.008853 -70.008835 239.326748 83.604351'>
 <defs>
 <path stroke='none' id='nf-appelsiner-b-g0-0' d='M5.571108-1.809215C5.69863-1.809215 5.873973-1.809215 5.873973-1.992528S5.69863-2.175841 5.571108-2.175841H1.004234C.876712-2.175841 .70137-2.175841 .70137-1.992528S.876712-1.809215 1.004234-1.809215H5.571108Z'/>
@@ -373,13 +378,24 @@
 </g>
 </g>
 </svg><!-- /tikz:nf-appelsiner-b -->
-                <p>Nå er arealet kjent (0.10 til venstre) og grensen \(k\) ukjent.</p>
-                <p>\[ P(X&lt;k)=0.10 \quad\Rightarrow\quad \frac{k-270}{15}=-z_{0.10}=-1.282 \]</p>
-                <p>\[ k=270-1.282\cdot 15=250.8\approx 251\ \text{gram} \]</p>
-                <h4>c)</h4>
-                <p>Først \(p\) fra normalfordelingen, så binomisk:</p>
-                <p>\[ p=P(X&gt;285)=1-G(1.00)=0.1587 \]</p>
-                <p>\[ P(Y\ge 3)=1-\sum_{x=0}^{2}\binom{25}{x}p^x(1-p)^{25-x}\approx 0.78 \]</p>
+                <p><strong>Hva spørres om?</strong> Nå er arealet kjent (0.10 til venstre) og grensen \(k\) ukjent. Vi skal finne \(k\) slik at \(P(X&lt;k)=0.10\). Fra sannsynlighet til x-verdi: det er Tabell B.</p>
+                <p><strong>Finn z-verdien.</strong> Arealet er i venstre hale, så \(z\) er negativ. Tabell B gir \(z_{0.10}=1.282\) (arealet til høyre for 1.282 er 0.10). Symmetrien gir at arealet til venstre for \(-1.282\) også er 0.10:</p>
+                <p>\[ \frac{k-270}{15}=-z_{0.10}=-1.282 \]</p>
+                <p><strong>Løs for \(k\).</strong></p>
+                <p>\[ k=270-1.282\cdot 15=270-19.2=250.8\approx 251\ \text{gram} \]</p>
+                <p><strong>Svar.</strong> Appelsiner som veier opptil omtrent 251 gram går til juiceproduksjon.</p>
+                <h4>c) Minst 3 av 25 over 285 gram</h4>
+                <p><strong>Steg 1 — Sannsynligheten for én appelsin.</strong> Først finner vi \(p\) = sannsynligheten for at én appelsin veier over 285 gram:</p>
+                <p>\[ p=P(X&gt;285)=1-G\!\left(\frac{285-270}{15}\right)=1-G(1.00)=1-0.8413=0.1587 \]</p>
+                <p><strong>Steg 2 — Fordelingen til antallet.</strong> La \(Y\) være antall av de 25 som veier over 285 gram. Vektene er uavhengige, og hver appelsin er «tung» med samme sannsynlighet \(p\). Da er \(Y\sim\mathrm{Bin}(25,\,0.1587)\).</p>
+                <p><strong>Steg 3 — Komplement.</strong> «Minst 3» er komplementet til «0, 1 eller 2»:</p>
+                <p>\[ P(Y\ge 3)=1-\bigl[P(Y=0)+P(Y=1)+P(Y=2)\bigr] \]</p>
+                <p><strong>Steg 4 — Regn ut leddene</strong> med \(P(Y=y)=\binom{25}{y}p^y(1-p)^{25-y}\):</p>
+                <p>\[ P(Y=0)=0.8413^{25}=0.0133 \]</p>
+                <p>\[ P(Y=1)=25\cdot 0.1587\cdot 0.8413^{24}=0.0628 \]</p>
+                <p>\[ P(Y=2)=300\cdot 0.1587^2\cdot 0.8413^{23}=0.1420 \]</p>
+                <p>\[ P(Y\ge 3)=1-(0.0133+0.0628+0.1420)=1-0.2181=0.78 \]</p>
+                <p><strong>Svar.</strong> Det er 78 % sannsynlighet for at minst 3 av de 25 appelsinene veier mer enn 285 gram.</p>
                 <div class="answer"><b>a) 0.82 · b) ca. 251 gram · c) 0.78.</b></div>
               </div>
             </details>
@@ -461,11 +477,15 @@
 </g>
 </g>
 </svg><!-- /tikz:nf-stempel -->
-                <h4>a)</h4>
-                <p>Grensene 9.95 og 10.05 ligger like langt fra \(\mu=10\) på hver side, altså \(z_1=-z\) og \(z_2=z\) for samme \(z\). Symmetrien \(G(-z)=1-G(z)\) gir da</p>
-                <p>\[ P(z_1&lt;Z&lt;z_2)=G(z)-G(-z)=G(z)-(1-G(z))=2G(z)-1 \]</p>
-                <p>\[ z=\frac{0.05}{0.03}=1.67 \quad\Rightarrow\quad P=2G(1.67)-1=2\cdot 0.9525-1=0.905\approx 0.91 \]</p>
-                <h4>b)</h4>
+                <h4>a) Symmetrisk intervall</h4>
+                <p>La \(X\sim N(10,\,0.03)\) være diameteren.</p>
+                <p><strong>Standardiser.</strong> Grensene 9.95 og 10.05 ligger begge 0.05 fra \(\mu=10\):</p>
+                <p>\[ z_1=\frac{9.95-10}{0.03}=-1.67,\qquad z_2=\frac{10.05-10}{0.03}=1.67 \]</p>
+                <p><strong>Regel.</strong> Grensene er symmetriske, \(z_1=-z_2\). Symmetrien \(G(-z)=1-G(z)\) gir da</p>
+                <p>\[ P(-z&lt;Z&lt;z)=G(z)-G(-z)=G(z)-\bigl(1-G(z)\bigr)=2G(z)-1 \]</p>
+                <p>\[ P(9.95&lt;X&lt;10.05)=2G(1.67)-1=2\cdot 0.9525-1=0.905\approx 0.91 \]</p>
+                <p><strong>Svar.</strong> 91 % av ringene har diameter mellom 9.95 og 10.05 cm.</p>
+                <h4>b) Lengste garantitid</h4>
                 <!-- tikz:nf-garanti --><svg class='tikz' role='img' style='width:28.2em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-70.008853 -70.008835 239.329748 83.598392'>
 <defs>
 <path stroke='none' id='nf-garanti-g0-0' d='M5.571108-1.809215C5.69863-1.809215 5.873973-1.809215 5.873973-1.992528S5.69863-2.175841 5.571108-2.175841H1.004234C.876712-2.175841 .70137-2.175841 .70137-1.992528S.876712-1.809215 1.004234-1.809215H5.571108Z'/>
@@ -523,9 +543,14 @@
 </g>
 </g>
 </svg><!-- /tikz:nf-garanti -->
-                <p>Regn om til måneder først: \(\mu=12\cdot 12=144\), \(\sigma=2.5\cdot 12=30\). La garantitiden være \(k\) måneder. Kravet er \(P(X&lt;k)\le 0.05\):</p>
-                <p>\[ \frac{k-144}{30}&lt;-z_{0.05}=-1.645 \quad\Rightarrow\quad k&lt;144-1.645\cdot 30=94.65 \]</p>
-                <div class="answer"><b>a) 0.91 · b) 94 måneder.</b> Avrund <em>ned</em> — 95 måneder ville gitt mer enn 5 % erstatninger.</div>
+                <p><strong>Steg 1 — Gjør om enhetene.</strong> Garantitiden skal være et helt antall <em>måneder</em>, mens fordelingen er gitt i <em>år</em>. Regn om først:</p>
+                <p>\[ \mu=12\cdot 12=144\ \text{måneder},\qquad \sigma=2.5\cdot 12=30\ \text{måneder} \]</p>
+                <p><strong>Steg 2 — Sett opp kravet.</strong> La garantitiden være \(k\) måneder. En motor erstattes hvis den slutter å virke før \(k\). Andelen som erstattes, skal være høyst 5 %:</p>
+                <p>\[ P(X&lt;k)\le 0.05 \]</p>
+                <p><strong>Steg 3 — Baklengs med Tabell B.</strong> Arealet er i venstre hale, så grensen er \(-z_{0.05}=-1.645\):</p>
+                <p>\[ \frac{k-144}{30}\le -1.645 \quad\Rightarrow\quad k\le 144-1.645\cdot 30=144-49.35=94.65 \]</p>
+                <p><strong>Steg 4 — Rund av riktig vei.</strong> \(k\) må være et helt antall måneder og høyst 94.65. Da blir det 94 måneder. Kontroll: \(k=95\) gir \(P(X&lt;95)=G(-1.63)=0.051\), som er litt over 5 %.</p>
+                <div class="answer"><b>a) 0.91 · b) 94 måneder.</b> Rund <em>ned</em> her: 95 måneder ville gitt mer enn 5 % erstatninger.</div>
               </div>
             </details>
           </article>
@@ -590,15 +615,30 @@
 </g>
 </g>
 </svg><!-- /tikz:nf-teposer -->
-                <h4>a)</h4>
-                <p>\[ P(X&gt;1.32)=1-G\!\left(\frac{1.32-1.30}{0.05}\right)=1-G(0.40)=1-0.6554=0.3446 \]</p>
-                <h4>b)</h4>
-                <p>\(Y=\sum_{i=1}^{20}X_i\) er normalfordelt med</p>
-                <p>\[ E(Y)=20\cdot 1.30=26,\qquad \operatorname{Var}(Y)=20\cdot 0.05^2=0.05 \ \Rightarrow\ \sigma_Y=\sqrt{0.05}\approx 0.224 \]</p>
+                <p>La \(X\sim N(1.30,\,0.05)\) være vekten av én tepose.</p>
+                <h4>a) Én pose over 1.32 gram</h4>
+                <p><strong>Standardiser.</strong></p>
+                <p>\[ z=\frac{1.32-1.30}{0.05}=\frac{0.02}{0.05}=0.40 \]</p>
+                <p><strong>Regel.</strong> Tabell A gir \(P(Z\le z)\), så «over» krever komplementet:</p>
+                <p>\[ P(X&gt;1.32)=1-G(0.40)=1-0.6554=0.3446 \]</p>
+                <p><strong>Svar.</strong> 34.5 % av teposene veier over 1.32 gram.</p>
+                <h4>b) 20 poser til sammen over 26.4 gram</h4>
+                <p><strong>Steg 1 — Fordelingen til summen.</strong> \(Y=X_1+\dots+X_{20}\). En sum av uavhengige normalfordelte variable er <em>eksakt</em> normalfordelt.</p>
+                <p><strong>Steg 2 — Parametrene.</strong> Forventningene adderes. Variansene adderes fordi posene er uavhengige:</p>
+                <p>\[ E(Y)=20\cdot 1.30=26,\qquad \operatorname{Var}(Y)=20\cdot 0.05^2=20\cdot 0.0025=0.05 \]</p>
+                <p>\[ \sigma_Y=\sqrt{0.05}=0.224 \]</p>
+                <p>Legg merke til at \(\sigma_Y=\sqrt{20}\cdot 0.05\), ikke \(20\cdot 0.05=1\).</p>
+                <p><strong>Steg 3 — Standardiser.</strong></p>
                 <p>\[ P(Y&gt;26.4)=1-G\!\left(\frac{26.4-26}{0.224}\right)=1-G(1.79)=1-0.9633=0.037 \]</p>
-                <h4>c)</h4>
-                <p>Binomisk med \(n=5\) og \(p=0.3446\) fra a):</p>
-                <p>\[ P(T\ge 3)=\sum_{x=3}^{5}\binom{5}{x}p^x(1-p)^{5-x}\approx 0.227 \]</p>
+                <p><strong>Svar.</strong> Det er 3.7 % sannsynlighet for at en eske med 20 poser veier over 26.4 gram til sammen.</p>
+                <h4>c) Minst 3 av 5 over 1.32 gram</h4>
+                <p><strong>Steg 1 — Fordelingen til antallet.</strong> La \(T\) være antall av 5 poser som veier over 1.32 gram. Hver pose gjør det med sannsynlighet \(p=0.3446\) fra a), uavhengig av de andre. Da er \(T\sim\mathrm{Bin}(5,\,0.3446)\).</p>
+                <p><strong>Steg 2 — Summer leddene.</strong> «Minst 3» er 3, 4 eller 5. Med \(1-p=0.6554\):</p>
+                <p>\[ P(T=3)=\binom{5}{3}0.3446^3\cdot 0.6554^2=10\cdot 0.04092\cdot 0.4295=0.1758 \]</p>
+                <p>\[ P(T=4)=\binom{5}{4}0.3446^4\cdot 0.6554=5\cdot 0.01410\cdot 0.6554=0.0462 \]</p>
+                <p>\[ P(T=5)=0.3446^5=0.0049 \]</p>
+                <p>\[ P(T\ge 3)=0.1758+0.0462+0.0049=0.227 \]</p>
+                <p><strong>Svar.</strong> Det er 22.7 % sannsynlighet for at minst 3 av 5 poser veier over 1.32 gram.</p>
                 <div class="answer"><b>a) 0.345 · b) 0.037 · c) 0.227.</b></div>
               </div>
             </details>
@@ -666,12 +706,20 @@
 </g>
 </g>
 </svg><!-- /tikz:nf-mandel -->
-                <h4>a)</h4>
-                <p>\[ P(X&lt;50)=G\!\left(\frac{50-38}{8}\right)=G(1.50)=0.9332 \]</p>
-                <h4>b) Maks-triks</h4>
-                <p>«Den tyngste av 14 veier over 50» er komplementet til «<em>alle</em> 14 veier høyst 50» — igjen to hendelser som dekker alle utfall uten overlapp. Fordi potetene er uavhengige, er sannsynligheten for at <em>alle</em> 14 samtidig veier høyst 50 gram lik <em>produktet</em> av enkeltsannsynlighetene (det er selve definisjonen av uavhengighet: fellessannsynlighet = produkt): \(P(X_1\le 50,\dots,X_{14}\le 50)=P(X\le 50)^{14}\). Deretter komplementregelen som i a):</p>
-                <p>\[ P(X_{\max}&gt;50)=1-P(X\le 50)^{14}=1-0.9332^{14}\approx 0.62 \]</p>
-                <div class="answer"><b>a) 0.933 · b) 0.62.</b> Dette komplementtrikset er verdt å kunne utenat — «minst én av n», «den største av n» og «den minste av n» løses alle slik.</div>
+                <p>La \(X\sim N(38,\,8)\) være vekten av én mandelpotet.</p>
+                <h4>a) Under 50 gram</h4>
+                <p><strong>Standardiser og slå opp.</strong> «Under» er arealet til venstre, som Tabell A gir direkte:</p>
+                <p>\[ P(X&lt;50)=G\!\left(\frac{50-38}{8}\right)=G\!\left(\frac{12}{8}\right)=G(1.50)=0.9332 \]</p>
+                <p><strong>Svar.</strong> 93.3 % av mandelpotetene veier under 50 gram.</p>
+                <h4>b) Den tyngste av 14 over 50 gram</h4>
+                <p><strong>Steg 1 — Skriv om med komplement.</strong> «Den tyngste veier over 50» betyr at <em>minst én</em> veier over 50. Det motsatte er at <em>alle</em> 14 veier høyst 50:</p>
+                <p>\[ P(X_{\max}&gt;50)=1-P(\text{alle 14 veier høyst 50}) \]</p>
+                <p><strong>Steg 2 — Bruk uavhengigheten.</strong> Vektene er uavhengige, så sannsynligheten for at alle 14 samtidig veier høyst 50 er produktet av de 14 enkeltsannsynlighetene:</p>
+                <p>\[ P(X_1\le 50,\dots,X_{14}\le 50)=P(X\le 50)^{14}=0.9332^{14}=0.380 \]</p>
+                <p><strong>Steg 3 — Komplementet.</strong></p>
+                <p>\[ P(X_{\max}&gt;50)=1-0.380=0.62 \]</p>
+                <p><strong>Svar.</strong> Det er 62 % sannsynlighet for at den tyngste av 14 poteter veier over 50 gram, selv om hver enkelt bare har 6.7 % sjanse.</p>
+                <div class="answer"><b>a) 0.933 · b) 0.62.</b> Dette komplementtrikset er verdt å kunne utenat: «minst én av n», «den største av n» og «den minste av n» løses alle slik.</div>
               </div>
             </details>
           </article>
@@ -809,16 +857,26 @@
 <path d='M-9.3125-49.89067L45.5472-35.59377' fill='none' stroke-width='.39851' stroke-miterlimit='10' style='stroke:var(--st-forstatt)'/>
 </g>
 </svg><!-- /tikz:nf-kaffe -->
-                <p>Alle tre delspørsmålene gjelder samme kurve, så de kan tegnes i én skisse.</p>
-                <h4>a)</h4>
-                <p>\[ P(X&lt;215)=G\!\left(\frac{215-220}{3.0}\right)=G(-1.67)=0.0475 \]</p>
-                <h4>b)</h4>
-                <p>Merk at 220 er nøyaktig \(\mu\), så \(G(0)=1/2\):</p>
-                <p>\[ P(218&lt;X&lt;220)=\tfrac12-G(-0.67)=0.5-0.2514=0.2486\approx 0.25 \]</p>
-                <h4>c) Baklengs</h4>
-                <p>Med koppvolum \(v\) krever vi \(P(X&gt;v)&lt;0.001\), altså \(G\bigl(\tfrac{v-220}{3.0}\bigr)&gt;0.999\):</p>
-                <p>\[ \frac{v-220}{3.0}&gt;z_{0.001}=3.090 \quad\Rightarrow\quad v&gt;229.3 \]</p>
-                <div class="answer"><b>a) 0.048 · b) 0.25 · c) koppen må romme minst ca. 229 ml.</b></div>
+                <p>La \(X\sim N(220,\,3.0)\) være volumet i én kopp. Alle tre delspørsmålene gjelder samme kurve, så de kan tegnes i én skisse.</p>
+                <h4>a) Under 215 ml</h4>
+                <p><strong>Standardiser.</strong></p>
+                <p>\[ z=\frac{215-220}{3.0}=\frac{-5}{3}=-1.67 \]</p>
+                <p><strong>Slå opp.</strong> «Under» er arealet til venstre:</p>
+                <p>\[ P(X&lt;215)=G(-1.67)=1-G(1.67)=1-0.9525=0.0475 \]</p>
+                <p><strong>Svar.</strong> 4.8 % av koppene får mindre enn 215 ml.</p>
+                <h4>b) Mellom 218 og 220 ml</h4>
+                <p><strong>Standardiser begge grensene.</strong></p>
+                <p>\[ z_1=\frac{218-220}{3.0}=-0.67,\qquad z_2=\frac{220-220}{3.0}=0 \]</p>
+                <p><strong>Regel.</strong> Den øvre grensen er nøyaktig \(\mu\), og halvparten av arealet ligger under \(\mu\): \(G(0)=0.5\).</p>
+                <p>\[ P(218&lt;X&lt;220)=G(0)-G(-0.67)=0.5-0.2514=0.2486\approx 0.25 \]</p>
+                <p><strong>Svar.</strong> 25 % av koppene får mellom 218 og 220 ml.</p>
+                <h4>c) Baklengs: minste koppvolum</h4>
+                <p><strong>Sett opp kravet.</strong> Kaffen renner over hvis volumet \(X\) er større enn koppvolumet \(v\). Sannsynligheten for det skal være under 0.1 %:</p>
+                <p>\[ P(X&gt;v)&lt;0.001 \iff P(X\le v)&gt;0.999 \]</p>
+                <p><strong>Tabell B.</strong> Arealet til høyre skal være under 0.001, så den standardiserte grensen må ligge over \(z_{0.001}=3.090\):</p>
+                <p>\[ \frac{v-220}{3.0}&gt;3.090 \quad\Rightarrow\quad v&gt;220+3.090\cdot 3.0=220+9.27=229.3 \]</p>
+                <p><strong>Svar.</strong> Koppen må romme minst ca. 229.3 ml. Rund opp hvis du skal oppgi et helt antall: 230 ml.</p>
+                <div class="answer"><b>a) 0.048 · b) 0.25 · c) koppen må romme minst ca. 229.3 ml.</b></div>
               </div>
             </details>
           </article>
@@ -914,10 +972,18 @@
 </g>
 </g>
 </svg><!-- /tikz:nf-stoy -->
-                <h4>a)</h4>
-                <p>\[ P(X&gt;60)=1-G\!\left(\frac{60-40}{10}\right)=1-G(2.00)=1-0.9772=0.023 \]</p>
-                <h4>b)</h4>
+                <p>La \(X\sim N(40,\,10)\) være én støymåling i dB.</p>
+                <h4>a) Over 60 dB</h4>
+                <p><strong>Standardiser.</strong></p>
+                <p>\[ z=\frac{60-40}{10}=2.00 \]</p>
+                <p><strong>Komplement</strong>, fordi Tabell A gir arealet til venstre:</p>
+                <p>\[ P(X&gt;60)=1-G(2.00)=1-0.9772=0.023 \]</p>
+                <p><strong>Svar.</strong> 2.3 % av målingene er over 60 dB.</p>
+                <h4>b) Mellom 50 og 60 dB</h4>
+                <p><strong>Standardiser begge grensene.</strong></p>
+                <p>\[ z_1=\frac{50-40}{10}=1.00,\qquad z_2=\frac{60-40}{10}=2.00 \]</p>
                 <p>\[ P(50&lt;X&lt;60)=G(2.00)-G(1.00)=0.9772-0.8413=0.136 \]</p>
+                <p><strong>Svar.</strong> 13.6 % av målingene ligger mellom 50 og 60 dB.</p>
                 <h4>c) Nå er det \(\mu\) som er ukjent</h4>
                 <!-- tikz:nf-stoy-c --><svg class='tikz' role='img' style='width:28.2em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-70.008853 -70.008825 239.329748 83.156382'>
 <defs>
@@ -972,8 +1038,13 @@
 </g>
 </svg><!-- /tikz:nf-stoy-c -->
                 <p>Grensen 50 dB ligger fast, så hele kurven må flyttes til venstre (den grå er den opprinnelige med \(\mu=40\)) til 90 % av arealet ligger under 50.</p>
-                <p>\[ P(X&lt;50)\ge 0.90 \quad\Rightarrow\quad \frac{50-\mu}{10}\ge z_{0.10}=1.282 \]</p>
-                <p>\[ \mu\le 50-1.282\cdot 10=37.2\ \text{dB} \]</p>
+                <p><strong>Sett opp kravet.</strong></p>
+                <p>\[ P(X&lt;50)\ge 0.90 \]</p>
+                <p><strong>Tabell B.</strong> 90 % til venstre betyr 10 % til høyre, så den standardiserte grensen må være minst \(z_{0.10}=1.282\):</p>
+                <p>\[ \frac{50-\mu}{10}\ge 1.282 \]</p>
+                <p><strong>Løs for \(\mu\).</strong></p>
+                <p>\[ 50-\mu\ge 12.82 \quad\Rightarrow\quad \mu\le 50-12.82=37.2\ \text{dB} \]</p>
+                <p><strong>Svar.</strong> Forventet støynivå må ned til 37.2 dB eller lavere.</p>
                 <div class="answer"><b>a) 0.023 · b) 0.136 · c) \(\mu\le 37.2\) dB.</b></div>
               </div>
             </details>
@@ -1064,12 +1135,21 @@
 </g>
 </svg><!-- /tikz:nf-resistans -->
                 <p>Samme intervall, to fordelinger: den brede grå er én måling \(R\), den smale er gjennomsnittet \(\bar R\) av fem. Den smale har mye mer av arealet sitt mellom 49 og 51.</p>
-                <h4>a)</h4>
-                <p>\[ P(49&lt;R&lt;51)=2G\!\left(\frac{1}{2}\right)-1=2\cdot 0.6915-1=0.383 \]</p>
-                <h4>b)</h4>
-                <p>Gjennomsnittet av normalfordelte variable er <em>eksakt</em> normalfordelt, med samme forventning men mindre spredning:</p>
-                <p>\[ \sigma_{\bar R}=\frac{2}{\sqrt5}=0.894 \quad\Rightarrow\quad P(49&lt;\bar R&lt;51)=2G\!\left(\frac{1}{0.894}\right)-1=2G(1.12)-1\approx 0.736 \]</p>
-                <div class="answer"><b>a) 0.38 · b) 0.74.</b> Det samme intervallet fanger mye mer sannsynlighet når du midler over fem målinger — kjernen i hele estimeringsteorien.</div>
+                <h4>a) Én motstand</h4>
+                <p>\(R\sim N(50,\,2)\).</p>
+                <p><strong>Standardiser.</strong> Grensene ligger symmetrisk, 1 kΩ på hver side av 50:</p>
+                <p>\[ z=\frac{51-50}{2}=0.50 \]</p>
+                <p><strong>Symmetrisk intervall.</strong></p>
+                <p>\[ P(49&lt;R&lt;51)=2G(0.50)-1=2\cdot 0.6915-1=0.383 \]</p>
+                <p><strong>Svar.</strong> 38 % av motstandene har resistans mellom 49 og 51 kΩ.</p>
+                <h4>b) Gjennomsnittet av fem</h4>
+                <p><strong>Fordelingen til gjennomsnittet.</strong> Gjennomsnittet av uavhengige normalfordelte variable er <em>eksakt</em> normalfordelt, med samme forventning men mindre spredning:</p>
+                <p>\[ \mu_{\bar R}=50,\qquad \sigma_{\bar R}=\frac{\sigma}{\sqrt n}=\frac{2}{\sqrt 5}=\frac{2}{2.236}=0.894 \]</p>
+                <p><strong>Standardiser.</strong></p>
+                <p>\[ z=\frac{51-50}{0.894}=1.12 \]</p>
+                <p>\[ P(49&lt;\bar R&lt;51)=2G(1.12)-1=2\cdot 0.8686-1=0.737 \]</p>
+                <p><strong>Svar.</strong> Det er 74 % sannsynlighet for at gjennomsnittet av fem motstander ligger mellom 49 og 51 kΩ.</p>
+                <div class="answer"><b>a) 0.38 · b) 0.74.</b> Det samme intervallet fanger mye mer sannsynlighet når du tar gjennomsnittet av fem målinger. Det er kjernen i hele estimeringsteorien.</div>
               </div>
             </details>
           </article>
@@ -1124,8 +1204,13 @@
 </g>
 </g>
 </svg><!-- /tikz:nf-eksamen -->
-                <p>\[ P(X&gt;60)=1-G\!\left(\frac{60-57.9}{14.0}\right)=1-G(0.15)=1-0.5596=0.440 \]</p>
-                <div class="answer"><b>Ca. 44 %.</b></div>
+                <p>La \(X\sim N(57.9,\,14.0)\) være andelen riktige svar for en tilfeldig student.</p>
+                <p><strong>Standardiser.</strong></p>
+                <p>\[ z=\frac{60-57.9}{14.0}=\frac{2.1}{14.0}=0.15 \]</p>
+                <p><strong>Komplement</strong>, fordi oppgaven spør om «over»:</p>
+                <p>\[ P(X&gt;60)=1-G(0.15)=1-0.5596=0.440 \]</p>
+                <p><strong>Svar.</strong> 44 % av studentene har over 60 % riktig.</p>
+                <div class="answer"><b>Ca. 44 %.</b> Denne sannsynligheten brukes videre som \(p\) i den binomiske fordelingen i punkt b).</div>
               </div>
             </details>
           </article>
@@ -1210,11 +1295,14 @@
 </g>
 </g>
 </svg><!-- /tikz:nf-kylling-a -->
-                <h4>a)</h4>
-                <p>Symmetrisk om \(\mu=1.8\), med \(z=0.2/0.3=0.67\):</p>
+                <p>La \(X\sim N(\mu,\,0.3)\) være vekten av én kylling.</p>
+                <h4>a) Mellom 1.6 og 2.0 kg når μ = 1.8</h4>
+                <p><strong>Standardiser.</strong> Grensene ligger symmetrisk, 0.2 kg på hver side av 1.8:</p>
+                <p>\[ z=\frac{2.0-1.8}{0.3}=\frac{0.2}{0.3}=0.67 \]</p>
+                <p><strong>Symmetrisk intervall.</strong></p>
                 <p>\[ P(1.6&lt;X&lt;2.0)=2G(0.67)-1=2\cdot 0.7486-1=0.497 \]</p>
-                <p>Altså ca. <strong>50 %</strong> av kyllingene.</p>
-                <h4>b)</h4>
+                <p><strong>Svar.</strong> Omtrent 50 % av kyllingene veier mellom 1.6 og 2.0 kg.</p>
+                <h4>b) Hva må μ være?</h4>
                 <!-- tikz:nf-kylling-b --><svg class='tikz' role='img' style='width:28.2em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-70.008853 -70.008865 239.329748 83.142066'>
 <defs>
 <path stroke='none' id='nf-kylling-b-g0-0' d='M5.571108-1.809215C5.69863-1.809215 5.873973-1.809215 5.873973-1.992528S5.69863-2.175841 5.571108-2.175841H1.004234C.876712-2.175841 .70137-2.175841 .70137-1.992528S.876712-1.809215 1.004234-1.809215H5.571108Z'/>
@@ -1277,9 +1365,13 @@
 </g>
 </g>
 </svg><!-- /tikz:nf-kylling-b -->
-                <p>Kravet er at arealet over 1.6 kg skal være minst 0.80. Da kan høyst 0.20 ligge under, og \(\mu\) må ligge minst \(0.842\sigma\) over 1.6.</p>
-                <p>\[ P(X&gt;1.6)\ge 0.80 \iff P(X\le 1.6)\le 0.20 \iff \frac{1.6-\mu}{0.3}\le -z_{0.20}=-0.842 \]</p>
-                <p>\[ \mu\ge 1.6+0.842\cdot 0.3=1.85\ \text{kg} \]</p>
+                <p><strong>Sett opp kravet.</strong> Minst 80 % skal veie mer enn 1.6 kg. Da kan høyst 20 % veie 1.6 kg eller mindre:</p>
+                <p>\[ P(X&gt;1.6)\ge 0.80 \iff P(X\le 1.6)\le 0.20 \]</p>
+                <p><strong>Tabell B.</strong> 20 % i venstre hale gir grensen \(-z_{0.20}=-0.842\):</p>
+                <p>\[ \frac{1.6-\mu}{0.3}\le -0.842 \]</p>
+                <p><strong>Løs for \(\mu\).</strong> Gang med 0.3 og flytt over:</p>
+                <p>\[ 1.6-\mu\le -0.253 \quad\Rightarrow\quad \mu\ge 1.6+0.253=1.85\ \text{kg} \]</p>
+                <p><strong>Svar.</strong> Forventet vekt må være minst 1.85 kg. Da ligger 1.6 kg minst 0.842 standardavvik under \(\mu\).</p>
                 <div class="answer"><b>a) ca. 50 % · b) \(\mu\ge 1.85\) kg.</b></div>
               </div>
             </details>
@@ -1359,9 +1451,13 @@
 </g>
 </g>
 </svg><!-- /tikz:nf-handtemp -->
-                <p>\[ P(31.0&lt;X&lt;34.0)=G\!\left(\frac{34.0-33.5}{1.5}\right)-G\!\left(\frac{31.0-33.5}{1.5}\right)=G(0.33)-G(-1.67) \]</p>
-                <p>\[ =0.6293-0.0475=0.582 \]</p>
-                <div class="answer"><b>Ca. 58 %.</b> Her er grensene <em>ikke</em> symmetriske om \(\mu\), så \(2G(z)-1\) kan ikke brukes.</div>
+                <p>La \(X\sim N(33.5,\,1.5)\) være håndtemperaturen.</p>
+                <p><strong>Standardiser begge grensene.</strong></p>
+                <p>\[ z_1=\frac{31.0-33.5}{1.5}=\frac{-2.5}{1.5}=-1.67,\qquad z_2=\frac{34.0-33.5}{1.5}=\frac{0.5}{1.5}=0.33 \]</p>
+                <p><strong>Regel.</strong> Arealet under den øvre grensen minus arealet under den nedre. Grensene er ikke symmetriske om 33.5, så \(2G(z)-1\) kan ikke brukes:</p>
+                <p>\[ P(31.0&lt;X&lt;34.0)=G(0.33)-G(-1.67)=0.6293-0.0475=0.582 \]</p>
+                <p><strong>Svar.</strong> 58 % av personene har håndtemperatur mellom 31.0 og 34.0 grader.</p>
+                <div class="answer"><b>Ca. 58 %.</b></div>
               </div>
             </details>
           </article>
