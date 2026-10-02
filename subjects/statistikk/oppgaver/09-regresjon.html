@@ -88,11 +88,18 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>a)</h4>
-                <p>\[ \bar x=\frac{140}{4}=35,\qquad \bar y=\frac{13.9}{4}=3.475 \]</p>
+                <h4>a) Minste kvadraters linje og prognose</h4>
+                <p><strong>Steg 1 — Gjennomsnitt.</strong> \(n=4\) observasjoner:</p>
+                <p>\[ \bar x=\frac{\sum x_i}{n}=\frac{140}{4}=35,\qquad \bar y=\frac{\sum y_i}{n}=\frac{13.9}{4}=3.475 \]</p>
+                <p><strong>Steg 2 — Stigningstallet.</strong> Sett nøkkeltallene inn i formelen:</p>
                 <p>\[ \hat\beta=\frac{\sum(x_i-\bar x)(y_i-\bar y)}{\sum(x_i-\bar x)^2}=\frac{-33.5}{500}=-0.067 \]</p>
-                <p>\[ \hat\alpha=\bar y-\hat\beta\bar x=3.475-(-0.067)\cdot 35=5.82 \]</p>
-                <p>\[ \hat y=5.82-0.067x \quad\Rightarrow\quad \hat y(15)=5.82-0.067\cdot 15\approx 4.8\ \text{kWh/kg} \]</p>
+                <p><strong>Steg 3 — Konstantleddet.</strong> Linja går alltid gjennom \((\bar x,\bar y)\):</p>
+                <p>\[ \hat\alpha=\bar y-\hat\beta\bar x=3.475-(-0.067)\cdot 35=3.475+2.345=5.82 \]</p>
+                <p><strong>Steg 4 — Linja.</strong></p>
+                <p>\[ \hat y=5.82-0.067x \]</p>
+                <p>Stigningstallet betyr at brennverdien i modellen synker med 0.067 kWh/kg for hvert prosentpoeng økning i fuktighet.</p>
+                <p><strong>Steg 5 — Prognose.</strong> Sett inn \(x=15\):</p>
+                <p>\[ \hat y(15)=5.82-0.067\cdot 15=5.82-1.005\approx 4.8\ \text{kWh/kg} \]</p>
                 <!-- tikz:rg-brennverdi --><svg class='tikz' role='img' style='width:27.8em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-66.686948 -69.80864 236.343578 140.135251'>
 <defs>
 <clipPath id='rg-brennverdi-clip1'>
@@ -246,12 +253,18 @@
 </g>
 </svg><!-- /tikz:rg-brennverdi -->
                 <p>Den fargede linja er minste kvadraters linje, og ringen er prognosen. De stiplede linjene går gjennom \((\bar x,\bar y)\) med stigningstallene i endene av 95 %-intervallet for \(\beta\) fra b). Fuktprosent 15 ligger utenfor dataene (20–50), så prognosen er en ekstrapolasjon og mer usikker enn den ser ut.</p>
-                <h4>b)</h4>
-                <p>\(\nu=n-2=2\) frihetsgrader gir \(t_{0.025}=4.303\):</p>
-                <p>\[ \frac{\sqrt{500\cdot 2.3075-(-33.5)^2}}{500\sqrt{2}}=\frac{\sqrt{1153.75-1122.25}}{707.1}=\frac{5.61}{707.1}=0.00794 \]</p>
-                <p>\[ -0.067\pm 4.303\cdot 0.00794=-0.067\pm 0.034 \]</p>
-                <div class="answer"><b>a) \(\hat y=5.82-0.067x\), \(\hat y(15)\approx 4.8\) kWh/kg · b) \(\beta\in[-0.10,\ -0.03]\).</b>
-                <br><br>I ord: vi kan være 95 % sikre på at én prosents økning i fuktighet reduserer forventet brennverdi med mellom 0.03 og 0.10 kWh per kg. Siden hele intervallet er negativt, er sammenhengen signifikant.</div>
+                <h4>b) Konfidensintervall for β</h4>
+                <p><strong>Steg 1 — Formel.</strong> I den lineærnormale modellen med ukjent \(\sigma\) er intervallet for \(\beta\)</p>
+                <p>\[ \hat\beta\pm t_{\alpha/2}\cdot\frac{\sqrt{\sum(x_i-\bar x)^2\sum(y_i-\bar y)^2-\left[\sum(x_i-\bar x)(y_i-\bar y)\right]^2}}{\sum(x_i-\bar x)^2\cdot\sqrt{n-2}} \]</p>
+                <p><strong>Steg 2 — Kvantil.</strong> t-fordelingen med \(\nu=n-2=4-2=2\) frihetsgrader. Vi mister to frihetsgrader fordi både \(\alpha\) og \(\beta\) er estimert. 95 % gir \(t_{0.025}=4.303\).</p>
+                <p><strong>Steg 3 — Standardfeil.</strong> Regn teller og nevner hver for seg:</p>
+                <p>\[ \text{teller: }\sqrt{500\cdot 2.3075-(-33.5)^2}=\sqrt{1153.75-1122.25}=\sqrt{31.5}=5.61 \]</p>
+                <p>\[ \text{nevner: }500\cdot\sqrt 2=707.1 \]</p>
+                <p>\[ SE(\hat\beta)=\frac{5.61}{707.1}=0.00794 \]</p>
+                <p><strong>Steg 4 — Sett inn.</strong></p>
+                <p>\[ -0.067\pm 4.303\cdot 0.00794=-0.067\pm 0.034 \quad\Rightarrow\quad [-0.10,\ -0.03] \]</p>
+                <p><strong>Steg 5 — Tolk.</strong> Vi er 95 % sikre på at når fuktprosenten øker med ett prosentpoeng, synker forventet brennverdi med mellom 0.03 og 0.10 kWh per kg. Hele intervallet er negativt, så 0 er ikke med: sammenhengen er signifikant på 5 % nivå.</p>
+                <div class="answer"><b>a) \(\hat y=5.82-0.067x\), \(\hat y(15)\approx 4.8\) kWh/kg · b) \(\beta\in[-0.10,\ -0.03]\).</b></div>
               </div>
             </details>
           </article>
@@ -276,10 +289,18 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>a)</h4>
-                <p>\[ \hat\beta=\frac{-485.4}{425.6}=-1.14 \]</p>
-                <p>\[ \hat\alpha=\bar y-\hat\beta\bar x=180.3-(-1.14)\cdot 36.8=222.3 \]</p>
-                <p>\[ \hat y=222.3-1.14x \quad\Rightarrow\quad \hat y(35)=222.3-1.14\cdot 35\approx 182 \]</p>
+                <h4>a) Minste kvadraters linje og prognose</h4>
+                <p><strong>Steg 1 — Gjennomsnitt.</strong> Oppgitt i regnehjelpen: \(\bar x=36.8\) og \(\bar y=180.3\).</p>
+                <p><strong>Steg 2 — Stigningstallet.</strong></p>
+                <p>\[ \hat\beta=\frac{\sum(x_i-\bar x)(y_i-\bar y)}{\sum(x_i-\bar x)^2}=\frac{-485.4}{425.6}=-1.14 \]</p>
+                <p><strong>Steg 3 — Konstantleddet.</strong></p>
+                <p>\[ \hat\alpha=\bar y-\hat\beta\bar x=180.3-(-1.14)\cdot 36.8=180.3+42.0=222.3 \]</p>
+                <p><strong>Steg 4 — Linja.</strong></p>
+                <p>\[ \hat y=222.3-1.14x \]</p>
+                <p>Makspulsen synker altså med 1.14 slag per minutt for hvert leveår i modellen.</p>
+                <p><strong>Steg 5 — Prognose for en 35-åring.</strong></p>
+                <p>\[ \hat y(35)=222.3-1.14\cdot 35=222.3-39.9\approx 182\ \text{slag/min} \]</p>
+                <p>35 år ligger innenfor dataene (24–46 år), så dette er interpolasjon og ikke ekstrapolasjon.</p>
                 <!-- tikz:rg-makspuls --><svg class='tikz' role='img' style='width:28.8em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-66.682996 -69.8086 244.561476 138.499299'>
 <defs>
 <clipPath id='rg-makspuls-clip1'>
@@ -427,12 +448,18 @@
 </g>
 </svg><!-- /tikz:rg-makspuls -->
                 <p>Modellen er altså i praksis den kjente tommelfingerregelen «makspuls ≈ 220 − alder».</p>
-                <h4>b)</h4>
-                <p>\(\nu=n-2=8\) gir \(t_{0.025}=2.306\):</p>
-                <p>\[ \frac{\sqrt{425.6\cdot 642.1-(-485.4)^2}}{425.6\sqrt{8}}=\frac{\sqrt{273\,277.8-235\,613.2}}{1203.8}=\frac{194.1}{1203.8}=0.1612 \]</p>
-                <p>\[ -1.14\pm 2.306\cdot 0.1612=-1.14\pm 0.372 \]</p>
-                <div class="answer"><b>a) \(\hat y=222.3-1.14x\), ca. 182 slag/min for en 35-åring · b) \(\beta\in[-1.51,\ -0.77]\).</b>
-                <br><br>I ord: den forventede årlige reduksjonen i makspuls ligger med 95 % sikkerhet mellom 0.77 og 1.51 slag per minutt per leveår.</div>
+                <h4>b) Konfidensintervall for β</h4>
+                <p><strong>Steg 1 — Formel.</strong></p>
+                <p>\[ \hat\beta\pm t_{\alpha/2}\cdot\frac{\sqrt{\sum(x_i-\bar x)^2\sum(y_i-\bar y)^2-\left[\sum(x_i-\bar x)(y_i-\bar y)\right]^2}}{\sum(x_i-\bar x)^2\cdot\sqrt{n-2}} \]</p>
+                <p><strong>Steg 2 — Kvantil.</strong> \(n=10\) gir \(\nu=n-2=8\) frihetsgrader, og 95 % gir \(t_{0.025}=2.306\).</p>
+                <p><strong>Steg 3 — Standardfeil.</strong></p>
+                <p>\[ \text{teller: }\sqrt{425.6\cdot 642.1-(-485.4)^2}=\sqrt{273\,277.8-235\,613.2}=\sqrt{37\,664.6}=194.1 \]</p>
+                <p>\[ \text{nevner: }425.6\cdot\sqrt 8=425.6\cdot 2.828=1203.8 \]</p>
+                <p>\[ SE(\hat\beta)=\frac{194.1}{1203.8}=0.1612 \]</p>
+                <p><strong>Steg 4 — Sett inn.</strong></p>
+                <p>\[ -1.14\pm 2.306\cdot 0.1612=-1.14\pm 0.372 \quad\Rightarrow\quad [-1.51,\ -0.77] \]</p>
+                <p><strong>Steg 5 — Tolk.</strong> Vi er 95 % sikre på at forventet makspuls synker med mellom 0.77 og 1.51 slag per minutt for hvert leveår. Hele intervallet er negativt, så sammenhengen er signifikant på 5 % nivå.</p>
+                <div class="answer"><b>a) \(\hat y=222.3-1.14x\), ca. 182 slag/min for en 35-åring · b) \(\beta\in[-1.51,\ -0.77]\).</b></div>
               </div>
             </details>
           </article>
@@ -457,14 +484,29 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>a)</h4>
-                <p>\[ R=\frac{S_{XY}}{S_XS_Y}=\frac{23.6}{\sqrt{1.60\cdot 435.2}}=\frac{23.6}{26.39}=0.894 \]</p>
-                <p><strong>Tolkning:</strong> \(R\) måler graden av linearitet i et spredningsplott. Med \(R=0.89\) — relativt nær 1 — er det ganske høy grad av lineær sammenheng. At \(R\) er positiv betyr, ikke overraskende, at lange poteter i dette utvalget har en tendens til å veie mer enn korte. Med bare fem observasjoner er usikkerheten imidlertid stor.</p>
-                <h4>b)</h4>
-                <p>\[ \hat\beta=\frac{23.60}{1.60}=14.75 \]</p>
-                <p>\(\nu=5-2=3\) gir \(t_{0.025}=3.182\):</p>
-                <p>\[ \frac{\sqrt{1.60\cdot 435.2-23.60^2}}{1.60\sqrt{3}}=\frac{\sqrt{696.32-556.96}}{2.771}=\frac{11.81}{2.771}=4.26 \]</p>
-                <p>\[ 14.75\pm 3.182\cdot 4.26=14.75\pm 13.55 \]</p>
+                <h4>a) Korrelasjonskoeffisient</h4>
+                <p><strong>Formel.</strong> Faktorene \(1/(n-1)\) forkortes bort, så vi kan bruke de rå summene:</p>
+                <p>\[ R=\frac{\sum(x_i-\bar x)(y_i-\bar y)}{\sqrt{\sum(x_i-\bar x)^2\cdot\sum(y_i-\bar y)^2}} \]</p>
+                <p><strong>Sett inn.</strong></p>
+                <p>\[ R=\frac{23.6}{\sqrt{1.60\cdot 435.2}}=\frac{23.6}{\sqrt{696.32}}=\frac{23.6}{26.39}=0.894 \]</p>
+                <p><strong>Tolkning, tre ting:</strong></p>
+                <ul>
+                <li><em>Styrke:</em> \(R=0.89\) er nær 1, så det er en ganske sterk lineær sammenheng.</li>
+                <li><em>Retning:</em> \(R\) er positiv, så lange poteter har en tendens til å veie mer enn korte.</li>
+                <li><em>Forbehold:</em> Med bare fem observasjoner er usikkerheten stor, og \(R\) sier bare noe om <em>lineær</em> sammenheng.</li>
+                </ul>
+                <h4>b) Konfidensintervall for β</h4>
+                <p><strong>Steg 1 — Estimat og formel.</strong> Først stigningstallet:</p>
+                <p>\[ \hat\beta=\frac{\sum(x_i-\bar x)(y_i-\bar y)}{\sum(x_i-\bar x)^2}=\frac{23.6}{1.60}=14.75\ \text{gram per cm} \]</p>
+                <p>Intervallet er</p>
+                <p>\[ \hat\beta\pm t_{\alpha/2}\cdot\frac{\sqrt{\sum(x_i-\bar x)^2\sum(y_i-\bar y)^2-\left[\sum(x_i-\bar x)(y_i-\bar y)\right]^2}}{\sum(x_i-\bar x)^2\cdot\sqrt{n-2}} \]</p>
+                <p><strong>Steg 2 — Kvantil.</strong> \(n=5\) gir \(\nu=5-2=3\) frihetsgrader, og 95 % gir \(t_{0.025}=3.182\).</p>
+                <p><strong>Steg 3 — Standardfeil.</strong></p>
+                <p>\[ \text{teller: }\sqrt{1.60\cdot 435.2-23.6^2}=\sqrt{696.32-556.96}=\sqrt{139.36}=11.81 \]</p>
+                <p>\[ \text{nevner: }1.60\cdot\sqrt 3=1.60\cdot 1.732=2.771 \]</p>
+                <p>\[ SE(\hat\beta)=\frac{11.81}{2.771}=4.26 \]</p>
+                <p><strong>Steg 4 — Sett inn.</strong></p>
+                <p>\[ 14.75\pm 3.182\cdot 4.26=14.75\pm 13.55 \quad\Rightarrow\quad [1.2,\ 28.3] \]</p>
                 <!-- tikz:rg-poteter --><svg class='tikz' role='img' style='width:29.1em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-66.686983 -67.0937 247.010675 141.130127'>
 <defs>
 <clipPath id='rg-poteter-clip1'>
@@ -637,8 +679,8 @@
 </g>
 </svg><!-- /tikz:rg-poteter -->
                 <p>Vifta mellom de stiplede linjene er svært åpen. Med bare fem punkter kan linja være nesten flat eller dobbelt så bratt.</p>
-                <div class="answer"><b>a) \(R=0.89\) · b) \(\beta\in[1.2,\ 28]\) gram per cm.</b>
-                <br><br>I ord: sammenlikner vi poteter med 1 cm lengdeforskjell, kan vi være 95 % sikre på at forventet vektforskjell ligger mellom 1.2 og 28 gram. Intervallet er ekstremt bredt — med \(n=5\) og \(t_{0.025}=3.18\) er presisjonen dårlig, selv om korrelasjonen ser sterk ut.</div>
+                <p><strong>Steg 5 — Tolk.</strong> Sammenlikner vi poteter med 1 cm forskjell i lengde, er vi 95 % sikre på at forventet vektforskjell ligger mellom 1.2 og 28 gram. 0 er ikke med, så sammenhengen er signifikant på 5 % nivå. Men intervallet er svært bredt: med \(n=5\) og \(t_{0.025}=3.18\) er presisjonen dårlig, selv om korrelasjonen ser sterk ut.</p>
+                <div class="answer"><b>a) \(R=0.89\) · b) \(\beta\in[1.2,\ 28]\) gram per cm.</b></div>
               </div>
             </details>
           </article>
@@ -662,12 +704,24 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>a)</h4>
-                <p>Her må du regne ut summene selv — det er ingen regnehjelp i dette settet:</p>
-                <p>\[ \bar x=175.8,\qquad \bar y=79.2 \]</p>
-                <p>\[ \sum(x_i-\bar x)^2=738.8,\quad \sum(y_i-\bar y)^2=462.8,\quad \sum(x_i-\bar x)(y_i-\bar y)=546.2 \]</p>
-                <p>\[ \hat\beta=\frac{546.2}{738.8}=0.739,\qquad \hat\alpha=79.2-0.739\cdot 175.8=-50.77 \]</p>
-                <p>\[ \hat y=-50.77+0.739x \quad\Rightarrow\quad \hat y(175)\approx 78.6\ \text{kg} \]</p>
+                <h4>a) Prognose med lineær regresjon</h4>
+                <p>Her er det ingen regnehjelp, så summene må regnes ut selv. Det er raskest å bruke snarveiformlene \(\sum(x_i-\bar x)^2=\sum x_i^2-n\bar x^2\) og \(\sum(x_i-\bar x)(y_i-\bar y)=\sum x_iy_i-n\bar x\bar y\).</p>
+                <p><strong>Steg 1 — Gjennomsnitt.</strong> \(n=5\):</p>
+                <p>\[ \bar x=\frac{156+183+169+191+180}{5}=\frac{879}{5}=175.8,\qquad \bar y=\frac{65+78+75+94+84}{5}=\frac{396}{5}=79.2 \]</p>
+                <p><strong>Summene.</strong> Med \(\sum x_i^2=155\,267\), \(\sum y_i^2=31\,826\) og \(\sum x_iy_i=70\,163\):</p>
+                <p>\[ \sum(x_i-\bar x)^2=155\,267-5\cdot 175.8^2=155\,267-154\,528.2=738.8 \]</p>
+                <p>\[ \sum(y_i-\bar y)^2=31\,826-5\cdot 79.2^2=31\,826-31\,363.2=462.8 \]</p>
+                <p>\[ \sum(x_i-\bar x)(y_i-\bar y)=70\,163-5\cdot 175.8\cdot 79.2=70\,163-69\,616.8=546.2 \]</p>
+                <p><strong>Steg 2 — Stigningstallet.</strong></p>
+                <p>\[ \hat\beta=\frac{546.2}{738.8}=0.7393 \]</p>
+                <p><strong>Steg 3 — Konstantleddet.</strong></p>
+                <p>\[ \hat\alpha=\bar y-\hat\beta\bar x=79.2-0.7393\cdot 175.8=79.2-129.97=-50.77 \]</p>
+                <p>Bruk flere desimaler i \(\hat\beta\) her. Med \(\hat\beta=0.739\) blir \(\hat\alpha=-50.72\), fordi feilen ganges med 175.8.</p>
+                <p><strong>Steg 4 — Linja.</strong></p>
+                <p>\[ \hat y=-50.77+0.739x \]</p>
+                <p>Konstantleddet −50.77 har ingen fysisk tolkning (en person som er 0 cm høy). Det er bare der linja krysser y-aksen, langt utenfor dataene.</p>
+                <p><strong>Steg 5 — Prognose for 175 cm.</strong></p>
+                <p>\[ \hat y(175)=-50.77+0.7393\cdot 175=-50.77+129.38\approx 78.6\ \text{kg} \]</p>
                 <!-- tikz:rg-hoyde --><svg class='tikz' role='img' style='width:33.0em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-66.686935 -69.80861 280.396133 141.134085'>
 <defs>
 <clipPath id='rg-hoyde-clip1'>
@@ -832,12 +886,18 @@
 </g>
 </svg><!-- /tikz:rg-hoyde -->
                 <p>(Til orientering: \(R=546.2/\sqrt{738.8\cdot 462.8}=0.934\).)</p>
-                <h4>b)</h4>
-                <p>\(\nu=3\), \(t_{0.025}=3.182\):</p>
-                <p>\[ \frac{\sqrt{738.8\cdot 462.8-546.2^2}}{738.8\sqrt 3}=\frac{\sqrt{341\,916-298\,334}}{1279.6}=\frac{208.8}{1279.6}=0.163 \]</p>
-                <p>\[ 0.739\pm 3.182\cdot 0.163=0.739\pm 0.519 \]</p>
-                <div class="answer"><b>a) ca. 78.6 kg · b) \(\beta\in[0.22,\ 1.26]\) kg per cm.</b>
-                <br><br>I ord: for hver ekstra centimeter kroppshøyde øker forventet vekt med mellom 0.22 og 1.26 kg, med 95 % sikkerhet. At 0 ikke ligger i intervallet, viser at sammenhengen er signifikant på 5 % nivå.</div>
+                <h4>b) Konfidensintervall for β</h4>
+                <p><strong>Steg 1 — Formel.</strong></p>
+                <p>\[ \hat\beta\pm t_{\alpha/2}\cdot\frac{\sqrt{\sum(x_i-\bar x)^2\sum(y_i-\bar y)^2-\left[\sum(x_i-\bar x)(y_i-\bar y)\right]^2}}{\sum(x_i-\bar x)^2\cdot\sqrt{n-2}} \]</p>
+                <p><strong>Steg 2 — Kvantil.</strong> \(\nu=5-2=3\) frihetsgrader, og 95 % gir \(t_{0.025}=3.182\).</p>
+                <p><strong>Steg 3 — Standardfeil.</strong></p>
+                <p>\[ \text{teller: }\sqrt{738.8\cdot 462.8-546.2^2}=\sqrt{341\,916-298\,334}=\sqrt{43\,582}=208.8 \]</p>
+                <p>\[ \text{nevner: }738.8\cdot\sqrt 3=738.8\cdot 1.732=1279.6 \]</p>
+                <p>\[ SE(\hat\beta)=\frac{208.8}{1279.6}=0.163 \]</p>
+                <p><strong>Steg 4 — Sett inn.</strong></p>
+                <p>\[ 0.739\pm 3.182\cdot 0.163=0.739\pm 0.519 \quad\Rightarrow\quad [0.22,\ 1.26] \]</p>
+                <p><strong>Steg 5 — Tolk.</strong> Vi er 95 % sikre på at forventet vekt øker med mellom 0.22 og 1.26 kg for hver ekstra centimeter kroppshøyde. 0 ligger ikke i intervallet, så sammenhengen er signifikant på 5 % nivå.</p>
+                <div class="answer"><b>a) ca. 78.6 kg · b) \(\beta\in[0.22,\ 1.26]\) kg per cm.</b></div>
               </div>
             </details>
           </article>
@@ -863,13 +923,26 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>a)</h4>
-                <p>\[ \bar x=4,\qquad \bar y=805.7 \]</p>
-                <p>\[ \sum(x_i-\bar x)^2=28,\quad \sum(y_i-\bar y)^2=243\,323.4,\quad \sum(x_i-\bar x)(y_i-\bar y)=-2600 \]</p>
-                <p>\[ R=\frac{-2600}{\sqrt{28\cdot 243\,323.4}}=-0.996 \]</p>
-                <p>Nesten perfekt negativ lineær sammenheng.</p>
-                <p>\[ \hat\beta=\frac{-2600}{28}=-92.86,\qquad \hat\alpha=805.7-(-92.86)\cdot 4=1177.1 \]</p>
-                <p>\[ \hat y=1177.1-92.86x \quad\Rightarrow\quad \hat y(8)\approx 434\ \text{tonn i 2019} \]</p>
+                <h4>a) Korrelasjon, linje og prognose</h4>
+                <p>Ingen regnehjelp her heller, så vi regner summene med snarveiformlene.</p>
+                <p><strong>Steg 1 — Gjennomsnitt.</strong> \(n=7\):</p>
+                <p>\[ \bar x=\frac{1+2+\dots+7}{7}=\frac{28}{7}=4,\qquad \bar y=\frac{1105+998+882+781+702+625+547}{7}=\frac{5640}{7}=805.7 \]</p>
+                <p><strong>Summene.</strong> Med \(\sum x_i^2=140\), \(\sum y_i^2=4\,787\,552\) og \(\sum x_iy_i=19\,960\):</p>
+                <p>\[ \sum(x_i-\bar x)^2=140-7\cdot 4^2=140-112=28 \]</p>
+                <p>\[ \sum(y_i-\bar y)^2=4\,787\,552-\frac{5640^2}{7}=4\,787\,552-4\,544\,228.6=243\,323.4 \]</p>
+                <p>\[ \sum(x_i-\bar x)(y_i-\bar y)=19\,960-7\cdot 4\cdot\frac{5640}{7}=19\,960-22\,560=-2600 \]</p>
+                <p>(Bruk den eksakte brøken \(5640/7\) i stedet for 805.7 i mellomregningene. Ellers gir avrundingen merkbare feil i \(\sum(y_i-\bar y)^2\).)</p>
+                <p><strong>Korrelasjonskoeffisienten.</strong></p>
+                <p>\[ R=\frac{-2600}{\sqrt{28\cdot 243\,323.4}}=\frac{-2600}{2610.2}=-0.996 \]</p>
+                <p>\(R\) er svært nær −1: nesten perfekt negativ lineær sammenheng. Utslippet har sunket jevnt år for år.</p>
+                <p><strong>Steg 2 — Stigningstallet.</strong></p>
+                <p>\[ \hat\beta=\frac{-2600}{28}=-92.86 \]</p>
+                <p><strong>Steg 3 — Konstantleddet.</strong></p>
+                <p>\[ \hat\alpha=\bar y-\hat\beta\bar x=805.7-(-92.86)\cdot 4=805.7+371.4=1177.1 \]</p>
+                <p><strong>Steg 4 — Linja.</strong></p>
+                <p>\[ \hat y=1177.1-92.86x \]</p>
+                <p><strong>Steg 5 — Prognose for 2019.</strong> 2012 er år 1, så 2019 er år 8:</p>
+                <p>\[ \hat y(8)=1177.1-92.86\cdot 8=1177.1-742.9\approx 434\ \text{tonn} \]</p>
                 <!-- tikz:rg-svevestov --><svg class='tikz' role='img' style='width:29.6em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-66.686843 -66.880267 251.702463 142.732834'>
 <defs>
 <clipPath id='rg-svevestov-clip1'>
@@ -1039,19 +1112,28 @@
 </g>
 </g>
 </svg><!-- /tikz:rg-svevestov -->
-                <p>Punktene ligger nesten på linja (\(R=-0.996\)), så vifta er smal. År 8 ligger likevel utenfor dataene.</p>
-                <h4>b)</h4>
-                <p>\(\nu=5\), \(t_{0.025}=2.571\):</p>
-                <p>\[ \frac{\sqrt{28\cdot 243\,323.4-2600^2}}{28\sqrt 5}=\frac{\sqrt{6\,813\,056-6\,760\,000}}{62.61}=\frac{230.3}{62.61}=3.679 \]</p>
-                <p>\[ -92.86\pm 2.571\cdot 3.679=-92.86\pm 9.46 \]</p>
-                <p>Intervallet for \(\beta\) er \([-102.3,\ -83.4]\). Oppgaven spør om <em>reduksjonen</em>, altså et positivt tall — snu fortegnet:</p>
+                <p>Punktene ligger nesten på linja (\(R=-0.996\)), så vifta er smal. År 8 ligger likevel utenfor dataene, så prognosen er en ekstrapolasjon.</p>
+                <h4>b) Konfidensintervall for årlig reduksjon</h4>
+                <p><strong>Steg 1 — Formel.</strong> Den årlige endringen er \(\beta\), og intervallet er</p>
+                <p>\[ \hat\beta\pm t_{\alpha/2}\cdot\frac{\sqrt{\sum(x_i-\bar x)^2\sum(y_i-\bar y)^2-\left[\sum(x_i-\bar x)(y_i-\bar y)\right]^2}}{\sum(x_i-\bar x)^2\cdot\sqrt{n-2}} \]</p>
+                <p><strong>Steg 2 — Kvantil.</strong> \(\nu=7-2=5\) frihetsgrader, og 95 % gir \(t_{0.025}=2.571\).</p>
+                <p><strong>Steg 3 — Standardfeil.</strong></p>
+                <p>\[ \text{teller: }\sqrt{28\cdot 243\,323.4-2600^2}=\sqrt{6\,813\,056-6\,760\,000}=\sqrt{53\,056}=230.3 \]</p>
+                <p>\[ \text{nevner: }28\cdot\sqrt 5=28\cdot 2.236=62.61 \]</p>
+                <p>\[ SE(\hat\beta)=\frac{230.3}{62.61}=3.679 \]</p>
+                <p><strong>Steg 4 — Sett inn.</strong></p>
+                <p>\[ -92.86\pm 2.571\cdot 3.679=-92.86\pm 9.46 \quad\Rightarrow\quad \beta\in[-102.3,\ -83.4] \]</p>
+                <p><strong>Steg 5 — Svar på det som spørres om.</strong> Oppgaven spør om <em>reduksjonen</em>, som er et positivt tall. Den er \(-\beta\), så vi snur fortegnet og bytter om endepunktene:</p>
                 <p>\[ \text{reduksjon}\in[83.4,\ 102.3]\ \text{tonn per år} \]</p>
-                <h4>c)</h4>
-                <p>Testen må gjelde \(\beta\), den må være tosidig, og \(H_0\) må forkastes på 5 % nivå. Det oppnås ved å velge en \(\beta_0\) som ligger <em>utenfor</em> intervallet i b), for eksempel:</p>
+                <p>Vi er 95 % sikre på at det forventede utslippet av svevestøv fra veitrafikk har sunket med mellom 83.4 og 102.3 tonn per år.</p>
+                <h4>c) Tosidig test via intervallet</h4>
+                <p><strong>Ideen.</strong> Et 95 % konfidensintervall inneholder nøyaktig de verdiene \(\beta_0\) som <em>ikke</em> forkastes i en tosidig test på 5 % nivå. For å lage en test der \(H_0\) forkastes, må vi altså velge en \(\beta_0\) <em>utenfor</em> intervallet fra b).</p>
+                <p><strong>Hypoteser.</strong> Vi velger for eksempel \(\beta_0=-80\):</p>
                 <p>\[ H_0:\beta=-80 \qquad\text{mot}\qquad H_1:\beta\neq -80 \]</p>
-                <p>Siden \(-80\notin[-102.3,\ -83.4]\), forkastes \(H_0\) på 5 % signifikansnivå.</p>
+                <p><strong>Konklusjon.</strong> Siden \(-80\notin[-102.3,\ -83.4]\), forkastes \(H_0\) på 5 % signifikansnivå. Dataene gir grunnlag for å hevde at den forventede årlige endringen ikke er −80 tonn.</p>
+                <p>Et annet naturlig valg er \(H_0:\beta=0\) («ingen endring»), som også ligger utenfor og dermed forkastes.</p>
                 <div class="answer"><b>a) \(R=-0.996\), \(\hat y=1177-92.9x\), ca. 434 tonn i 2019 · b) reduksjon i [83.4, 102.3] tonn/år · c) f.eks. \(H_0:\beta=-80\) forkastes.</b>
-                <br><br>Punkt c) er en uvanlig oppgaveform — den ber deg <em>konstruere</em> en test med kjent utfall. Poenget er å vise at du skjønner ekvivalensen mellom tosidig test og konfidensintervall.</div>
+                <br><br>Punkt c) er en uvanlig oppgaveform. Den ber deg <em>konstruere</em> en test med kjent utfall, for å vise at du forstår sammenhengen mellom tosidig test og konfidensintervall.</div>
               </div>
             </details>
           </article>
