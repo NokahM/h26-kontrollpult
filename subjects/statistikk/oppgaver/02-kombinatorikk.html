@@ -206,23 +206,48 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>Totalt 18 elever, 6 trekkes. Alle utvalg er like sannsynlige, så nevneren er alltid \(\binom{18}{6}=18\,564\).</p>
-                <h4>a)</h4>
-                <p>\[ P(3G\cap 3J)=\frac{\binom{10}{3}\binom{8}{3}}{\binom{18}{6}}=\frac{120\cdot 56}{18\,564}\approx 0.36 \]</p>
-                <h4>b)</h4>
-                <p>Komplementært, der \(J\) er antall jenter blant de seks:</p>
-                <p>\[ P(J\ge 2)=1-\frac{\binom{10}{6}\binom{8}{0}+\binom{10}{5}\binom{8}{1}}{\binom{18}{6}}=1-0.12=0.88 \]</p>
-                <h4>c)</h4>
-                <p>G3 er 3 av de 18; de tre andre billettene fordeles blant de resterende 15:</p>
-                <p>\[ P(G3=3)=\frac{\binom{3}{3}\binom{15}{3}}{\binom{18}{6}}\approx 0.025,\qquad P(G2=2)=\frac{\binom{2}{2}\binom{16}{4}}{\binom{18}{6}}\approx 0.098 \]</p>
-                <h4>d)</h4>
-                <p>Nå må 5 bestemte personer alle få billett, og den siste går til én av de 13 øvrige:</p>
-                <p>\[ P(G3=3\cap G2=2)=\frac{\binom{5}{5}\binom{13}{1}}{\binom{18}{6}}=\frac{13}{18\,564}\approx 0.0007 \]</p>
-                <h4>e)</h4>
-                <p>Med avtalen får G3 minst tre billetter enten ved å trekke tre selv, eller ved å trekke to og overta minst én fra G2:</p>
-                <p>\[ P(G3\ge 3)=\frac{\binom{3}{3}\binom{15}{3}+\binom{3}{2}\binom{2}{1}\binom{13}{3}+\binom{3}{2}\binom{2}{2}\binom{13}{2}}{\binom{18}{6}}\approx 0.13 \]</p>
-                <p>G2 får minst to enten ved å trekke to selv (så lenge G3 ikke trakk nøyaktig to, for da mister de dem), eller ved å trekke én og overta G3s ene billett:</p>
-                <p>\[ P(G2\ge 2)=\frac{\binom{2}{2}\binom{16}{4}-\binom{2}{2}\binom{3}{2}\binom{13}{2}+\binom{2}{1}\binom{3}{1}\binom{13}{4}}{\binom{18}{6}}\approx 0.32 \]</p>
+                <p><strong>Modell.</strong> Totalt 18 elever, og 6 trekkes ut uten tilbakelegging. Alle utvalg på 6 er like sannsynlige, så vi bruker \(P=\frac{\text{gunstige}}{\text{mulige}}\). Antall mulige utvalg er alltid det samme:</p>
+                <p>\[ \binom{18}{6}=\frac{18!}{6!\,12!}=18\,564 \]</p>
+                <p>Telleren lager vi ved å dele elevene i grupper og velge fra hver gruppe for seg. Multiplikasjonsprinsippet gir at antallene ganges.</p>
+                <h4>a) 3 gutter og 3 jenter</h4>
+                <p><strong>Gunstige:</strong> velg 3 av 10 gutter og 3 av 8 jenter:</p>
+                <p>\[ \binom{10}{3}\binom{8}{3}=120\cdot 56=6720 \]</p>
+                <p>\[ P(3G\cap 3J)=\frac{6720}{18\,564}=0.36 \]</p>
+                <h4>b) Jentene får to eller flere</h4>
+                <p>La \(J\) være antall jenter blant de seks. \(J\ge 2\) har fem tilfeller (2 til 6), mens komplementet \(J\le 1\) bare har to. Vi regner derfor komplementært:</p>
+                <p>\[ P(J=0)=\frac{\binom{10}{6}\binom{8}{0}}{18\,564}=\frac{210}{18\,564},\qquad P(J=1)=\frac{\binom{10}{5}\binom{8}{1}}{18\,564}=\frac{252\cdot 8}{18\,564}=\frac{2016}{18\,564} \]</p>
+                <p>\[ P(J\ge 2)=1-\frac{210+2016}{18\,564}=1-\frac{2226}{18\,564}=1-0.120=0.88 \]</p>
+                <h4>c) G3 får tre, og G2 får to</h4>
+                <p><strong>G3 får tre billetter.</strong> Del de 18 i to grupper: de 3 i G3 og de 15 andre. Alle tre i G3 skal ha billett, og de tre resterende billettene går til tre av de 15 andre:</p>
+                <p>\[ P(G3=3)=\frac{\binom{3}{3}\binom{15}{3}}{18\,564}=\frac{1\cdot 455}{18\,564}=0.025 \]</p>
+                <p><strong>G2 får to billetter.</strong> Begge i G2 skal ha billett, og de fire resterende går til fire av de 16 andre:</p>
+                <p>\[ P(G2=2)=\frac{\binom{2}{2}\binom{16}{4}}{18\,564}=\frac{1820}{18\,564}=0.098 \]</p>
+                <h4>d) Begge gruppene får alle sine</h4>
+                <p>Nå skal 5 bestemte personer (3 + 2) alle ha billett. Den sjette billetten går til én av de 13 øvrige:</p>
+                <p>\[ P(G3=3\cap G2=2)=\frac{\binom{5}{5}\binom{13}{1}}{18\,564}=\frac{13}{18\,564}=0.0007 \]</p>
+                <h4>e) Med avtalen</h4>
+                <p><strong>Sett opp tilfellene.</strong> La \(a\) være antall billetter G3 trekker og \(b\) antall G2 trekker. Avtalen endrer fordelingen slik:</p>
+                <ul>
+                <li>\(a=3\) eller \(a=0\): ingen endring.</li>
+                <li>\(a=2\): G2 gir sine \(b\) billetter til G3. G3 får \(2+b\), G2 får 0.</li>
+                <li>\(a=1\): G3 gir sin ene billett til G2. G3 får 0, G2 får \(b+1\).</li>
+                </ul>
+                <p>Antall utvalg med gitte \(a\) og \(b\) er \(\binom{3}{a}\binom{2}{b}\binom{13}{6-a-b}\).</p>
+                <p><strong>G3 får minst tre.</strong> Det skjer når \(a=3\) (uansett \(b\)), eller når \(a=2\) og \(b\ge 1\):</p>
+                <ul>
+                <li>\(a=3\): \(\binom{3}{3}\binom{15}{3}=455\) (G2 og de andre slås sammen til 15 personer)</li>
+                <li>\(a=2,\ b=1\): \(\binom{3}{2}\binom{2}{1}\binom{13}{3}=3\cdot 2\cdot 286=1716\)</li>
+                <li>\(a=2,\ b=2\): \(\binom{3}{2}\binom{2}{2}\binom{13}{2}=3\cdot 1\cdot 78=234\)</li>
+                </ul>
+                <p>\[ P(G3\ge 3)=\frac{455+1716+234}{18\,564}=\frac{2405}{18\,564}=0.13 \]</p>
+                <p><strong>G2 får minst to.</strong> Det skjer når \(b=2\) og G3 ikke trakk nøyaktig to (da mister G2 billettene), eller når \(a=1\) og \(b\ge 1\) (G2 får \(b+1\ge 2\)):</p>
+                <ul>
+                <li>\(b=2\), alle \(a\): \(\binom{2}{2}\binom{16}{4}=1820\)</li>
+                <li>minus \(b=2,\ a=2\): \(\binom{3}{2}\binom{2}{2}\binom{13}{2}=234\)</li>
+                <li>\(a=1,\ b=1\): \(\binom{3}{1}\binom{2}{1}\binom{13}{4}=3\cdot 2\cdot 715=4290\)</li>
+                </ul>
+                <p>(Tilfellet \(a=1,\ b=2\) er allerede med i den første linjen.)</p>
+                <p>\[ P(G2\ge 2)=\frac{1820-234+4290}{18\,564}=\frac{5876}{18\,564}=0.32 \]</p>
                 <div class="answer"><b>a) 0.36 · b) 0.88 · c) 0.025 og 0.098 · d) 0.0007 · e) 0.13 og 0.32.</b></div>
               </div>
             </details>
@@ -244,16 +269,26 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>a)</h4>
-                <p>\(X\sim\mathrm{Hyp}(150,20,50)\):</p>
-                <p>\[ P(X=3)=\frac{\binom{20}{3}\binom{130}{47}}{\binom{150}{50}}\approx 0.0359 \]</p>
-                <h4>b)</h4>
-                <p>Snu problemet: la \(Y\) være antall <em>ikke-defekte</em> i utvalget, \(Y\sim\mathrm{Hyp}(150,130,n)\). Vi vil ha \(P(Y\ge 5)\ge 0.95\). Prøv økende \(n\):</p>
+                <h4>a) Nøyaktig 3 defekte</h4>
+                <p><strong>Gjenkjenn fordelingen.</strong> En endelig pott på \(N=150\), hvorav \(M=20\) er defekte, og vi trekker \(n=50\) uten tilbakelegging. Antall defekte i utvalget er da hypergeometrisk: \(X\sim\mathrm{Hyp}(150,\,20,\,50)\).</p>
+                <p><strong>Formel.</strong> Velg 3 av de 20 defekte og de resterende 47 blant de 130 gode:</p>
+                <p>\[ P(X=3)=\frac{\binom{20}{3}\binom{130}{47}}{\binom{150}{50}}=0.036 \]</p>
+                <p>Binomialkoeffisientene her er enorme, så sett inn i formelen og regn ut på kalkulator (hypergeometrisk funksjon) i stedet for å regne dem hver for seg.</p>
+                <h4>b) Hvor stort utvalg?</h4>
+                <p><strong>Snu problemet.</strong> Vi vil ha minst 5 ikke-defekte. La \(Y\) være antall ikke-defekte i et utvalg på \(n\): \(Y\sim\mathrm{Hyp}(150,\,130,\,n)\). Kravet er</p>
+                <p>\[ P(Y\ge 5)\ge 0.95 \]</p>
+                <p><strong>Ingen lukket formel, så vi prøver oss fram.</strong> Med \(n\) enheter betyr «minst 5 gode» at høyst \(n-5\) er defekte. For eksempel er \(n=7\) det samme som høyst 2 defekte blant 7:</p>
+                <p>\[ P(Y\ge 5)=\frac{\binom{20}{0}\binom{130}{7}+\binom{20}{1}\binom{130}{6}+\binom{20}{2}\binom{130}{5}}{\binom{150}{7}}=0.3592+0.4055+0.1849=0.9496 \]</p>
                 <div class="dtable-wrap"><table class="dtable">
-                  <thead><tr><th class="num">\(n\)</th><th class="num">5</th><th class="num">6</th><th class="num">7</th><th class="num">8</th></tr></thead>
-                  <tbody><tr><td class="num">\(P(Y\ge 5)\)</td><td class="num">0.484</td><td class="num">0.818</td><td class="num hit">0.950</td><td class="num">0.988</td></tr></tbody>
+                <thead><tr><th class="num">\(n\)</th><th class="num">5</th><th class="num">6</th><th class="num">7</th><th class="num">8</th></tr></thead>
+                <tbody>
+                <tr><td class="num">Høyst så mange defekte</td><td class="num">0</td><td class="num">1</td><td class="num">2</td><td class="num">3</td></tr>
+                <tr><td class="num">\(P(Y\ge 5)\)</td><td class="num">0.4838</td><td class="num">0.8175</td><td class="num">0.9496</td><td class="num hit">0.9884</td></tr>
+                </tbody>
                 </table></div>
-                <div class="answer"><b>a) 0.036 · b) \(n=7\)</b> enheter må kontrolleres.</div>
+                <p><strong>Les av tabellen.</strong> \(n=7\) gir 0.9496. Det er så vidt under 0.95, så kravet «minst 95 %» er strengt tatt ikke oppfylt. Første \(n\) som oppfyller kravet, er \(n=8\).</p>
+                <div class="note"><strong>Avrunding avgjør her:</strong> rundes 0.9496 til tre desimaler, blir det 0.950, og da kan det se ut som \(n=7\) holder. Vis tabellen med fire desimaler og begrunn valget ditt. Det er fremgangsmåten som gir poengene.</div>
+                <div class="answer"><b>a) 0.036 · b) \(n=8\)</b> enheter (\(n=7\) gir 0.9496, som er like under kravet).</div>
               </div>
             </details>
           </article>
@@ -277,20 +312,32 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>a)</h4>
-                <p>\(X\sim\mathrm{Hyp}(N{=}20,\ M{=}7,\ n{=}5)\), verdimengde \(\{0,1,2,3,4,5\}\):</p>
-                <p>\[ P(X=x)=\frac{\binom{7}{x}\binom{13}{5-x}}{\binom{20}{5}} \]</p>
-                <h4>b)</h4>
-                <p>\[ P(X=0)=\frac{\binom{7}{0}\binom{13}{5}}{\binom{20}{5}}=\frac{1287}{15\,504}\approx 0.083 \]</p>
-                <h4>c)</h4>
-                <p>\[ P(X\ge 3)=P(X{=}3)+P(X{=}4)+P(X{=}5)\approx 0.207 \]</p>
-                <h4>d)</h4>
-                <p>\[ \mu=n\frac{M}{N}=5\cdot\frac{7}{20}=1.75 \]</p>
-                <p>\[ \sigma^2=5\cdot\frac{7}{20}\Bigl(1-\frac{7}{20}\Bigr)\frac{20-5}{20-1}=0.898 \quad\Rightarrow\quad \sigma\approx 0.948 \]</p>
-                <h4>e)</h4>
-                <p>Her spørres det om en bestemt <em>rekkefølge</em>: de to første er rene, den tredje ikke. Da kan vi ikke bruke hypergeometrisk punktsannsynlighet, men må gange sekvensielt:</p>
-                <p>\[ \frac{13}{20}\cdot\frac{12}{19}\cdot\frac{7}{18}\approx 0.160 \]</p>
-                <div class="answer"><b>b) 0.083 · c) 0.207 · d) \(\mu=1.75\), \(\sigma\approx0.95\) · e) 0.16.</b></div>
+                <h4>a) Fordeling og formel</h4>
+                <p><strong>Gjenkjenn fordelingen.</strong> En endelig gruppe på \(N=20\) studenter, hvorav \(M=7\) har kjøpt for mye. Tollerne trekker \(n=5\) uten tilbakelegging (samme person kontrolleres ikke to ganger). \(X\) er da hypergeometrisk: \(X\sim\mathrm{Hyp}(20,\,7,\,5)\).</p>
+                <p><strong>Formel.</strong> Velg \(x\) av de 7 som har kjøpt for mye, og de resterende \(5-x\) blant de 13 andre:</p>
+                <p>\[ P(X=x)=\frac{\binom{7}{x}\binom{13}{5-x}}{\binom{20}{5}},\qquad x=0,1,2,3,4,5 \]</p>
+                <p>Nevneren er \(\binom{20}{5}=15\,504\).</p>
+                <h4>b) Ingen har kjøpt for mye</h4>
+                <p>\[ P(X=0)=\frac{\binom{7}{0}\binom{13}{5}}{15\,504}=\frac{1\cdot 1287}{15\,504}=0.083 \]</p>
+                <h4>c) Minst 3 av 5</h4>
+                <p>Her er det like mange ledd begge veier, så vi summerer direkte:</p>
+                <p>\[ P(X=3)=\frac{\binom{7}{3}\binom{13}{2}}{15\,504}=\frac{35\cdot 78}{15\,504}=\frac{2730}{15\,504} \]</p>
+                <p>\[ P(X=4)=\frac{\binom{7}{4}\binom{13}{1}}{15\,504}=\frac{35\cdot 13}{15\,504}=\frac{455}{15\,504},\qquad P(X=5)=\frac{\binom{7}{5}\binom{13}{0}}{15\,504}=\frac{21}{15\,504} \]</p>
+                <p>\[ P(X\ge 3)=\frac{2730+455+21}{15\,504}=\frac{3206}{15\,504}=0.207 \]</p>
+                <h4>d) Forventning og standardavvik</h4>
+                <p>Formlene for hypergeometrisk fordeling fra formelarket, med \(M/N=7/20=0.35\):</p>
+                <p>\[ \mu=n\frac{M}{N}=5\cdot 0.35=1.75 \]</p>
+                <p>\[ \sigma^2=n\frac{M}{N}\Bigl(1-\frac{M}{N}\Bigr)\frac{N-n}{N-1}=5\cdot 0.35\cdot 0.65\cdot\frac{15}{19}=1.1375\cdot 0.789=0.898 \]</p>
+                <p>\[ \sigma=\sqrt{0.898}=0.948 \]</p>
+                <p>Den siste faktoren \(\frac{N-n}{N-1}\) er det som skiller hypergeometrisk varians fra binomisk. Den er mindre enn 1, fordi trekking uten tilbakelegging gir mindre spredning.</p>
+                <h4>e) Bare den tredje har kjøpt for mye</h4>
+                <p><strong>Ikke hypergeometrisk.</strong> Her spørres det om en bestemt <em>rekkefølge</em>: de to første er «rene», den tredje har kjøpt for mye, og de to siste er rene igjen. Hypergeometrisk punktsannsynlighet teller alle rekkefølger, så vi må gange sekvensielt med produktsetningen.</p>
+                <p><strong>Tolkning.</strong> «Bare den tredje» betyr at nøyaktig én av de fem har kjøpt for mye, og at det er nummer tre:</p>
+                <p>\[ \frac{13}{20}\cdot\frac{12}{19}\cdot\frac{7}{18}\cdot\frac{11}{17}\cdot\frac{10}{16}=0.0645 \]</p>
+                <p>Hvis du tolker «bare den tredje» som at vi bare ser på de tre første kontrollene (rene, rene, for mye), blir det</p>
+                <p>\[ \frac{13}{20}\cdot\frac{12}{19}\cdot\frac{7}{18}=0.160 \]</p>
+                <p>Formuleringen kan leses begge veier. Den første tolkningen er den mest bokstavelige («bare» den tredje av de fem). Skriv hvilken tolkning du bruker, så får sensor se at fremgangsmåten er riktig.</p>
+                <div class="answer"><b>a) \(\mathrm{Hyp}(20,7,5)\) · b) 0.083 · c) 0.207 · d) \(\mu=1.75\), \(\sigma\approx 0.95\) · e) 0.065 (0.16 hvis bare de tre første kontrollene telles).</b></div>
               </div>
             </details>
           </article>
@@ -312,17 +359,26 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>a)</h4>
-                <p>\[ X\sim\mathrm{Hyp}(200,30,40):\qquad P(X=x)=\frac{\binom{30}{x}\binom{170}{40-x}}{\binom{200}{40}} \]</p>
-                <h4>b)</h4>
-                <p>\[ P(X=5)=\frac{\binom{30}{5}\binom{170}{35}}{\binom{200}{40}}\approx 0.181 \]</p>
-                <h4>c)</h4>
-                <p>La \(Y\sim\mathrm{Hyp}(200,170,n)\) være antall ikke-defekte. Krav: \(P(Y\ge 4)\ge 0.95\).</p>
+                <h4>a) Fordeling og formel</h4>
+                <p><strong>Gjenkjenn fordelingen.</strong> Endelig pott på \(N=200\), hvorav \(M=30\) er defekte. Vi trekker \(n=40\) uten tilbakelegging. Da er \(X\sim\mathrm{Hyp}(200,\,30,\,40)\):</p>
+                <p>\[ P(X=x)=\frac{\binom{30}{x}\binom{170}{40-x}}{\binom{200}{40}},\qquad x=0,1,\dots,30 \]</p>
+                <h4>b) Nøyaktig 5 defekte</h4>
+                <p>Velg 5 av de 30 defekte og 35 av de 170 gode:</p>
+                <p>\[ P(X=5)=\frac{\binom{30}{5}\binom{170}{35}}{\binom{200}{40}}=0.181 \]</p>
+                <p>Tallene er for store til å regne for hånd, så bruk kalkulatorens hypergeometriske funksjon.</p>
+                <h4>c) Hvor stort utvalg?</h4>
+                <p><strong>Snu problemet.</strong> La \(Y\sim\mathrm{Hyp}(200,\,170,\,n)\) være antall ikke-defekte. Kravet er \(P(Y\ge 4)\ge 0.95\).</p>
+                <p><strong>Prøv deg fram.</strong> «Minst 4 gode» blant \(n\) betyr «høyst \(n-4\) defekte». For eksempel er \(n=6\) det samme som høyst 2 defekte:</p>
+                <p>\[ P(Y\ge 4)=\frac{\binom{30}{0}\binom{170}{6}+\binom{30}{1}\binom{170}{5}+\binom{30}{2}\binom{170}{4}}{\binom{200}{6}}=0.3721+0.4059+0.1773=0.9553 \]</p>
                 <div class="dtable-wrap"><table class="dtable">
-                  <thead><tr><th class="num">\(n\)</th><th class="num">4</th><th class="num">5</th><th class="num">6</th><th class="num">7</th></tr></thead>
-                  <tbody><tr><td class="num">\(P(Y\ge 4)\)</td><td class="num">0.519</td><td class="num">0.837</td><td class="num hit">0.955</td><td class="num">0.989</td></tr></tbody>
+                <thead><tr><th class="num">\(n\)</th><th class="num">4</th><th class="num">5</th><th class="num">6</th><th class="num">7</th></tr></thead>
+                <tbody>
+                <tr><td class="num">Høyst så mange defekte</td><td class="num">0</td><td class="num">1</td><td class="num">2</td><td class="num">3</td></tr>
+                <tr><td class="num">\(P(Y\ge 4)\)</td><td class="num">0.5192</td><td class="num">0.8371</td><td class="num hit">0.9553</td><td class="num">0.9894</td></tr>
+                </tbody>
                 </table></div>
-                <div class="answer"><b>b) 0.18 · c) \(n=6\).</b></div>
+                <p><strong>Les av tabellen.</strong> \(n=5\) gir 0.837, som er for lite. \(n=6\) gir 0.955, som oppfyller kravet. Minste utvalg er altså 6.</p>
+                <div class="answer"><b>a) \(\mathrm{Hyp}(200,30,40)\) · b) 0.18 · c) \(n=6\).</b></div>
               </div>
             </details>
           </article>
@@ -344,15 +400,20 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>a)</h4>
-                <p>Hypergeometrisk fordeling med \(N=9\), \(M=4\), \(n=5\):</p>
+                <h4>a) Formel og navn</h4>
+                <p><strong>Gjenkjenn fordelingen.</strong> En eske med \(N=9\) pærer, hvorav \(M=4\) er defekte. Vi tar ut \(n=5\) uten å legge tilbake. Antall defekte i utvalget er hypergeometrisk fordelt.</p>
+                <p><strong>Formel.</strong> Velg \(x\) av de 4 defekte og \(5-x\) av de 5 hele:</p>
                 <p>\[ P(X=x)=\frac{\binom{4}{x}\binom{5}{5-x}}{\binom{9}{5}},\qquad x=0,1,2,3,4 \]</p>
-                <h4>b)</h4>
-                <p>\[ \mu=n\frac{M}{N}=\frac{5\cdot 4}{9}=\frac{20}{9}\approx 2.22 \]</p>
-                <p>\[ \sigma^2=\frac{nM(1-M/N)(N-n)}{N(N-1)}=\frac{5\cdot 4\,(1-4/9)(9-5)}{9\cdot 8}\approx 0.617 \]</p>
-                <h4>c)</h4>
-                <p>\[ P(X\ge 2)=1-P(X{=}0)-P(X{=}1)=1-\frac{1}{126}-\frac{20}{126}=\frac{105}{126}=\frac{5}{6}\approx 0.83 \]</p>
-                <div class="answer"><b>\(\mu\approx 2.22\) · \(\sigma^2\approx 0.62\) · \(P(X\ge 2)=5/6\approx 0.83\).</b></div>
+                <p>Nevneren er \(\binom{9}{5}=126\). (\(x=5\) er umulig, fordi det bare finnes 4 defekte.)</p>
+                <h4>b) Forventning og varians</h4>
+                <p>Med \(M/N=4/9\):</p>
+                <p>\[ \mu=n\frac{M}{N}=5\cdot\frac{4}{9}=\frac{20}{9}=2.22 \]</p>
+                <p>\[ \sigma^2=n\frac{M}{N}\Bigl(1-\frac{M}{N}\Bigr)\frac{N-n}{N-1}=5\cdot\frac49\cdot\frac59\cdot\frac{4}{8}=\frac{100}{81}\cdot\frac12=\frac{50}{81}=0.617 \]</p>
+                <h4>c) To eller flere defekte</h4>
+                <p>«To eller flere» har tre ledd (2, 3 og 4), mens komplementet har to (0 og 1). Vi regner komplementært:</p>
+                <p>\[ P(X=0)=\frac{\binom{4}{0}\binom{5}{5}}{126}=\frac{1}{126},\qquad P(X=1)=\frac{\binom{4}{1}\binom{5}{4}}{126}=\frac{4\cdot 5}{126}=\frac{20}{126} \]</p>
+                <p>\[ P(X\ge 2)=1-\frac{1+20}{126}=\frac{105}{126}=\frac{5}{6}=0.83 \]</p>
+                <div class="answer"><b>a) hypergeometrisk · b) \(\mu\approx 2.22\), \(\sigma^2\approx 0.62\) · c) \(P(X\ge 2)=5/6\approx 0.83\).</b></div>
               </div>
             </details>
           </article>
@@ -373,16 +434,22 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>a) To like gyldige veier</h4>
-                <p><strong>Eksakt (hypergeometrisk).</strong> \(M=0.4\cdot 220=88\), så \(X\sim\mathrm{Hyp}(220,88,10)\):</p>
-                <p>\[ P(X\ge 3)=1-\sum_{x=0}^{2}\frac{\binom{88}{x}\binom{132}{10-x}}{\binom{220}{10}}\approx 0.839 \]</p>
-                <p><strong>Tilnærmet (binomisk).</strong> Siden \(N=220\ge 10n=100\) kan vi bruke \(X\sim\mathrm{Bin}(10,\,0.4)\):</p>
-                <p>\[ P(X\ge 3)=1-\sum_{x=0}^{2}\binom{10}{x}0.4^x0.6^{10-x}\approx 0.833 \]</p>
+                <h4>a) Minst tre fikenplanter av 10</h4>
+                <p><strong>Gjenkjenn fordelingen.</strong> Et bord med \(N=220\) planter, hvorav \(M=0.4\cdot 220=88\) er fikenplanter. Kunden tar \(n=10\) uten tilbakelegging. Eksakt er \(X\sim\mathrm{Hyp}(220,\,88,\,10)\).</p>
+                <p><strong>Eksakt (hypergeometrisk).</strong> Komplementet til «minst 3» er 0, 1 eller 2:</p>
+                <p>\[ P(X\ge 3)=1-\sum_{x=0}^{2}\frac{\binom{88}{x}\binom{132}{10-x}}{\binom{220}{10}}=1-(0.0052+0.0375+0.1185)=0.839 \]</p>
+                <p><strong>Tilnærmet (binomisk).</strong> Potten er stor i forhold til utvalget: \(N=220\ge 10n=100\). Da endrer sannsynligheten seg lite fra trekning til trekning, og vi kan bruke \(X\sim\mathrm{Bin}(10,\,0.4)\):</p>
+                <p>\[ P(X=0)=0.6^{10}=0.0060,\quad P(X=1)=10\cdot 0.4\cdot 0.6^9=0.0403,\quad P(X=2)=45\cdot 0.4^2\cdot 0.6^8=0.1209 \]</p>
+                <p>\[ P(X\ge 3)=1-(0.0060+0.0403+0.1209)=0.833 \]</p>
                 <p>Avviket er under 1 %, og sensurveiledningen godtar begge.</p>
-                <h4>b)</h4>
-                <p>Nøyaktig én fikenplante totalt betyr enten «1 fra bord 1 og 0 fra bord 2» eller «0 fra bord 1 og 1 fra bord 2». Bordene er uavhengige, så vi ganger og summerer:</p>
-                <p>\[ \underbrace{\frac{\binom{88}{1}\binom{132}{1}}{\binom{220}{2}}}_{0.4822}\cdot\underbrace{\frac{\binom{50}{0}\binom{100}{2}}{\binom{150}{2}}}_{0.4430} + \underbrace{\frac{\binom{88}{0}\binom{132}{2}}{\binom{220}{2}}}_{0.3589}\cdot\underbrace{\frac{\binom{50}{1}\binom{100}{1}}{\binom{150}{2}}}_{0.4474} \]</p>
-                <p>\[ =0.2136+0.1606=0.3742 \]</p>
+                <h4>b) Nøyaktig én fikenplante av fire</h4>
+                <p><strong>Del opp.</strong> Nøyaktig én fikenplante totalt kan skje på to måter: én fra bord 1 og ingen fra bord 2, eller ingen fra bord 1 og én fra bord 2. De to måtene er disjunkte, så vi summerer.</p>
+                <p><strong>Bord 1</strong> (\(N=220\), \(M=88\), 2 trekkes), med \(\binom{220}{2}=24\,090\):</p>
+                <p>\[ P(1\text{ fiken})=\frac{\binom{88}{1}\binom{132}{1}}{24\,090}=\frac{11\,616}{24\,090}=0.4822,\qquad P(0\text{ fiken})=\frac{\binom{132}{2}}{24\,090}=\frac{8646}{24\,090}=0.3589 \]</p>
+                <p><strong>Bord 2</strong> (\(N=150\), \(M=50\), 2 trekkes), med \(\binom{150}{2}=11\,175\):</p>
+                <p>\[ P(1\text{ fiken})=\frac{\binom{50}{1}\binom{100}{1}}{11\,175}=\frac{5000}{11\,175}=0.4474,\qquad P(0\text{ fiken})=\frac{\binom{100}{2}}{11\,175}=\frac{4950}{11\,175}=0.4430 \]</p>
+                <p><strong>Sett sammen.</strong> Bordene er uavhengige, så innenfor hver måte ganger vi:</p>
+                <p>\[ P=0.4822\cdot 0.4430+0.3589\cdot 0.4474=0.2136+0.1606=0.374 \]</p>
                 <div class="answer"><b>a) ca. 0.84 (0.83 binomisk) · b) ca. 0.37.</b></div>
               </div>
             </details>
@@ -404,12 +471,16 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>\(X\sim\mathrm{Hyp}(80,7,12)\).</p>
-                <h4>a)</h4>
-                <p>\[ P(X=1)=\frac{\binom{7}{1}\binom{73}{11}}{\binom{80}{12}}\approx 0.414 \]</p>
-                <h4>b)</h4>
-                <p>\[ \mu=12\cdot\frac{7}{80}=1.05 \]</p>
-                <p>\[ \sigma^2=12\cdot\frac{7}{80}\Bigl(1-\frac{7}{80}\Bigr)\cdot\frac{80-12}{80-1}\approx 0.82 \]</p>
+                <p><strong>Gjenkjenn fordelingen.</strong> En endelig kundemasse på \(N=80\), hvorav \(M=7\) er misfornøyde. Ledelsen besøker \(n=12\) ulike kunder, altså uten tilbakelegging. Da er \(X\sim\mathrm{Hyp}(80,\,7,\,12)\).</p>
+                <h4>a) Nøyaktig én misfornøyd</h4>
+                <p>Velg 1 av de 7 misfornøyde og 11 av de 73 fornøyde:</p>
+                <p>\[ P(X=1)=\frac{\binom{7}{1}\binom{73}{11}}{\binom{80}{12}}=0.414 \]</p>
+                <p>Tallene er store, så regn ut med kalkulatorens hypergeometriske funksjon.</p>
+                <p>Binomisk tilnærming er <em>ikke</em> godt nok her, fordi \(N=80\) er mindre enn \(10n=120\).</p>
+                <h4>b) Forventning og varians</h4>
+                <p>Med \(M/N=7/80=0.0875\):</p>
+                <p>\[ \mu=n\frac{M}{N}=12\cdot 0.0875=1.05 \]</p>
+                <p>\[ \sigma^2=n\frac{M}{N}\Bigl(1-\frac{M}{N}\Bigr)\frac{N-n}{N-1}=12\cdot 0.0875\cdot 0.9125\cdot\frac{68}{79}=0.958\cdot 0.861=0.82 \]</p>
                 <div class="answer"><b>a) 0.41 · b) \(\mu=1.05\), \(\sigma^2\approx 0.82\).</b></div>
               </div>
             </details>
@@ -427,9 +498,14 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>Med defektandel 3 % i et parti på 100 er \(M=3\), altså \(X\sim\mathrm{Hyp}(N{=}100,\ M{=}3,\ n{=}15)\). Siden det bare finnes 3 defekte i hele partiet er \(P(X\ge 3)=P(X=3)\):</p>
-                <p>\[ P(X\ge 3)=\frac{\binom{3}{3}\binom{97}{12}}{\binom{100}{15}}=\frac{15\cdot 14\cdot 13}{100\cdot 99\cdot 98}\approx 0.0028 \]</p>
-                <div class="answer"><b>Ca. 0.28 %.</b> Det er altså svært lite trolig å finne tre defekte hvis garantien holder — et sterkt argument for at partiet er dårligere enn lovet. (Dette er i praksis en p-verdi, se <a href="08-hypotesetesting.html">hypotesetesting</a>.)</div>
+                <p><strong>Oversett garantien.</strong> Defektandel 3 % i et parti på 100 betyr \(M=0.03\cdot 100=3\) defekte enheter.</p>
+                <p><strong>Gjenkjenn fordelingen.</strong> Vi trekker \(n=15\) av \(N=100\) uten tilbakelegging. Antall defekte i utvalget er \(X\sim\mathrm{Hyp}(100,\,3,\,15)\).</p>
+                <p><strong>Forenkle.</strong> Det finnes bare 3 defekte i hele partiet, så \(X\) kan ikke bli større enn 3. Dermed er \(P(X\ge 3)=P(X=3)\).</p>
+                <p><strong>Regn ut.</strong> Alle 3 defekte må være med, og de 12 andre i utvalget velges blant de 97 gode:</p>
+                <p>\[ P(X=3)=\frac{\binom{3}{3}\binom{97}{12}}{\binom{100}{15}} \]</p>
+                <p>Brøken forkortes pent. \(\binom{97}{12}/\binom{100}{15}\) er sannsynligheten for at tre bestemte enheter alle havner i utvalget: \(\frac{15}{100}\cdot\frac{14}{99}\cdot\frac{13}{98}\).</p>
+                <p>\[ P(X\ge 3)=\frac{15\cdot 14\cdot 13}{100\cdot 99\cdot 98}=\frac{2730}{970\,200}=0.0028 \]</p>
+                <div class="answer"><b>Ca. 0.28 %.</b> Det er svært lite trolig å finne tre defekte hvis garantien holder. Det er et sterkt argument for at partiet er dårligere enn lovet. (Dette er i praksis en p-verdi, se <a href="08-hypotesetesting.html">hypotesetesting</a>.)</div>
               </div>
             </details>
           </article>
