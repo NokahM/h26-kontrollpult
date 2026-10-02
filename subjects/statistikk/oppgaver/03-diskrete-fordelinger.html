@@ -89,16 +89,24 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>a)</h4>
-                <p>Verdimengden er \(\{4,5,6,7\}\).</p>
-                <p>\[ \mu=4(0.2)+5(0.4)+6(0.3)+7(0.1)=0.8+2.0+1.8+0.7=5.3 \]</p>
-                <p>\[ E(X^2)=16(0.2)+25(0.4)+36(0.3)+49(0.1)=28.9 \quad\Rightarrow\quad \sigma^2=28.9-5.3^2=0.81 \]</p>
-                <p>Altså \(\sigma=0.90\).</p>
-                <h4>b)</h4>
-                <p>\[ \mu_{\bar X}=\mu=5.3,\qquad \sigma^2_{\bar X}=\frac{\sigma^2}{n}=\frac{0.81}{36}=0.0225\ \Rightarrow\ \sigma_{\bar X}=0.15 \]</p>
-                <h4>c)</h4>
-                <p>\[ P(\bar X&lt;5.5)=G\!\left(\frac{5.5-5.3}{0.15}\right)=G(1.33)\approx 0.91 \]</p>
-                <div class="answer"><b>\(\mu=5.3\), \(\sigma^2=0.81\) · \(\sigma_{\bar X}=0.15\) · \(P(\bar X&lt;5.5)\approx 0.91\).</b></div>
+                <h4>a) Verdimengde, forventning og varians</h4>
+                <p><strong>Verdimengde.</strong> Verdiene \(X\) kan ta med positiv sannsynlighet: \(\{4,5,6,7\}\).</p>
+                <p><strong>Forventning.</strong> Gang hver verdi med sannsynligheten sin og summer:</p>
+                <p>\[ \mu=\sum_k k\cdot P(X=k)=4\cdot 0.2+5\cdot 0.4+6\cdot 0.3+7\cdot 0.1=0.8+2.0+1.8+0.7=5.3 \]</p>
+                <p><strong>Varians.</strong> Regn først \(E(X^2)\) på samme måte, men med kvadrerte verdier:</p>
+                <p>\[ E(X^2)=16\cdot 0.2+25\cdot 0.4+36\cdot 0.3+49\cdot 0.1=3.2+10.0+10.8+4.9=28.9 \]</p>
+                <p>\[ \sigma^2=E(X^2)-\mu^2=28.9-5.3^2=28.9-28.09=0.81 \]</p>
+                <p>Standardavviket er \(\sigma=\sqrt{0.81}=0.90\).</p>
+                <h4>b) Gjennomsnittet av 36 kaker</h4>
+                <p>Gjennomsnittet har samme forventning som én kake, men variansen deles på \(n\) (fordi kakene er uavhengige):</p>
+                <p>\[ \mu_{\bar X}=\mu=5.3,\qquad \sigma^2_{\bar X}=\frac{\sigma^2}{n}=\frac{0.81}{36}=0.0225 \]</p>
+                <p>\(\sigma_{\bar X}=\sqrt{0.0225}=0.15\).</p>
+                <h4>c) Sentralgrenseteoremet</h4>
+                <p><strong>Begrunnelse.</strong> 36 uavhengige og identisk fordelte kaker, \(n=36\ge 30\). Sentralgrenseteoremet gir at \(\bar X\) er tilnærmet \(N(5.3,\,0.15)\).</p>
+                <p><strong>Standardiser.</strong></p>
+                <p>\[ P(\bar X&lt;5.5)=G\!\left(\frac{5.5-5.3}{0.15}\right)=G(1.33)=0.91 \]</p>
+                <p><strong>Svar.</strong> Det er omtrent 91 % sannsynlighet for at gjennomsnittet av 36 kaker er under 5.5 kirsebær.</p>
+                <div class="answer"><b>a) \(\{4,5,6,7\}\), \(\mu=5.3\), \(\sigma^2=0.81\) · b) \(\mu_{\bar X}=5.3\), \(\sigma^2_{\bar X}=0.0225\) · c) \(\approx 0.91\).</b></div>
               </div>
             </details>
           </article>
@@ -124,16 +132,24 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>a)</h4>
-                <p>Verdimengde \(\{14,18,20,22,25\}\).</p>
-                <p>\[ \mu=14(0.2)+18(0.3)+20(0.3)+22(0.1)+25(0.1)=18.9 \]</p>
-                <p>\[ E(X^2)=196(0.2)+324(0.3)+400(0.3)+484(0.1)+625(0.1)=367.3 \]</p>
-                <p>\[ \sigma^2=367.3-18.9^2=10.09\ \Rightarrow\ \sigma\approx 3.18 \]</p>
-                <h4>b)</h4>
-                <p>\[ \mu_{\bar X}=18.9,\qquad \sigma^2_{\bar X}=\frac{10.09}{25}=0.4036\ \Rightarrow\ \sigma_{\bar X}\approx 0.635 \]</p>
-                <h4>c)</h4>
-                <p>\[ P(\bar X&lt;18.5)=G\!\left(\frac{18.5-18.9}{0.635}\right)=G(-0.63)\approx 0.26 \]</p>
-                <div class="answer"><b>\(\mu=18.9\), \(\sigma^2=10.09\) · \(\sigma_{\bar X}\approx 0.64\) · \(P(\bar X&lt;18.5)\approx 0.26\).</b></div>
+                <h4>a) Verdimengde, forventning og varians</h4>
+                <p><strong>Verdimengde.</strong> \(\{14,18,20,22,25\}\).</p>
+                <p><strong>Forventning.</strong></p>
+                <p>\[ \mu=14\cdot 0.2+18\cdot 0.3+20\cdot 0.3+22\cdot 0.1+25\cdot 0.1=2.8+5.4+6.0+2.2+2.5=18.9 \]</p>
+                <p><strong>Varians.</strong> Først \(E(X^2)\):</p>
+                <p>\[ E(X^2)=196\cdot 0.2+324\cdot 0.3+400\cdot 0.3+484\cdot 0.1+625\cdot 0.1 \]</p>
+                <p>\[ =39.2+97.2+120.0+48.4+62.5=367.3 \]</p>
+                <p>\[ \sigma^2=E(X^2)-\mu^2=367.3-18.9^2=367.3-357.21=10.09 \]</p>
+                <p>Standardavviket er \(\sigma=\sqrt{10.09}=3.18\).</p>
+                <h4>b) Gjennomsnittet av 25 desserter</h4>
+                <p>\[ \mu_{\bar X}=\mu=18.9,\qquad \sigma^2_{\bar X}=\frac{\sigma^2}{n}=\frac{10.09}{25}=0.4036 \]</p>
+                <p>\(\sigma_{\bar X}=\sqrt{0.4036}=0.635\).</p>
+                <h4>c) Tilnærmet sannsynlighet</h4>
+                <p><strong>Begrunnelse.</strong> 25 uavhengige og identisk fordelte desserter. Det er under tommelfingergrensen på 30, men oppgaven ber om en <em>tilnærmet</em> sannsynlighet, og sentralgrenseteoremet er veien dit. Nevn forbeholdet.</p>
+                <p><strong>Standardiser.</strong></p>
+                <p>\[ P(\bar X&lt;18.5)=G\!\left(\frac{18.5-18.9}{0.635}\right)=G(-0.63)=0.26 \]</p>
+                <p><strong>Svar.</strong> Det er omtrent 26 % sannsynlighet for at gjennomsnittet av 25 desserter er under 18.5 bringebær.</p>
+                <div class="answer"><b>a) \(\mu=18.9\), \(\sigma^2=10.09\) · b) \(\sigma^2_{\bar X}=0.4036\), \(\sigma_{\bar X}\approx 0.64\) · c) \(\approx 0.26\).</b></div>
               </div>
             </details>
           </article>
@@ -160,23 +176,29 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>Skriv om alle brøkene til 24-deler først: \(9/24,\ 8/24,\ 6/24,\ 0,\ 1/24\). Da blir alt enklere.</p>
-                <h4>a)</h4>
-                <p>\[ \mu=0\cdot\tfrac{9}{24}+1\cdot\tfrac{8}{24}+2\cdot\tfrac{6}{24}+4\cdot\tfrac{1}{24}=\frac{8+12+4}{24}=1 \]</p>
-                <p>\[ \sigma^2=E(X^2)-\mu^2=\frac{0+8+24+16}{24}-1^2=2-1=1 \]</p>
-                <h4>b)</h4>
-                <p>De fire dekkene kan plasseres på \(4!=24\) måter, og nøyaktig én av dem har alle på rett plass, derfor \(P(X=4)=1/24\). Det er umulig å ha nøyaktig tre riktige: hvis tre er riktig plassert, må det fjerde også være det. Derfor \(P(X=3)=0\).</p>
-                <h4>c)</h4>
-                <p>\(\{X\le1\}\) er en delmengde av \(\{X\le3\}\), så snittet er bare \(\{X\le1\}\):</p>
-                <p>\[ P(X\le 1\cap X\le 3)=P(X\le 1)=\tfrac{9}{24}+\tfrac{8}{24}=\tfrac{17}{24}\approx 0.708 \]</p>
-                <p>\[ P(X\le 1\mid X\le 3)=\frac{17/24}{23/24}=\frac{17}{23}\approx 0.739 \]</p>
+                <p>Skriv om alle brøkene til 24-deler først: \(\tfrac38=\tfrac{9}{24}\), \(\tfrac13=\tfrac{8}{24}\), \(\tfrac14=\tfrac{6}{24}\), \(0\), \(\tfrac{1}{24}\). Da blir alt enklere. Kontroll: \(9+8+6+0+1=24\), så sannsynlighetene summerer til 1.</p>
+                <h4>a) Forventning og varians</h4>
+                <p><strong>Forventning.</strong></p>
+                <p>\[ \mu=0\cdot\tfrac{9}{24}+1\cdot\tfrac{8}{24}+2\cdot\tfrac{6}{24}+3\cdot 0+4\cdot\tfrac{1}{24}=\frac{0+8+12+0+4}{24}=\frac{24}{24}=1 \]</p>
+                <p><strong>Varians.</strong> Først \(E(X^2)\), med kvadratene \(0,1,4,9,16\):</p>
+                <p>\[ E(X^2)=0\cdot\tfrac{9}{24}+1\cdot\tfrac{8}{24}+4\cdot\tfrac{6}{24}+9\cdot 0+16\cdot\tfrac{1}{24}=\frac{8+24+16}{24}=\frac{48}{24}=2 \]</p>
+                <p>\[ \sigma^2=E(X^2)-\mu^2=2-1^2=1 \]</p>
+                <h4>b) Forklaring</h4>
+                <p><strong>\(P(X=4)=1/24\):</strong> De fire dekkene kan plasseres på \(4!=4\cdot 3\cdot 2\cdot 1=24\) måter, og alle er like sannsynlige. Nøyaktig én av dem har alle fire på rett plass. Med uniform modell blir sannsynligheten \(1/24\).</p>
+                <p><strong>\(P(X=3)=0\):</strong> Hvis tre dekk står på rett plass, er det bare én plass igjen til det fjerde dekket, og det er dekkets egen plass. Da står alle fire riktig. Nøyaktig tre riktige er altså umulig.</p>
+                <h4>c) Betingede sannsynligheter</h4>
+                <p><strong>Snittet.</strong> Hvis \(X\le 1\), er automatisk \(X\le 3\). \(\{X\le 1\}\) er en delmengde av \(\{X\le 3\}\), så snittet er bare \(\{X\le 1\}\):</p>
+                <p>\[ P(X\le 1\cap X\le 3)=P(X\le 1)=P(X=0)+P(X=1)=\tfrac{9}{24}+\tfrac{8}{24}=\tfrac{17}{24}\approx 0.708 \]</p>
+                <p><strong>Første betingede.</strong> Definisjonen \(P(A\mid B)=P(A\cap B)/P(B)\), med \(P(X\le 3)=1-P(X=4)=\tfrac{23}{24}\):</p>
+                <p>\[ P(X\le 1\mid X\le 3)=\frac{P(X\le 1\cap X\le 3)}{P(X\le 3)}=\frac{17/24}{23/24}=\frac{17}{23}\approx 0.739 \]</p>
+                <p><strong>Andre betingede.</strong> Snittet av \(X\le 2\) og \(X\ge 2\) er bare \(X=2\). \(P(X\ge 2)=\tfrac{6}{24}+0+\tfrac{1}{24}=\tfrac{7}{24}\):</p>
                 <p>\[ P(X\le 2\mid X\ge 2)=\frac{P(X=2)}{P(X\ge 2)}=\frac{6/24}{7/24}=\frac{6}{7}\approx 0.857 \]</p>
-                <h4>d)</h4>
-                <p>Summen blir 4 på tre måter, siden \(P(X=3)=0\):</p>
-                <p>\[ \{X_1{=}0,X_2{=}4\}\cup\{X_1{=}4,X_2{=}0\}\cup\{X_1{=}2,X_2{=}2\} \]</p>
-                <p>Bilene er uavhengige:</p>
-                <p>\[ P(Y=4)=2\cdot\tfrac{1}{24}\cdot\tfrac{3}{8}+\left(\tfrac{1}{4}\right)^2=\tfrac{1}{32}+\tfrac{1}{16}=\tfrac{3}{32}\approx 0.094 \]</p>
-                <div class="answer"><b>\(\mu=1\), \(\sigma^2=1\) · c) 17/24, 17/23, 6/7 · d) 3/32 ≈ 0.09.</b></div>
+                <h4>d) To biler</h4>
+                <p><strong>Hvilke kombinasjoner gir \(Y=4\)?</strong> \(X_1+X_2=4\) med verdier fra \(\{0,1,2,4\}\) (3 er umulig). Mulighetene er 0+4, 4+0 og 2+2. (1+3 og 3+1 faller bort fordi \(P(X=3)=0\).)</p>
+                <p><strong>Regn ut.</strong> Bilene er uavhengige, så sannsynligheten for hver kombinasjon er produktet. De tre kombinasjonene er disjunkte, så vi summerer:</p>
+                <p>\[ P(Y=4)=P(X_1=0)P(X_2=4)+P(X_1=4)P(X_2=0)+P(X_1=2)P(X_2=2) \]</p>
+                <p>\[ =\tfrac38\cdot\tfrac{1}{24}+\tfrac{1}{24}\cdot\tfrac38+\tfrac14\cdot\tfrac14=\tfrac{1}{64}+\tfrac{1}{64}+\tfrac{1}{16}=\tfrac{1+1+4}{64}=\tfrac{6}{64}=\tfrac{3}{32}\approx 0.094 \]</p>
+                <div class="answer"><b>a) \(\mu=1\), \(\sigma^2=1\) · c) 17/24, 17/23, 6/7 · d) 3/32 ≈ 0.09.</b></div>
               </div>
             </details>
           </article>
@@ -194,11 +216,14 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>Uniform fordeling: \(P(X=k)=1/6\) for \(k=1,\dots,6\).</p>
-                <p>\[ E(X)=\frac{1}{6}(1+2+3+4+5+6)=\frac{21}{6}=\frac{7}{2} \]</p>
-                <p>\[ E(X^2)=\frac{1}{6}(1+4+9+16+25+36)=\frac{91}{6} \]</p>
-                <p>\[ \operatorname{Var}(X)=\frac{91}{6}-\left(\frac{7}{2}\right)^2=\frac{182}{12}-\frac{147}{12}=\frac{35}{12} \]</p>
-                <div class="answer">Gratispoeng — men husk å skrive begge summene ut, ikke bare svaret.</div>
+                <p><strong>Fordelingen.</strong> En vanlig terning gir hvert av utfallene 1 til 6 med samme sannsynlighet: \(P(X=k)=\tfrac16\) for \(k=1,\dots,6\).</p>
+                <p><strong>Forventning.</strong> Alle sannsynlighetene er like, så \(\tfrac16\) kan settes utenfor:</p>
+                <p>\[ E(X)=\sum_{k=1}^{6}k\cdot\frac16=\frac{1}{6}(1+2+3+4+5+6)=\frac{21}{6}=\frac{7}{2} \]</p>
+                <p><strong>\(E(X^2)\).</strong></p>
+                <p>\[ E(X^2)=\sum_{k=1}^{6}k^2\cdot\frac16=\frac{1}{6}(1+4+9+16+25+36)=\frac{91}{6} \]</p>
+                <p><strong>Varians.</strong> Felles nevner 12:</p>
+                <p>\[ \operatorname{Var}(X)=E(X^2)-\bigl(E(X)\bigr)^2=\frac{91}{6}-\left(\frac{7}{2}\right)^2=\frac{91}{6}-\frac{49}{4}=\frac{182}{12}-\frac{147}{12}=\frac{35}{12} \]</p>
+                <div class="answer">Gratispoeng, men skriv begge summene ut. Oppgaven sier «vis at», så det er utregningen som gir poeng, ikke svaret.</div>
               </div>
             </details>
           </article>
@@ -232,21 +257,33 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>a)</h4>
+                <h4>a) De fire kjennetegnene</h4>
                 <ul>
-                  <li>Fast antall delforsøk: vi kaster nøyaktig \(n\) ganger.</li>
-                  <li>To utfall per kast: sekser eller ikke sekser.</li>
-                  <li>Samme sannsynlighet hver gang: \(p=1/6\), terningen endrer seg ikke.</li>
-                  <li>Uavhengige kast: utfallet av ett kast påvirker ikke de andre.</li>
+                <li><strong>Fast antall delforsøk:</strong> vi kaster nøyaktig \(n\) ganger.</li>
+                <li><strong>To utfall per delforsøk:</strong> hvert kast er enten en sekser (suksess) eller ikke.</li>
+                <li><strong>Samme sannsynlighet hver gang:</strong> \(p=\tfrac16\) i hvert kast, fordi terningen ikke endrer seg.</li>
+                <li><strong>Uavhengige delforsøk:</strong> utfallet av ett kast påvirker ikke de andre.</li>
                 </ul>
-                <h4>b)</h4>
-                <p>\(X\sim\mathrm{Bin}(8,\,1/6)\):</p>
-                <p>\[ P(X\ge 3)=1-\sum_{x=0}^{2}\binom{8}{x}\left(\tfrac16\right)^x\left(\tfrac56\right)^{8-x}\approx 0.135 \]</p>
-                <h4>c)</h4>
-                <p>Med \(\mu=np\) og \(\sigma=\sqrt{np(1-p)}\):</p>
-                <p>\[ \frac{\sigma}{\mu}=\frac{\sqrt{np(1-p)}}{np}=\sqrt{\frac{1-p}{np}}&lt;0.15 \]</p>
-                <p>\[ \frac{1-p}{np}&lt;0.0225 \quad\Rightarrow\quad n&gt;\frac{1-p}{p\cdot 0.0225}=\frac{5/6}{(1/6)\cdot 0.0225}=222.2 \]</p>
-                <div class="answer"><b>b) 0.135 · c) \(n\ge 223\) kast.</b> Legg merke til at det relative standardavviket krymper som \(1/\sqrt n\) — dette er hele ideen bak både konfidensintervall og sentralgrenseteoremet.</div>
+                <p>Da er \(X\) = antall suksesser binomisk fordelt: \(X\sim\mathrm{Bin}(n,\,\tfrac16)\).</p>
+                <h4>b) Minst tre seksere på 8 kast</h4>
+                <p><strong>Fordeling.</strong> \(X\sim\mathrm{Bin}(8,\,\tfrac16)\).</p>
+                <p><strong>Komplement.</strong> «Minst 3» er komplementet til «0, 1 eller 2»:</p>
+                <p>\[ P(X\ge 3)=1-\bigl[P(X=0)+P(X=1)+P(X=2)\bigr] \]</p>
+                <p><strong>Regn ut leddene</strong> med \(P(X=x)=\binom{8}{x}\left(\tfrac16\right)^x\left(\tfrac56\right)^{8-x}\):</p>
+                <p>\[ P(X=0)=\left(\tfrac56\right)^8=0.2326 \]</p>
+                <p>\[ P(X=1)=8\cdot\tfrac16\cdot\left(\tfrac56\right)^7=0.3721 \]</p>
+                <p>\[ P(X=2)=28\cdot\left(\tfrac16\right)^2\cdot\left(\tfrac56\right)^6=0.2605 \]</p>
+                <p>\[ P(X\ge 3)=1-(0.2326+0.3721+0.2605)=1-0.8652=0.135 \]</p>
+                <p><strong>Svar.</strong> Det er 13.5 % sannsynlighet for minst tre seksere på åtte kast.</p>
+                <h4>c) Hvor stor må n være?</h4>
+                <p><strong>Uttrykk for forholdet.</strong> For binomisk fordeling er \(\mu=np\) og \(\sigma=\sqrt{np(1-p)}\):</p>
+                <p>\[ \frac{\sigma}{\mu}=\frac{\sqrt{np(1-p)}}{np}=\sqrt{\frac{np(1-p)}{n^2p^2}}=\sqrt{\frac{1-p}{np}} \]</p>
+                <p><strong>Sett opp kravet og kvadrer begge sider</strong> (begge er positive, så ulikheten beholder retningen):</p>
+                <p>\[ \sqrt{\frac{1-p}{np}}&lt;0.15 \quad\Rightarrow\quad \frac{1-p}{np}&lt;0.0225 \]</p>
+                <p><strong>Løs for \(n\)</strong> med \(p=\tfrac16\):</p>
+                <p>\[ n&gt;\frac{1-p}{p\cdot 0.0225}=\frac{5/6}{(1/6)\cdot 0.0225}=\frac{5}{0.0225}=222.2 \]</p>
+                <p><strong>Rund opp.</strong> \(n\) må være et helt tall, så det trengs minst 223 kast.</p>
+                <div class="answer"><b>b) 0.135 · c) \(n\ge 223\) kast.</b> Legg merke til at det relative standardavviket krymper som \(1/\sqrt n\). Det er hele ideen bak både konfidensintervall og sentralgrenseteoremet.</div>
               </div>
             </details>
           </article>
@@ -264,8 +301,15 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>\(X\sim\mathrm{Bin}(10,\,0.76)\), forutsatt uavhengighet mellom bilene:</p>
-                <p>\[ P(X\ge 8)=\sum_{x=8}^{10}\binom{10}{x}0.76^x\,0.24^{10-x}\approx 0.556 \]</p>
+                <p><strong>Fordeling.</strong> La \(X\) være antall av de 10 bilene som kjører for fort. Hver bil kjører for fort eller ikke, med samme sannsynlighet \(p=0.76\), og vi antar at bilene er uavhengige. Da er \(X\sim\mathrm{Bin}(10,\,0.76)\).</p>
+                <p><strong>Hva spørres om?</strong> «Minst 8 av 10» er \(X\ge 8\), altså 8, 9 eller 10. Det er bare tre ledd, så vi summerer dem direkte:</p>
+                <p>\[ P(X\ge 8)=P(X=8)+P(X=9)+P(X=10) \]</p>
+                <p><strong>Regn ut leddene</strong> med \(P(X=x)=\binom{10}{x}0.76^x\,0.24^{10-x}\):</p>
+                <p>\[ P(X=8)=45\cdot 0.76^8\cdot 0.24^2=0.2885 \]</p>
+                <p>\[ P(X=9)=10\cdot 0.76^9\cdot 0.24=0.2030 \]</p>
+                <p>\[ P(X=10)=0.76^{10}=0.0643 \]</p>
+                <p>\[ P(X\ge 8)=0.2885+0.2030+0.0643=0.556 \]</p>
+                <p><strong>Svar.</strong> Det er 56 % sannsynlighet for at minst 8 av 10 biler kjører for fort.</p>
                 <div class="answer"><b>\(P(X\ge 8)\approx 0.56\).</b></div>
               </div>
             </details>
@@ -287,11 +331,19 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>\(X\sim\mathrm{Bin}(10,\,0.07)\).</p>
-                <h4>a)</h4>
-                <p>\[ P(X=0)=\binom{10}{0}0.07^0\,0.93^{10}=0.93^{10}\approx 0.484 \]</p>
-                <h4>b)</h4>
-                <p>\[ P(2\le X\le 4)=\sum_{x=2}^{4}\binom{10}{x}0.07^x\,0.93^{10-x}=0.1234+0.0262+0.0036\approx 0.151 \]</p>
+                <p><strong>Fordeling.</strong> La \(X\) være antall defekte komponenter på et kort. Det er 10 komponenter, hver er defekt med sannsynlighet 0.07, og vi antar at de er uavhengige. Da er \(X\sim\mathrm{Bin}(10,\,0.07)\).</p>
+                <h4>a) Ingen defekte</h4>
+                <p>\[ P(X=0)=\binom{10}{0}0.07^0\cdot 0.93^{10}=1\cdot 1\cdot 0.93^{10}=0.484 \]</p>
+                <p><strong>Svar.</strong> 48 % av kortene har ingen defekte komponenter.</p>
+                <h4>b) Fra og med 2 til og med 4 defekte</h4>
+                <p><strong>Hva spørres om?</strong> \(P(2\le X\le 4)=P(X=2)+P(X=3)+P(X=4)\). Pass på grensene: «fra og med» og «til og med» betyr at både 2 og 4 er med.</p>
+                <p><strong>Regn ut leddene.</strong></p>
+                <p>\[ P(X=2)=\binom{10}{2}0.07^2\cdot 0.93^8=45\cdot 0.0049\cdot 0.5596=0.1234 \]</p>
+                <p>\[ P(X=3)=\binom{10}{3}0.07^3\cdot 0.93^7=120\cdot 0.000343\cdot 0.6017=0.0248 \]</p>
+                <p>\[ P(X=4)=\binom{10}{4}0.07^4\cdot 0.93^6=210\cdot 0.0000240\cdot 0.6470=0.0033 \]</p>
+                <p>\[ P(2\le X\le 4)=0.1234+0.0248+0.0033=0.151 \]</p>
+                <p><strong>Alternativt med kumulative sannsynligheter:</strong> \(P(X\le 4)-P(X\le 1)\).</p>
+                <p><strong>Svar.</strong> Omtrent 15 % av kortene blir sendt til reparasjon.</p>
                 <div class="answer"><b>a) ca. 48 % · b) ca. 15 %.</b></div>
               </div>
             </details>
@@ -314,17 +366,20 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>b)</h4>
-                <p>La \(Y\) være antall defekte på kortet, \(Y\sim\mathrm{Bin}(5,\,0.05)\):</p>
-                <p>\[ P(Y=0)=0.95^5\approx 0.7738 \]</p>
-                <p>3000 komponenter gir \(3000/5=600\) kort, altså forventet</p>
-                <p>\[ 600\cdot 0.7738\approx 464 \text{ fungerende kort} \]</p>
-                <h4>c)</h4>
-                <p>Nå er \(X\sim\mathrm{Bin}(6,\,0.05)\), og kortet fungerer når \(X\le 1\):</p>
-                <p>\[ P(X\le 1)=0.95^6+\binom{6}{1}0.05\cdot 0.95^5=0.7351+0.2321=0.9672 \]</p>
-                <p>3000 komponenter gir \(3000/6=500\) kort:</p>
-                <p>\[ 500\cdot 0.9672\approx 484 \text{ fungerende kort} \]</p>
-                <div class="answer"><b>b) 0.774 og ca. 464 kort · c) ca. 484 kort.</b> Å bruke én komponent ekstra per kort gir flere <em>fungerende</em> kort selv om det blir færre kort totalt.</div>
+                <h4>b) Fem komponenter per kort</h4>
+                <p><strong>Fordeling.</strong> La \(Y\) være antall defekte komponenter på et kort med fem komponenter. Hver er defekt med sannsynlighet \(p=0.05\), uavhengig av de andre: \(Y\sim\mathrm{Bin}(5,\,0.05)\).</p>
+                <p><strong>Når fungerer kortet?</strong> Bare når alle fem er gode, altså \(Y=0\):</p>
+                <p>\[ P(Y=0)=\binom{5}{0}0.05^0\cdot 0.95^5=0.95^5=0.7738 \]</p>
+                <p><strong>Forventet antall.</strong> 3000 komponenter gir \(3000/5=600\) kort. Hvert kort fungerer med sannsynlighet 0.7738, så antall fungerende kort er \(\mathrm{Bin}(600,\,0.7738)\) med forventning \(np\):</p>
+                <p>\[ 600\cdot 0.7738=464 \text{ fungerende kort} \]</p>
+                <h4>c) Seks komponenter per kort</h4>
+                <p><strong>Fordeling.</strong> Nå er \(X\sim\mathrm{Bin}(6,\,0.05)\) antall defekte på et kort.</p>
+                <p><strong>Når fungerer kortet?</strong> Når minst fem av seks er gode, altså høyst én defekt: \(X\le 1\).</p>
+                <p>\[ P(X\le 1)=P(X=0)+P(X=1)=0.95^6+\binom{6}{1}0.05\cdot 0.95^5 \]</p>
+                <p>\[ =0.7351+6\cdot 0.05\cdot 0.7738=0.7351+0.2321=0.9672 \]</p>
+                <p><strong>Forventet antall.</strong> 3000 komponenter gir \(3000/6=500\) kort:</p>
+                <p>\[ 500\cdot 0.9672=484 \text{ fungerende kort} \]</p>
+                <div class="answer"><b>b) 0.774 og ca. 464 kort · c) ca. 484 kort.</b> Å bruke én komponent ekstra per kort gir flere <em>fungerende</em> kort, selv om det blir færre kort totalt.</div>
               </div>
             </details>
           </article>
@@ -342,11 +397,18 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p><strong>Hvorfor binomisk?</strong> Strengt tatt er \(X\) hypergeometrisk — vi trekker uten tilbakelegging. Men potten er enorm:</p>
-                <p>\[ P(\text{el-bil på 1. trekning})=\frac{825\,739}{3\,403\,763}\approx 0.243 \]</p>
-                <p>\[ P(\text{el-bil på 2.}\mid\text{el-bil på 1.})=\frac{825\,738}{3\,403\,762}\approx 0.243 \]</p>
-                <p>Sannsynligheten endrer seg ikke merkbart, så \(X\sim\mathrm{Bin}(12,\,0.243)\) er en utmerket tilnærming.</p>
-                <p>\[ P(X&lt;4)=\sum_{x=0}^{3}\binom{12}{x}0.243^x\,0.757^{12-x}\approx 0.67 \]</p>
+                <p><strong>Hvorfor binomisk?</strong> Strengt tatt er \(X\) hypergeometrisk, fordi vi trekker uten tilbakelegging. Men potten er enorm, og sannsynligheten endrer seg nesten ikke fra trekning til trekning:</p>
+                <p>\[ P(\text{el-bil på 1. trekning})=\frac{825\,739}{3\,403\,763}=0.243 \]</p>
+                <p>\[ P(\text{el-bil på 2.}\mid\text{el-bil på 1.})=\frac{825\,738}{3\,403\,762}=0.243 \]</p>
+                <p>Betingelsen for å tilnærme hypergeometrisk med binomisk er \(N\ge 10n\), og her er \(3\,403\,763\ge 120\). Altså er \(X\sim\mathrm{Bin}(12,\,0.243)\) en svært god tilnærming.</p>
+                <p><strong>Hva spørres om?</strong> «Færre enn 4» er \(X\le 3\), altså 0, 1, 2 eller 3. (Ikke ta med 4.)</p>
+                <p><strong>Regn ut leddene</strong> med \(P(X=x)=\binom{12}{x}0.243^x\,0.757^{12-x}\):</p>
+                <p>\[ P(X=0)=0.757^{12}=0.0354 \]</p>
+                <p>\[ P(X=1)=12\cdot 0.243\cdot 0.757^{11}=0.1364 \]</p>
+                <p>\[ P(X=2)=66\cdot 0.243^2\cdot 0.757^{10}=0.2408 \]</p>
+                <p>\[ P(X=3)=220\cdot 0.243^3\cdot 0.757^{9}=0.2577 \]</p>
+                <p>\[ P(X\le 3)=0.0354+0.1364+0.2408+0.2577=0.670 \]</p>
+                <p><strong>Svar.</strong> Det er 67 % sannsynlighet for at færre enn 4 av 12 tilfeldige biler er el-biler.</p>
                 <div class="answer"><b>\(P(X&lt;4)\approx 0.67\).</b></div>
               </div>
             </details>
@@ -368,15 +430,23 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>Okt 2024</h4>
-                <p>Steg 1 — normalfordeling gir \(p\):</p>
+                <p><strong>Felles oppskrift.</strong> Spørsmålet skifter fra «hvor mye veier én» til «hvor mange av \(n\)». Da skifter du fordeling: 1) finn \(p\) for én enhet med normalfordelingen, 2) bruk \(p\) i en binomisk fordeling for antallet.</p>
+                <h4>Okt 2024 — teposer</h4>
+                <p><strong>Steg 1 — Normalfordeling gir \(p\).</strong></p>
                 <p>\[ p=P(X&gt;1.32)=1-G\!\left(\frac{1.32-1.30}{0.05}\right)=1-G(0.40)=1-0.6554=0.3446 \]</p>
-                <p>Steg 2 — binomisk med \(n=5\), \(p=0.3446\):</p>
-                <p>\[ P(T\ge 3)=\sum_{x=3}^{5}\binom{5}{x}p^x(1-p)^{5-x}\approx 0.227 \]</p>
-                <h4>Okt 2025</h4>
-                <p>\[ p=P(X&gt;285)=1-G\!\left(\frac{285-270}{15}\right)=1-G(1.00)=0.1587 \]</p>
-                <p>\[ P(Y\ge 3)=1-\sum_{x=0}^{2}\binom{25}{x}p^x(1-p)^{25-x}\approx 0.78 \]</p>
-                <div class="answer"><b>Okt 2024: 0.227 · Okt 2025: 0.78.</b> Nøkkelen er å se at spørsmålet skifter fra «hvor mye veier én» til «hvor mange av n» — da skifter du fordeling.</div>
+                <p><strong>Steg 2 — Binomisk.</strong> \(T\sim\mathrm{Bin}(5,\,0.3446)\) er antall av 5 poser over 1.32 gram. «Minst 3» er 3, 4 eller 5:</p>
+                <p>\[ P(T=3)=10\cdot 0.3446^3\cdot 0.6554^2=0.1758 \]</p>
+                <p>\[ P(T=4)=5\cdot 0.3446^4\cdot 0.6554=0.0462 \]</p>
+                <p>\[ P(T=5)=0.3446^5=0.0049 \]</p>
+                <p>\[ P(T\ge 3)=0.1758+0.0462+0.0049=0.227 \]</p>
+                <h4>Okt 2025 — appelsiner</h4>
+                <p><strong>Steg 1 — Normalfordeling gir \(p\).</strong></p>
+                <p>\[ p=P(X&gt;285)=1-G\!\left(\frac{285-270}{15}\right)=1-G(1.00)=1-0.8413=0.1587 \]</p>
+                <p><strong>Steg 2 — Binomisk.</strong> \(Y\sim\mathrm{Bin}(25,\,0.1587)\). «Minst 3» er komplementet til 0, 1 eller 2:</p>
+                <p>\[ P(Y=0)=0.8413^{25}=0.0133,\quad P(Y=1)=25\cdot 0.1587\cdot 0.8413^{24}=0.0628 \]</p>
+                <p>\[ P(Y=2)=300\cdot 0.1587^2\cdot 0.8413^{23}=0.1420 \]</p>
+                <p>\[ P(Y\ge 3)=1-(0.0133+0.0628+0.1420)=1-0.2181=0.78 \]</p>
+                <div class="answer"><b>Okt 2024: 0.227 · Okt 2025: 0.78.</b> Nøkkelen er å se at spørsmålet skifter fra «hvor mye veier én» til «hvor mange av n». Da skifter du fordeling.</div>
               </div>
             </details>
           </article>
@@ -408,20 +478,31 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>Skaler først raten til intervallet: \(\lambda t=0.35\cdot 20=7.0\).</p>
-                <h4>a)</h4>
-                <p>\[ P(X=6)=\frac{7.0^6}{6!}e^{-7.0}\approx 0.149 \]</p>
-                <h4>b)</h4>
-                <p>\[ P(X&lt;3)=e^{-7}\left(\frac{7^0}{0!}+\frac{7^1}{1!}+\frac{7^2}{2!}\right)\approx 0.0296 \]</p>
-                <h4>c)</h4>
-                <p>Ventetiden \(T\) mellom to hendelser i en poissonprosess er eksponensialfordelt:</p>
-                <p>\[ E(T)=\frac{1}{\lambda}=\frac{1}{0.35}\approx 2.9\ \text{sekunder} \]</p>
-                <h4>d)</h4>
-                <p>Nå skifter vi fordeling: la \(Y\) være antall av de 100 forsøkene der det registreres færre enn 3 partikler. \(Y\sim\mathrm{Bin}(100,\,0.0296)\):</p>
-                <p>\[ P(Y\ge 3)=1-\sum_{x=0}^{2}\binom{100}{x}p^x(1-p)^{100-x}\approx 0.57 \]</p>
-                <h4>e)</h4>
-                <p>For poisson er \(\mu=\sigma^2=7.0\), så \(\sigma=\sqrt{7.0}\approx 2.65\). Sentralgrenseteoremet (\(n=100\gg 30\)) gir</p>
-                <p>\[ \mu_{\bar X}=7.0,\qquad \sigma_{\bar X}=\frac{\sigma}{\sqrt n}=\frac{2.65}{10}\approx 0.26 \]</p>
+                <p><strong>Skaler raten først.</strong> Telleren registrerer 0.35 partikler per sekund. Over \(t=20\) sekunder blir poissonparameteren</p>
+                <p>\[ \lambda t=0.35\cdot 20=7.0 \]</p>
+                <p>Altså er \(X\sim\mathrm{Poisson}(7.0)\), med \(P(X=x)=\dfrac{7^x}{x!}e^{-7}\) og \(e^{-7}=0.000912\).</p>
+                <h4>a) Akkurat 6</h4>
+                <p>\[ P(X=6)=\frac{7^6}{6!}e^{-7}=\frac{117\,649}{720}\cdot 0.000912=163.4\cdot 0.000912=0.149 \]</p>
+                <p><strong>Svar.</strong> 14.9 % sannsynlighet for akkurat 6 partikler.</p>
+                <h4>b) Færre enn 3</h4>
+                <p>«Færre enn 3» er \(X\le 2\), altså 0, 1 eller 2:</p>
+                <p>\[ P(X\le 2)=e^{-7}\left(\frac{7^0}{0!}+\frac{7^1}{1!}+\frac{7^2}{2!}\right)=e^{-7}(1+7+24.5)=0.000912\cdot 32.5=0.0296 \]</p>
+                <p><strong>Svar.</strong> 3.0 % sannsynlighet for færre enn 3 partikler på 20 sekunder.</p>
+                <h4>c) Forventet tid mellom to registreringer</h4>
+                <p>I en poissonprosess med rate \(\lambda\) er ventetiden \(T\) mellom to hendelser eksponentialfordelt med forventning \(1/\lambda\). Her er \(\lambda=0.35\) per sekund (raten per tidsenhet, ikke \(\lambda t\)):</p>
+                <p>\[ E(T)=\frac{1}{\lambda}=\frac{1}{0.35}=2.86\ \text{sekunder} \]</p>
+                <h4>d) Minst 3 av 100 forsøk med færre enn 3</h4>
+                <p><strong>Skift fordeling.</strong> Nå teller vi forsøk, ikke partikler. La \(Y\) være antall av de 100 målingene der det registreres færre enn 3 partikler. Hver måling «lykkes» med \(p=0.0296\) fra b), uavhengig av de andre. Da er \(Y\sim\mathrm{Bin}(100,\,0.0296)\).</p>
+                <p><strong>Komplement.</strong></p>
+                <p>\[ P(Y\ge 3)=1-\bigl[P(Y=0)+P(Y=1)+P(Y=2)\bigr] \]</p>
+                <p>\[ P(Y=0)=0.9704^{100}=0.0496,\quad P(Y=1)=100\cdot 0.0296\cdot 0.9704^{99}=0.1512 \]</p>
+                <p>\[ P(Y=2)=4950\cdot 0.0296^2\cdot 0.9704^{98}=0.2282 \]</p>
+                <p>\[ P(Y\ge 3)=1-(0.0496+0.1512+0.2282)=1-0.4290=0.57 \]</p>
+                <p>(Siden \(n=100&gt;10\) og \(p&lt;0.1\), kan du også tilnærme med \(\mathrm{Poisson}(np)=\mathrm{Poisson}(2.96)\). Det gir nesten det samme.)</p>
+                <h4>e) Gjennomsnittet av 100 målinger</h4>
+                <p><strong>Én måling.</strong> For poissonfordelingen er forventning og varians like: \(\mu=\sigma^2=7.0\), så \(\sigma=\sqrt{7.0}=2.65\).</p>
+                <p><strong>Gjennomsnittet.</strong> 100 uavhengige målinger, \(n=100\ge 30\), så sentralgrenseteoremet gir at \(\bar X\) er tilnærmet normalfordelt med</p>
+                <p>\[ \mu_{\bar X}=\mu=7.0,\qquad \sigma_{\bar X}=\frac{\sigma}{\sqrt n}=\frac{2.65}{10}=0.26 \]</p>
                 <div class="answer"><b>a) 0.149 · b) 0.030 · c) 2.9 s · d) 0.57 · e) \(\mu_{\bar X}=7.0\), \(\sigma_{\bar X}=0.26\).</b></div>
               </div>
             </details>
@@ -443,13 +524,19 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>a)</h4>
-                <p>\(X_1\sim\mathrm{Poisson}(5)\):</p>
-                <p>\[ P(X_1\le 4)=e^{-5}\left(\frac{5^0}{0!}+\frac{5^1}{1!}+\frac{5^2}{2!}+\frac{5^3}{3!}+\frac{5^4}{4!}\right)\approx 0.44 \]</p>
-                <h4>b)</h4>
-                <p>Poissonparameteren skalerer med arealet: \(X_{10}\sim\mathrm{Poisson}(50)\). Siden \(\lambda t=50\ge 10\) kan vi tilnærme med \(N(50,\sqrt{50})\). Ordet «tilnærmet» i oppgaveteksten er signalet om at du skal gjøre nettopp dette — og siden \(X\) er en heltallsvariabel, bruker vi heltallskorreksjon:</p>
-                <p>\[ P(X_{10}\le 40)\approx G\!\left(\frac{40+0.5-50}{\sqrt{50}}\right)=G(-1.34)\approx 0.09 \]</p>
-                <div class="answer"><b>a) 0.44 · b) 0.09.</b> (Eksakt poissonberegning gir 0.086 — tilnærmingen er god.)</div>
+                <h4>a) Fire eller færre på én km²</h4>
+                <p><strong>Fordeling.</strong> På én kvadratkilometer er antallet \(X_1\sim\mathrm{Poisson}(5)\), med \(P(X_1=x)=\dfrac{5^x}{x!}e^{-5}\) og \(e^{-5}=0.006738\).</p>
+                <p><strong>Summer leddene.</strong> «Fire eller færre» er 0, 1, 2, 3 eller 4:</p>
+                <p>\[ P(X_1\le 4)=e^{-5}\left(\frac{5^0}{0!}+\frac{5^1}{1!}+\frac{5^2}{2!}+\frac{5^3}{3!}+\frac{5^4}{4!}\right) \]</p>
+                <p>\[ =0.006738\cdot(1+5+12.5+20.83+26.04)=0.006738\cdot 65.375=0.44 \]</p>
+                <p><strong>Svar.</strong> 44 % sannsynlighet for fire eller færre lynnedslag på én km² i løpet av et døgn.</p>
+                <h4>b) 40 eller færre på ti km²</h4>
+                <p><strong>Skaler parameteren.</strong> Poissonparameteren skalerer med arealet: \(X_{10}\sim\mathrm{Poisson}(5\cdot 10)=\mathrm{Poisson}(50)\).</p>
+                <p><strong>Normaltilnærming.</strong> Ordet «tilnærmet» i oppgaveteksten er signalet. Betingelsen er \(\lambda t=50\ge 10\), så vi kan bruke \(N(50,\sqrt{50})\), der \(\sqrt{50}=7.07\).</p>
+                <p><strong>Heltallskorreksjon.</strong> \(X_{10}\) er en heltallsvariabel, så «40 eller færre» får grensen 40.5:</p>
+                <p>\[ P(X_{10}\le 40)\approx G\!\left(\frac{40.5-50}{7.07}\right)=G(-1.34)=0.09 \]</p>
+                <p><strong>Svar.</strong> Omtrent 9 % sannsynlighet for 40 eller færre lynnedslag på ti km².</p>
+                <div class="answer"><b>a) 0.44 · b) 0.09.</b> (Eksakt poissonberegning gir 0.086, så tilnærmingen er god.)</div>
               </div>
             </details>
           </article>
