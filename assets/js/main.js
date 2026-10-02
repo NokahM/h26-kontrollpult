@@ -45,8 +45,8 @@
     {
       id: 'tsd3060', code: 'TSD3060', course: 'TSD3060', kind: 'emne', short: 'Sikre webtjenester',
       name: 'Utvikling av sikre webtjenester',
-      desc: 'HTTP-tjenere i C, SQL-injeksjon og autentisering, konteinere, HTML/XML/CSS og CGI.',
-      scope: '6 uker og eksamensoversikt',
+      desc: 'HTTP-tjenere i C, SQL-injeksjon og autentisering, konteinere, HTML/XML/CSS, CGI, JavaScript og innlogging med sesjoner.',
+      scope: '8 uker, JavaScript og eksamensoversikt',
       href: 'subjects/tsd3060/index.html',
       groups: [
         { label: 'Uker', items: [
@@ -55,7 +55,10 @@
           { n: '35', title: 'chroot og konteinere', part: 'Uke 35', track: 'page', href: 'subjects/tsd3060/guides/35-chroot-konteinere.html' },
           { n: '36', title: 'Podman, Docker og Compose', part: 'Uke 36', track: 'page', href: 'subjects/tsd3060/guides/36-podman-docker-compose.html' },
           { n: '37', title: 'HTML, XML og CSS', part: 'Uke 37', track: 'page', href: 'subjects/tsd3060/guides/37-html-xml-css.html' },
-          { n: '38', title: 'CGI og HTML-skjema', part: 'Uke 38', track: 'page', href: 'subjects/tsd3060/guides/38-cgi-html-skjema.html' }
+          { n: '38', title: 'CGI og HTML-skjema', part: 'Uke 38', track: 'page', href: 'subjects/tsd3060/guides/38-cgi-html-skjema.html' },
+          { n: 'JS', title: 'JavaScript og fetch', part: 'Hjemmelekse uke 38–39', track: 'page', href: 'subjects/tsd3060/guides/38-39-javascript.html' },
+          { n: '39', title: 'Sammensatt eksempel', part: 'Uke 39', track: 'page', href: 'subjects/tsd3060/guides/39-sammensatt-eksempel.html' },
+          { n: '40', title: 'Innlogging og sesjoner', part: 'Uke 40', track: 'page', href: 'subjects/tsd3060/guides/40-innlogging-sesjoner.html' }
         ] },
         { label: 'Eksamen', items: [
           { title: 'Eksamensoversikt', part: 'Eksamensforberedelse', href: 'subjects/tsd3060/guides/eksamensoversikt.html' },

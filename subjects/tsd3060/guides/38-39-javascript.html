@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JavaScript · språket, nettleseren og fetch — TSD3060 · H26</title>
+  <meta name="description" content="Hjemmelekse uke 38–39: JavaScript som språk, DOM og hendelser i nettleseren, AJAX og fetch med Promises, progressive webapplikasjoner, samme opphav og CORS.">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=35">
+</head>
+<body class="theme-tsd3060" data-updated="2026-10-02">
+  <div class="app-shell">
+
+    <aside class="sidebar"></aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">TSD3060</a>
+        <div class="topbar__crumb">JavaScript</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow">TSD3060 hjemmelekse, uke 38&#8211;39</div>
+          <h1>JavaScript: språket, nettleseren og fetch</h1>
+          <p class="page-header__desc">Det du trenger av JavaScript for å lese og skrive klientkoden i eksamenssystemene: språkets særheter, DOM og hendelser, <code>fetch()</code> med Promises, og hvorfor nettleseren stopper forespørsler til et annet opphav med mindre tjeneren sier ja (CORS).</p>
+          <span class="page-header__status" data-status="active"><i></i>pensum + notater</span>
+        </header>
+
+        <div class="sourcebar">
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/dyn_var.js" target="_blank" rel="noopener" title="Kopi fra debbie.usn.no">kode · dyn_var.js</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/scope.js" target="_blank" rel="noopener" title="Kopi fra debbie.usn.no">kode · scope.js</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/diverse.js" target="_blank" rel="noopener" title="Kopi fra debbie.usn.no">kode · diverse.js</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/hendelesesbehandler-attributt.html" target="_blank" rel="noopener" title="Kopi fra debbie.usn.no">kode · hendelesesbehandler-attributt.html</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/script-element.html" target="_blank" rel="noopener" title="Kopi fra debbie.usn.no">kode · script-element.html</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/script_i_fil.html" target="_blank" rel="noopener" title="Kopi fra debbie.usn.no">kode · script_i_fil.html</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/scriptfil.js" target="_blank" rel="noopener" title="Kopi fra debbie.usn.no">kode · scriptfil.js</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/pseudo-protokoll.html" target="_blank" rel="noopener" title="Kopi fra debbie.usn.no">kode · pseudo-protokoll.html</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/musealarm1.html" target="_blank" rel="noopener" title="Kopi fra debbie.usn.no">kode · musealarm1.html</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/musealarm2.html" target="_blank" rel="noopener" title="Kopi fra debbie.usn.no">kode · musealarm2.html</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/ajax_get.html" target="_blank" rel="noopener" title="Kopi fra debbie.usn.no">kode · ajax_get.html</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/sql-klient3.cgi" target="_blank" rel="noopener" title="Fra notatene (debbie sperrer .cgi-filer)">kode · sql-klient3.cgi</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/fetch_demo_1.html" target="_blank" rel="noopener" title="Kopi fra debbie.usn.no">kode · fetch_demo_1.html</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/fetch_demo_2.html" target="_blank" rel="noopener" title="Kopi fra debbie.usn.no">kode · fetch_demo_2.html</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/fetch_demo_3.html" target="_blank" rel="noopener" title="Kopi fra debbie.usn.no">kode · fetch_demo_3.html</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/fetch-test.cgi" target="_blank" rel="noopener" title="Fra notatene (debbie sperrer .cgi-filer)">kode · fetch-test.cgi</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/web-app/index.html" target="_blank" rel="noopener" title="Kopi fra debbie.usn.no">kode · web-app/index.html</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/web-app/serviceArbeider.js" target="_blank" rel="noopener" title="Kopi fra debbie.usn.no">kode · web-app/serviceArbeider.js</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/web-app/manifest.webmanifest" target="_blank" rel="noopener" title="Kopi fra debbie.usn.no">kode · web-app/manifest.webmanifest</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/opphav/login.html" target="_blank" rel="noopener" title="Kopi fra debbie.usn.no">kode · opphav/login.html</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/opphav/passord.js" target="_blank" rel="noopener" title="Kopi fra debbie.usn.no">kode · opphav/passord.js</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/opphav/mottager.cgi" target="_blank" rel="noopener" title="Fra notatene (debbie sperrer .cgi-filer)">kode · opphav/mottager.cgi</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/kryssopphav/send.html" target="_blank" rel="noopener" title="Kopi fra debbie.usn.no">kode · kryssopphav/send.html</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/kryssopphav/ajax-send.html" target="_blank" rel="noopener" title="Kopi fra debbie.usn.no">kode · kryssopphav/ajax-send.html</a>
+          <a class="tag" href="../../../assets/resources/tsd3060/eksempler/kryssopphav/tjeneste.cgi" target="_blank" rel="noopener" title="Fra notatene (debbie sperrer .cgi-filer)">kode · kryssopphav/tjeneste.cgi</a>
+        </div>
+
+        <article class="prose">
+          <p class="callout">Pensum er <em>JavaScript: The Definitive Guide</em> (7. utg.) kap. 1&#8211;8 og 13&#8211;18, pluss MDN om <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity" target="_blank" rel="noopener">Subresource Integrity</a> og <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS" target="_blank" rel="noopener">CORS</a>. På eksamen skal du <em>lese og forklare</em> JavaScript, ikke skrive store programmer. Prioriter derfor <code>fetch()</code>, <code>credentials</code>, DOM-oppslag og samme opphav.</p>
+
+          <h2>Språket</h2>
+          <p>JavaScript er en implementasjon av standarden <strong>ECMAScript</strong>. Språket er ikke Java, selv om syntaksen ligner. Det kjører både i nettleseren (klientside) og på tjeneren (for eksempel <code>node</code>). Prøv kodebitene i nettleserens konsoll (F12 → Console) eller med <code>node</code>.</p>
+
+          <h3>Dynamiske typer og typekonvertering</h3>
+          <p>Typen bestemmes ved tilordning, ikke ved deklarasjon. <code>+</code> skjøter tekst så snart en av operandene er tekst, mens <code>-</code>, <code>*</code> og <code>/</code> alltid prøver å gjøre om til tall:</p>
+          <pre class="codeblock">// dyn_var.js
+var a, b
+a = 1 + '2'      // '12'  (tekst)
+b = 1 +  2       // 3     (tall)
+console.log(a, b)   // 12 3</pre>
+          <div class="dtable-wrap">
+            <table class="dtable">
+              <thead><tr><th>Uttrykk</th><th>Resultat</th><th>Hvorfor</th></tr></thead>
+              <tbody>
+                <tr><td><code>'5' + 4</code></td><td><code>'54'</code></td><td><code>+</code> med tekst skjøter</td></tr>
+                <tr><td><code>'5' * '4'</code></td><td><code>20</code></td><td><code>*</code> gjør begge om til tall</td></tr>
+                <tr><td><code>'5' - 4</code></td><td><code>1</code></td><td>Det samme for <code>-</code></td></tr>
+                <tr><td><code>5 * 'x'</code></td><td><code>NaN</code></td><td><code>'x'</code> er ikke et tall</td></tr>
+                <tr><td><code>undefined == null</code></td><td><code>true</code></td><td><code>==</code> konverterer, <code>===</code> gjør det ikke (gir <code>false</code>)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Primitiver og objekter</h3>
+          <p>Det finnes tre grunnleggende primitiver: <code>boolean</code>, <code>number</code> (alltid 64-bits flyttall) og <code>string</code>. Alt annet er objekter. Kaller du en metode på en primitiv, lages et <strong>midlertidig objekt</strong> som forsvinner rett etterpå:</p>
+          <pre class="codeblock">a = 1
+a.toString()        // virker: midlertidig Number-objekt
+s = "tekst"
+s.b = "bla bla"     // lagres på et midlertidig objekt ...
+s.b                 // ... som er borte: undefined</pre>
+          <p><code>null</code> betyr «uten verdi». <code>undefined</code> er verdien til en variabel som ikke er initialisert, eller et medlem som ikke finnes. <code>NaN</code> er ikke lik noe, heller ikke seg selv, så test med <code>isNaN()</code>.</p>
+
+          <h3>Objekter og tabeller</h3>
+          <p>Et objekt er en mengde navn-verdi-par, en hashtabell. Objektlitteralen er opphavet til JSON:</p>
+          <pre class="codeblock">o = { navn: 'per', nummer: 123 }
+o["navn"]            // 'per'
+o.navn               // samme medlem
+o.etternavn = "Hansen"   // nytt medlem</pre>
+          <p>En tabell (array) er også et objekt, men ordnet og med <code>length</code>, som alltid er én større enn den største heltallsnøkkelen. <code>diverse.js</code> fyller et objekt, en hashtabell og en tabell med de samme nøklene og skriver dem ut. Bare tabellen har <code>length</code> (3). For de to andre er den <code>undefined</code>.</p>
+
+          <h3>Funksjoner, <code>this</code> og gyldighetsområde</h3>
+          <p>Funksjoner er objekter og kan defineres som uttrykk (<code>var f = function (x) {…}</code>), som setning (<code>function f(x) {…}</code>) eller som pilfunksjon (<code>x =&gt; …</code>). Alle returnerer en verdi, som er <code>undefined</code> hvis ingenting annet er angitt. <code>this</code> er objektet funksjonen ble kalt som metode på.</p>
+          <p>Variabler deklarert med <code>var</code> har <strong>funksjonsskop</strong>, ikke blokkskop, og deklarasjonen <strong>heises</strong> (hoisting) til toppen av funksjonen. Tilordner du til en variabel som ikke er deklarert noe sted, havner den i det globale objektet. Det er poenget med <code>scope.js</code>:</p>
+          <pre class="codeblock">// scope.js (uten #!-linja)
+print = console.log
+v = "X"                    // global
+var o = new Object()
+o.v = "Y"                  // medlem av o
+o.f = function () {
+    v = "Z"
+    print(global.v)
+    print(this.v)
+    print(v)
+    var v                  // kommenter bort denne, observer og forklar
+}
+o.f()</pre>
+          <details class="sol">
+            <summary>Hva skrives ut, med og uten <code>var v</code>?</summary>
+            <div class="sol__body">
+              <p><strong>Med</strong> <code>var v</code>: deklarasjonen heises til toppen av <code>f</code>, så <code>v = "Z"</code> skriver til en <em>lokal</em> variabel. Utskriften blir <code>X</code>, <code>Y</code>, <code>Z</code>.</p>
+              <p><strong>Uten</strong>: det finnes ingen lokal <code>v</code>, så <code>v = "Z"</code> overskriver den globale. Utskriften blir <code>Z</code>, <code>Y</code>, <code>Z</code>.</p>
+              <p><code>this.v</code> er <code>Y</code> i begge tilfeller, fordi <code>f</code> kalles som metode på <code>o</code>. (Kontrollert med <code>node</code>.)</p>
+            </div>
+          </details>
+          <details class="sol">
+            <summary>Hva blir utskriften fra tabelleksempelet i notatene?</summary>
+            <div class="sol__body">
+              <pre class="codeblock">var a = []
+a[04] = 'start'
+a[09] = 'slutt'
+console.log(a.length)      // 10: største indeks er 9
+t1 = [,,]                  // length 2: avsluttende komma teller ikke
+t1[2] = 'tredje element'
+console.log(t1)            // [ &lt;2 empty items&gt;, 'tredje element' ]</pre>
+              <p><code>04</code> og <code>09</code> er bare 4 og 9 her. Ledende null betyr egentlig oktalt, men <code>09</code> er ikke et gyldig oktaltall og leses derfor som desimalt. I streng modus (<code>"use strict"</code>) er begge syntaksfeil. (Kontrollert med <code>node</code>.)</p>
+            </div>
+          </details>
+
+          <p>Resten av grunnspråket ligner på C og Java: <code>if</code>/<code>else</code>, <code>while</code>, <code>for</code>, <code>switch</code> og <code>try</code>/<code>catch</code>/<code>finally</code>. Unntaket er <code>for (x in X)</code>, som går gjennom <em>nøklene</em> i et objekt.</p>
+
+          <h2>JavaScript i nettleseren</h2>
+          <p>Nettleseren representerer dokumentet som et tre av noder, <strong>DOM</strong> (Document Object Model). DOM er en W3C-standard og ikke en del av ECMAScript. Det globale objektet heter <code>window</code>, ett per vindu eller fane, og alle globale variabler er medlemmer av det.</p>
+
+          <h3>Fire steder koden kan stå</h3>
+          <div class="dtable-wrap">
+            <table class="dtable">
+              <thead><tr><th>Plassering</th><th>Eksempel</th><th>Kommentar</th></tr></thead>
+              <tbody>
+                <tr><td>Hendelsesattributt</td><td><code>&lt;p onclick="alert('…')"&gt;</code></td><td>Navnet er <code>on</code> + hendelsen (<code>click</code>, <code>load</code>, <code>keydown</code> …)</td></tr>
+                <tr><td><code>&lt;script&gt;</code>-element</td><td><code>&lt;script&gt;onload = …&lt;/script&gt;</code></td><td>Alle skript-elementene på siden utgjør til sammen ett program</td></tr>
+                <tr><td>Egen fil</td><td><code>&lt;script src="db.js"&gt;&lt;/script&gt;</code></td><td>Bare JavaScript i fila. Kan sikres med <code>integrity</code> (SRI, se under)</td></tr>
+                <tr><td>Pseudoprotokoll</td><td><code>&lt;a href="javascript: alert(Date())"&gt;</code></td><td>URL-en tolkes som kode i stedet for å sende en HTTP-forespørsel</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Koden kjøres mens dokumentet leses inn. Tung kode bør derfor vente: legg den i en <code>load</code>-behandler, sett den sist, eller bruk <code>&lt;script defer&gt;</code> (kjøres når hele dokumentet er lest) eller <code>&lt;script async&gt;</code> (lastes parallelt). Koden kan ikke bruke et element som ikke er lest inn ennå.</p>
+
+          <h3>Hendelsesbehandlere</h3>
+          <p>I DOM nivå 0 er behandleren en attributtverdi eller en egenskap (<code>onload = f</code>). Da kan det bare være én behandler per hendelse. Fra DOM nivå 2 brukes <code>addEventListener</code>. Behandleren får et <strong>hendelsesobjekt</strong> med detaljer, og hendelsen «bobler» oppover i treet til noen kaller <code>stopPropagation()</code>:</p>
+          <pre class="codeblock">// musealarm2.html (forenklet)
+function musealarm(hendelse) {
+  alert('Du trykket musknapp nr. ' + hendelse.button)
+}
+function initialisering() {
+  document.querySelector('#musefelle')
+    .addEventListener('mousedown', musealarm, false)
+}
+window.addEventListener('load', initialisering, false)</pre>
+          <p><code>musealarm1.html</code> gjør det samme, men registrerer <code>initialisering</code> med <code>&lt;body onload=…&gt;</code>. Begge venter til <code>#musefelle</code> finnes før de slår opp elementet.</p>
+
+          <h3>Finne og endre elementer</h3>
+          <pre class="codeblock">document.querySelector('#epost')          // første treff på en CSS-velger
+document.querySelectorAll('a')            // alle treff
+document.getElementById('epost')          // eldre, virker fortsatt
+
+let e = document.createElement('a')       // ny elementnode
+e.href = 'https://debbie.usn.no'          // attributter er egenskaper
+e.appendChild(document.createTextNode('debbie'))
+forelder.appendChild(e)                   // sett inn (eller flytt)
+forelder.removeChild(e)                   // koble fra
+e.style.visibility = 'hidden'             // CSS via style
+e.className = 'aktiv'                     // class er reservert ord</pre>
+          <p>Det er nesten bare <code>querySelector(…).value</code> eksamenskoden bruker. Den leser verdien i et <code>&lt;input&gt;</code>-felt før den sendes med <code>fetch()</code>.</p>
+
+          <h2>Web-applikasjoner: AJAX og fetch</h2>
+          <p><strong>AJAX</strong> betyr at siden gjør HTTP-forespørsler fra JavaScript uten å laste hele siden på nytt. Det eldste API-et er <code>XMLHttpRequest</code>:</p>
+          <pre class="codeblock">// ajax_get.html (forenklet)
+var f = new XMLHttpRequest()
+f.open("GET", "sql-klient3.cgi?" + s, true)   // true = asynkron
+f.onload = function () {
+  document.getElementById("tabell").innerHTML = f.responseText
+}
+f.send(null)</pre>
+          <p><code>readyState</code> går fra 0 (UNSENT) via 1 (OPENED), 2 (HEADERS_RECEIVED) og 3 (LOADING) til 4 (DONE). <code>status</code> er HTTP-statuskoden.</p>
+          <div class="pitfall">
+            <div class="pitfall__title">Fallgruve: sql-klient3.cgi er SQL-injeksjon med vilje</div>
+            <p>Skriptet sender spørrestrengen <em>rett</em> til <code>sqlite3</code>. Den som skriver i feltet, kan kjøre hvilken som helst SQL, også <code>DROP TABLE</code>. Eksempelet viser AJAX, ikke hvordan en tjeneste skal lages. Se forberedte SQL-kommandoer i <a href="34-sqlite-injeksjon-autentisering.html">uke 34</a>. En detalj: <code>sed "s/%21/=/g"</code> gjør <code>%21</code> om til <code>=</code>, men <code>%21</code> er <code>!</code>. Likhetstegnet er <code>%3D</code>.</p>
+          </div>
+
+          <h3>Promises og pilfunksjoner</h3>
+          <p>Et <strong>Promise</strong> representerer resultatet av <em>én</em> asynkron handling. Det er enten <em>pending</em> (venter) eller <em>settled</em>, som betyr <em>fulfilled</em> (oppfylt) eller <em>rejected</em> (avvist). Med <code>then(ok, feil)</code> registreres funksjoner som kjøres når resultatet foreligger. <code>catch(feil)</code> er en kortform for <code>then(null, feil)</code>. Kjeding av <code>then</code> erstatter tilbakekall nøstet inni hverandre («callback hell»).</p>
+          <p>En pilfunksjon <code>x =&gt; uttrykk</code> er en kortere skrivemåte for <code>function (x) { return uttrykk }</code>. Disse to er like:</p>
+          <pre class="codeblock">// fetch_demo_1.html
+fetch('fetch-test.txt')
+  .then(function (respons) { return respons.text() })
+  .then(function (kropp)   { document.querySelector('#beholder').innerHTML += kropp })
+
+// fetch_demo_2.html
+fetch('fetch-test.txt')
+  .then(respons    =&gt; respons.text())
+  .then(http_kropp =&gt; document.querySelector('#beholder').innerHTML += http_kropp)</pre>
+          <p><code>fetch()</code> returnerer et Promise for <em>responsen</em>. <code>respons.text()</code> (eller <code>.json()</code>) returnerer et nytt Promise for <em>kroppen</em>. Derfor trengs to <code>then</code>.</p>
+          <p><code>fetch_demo_3.html</code> sender enten POST med kroppen i <code>body</code>, eller GET der feltene legges inn i URL-en med <code>url.searchParams.set()</code>. <code>fetch-test.cgi</code> skriver tilbake <code>REQUEST_METHOD</code>, <code>QUERY_STRING</code> og kroppen, så du ser forskjellen:</p>
+          <pre class="codeblock">fetch(url, { method: 'POST', body: t2 })    // data i kroppen → stdin i CGI
+url.searchParams.set('txt1', t1); fetch(url)  // data i URL-en → QUERY_STRING</pre>
+          <div class="pitfall">
+            <div class="pitfall__title">Fallgruve: eksemplene peker til et gammelt emne</div>
+            <p><code>fetch_demo_3.html</code>, <code>opphav/</code> og <code>kryssopphav/</code> har hardkodet <code>https://debbie.usn.no/da-nan3000/…</code> og <code>web01.usn.no</code>, som er adressene fra forløperemnet. Lokalt må du endre basis-URL-en til der du selv kjører CGI-skriptet, for eksempel busybox <code>httpd</code> fra <a href="38-cgi-html-skjema.html">uke 38</a>.</p>
+          </div>
+
+          <h3>Progressive webapplikasjoner (PWA)</h3>
+          <p>En PWA er en vanlig nettside med egenskaper som gjør at den oppfører seg som en app: den kan virke offline og startes fra hjemskjermen. To deler:</p>
+          <ul>
+            <li><strong>Manifest</strong>, en JSON-fil koblet inn med <code>&lt;link rel="manifest" href="manifest.webmanifest"&gt;</code>, med navn, ikon og start-URL.</li>
+            <li><strong>Service worker</strong>, et skript som registreres med <code>navigator.serviceWorker.register()</code>. Det fungerer som en <em>proxy</em> mellom siden og tjeneren. Det kjører i egen tråd uten tilgang til DOM, og krever HTTPS (eller <code>localhost</code>).</li>
+          </ul>
+          <pre class="codeblock">// web-app/serviceArbeider.js
+self.addEventListener('install', event =&gt;          // ved installasjon:
+  event.waitUntil(caches.open('mellomlager')         //   legg filene i hurtiglageret
+    .then(cache =&gt; cache.addAll(['./index.html', './', './p1.txt' /* … */]))))
+self.addEventListener('fetch', event =&gt;            // ved hver forespørsel:
+  event.respondWith(caches.match(event.request)))    //   svar fra hurtiglageret</pre>
+          <div class="note"><strong>Eksamensvekt:</strong> service workers ble bare spurt om i 2022&#8211;2023 (se <a href="eksamensoversikt.html">eksamensoversikten</a>). Kjenn igjen begrepene, men bruk tiden på opphav og <code>fetch()</code>.</div>
+          <div class="pitfall">
+            <div class="pitfall__title">Fallgruve: web-app-eksempelet virker ikke som det er</div>
+            <p><code>manifest.webmanifest</code> har <code>"start_url"</code> <em>inni</em> ikonobjektet. Det skal stå på toppnivå. <code>index.html</code> starter med <code>&lt;!doctype&gt;</code> uten <code>html</code>. <code>p1.txt</code>&#8211;<code>p5.txt</code> og <code>ikon.png</code> finnes ikke på debbie, og da feiler <code>cache.addAll()</code>, som avvises hvis bare én fil mangler. Lag filene selv hvis du vil prøve.</p>
+          </div>
+
+          <h2>Samme opphav og CORS</h2>
+          <p>To URL-er har <strong>samme opphav</strong> (origin, RFC 6454) når de har samme <strong>skjema</strong>, <strong>vert</strong> og <strong>port</strong>. Stien teller ikke:</p>
+          <div class="dtable-wrap">
+            <table class="dtable">
+              <thead><tr><th>Siden er lastet fra <code>http://localhost:8080/db.html</code></th><th>Samme opphav?</th></tr></thead>
+              <tbody>
+                <tr><td><code>http://localhost:8080/person/ola</code></td><td>Ja, bare stien er forskjellig</td></tr>
+                <tr><td><code>http://localhost:8090/person/ola</code></td><td>Nei, annen port</td></tr>
+                <tr><td><code>https://localhost:8080/</code></td><td>Nei, annet skjema</td></tr>
+                <tr><td><code>http://127.0.0.1:8080/</code></td><td>Nei, annen vert (selv om det er samme maskin)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p><strong>Retningslinjen om samme opphav</strong> (same-origin policy, SOP) håndheves <em>av nettleseren</em>. Kode fra ett opphav får ikke lese svaret på en forespørsel til et annet opphav. Det beskytter brukeren: et skript på en fremmed side kan ikke lese det din innloggede sesjon har tilgang til. SOP gjelder bare kode i nettleseren. <code>curl</code> og en konteiner som snakker med en annen konteiner, merker ingenting av den.</p>
+          <p><strong>CORS</strong> (Cross-Origin Resource Sharing) er unntaket: tjeneren sier i responshodet hvilke fremmede opphav som får lov.</p>
+          <div class="dtable-wrap">
+            <table class="dtable">
+              <thead><tr><th>Responshode</th><th>Betyr</th></tr></thead>
+              <tbody>
+                <tr><td><code>Access-Control-Allow-Origin: http://localhost:8080</code></td><td>Kode fra dette opphavet får lese svaret. Med <code>credentials</code> kan det ikke være <code>*</code>.</td></tr>
+                <tr><td><code>Access-Control-Allow-Credentials: true</code></td><td>Svaret kan leses også når forespørselen hadde med informasjonskapsler</td></tr>
+                <tr><td><code>Access-Control-Allow-Methods: PUT</code></td><td>Metoder utover GET, HEAD og POST som er tillatt</td></tr>
+                <tr><td><code>Access-Control-Allow-Headers: Content-Type</code></td><td>Hodefelt klienten får sende, for eksempel <code>Content-Type: application/json</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>En <strong>enkel forespørsel</strong> (GET eller POST med et enkelt <code>Content-Type</code> som <code>text/plain</code>) sendes rett av gårde. Nettleseren sjekker hodet i svaret og stopper bare <em>lesingen</em>. Alt annet, for eksempel PUT, DELETE eller <code>Content-Type: application/json</code>, får først en <strong>forhåndskontroll</strong> (preflight): nettleseren sender <code>OPTIONS</code> og venter på et ja før den sender selve forespørselen.</p>
+          <div class="note"><strong>Viktig poeng på eksamen:</strong> SOP stopper ikke at en enkel forespørsel <em>når fram</em> til tjeneren. Den stopper bare at koden leser svaret. En POST som endrer data, kan derfor ha skjedd selv om konsollen viser en CORS-feil.</div>
+
+          <h3><code>credentials</code> i <code>fetch()</code></h3>
+          <div class="dtable-wrap">
+            <table class="dtable">
+              <thead><tr><th>Verdi</th><th>Informasjonskapsler sendes og lagres</th></tr></thead>
+              <tbody>
+                <tr><td><code>'omit'</code></td><td>Aldri</td></tr>
+                <tr><td><code>'same-origin'</code> (standard)</td><td>Bare mot samme opphav</td></tr>
+                <tr><td><code>'include'</code></td><td>Også mot fremmede opphav. Tjeneren må da svare med <code>Allow-Credentials: true</code> og et eksplisitt opphav.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Eksempelet på tvers av opphav</h3>
+          <p><code>kryssopphav/send.html</code> sender til <code>tjeneste.cgi</code> på et annet opphav. Kroppen styrer hvilke CORS-hoder tjenesten svarer med:</p>
+          <div class="dtable-wrap">
+            <table class="dtable">
+              <thead><tr><th>Kall</th><th>Hoder i svaret</th><th>Kan siden lese svaret?</th></tr></thead>
+              <tbody>
+                <tr><td><code>send('POST', '', 'same-origin')</code></td><td>Ingen</td><td>Nei. Forespørselen kom fram, men nettleseren skjuler svaret.</td></tr>
+                <tr><td><code>send('POST', 'orig', 'same-origin')</code></td><td><code>Allow-Origin</code></td><td>Ja</td></tr>
+                <tr><td><code>send('POST', 'orig', 'include')</code></td><td><code>Allow-Origin</code></td><td>Nei, <code>Allow-Credentials</code> mangler</td></tr>
+                <tr><td><code>send('POST', 'orig+cred', 'include')</code></td><td>Begge</td><td>Ja</td></tr>
+                <tr><td><code>send('PUT', 'orig+cred', 'include')</code></td><td>Forhåndskontroll: <code>OPTIONS</code> får alle tre. Deretter PUT.</td><td>Ja, etter forhåndskontrollen</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p><code>opphav/login.html</code> viser den andre siden av saken: siden laster <code>passord.js</code> fra en annen vert. Et skript som lastes med <code>&lt;script src&gt;</code>, kjører med <em>sidens</em> opphav og kan lese alt på siden, også passordfeltet. SOP beskytter ikke mot skript du selv har valgt å laste inn. Det er dette <strong>Subresource Integrity</strong> (<code>integrity</code>-attributtet) hjelper mot: nettleseren nekter å kjøre fila hvis innholdet ikke har den oppgitte hashen. Se <a href="39-sammensatt-eksempel.html">uke 39</a>.</p>
+
+          <div class="pitfall">
+            <div class="pitfall__title">Fallgruve: feil i notatene og eksemplene</div>
+            <ul>
+              <li><code>var o["navn"] = 'pål'</code> er en syntaksfeil. <code>var</code> deklarerer variabler og kan ikke stå foran et medlem. Skriv <code>o["navn"] = 'pål'</code>.</li>
+              <li><code>catch (err)</code>: <code>err</code> er det som ble kastet, som regel et <code>Error</code>-objekt med <code>.message</code>, ikke en tekststreng.</li>
+              <li>En anonym <code>function (x) {…}</code> alene på en linje er en syntaksfeil. Den må tilordnes eller sendes som argument.</li>
+              <li><code>system.log(this)</code> skal være <code>console.log(this)</code>.</li>
+              <li>I <code>ajax-send.html</code> står <code>h.load = …</code> og <code>respons.text()</code>. Det skal være <code>h.onload</code> og <code>h.responseText</code>. Dessuten gjøres strengen <code>'false'</code> om til <code>true</code> når den tilordnes <code>withCredentials</code>, så alle «false»-variantene sender likevel med informasjonskapsler.</li>
+            </ul>
+          </div>
+        </article>
+
+        <section class="section">
+          <div class="section__label">Øvinger</div>
+          <div class="reslist">
+            <div class="res">
+              <span class="res__num">·</span>
+              <div><div class="res__title">Kjør eksemplene</div><div class="res__sub">Kjør <code>dyn_var.js</code>, <code>scope.js</code> og <code>diverse.js</code> med <code>node</code> og forklar utskriften linje for linje. Fjern <code>#!</code>-linja først hvis <code>node</code> klager.</div></div>
+            </div>
+            <div class="res">
+              <span class="res__num">·</span>
+              <div><div class="res__title">fetch mot eget CGI-skript</div><div class="res__sub">Server <code>fetch_demo_3.html</code> og <code>fetch-test.cgi</code> fra samme busybox <code>httpd</code> (endre basis-URL-en). Send én GET og én POST, og forklar hvorfor dataene havner i <code>QUERY_STRING</code> i det ene tilfellet og i kroppen i det andre.</div></div>
+            </div>
+            <div class="res">
+              <span class="res__num">·</span>
+              <div><div class="res__title">Fremprovoser en CORS-feil</div><div class="res__sub">Kjør siden på én port og CGI-skriptet på en annen. Se feilen i konsollen, og se i nettverksfanen at forespørselen likevel kom fram. Legg til <code>Access-Control-Allow-Origin</code> i skriptet og prøv igjen.</div></div>
+            </div>
+          </div>
+        </section>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="38-cgi-html-skjema.html"><small>forrige</small>Uke 38: CGI og HTML-skjema</a>
+          <a data-dir="next" href="39-sammensatt-eksempel.html"><small>neste</small>Uke 39: Sammensatt eksempel</a>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js?v=37"></script>
+  <script src="../../../assets/js/status.js?v=35"></script>
+  <script src="../../../assets/js/formler.js?v=35"></script>
+</body>
+</html>

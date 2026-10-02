@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>TSD3060 — Sikre webtjenester · H26</title>
-  <meta name="description" content="Utvikling av sikre webtjenester (TSD3060) — kapittelguider for uke 33-38: HTTP/REST, SQLite/injeksjon/autentisering, chroot/konteinere, Podman/Compose, HTML/XML/CSS og CGI.">
+  <meta name="description" content="Utvikling av sikre webtjenester (TSD3060) — kapittelguider for uke 33-40: HTTP/REST, SQLite/injeksjon/autentisering, chroot/konteinere, Podman/Compose, HTML/XML/CSS, CGI, JavaScript, et sammensatt system og innlogging med sesjoner.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
   <link rel="stylesheet" href="../../assets/css/main.css?v=35">
 </head>
-<body class="theme-tsd3060" data-updated="2026-09-18">
+<body class="theme-tsd3060" data-updated="2026-10-02">
   <div class="app-shell">
 
     <aside class="sidebar"></aside>
@@ -27,8 +27,8 @@
         <header class="page-header">
           <div class="page-header__eyebrow">TSD3060</div>
           <h1>Utvikling av sikre webtjenester</h1>
-          <p class="page-header__desc">Læreres egne forelesningsnotater, omskrevet til kapitler: HTTP-tjenere fra bunnen, SQL-injeksjon og autentisering, konteinere fra chroot og navnerom til Podman og Compose, og hvordan tjeneren leverer HTML, XML og CGI-svar.</p>
-          <span class="page-header__status" data-status="active"><i></i>6 kapitler · uke 33&#8211;38</span>
+          <p class="page-header__desc">Læreres egne forelesningsnotater, omskrevet til kapitler: HTTP-tjenere fra bunnen, SQL-injeksjon og autentisering, konteinere fra chroot og navnerom til Podman og Compose, hvordan tjeneren leverer HTML, XML og CGI-svar, og JavaScript-klienten som snakker med et API på tvers av opphav.</p>
+          <span class="page-header__status" data-status="active"><i></i>9 kapitler · uke 33&#8211;40</span>
         </header>
 
         <section class="section">
@@ -76,6 +76,27 @@
                 <div class="res__sub">Miljøvariabler, QUERY_STRING, GET og POST</div>
               </div>
             </div>
+            <div class="res">
+              <span class="res__num">JS</span>
+              <div>
+                <div class="res__title"><a href="guides/38-39-javascript.html">JavaScript og fetch</a></div>
+                <div class="res__sub">Hjemmelekse: DOM og hendelser, fetch og Promises, samme opphav og CORS</div>
+              </div>
+            </div>
+            <div class="res">
+              <span class="res__num">39</span>
+              <div>
+                <div class="res__title"><a href="guides/39-sammensatt-eksempel.html">Sammensatt eksempel</a></div>
+                <div class="res__sub">REST-API i shell, skjema → CGI → curl, fetch med CORS og SRI</div>
+              </div>
+            </div>
+            <div class="res">
+              <span class="res__num">40</span>
+              <div>
+                <div class="res__title"><a href="guides/40-innlogging-sesjoner.html">Innlogging og sesjoner</a></div>
+                <div class="res__sub">Saltet hash, sesjonskapsel, credentials: 'include', vurder autentiseringen</div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -115,7 +136,7 @@
 
         <section class="section">
           <div class="section__label">Kurssystem</div>
-          <p class="callout">Etter planen kommer JavaScript i uke 39 og repetisjon i uke 40. Uke 41 er det ingen undervisning. Kapitlene fylles på her etter hvert som notatene kommer i kurssystemet. Eksempelkoden er kopiert hit og lenket øverst på hver ukeside. De fullstendige eksamensoppgavene med sensorveiledninger og et eldre prosjekteksempel finnes kun i kurssystemet (eksamensoversikten her er en mønsteranalyse, ikke en full gjengivelse).</p>
+          <p class="callout">Undervisningen med nytt stoff er ferdig etter uke 40. Uke 41 er det ingen undervisning, uke 42&#8211;44 er det veiledning på forespørsel, og uke 45 er oppsummering. Eksamensdatoen er ikke kunngjort ennå. Eksempelkoden er kopiert hit og lenket øverst på hver ukeside. De fullstendige eksamensoppgavene med sensorveiledninger og et eldre prosjekteksempel finnes kun i kurssystemet (eksamensoversikten her er en mønsteranalyse, ikke en full gjengivelse).</p>
           <a class="btn" href="https://debbie.usn.no/tsd3060/" target="_blank" rel="noopener">
             Åpne kurssystem (debbie.usn.no)
           </a>
@@ -125,7 +146,7 @@
     </div>
   </div>
 
-  <script src="../../assets/js/main.js?v=36"></script>
+  <script src="../../assets/js/main.js?v=37"></script>
   <script src="../../assets/js/status.js?v=35"></script>
   <script src="../../assets/js/formler.js?v=35"></script>
 </body>
