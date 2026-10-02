@@ -1,0 +1,17 @@
+services:
+  web:
+    build: ./web
+    ports:
+    - 8080:80
+  db:
+    build: ./db
+    ports:
+    - 8090:80
+  app:
+    build: ./app
+    ports:
+    - 8070:80
+  db2:
+    build: ./db2
+    ports:
+    - 1234:80

@@ -1,0 +1,9 @@
+{
+  "name": "Web-app-eksempel (med støtte)",
+  "description": "Denne app skal demonstrere web-apps.",
+  "icons": [{
+    "src": "./ikon.png",
+    "sizes": "64x64",
+    "start_url": "."
+  }]
+}

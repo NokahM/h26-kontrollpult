@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Musealarm 2</title>
+    <script>
+
+      function musealarm(hendelse) {
+        alert('Du trykket musknapp nr.' +
+          hendelse.button);
+      }
+
+      function initialisering() {
+
+        // document.getElementById('musefelle').
+	document.querySelector('#musefelle').
+          addEventListener(
+            'mousedown', musealarm, false);
+      }
+
+      window.addEventListener(
+        'load', initialisering, false);
+
+    </script>
+  </head>
+
+  <body>
+    <p id="musefelle">Ostebit</p>
+  </body>
+</html>

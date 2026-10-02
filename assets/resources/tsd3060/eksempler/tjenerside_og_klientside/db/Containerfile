@@ -1,0 +1,6 @@
+FROM    alpine
+RUN     apk update; apk add sqlite jq
+COPY    db db.sh personer.db /
+EXPOSE  80
+WORKDIR /
+CMD ./db

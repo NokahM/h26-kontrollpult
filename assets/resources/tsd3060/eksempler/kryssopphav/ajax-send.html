@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> Opphav </title>
+    <script>
+
+      let URL = 'https://debbie.usn.no/da-nan3000/eksempler/kryssopphav/tjeneste.cgi';
+
+      function send(metode, tekst, cred) {
+
+          let h = new XMLHttpRequest();
+	  h.open(metode, URL);
+	  h.withCredentials = cred;
+          h.load = function() { alert( respons.text() ) }
+	  h.send(tekst);
+
+
+
+	// fetch(URL, { method:      metode,
+	// 		body:        tekst,
+	// 		credentials: cred
+        //             })
+	// .then( respons    => respons.text()     )
+	// .then( http_kropp => alert(http_kropp)  )
+      }
+
+    </script>
+  </head>
+  <body>
+  <h3>send( metode, kropp, rettighetsbevis) => fetch(URL,{method: metode, body: kropp, credentials: rettighetsbevis})</h3>
+    <ol>
+      <li> <a href="javascript: send('POST','','false')"  > send('POST','','false')  </a> <br>
+           <img src='./post-cors_1.png'>
+      </li>
+
+      <li> <a href="javascript: send('POST','','true')"  > send('POST','','true')  </a> <br>
+           <img src='./post-cors_1.png'>
+      </li>
+
+      <li> <a href="javascript: send('POST','orig','false')"  > send('POST','orig','false')  </a> <br>
+           <img src='./post-cors_2.png'>
+      </li>
+      <li> <a href="javascript: send('POST','orig','true')"      > send('POST','orig','true')      </a> <br>
+           <img src='./post-cors_3.png'>
+      </li>
+
+      <li> <a href="javascript: send('POST','orig+cred','false')" > send('POST','orig+cred','false') </a> <br>
+           <img src='./post-cors_4.png'>
+      </li>
+
+      <li> <a href="javascript: send('POST','orig+cred','true')" > send('POST','orig+cred','true') </a> <br>
+           <img src='./post-cors_4.png'>
+      </li>
+      <li> <a href="javascript: send('PUT', 'orig+cred','include')" > send('PUT', 'orig+cred','include') </a> <br>
+           <img src='./put-cors_1.png'>
+      </li>
+    </ol>
+
+  </body>
+</html>

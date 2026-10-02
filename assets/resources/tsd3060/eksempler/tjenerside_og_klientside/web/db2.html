@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Grensesnitt mot database-api</title>
+    <script src="db2.js"></script>
+  </head>
+  <body>
+
+    <input name='brukerid'  type='text' id='brukerid'  placeholder='brukernavn'>
+    <input name='passord'   type='text' id='passord'   placeholder='passord'   >
+    <input name='fornavn'   type='text' id='fornavn'   placeholder='fornavn'   >
+    <input name='etternavn' type='text' id='etternavn' placeholder='etternavn' >
+
+    <br/>
+    <button type="button" onclick='login()'>    Login    </button>
+    <button type="button" onclick='liste()'>    Liste    </button>
+    <button type="button" onclick='oppdater()'> Oppdater </button>
+    <button type="button" onclick='ny()'>       Ny       </button>
+    <button type="button" onclick='slett()'>    Slett    </button>
+
+    <p>
+      <b>Merk:</b>
+      Oppdatering av passord er ikke implementert i
+      oppdateringsfunksjonen
+    </p>
+  </body>
+</html>

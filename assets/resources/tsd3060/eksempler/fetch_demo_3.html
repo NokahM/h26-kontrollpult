@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script>
+
+        function sporre(event){
+            if (event.keyCode==13) {
+
+		// Lager et URL-objekt til bruk i fetch-metoden
+		let basis = 'https://debbie.usn.no/da-nan3000/eksempler/';
+		let url = new URL('fetch-test.cgi', basis);
+
+		// Lager referanser til elementer i html-dokumentet
+		let t1 =document.querySelector('#txt1').value;
+		let t2 =document.querySelector('#txt2').value;
+		let tbl=document.querySelector('#tabell');
+
+
+		if ( 'POST' == t1 )
+
+		    // Sender post-forespørsel
+		    fetch( url, { method: t1, body: t2 } )
+			.then( respons    => respons.text()            )
+        		.then( http_kropp => tbl.innerHTML+=http_kropp )
+
+		else {
+
+		    // Bygger "query-string"
+		    url.searchParams.set('txt1', t1);
+		    url.searchParams.set('txt2', t2);
+
+		    // sender GET-forespørsel
+        	    fetch(url)
+			.then( respons    => respons.text()            )
+        		.then( http_kropp => tbl.innerHTML+=http_kropp )
+		}
+            }
+	}
+
+</script>
+  </head>
+  <body>
+    <table id='tabell' border='0'>
+    <tr> <td> Tekstfelt 1 (txt1) </td><td> <input size='80' id='txt1' type=text onkeyup='sporre(event)'> </td></tr>
+    <tr> <td> Tekstfelt 2 (txt2) </td><td> <input size='80' id='txt2' type=text onkeyup='sporre(event)'> </td></tr>
+    </table>
+</body>
+</html>

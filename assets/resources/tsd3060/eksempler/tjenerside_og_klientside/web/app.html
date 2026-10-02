@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Grensesnitt mot database-api (m/Fetch)</title>
+  </head>
+  <body>
+
+    <form action='http://localhost:8070/cgi-bin/app.cgi' method='post'>
+
+      <input name='epost'     type='text' id='epost'     placeholder='e-post'    />
+      <input name='telefon'   type='text' id='telefon'   placeholder='telefon'   />
+      <input name='fornavn'   type='text' id='fornavn'   placeholder='fornavn'   />
+      <input name='etternavn' type='text' id='etternavn' placeholder='etternavn' />
+
+      <br/>
+      <input type='submit' name='handling' value='Liste'    />
+      <input type='submit' name='handling' value='Oppdater' />
+      <input type='submit' name='handling' value='Ny'       />
+      <input type='submit' name='handling' value='Slett'    />
+
+    </form>
+
+  </body>
+</html>

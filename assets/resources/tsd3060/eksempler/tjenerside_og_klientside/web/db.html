@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+      <head>
+	<meta charset="utf-8">
+	<title>Grensesnitt mot database-api (m/Fetch)</title>
+	<script src="db.js"
+		integrity="sha384-gchPot6akwYig1yf7GGq9O0VjEwe+Ef3btrnvmpjs/0AQW1ZUIF2lpDya7zULeC/">
+	</script>
+
+      </head>
+      <body>
+
+	<input name='epost'     type='text' id='epost'     placeholder='e-post'    />
+	<input name='telefon'   type='text' id='telefon'   placeholder='telefon'   />
+	<input name='fornavn'   type='text' id='fornavn'   placeholder='fornavn'   />
+	<input name='etternavn' type='text' id='etternavn' placeholder='etternavn' />
+
+	<br/>
+	<button type="button" onclick='liste()'>    Liste    </button>
+	<button type="button" onclick='oppdater()'> Oppdater </button>
+	<button type="button" onclick='ny()'>       Ny       </button>
+	<button type="button" onclick='slett()'>    Slett    </button>
+
+      </body>
+</html>

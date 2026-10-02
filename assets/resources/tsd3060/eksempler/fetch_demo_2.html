@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head><meta charset="utf-8">
+    <script>
+
+
+        // function hentFil(){
+        // 	fetch('fetch-test.txt')
+        // 		.then( function (respons) { return respons.text() }           )
+        // 		.then( function (kropp)   { document.querySelector('#beholder')
+        // 		.innerHTML+=kropp } )
+        // }
+
+        function hentFil(){
+		fetch('fetch-test.txt')
+			.then( respons    => respons.text()                      )
+        		.then( http_kropp => document.querySelector('#beholder')
+			.innerHTML+=http_kropp )
+	     }
+
+    </script>
+  </head>
+
+  <body>
+    <button  onclick = 'hentFil()'  >+</button>
+    <div          id = 'beholder' > </div>
+  </body>
+</html>

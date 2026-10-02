@@ -1,0 +1,5 @@
+FROM alpine
+RUN  apk update; apk add curl busybox-extras
+EXPOSE  80
+COPY    *.cgi /var/www/cgi-bin
+CMD httpd -f -vv -h /var/www

@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script>
+
+      function sporre(event){
+        if (event.keyCode==13) {
+	  var f=new XMLHttpRequest();
+	  var s=document.getElementById("s").value;
+	  f.open("GET","sql-klient3.cgi?"+s, true);
+	  f.onload=function(){
+	    document.getElementById("tabell").innerHTML=f.responseText;
+	  };
+	  f.send(null);
+      }
+  }
+    </script>
+  </head>
+
+  <body>
+
+    <input
+       size=80
+       id=s
+       type=text
+       onkeyup=sporre(event)
+       >
+    <div id="tabell"></div>
+
+  </body>
+</html>

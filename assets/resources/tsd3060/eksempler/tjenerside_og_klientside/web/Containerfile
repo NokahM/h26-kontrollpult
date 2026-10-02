@@ -1,0 +1,5 @@
+FROM    busybox
+COPY    *.html *.js /var/www/
+EXPOSE  80
+WORKDIR /var/www
+CMD     httpd -f -vv

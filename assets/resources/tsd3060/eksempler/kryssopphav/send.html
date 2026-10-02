@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> Opphav </title>
+    <script>
+
+      let URL   = 'https://debbie.usn.no/da-nan3000/eksempler/kryssopphav/tjeneste.cgi';
+
+      function send(metode, tekst, cred) {
+	fetch(URL, { method:      metode,
+		     body:        tekst,
+		     credentials: cred
+		    })
+	.then( respons    => respons.text()     )
+	.then( http_kropp => alert(http_kropp)  )
+      }
+
+    </script>
+  </head>
+  <body>
+  <h3>send( metode, kropp, rettighetsbevis) => fetch(URL,{method: metode, body: kropp, credentials: rettighetsbevis})</h3>
+    <ol>
+      <li> <a href="javascript: send('POST','','same-origin')"  > send('POST','','same-origin')  </a> <br>
+           <img src='./post-cors_1.png'>
+      </li>
+      <li> <a href="javascript: send('POST','orig','same-origin')"  > send('POST','orig','same-origin')  </a> <br>
+           <img src='./post-cors_2.png'>
+      </li>
+      <li> <a href="javascript: send('POST','orig','include')"      > send('POST','orig','include')      </a> <br>
+           <img src='./post-cors_3.png'>
+      </li>
+      <li> <a href="javascript: send('POST','orig+cred','include')" > send('POST','orig+cred','include') </a> <br>
+           <img src='./post-cors_4.png'>
+      </li>
+      <li> <a href="javascript: send('PUT', 'orig+cred','include')" > send('PUT', 'orig+cred','include') </a> <br>
+           <img src='./put-cors_1.png'>
+      </li>
+    </ol>
+
+  </body>
+</html>

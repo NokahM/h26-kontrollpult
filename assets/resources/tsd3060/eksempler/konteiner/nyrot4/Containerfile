@@ -1,0 +1,5 @@
+FROM alpine
+RUN  apk add busybox-extras curl
+RUN  echo Det virket > index.html
+EXPOSE 80
+ENTRYPOINT httpd -f

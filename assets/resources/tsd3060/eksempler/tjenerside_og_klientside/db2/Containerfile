@@ -1,0 +1,21 @@
+FROM alpine
+RUN apk add sqlite jq uuidgen
+
+RUN echo "CREATE TABLE Person (         \
+  brukerid    VARCHAR(200) PRIMARY KEY, \
+  passordhash VARCHAR(107),             \
+  sesjonsid   VARCHAR(36),              \
+  fornavn     VARCHAR(1000),            \
+  etternavn   VARCHAR(100))" | sqlite3 /person.db
+
+RUN HASH=$( mkpasswd -S 1234567812345678 123 ); \
+   echo "INSERT INTO Person (brukerid,passordhash,fornavn, etternavn) VALUES  \
+   ( 'kari', '$HASH', 'Kari', NULL       ), \
+   ( 'ola' , '$HASH', 'Ola' , 'Nordmann' ), \
+   ( 'tux' , '$HASH' , NULL, NULL       )"  \
+   | sqlite3 /person.db
+
+RUN chmod a+w /person.db
+COPY api rest.sh /
+EXPOSE 80
+CMD /api 80
