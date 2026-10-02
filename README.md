@@ -107,7 +107,11 @@ ukeside (kodelenkene øverst). I motsetning til annet kursmateriell er de
 med i git og publiseres (brukeren regner koden som åpen kildekode), unntatt
 PDF-er. Kompilerte programmer, tar-baller og ferdige rotfilsystemer er med
 vilje utelatt. Hent på nytt ved å speile de to
-katalogene fra debbie (Basic Auth, kataloglisting er på).
+katalogene fra debbie (Basic Auth, kataloglisting er på). To unntak ved
+speilingen: debbie kjører `.cgi`-filer i stedet for å levere dem (403), så
+de er kopiert ordrett fra `<pre>`-blokkene i notatene. Og kataloger med egen
+`index.html` (for eksempel `web-app/` og `tjenerside_og_klientside/web/`)
+viser ingen katalogliste, så filene der må hentes enkeltvis.
 
 Praktiske fallgruver og feil i kursets eksempler markeres med
 `<div class="pitfall">` (tittel i `.pitfall__title`).
