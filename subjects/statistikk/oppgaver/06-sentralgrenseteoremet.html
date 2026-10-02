@@ -160,11 +160,12 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>Sjekk betingelsen først</h4>
+                <p><strong>Steg 1 — Fordelingen.</strong> La \(Y\) være antall av de 1000 bilene som kjører for fort. Hver bil kjører for fort eller ikke, med samme sannsynlighet \(p=0.76\), uavhengig av de andre. Da er \(Y\sim\mathrm{Bin}(1000,\,0.76)\).</p>
+                <p><strong>Steg 2 — Kan vi tilnærme med normalfordelingen?</strong> Sjekk betingelsen fra formelarket:</p>
                 <p>\[ np(1-p)=1000\cdot 0.76\cdot 0.24=182.4\ \ge 5 \quad\checkmark \]</p>
-                <p>Så \(Y\) er tilnærmet normalfordelt med</p>
-                <p>\[ \mu=np=760,\qquad \sigma=\sqrt{182.4}=13.51 \]</p>
-                <h4>Med heltallskorreksjon</h4>
+                <p><strong>Steg 3 — Parametrene.</strong> Normalfordelingen som erstatter den binomiske, har samme forventning og standardavvik:</p>
+                <p>\[ \mu=np=1000\cdot 0.76=760,\qquad \sigma=\sqrt{np(1-p)}=\sqrt{182.4}=13.51 \]</p>
+                <p><strong>Steg 4 — Heltallskorreksjon og standardisering.</strong> «Minst 800» er \(Y\ge 800\). Tabellen gir bare \(P(Z\le z)\), så vi bruker komplementet: \(P(Y\ge 800)=1-P(Y\le 799)\). \(Y\) er en heltallsvariabel, så grensen flyttes en halv enhet, til 799.5:</p>
                 <!-- tikz:sg-tunnel --><svg class='tikz' role='img' style='width:28.6em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-70.007891 -70.007915 243.153538 83.600673'>
 <defs>
 <path stroke='none' id='sg-tunnel-g0-21' d='M6.204732-2.932005C6.28543-2.96787 6.38406-3.021669 6.38406-3.138232S6.321295-3.29066 6.222665-3.335492L1.147696-5.783313C1.022167-5.846077 .977335-5.846077 .959402-5.846077C.860772-5.846077 .771108-5.76538 .771108-5.648817S.869738-5.478456 .950436-5.44259L5.747447-3.147198L.986301-.851806C.842839-.780075 .771108-.753176 .771108-.627646C.771108-.555915 .824907-.439352 .968369-.439352C.977335-.439352 1.022167-.439352 1.129763-.493151L6.204732-2.932005ZM6.052304 1.380822C6.204732 1.380822 6.38406 1.380822 6.38406 1.192528C6.38406 .995268 6.1868 .995268 6.052304 .995268H1.102864C.968369 .995268 .771108 .995268 .771108 1.192528C.771108 1.380822 .950436 1.380822 1.102864 1.380822H6.052304Z'/>
@@ -352,12 +353,12 @@
 </g>
 </g>
 </svg><!-- /tikz:sg-tunnel -->
-                <p>«Minst 800» er søylene fra 800 og oppover, og søyle 800 begynner på 799.5. Halen er så tynn at den knapt synes. Svaret er da også lite.</p>
-                <p>«Minst 800» er \(Y\ge 800\), altså \(1-P(Y\le 799)\), og grensen flyttes til 799.5:</p>
-                <p>\[ P(Y\ge 800)\approx 1-G\!\left(\frac{799.5-760}{13.51}\right)=1-G(2.92)=0.0017 \]</p>
-                <h4>Eksakt</h4>
+                <p>«Minst 800» er søylene fra 800 og oppover, og søyle 800 begynner på 799.5. Halen er så tynn at den knapt synes, og svaret blir da også lite.</p>
+                <p>\[ P(Y\ge 800)\approx 1-G\!\left(\frac{799.5-760}{13.51}\right)=1-G(2.92)=1-0.9982=0.0018 \]</p>
+                <p><strong>Eksakt beregning.</strong> Med den binomiske fordelingen direkte (på kalkulator, siden tabellen ikke dekker \(n=1000\)):</p>
                 <p>\[ P(Y\ge 800)=\sum_{y=800}^{1000}\binom{1000}{y}0.76^y\,0.24^{1000-y}=0.00145 \]</p>
-                <div class="answer"><b>Tilnærmet 0.0017 mot eksakt 0.00145.</b> Tilnærmingen er god i absolutt forstand, men relativt ganske grov langt ute i halen — et poeng verdt å nevne i besvarelsen.</div>
+                <p><strong>Steg 5 — Sammenlikn.</strong> Tilnærmingen gir 0.0018 og den eksakte verdien er 0.00145. Begge sier at det er svært usannsynlig at minst 800 av 1000 kjører for fort.</p>
+                <div class="answer"><b>Tilnærmet 0.0018 mot eksakt 0.00145.</b> Tilnærmingen er god i absolutt forstand, men relativt ganske grov langt ute i halen. Det er et poeng verdt å nevne i besvarelsen.</div>
               </div>
             </details>
           </article>
@@ -375,6 +376,12 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
+                <p><strong>Steg 1 — Fordelingen.</strong> La \(X\) være antall kron i 1000 kast. Kastene er uavhengige med \(p=0.5\), så \(X\sim\mathrm{Bin}(1000,\,0.5)\).</p>
+                <p><strong>Steg 2 — Kan vi tilnærme?</strong></p>
+                <p>\[ np(1-p)=1000\cdot 0.5\cdot 0.5=250\ \ge 5 \quad\checkmark \]</p>
+                <p><strong>Steg 3 — Parametrene.</strong></p>
+                <p>\[ \mu=np=500,\qquad \sigma=\sqrt{250}=15.81 \]</p>
+                <p><strong>Steg 4 — Heltallskorreksjon og standardisering.</strong> «476 eller færre» er \(X\le 476\). Søylen for 476 går opp til 476.5, så vi tar med arealet dit:</p>
                 <!-- tikz:sg-mynt --><svg class='tikz' role='img' style='width:28.1em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-67.402366 -70.007925 239.031021 83.614086'>
 <defs>
 <path stroke='none' id='sg-mynt-g0-20' d='M6.204732-5.44259C6.28543-5.478456 6.38406-5.532254 6.38406-5.648817S6.294396-5.846077 6.195766-5.846077C6.177833-5.846077 6.133001-5.846077 6.025405-5.792279L.950436-3.353425C.824907-3.29066 .771108-3.245828 .771108-3.138232C.771108-3.021669 .869738-2.96787 .950436-2.932005L6.007472-.502117C6.133001-.439352 6.168867-.439352 6.1868-.439352C6.330262-.439352 6.38406-.564882 6.38406-.627646C6.38406-.744209 6.312329-.780075 6.222665-.824907L1.407721-3.147198L6.204732-5.44259ZM6.052304 1.380822C6.204732 1.380822 6.38406 1.380822 6.38406 1.192528C6.38406 .995268 6.1868 .995268 6.052304 .995268H1.102864C.968369 .995268 .771108 .995268 .771108 1.192528C.771108 1.380822 .950436 1.380822 1.102864 1.380822H6.052304Z'/>
@@ -577,9 +584,9 @@
 </g>
 </g>
 </svg><!-- /tikz:sg-mynt -->
-                <p>\(X\sim\mathrm{Bin}(1000,\,0.5)\) med \(\sigma^2=np(1-p)=250\ge 5\), altså kan vi tilnærme med \(N(500,\,15.8)\).</p>
-                <p>\[ P(X\le 476)\approx G\!\left(\frac{476+0.5-500}{15.8}\right)=G(-1.49)=0.068 \]</p>
-                <div class="answer"><b>Ca. 6.8 %.</b> Dette er samtidig den ensidige p-verdien for påstanden om at mynten er rettferdig — så et resultat som 476/1000 er ikke i seg selv mistenkelig.</div>
+                <p>\[ P(X\le 476)\approx G\!\left(\frac{476.5-500}{15.81}\right)=G(-1.49)=0.068 \]</p>
+                <p><strong>Steg 5 — Svar.</strong> Med en rettferdig mynt er det omtrent 6.8 % sjanse for å få 476 eller færre kron i 1000 kast.</p>
+                <div class="answer"><b>Ca. 6.8 %.</b> Dette er samtidig den ensidige p-verdien for påstanden om at mynten er rettferdig. Et resultat som 476 av 1000 er altså ikke i seg selv mistenkelig.</div>
               </div>
             </details>
           </article>
@@ -596,9 +603,13 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>La \(Y=X_1+\dots+X_{200}\). Sentralgrenseteoremet gir</p>
-                <p>\[ E(Y)=200\cdot\frac72=700,\qquad \operatorname{Var}(Y)=200\cdot\frac{35}{12}=\frac{1750}{3} \ \Rightarrow\ \sigma_Y=\sqrt{\tfrac{1750}{3}}\approx 24.15 \]</p>
-                <p>\(Y\) er en heltallsvariabel, så vi bruker heltallskorreksjon:</p>
+                <p><strong>Steg 1 — Én observasjon.</strong> La \(X_i\) være antall øyne på terning nummer \(i\). Fra a): \(\mu=E(X_i)=\tfrac72=3.5\) og \(\sigma^2=\operatorname{Var}(X_i)=\tfrac{35}{12}\).</p>
+                <p><strong>Steg 2 — Begrunn tilnærmingen.</strong> Summen \(Y=X_1+\dots+X_{200}\) er en sum av 200 uavhengige og identisk fordelte variable. Siden \(n=200\ge 30\), gir sentralgrenseteoremet at \(Y\) er tilnærmet normalfordelt.</p>
+                <p><strong>Steg 3 — Parametrene for summen.</strong> Forventningene adderes, og fordi terningene er uavhengige, adderes også variansene:</p>
+                <p>\[ E(Y)=n\mu=200\cdot\frac72=700,\qquad \operatorname{Var}(Y)=n\sigma^2=200\cdot\frac{35}{12}=\frac{1750}{3}=583.3 \]</p>
+                <p>\[ \sigma_Y=\sqrt{583.3}=24.15 \]</p>
+                <p>Standardavviket er \(\sqrt n\,\sigma\), ikke \(n\sigma\).</p>
+                <p><strong>Steg 4 — Heltallskorreksjon og standardisering.</strong> Summen av øyne er et heltall, så «670 eller lavere» får grensen 670.5:</p>
                 <!-- tikz:sg-terninger --><svg class='tikz' role='img' style='width:28.1em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-66.38777 -70.007865 239.044765 83.619523'>
 <defs>
 <path stroke='none' id='sg-terninger-g0-20' d='M6.204732-5.44259C6.28543-5.478456 6.38406-5.532254 6.38406-5.648817S6.294396-5.846077 6.195766-5.846077C6.177833-5.846077 6.133001-5.846077 6.025405-5.792279L.950436-3.353425C.824907-3.29066 .771108-3.245828 .771108-3.138232C.771108-3.021669 .869738-2.96787 .950436-2.932005L6.007472-.502117C6.133001-.439352 6.168867-.439352 6.1868-.439352C6.330262-.439352 6.38406-.564882 6.38406-.627646C6.38406-.744209 6.312329-.780075 6.222665-.824907L1.407721-3.147198L6.204732-5.44259ZM6.052304 1.380822C6.204732 1.380822 6.38406 1.380822 6.38406 1.192528C6.38406 .995268 6.1868 .995268 6.052304 .995268H1.102864C.968369 .995268 .771108 .995268 .771108 1.192528C.771108 1.380822 .950436 1.380822 1.102864 1.380822H6.052304Z'/>
@@ -888,7 +899,8 @@
 </g>
 </g>
 </svg><!-- /tikz:sg-terninger -->
-                <p>\[ P(Y\le 670)\approx G\!\left(\frac{670+0.5-700}{24.15}\right)=G(-1.22)\approx 0.11 \]</p>
+                <p>\[ P(Y\le 670)\approx G\!\left(\frac{670.5-700}{24.15}\right)=G(-1.22)=0.11 \]</p>
+                <p><strong>Steg 5 — Svar.</strong> Det er omtrent 11 % sjanse for at summen av 200 terninger blir 670 eller lavere.</p>
                 <div class="answer"><b>Ca. 11 %.</b></div>
               </div>
             </details>
@@ -906,6 +918,12 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
+                <p><strong>Steg 1 — Fordelingen.</strong> Antall lynnedslag per km² per døgn er \(\mathrm{Poisson}(5)\). Poissonparameteren skalerer med arealet, så på 10 km² er antallet \(X_{10}\sim\mathrm{Poisson}(\lambda t)\) med \(\lambda t=5\cdot 10=50\).</p>
+                <p><strong>Steg 2 — Kan vi tilnærme?</strong> Betingelsen fra formelarket er \(\lambda t\ge 10\):</p>
+                <p>\[ \lambda t=50\ \ge 10 \quad\checkmark \]</p>
+                <p><strong>Steg 3 — Parametrene.</strong> For poissonfordelingen er både forventning og varians lik \(\lambda t\):</p>
+                <p>\[ \mu=50,\qquad \sigma=\sqrt{50}=7.07 \]</p>
+                <p><strong>Steg 4 — Heltallskorreksjon og standardisering.</strong> «40 eller færre» er \(X_{10}\le 40\), med grensen 40.5:</p>
                 <!-- tikz:sg-poisson --><svg class='tikz' role='img' style='width:28.1em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-70.007891 -70.007905 239.030846 83.610762'>
 <defs>
 <path stroke='none' id='sg-poisson-g0-20' d='M6.204732-5.44259C6.28543-5.478456 6.38406-5.532254 6.38406-5.648817S6.294396-5.846077 6.195766-5.846077C6.177833-5.846077 6.133001-5.846077 6.025405-5.792279L.950436-3.353425C.824907-3.29066 .771108-3.245828 .771108-3.138232C.771108-3.021669 .869738-2.96787 .950436-2.932005L6.007472-.502117C6.133001-.439352 6.168867-.439352 6.1868-.439352C6.330262-.439352 6.38406-.564882 6.38406-.627646C6.38406-.744209 6.312329-.780075 6.222665-.824907L1.407721-3.147198L6.204732-5.44259ZM6.052304 1.380822C6.204732 1.380822 6.38406 1.380822 6.38406 1.192528C6.38406 .995268 6.1868 .995268 6.052304 .995268H1.102864C.968369 .995268 .771108 .995268 .771108 1.192528C.771108 1.380822 .950436 1.380822 1.102864 1.380822H6.052304Z'/>
@@ -1023,8 +1041,8 @@
 </g>
 </g>
 </svg><!-- /tikz:sg-poisson -->
-                <p>Poissonparameteren skalerer med areal: \(X_{10}\sim\mathrm{Poisson}(50)\). Siden \(\lambda t=50\ge 10\) tilnærmer vi med \(N(50,\sqrt{50})\), og heltallskorreksjon gjelder:</p>
-                <p>\[ P(X_{10}\le 40)\approx G\!\left(\frac{40+0.5-50}{\sqrt{50}}\right)=G(-1.34)\approx 0.09 \]</p>
+                <p>\[ P(X_{10}\le 40)\approx G\!\left(\frac{40.5-50}{7.07}\right)=G(-1.34)=0.09 \]</p>
+                <p><strong>Steg 5 — Svar.</strong> Det er omtrent 9 % sjanse for 40 eller færre lynnedslag på ti kvadratkilometer i løpet av et døgn.</p>
                 <div class="answer"><b>Ca. 9 %</b> (eksakt poisson gir 0.086). Se også <a href="03-diskrete-fordelinger.html#okt2025-poisson">poissonfordeling</a>.</div>
               </div>
             </details>
@@ -1058,18 +1076,27 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>d)</h4>
-                <p>Fordelingen er ukjent — men det spiller ingen rolle, for \(n=99\ge 30\). Sentralgrenseteoremet gir</p>
-                <p>\[ \mu_{\bar T}=8.0,\qquad \sigma_{\bar T}=\frac{2.0}{\sqrt{99}}=0.201 \]</p>
-                <p>\[ P(\bar T&lt;8.2)=G\!\left(\frac{8.2-8.0}{0.201}\right)=G(0.995)\approx 0.84 \]</p>
-                <h4>e) Den vanskeligste varianten</h4>
-                <p>Summen er tilnærmet normalfordelt med \(\mu_S=m\mu\) og \(\sigma_S=\sqrt m\,\sigma\). Kravet kan skrives om:</p>
-                <p>\[ P\bigl(0.99\mu_S&lt;S&lt;1.01\mu_S\bigr)&gt;0.9 \]</p>
-                <p>Normalfordelingen er symmetrisk om \(\mu_S\), så dette er ekvivalent med</p>
-                <p>\[ 2P(S&lt;1.01\mu_S)-1&gt;0.9 \iff P(S&lt;1.01\mu_S)&gt;0.95 \]</p>
-                <p>\[ G\!\left(\frac{0.01\,m\mu}{\sqrt m\,\sigma}\right)&gt;0.95 \iff \frac{0.01\sqrt m\,\mu}{\sigma}&gt;z_{0.05}=1.645 \]</p>
-                <p>\[ m&gt;\left(\frac{\sigma}{0.01\mu}\cdot z_{0.05}\right)^2=\left(\frac{2.0}{0.01\cdot 8.0}\cdot 1.645\right)^2=1691.3 \]</p>
-                <div class="answer"><b>d) 0.84 · e) \(m\ge 1692\) målinger.</b> Trikset er å gjøre om det tosidige kravet til ett ensidig, og så huske at \(\mu_S/\sigma_S\) vokser som \(\sqrt m\).</div>
+                <h4>d) Gjennomsnittlig ventetid</h4>
+                <p><strong>Steg 1 — Én observasjon.</strong> Ventetiden \(T\) har ukjent fordeling, men \(\mu=8.0\) s og \(\sigma=2.0\) s.</p>
+                <p><strong>Steg 2 — Begrunn tilnærmingen.</strong> 100 kopper gir 99 ventetider (mellomrommene mellom koppene). De er uavhengige og identisk fordelte, og \(n=99\ge 30\). Sentralgrenseteoremet gir da at \(\bar T\) er tilnærmet normalfordelt, selv om vi ikke kjenner fordelingen til \(T\).</p>
+                <p><strong>Steg 3 — Parametrene for gjennomsnittet.</strong></p>
+                <p>\[ \mu_{\bar T}=\mu=8.0,\qquad \sigma_{\bar T}=\frac{\sigma}{\sqrt n}=\frac{2.0}{\sqrt{99}}=\frac{2.0}{9.95}=0.201 \]</p>
+                <p><strong>Steg 4 — Standardiser.</strong> Ventetid er kontinuerlig, så det trengs ingen heltallskorreksjon:</p>
+                <p>\[ P(\bar T&lt;8.2)=G\!\left(\frac{8.2-8.0}{0.201}\right)=G(0.995)\approx G(1.00)=0.84 \]</p>
+                <p><strong>Steg 5 — Svar.</strong> Det er 84 % sannsynlighet for at gjennomsnittlig ventetid er under 8.2 sekunder.</p>
+                <h4>e) Hvor mange målinger?</h4>
+                <p><strong>1) Fordelingen til summen.</strong> Med \(m\) uavhengige ventetider er summen \(S\) tilnærmet normalfordelt (for stor \(m\)) med</p>
+                <p>\[ \mu_S=m\mu=8m,\qquad \sigma_S=\sqrt m\,\sigma=2\sqrt m \]</p>
+                <p><strong>2) Skriv om kravet.</strong> «Relativt avvik under 1 %» betyr at \(S\) ligger innenfor 1 % av \(\mu_S\) på hver side:</p>
+                <p>\[ \frac{|S-\mu_S|}{\mu_S}&lt;0.01 \iff 0.99\mu_S&lt;S&lt;1.01\mu_S \]</p>
+                <p><strong>3) Gjør det tosidige kravet ensidig.</strong> Normalfordelingen er symmetrisk om \(\mu_S\). Hvis sannsynligheten i midten skal være 0.9, er det 0.05 igjen i hver hale. Det er det samme som at sannsynligheten under den øvre grensen er minst 0.95:</p>
+                <p>\[ P(0.99\mu_S&lt;S&lt;1.01\mu_S)&gt;0.9 \iff P(S&lt;1.01\mu_S)&gt;0.95 \]</p>
+                <p><strong>4) Standardiser.</strong> Avstanden fra \(\mu_S\) til den øvre grensen er \(0.01\mu_S=0.01\cdot 8m=0.08m\):</p>
+                <p>\[ G\!\left(\frac{0.08m}{2\sqrt m}\right)&gt;0.95 \iff \frac{0.08m}{2\sqrt m}=0.04\sqrt m&gt;z_{0.05}=1.645 \]</p>
+                <p><strong>5) Løs for \(m\).</strong></p>
+                <p>\[ \sqrt m&gt;\frac{1.645}{0.04}=41.13 \quad\Rightarrow\quad m&gt;41.13^2=1691.3 \]</p>
+                <p>Rund opp: minst 1692 målinger.</p>
+                <div class="answer"><b>d) 0.84 · e) \(m\ge 1692\) målinger.</b> Trikset er å gjøre det tosidige kravet om til ett ensidig, og huske at \(\mu_S/\sigma_S\) vokser som \(\sqrt m\).</div>
               </div>
             </details>
           </article>
@@ -1086,15 +1113,17 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>Alle tre forutsetningene i sentralgrenseteoremet er nevnt eksplisitt i oppgaveteksten, og det er nettopp det sensor vil se at du bruker:</p>
+                <p><strong>Steg 1 — Én observasjon.</strong> Hver støymåling har \(\mu=40\) dB og \(\sigma=10\) dB. Fordelingen er ikke oppgitt.</p>
+                <p><strong>Steg 2 — Begrunnelse.</strong> Oppgaven sier «begrunn svaret». Sensor vil se at du sjekker forutsetningene i sentralgrenseteoremet, og alle tre er oppfylt:</p>
                 <ul>
-                  <li>Målingene er <strong>uavhengige</strong>.</li>
-                  <li>De er <strong>identisk fordelte</strong> med endelig \(\mu\) og \(\sigma\).</li>
-                  <li>\(n=35\ge 30\).</li>
+                <li>Målingene er <strong>uavhengige</strong>.</li>
+                <li>De er <strong>identisk fordelte</strong> med endelig \(\mu\) og \(\sigma\).</li>
+                <li>\(n=35\ge 30\).</li>
                 </ul>
-                <p>Derfor er \(\bar X\) tilnærmet normalfordelt, uansett hvilken fordeling de enkelte målingene har:</p>
-                <p>\[ \mu_{\bar X}=\mu=40\ \text{dB},\qquad \sigma_{\bar X}=\frac{\sigma}{\sqrt n}=\frac{10}{\sqrt{35}}\approx 1.69\ \text{dB} \]</p>
-                <div class="answer"><b>\(\bar X\) tilnærmet \(N(40,\,1.69)\).</b> Legg merke til at spredningen krymper fra 10 til 1.69 — med 35 målinger blir estimatet nesten seks ganger så presist.</div>
+                <p>Derfor er \(\bar X\) tilnærmet normalfordelt, uansett hvilken fordeling de enkelte målingene har.</p>
+                <p><strong>Steg 3 — Parametrene for gjennomsnittet.</strong></p>
+                <p>\[ \mu_{\bar X}=\mu=40\ \text{dB},\qquad \sigma_{\bar X}=\frac{\sigma}{\sqrt n}=\frac{10}{\sqrt{35}}=\frac{10}{5.916}=1.69\ \text{dB} \]</p>
+                <div class="answer"><b>\(\bar X\) er tilnærmet \(N(40,\,1.69)\).</b> Legg merke til at spredningen krymper fra 10 til 1.69. Med 35 målinger blir estimatet nesten seks ganger så presist som én enkelt måling.</div>
               </div>
             </details>
           </article>
@@ -1116,15 +1145,27 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>b)</h4>
-                <p>La \(Y\) være antall av de 81 som får over 60 %. Da er \(Y\sim\mathrm{Bin}(81,\,0.4404)\):</p>
-                <p>\[ P(Y\ge 30)=1-\sum_{y=0}^{29}\binom{81}{y}0.4404^y\,0.5596^{81-y}\approx 0.917 \]</p>
-                <p>Alternativt med normaltilnærming, siden \(np(1-p)=20.0\ge 5\): \(\mu=35.67\), \(\sigma=4.47\), og med heltallskorreksjon \(1-G\bigl(\tfrac{29.5-35.67}{4.47}\bigr)=1-G(-1.38)\approx 0.916\).</p>
-                <h4>c)</h4>
-                <p>Siden de enkelte \(X_i\) er normalfordelte, er \(\bar X\) <em>eksakt</em> normalfordelt:</p>
-                <p>\[ \sigma_{\bar X}=\frac{14.0}{\sqrt{81}}=\frac{14.0}{9}=1.556 \]</p>
-                <p>\[ P(\bar X&gt;60)=1-G\!\left(\frac{60-57.9}{1.556}\right)=1-G(1.35)\approx 0.089 \]</p>
-                <div class="answer"><b>b) 0.92 · c) 0.089.</b> At <em>minst 30 av 81</em> er over 60 er nesten sikkert; at <em>snittet</em> er over 60 er ganske usannsynlig.</div>
+                <h4>b) Minst 30 av 81 over 60 %</h4>
+                <p><strong>Steg 1 — Fordelingen.</strong> La \(Y\) være antall av de 81 studentene som får over 60 %. Hver student passerer grensen med sannsynlighet \(p=P(X&gt;60)=0.440\) fra a), uavhengig av de andre. Da er \(Y\sim\mathrm{Bin}(81,\,0.440)\).</p>
+                <p><strong>Eksakt.</strong> «Minst 30» er komplementet til «29 eller færre»:</p>
+                <p>\[ P(Y\ge 30)=1-P(Y\le 29)=1-\sum_{y=0}^{29}\binom{81}{y}0.440^y\,0.560^{81-y}\approx 0.917 \]</p>
+                <p>Tabellen dekker ikke \(n=81\), så denne summen regnes på kalkulator. Uten kalkulator bruker du normaltilnærmingen.</p>
+                <p><strong>Steg 2 — Normaltilnærming.</strong> Betingelsen:</p>
+                <p>\[ np(1-p)=81\cdot 0.440\cdot 0.560=20.0\ \ge 5 \quad\checkmark \]</p>
+                <p><strong>Steg 3 — Parametrene.</strong></p>
+                <p>\[ \mu=np=81\cdot 0.440=35.67,\qquad \sigma=\sqrt{20.0}=4.47 \]</p>
+                <p><strong>Steg 4 — Heltallskorreksjon.</strong> \(P(Y\ge 30)=1-P(Y\le 29)\), med grensen 29.5:</p>
+                <p>\[ P(Y\ge 30)\approx 1-G\!\left(\frac{29.5-35.67}{4.47}\right)=1-G(-1.38)=1-0.0838=0.916 \]</p>
+                <p><strong>Steg 5 — Svar.</strong> Det er omtrent 92 % sannsynlighet for at minst 30 av de 81 får over 60 % riktig.</p>
+                <h4>c) Gjennomsnittet over 60 %</h4>
+                <p><strong>Steg 1 — Én observasjon.</strong> \(X_i\sim N(57.9,\,14.0)\).</p>
+                <p><strong>Steg 2 — Begrunnelse.</strong> De enkelte resultatene er normalfordelte og uavhengige, så \(\bar X\) er <em>eksakt</em> normalfordelt. Vi trenger ikke sentralgrenseteoremet her.</p>
+                <p><strong>Steg 3 — Parametrene for gjennomsnittet.</strong></p>
+                <p>\[ \mu_{\bar X}=57.9,\qquad \sigma_{\bar X}=\frac{14.0}{\sqrt{81}}=\frac{14.0}{9}=1.556 \]</p>
+                <p><strong>Steg 4 — Standardiser.</strong></p>
+                <p>\[ P(\bar X&gt;60)=1-G\!\left(\frac{60-57.9}{1.556}\right)=1-G(1.35)=1-0.9115=0.089 \]</p>
+                <p><strong>Steg 5 — Svar.</strong> Det er bare 8.9 % sannsynlighet for at gjennomsnittet av de 81 studentene er over 60 %.</p>
+                <div class="answer"><b>b) 0.92 · c) 0.089.</b> At <em>minst 30 av 81</em> er over 60 er nesten sikkert. At <em>snittet</em> er over 60 er ganske usannsynlig.</div>
               </div>
             </details>
           </article>
@@ -1141,11 +1182,16 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>Her er \(n=9&lt;30\), men det gjør ingenting: de enkelte vektene er allerede normalfordelte, så gjennomsnittet er eksakt normalfordelt.</p>
-                <p>\[ \bar X\sim N\!\left(1.78,\ \frac{0.3}{\sqrt 9}\right)=N(1.78,\,0.10) \]</p>
-                <p>Grensene ligger symmetrisk om 1.78 (\(\pm 0.20\)), altså \(z=2.00\):</p>
-                <p>\[ P(1.58&lt;\bar X&lt;1.98)=2G(2.00)-1=2\cdot 0.9772-1=0.954 \]</p>
-                <div class="answer"><b>Ca. 95.4 %</b> — det klassiske «to standardavvik»-intervallet.</div>
+                <p><strong>Steg 1 — Én observasjon.</strong> Hver kyllingvekt er \(X_i\sim N(1.78,\,0.3)\) kg.</p>
+                <p><strong>Steg 2 — Begrunnelse.</strong> Her er \(n=9&lt;30\), men det gjør ingenting. De enkelte vektene er allerede normalfordelte, og da er gjennomsnittet <em>eksakt</em> normalfordelt for alle \(n\).</p>
+                <p><strong>Steg 3 — Parametrene for gjennomsnittet.</strong></p>
+                <p>\[ \mu_{\bar X}=1.78,\qquad \sigma_{\bar X}=\frac{0.3}{\sqrt 9}=\frac{0.3}{3}=0.10 \]</p>
+                <p><strong>Steg 4 — Standardiser begge grensene.</strong></p>
+                <p>\[ z_1=\frac{1.58-1.78}{0.10}=-2.00,\qquad z_2=\frac{1.98-1.78}{0.10}=2.00 \]</p>
+                <p>\[ P(1.58&lt;\bar X&lt;1.98)=G(2.00)-G(-2.00)=0.9772-0.0228=0.954 \]</p>
+                <p>(Fordi grensene ligger symmetrisk, kan du også skrive \(2G(2.00)-1\).)</p>
+                <p><strong>Steg 5 — Svar.</strong> Det er 95.4 % sannsynlighet for at gjennomsnittet av 9 kyllinger ligger mellom 1.58 og 1.98 kg.</p>
+                <div class="answer"><b>Ca. 95.4 %.</b> Dette er det klassiske «to standardavvik»-intervallet.</div>
               </div>
             </details>
           </article>
@@ -1167,16 +1213,29 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>Mai 2026</h4>
-                <p>For eksponentialfordelingen er \(\sigma=\mu=1100\), altså \(\sigma_{\bar X}=1100/\sqrt{100}=110\):</p>
-                <p>\[ P(\bar X&lt;1150)=G\!\left(\frac{1150-1100}{110}\right)=G(0.45)\approx 0.67 \]</p>
-                <h4>Mai 2024</h4>
-                <p>\(\sigma=\mu=3.2\), \(\sigma_{\bar T}=3.2/\sqrt{30}=0.584\):</p>
-                <p>\[ P(\bar T&gt;4.0)=1-G\!\left(\frac{4.0-3.2}{0.584}\right)=1-G(1.37)\approx 0.085 \]</p>
-                <h4>Jun 2020</h4>
-                <p>\(\sigma_{\bar T}=\sqrt{2/100}=0.141\):</p>
-                <p>\[ P(\bar T\ge 2.2)=1-G\!\left(\frac{2.2-2}{0.141}\right)=1-G(1.41)\approx 0.079 \]</p>
-                <div class="answer"><b>0.67 · 0.085 · 0.079.</b> Felles fremgangsmåte: finn \(\mu\) og \(\sigma\) for <em>én</em> observasjon, del \(\sigma\) på \(\sqrt n\), standardiser.</div>
+                <p><strong>Felles oppskrift for alle tre.</strong> 1) Finn \(\mu\) og \(\sigma\) for <em>én</em> observasjon. For eksponentialfordelingen er \(\sigma=\mu\). 2) Begrunn at gjennomsnittet er tilnærmet normalfordelt: uavhengige, identisk fordelte og \(n\ge 30\), altså sentralgrenseteoremet. Eksponentialfordelingen er svært skjev, så det er nettopp sentralgrenseteoremet som gjør normalfordelingen gyldig. 3) Regn ut \(\sigma_{\bar X}=\sigma/\sqrt n\). 4) Standardiser.</p>
+                <h4>Mai 2026 — lyspærer</h4>
+                <p><strong>Én observasjon:</strong> \(\mu=1100\) timer, og for eksponentialfordelingen er \(\sigma=\mu=1100\).</p>
+                <p><strong>Begrunnelse:</strong> 100 uavhengige levetider, \(n=100\ge 30\), så \(\bar X\) er tilnærmet normalfordelt.</p>
+                <p><strong>Gjennomsnittet:</strong></p>
+                <p>\[ \mu_{\bar X}=1100,\qquad \sigma_{\bar X}=\frac{1100}{\sqrt{100}}=\frac{1100}{10}=110 \]</p>
+                <p><strong>Standardiser:</strong></p>
+                <p>\[ P(\bar X&lt;1150)=G\!\left(\frac{1150-1100}{110}\right)=G(0.45)=0.67 \]</p>
+                <h4>Mai 2024 — programmerere</h4>
+                <p><strong>Én observasjon:</strong> \(\mu=3.2\) timer, og \(\sigma=\mu=3.2\).</p>
+                <p><strong>Begrunnelse:</strong> 30 uavhengige tider, \(n=30\), akkurat på tommelfingergrensen. Sentralgrenseteoremet gir at \(\bar T\) er tilnærmet normalfordelt.</p>
+                <p><strong>Gjennomsnittet:</strong></p>
+                <p>\[ \mu_{\bar T}=3.2,\qquad \sigma_{\bar T}=\frac{3.2}{\sqrt{30}}=\frac{3.2}{5.477}=0.584 \]</p>
+                <p><strong>Standardiser:</strong></p>
+                <p>\[ P(\bar T&gt;4.0)=1-G\!\left(\frac{4.0-3.2}{0.584}\right)=1-G(1.37)=1-0.9147=0.085 \]</p>
+                <h4>Jun 2020 — responstid</h4>
+                <p><strong>Én observasjon:</strong> \(\mu=2\) dager og \(\sigma^2=2\). Her er variansen oppgitt, så \(\sigma=\sqrt 2\).</p>
+                <p><strong>Begrunnelse:</strong> 100 uavhengige responstider, \(n=100\ge 30\), så \(\bar T\) er tilnærmet normalfordelt.</p>
+                <p><strong>Gjennomsnittet:</strong> Del variansen på \(n\), og ta roten:</p>
+                <p>\[ \mu_{\bar T}=2,\qquad \sigma_{\bar T}=\sqrt{\frac{\sigma^2}{n}}=\sqrt{\frac{2}{100}}=0.141 \]</p>
+                <p><strong>Standardiser:</strong></p>
+                <p>\[ P(\bar T\ge 2.2)=1-G\!\left(\frac{2.2-2}{0.141}\right)=1-G(1.41)=1-0.9207=0.079 \]</p>
+                <div class="answer"><b>Mai 2026: 0.67 · Mai 2024: 0.085 · Jun 2020: 0.079.</b> Felles fremgangsmåte: finn \(\mu\) og \(\sigma\) for <em>én</em> observasjon, del \(\sigma\) på \(\sqrt n\), standardiser.</div>
               </div>
             </details>
           </article>
@@ -1197,11 +1256,22 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>Des 2020</h4>
-                <p>\[ \sigma_{\bar X}=\sqrt{\frac{0.81}{36}}=0.15 \quad\Rightarrow\quad P(\bar X&lt;5.5)=G\!\left(\frac{5.5-5.3}{0.15}\right)=G(1.33)\approx 0.91 \]</p>
-                <h4>Okt 2022</h4>
-                <p>\[ \sigma_{\bar X}=\sqrt{\frac{10.09}{25}}=0.635 \quad\Rightarrow\quad P(\bar X&lt;18.5)=G\!\left(\frac{18.5-18.9}{0.635}\right)=G(-0.63)\approx 0.26 \]</p>
-                <div class="answer"><b>0.91 · 0.26.</b> Her er \(n=36\) og \(n=25\) — det siste er strengt tatt under tommelfingergrensen på 30, men oppgaven ber eksplisitt om en <em>tilnærmet</em> sannsynlighet. Se hele oppgavene under <a href="03-diskrete-fordelinger.html">diskrete fordelinger</a>.</div>
+                <p><strong>Felles oppskrift.</strong> \(\mu\) og \(\sigma^2\) for én observasjon er regnet ut fra tabellen tidligere i oppgaven (se <a href="03-diskrete-fordelinger.html">diskrete fordelinger</a>). Deretter: begrunn normaltilnærmingen med sentralgrenseteoremet, regn ut \(\sigma_{\bar X}=\sqrt{\sigma^2/n}\) og standardiser.</p>
+                <h4>Des 2020 — kirsebær i 36 kaker</h4>
+                <p><strong>Én observasjon:</strong> \(\mu=5.3\) og \(\sigma^2=0.81\).</p>
+                <p><strong>Begrunnelse:</strong> 36 uavhengige og identisk fordelte kaker, \(n=36\ge 30\). Sentralgrenseteoremet gir at \(\bar X\) er tilnærmet normalfordelt.</p>
+                <p><strong>Gjennomsnittet:</strong></p>
+                <p>\[ \mu_{\bar X}=5.3,\qquad \sigma_{\bar X}=\sqrt{\frac{0.81}{36}}=\frac{0.9}{6}=0.15 \]</p>
+                <p><strong>Standardiser:</strong></p>
+                <p>\[ P(\bar X&lt;5.5)=G\!\left(\frac{5.5-5.3}{0.15}\right)=G(1.33)=0.91 \]</p>
+                <h4>Okt 2022 — bringebær i 25 desserter</h4>
+                <p><strong>Én observasjon:</strong> \(\mu=18.9\) og \(\sigma^2=10.09\).</p>
+                <p><strong>Begrunnelse:</strong> 25 uavhengige og identisk fordelte desserter. Det er strengt tatt under tommelfingergrensen på 30, men oppgaven ber om en <em>tilnærmet</em> sannsynlighet, og sentralgrenseteoremet er den eneste veien dit. Nevn forbeholdet.</p>
+                <p><strong>Gjennomsnittet:</strong></p>
+                <p>\[ \mu_{\bar X}=18.9,\qquad \sigma_{\bar X}=\sqrt{\frac{10.09}{25}}=\sqrt{0.4036}=0.635 \]</p>
+                <p><strong>Standardiser:</strong></p>
+                <p>\[ P(\bar X&lt;18.5)=G\!\left(\frac{18.5-18.9}{0.635}\right)=G(-0.63)=0.26 \]</p>
+                <div class="answer"><b>Des 2020: 0.91 · Okt 2022: 0.26.</b> Se hele oppgavene under <a href="03-diskrete-fordelinger.html">diskrete fordelinger</a>.</div>
               </div>
             </details>
           </article>
