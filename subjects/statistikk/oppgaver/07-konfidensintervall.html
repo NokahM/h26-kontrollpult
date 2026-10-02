@@ -155,9 +155,17 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>Summen er 165.9, altså \(\bar x=165.9/7=23.7\). Med \(\sigma=5\) kjent og \(n=7\) bruker vi z-intervallet — lovlig selv om \(n&lt;30\), fordi observasjonene er normalfordelte.</p>
-                <p>\[ \bar x \pm z_{0.05}\cdot\frac{\sigma}{\sqrt n}=23.7\pm 1.645\cdot\frac{5}{\sqrt 7}=23.7\pm 3.11 \]</p>
-                <div class="answer"><b>\(\mu\in[20.6,\ 26.8]\).</b> Legg merke til at 20 ligger <em>utenfor</em> intervallet — se <a href="08-hypotesetesting.html#mai2026">hypotesetesten</a> i punkt b).</div>
+                <p><strong>Steg 1 — Velg intervall.</strong> \(\sigma=5\) er kjent og observasjonene er normalfordelte, så vi bruker z-intervallet:</p>
+                <p>\[ \bar X\pm z_{\alpha/2}\cdot\frac{\sigma}{\sqrt n} \]</p>
+                <p>Det er lov selv om \(n=7\) er lite, fordi observasjonene selv er normalfordelte. Da er \(\bar X\) eksakt normalfordelt, og vi trenger ikke sentralgrenseteoremet.</p>
+                <p><strong>Steg 2 — Finn kvantilen.</strong> 90 % konfidensgrad gir \(1-\alpha=0.90\), altså \(\alpha=0.10\) og \(\alpha/2=0.05\) i hver hale. Tabell B gir \(z_{0.05}=1.645\).</p>
+                <p><strong>Steg 3 — Regn ut estimat og standardfeil.</strong></p>
+                <p>\[ \bar x=\frac{19.2+23.4+21.9+26.1+24.9+33.6+16.8}{7}=\frac{165.9}{7}=23.7 \]</p>
+                <p>\[ \frac{\sigma}{\sqrt n}=\frac{5}{\sqrt 7}=\frac{5}{2.646}=1.890 \]</p>
+                <p><strong>Steg 4 — Sett inn.</strong></p>
+                <p>\[ 23.7\pm 1.645\cdot 1.890=23.7\pm 3.11 \quad\Rightarrow\quad [20.6,\ 26.8] \]</p>
+                <p><strong>Steg 5 — Tolk.</strong> Vi er 90 % sikre på at den sanne forventede fuktprosenten ligger mellom 20.6 og 26.8.</p>
+                <div class="answer"><b>\(\mu\in[20.6,\ 26.8]\).</b> Legg merke til at 20 ligger <em>utenfor</em> intervallet. Se <a href="08-hypotesetesting.html#mai2026">hypotesetesten</a> i punkt b).</div>
               </div>
             </details>
           </article>
@@ -174,8 +182,14 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>\(100(1-\alpha)=98\ \Rightarrow\ \alpha=0.02\ \Rightarrow\ \alpha/2=0.01\ \Rightarrow\ z_{0.01}=2.326\).</p>
-                <p>\[ \bar X\pm z_{\alpha/2}\frac{\sigma}{\sqrt n}=4.25\pm 2.326\cdot\frac{0.5}{\sqrt{25}}=4.25\pm 0.233 \]</p>
+                <p><strong>Steg 1 — Velg intervall.</strong> \(\sigma=0.5\) kg er kjent og vekten er normalfordelt, så vi bruker z-intervallet:</p>
+                <p>\[ \bar X\pm z_{\alpha/2}\cdot\frac{\sigma}{\sqrt n} \]</p>
+                <p><strong>Steg 2 — Finn kvantilen.</strong> 98 % konfidensgrad gir \(1-\alpha=0.98\), altså \(\alpha=0.02\) og \(\alpha/2=0.01\). Tabell B gir \(z_{0.01}=2.326\).</p>
+                <p><strong>Steg 3 — Regn ut standardfeilen.</strong></p>
+                <p>\[ \frac{\sigma}{\sqrt n}=\frac{0.5}{\sqrt{25}}=\frac{0.5}{5}=0.1 \]</p>
+                <p><strong>Steg 4 — Sett inn.</strong> Med \(\bar x=4.25\):</p>
+                <p>\[ 4.25\pm 2.326\cdot 0.1=4.25\pm 0.233 \quad\Rightarrow\quad [4.02,\ 4.48] \]</p>
+                <p><strong>Steg 5 — Tolk.</strong> Vi er 98 % sikre på at den virkelige gjennomsnittsvekten for laksen i merden ligger mellom 4.02 og 4.48 kg.</p>
                 <div class="answer"><b>\(\mu\in[4.02,\ 4.48]\) kg.</b></div>
               </div>
             </details>
@@ -193,9 +207,15 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>\(\alpha=0.01\ \Rightarrow\ z_{0.005}=2.576\).</p>
-                <p>\[ 0.153\pm 2.576\cdot\frac{0.028}{\sqrt{100}}=0.153\pm 0.0072 \]</p>
-                <div class="answer"><b>\(\mu\in[0.146,\ 0.160]\) kg.</b> Oppgi svaret med samme antall desimaler som dataene — her tre.</div>
+                <p><strong>Steg 1 — Velg intervall.</strong> \(\sigma=0.028\) kg er kjent og vektene er normalfordelte, så vi bruker z-intervallet:</p>
+                <p>\[ \bar X\pm z_{\alpha/2}\cdot\frac{\sigma}{\sqrt n} \]</p>
+                <p><strong>Steg 2 — Finn kvantilen.</strong> 99 % konfidensgrad gir \(\alpha=0.01\) og \(\alpha/2=0.005\). Tabell B gir \(z_{0.005}=2.576\).</p>
+                <p><strong>Steg 3 — Regn ut standardfeilen.</strong></p>
+                <p>\[ \frac{\sigma}{\sqrt n}=\frac{0.028}{\sqrt{100}}=\frac{0.028}{10}=0.0028 \]</p>
+                <p><strong>Steg 4 — Sett inn.</strong> Med \(\bar x=0.153\):</p>
+                <p>\[ 0.153\pm 2.576\cdot 0.0028=0.153\pm 0.0072 \quad\Rightarrow\quad [0.146,\ 0.160] \]</p>
+                <p><strong>Steg 5 — Tolk.</strong> Vi er 99 % sikre på at forventet eplevekt ligger mellom 0.146 og 0.160 kg.</p>
+                <div class="answer"><b>\(\mu\in[0.146,\ 0.160]\) kg.</b> Oppgi svaret med samme antall desimaler som dataene, her tre.</div>
               </div>
             </details>
           </article>
@@ -216,13 +236,24 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>a)</h4>
-                <p>\[ 118.5\pm 1.960\cdot\frac{10}{\sqrt 6}=118.5\pm 8.00 \]</p>
-                <p>altså \(\mu\in[110.5,\ 126.5]\) g/km.</p>
-                <h4>b)</h4>
-                <p>Lengden er \(L=2z_{\alpha/2}\sigma/\sqrt n\):</p>
-                <p>\[ 2\cdot 1.960\cdot\frac{10}{\sqrt n}\le 10 \quad\Rightarrow\quad \sqrt n\ge 3.92 \quad\Rightarrow\quad n\ge 15.37 \]</p>
-                <div class="answer"><b>a) [110.5, 126.5] · b) minst 16 biler.</b> Rund alltid opp — 15 biler gir et for langt intervall.</div>
+                <h4>a) Konfidensintervall</h4>
+                <p><strong>Steg 1 — Velg intervall.</strong> \(\sigma=10\) g/km er kjent og målingene er normalfordelte, så vi bruker z-intervallet, selv om \(n=6\) er lite:</p>
+                <p>\[ \bar X\pm z_{\alpha/2}\cdot\frac{\sigma}{\sqrt n} \]</p>
+                <p><strong>Steg 2 — Finn kvantilen.</strong> 95 % gir \(\alpha=0.05\) og \(\alpha/2=0.025\). Tabell B gir \(z_{0.025}=1.960\).</p>
+                <p><strong>Steg 3 — Regn ut standardfeilen.</strong></p>
+                <p>\[ \frac{\sigma}{\sqrt n}=\frac{10}{\sqrt 6}=\frac{10}{2.449}=4.08 \]</p>
+                <p><strong>Steg 4 — Sett inn.</strong> Med \(\bar x=118.5\):</p>
+                <p>\[ 118.5\pm 1.960\cdot 4.08=118.5\pm 8.00 \quad\Rightarrow\quad [110.5,\ 126.5] \]</p>
+                <p><strong>Steg 5 — Tolk.</strong> Vi er 95 % sikre på at forventet CO₂-utslipp for modellen ligger mellom 110.5 og 126.5 g/km.</p>
+                <h4>b) Hvor mange biler?</h4>
+                <p><strong>1) Uttrykk for lengden.</strong> Intervallet går fra \(\bar X-z_{\alpha/2}\sigma/\sqrt n\) til \(\bar X+z_{\alpha/2}\sigma/\sqrt n\), så lengden er to ganger feilmarginen:</p>
+                <p>\[ L=2\cdot z_{\alpha/2}\cdot\frac{\sigma}{\sqrt n} \]</p>
+                <p><strong>2) Sett opp kravet</strong> \(L\le 10\) med \(z_{0.025}=1.960\) og \(\sigma=10\):</p>
+                <p>\[ 2\cdot 1.960\cdot\frac{10}{\sqrt n}\le 10 \]</p>
+                <p><strong>3) Løs for \(n\).</strong> Gang med \(\sqrt n\) og del på 10:</p>
+                <p>\[ \sqrt n\ge 2\cdot 1.960=3.92 \quad\Rightarrow\quad n\ge 3.92^2=15.37 \]</p>
+                <p><strong>4) Rund opp.</strong> \(n\) må være et helt tall, og 15 biler gir et litt for langt intervall. Det trengs minst 16 biler.</p>
+                <div class="answer"><b>a) [110.5, 126.5] g/km · b) minst 16 biler.</b> Rund alltid opp når du finner \(n\).</div>
               </div>
             </details>
           </article>
@@ -239,10 +270,16 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
+                <p><strong>Steg 1 — Velg intervall.</strong> \(\sigma=2\) er <em>kjent</em> (oppgitt), og resistansene er normalfordelte. Da bruker vi z-intervallet og ikke t, selv med bare 5 målinger:</p>
+                <p>\[ \bar X\pm z_{\alpha/2}\cdot\frac{\sigma}{\sqrt n} \]</p>
+                <p><strong>Steg 2 — Finn kvantilen.</strong> 95 % gir \(\alpha/2=0.025\), og Tabell B gir \(z_{0.025}=1.960\).</p>
+                <p><strong>Steg 3 — Regn ut estimat og standardfeil.</strong></p>
                 <p>\[ \bar x=\frac{49+49+50+50+54}{5}=\frac{252}{5}=50.4 \]</p>
-                <p>\(\sigma\) er <em>kjent</em> (oppgitt til 2), så vi bruker z og ikke t, selv med bare 5 målinger:</p>
-                <p>\[ 50.4\pm 1.960\cdot\frac{2}{\sqrt 5}=50.4\pm 1.75 \]</p>
-                <div class="answer"><b>\(\mu\in[48.65,\ 52.15]\) kΩ.</b> 50 ligger godt innenfor — se <a href="08-hypotesetesting.html#okt2022">den tilhørende hypotesetesten</a> fra okt 2022, som bruker nøyaktig samme data.</div>
+                <p>\[ \frac{\sigma}{\sqrt n}=\frac{2}{\sqrt 5}=\frac{2}{2.236}=0.894 \]</p>
+                <p><strong>Steg 4 — Sett inn.</strong></p>
+                <p>\[ 50.4\pm 1.960\cdot 0.894=50.4\pm 1.75 \quad\Rightarrow\quad [48.65,\ 52.15] \]</p>
+                <p><strong>Steg 5 — Tolk.</strong> Vi er 95 % sikre på at forventet resistans ligger mellom 48.65 og 52.15 kΩ.</p>
+                <div class="answer"><b>\(\mu\in[48.65,\ 52.15]\) kΩ.</b> 50 ligger godt innenfor. Se <a href="08-hypotesetesting.html#okt2022">den tilhørende hypotesetesten</a> fra okt 2022, som bruker nøyaktig de samme dataene.</div>
               </div>
             </details>
           </article>
@@ -263,14 +300,22 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>d)</h4>
-                <p>\[ \bar x=\frac{16}{9}=1.778 \]</p>
-                <p>\[ 1.778\pm 1.960\cdot\frac{0.3}{\sqrt 9}=1.778\pm 0.196 \]</p>
-                <p>altså \(\mu\in[1.58,\ 1.97]\) kg.</p>
-                <h4>e)</h4>
-                <p>Fra punkt b) på samme sett vet vi at kravet «minst 80 % over 1.6 kg» betyr \(\mu\ge 1.85\). Den laveste \(\mu\)-verdien vi er 95 % sikre på, er intervallets nedre grense \(\bar X-0.196\). Kravet blir derfor</p>
+                <h4>d) Konfidensintervall</h4>
+                <p><strong>Steg 1 — Velg intervall.</strong> \(\sigma=0.3\) kg er kjent og kyllingvekten er normalfordelt, så vi bruker z-intervallet:</p>
+                <p>\[ \bar X\pm z_{\alpha/2}\cdot\frac{\sigma}{\sqrt n} \]</p>
+                <p><strong>Steg 2 — Finn kvantilen.</strong> 95 % gir \(z_{0.025}=1.960\).</p>
+                <p><strong>Steg 3 — Regn ut estimat og standardfeil.</strong> Oppgaven oppgir totalvekten, så gjennomsnittet er totalen delt på antallet:</p>
+                <p>\[ \bar x=\frac{16}{9}=1.778,\qquad \frac{\sigma}{\sqrt n}=\frac{0.3}{\sqrt 9}=\frac{0.3}{3}=0.1 \]</p>
+                <p><strong>Steg 4 — Sett inn.</strong></p>
+                <p>\[ 1.778\pm 1.960\cdot 0.1=1.778\pm 0.196 \quad\Rightarrow\quad [1.58,\ 1.97] \]</p>
+                <p><strong>Steg 5 — Tolk.</strong> Vi er 95 % sikre på at den virkelige forventede kyllingvekten ligger mellom 1.58 og 1.97 kg.</p>
+                <h4>e) Kravet baklengs</h4>
+                <p><strong>1) Oversett «minst 80 % veier mer enn 1.6 kg» til et krav på \(\mu\).</strong> Dette er punkt b) i samme sett. Vi trenger \(P(X&gt;1.6)\ge 0.80\), altså \(P(X\le 1.6)\le 0.20\):</p>
+                <p>\[ G\!\left(\frac{1.6-\mu}{0.3}\right)\le 0.20 \quad\Rightarrow\quad \frac{1.6-\mu}{0.3}\le -z_{0.20}=-0.842 \]</p>
+                <p>\[ \mu\ge 1.6+0.842\cdot 0.3=1.85 \]</p>
+                <p><strong>2) Bruk intervallet som krav.</strong> Produsenten skal være 95 % sikker på at \(\mu\ge 1.85\). Den laveste \(\mu\)-verdien vi er 95 % sikre på, er intervallets nedre grense \(\bar X-0.196\) (fra d). Den må ligge over 1.85:</p>
                 <p>\[ \bar X-0.196\ge 1.85 \quad\Rightarrow\quad \bar X\ge 2.046\ \text{kg} \]</p>
-                <div class="answer"><b>d) [1.58, 1.97] kg · e) \(\bar X\ge 2.05\) kg.</b> Punkt e) er en fin illustrasjon av hvordan et konfidensintervall brukes som et <em>krav</em>, ikke bare som en rapport.</div>
+                <div class="answer"><b>d) [1.58, 1.97] kg · e) \(\bar X\ge 2.05\) kg.</b> Punkt e) viser hvordan et konfidensintervall kan brukes som et <em>krav</em>, ikke bare som en rapport.</div>
               </div>
             </details>
           </article>
@@ -297,10 +342,15 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>Standardavviket er <em>ukjent</em> og estimert fra dataene, så det er t-fordelingen som gjelder:</p>
-                <p>\[ s=\sqrt{0.0016}=0.040\ \text{cm},\qquad \nu=n-1=8,\qquad t_{0.005}=3.355 \]</p>
-                <p>\[ 1.0087\pm 3.355\cdot\frac{0.040}{\sqrt 9}=1.0087\pm 0.0447 \]</p>
-                <div class="answer"><b>\(\mu\in[0.964,\ 1.053]\) cm.</b> Sammenlikn med \(z_{0.005}=2.576\): t-kvantilet er 30 % større med bare 8 frihetsgrader, så intervallet blir merkbart bredere.</div>
+                <p><strong>Steg 1 — Velg intervall.</strong> Standardavviket er <em>ukjent</em> og estimert fra dataene (bare \(s^2\) er oppgitt), og målingene er normalfordelte. Da gjelder t-intervallet:</p>
+                <p>\[ \bar X\pm t_{\alpha/2}\cdot\frac{S}{\sqrt n} \]</p>
+                <p><strong>Steg 2 — Finn kvantilen.</strong> 99 % gir \(\alpha/2=0.005\). Antall frihetsgrader er \(\nu=n-1=9-1=8\), og Tabell C gir \(t_{0.005}=3.355\).</p>
+                <p><strong>Steg 3 — Regn ut standardfeilen.</strong> Oppgaven gir variansen, så ta kvadratroten først:</p>
+                <p>\[ s=\sqrt{0.0016}=0.040\ \text{cm},\qquad \frac{s}{\sqrt n}=\frac{0.040}{\sqrt 9}=\frac{0.040}{3}=0.0133 \]</p>
+                <p><strong>Steg 4 — Sett inn.</strong> Med \(\bar x=1.0087\):</p>
+                <p>\[ 1.0087\pm 3.355\cdot 0.0133=1.0087\pm 0.0447 \quad\Rightarrow\quad [0.964,\ 1.053] \]</p>
+                <p><strong>Steg 5 — Tolk.</strong> Vi er 99 % sikre på at forventet diameter for en metalldel ligger mellom 0.964 og 1.053 cm.</p>
+                <div class="answer"><b>\(\mu\in[0.964,\ 1.053]\) cm.</b> Sammenlikn med \(z_{0.005}=2.576\): med bare 8 frihetsgrader er t-kvantilet 30 % større, så intervallet blir merkbart bredere.</div>
               </div>
             </details>
           </article>
@@ -321,14 +371,27 @@
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
                 <h4>O6b — t-intervall</h4>
-                <p>\(\alpha=0.02\), \(\nu=60\) frihetsgrader, og Tabell C gir \(t_{0.01}=2.390\):</p>
-                <p>\[ 38.2\pm 2.390\cdot\frac{5.6}{\sqrt{61}}=38.2\pm 1.71 \]</p>
-                <p>altså \(\mu\in[36.49,\ 39.91]\) måneder.</p>
-                <p>Siden \(n=61\) er stort, kan man også tilnærme \(t_{0.01}\approx z_{0.01}=2.326\), som gir [36.53, 39.87] — identisk til første desimal.</p>
+                <p><strong>Steg 1 — Velg intervall.</strong> Bare utvalgsstandardavviket \(s=5.6\) er kjent, så vi bruker t-intervallet. Levetiden er ikke oppgitt som normalfordelt, men med \(n=61\) gir sentralgrenseteoremet at \(\bar X\) er tilnærmet normalfordelt:</p>
+                <p>\[ \bar X\pm t_{\alpha/2}\cdot\frac{S}{\sqrt n} \]</p>
+                <p><strong>Steg 2 — Finn kvantilen.</strong> 98 % gir \(\alpha=0.02\) og \(\alpha/2=0.01\). Med \(\nu=61-1=60\) frihetsgrader gir Tabell C \(t_{0.01}=2.390\).</p>
+                <p><strong>Steg 3 — Regn ut standardfeilen.</strong></p>
+                <p>\[ \frac{s}{\sqrt n}=\frac{5.6}{\sqrt{61}}=\frac{5.6}{7.810}=0.717 \]</p>
+                <p><strong>Steg 4 — Sett inn.</strong> Med \(\bar x=38.2\):</p>
+                <p>\[ 38.2\pm 2.390\cdot 0.717=38.2\pm 1.71 \quad\Rightarrow\quad [36.49,\ 39.91] \]</p>
+                <p><strong>Steg 5 — Tolk.</strong> Vi er 98 % sikre på at forventet levetid for mus med denne maten ligger mellom 36.5 og 39.9 måneder.</p>
+                <p>Siden \(n=61\) er stort, kan du også bruke \(t_{0.01}\approx z_{0.01}=2.326\). Det gir [36.53, 39.87], som er det samme til første desimal.</p>
                 <h4>O7b — intervall for p</h4>
-                <p>\[ \hat p=\frac{476}{1000}=0.476,\qquad n\hat p(1-\hat p)=249.4\ \ge 5 \quad\checkmark \]</p>
-                <p>\[ 0.476\pm 2.576\sqrt{\frac{0.476\cdot 0.524}{1000}}=0.476\pm 0.041 \]</p>
-                <div class="answer"><b>b) [36.5, 39.9] måneder · O7b) \(p\in[0.43,\ 0.52]\).</b> At 0.5 ligger innenfor, betyr at dataene ikke gir grunnlag for å hevde at mynten er skjev.</div>
+                <p><strong>Steg 1 — Velg intervall.</strong> Vi skal estimere en sannsynlighet ut fra antall suksesser, så vi bruker intervallet for \(p\):</p>
+                <p>\[ \hat p\pm z_{\alpha/2}\sqrt{\frac{\hat p(1-\hat p)}{n}} \]</p>
+                <p>Først estimatet og kontrollen av at normaltilnærmingen gjelder:</p>
+                <p>\[ \hat p=\frac{476}{1000}=0.476,\qquad n\hat p(1-\hat p)=1000\cdot 0.476\cdot 0.524=249.4\ \ge 5 \quad\checkmark \]</p>
+                <p><strong>Steg 2 — Finn kvantilen.</strong> 99 % gir \(z_{0.005}=2.576\).</p>
+                <p><strong>Steg 3 — Regn ut standardfeilen.</strong></p>
+                <p>\[ \sqrt{\frac{0.476\cdot 0.524}{1000}}=\sqrt{0.000249}=0.0158 \]</p>
+                <p><strong>Steg 4 — Sett inn.</strong></p>
+                <p>\[ 0.476\pm 2.576\cdot 0.0158=0.476\pm 0.041 \quad\Rightarrow\quad [0.435,\ 0.517] \]</p>
+                <p><strong>Steg 5 — Tolk.</strong> Vi er 99 % sikre på at sannsynligheten for kron ligger mellom 0.435 og 0.517.</p>
+                <div class="answer"><b>O6b) [36.5, 39.9] måneder · O7b) \(p\in[0.43,\ 0.52]\).</b> 0.5 ligger innenfor, så dataene gir ikke grunnlag for å hevde at mynten er skjev (på 1 % nivå).</div>
               </div>
             </details>
           </article>
@@ -345,11 +408,18 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>\[ \bar x=\frac{452.7}{9}=50.3 \]</p>
-                <p>\[ s^2=\frac{1}{n-1}\left(\sum x_i^2-n\bar x^2\right)=\frac{1}{8}\bigl(25\,452.31-9\cdot 50.3^2\bigr)=335.19 \ \Rightarrow\ s=18.31 \]</p>
-                <p>\(\alpha=0.01\), \(\nu=8\), \(t_{0.005}=3.355\):</p>
-                <p>\[ 50.3\pm 3.355\cdot\frac{18.31}{\sqrt 9}=50.3\pm 20.48 \]</p>
-                <div class="answer"><b>\(\mu\in[29.8,\ 70.8]\).</b> Et enormt bredt intervall — 9 målinger med stor spredning gir nesten ingen presisjon. Legg merke til at \(\mu_0=57.9\) ligger innenfor, så hypotesen om uendret nivå kan ikke forkastes (se <a href="08-hypotesetesting.html#mai2022">hypotesetesting</a>).</div>
+                <p><strong>Steg 1 — Velg intervall.</strong> \(\sigma\) er ukjent, så vi må estimere den med \(s\) og bruke t-intervallet. Med bare 9 målinger forutsetter det at resultatene er normalfordelte.</p>
+                <p>\[ \bar X\pm t_{\alpha/2}\cdot\frac{S}{\sqrt n} \]</p>
+                <p><strong>Steg 2 — Finn kvantilen.</strong> 99 % gir \(\alpha/2=0.005\). Med \(\nu=9-1=8\) frihetsgrader gir Tabell C \(t_{0.005}=3.355\).</p>
+                <p><strong>Steg 3 — Regn ut estimat og standardfeil.</strong> Gjennomsnittet:</p>
+                <p>\[ \bar x=\frac{41.3+63.7+35.7+87.1+37.9+53.5+58.6+49.5+25.4}{9}=\frac{452.7}{9}=50.3 \]</p>
+                <p>Utvalgsvariansen, med \(\sum x_i^2=25\,452.31\) og \(n\bar x^2=9\cdot 50.3^2=22\,770.81\):</p>
+                <p>\[ s^2=\frac{1}{n-1}\left(\sum x_i^2-n\bar x^2\right)=\frac{25\,452.31-22\,770.81}{8}=\frac{2681.5}{8}=335.19 \quad\Rightarrow\quad s=18.31 \]</p>
+                <p>\[ \frac{s}{\sqrt n}=\frac{18.31}{\sqrt 9}=\frac{18.31}{3}=6.103 \]</p>
+                <p><strong>Steg 4 — Sett inn.</strong></p>
+                <p>\[ 50.3\pm 3.355\cdot 6.103=50.3\pm 20.48 \quad\Rightarrow\quad [29.8,\ 70.8] \]</p>
+                <p><strong>Steg 5 — Tolk.</strong> Vi er 99 % sikre på at forventet eksamensresultat ligger mellom 29.8 og 70.8 prosent.</p>
+                <div class="answer"><b>\(\mu\in[29.8,\ 70.8]\).</b> Intervallet er svært bredt: 9 målinger med stor spredning gir nesten ingen presisjon. Legg merke til at \(\mu_0=57.9\) ligger innenfor, så hypotesen om uendret nivå kan ikke forkastes (se <a href="08-hypotesetesting.html#mai2022">hypotesetesting</a>).</div>
               </div>
             </details>
           </article>
@@ -370,13 +440,24 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>a)</h4>
-                <p>Det sanne standardavviket er ukjent, så i prinsippet gjelder t-fordelingen. Men \(n=81\) er stort, så \(t_{0.025}\approx z_{0.025}=1.96\):</p>
-                <p>\[ 461\pm 1.96\cdot\frac{13}{\sqrt{81}}=461\pm 2.83 \]</p>
-                <p>altså \(\mu\in[458.2,\ 463.8]\) gram.</p>
-                <h4>b) Intervall for σ — den eneste gangen dette er spurt om</h4>
-                <p>Her trengs kjikvadratfordelingen med \(n-1=80\) frihetsgrader, \(\chi^2_{0.025}=106.63\) og \(\chi^2_{0.975}=57.15\):</p>
-                <p>\[ \left[\sqrt{\frac{(n-1)s^2}{\chi^2_{\alpha/2}}},\ \sqrt{\frac{(n-1)s^2}{\chi^2_{1-\alpha/2}}}\right]=\left[13\sqrt{\frac{80}{106.63}},\ 13\sqrt{\frac{80}{57.15}}\right]=[11.26,\ 15.38] \]</p>
+                <h4>a) Intervall for μ</h4>
+                <p><strong>Steg 1 — Velg intervall.</strong> Det sanne standardavviket er ukjent (bare \(s=13\) er oppgitt), så i prinsippet gjelder t-intervallet:</p>
+                <p>\[ \bar X\pm t_{\alpha/2}\cdot\frac{S}{\sqrt n} \]</p>
+                <p><strong>Steg 2 — Finn kvantilen.</strong> 95 % gir \(\alpha/2=0.025\). Med \(\nu=81-1=80\) gir Tabell C \(t_{0.025}=1.990\). Fordi \(n\) er stort, er \(z_{0.025}=1.96\) også godtatt, og det er den sensurveiledningen bruker.</p>
+                <p><strong>Steg 3 — Regn ut standardfeilen.</strong></p>
+                <p>\[ \frac{s}{\sqrt n}=\frac{13}{\sqrt{81}}=\frac{13}{9}=1.444 \]</p>
+                <p><strong>Steg 4 — Sett inn.</strong> Med \(\bar x=461\):</p>
+                <p>\[ 461\pm 1.96\cdot 1.444=461\pm 2.83 \quad\Rightarrow\quad [458.2,\ 463.8] \]</p>
+                <p>(Med \(t_{0.025}=1.990\) blir feilmarginen 2.87 og intervallet [458.1, 463.9].)</p>
+                <p><strong>Steg 5 — Tolk.</strong> Vi er 95 % sikre på at forventet fødselsvekt ligger mellom 458.2 og 463.8 gram.</p>
+                <h4>b) Intervall for σ (spurt om bare denne ene gangen)</h4>
+                <p><strong>Steg 1 — Velg intervall.</strong> For standardavviket bruker vi at \((n-1)S^2/\sigma^2\) er kjikvadratfordelt med \(n-1\) frihetsgrader når dataene er normalfordelte. Det gir intervallet</p>
+                <p>\[ \left[\sqrt{\frac{(n-1)s^2}{\chi^2_{\alpha/2}}},\ \sqrt{\frac{(n-1)s^2}{\chi^2_{1-\alpha/2}}}\right] \]</p>
+                <p>Det største kvantilet står i nevneren til den nedre grensen.</p>
+                <p><strong>Steg 2 — Finn kvantilene.</strong> Med \(\nu=80\) og \(\alpha/2=0.025\): \(\chi^2_{0.025}=106.63\) og \(\chi^2_{0.975}=57.15\).</p>
+                <p><strong>Steg 3 og 4 — Sett inn.</strong> \((n-1)s^2=80\cdot 13^2\), og vi kan trekke \(s=13\) utenfor rottegnet:</p>
+                <p>\[ \left[13\sqrt{\frac{80}{106.63}},\ 13\sqrt{\frac{80}{57.15}}\right]=\left[13\cdot 0.866,\ 13\cdot 1.183\right]=[11.26,\ 15.38] \]</p>
+                <p><strong>Steg 5 — Tolk.</strong> Vi er 95 % sikre på at standardavviket for fødselsvekten ligger mellom 11.3 og 15.4 gram. Legg merke til at intervallet ikke er symmetrisk om \(s=13\), fordi kjikvadratfordelingen er skjev.</p>
                 <div class="note"><strong>Avvik fra det offisielle løsningsforslaget:</strong> LF sier også 80 frihetsgrader og bruker kvantilene for 80, men setter inn 79 i telleren og får \([11.2,\ 15.3]\). Med \(n=81\) er \(n-1=80\), så riktig intervall er \([11.3,\ 15.4]\). Forskjellen er liten, men bruk 80.</div>
                 <div class="answer"><b>a) [458.2, 463.8] gram · b) \(\sigma\in[11.3,\ 15.4]\) gram.</b>
                 <br><br>Kjikvadratintervallet for \(\sigma\) er spurt om <strong>én gang på 13 sett</strong>, og formelen står ikke på dagens formelark. Kjenn igjen mønsteret, men prioriter det lavt.</div>
@@ -409,15 +490,21 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>Hvorfor normalfordelt</h4>
-                <p>\(X\) er binomisk fordelt med \(n=200\) og \(\hat p=14/200=0.07\). Betingelsen for normaltilnærming er oppfylt:</p>
-                <p>\[ n\hat p(1-\hat p)=200\cdot 0.07\cdot 0.93=13.0 \ \ge 5 \quad\checkmark \]</p>
+                <h4>Hvorfor er X tilnærmet normalfordelt?</h4>
+                <p>Hver komponent er enten defekt eller ikke, komponentene er uavhengige, og defektsannsynligheten \(p\) er den samme for alle. Da er \(X\) binomisk fordelt, \(X\sim\mathrm{Bin}(200,\,p)\). En binomisk fordeling er tilnærmet normalfordelt når \(np(1-p)\) er stor nok. Med estimatet \(\hat p=14/200=0.07\):</p>
+                <p>\[ n\hat p(1-\hat p)=200\cdot 0.07\cdot 0.93=13.0\ \ge 5 \quad\checkmark \]</p>
                 <h4>Konfidensintervall</h4>
-                <p>\[ SE(\hat p)=\sqrt{\frac{0.07\cdot 0.93}{200}}=0.0180 \]</p>
-                <p>\[ 0.07\pm 1.960\cdot 0.0180=0.07\pm 0.0354 \]</p>
-                <p>altså \(p\in[0.035,\ 0.105]\).</p>
-                <h4>Konklusjon</h4>
-                <div class="answer"><b>Nei.</b> \(p=0.05\) ligger innenfor det 95 % konfidensintervallet, og da kan nullhypotesen \(H_0: p=0.05\) ikke forkastes på 5 % signifikansnivå. Dette er konfidensintervall-snarveien til en tosidig test.</div>
+                <p><strong>Steg 1 — Velg intervall.</strong> Intervall for en sannsynlighet:</p>
+                <p>\[ \hat p\pm z_{\alpha/2}\sqrt{\frac{\hat p(1-\hat p)}{n}} \]</p>
+                <p><strong>Steg 2 — Finn kvantilen.</strong> 95 % gir \(z_{0.025}=1.960\).</p>
+                <p><strong>Steg 3 — Regn ut standardfeilen.</strong></p>
+                <p>\[ \sqrt{\frac{0.07\cdot 0.93}{200}}=\sqrt{0.000326}=0.0180 \]</p>
+                <p><strong>Steg 4 — Sett inn.</strong></p>
+                <p>\[ 0.07\pm 1.960\cdot 0.0180=0.07\pm 0.0354 \quad\Rightarrow\quad [0.035,\ 0.105] \]</p>
+                <p><strong>Steg 5 — Tolk.</strong> Vi er 95 % sikre på at leverandørens virkelige defektsannsynlighet ligger mellom 3.5 % og 10.5 %.</p>
+                <h4>Kan Hansen konkludere med at p ≠ 0.05?</h4>
+                <p>Dette er en tosidig test av \(H_0:p=0.05\) mot \(H_1:p\neq 0.05\) på 5 % nivå. Et 95 % konfidensintervall inneholder nøyaktig de verdiene av \(p\) som <em>ikke</em> forkastes i en slik test. Siden 0.05 ligger innenfor [0.035, 0.105], kan \(H_0\) ikke forkastes.</p>
+                <div class="answer"><b>Nei.</b> \(p=0.05\) ligger innenfor 95 %-intervallet [0.035, 0.105], så \(H_0: p=0.05\) kan ikke forkastes på 5 % signifikansnivå. Dette er konfidensintervall-snarveien til en tosidig test.</div>
               </div>
             </details>
           </article>
@@ -434,9 +521,17 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>\[ \hat p=\frac{28}{1000}=0.028,\qquad n\hat p(1-\hat p)=27.2\ \ge 5 \quad\checkmark \]</p>
-                <p>\[ 0.028\pm 1.960\sqrt{\frac{0.028\cdot 0.972}{1000}}=0.028\pm 0.0102 \]</p>
-                <div class="answer"><b>\(p\in[0.018,\ 0.038]\).</b> Merk at intervallet er asymmetrisk i praktisk forstand: øvre grense er mer enn dobbelt så stor som nedre, fordi \(\hat p\) er liten.</div>
+                <p><strong>Steg 1 — Velg intervall.</strong> Vi skal estimere en sannsynlighet ut fra antall defekte, så vi bruker intervallet for \(p\):</p>
+                <p>\[ \hat p\pm z_{\alpha/2}\sqrt{\frac{\hat p(1-\hat p)}{n}} \]</p>
+                <p>Estimatet og kontrollen av normaltilnærmingen:</p>
+                <p>\[ \hat p=\frac{28}{1000}=0.028,\qquad n\hat p(1-\hat p)=1000\cdot 0.028\cdot 0.972=27.2\ \ge 5 \quad\checkmark \]</p>
+                <p><strong>Steg 2 — Finn kvantilen.</strong> 95 % gir \(z_{0.025}=1.960\).</p>
+                <p><strong>Steg 3 — Regn ut standardfeilen.</strong></p>
+                <p>\[ \sqrt{\frac{0.028\cdot 0.972}{1000}}=\sqrt{0.0000272}=0.00522 \]</p>
+                <p><strong>Steg 4 — Sett inn.</strong></p>
+                <p>\[ 0.028\pm 1.960\cdot 0.00522=0.028\pm 0.0102 \quad\Rightarrow\quad [0.018,\ 0.038] \]</p>
+                <p><strong>Steg 5 — Tolk.</strong> Vi er 95 % sikre på at sannsynligheten for at en tilfeldig del er defekt, ligger mellom 1.8 % og 3.8 %.</p>
+                <div class="answer"><b>\(p\in[0.018,\ 0.038]\).</b> Feilmarginen (0.010) er stor sammenliknet med selve estimatet (0.028). Når \(\hat p\) er liten, trengs det mange observasjoner for å anslå den presist.</div>
               </div>
             </details>
           </article>
