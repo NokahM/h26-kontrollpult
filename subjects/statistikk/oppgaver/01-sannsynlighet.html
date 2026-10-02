@@ -85,7 +85,9 @@
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
                 <h4>a) Hendelsestre</h4>
-                <p>La \(P\) = positiv hurtigtest, \(N\) = negativ, \(S\) = smittet, \(I\) = ikke smittet. Første forgrening er hurtigtestens svar, andre forgrening er fasiten. Tallene i parentes er antall personer av 1000. Sannsynlighetene på andre forgrening er betingede, for eksempel \(P(S\mid P)=\tfrac{400}{600}=\tfrac23\).</p>
+                <p><strong>Navngi hendelsene.</strong> \(P\) = positiv hurtigtest, \(N\) = negativ hurtigtest, \(S\) = smittet, \(I\) = ikke smittet.</p>
+                <p><strong>Finn tallene.</strong> Av 1000 testet 600 positivt og 400 negativt. Av de 600 positive var 200 ikke smittet, altså 400 smittet. Av de 400 negative var 100 smittet, altså 300 ikke smittet.</p>
+                <p><strong>Tegn treet.</strong> Første forgrening er hurtigtestens svar, andre forgrening er fasiten. Tallene i parentes er antall personer av 1000. Sannsynlighetene på andre forgrening er betingede, for eksempel \(P(S\mid P)=\tfrac{400}{600}=\tfrac23\).</p>
                 <!-- tikz:tre-hurtigtest --><svg class='tikz' role='img' aria-label='Hendelsestre: hurtigtest positiv eller negativ, deretter smittet eller ikke smittet' style='width:35.7em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-70.00782 -66.686984 303.05119 120.51414'>
 <defs>
 <path stroke='none' id='tre-hurtigtest-g0-58' d='M1.75741-.484184C1.75741-.744209 1.551183-.968369 1.273225-.968369S.789041-.744209 .789041-.484184S.995268 0 1.273225 0S1.75741-.224159 1.75741-.484184Z'/>
@@ -242,19 +244,33 @@
 </g>
 </svg><!-- /tikz:tre-hurtigtest -->
                 <p>De uthevede bladene er de smittede: totalt 400 + 100 = 500. De øvrige 200 + 300 = 500 er ikke smittet.</p>
-                <h4>b)</h4>
-                <p>\[ P(I\mid P)=\frac{200}{600}=\frac{1}{3}\approx 0.33 \]</p>
-                <h4>c)</h4>
+                <h4>b) Positiv, men ikke smittet</h4>
+                <p><strong>Hva spørres om?</strong> Per testet positivt, og vi skal finne sannsynligheten for at han ikke er smittet: \(P(I\mid P)\).</p>
+                <p><strong>Regel.</strong> Vi har antall, så betinget sannsynlighet er å telle innenfor gruppen vi vet at Per tilhører (de 600 positive):</p>
+                <p>\[ P(I\mid P)=\frac{\text{antall positive som ikke er smittet}}{\text{antall positive}}=\frac{200}{600}=\frac{1}{3}\approx 0.33 \]</p>
+                <p><strong>Svar.</strong> Det er en tredjedels sjanse for at Per ikke var smittet, selv om hurtigtesten var positiv.</p>
+                <h4>c) Minst én av to negative er smittet</h4>
+                <p><strong>Hva spørres om?</strong> Tor og Kari testet begge negativt. Vi skal finne \(P(\text{minst én smittet})\).</p>
+                <p><strong>Regel.</strong> «Minst én» løses enklest med komplementet «ingen». Først sannsynligheten for at én negativ person ikke er smittet:</p>
                 <p>\[ P(I\mid N)=\frac{300}{400}=\frac{3}{4} \]</p>
-                <p>Tor og Kari er uavhengige, så sannsynligheten for at ingen av dem er smittet er \((3/4)^2=9/16\). Da blir</p>
-                <p>\[ P(\text{minst én smittet})=1-\frac{9}{16}=\frac{7}{16}\approx 0.44 \]</p>
-                <h4>d)</h4>
-                <p>Av de 500 smittede testet 400 positivt:</p>
+                <p>Vi antar at Tor og Kari er uavhengige av hverandre. Da ganger vi sannsynlighetene for at hver av dem ikke er smittet:</p>
+                <p>\[ P(\text{ingen smittet})=\frac{3}{4}\cdot\frac{3}{4}=\frac{9}{16} \]</p>
+                <p>\[ P(\text{minst én smittet})=1-P(\text{ingen smittet})=1-\frac{9}{16}=\frac{7}{16}\approx 0.44 \]</p>
+                <p><strong>Svar.</strong> Det er 44 % sjanse for at minst én av dem likevel var smittet.</p>
+                <h4>d) Smittet og positiv</h4>
+                <p><strong>Hva spørres om?</strong> Gitt at personen er smittet, hva er sannsynligheten for positiv test: \(P(P\mid S)\). Legg merke til at betingelsen nå er snudd sammenliknet med b).</p>
+                <p><strong>Regel.</strong> Tell innenfor gruppen av smittede. Av de 500 smittede testet 400 positivt:</p>
                 <p>\[ P(P\mid S)=\frac{400}{500}=0.80 \]</p>
-                <h4>e)</h4>
-                <p>Uriktig resultat er enten falsk negativ eller falsk positiv. Fra studien: \(P(N\mid S)=1-0.80=0.20\) og \(P(P\mid I)=\tfrac{200}{500}=0.40\).</p>
-                <p>\[ 50\,000\cdot\bigl(0.01\cdot 0.20+0.99\cdot 0.40\bigr)=50\,000\cdot 0.398 \]</p>
-                <div class="answer"><b>19 900</b> personer forventes å få uriktig testresultat. Legg merke til at nesten alle feilene er falske positive, fordi de friske er så mange flere.</div>
+                <p><strong>Svar.</strong> Hurtigtesten fanger opp 80 % av de smittede.</p>
+                <h4>e) Forventet antall uriktige resultater</h4>
+                <p><strong>Hva spørres om?</strong> Et uriktig resultat er enten falsk negativ (smittet, men negativ test) eller falsk positiv (ikke smittet, men positiv test). Nå er andelen smittede 1 % i stedet for 50 % som i studien, så vi kan ikke telle direkte. Vi bruker de betingede sannsynlighetene fra studien og total sannsynlighet.</p>
+                <p><strong>Betingede sannsynligheter fra studien.</strong></p>
+                <p>\[ P(N\mid S)=1-P(P\mid S)=1-0.80=0.20,\qquad P(P\mid I)=\frac{200}{500}=0.40 \]</p>
+                <p><strong>Total sannsynlighet for feil.</strong> Med \(P(S)=0.01\) og \(P(I)=0.99\):</p>
+                <p>\[ P(\text{feil})=P(N\mid S)P(S)+P(P\mid I)P(I)=0.20\cdot 0.01+0.40\cdot 0.99=0.002+0.396=0.398 \]</p>
+                <p><strong>Forventet antall.</strong> Forventet antall er antall personer ganger sannsynligheten:</p>
+                <p>\[ 50\,000\cdot 0.398=19\,900 \]</p>
+                <div class="answer"><b>a) se treet · b) 1/3 · c) 7/16 ≈ 0.44 · d) 0.80 · e) 19 900 personer.</b> Legg merke til at nesten alle feilene i e) er falske positive (0.396 av 0.398), fordi de friske er så mange flere.</div>
               </div>
             </details>
           </article>
@@ -277,8 +293,15 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>a)</h4>
-                <p>La \(F\) = «blir ikke syk» og \(B\) = «får bivirkninger». Gitt: \(P(F)=0.65\), \(P(\bar F)=0.35\), \(P(B\mid F)=0.31\), \(P(B\mid \bar F)=0.15\). Sluttsannsynlighetene er produktet langs hver gren.</p>
+                <p><strong>Navngi hendelsene.</strong> \(F\) = «blir ikke syk» og \(B\) = «får bivirkninger». Strek over betyr komplement, for eksempel \(\bar F\) = «blir syk».</p>
+                <p><strong>Oversett teksten.</strong></p>
+                <ul>
+                <li>65 % blir ikke syke: \(P(F)=0.65\), og dermed \(P(\bar F)=1-0.65=0.35\).</li>
+                <li>Bivirkninger blant dem som ikke ble syke: \(P(B\mid F)=0.31\), og dermed \(P(\bar B\mid F)=0.69\).</li>
+                <li>Bivirkninger blant dem som ble syke: \(P(B\mid\bar F)=0.15\), og dermed \(P(\bar B\mid\bar F)=0.85\).</li>
+                </ul>
+                <h4>a) Hendelsestre</h4>
+                <p>Første forgrening er syk/ikke syk, fordi det er den inndelingen bivirkningstallene er gitt innenfor. Sluttsannsynlighetene er produktet langs hver gren.</p>
                 <!-- tikz:tre-vaksine --><svg class='tikz' role='img' aria-label='Hendelsestre: blir ikke syk F eller syk, deretter bivirkninger B eller ikke' style='width:33.1em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-70.00782 -66.686984 281.605217 120.86554'>
 <defs>
 <path stroke='none' id='tre-vaksine-g0-58' d='M1.75741-.484184C1.75741-.744209 1.551183-.968369 1.273225-.968369S.789041-.744209 .789041-.484184S.995268 0 1.273225 0S1.75741-.224159 1.75741-.484184Z'/>
@@ -439,13 +462,24 @@
 </g>
 </svg><!-- /tikz:tre-vaksine -->
                 <p>De uthevede bladene er «ingen bivirkninger». Summen deres er \(P(\bar B)=0.4485+0.2975=0.746\), som trengs i d).</p>
-                <h4>b)</h4>
+                <h4>b) Ikke syk og ingen bivirkninger</h4>
+                <p><strong>Hva spørres om?</strong> Begge deler samtidig: \(P(F\cap\bar B)\).</p>
+                <p><strong>Regel.</strong> Produktsetningen, altså å gange langs greina i treet:</p>
                 <p>\[ P(F\cap\bar B)=P(F)\cdot P(\bar B\mid F)=0.65\cdot 0.69=0.4485 \]</p>
-                <h4>c) Total sannsynlighet</h4>
-                <p>\[ P(B)=P(B\mid F)P(F)+P(B\mid\bar F)P(\bar F)=0.65\cdot 0.31+0.35\cdot 0.15=0.254 \]</p>
-                <h4>d) Bayes</h4>
-                <p>\[ P(F\mid \bar B)=\frac{P(F\cap\bar B)}{P(\bar B)}=\frac{0.4485}{1-0.254}=\frac{0.4485}{0.746} \]</p>
-                <div class="answer"><b>\(P(F\mid\bar B)\approx 0.60\)</b> — altså 60 %.</div>
+                <p><strong>Svar.</strong> 44.85 % av de vaksinerte blir ikke syke og får heller ingen bivirkninger.</p>
+                <h4>c) Bivirkninger</h4>
+                <p><strong>Hva spørres om?</strong> \(P(B)\), uansett om personen blir syk eller ikke.</p>
+                <p><strong>Regel.</strong> Total sannsynlighet: summer over de to måtene å få bivirkninger på (ikke syk eller syk):</p>
+                <p>\[ P(B)=P(B\mid F)P(F)+P(B\mid\bar F)P(\bar F)=0.31\cdot 0.65+0.15\cdot 0.35=0.2015+0.0525=0.254 \]</p>
+                <p><strong>Svar.</strong> 25.4 % av de vaksinerte får bivirkninger.</p>
+                <h4>d) Ikke syk, gitt ingen bivirkninger</h4>
+                <p><strong>Hva spørres om?</strong> Vi vet at personen ikke fikk bivirkninger, og skal finne sannsynligheten for at hen ikke blir syk: \(P(F\mid\bar B)\). Betingelsen er motsatt av den treet er tegnet med, så dette er Bayes.</p>
+                <p><strong>Regel.</strong> Definisjonen av betinget sannsynlighet: én grein delt på summen av greinene der betingelsen er oppfylt.</p>
+                <p>\[ P(F\mid\bar B)=\frac{P(F\cap\bar B)}{P(\bar B)} \]</p>
+                <p>Telleren er fra b). Nevneren er komplementet til c): \(P(\bar B)=1-0.254=0.746\).</p>
+                <p>\[ P(F\mid\bar B)=\frac{0.4485}{0.746}=0.60 \]</p>
+                <p><strong>Svar.</strong> Blant vaksinerte uten bivirkninger blir 60 % ikke syke.</p>
+                <div class="answer"><b>b) 0.4485 · c) 0.254 · d) \(P(F\mid\bar B)\approx 0.60\).</b></div>
               </div>
             </details>
           </article>
@@ -467,8 +501,15 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>\(A\) = «bilen slipper ut for mye», \(B\) = «testen viser høyt utslipp». Gitt \(P(A)=0.20\), \(P(B\mid A)=0.98\), \(P(B\mid\bar A)=0.15\).</p>
+                <p><strong>Navngi hendelsene.</strong> \(A\) = «bilen slipper ut for mye», \(B\) = «testen viser høyt utslipp».</p>
+                <p><strong>Oversett teksten.</strong></p>
+                <ul>
+                <li>20 % slipper ut for mye: \(P(A)=0.20\), så \(P(\bar A)=0.80\).</li>
+                <li>Testen avslører 98 % av dem: \(P(B\mid A)=0.98\), så \(P(\bar B\mid A)=0.02\).</li>
+                <li>Falsk alarm i 15 % av de rene bilene: \(P(B\mid\bar A)=0.15\), så \(P(\bar B\mid\bar A)=0.85\).</li>
+                </ul>
                 <h4>a) Hendelsestre</h4>
+                <p>Første forgrening er bilens virkelige tilstand, andre er testresultatet.</p>
                 <!-- tikz:tre-utslipp --><svg class='tikz' role='img' aria-label='Hendelsestre: bilen slipper ut for mye A eller ikke, deretter testen viser høyt utslipp B eller ikke' style='width:32.5em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-70.00782 -66.686984 276.524786 120.86554'>
 <defs>
 <path stroke='none' id='tre-utslipp-g0-58' d='M1.75741-.484184C1.75741-.744209 1.551183-.968369 1.273225-.968369S.789041-.744209 .789041-.484184S.995268 0 1.273225 0S1.75741-.224159 1.75741-.484184Z'/>
@@ -623,11 +664,17 @@
 </g>
 </svg><!-- /tikz:tre-utslipp -->
                 <p>De uthevede bladene er alle bilene testen sier slipper ut for mye. Summen er \(P(B)\) i b), og det øverste av dem er telleren i c).</p>
-                <h4>b)</h4>
-                <p>\[ P(B)=0.20\cdot 0.98+0.80\cdot 0.15=0.196+0.120=0.316 \]</p>
-                <h4>c)</h4>
-                <p>\[ P(A\mid B)=\frac{0.196}{0.316} \]</p>
-                <div class="answer"><b>\(P(A\mid B)\approx 0.62\).</b> Testen fanger 98 % av verstingene, men fordi 80 % av bilene er i orden, er nesten 4 av 10 «stryk» falske alarmer.</div>
+                <h4>b) Testen sier «for mye»</h4>
+                <p><strong>Hva spørres om?</strong> \(P(B)\) for en tilfeldig bil.</p>
+                <p><strong>Regel.</strong> Total sannsynlighet: testen kan si «for mye» både om biler som faktisk slipper ut for mye og om biler som ikke gjør det.</p>
+                <p>\[ P(B)=P(B\mid A)P(A)+P(B\mid\bar A)P(\bar A)=0.98\cdot 0.20+0.15\cdot 0.80=0.196+0.120=0.316 \]</p>
+                <p><strong>Svar.</strong> Testen konkluderer med for høyt utslipp for 31.6 % av bilene.</p>
+                <h4>c) Virkelig for mye, gitt at testen sier det</h4>
+                <p><strong>Hva spørres om?</strong> \(P(A\mid B)\). Treet er tegnet med \(A\) først, så vi må snu det: Bayes.</p>
+                <p><strong>Regel.</strong></p>
+                <p>\[ P(A\mid B)=\frac{P(B\mid A)P(A)}{P(B)}=\frac{0.98\cdot 0.20}{0.316}=\frac{0.196}{0.316}=0.62 \]</p>
+                <p><strong>Svar.</strong> Når testen sier at en bil slipper ut for mye, stemmer det i 62 % av tilfellene.</p>
+                <div class="answer"><b>b) 0.316 · c) \(P(A\mid B)\approx 0.62\).</b> Testen fanger 98 % av verstingene, men fordi 80 % av bilene er i orden, er nesten 4 av 10 «stryk» falske alarmer.</div>
               </div>
             </details>
           </article>
@@ -654,10 +701,14 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>a)</h4>
-                <p>\[ E(X)=0\cdot 0.12+1\cdot 0.36+2\cdot 0.52=1.40 \]</p>
-                <h4>b) Total sannsynlighet</h4>
-                <p>Med \(A\) = «har matallergi». Tre forgreninger først, én for hvert antall måltider:</p>
+                <h4>a) Forventningsverdi</h4>
+                <p><strong>Regel.</strong> Forventningen til en diskret variabel er summen av verdi ganger sannsynlighet:</p>
+                <p>\[ E(X)=\sum_x x\cdot P(X=x)=0\cdot 0.12+1\cdot 0.36+2\cdot 0.52=0+0.36+1.04=1.40 \]</p>
+                <p><strong>Svar.</strong> En passasjer bestiller i gjennomsnitt 1.40 måltider.</p>
+                <h4>b) Matallergi, total sannsynlighet</h4>
+                <p><strong>Navngi hendelsene.</strong> \(A\) = «har matallergi». Inndelingen er \(X=0\), \(X=1\) og \(X=2\). Disse er disjunkte og dekker alle passasjerer.</p>
+                <p><strong>Oversett teksten.</strong> \(P(A\mid X=0)=0.44\), \(P(A\mid X=1)=0.08\) og \(P(A\mid X=2)=0.03\).</p>
+                <p>Treet får tre forgreninger først, én for hvert antall måltider:</p>
                 <!-- tikz:tre-flymat --><svg class='tikz' role='img' aria-label='Hendelsestre: 0, 1 eller 2 bestilte måltider, deretter matallergi A eller ikke' style='width:33.1em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-70.00782 -67.012391 281.704399 197.73835'>
 <defs>
 <path stroke='none' id='tre-flymat-g0-58' d='M1.75741-.484184C1.75741-.744209 1.551183-.968369 1.273225-.968369S.789041-.744209 .789041-.484184S.995268 0 1.273225 0S1.75741-.224159 1.75741-.484184Z'/>
@@ -899,11 +950,16 @@
 </g>
 </g>
 </svg><!-- /tikz:tre-flymat -->
-                <p>\(P(A)\) er summen av de uthevede bladene:</p>
-                <p>\[ P(A)=0.12\cdot 0.44+0.36\cdot 0.08+0.52\cdot 0.03 = 0.0528+0.0288+0.0156 = 0.0972 \]</p>
-                <h4>c) Bayes</h4>
-                <p>\[ P(X=0\mid A)=\frac{0.12\cdot 0.44}{0.0972}=\frac{0.0528}{0.0972} \]</p>
-                <div class="answer"><b>\(E(X)=1.40\) · \(P(A)=0.0972\) · \(P(X=0\mid A)\approx 0.54\).</b></div>
+                <p><strong>Regel.</strong> Total sannsynlighet: \(P(A)\) er summen av de uthevede bladene, altså summen over alle tre gruppene:</p>
+                <p>\[ P(A)=\sum_{x=0}^{2}P(A\mid X=x)P(X=x)=0.44\cdot 0.12+0.08\cdot 0.36+0.03\cdot 0.52 \]</p>
+                <p>\[ =0.0528+0.0288+0.0156=0.0972 \]</p>
+                <p><strong>Svar.</strong> 9.72 % av passasjerene har matallergi.</p>
+                <h4>c) Ingen måltider, gitt matallergi</h4>
+                <p><strong>Hva spørres om?</strong> \(P(X=0\mid A)\). Treet er tegnet med \(X\) først, så vi snur det: Bayes.</p>
+                <p><strong>Regel.</strong> Én grein (\(X=0\) og allergi) delt på summen av alle allergigreinene:</p>
+                <p>\[ P(X=0\mid A)=\frac{P(A\mid X=0)P(X=0)}{P(A)}=\frac{0.44\cdot 0.12}{0.0972}=\frac{0.0528}{0.0972}=0.54 \]</p>
+                <p><strong>Svar.</strong> Over halvparten av passasjerene med matallergi bestiller ingen måltider, selv om bare 12 % av alle passasjerer gjør det.</p>
+                <div class="answer"><b>a) \(E(X)=1.40\) · b) \(P(A)=0.0972\) · c) \(P(X=0\mid A)\approx 0.54\).</b></div>
               </div>
             </details>
           </article>
@@ -924,7 +980,9 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>\(V\) = smittet, \(F\) = hunnfisk. \(P(F)=0.8\), \(P(V\mid F)=0.05\), \(P(V\mid\bar F)=0.30\).</p>
+                <p><strong>Navngi hendelsene.</strong> \(F\) = «fisken er en hunn», \(V\) = «fisken er smittet».</p>
+                <p><strong>Oversett teksten.</strong> \(P(F)=0.8\), så \(P(\bar F)=0.2\). \(P(V\mid F)=0.05\) og \(P(V\mid\bar F)=0.30\).</p>
+                <p>Treet har kjønn som første forgrening og smitte som andre:</p>
                 <!-- tikz:tre-fisk --><svg class='tikz' role='img' aria-label='Hendelsestre: hunn F eller hann, deretter smittet V eller ikke' style='width:32.0em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-70.00782 -66.686984 271.814582 120.86554'>
 <defs>
 <path stroke='none' id='tre-fisk-g0-58' d='M1.75741-.484184C1.75741-.744209 1.551183-.968369 1.273225-.968369S.789041-.744209 .789041-.484184S.995268 0 1.273225 0S1.75741-.224159 1.75741-.484184Z'/>
@@ -1072,11 +1130,17 @@
 </g>
 </svg><!-- /tikz:tre-fisk -->
                 <p>De smittede er de uthevede bladene: \(0.04+0.06=0.10\). Bare 0.04 av dem er hunner.</p>
-                <h4>a)</h4>
-                <p>\[ P(V)=P(V\mid F)P(F)+P(V\mid\bar F)P(\bar F)=0.05\cdot 0.8+0.30\cdot 0.2=0.10 \]</p>
-                <h4>b)</h4>
-                <p>\[ P(F\mid V)=\frac{P(V\cap F)}{P(V)}=\frac{0.05\cdot 0.8}{0.10}=\frac{0.04}{0.10}=0.40 \]</p>
-                <div class="answer"><b>10 % av fiskene er smittet; 40 % av de smittede er hunner</b> — selv om 80 % av dammen er hunner.</div>
+                <h4>a) Smittet</h4>
+                <p><strong>Hva spørres om?</strong> \(P(V)\) for en tilfeldig fisk.</p>
+                <p><strong>Regel.</strong> Total sannsynlighet over hunner og hanner:</p>
+                <p>\[ P(V)=P(V\mid F)P(F)+P(V\mid\bar F)P(\bar F)=0.05\cdot 0.8+0.30\cdot 0.2=0.04+0.06=0.10 \]</p>
+                <p><strong>Svar.</strong> 10 % av fiskene i dammen er smittet.</p>
+                <h4>b) Hunn, gitt smittet</h4>
+                <p><strong>Hva spørres om?</strong> \(P(F\mid V)\). Betingelsen er snudd i forhold til treet, så dette er Bayes.</p>
+                <p><strong>Regel.</strong></p>
+                <p>\[ P(F\mid V)=\frac{P(V\cap F)}{P(V)}=\frac{P(V\mid F)P(F)}{P(V)}=\frac{0.05\cdot 0.8}{0.10}=\frac{0.04}{0.10}=0.40 \]</p>
+                <p><strong>Svar.</strong> En smittet fisk er en hunn med 40 % sannsynlighet.</p>
+                <div class="answer"><b>a) 0.10 · b) 0.40.</b> 80 % av dammen er hunner, men bare 40 % av de smittede er det, fordi hannene smittes seks ganger så ofte.</div>
               </div>
             </details>
           </article>
@@ -1098,10 +1162,12 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>\(S_1,S_2,S_3\) = skolene (disjunkte og dekker hele utfallsrommet), \(G\) = ståkarakter.</p>
-                <p>\(P(S_1)=0.5,\ P(S_2)=0.3,\ P(S_3)=0.2\) og \(P(G\mid S_1)=0.70,\ P(G\mid S_2)=0.60,\ P(G\mid S_3)=0.55\).</p>
+                <p><strong>Navngi hendelsene.</strong> \(S_1,S_2,S_3\) = besvarelsen kommer fra skole 1, 2 eller 3. De er disjunkte og dekker alle besvarelsene. \(G\) = «ståkarakter».</p>
+                <p><strong>Oversett teksten.</strong></p>
+                <p>\[ P(S_1)=0.5,\quad P(S_2)=0.3,\quad P(S_3)=0.2 \]</p>
+                <p>\[ P(G\mid S_1)=0.70,\quad P(G\mid S_2)=0.60,\quad P(G\mid S_3)=0.55 \]</p>
                 <h4>a) Hendelsestre</h4>
-                <p>Tre greiner fra roten, fordi skolene er tre disjunkte hendelser som dekker alt. De uthevede bladene er ståkarakter.</p>
+                <p>Tre greiner fra roten, én for hver skole, og deretter stå/stryk. Sluttsannsynlighetene er produktene langs hver gren. De uthevede bladene er ståkarakter.</p>
                 <!-- tikz:tre-skoler --><svg class='tikz' role='img' aria-label='Hendelsestre: skole 1, 2 eller 3, deretter ståkarakter G eller ikke' style='width:32.3em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-70.00782 -66.686993 274.174908 200.23564'>
 <defs>
 <path stroke='none' id='tre-skoler-g0-58' d='M1.75741-.484184C1.75741-.744209 1.551183-.968369 1.273225-.968369S.789041-.744209 .789041-.484184S.995268 0 1.273225 0S1.75741-.224159 1.75741-.484184Z'/>
@@ -1316,11 +1382,18 @@
 </g>
 </g>
 </svg><!-- /tikz:tre-skoler -->
-                <h4>b)</h4>
-                <p>\[ P(G)=0.5\cdot 0.70+0.3\cdot 0.60+0.2\cdot 0.55=0.35+0.18+0.11=0.64 \]</p>
-                <h4>c)</h4>
-                <p>\[ P(S_1\mid G)=\frac{P(G\mid S_1)P(S_1)}{P(G)}=\frac{0.35}{0.64}\approx 0.547 \]</p>
-                <div class="answer"><b>64 % står; av dem kommer ca. 55 % fra Skole 1.</b></div>
+                <h4>b) Ståkarakter</h4>
+                <p><strong>Hva spørres om?</strong> \(P(G)\) for en tilfeldig besvarelse.</p>
+                <p><strong>Regel.</strong> Total sannsynlighet over de tre skolene:</p>
+                <p>\[ P(G)=P(G\mid S_1)P(S_1)+P(G\mid S_2)P(S_2)+P(G\mid S_3)P(S_3) \]</p>
+                <p>\[ =0.70\cdot 0.5+0.60\cdot 0.3+0.55\cdot 0.2=0.35+0.18+0.11=0.64 \]</p>
+                <p><strong>Svar.</strong> 64 % av besvarelsene har ståkarakter.</p>
+                <h4>c) Skole 1, gitt ståkarakter</h4>
+                <p><strong>Hva spørres om?</strong> \(P(S_1\mid G)\). Dette er Bayes: vi snur treet.</p>
+                <p><strong>Regel.</strong></p>
+                <p>\[ P(S_1\mid G)=\frac{P(G\mid S_1)P(S_1)}{P(G)}=\frac{0.35}{0.64}=0.547 \]</p>
+                <p><strong>Svar.</strong> En besvarelse med ståkarakter kommer fra skole 1 med 55 % sannsynlighet. Det er litt mer enn skolens andel av alle besvarelsene (50 %), fordi skole 1 har høyest ståprosent.</p>
+                <div class="answer"><b>b) 0.64 · c) ca. 0.55.</b></div>
               </div>
             </details>
           </article>
@@ -1337,7 +1410,9 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>\(X\) = «har sykdommen», \(S\) = «testen er positiv». Gitt \(P(X)=0.005\), \(P(S\mid X)=0.99\), \(P(S\mid\bar X)=0.01\) og \(P(\bar X)=0.995\).</p>
+                <p><strong>Navngi hendelsene.</strong> \(X\) = «har sykdommen», \(S\) = «testen er positiv».</p>
+                <p><strong>Oversett teksten.</strong> \(P(X)=0.005\), så \(P(\bar X)=0.995\). \(P(S\mid X)=0.99\) og \(P(S\mid\bar X)=0.01\).</p>
+                <p><strong>Hva spørres om?</strong> \(P(X\mid S)\): sannsynligheten for å være syk, gitt positiv test. Oppgaven gir sannsynlighetene den andre veien, \(P(S\mid X)\), så dette er Bayes.</p>
                 <!-- tikz:tre-diagnose --><svg class='tikz' role='img' aria-label='Hendelsestre: syk X eller frisk, deretter positiv test S eller negativ' style='width:33.6em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-70.00782 -66.686984 285.77151 120.86554'>
 <defs>
 <path stroke='none' id='tre-diagnose-g0-58' d='M1.75741-.484184C1.75741-.744209 1.551183-.968369 1.273225-.968369S.789041-.744209 .789041-.484184S.995268 0 1.273225 0S1.75741-.224159 1.75741-.484184Z'/>
@@ -1498,8 +1573,13 @@
 </g>
 </svg><!-- /tikz:tre-diagnose -->
                 <p>De positive testene er de to uthevede bladene. Det nederste, friske som tester positivt, er dobbelt så stort som det øverste.</p>
-                <p>\[ P(X\mid S)=\frac{P(S\mid X)P(X)}{P(S\mid X)P(X)+P(S\mid\bar X)P(\bar X)}=\frac{0.99\cdot 0.005}{0.99\cdot 0.005+0.01\cdot 0.995}=\frac{0.00495}{0.01490} \]</p>
-                <div class="answer"><b>\(P(X\mid S)\approx 0.33\).</b> Bare en tredel av dem som tester positivt har faktisk sykdommen: de friske er 199 ganger så mange, så den lille feilraten på 1 % veier tyngre enn treffraten på 99 %.</div>
+                <p><strong>Steg 1 — Telleren:</strong> syk og positiv.</p>
+                <p>\[ P(S\cap X)=P(S\mid X)P(X)=0.99\cdot 0.005=0.00495 \]</p>
+                <p><strong>Steg 2 — Nevneren:</strong> alle positive, med total sannsynlighet.</p>
+                <p>\[ P(S)=P(S\mid X)P(X)+P(S\mid\bar X)P(\bar X)=0.00495+0.01\cdot 0.995=0.00495+0.00995=0.01490 \]</p>
+                <p><strong>Steg 3 — Bayes.</strong></p>
+                <p>\[ P(X\mid S)=\frac{P(S\cap X)}{P(S)}=\frac{0.00495}{0.01490}=0.33 \]</p>
+                <div class="answer"><b>\(P(X\mid S)\approx 0.33\).</b> Bare en tredjedel av dem som tester positivt har faktisk sykdommen. De friske er 199 ganger så mange, så den lille feilraten på 1 % veier tyngre enn treffraten på 99 %.</div>
               </div>
             </details>
           </article>
@@ -1517,7 +1597,9 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>\(I_1,I_2\) = hvilken ingeniør, \(F\) = «feil i anslaget».</p>
+                <p><strong>Navngi hendelsene.</strong> \(I_1\) og \(I_2\) = anslaget er gjort av ingeniør 1 eller 2. \(F\) = «anslaget har alvorlig feil».</p>
+                <p><strong>Oversett teksten.</strong> \(P(I_1)=0.80\), \(P(I_2)=0.20\), \(P(F\mid I_1)=0.02\) og \(P(F\mid I_2)=0.04\).</p>
+                <p><strong>Hva spørres om?</strong> «Neste prisanslag med alvorlig feil» betyr at vi vet at det er feil, og skal finne sannsynligheten for at ingeniør 1 laget det: \(P(I_1\mid F)\). Det er Bayes.</p>
                 <!-- tikz:tre-ingenior --><svg class='tikz' role='img' aria-label='Hendelsestre: ingeniør 1 eller 2, deretter feil F eller ikke' style='width:32.6em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-70.00782 -66.686984 277.502231 120.86554'>
 <defs>
 <path stroke='none' id='tre-ingenior-g0-58' d='M1.75741-.484184C1.75741-.744209 1.551183-.968369 1.273225-.968369S.789041-.744209 .789041-.484184S.995268 0 1.273225 0S1.75741-.224159 1.75741-.484184Z'/>
@@ -1677,10 +1759,11 @@
 </g>
 </g>
 </svg><!-- /tikz:tre-ingenior -->
-                <p>Anslagene med feil er de uthevede bladene:</p>
-                <p>\[ P(F)=0.80\cdot 0.02+0.20\cdot 0.04=0.016+0.008=0.024 \]</p>
-                <p>\[ P(I_1\mid F)=\frac{0.016}{0.024}=\frac{2}{3} \]</p>
-                <div class="answer"><b>\(P(I_1\mid F)=2/3\approx 0.67\).</b> Ingeniør 1 er dobbelt så nøyaktig, men gjør fire ganger så mange anslag — og står derfor for flertallet av feilene.</div>
+                <p><strong>Steg 1 — Nevneren</strong>, med total sannsynlighet. Anslagene med feil er de uthevede bladene:</p>
+                <p>\[ P(F)=P(F\mid I_1)P(I_1)+P(F\mid I_2)P(I_2)=0.02\cdot 0.80+0.04\cdot 0.20=0.016+0.008=0.024 \]</p>
+                <p><strong>Steg 2 — Bayes.</strong></p>
+                <p>\[ P(I_1\mid F)=\frac{P(F\mid I_1)P(I_1)}{P(F)}=\frac{0.016}{0.024}=\frac{2}{3} \]</p>
+                <div class="answer"><b>\(P(I_1\mid F)=2/3\approx 0.67\).</b> Ingeniør 1 er dobbelt så nøyaktig, men gjør fire ganger så mange anslag, og står derfor for flertallet av feilene.</div>
               </div>
             </details>
           </article>
@@ -1702,13 +1785,22 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>Uniform sannsynlighetsmodell — alle biler er like sannsynlige. Da er betinget sannsynlighet rett og slett å telle innenfor gruppen.</p>
-                <h4>a)</h4>
-                <p>\[ P(\overline{E\cup H}\mid P)=\frac{2\,889\,023-(788\,753+369\,696)}{2\,889\,023}=\frac{1\,730\,574}{2\,889\,023}\approx 0.599 \]</p>
-                <h4>b)</h4>
-                <p>Antall el-biler totalt er \(36\,986+788\,753=825\,739\), og av dem er 36 986 varebiler:</p>
-                <p>\[ P(V\mid E)=\frac{36\,986}{825\,739}\approx 0.0448 \]</p>
-                <div class="answer"><b>a) ca. 60 % · b) ca. 4.5 %.</b></div>
+                <p><strong>Modell.</strong> Alle biler er like sannsynlige å bli trukket, altså en uniform sannsynlighetsmodell. Da er en betinget sannsynlighet rett og slett å telle innenfor gruppen vi vet at bilen tilhører:</p>
+                <p>\[ P(A\mid B)=\frac{\text{antall i både }A\text{ og }B}{\text{antall i }B} \]</p>
+                <p><strong>Navngi hendelsene.</strong> \(P\) = personbil, \(V\) = varebil, \(E\) = el-bil, \(H\) = hybrid-bil.</p>
+                <h4>a) Verken el eller hybrid, gitt personbil</h4>
+                <p><strong>Hva spørres om?</strong> \(P(\overline{E\cup H}\mid P)\): blant personbilene, andelen som verken er el- eller hybrid-bil.</p>
+                <p><strong>Tell.</strong> Antall personbiler som verken er el eller hybrid:</p>
+                <p>\[ 2\,889\,023-(788\,753+369\,696)=2\,889\,023-1\,158\,449=1\,730\,574 \]</p>
+                <p>\[ P(\overline{E\cup H}\mid P)=\frac{1\,730\,574}{2\,889\,023}=0.599 \]</p>
+                <p><strong>Svar.</strong> Omtrent 60 % av personbilene går verken på strøm eller er hybrider.</p>
+                <h4>b) Varebil, gitt el-bil</h4>
+                <p><strong>Hva spørres om?</strong> \(P(V\mid E)\): blant alle el-bilene, andelen som er varebiler. Nå er det el-bilene som er gruppen vi teller innenfor.</p>
+                <p><strong>Tell.</strong> Antall el-biler totalt er el-personbiler pluss el-varebiler:</p>
+                <p>\[ 788\,753+36\,986=825\,739 \]</p>
+                <p>\[ P(V\mid E)=\frac{36\,986}{825\,739}=0.0448 \]</p>
+                <p><strong>Svar.</strong> Omtrent 4.5 % av el-bilene er varebiler.</p>
+                <div class="answer"><b>a) ca. 0.60 · b) ca. 0.045.</b></div>
               </div>
             </details>
           </article>
@@ -1730,25 +1822,38 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>Sett opp tabellen først — den løser alle tre punktene:</p>
+                <p><strong>Modell.</strong> Rommene deles ut tilfeldig, så alle rom er like sannsynlige: uniform modell, \(P=\frac{\text{gunstige}}{\text{mulige}}\). Sett opp tabellen først. Den løser alle tre punktene:</p>
                 <div class="dtable-wrap"><table class="dtable">
-                  <thead><tr><th>Dørfarge</th><th class="num">Badekar</th><th class="num">Uten</th><th class="num">Sum</th></tr></thead>
-                  <tbody>
-                    <tr><td>Rød</td><td class="num">2</td><td class="num">2</td><td class="num">4</td></tr>
-                    <tr><td>Svart</td><td class="num">1</td><td class="num">3</td><td class="num">4</td></tr>
-                    <tr><td>Grønn</td><td class="num">1</td><td class="num">1</td><td class="num">2</td></tr>
-                    <tr><td><strong>Sum</strong></td><td class="num"><strong>4</strong></td><td class="num"><strong>6</strong></td><td class="num"><strong>10</strong></td></tr>
-                  </tbody>
+                <thead><tr><th>Dørfarge</th><th class="num">Badekar</th><th class="num">Uten</th><th class="num">Sum</th></tr></thead>
+                <tbody>
+                <tr><td>Rød</td><td class="num">2</td><td class="num">2</td><td class="num">4</td></tr>
+                <tr><td>Svart</td><td class="num">1</td><td class="num">3</td><td class="num">4</td></tr>
+                <tr><td>Grønn</td><td class="num">1</td><td class="num">1</td><td class="num">2</td></tr>
+                <tr><td><strong>Sum</strong></td><td class="num"><strong>4</strong></td><td class="num"><strong>6</strong></td><td class="num"><strong>10</strong></td></tr>
+                </tbody>
                 </table></div>
-                <h4>a)</h4>
-                <p>\[ P(\bar B)=\frac{6}{10}=0.6 \]</p>
-                <h4>b)</h4>
-                <p>Uten tilbakelegging:</p>
-                <p>\[ P(\text{begge badekar})=\frac{4}{10}\cdot\frac{3}{9}=\frac{2}{15}\approx 0.13 \]</p>
-                <p>Samme svar hypergeometrisk med \(N=10\), \(M=4\), \(n=2\): \(\binom{4}{2}\binom{6}{0}\big/\binom{10}{2}=6/45=2/15\).</p>
-                <h4>c)</h4>
-                <p>Vi ser nå kun på de 6 rommene uten badekar: 2 røde, 3 svarte, 1 grønn. Antall måter å velge én av hver farge er \(2\cdot 3\cdot 1=6\), og antall måter å velge 3 rom av 6 er \(\binom{6}{3}=20\):</p>
-                <p>\[ p=\frac{2\cdot 3\cdot 1}{\binom{6}{3}}=\frac{6}{20}=\frac{3}{10}=0.3 \]</p>
+                <p><strong>Navngi hendelsen.</strong> \(B\) = «rommet har badekar».</p>
+                <h4>a) Ikke badekar</h4>
+                <p>Fra tabellen er det 4 rom med badekar av 10. Komplementregelen gir</p>
+                <p>\[ P(\bar B)=1-P(B)=1-\frac{4}{10}=\frac{6}{10}=0.6 \]</p>
+                <p>Du kan også lese det rett av tabellen: 6 rom uten badekar av 10.</p>
+                <h4>b) Begge rommene har badekar</h4>
+                <p><strong>Navngi hendelsene.</strong> \(B_1\) = «første rom har badekar», \(B_2\) = «andre rom har badekar».</p>
+                <p><strong>Regel.</strong> To nøkler deles ut uten tilbakelegging, så sannsynligheten for det andre rommet avhenger av det første. Produktsetningen:</p>
+                <p>\[ P(B_1\cap B_2)=P(B_1)\cdot P(B_2\mid B_1)=\frac{4}{10}\cdot\frac{3}{9}=\frac{12}{90}=\frac{2}{15}\approx 0.13 \]</p>
+                <p>Gitt at første rom har badekar, er det 3 badekarrom igjen blant 9 rom. Det er derfor det står \(\tfrac39\).</p>
+                <p><strong>Alternativt, hypergeometrisk.</strong> Velg 2 av 10 rom på én gang (\(N=10\), \(M=4\) med badekar, \(n=2\)):</p>
+                <p>\[ P(\text{begge badekar})=\frac{\binom{4}{2}\binom{6}{0}}{\binom{10}{2}}=\frac{6\cdot 1}{45}=\frac{2}{15} \]</p>
+                <h4>c) Tre forskjellige dørfarger</h4>
+                <p><strong>Hva er utvalget?</strong> Gjestene får tre rom <em>uten</em> badekar, så vi ser bare på de 6 rommene i kolonnen «Uten»: 2 røde, 3 svarte og 1 grønn.</p>
+                <p><strong>Hva er gunstig?</strong> Det finnes bare tre farger, så «tre forskjellige» betyr nøyaktig én rød, én svart og én grønn.</p>
+                <p><strong>Mulige utfall.</strong> Antall måter å velge 3 rom blant 6, når rekkefølgen ikke betyr noe:</p>
+                <p>\[ \binom{6}{3}=\frac{6\cdot 5\cdot 4}{3\cdot 2\cdot 1}=20 \]</p>
+                <p><strong>Gunstige utfall.</strong> Velg ett rom av hver farge. Multiplikasjonsprinsippet gir</p>
+                <p>\[ \binom{2}{1}\binom{3}{1}\binom{1}{1}=2\cdot 3\cdot 1=6 \]</p>
+                <p><strong>Sannsynligheten.</strong></p>
+                <p>\[ P(\text{tre farger})=\frac{6}{20}=0.3 \]</p>
+                <p><strong>Kontroll med produktsetningen.</strong> Rekkefølgen rød, svart, grønn har sannsynlighet \(\tfrac26\cdot\tfrac35\cdot\tfrac14=\tfrac{1}{20}\). Fargene kan komme i \(3!=6\) rekkefølger med samme sannsynlighet, så svaret blir \(6\cdot\tfrac{1}{20}=0.3\).</p>
                 <div class="answer"><b>a) 0.6 · b) 2/15 ≈ 0.13 · c) 0.3.</b></div>
               </div>
             </details>
