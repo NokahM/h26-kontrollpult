@@ -145,11 +145,14 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>a)</h4>
-                <p>Krav 1: \(t\ge 0\) og \(e^{-t}&gt;0\), så \(f(t)\ge 0\) overalt. Krav 2, med delvis integrasjon:</p>
-                <p>\[ \int_0^{\infty}t e^{-t}\,dt=\Bigl[-te^{-t}\Bigr]_0^{\infty}+\int_0^{\infty}e^{-t}\,dt=0+1=1 \]</p>
-                <p>Begge kravene er oppfylt. Videre:</p>
-                <p>\[ P(T\le 5)=\int_0^{5}t e^{-t}\,dt=1-6e^{-5}\approx 0.96 \]</p>
+                <h4>a) Hvorfor en sannsynlighetstetthet, og P(T ≤ 5)</h4>
+                <p>«Forklar hvorfor» betyr at vi må vise begge kravene.</p>
+                <p><strong>Krav 1: \(f(t)\ge 0\) overalt.</strong> For \(t&lt;0\) er \(f(t)=0\). For \(t\ge 0\) er både \(t\ge 0\) og \(e^{-t}&gt;0\), så produktet \(t\,e^{-t}\ge 0\).</p>
+                <p><strong>Krav 2: totalt areal er 1.</strong> Vi integrerer med delvis integrasjon, \(\int u\,v'=uv-\int u'v\), med \(u=t\) og \(v'=e^{-t}\), slik at \(u'=1\) og \(v=-e^{-t}\):</p>
+                <p>\[ \int_0^{\infty}t e^{-t}\,dt=\Bigl[-te^{-t}\Bigr]_0^{\infty}+\int_0^{\infty}e^{-t}\,dt=(0-0)+\Bigl[-e^{-t}\Bigr]_0^{\infty}=0+(0+1)=1 \]</p>
+                <p>(\(te^{-t}\to 0\) når \(t\to\infty\), fordi eksponentialfunksjonen vinner over \(t\).) Begge kravene er oppfylt, så \(f\) er en sannsynlighetstetthet.</p>
+                <p><strong>Sannsynligheten for svar innen 5 dager.</strong> Samme antiderivert, \(-te^{-t}-e^{-t}=-(t+1)e^{-t}\), men nå fra 0 til 5:</p>
+                <p>\[ P(T\le 5)=\int_0^{5}t e^{-t}\,dt=\Bigl[-(t+1)e^{-t}\Bigr]_0^{5}=-6e^{-5}-(-1)=1-6e^{-5}=1-6\cdot 0.00674=0.96 \]</p>
                 <!-- tikz:ek-respons --><svg class='tikz' role='img' style='width:28.3em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-66.32828 -70.008805 240.926875 77.403878'>
 <defs>
 <path stroke='none' id='ek-respons-g0-20' d='M6.204732-5.44259C6.28543-5.478456 6.38406-5.532254 6.38406-5.648817S6.294396-5.846077 6.195766-5.846077C6.177833-5.846077 6.133001-5.846077 6.025405-5.792279L.950436-3.353425C.824907-3.29066 .771108-3.245828 .771108-3.138232C.771108-3.021669 .869738-2.96787 .950436-2.932005L6.007472-.502117C6.133001-.439352 6.168867-.439352 6.1868-.439352C6.330262-.439352 6.38406-.564882 6.38406-.627646C6.38406-.744209 6.312329-.780075 6.222665-.824907L1.407721-3.147198L6.204732-5.44259ZM6.052304 1.380822C6.204732 1.380822 6.38406 1.380822 6.38406 1.192528C6.38406 .995268 6.1868 .995268 6.052304 .995268H1.102864C.968369 .995268 .771108 .995268 .771108 1.192528C.771108 1.380822 .950436 1.380822 1.102864 1.380822H6.052304Z'/>
@@ -199,13 +202,23 @@
 </g>
 </g>
 </svg><!-- /tikz:ek-respons -->
-                <h4>b)</h4>
-                <p>Definisjonene for en kontinuerlig variabel:</p>
-                <p>\[ E(T)=\int_0^{\infty}t\cdot t e^{-t}\,dt=\int_0^{\infty}t^2e^{-t}\,dt=2 \]</p>
-                <p>\[ E(T^2)=\int_0^{\infty}t^2\cdot t e^{-t}\,dt=\int_0^{\infty}t^3e^{-t}\,dt=6 \quad\Rightarrow\quad \operatorname{Var}(T)=6-2^2=2 \]</p>
-                <h4>c)</h4>
-                <p>Sentralgrenseteoremet med \(n=100\): \(\bar T\) er tilnærmet normalfordelt med \(\mu=2\) og \(\sigma_{\bar T}=\sqrt{2/100}=0.1414\):</p>
-                <p>\[ P(\bar T\ge 2.2)=1-G\!\left(\frac{2.2-2}{0.1414}\right)=1-G(1.41)\approx 0.079 \]</p>
+                <p><strong>Svar.</strong> 96 % av de spurte svarer innen 5 dager.</p>
+                <h4>b) E(T) og Var(T)</h4>
+                <p><strong>Forventning.</strong> Definisjonen for en kontinuerlig variabel er \(E(T)=\int t\,f(t)\,dt\):</p>
+                <p>\[ E(T)=\int_0^{\infty}t\cdot t e^{-t}\,dt=\int_0^{\infty}t^2e^{-t}\,dt \]</p>
+                <p>Delvis integrasjon med \(u=t^2\) gir</p>
+                <p>\[ \int_0^{\infty}t^2e^{-t}\,dt=\Bigl[-t^2e^{-t}\Bigr]_0^{\infty}+2\int_0^{\infty}te^{-t}\,dt=0+2\cdot 1=2 \]</p>
+                <p>der vi brukte resultatet fra a).</p>
+                <p><strong>Varians.</strong> Først \(E(T^2)=\int t^2 f(t)\,dt\), med delvis integrasjon én gang til:</p>
+                <p>\[ E(T^2)=\int_0^{\infty}t^3e^{-t}\,dt=\Bigl[-t^3e^{-t}\Bigr]_0^{\infty}+3\int_0^{\infty}t^2e^{-t}\,dt=0+3\cdot 2=6 \]</p>
+                <p>\[ \operatorname{Var}(T)=E(T^2)-\bigl(E(T)\bigr)^2=6-2^2=2 \]</p>
+                <p>Mønsteret er \(\int_0^\infty t^ke^{-t}\,dt=k!\). Det er nyttig å kjenne igjen.</p>
+                <h4>c) Gjennomsnittet av 100</h4>
+                <p><strong>Begrunnelse.</strong> 100 uavhengige responstider fra samme fordeling, \(n=100\ge 30\). Sentralgrenseteoremet gir at \(\bar T\) er tilnærmet normalfordelt.</p>
+                <p><strong>Parametrene.</strong> Fra b): \(\mu=2\) og \(\sigma^2=2\).</p>
+                <p>\[ \mu_{\bar T}=2,\qquad \sigma_{\bar T}=\sqrt{\frac{\sigma^2}{n}}=\sqrt{\frac{2}{100}}=0.1414 \]</p>
+                <p><strong>Standardiser.</strong></p>
+                <p>\[ P(\bar T\ge 2.2)=1-G\!\left(\frac{2.2-2}{0.1414}\right)=1-G(1.41)=1-0.9207=0.079 \]</p>
                 <div class="answer"><b>a) 0.96 · b) \(E(T)=2\), \(\operatorname{Var}(T)=2\) · c) ca. 0.08.</b></div>
               </div>
             </details>
@@ -229,9 +242,12 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>Nyttig antiderivert: \(\displaystyle F(t)=\int_0^t f=\frac{t}{3}-\frac{t^2}{36}\) for \(0\le t\le 6\). Sjekk: \(F(6)=2-1=1\) ✓</p>
-                <h4>a)</h4>
-                <p>\[ P(T&gt;2)=1-F(2)=1-\left(\frac{2}{3}-\frac{4}{36}\right)=1-\frac{5}{9}=\frac{4}{9}\approx 0.444 \]</p>
+                <p><strong>Kumulativ fordeling først.</strong> Alle tre punktene trenger arealer under \(f\), så det lønner seg å finne \(F(t)=P(T\le t)\) én gang. For \(0\le t\le 6\):</p>
+                <p>\[ F(t)=\int_0^t\left(\frac13-\frac{s}{18}\right)ds=\left[\frac{s}{3}-\frac{s^2}{36}\right]_0^t=\frac{t}{3}-\frac{t^2}{36} \]</p>
+                <p>Kontroll: \(F(6)=\tfrac63-\tfrac{36}{36}=2-1=1\), som det skal være.</p>
+                <h4>a) Levetid over 2 år</h4>
+                <p>Komplementet til «høyst 2 år»:</p>
+                <p>\[ P(T&gt;2)=1-F(2)=1-\left(\frac{2}{3}-\frac{4}{36}\right)=1-\left(\frac{24}{36}-\frac{4}{36}\right)=1-\frac{20}{36}=\frac{4}{9}=0.444 \]</p>
                 <!-- tikz:ek-tannborste-a --><svg class='tikz' role='img' style='width:25.0em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-66.32828 -70.008875 212.578875 75.663422'>
 <defs>
 <path stroke='none' id='ek-tannborste-a-g0-25' d='M6.644085-4.124533C6.644085-4.357659 6.563387-4.420423 6.509589-4.420423C6.410959-4.420423 6.38406-4.241096 6.375093-4.20523C6.357161-3.999004 6.339228-3.71208 5.935741-3.416189C5.729514-3.254795 5.424658-3.147198 5.110834-3.147198C4.608717-3.147198 4.169365-3.398257 3.631382-3.765878C3.075467-4.142466 2.609215-4.42939 2.044334-4.42939C1.147696-4.42939 .511083-3.721046 .511083-2.914072C.511083-2.680946 .591781-2.618182 .645579-2.618182C.735243-2.618182 .771108-2.779577 .780075-2.833375C.789041-3.021669 .806974-3.326526 1.219427-3.622416C1.425654-3.783811 1.730511-3.891407 2.044334-3.891407C2.546451-3.891407 2.99477-3.631382 3.514819-3.281694C4.097634-2.878207 4.554919-2.609215 5.110834-2.609215C6.007472-2.609215 6.644085-3.317559 6.644085-4.124533ZM6.644085-1.945704C6.644085-2.160897 6.572354-2.241594 6.509589-2.241594C6.410959-2.241594 6.38406-2.062267 6.375093-2.026401C6.357161-1.820174 6.339228-1.53325 5.935741-1.23736C5.702615-1.058032 5.397758-.968369 5.110834-.968369C4.608717-.968369 4.169365-1.219427 3.631382-1.587049C3.075467-1.963636 2.609215-2.25056 2.044334-2.25056C1.147696-2.25056 .511083-1.542217 .511083-.735243C.511083-.502117 .591781-.439352 .645579-.439352C.735243-.439352 .771108-.600747 .780075-.654545C.789041-.842839 .806974-1.147696 1.219427-1.443587C1.425654-1.604981 1.730511-1.712578 2.044334-1.712578C2.546451-1.712578 2.99477-1.452553 3.514819-1.102864C4.097634-.699377 4.554919-.430386 5.110834-.430386C6.016438-.430386 6.644085-1.147696 6.644085-1.945704Z'/>
@@ -273,9 +289,14 @@
 </g>
 </g>
 </svg><!-- /tikz:ek-tannborste-a -->
-                <h4>b)</h4>
-                <p>Denne fordelingen er <em>ikke</em> hukommelsesløs, så vi må bruke definisjonen:</p>
-                <p>\[ P(T\ge 4\mid T\ge 1)=\frac{P(T\ge 4)}{P(T\ge 1)}=\frac{1-F(4)}{1-F(1)}=\frac{1-\tfrac{8}{9}}{1-\tfrac{11}{36}}=\frac{0.1111}{0.6944}\approx 0.16 \]</p>
+                <p><strong>Svar.</strong> 44 % av tannbørstene varer lenger enn 2 år.</p>
+                <h4>b) Minst 3 år til, gitt at den har fungert i ett år</h4>
+                <p><strong>Oversett.</strong> «Fungert i ett år» er \(T\ge 1\). «Minst 3 år til» betyr at total levetid er minst \(1+3=4\) år: \(T\ge 4\). Vi skal finne \(P(T\ge 4\mid T\ge 1)\).</p>
+                <p><strong>Ingen snarvei.</strong> Denne fordelingen er <em>ikke</em> eksponentiell, og dermed ikke hukommelsesløs. Vi bruker definisjonen av betinget sannsynlighet. Hendelsen \(T\ge 4\) ligger helt inne i \(T\ge 1\), så snittet er bare \(T\ge 4\):</p>
+                <p>\[ P(T\ge 4\mid T\ge 1)=\frac{P(T\ge 4\cap T\ge 1)}{P(T\ge 1)}=\frac{P(T\ge 4)}{P(T\ge 1)}=\frac{1-F(4)}{1-F(1)} \]</p>
+                <p><strong>Regn ut \(F\).</strong></p>
+                <p>\[ F(4)=\frac43-\frac{16}{36}=\frac{48-16}{36}=\frac{32}{36}=\frac89,\qquad F(1)=\frac13-\frac{1}{36}=\frac{11}{36} \]</p>
+                <p>\[ P(T\ge 4\mid T\ge 1)=\frac{1-\tfrac89}{1-\tfrac{11}{36}}=\frac{\tfrac19}{\tfrac{25}{36}}=\frac{4}{25}=0.16 \]</p>
                 <!-- tikz:ek-tannborste-b --><svg class='tikz' role='img' style='width:25.0em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-66.32828 -70.008875 212.578875 75.663414'>
 <defs>
 <path stroke='none' id='ek-tannborste-b-g0-21' d='M6.204732-2.932005C6.28543-2.96787 6.38406-3.021669 6.38406-3.138232S6.321295-3.29066 6.222665-3.335492L1.147696-5.783313C1.022167-5.846077 .977335-5.846077 .959402-5.846077C.860772-5.846077 .771108-5.76538 .771108-5.648817S.869738-5.478456 .950436-5.44259L5.747447-3.147198L.986301-.851806C.842839-.780075 .771108-.753176 .771108-.627646C.771108-.555915 .824907-.439352 .968369-.439352C.977335-.439352 1.022167-.439352 1.129763-.493151L6.204732-2.932005ZM6.052304 1.380822C6.204732 1.380822 6.38406 1.380822 6.38406 1.192528C6.38406 .995268 6.1868 .995268 6.052304 .995268H1.102864C.968369 .995268 .771108 .995268 .771108 1.192528C.771108 1.380822 .950436 1.380822 1.102864 1.380822H6.052304Z'/>
@@ -343,13 +364,18 @@
 </g>
 </svg><!-- /tikz:ek-tannborste-b -->
                 <p>Betinget sannsynlighet er et forhold mellom to arealer: arealet fra 4 til 6 delt på hele arealet fra 1 til 6.</p>
-                <h4>c)</h4>
-                <p>Først forventning og varians ved integrasjon:</p>
-                <p>\[ E(T)=\int_0^6 t\left(\frac13-\frac{t}{18}\right)dt=\left[\frac{t^2}{6}-\frac{t^3}{54}\right]_0^6=6-4=2 \]</p>
-                <p>\[ E(T^2)=\int_0^6 t^2\left(\frac13-\frac{t}{18}\right)dt=\left[\frac{t^3}{9}-\frac{t^4}{72}\right]_0^6=24-18=6 \ \Rightarrow\ \operatorname{Var}(T)=6-4=2 \]</p>
-                <p>Sentralgrenseteoremet med \(n=90\), \(\sigma_{\bar T}=\sqrt{2/90}=0.149\):</p>
-                <p>\[ P(\bar T&gt;2.1)=1-G\!\left(\frac{2.1-2}{0.149}\right)=1-G(0.67)\approx 0.25 \]</p>
-                <div class="answer"><b>a) 4/9 ≈ 0.44 · b) 0.16 · c) 0.25.</b></div>
+                <p><strong>Svar.</strong> En tannbørste som har fungert i ett år, har 16 % sjanse for å fungere i minst 3 år til.</p>
+                <h4>c) Gjennomsnittet av 90</h4>
+                <p><strong>Steg 1 — Forventning ved integrasjon.</strong></p>
+                <p>\[ E(T)=\int_0^6 t\left(\frac13-\frac{t}{18}\right)dt=\int_0^6\left(\frac{t}{3}-\frac{t^2}{18}\right)dt=\left[\frac{t^2}{6}-\frac{t^3}{54}\right]_0^6=\frac{36}{6}-\frac{216}{54}=6-4=2 \]</p>
+                <p><strong>Steg 2 — Varians.</strong></p>
+                <p>\[ E(T^2)=\int_0^6 t^2\left(\frac13-\frac{t}{18}\right)dt=\left[\frac{t^3}{9}-\frac{t^4}{72}\right]_0^6=\frac{216}{9}-\frac{1296}{72}=24-18=6 \]</p>
+                <p>\[ \operatorname{Var}(T)=E(T^2)-\bigl(E(T)\bigr)^2=6-4=2 \]</p>
+                <p><strong>Steg 3 — Sentralgrenseteoremet.</strong> 90 uavhengige tannbørster, \(n=90\ge 30\), så \(\bar T\) er tilnærmet normalfordelt med</p>
+                <p>\[ \mu_{\bar T}=2,\qquad \sigma_{\bar T}=\sqrt{\frac{2}{90}}=0.149 \]</p>
+                <p><strong>Steg 4 — Standardiser.</strong></p>
+                <p>\[ P(\bar T&gt;2.1)=1-G\!\left(\frac{2.1-2}{0.149}\right)=1-G(0.67)=1-0.7486=0.25 \]</p>
+                <div class="answer"><b>a) 4/9 ≈ 0.44 · b) 4/25 = 0.16 · c) 0.25.</b></div>
               </div>
             </details>
           </article>
@@ -381,9 +407,10 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>d)</h4>
-                <p>\(\lambda=1/3000\):</p>
-                <p>\[ P(T&gt;1000)=e^{-\lambda\cdot 1000}=e^{-1/3}\approx 0.72 \]</p>
+                <h4>d) Én komponent holder 1000 timer</h4>
+                <p><strong>Parameter.</strong> For eksponentialfordelingen er \(\mu=1/\lambda\), så \(\lambda=1/\mu=1/3000\) per time.</p>
+                <p><strong>Formel.</strong> «Holder ut 1000 timer» betyr \(T&gt;1000\). For eksponentialfordelingen er \(P(T&gt;t)=e^{-\lambda t}\), så vi trenger ikke integrere:</p>
+                <p>\[ P(T&gt;1000)=e^{-1000/3000}=e^{-1/3}=0.72 \]</p>
                 <!-- tikz:ek-komponent --><svg class='tikz' role='img' style='width:28.3em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-66.32828 -70.008805 240.922875 77.909565'>
 <defs>
 <path stroke='none' id='ek-komponent-g0-22' d='M2.125031-3.200996C2.169863-3.362391 2.25056-3.667248 2.25056-3.703113C2.25056-3.846575 2.133998-3.963138 1.972603-3.963138C1.685679-3.963138 1.613948-3.703113 1.596015-3.61345L.313823 1.479452C.277958 1.604981 .277958 1.622914 .277958 1.676712C.277958 1.829141 .385554 1.936737 .555915 1.936737C.842839 1.936737 .91457 1.667746 .941469 1.53325L1.371856-.170361C1.604981 .017933 1.963636 .09863 2.259527 .09863C2.582316 .09863 3.012702 0 3.478954-.546949C3.58655-.071731 4.00797 .09863 4.312827 .09863C4.572852 .09863 4.797011-.017933 4.994271-.394521C5.155666-.690411 5.281196-1.246326 5.281196-1.282192C5.281196-1.327024 5.254296-1.389788 5.164633-1.389788C5.057036-1.389788 5.04807-1.344956 5.012204-1.174595C4.814944-.394521 4.617684-.125529 4.339726-.125529C4.115567-.125529 4.061768-.340722 4.061768-.537983C4.061768-.708344 4.1066-.887671 4.187298-1.201494L4.411457-2.125031L4.617684-2.923039C4.671482-3.156164 4.779078-3.568618 4.779078-3.604483C4.779078-3.721046 4.698381-3.864508 4.501121-3.864508C4.214197-3.864508 4.151432-3.622416 4.088667-3.371357L3.900374-2.627148C3.81071-2.268493 3.550685-1.228394 3.48792-.995268C3.478954-.959402 3.039601-.125529 2.295392-.125529C1.622914-.125529 1.622914-.753176 1.622914-.91457C1.622914-1.120797 1.649813-1.282192 1.748443-1.694645L2.125031-3.200996Z'/>
@@ -443,11 +470,13 @@
 </g>
 </g>
 </svg><!-- /tikz:ek-komponent -->
-                <h4>e)</h4>
-                <p>Fem-komponentkortet krever at alle fem overlever. Uavhengighet gir</p>
-                <p>\[ P=p^5=0.72^5\approx 0.19 \]</p>
-                <p>Seks-komponentkortet tåler at én ryker:</p>
-                <p>\[ P=p^6+\binom{6}{1}p^5(1-p)\approx 0.46 \]</p>
+                <h4>e) Kretskort med 5 og 6 komponenter</h4>
+                <p>La \(p=e^{-1/3}=0.7165\) være sannsynligheten for at én komponent overlever 1000 timer. Komponentene antas uavhengige, så antall overlevende på et kort er binomisk fordelt.</p>
+                <p><strong>Fem komponenter.</strong> Kortet krever at alle fem overlever. Uavhengighet gir produktet:</p>
+                <p>\[ P(\text{kortet holder})=p^5=0.7165^5=0.19 \]</p>
+                <p><strong>Seks komponenter.</strong> Kortet fungerer så lenge minst 5 av 6 lever: enten alle 6, eller nøyaktig 5. La \(Y\sim\mathrm{Bin}(6,\,p)\) være antall som overlever:</p>
+                <p>\[ P(Y\ge 5)=P(Y=6)+P(Y=5)=p^6+\binom{6}{5}p^5(1-p) \]</p>
+                <p>\[ =0.7165^6+6\cdot 0.7165^5\cdot 0.2835=0.135+0.321=0.46 \]</p>
                 <div class="answer"><b>d) 0.72 · e) 0.19 og 0.46.</b> Redundansen mer enn dobler sannsynligheten for at kortet overlever 1000 timer.</div>
               </div>
             </details>
@@ -469,9 +498,10 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>\(\lambda=1/24\).</p>
-                <h4>a)</h4>
-                <p>\[ P(T&lt;15)=1-e^{-15/24}=1-e^{-0.625}\approx 0.465 \]</p>
+                <p><strong>Parameter.</strong> Forventet levetid er 24 måneder, så \(\lambda=1/24\) per måned.</p>
+                <h4>a) Kortere enn 15 måneder</h4>
+                <p>Den kumulative fordelingen er \(P(T\le t)=1-e^{-\lambda t}\):</p>
+                <p>\[ P(T&lt;15)=1-e^{-15/24}=1-e^{-0.625}=1-0.535=0.465 \]</p>
                 <!-- tikz:ek-brikke --><svg class='tikz' role='img' style='width:28.3em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-66.32828 -70.008805 240.914875 77.394848'>
 <defs>
 <path stroke='none' id='ek-brikke-g0-22' d='M2.125031-3.200996C2.169863-3.362391 2.25056-3.667248 2.25056-3.703113C2.25056-3.846575 2.133998-3.963138 1.972603-3.963138C1.685679-3.963138 1.613948-3.703113 1.596015-3.61345L.313823 1.479452C.277958 1.604981 .277958 1.622914 .277958 1.676712C.277958 1.829141 .385554 1.936737 .555915 1.936737C.842839 1.936737 .91457 1.667746 .941469 1.53325L1.371856-.170361C1.604981 .017933 1.963636 .09863 2.259527 .09863C2.582316 .09863 3.012702 0 3.478954-.546949C3.58655-.071731 4.00797 .09863 4.312827 .09863C4.572852 .09863 4.797011-.017933 4.994271-.394521C5.155666-.690411 5.281196-1.246326 5.281196-1.282192C5.281196-1.327024 5.254296-1.389788 5.164633-1.389788C5.057036-1.389788 5.04807-1.344956 5.012204-1.174595C4.814944-.394521 4.617684-.125529 4.339726-.125529C4.115567-.125529 4.061768-.340722 4.061768-.537983C4.061768-.708344 4.1066-.887671 4.187298-1.201494L4.411457-2.125031L4.617684-2.923039C4.671482-3.156164 4.779078-3.568618 4.779078-3.604483C4.779078-3.721046 4.698381-3.864508 4.501121-3.864508C4.214197-3.864508 4.151432-3.622416 4.088667-3.371357L3.900374-2.627148C3.81071-2.268493 3.550685-1.228394 3.48792-.995268C3.478954-.959402 3.039601-.125529 2.295392-.125529C1.622914-.125529 1.622914-.753176 1.622914-.91457C1.622914-1.120797 1.649813-1.282192 1.748443-1.694645L2.125031-3.200996Z'/>
@@ -527,10 +557,13 @@
 </g>
 </g>
 </svg><!-- /tikz:ek-brikke -->
-                <h4>b)</h4>
-                <p>For én brikke: \(P(T&gt;12)=e^{-12/24}=e^{-0.5}\). Uavhengighet gir</p>
-                <p>\[ \bigl(e^{-0.5}\bigr)^5=e^{-2.5}\approx 0.082 \]</p>
-                <div class="answer"><b>a) 0.46 · b) 0.082.</b> Bare 8 % sjanse for at hele laget kan stille etter ett år — et poeng om hvor raskt uavhengige feilkilder multipliserer seg opp.</div>
+                <p><strong>Svar.</strong> 46 % av brikkene slutter å virke innen 15 måneder.</p>
+                <h4>b) Fem brikker alle over 12 måneder</h4>
+                <p><strong>Én brikke.</strong></p>
+                <p>\[ P(T&gt;12)=e^{-12/24}=e^{-0.5}=0.607 \]</p>
+                <p><strong>Fem uavhengige brikker.</strong> Alle fem må fungere, og uavhengighet gir produktet:</p>
+                <p>\[ P(\text{alle fem}&gt;12)=\bigl(e^{-0.5}\bigr)^5=e^{-2.5}=0.082 \]</p>
+                <div class="answer"><b>a) 0.46 · b) 0.082.</b> Bare 8 % sjanse for at hele laget kan stille etter ett år. Uavhengige feilkilder multipliserer seg raskt opp.</div>
               </div>
             </details>
           </article>
@@ -552,12 +585,14 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>\(\lambda=1/3.2\).</p>
-                <h4>a)</h4>
-                <p>\[ P(T&gt;4.0)=e^{-4.0/3.2}\approx 0.29 \]</p>
-                <h4>b) To veier fram</h4>
-                <p><strong>Med hukommelsesløshet:</strong> vi spør om de neste 2.5 timene, og fordelingen «glemmer» de 2.0 som har gått:</p>
-                <p>\[ P(T\le 4.5\mid T&gt;2.0)=P(T\le 2.5)=1-e^{-2.5/3.2}\approx 0.54 \]</p>
+                <p><strong>Parameter.</strong> \(\mu=3.2\) timer, så \(\lambda=1/3.2\) per time.</p>
+                <h4>a) Lenger enn 4.0 timer</h4>
+                <p>\[ P(T&gt;4.0)=e^{-\lambda\cdot 4.0}=e^{-4.0/3.2}=e^{-1.25}=0.29 \]</p>
+                <p><strong>Svar.</strong> 29 % av programmererne bruker mer enn 4 timer.</p>
+                <h4>b) Ferdig innen 4.5 timer, gitt at hen fortsatt jobber etter 2.0</h4>
+                <p><strong>Oversett.</strong> «Fremdeles arbeider etter 2.0 timer» er \(T&gt;2.0\). Vi skal finne \(P(T\le 4.5\mid T&gt;2.0)\).</p>
+                <p><strong>Vei 1 — hukommelsesløshet.</strong> Eksponentialfordelingen «glemmer» tiden som har gått. Spørsmålet er derfor bare om oppgaven løses i løpet av de neste \(4.5-2.0=2.5\) timene:</p>
+                <p>\[ P(T\le 4.5\mid T&gt;2.0)=P(T\le 2.5)=1-e^{-2.5/3.2}=1-e^{-0.781}=1-0.458=0.54 \]</p>
                 <!-- tikz:ek-programmerer --><svg class='tikz' role='img' style='width:28.6em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-66.283437 -70.008875 243.202532 75.664402'>
 <defs>
 <path stroke='none' id='ek-programmerer-g0-20' d='M6.204732-5.44259C6.28543-5.478456 6.38406-5.532254 6.38406-5.648817S6.294396-5.846077 6.195766-5.846077C6.177833-5.846077 6.133001-5.846077 6.025405-5.792279L.950436-3.353425C.824907-3.29066 .771108-3.245828 .771108-3.138232C.771108-3.021669 .869738-2.96787 .950436-2.932005L6.007472-.502117C6.133001-.439352 6.168867-.439352 6.1868-.439352C6.330262-.439352 6.38406-.564882 6.38406-.627646C6.38406-.744209 6.312329-.780075 6.222665-.824907L1.407721-3.147198L6.204732-5.44259ZM6.052304 1.380822C6.204732 1.380822 6.38406 1.380822 6.38406 1.192528C6.38406 .995268 6.1868 .995268 6.052304 .995268H1.102864C.968369 .995268 .771108 .995268 .771108 1.192528C.771108 1.380822 .950436 1.380822 1.102864 1.380822H6.052304Z'/>
@@ -627,11 +662,16 @@
 </g>
 </g>
 </svg><!-- /tikz:ek-programmerer -->
-                <p><strong>Med definisjonen</strong> — hvis du ikke husker regelen:</p>
-                <p>\[ \frac{P(T\le 4.5)-P(T\le 2.0)}{P(T&gt;2.0)}=\frac{(1-e^{-4.5/3.2})-(1-e^{-2.0/3.2})}{e^{-2.0/3.2}}=1-e^{-2.5/3.2}\approx 0.54 \]</p>
-                <h4>c)</h4>
-                <p>For eksponentialfordelingen er \(\sigma=\mu=3.2\). Med \(n=30\) gir sentralgrenseteoremet \(\sigma_{\bar T}=3.2/\sqrt{30}\):</p>
-                <p>\[ P(\bar T&gt;4.0)=1-G\!\left(\frac{4.0-3.2}{3.2/\sqrt{30}}\right)=1-G(1.37)\approx 0.085 \]</p>
+                <p><strong>Vei 2 — definisjonen</strong>, hvis du ikke husker regelen. Snittet av \(T\le 4.5\) og \(T&gt;2.0\) er \(2.0&lt;T\le 4.5\):</p>
+                <p>\[ P(T\le 4.5\mid T&gt;2.0)=\frac{P(2.0&lt;T\le 4.5)}{P(T&gt;2.0)}=\frac{e^{-2.0/3.2}-e^{-4.5/3.2}}{e^{-2.0/3.2}}=1-e^{-2.5/3.2}=0.54 \]</p>
+                <p>Begge veiene gir samme svar. Vis gjerne begge på eksamen.</p>
+                <h4>c) Gjennomsnittet av 30 programmerere</h4>
+                <p><strong>Én observasjon.</strong> For eksponentialfordelingen er \(\sigma=\mu=3.2\).</p>
+                <p><strong>Begrunnelse.</strong> 30 programmerere som ikke samarbeider, altså uavhengige. \(n=30\) er akkurat på tommelfingergrensen, og sentralgrenseteoremet gir at \(\bar T\) er tilnærmet normalfordelt.</p>
+                <p><strong>Parametrene.</strong></p>
+                <p>\[ \mu_{\bar T}=3.2,\qquad \sigma_{\bar T}=\frac{3.2}{\sqrt{30}}=\frac{3.2}{5.477}=0.584 \]</p>
+                <p><strong>Standardiser.</strong></p>
+                <p>\[ P(\bar T&gt;4.0)=1-G\!\left(\frac{4.0-3.2}{0.584}\right)=1-G(1.37)=1-0.9147=0.085 \]</p>
                 <div class="answer"><b>a) 0.29 · b) 0.54 · c) 0.085.</b></div>
               </div>
             </details>
@@ -653,8 +693,10 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <h4>a)</h4>
-                <p>\[ P(10&lt;T&lt;15)=\bigl(1-e^{-1.5}\bigr)-\bigl(1-e^{-1.0}\bigr)=e^{-1.0}-e^{-1.5}\approx 0.145 \]</p>
+                <h4>a) Mellom 10 og 15 minutter</h4>
+                <p><strong>Regel.</strong> Arealet mellom to grenser er differansen mellom de kumulative sannsynlighetene, \(F(t)=1-e^{-\lambda t}\), her med \(\lambda=0.1\):</p>
+                <p>\[ P(10&lt;T&lt;15)=F(15)-F(10)=\bigl(1-e^{-1.5}\bigr)-\bigl(1-e^{-1.0}\bigr)=e^{-1.0}-e^{-1.5} \]</p>
+                <p>\[ =0.3679-0.2231=0.145 \]</p>
                 <!-- tikz:ek-nodnummer --><svg class='tikz' role='img' style='width:28.3em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-66.32828 -70.008875 240.922875 75.66308'>
 <defs>
 <path stroke='none' id='ek-nodnummer-g0-58' d='M1.75741-.484184C1.75741-.744209 1.551183-.968369 1.273225-.968369S.789041-.744209 .789041-.484184S.995268 0 1.273225 0S1.75741-.224159 1.75741-.484184Z'/>
@@ -691,10 +733,14 @@
 </g>
 </g>
 </svg><!-- /tikz:ek-nodnummer -->
-                <h4>b)</h4>
-                <p>Forventningen \(\mu=1/\lambda\) estimeres best med gjennomsnittet:</p>
-                <p>\[ \bar t=\frac{221}{21}\approx 10.52 \quad\Rightarrow\quad \hat\lambda=\frac{1}{\bar t}=\frac{21}{221}\approx 0.095 \]</p>
-                <div class="answer"><b>a) 0.145 · b) \(\hat\lambda\approx 0.095\) oppringninger per minutt.</b> Legg merke til at man estimerer \(\mu\) først og inverterer — ikke omvendt.</div>
+                <p><strong>Svar.</strong> 14.5 % sannsynlighet for at det går mellom 10 og 15 minutter til neste oppringning.</p>
+                <h4>b) Estimat for λ</h4>
+                <p><strong>Ideen.</strong> Vi kjenner sammenhengen \(\mu=E(T)=1/\lambda\). Forventningen \(\mu\) estimeres naturlig med gjennomsnittet av observasjonene, og så inverterer vi.</p>
+                <p><strong>Gjennomsnitt.</strong></p>
+                <p>\[ \bar t=\frac{\sum t_i}{n}=\frac{221}{21}=10.52\ \text{minutter} \]</p>
+                <p><strong>Inverter.</strong></p>
+                <p>\[ \hat\lambda=\frac{1}{\bar t}=\frac{21}{221}=0.095\ \text{oppringninger per minutt} \]</p>
+                <div class="answer"><b>a) 0.145 · b) \(\hat\lambda\approx 0.095\) oppringninger per minutt.</b> Man estimerer \(\mu\) først og inverterer, ikke omvendt.</div>
               </div>
             </details>
           </article>
@@ -711,10 +757,14 @@
             <details class="sol">
               <summary>Løsningsforslag</summary>
               <div class="sol__body">
-                <p>Eksponentialfordelingen er langt fra normalfordelt, men med \(n=100\) redder sentralgrenseteoremet oss: \(\bar X\) er tilnærmet normalfordelt.</p>
-                <p>\[ \mu_{\bar X}=\mu=1100,\qquad \sigma=\mu=1100,\qquad \sigma_{\bar X}=\frac{1100}{\sqrt{100}}=110 \]</p>
-                <p>\[ P(\bar X&lt;1150)=G\!\left(\frac{1150-1100}{110}\right)=G(0.45)\approx 0.67 \]</p>
-                <div class="answer"><b>Ca. 67 %.</b> Nøkkelsteget er \(\sigma=\mu\) for eksponentialfordelingen — uten det får du feil standardavvik.</div>
+                <p><strong>Steg 1 — Én observasjon.</strong> Levetiden til én pære er eksponentialfordelt med \(\mu=1100\) timer. For eksponentialfordelingen er standardavviket lik forventningen: \(\sigma=\mu=1100\).</p>
+                <p><strong>Steg 2 — Begrunnelse.</strong> Eksponentialfordelingen er svært skjev og langt fra normalfordelt. Men vi har 100 uavhengige levetider fra samme fordeling, og \(n=100\ge 30\). Sentralgrenseteoremet gir at \(\bar X\) er tilnærmet normalfordelt.</p>
+                <p><strong>Steg 3 — Parametrene for gjennomsnittet.</strong></p>
+                <p>\[ \mu_{\bar X}=\mu=1100,\qquad \sigma_{\bar X}=\frac{\sigma}{\sqrt n}=\frac{1100}{\sqrt{100}}=\frac{1100}{10}=110 \]</p>
+                <p><strong>Steg 4 — Standardiser.</strong></p>
+                <p>\[ P(\bar X&lt;1150)=G\!\left(\frac{1150-1100}{110}\right)=G(0.45)=0.67 \]</p>
+                <p><strong>Svar.</strong> Det er omtrent 67 % sannsynlighet for at gjennomsnittlig levetid for de 100 pærene er under 1150 timer.</p>
+                <div class="answer"><b>Ca. 67 %.</b> Nøkkelsteget er \(\sigma=\mu\) for eksponentialfordelingen. Uten det får du feil standardavvik.</div>
               </div>
             </details>
           </article>
