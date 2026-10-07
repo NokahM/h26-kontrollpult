@@ -7,7 +7,7 @@
   <meta name="description" content="Forslag til det tosidige A4-arket du kan ha med på eksamen: formler, oppskrifter for de fire oppgavetypene og typiske feil.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../../assets/css/main.css?v=39">
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=40">
 </head>
 <body class="theme-fysikk2" data-updated="2026-10-07">
   <div class="app-shell">
@@ -53,6 +53,12 @@
             <p>Strøm inn på plussiden av R. En kilde <strong>leverer</strong> \(P=UI\) når strømmen går <em>ut</em> av plussiden, og <strong>forbruker</strong> når den går inn. Kontroll: \(\sum P_{kilder}=\sum P_R\).</p>
           </div>
 
+          <div class="box" data-ekstra>
+            <h4>Kilder og potensial</h4>
+            <p>Ideell U-kilde: fast \(U\), vilkårlig \(I\). Ideell I-kilde: fast \(I\), vilkårlig \(U\). Virkelig: \(U=E-IR_i\). \(R_i\) fra tomgang \(U_0\) og last: \(R_i=R_L\left(\frac{U_0}{U_L}-1\right)\).</p>
+            <p>Potensialvandring: \(U_{ab}=V_a-V_b\). Gå fra \(b\) til \(a\) og summer: + over kilde fra − til +, − over R i strømretningen.</p>
+          </div>
+
           <div class="box">
             <h4>Serie og parallell</h4>
             <p>Serie: samme \(I\), \(R_T=R_1+R_2+\dots\) &nbsp; Parallell: samme \(U\), \(\dfrac1{R_T}=\sum\dfrac1{R_k}\)</p>
@@ -71,6 +77,21 @@
               <li>Bruk formelen oppgaven ber om (strøm-/spenningsdeling, forholdsformel, KCL).</li>
               <li>Kontroll: \(P_T=EI_s=I_s^2R_T\). Bruk «vis at»-tall videre.</li>
             </ol>
+          </div>
+
+          <div class="box" data-ekstra>
+            <h4>Oppgave 1 — fullt eksempel (des 2025)</h4>
+            <p>Tre grener mellom topp og jord: \(R_1\parallel R_2\), \(R_3+E\), \(R_4+R_5\).</p>
+            <p>a) \(R_{12}=\frac{100\cdot150}{250}=60\), \(R_{45}=40\), \(R_T=R_3+R_{12}\parallel R_{45}=6+24=30\,\Omega\)</p>
+            <p>b) \(I_{R_3}=E/R_T=24/30=0.8\) A &nbsp; c) \(V_T=0.8\cdot 24=19.2\) V, \(I_{R_1}=19.2/100=0.192\) A</p>
+            <p>d) \(V_{R_5}=\frac{10}{40}\cdot 19.2=4.8\) V &nbsp; e) \(P_{R_2}=19.2^2/150=2.46\) W</p>
+          </div>
+
+          <div class="box" data-ekstra>
+            <h4>Varianter av oppgave 1</h4>
+            <p><strong>Strømkilde</strong> (vår 2026): \(V=IR_T\). \(R_T=3\parallel(2+1+4\parallel12)=3\parallel6=2\), \(V_{R_1}=1.5\cdot2=3\) V, gren \(3/6=0.5\) A, \(I_{R_5}=\frac{4}{16}0.5=0.125\) A.</p>
+            <p><strong>Stige</strong> (mar 2022): fra enden: \(R'=6\parallel3=2\), \(R''=4\parallel(2+2)=2\), \(R_T=3+5+2=10\). Strømdeling bakover: \(I_4=\frac{4}{4+4}\cdot 24=12\), \(I_7=\frac{6}{6+3}\cdot 12=8\) A.</p>
+            <p><strong>Baklengs</strong> (nov 2022): KCL nedover: \(I_{R_1}=80-48=32\), \(I_{R_2}=32-12=20\) mA … \(R=\Delta U/I\).</p>
           </div>
 
           <div class="box">
@@ -165,6 +186,11 @@
             <p>Bro i balanse: \(R_1/R_2=R_3/R_4\), ingen strøm i midtgrenen.</p>
           </div>
 
+          <div class="box" data-ekstra>
+            <h4>Bro med termistor (des 2021)</h4>
+            <p>\(R_1=R_2=27\) k, \(R_T=25\) k ved 25 °C (fra graf): balanse \(R_3+R_4=R_T\Rightarrow R_3=25-20=5\) k.</p>
+          </div>
+
           <div class="box">
             <h4>Nullstille og konvertere kilder</h4>
             <p><strong>Spenningskilde → kortslutning</strong> (0 Ω). <strong>Strømkilde → brudd</strong> (∞ Ω).</p>
@@ -232,6 +258,11 @@
             <p>Pila peker mot plussiden. Går ikke for ideell kilde uten R.</p>
           </div>
 
+          <div class="box" data-ekstra>
+            <h4>Konvertering — eksempel (nov 2022)</h4>
+            <p>10 V/3 Ω → 3.33 A opp; 5 V/4 Ω med + ned → 1.25 A ned. Alt i parallell: \(I_{R_3}=\frac{1/7}{1/3+1/4+1/7}(3.33-1.25)=0.41\) A.</p>
+          </div>
+
           <div class="box">
             <h4>Superposisjon</h4>
             <ol>
@@ -242,6 +273,13 @@
               <li>Effekt fra totalen: \(P=I_{tot}^2R\), aldri \(P'+P''\).</li>
             </ol>
             <p><em>Eks. (des 2024):</em> I alene: \(I_B=\frac{6.43}{6.43+8}\cdot 4=1.78\) mA mot ref. → \(V'=-8.37\) V. E alene: \(V''=\frac{4.7}{8}\cdot 6.42=3.77\) V. \(V=-4.6\) V.</p>
+          </div>
+
+          <div class="box" data-ekstra>
+            <h4>Superposisjon — flere eksempler</h4>
+            <p><strong>Feb 2025:</strong> \(I_s\) alene: \(I_{R_3}=\frac{R_1}{R_1+R_2+R_3}I_s=0.625\) mA → \(U'_o=1.25\) V. \(E\) alene: \(U''_o=\frac{R_1+R_2}{\Sigma R}E=2.5\) V. \(U_o=3.75\) V.</p>
+            <p><strong>Vår 2026 (tabell):</strong> a) \(E_1\) alene: Thévenin \(0.5\) V/0.6 k → \(V'_O=\frac{3.6}{7.2}0.5=0.25\). b) \(E_2\) alene: \(V''_O=\frac{3.6}{7.2}=0.5\). c) Sum \(0.75\) V.</p>
+            <p><strong>Effekt i kilder</strong> (des 2021): \(U=21\) V, \(I_A=45\) mA: \(P_{30\text{mA}}=21\cdot30\text{m}=630\) mW, \(P_{60\text{V}}=60\cdot45\text{m}=2.7\) W (begge leverer).</p>
           </div>
 
           <div class="box">
@@ -341,9 +379,21 @@
             <p><em>Eks. (feb 2024):</em> \(R_{th}=1\parallel 9+3=3.9\) k. \(U_A=\frac{9}{10}\cdot 7=6.3\), \(U_B=5\,\text{mA}\cdot 3\,\text{k}=15\) → \(U_{th}=U_A-U_B=-8.7\) V. Behold fortegnet.</p>
           </div>
 
+          <div class="box" data-ekstra>
+            <h4>Thévenin/Norton — flere eksempler</h4>
+            <p><strong>Norton (des 2025):</strong> kortslutt A–B: \(I_N=\frac{2}{2+4}12=4\) mA. \(R_N=(2+4)\parallel6=3\) k. \(E_{Th}=4\cdot3=12\) V.</p>
+            <p><strong>Med strømkilde (des 2021):</strong> \(R_{Th}=R_1+R_2=6\,\Omega\) (I brutt), \(E_{Th}=12\cdot4=48\) V (ingen strøm i \(R_2\)).</p>
+            <p><strong>To kilder (nov 2022):</strong> \(U'=14\), \(U''=-0.1\cdot90=-9\) → \(U_{th}=5\) V, \(R_{th}=90\), \(I_L=\frac{5}{100}=50\) mA.</p>
+          </div>
+
           <div class="box">
             <h4>Maks effekt</h4>
             <p>\(R_L=R_{Th}\Rightarrow P_{\max}=\dfrac{E_{Th}^2}{4R_{Th}}\), \(\eta=50\,\%\). Eks: 12 V, 3 kΩ → 12 mW.</p>
+          </div>
+
+          <div class="box" data-ekstra>
+            <h4>Effekt og virkningsgrad i lasten</h4>
+            <p>\(P_L=\left(\frac{E_{Th}}{R_{Th}+R_L}\right)^2R_L\), \(\eta=\frac{R_L}{R_{Th}+R_L}\). \(R_L\gg R_{Th}\): høy \(\eta\), lite effekt.</p>
           </div>
 
           <div class="box">
@@ -354,6 +404,23 @@
               <li>Metoden oppgaven nevner (annen metode = kontroll).</li>
               <li>«Vis at»-tall brukt videre. Fortegn forklart.</li>
             </ul>
+          </div>
+
+          <div class="box" data-ekstra2>
+            <h4>Hvilken metode når?</h4>
+            <table>
+              <thead><tr><th>Situasjon</th><th>Metode</th></tr></thead>
+              <tbody>
+                <tr><td>Én kilde</td><td>serie-parallell, strøm-/spenningsdeling</td></tr>
+                <tr><td>Flere kilder, én størrelse</td><td>superposisjon (eller Thévenin rundt den)</td></tr>
+                <tr><td>Last som varierer, maks effekt</td><td>Thévenin/Norton</td></tr>
+                <tr><td>Mange ukjente</td><td>knutepunkt hvis færre noder, maske hvis færre masker</td></tr>
+                <tr><td>Bare strømkilder</td><td>knutepunkt (direkte)</td></tr>
+                <tr><td>Bare spenningskilder</td><td>maske (direkte), eller konverter</td></tr>
+                <tr><td>Bryter med C eller L</td><td>Thévenin sett fra C/L → \(\tau\), \(x_f\)</td></tr>
+              </tbody>
+            </table>
+            <p>Antall ligninger: knutepunkt = noder − 1, maske = antall «vinduer».</p>
           </div>
         </div>
 
@@ -367,11 +434,28 @@
             <p><em>Eks. (vår 2026):</em> \(\tfrac13V_1-\tfrac14V_2=-1.25\), \(-\tfrac14V_1+\tfrac12V_2=1.25+\tfrac{12.5}{5}\) → \(V_1=3\), \(V_2=9\) V. Strøm i \(R_1\) i <strong>originalkretsen</strong>: \(\frac{12.5-9}{5}=0.7\) A (ikke \(9/5\)).</p>
           </div>
 
+          <div class="box" data-ekstra2>
+            <h4>Knutepunkt med kilde mellom noder (feb 2024)</h4>
+            <p>\(V_0\)=jord. \(V_1\): \(\frac{V_1-2}{1}+\frac{V_1-(V_2+1)}{1}=0\Rightarrow 2V_1-V_2=3\). \(V_2\): \(\frac{V_2+1-V_1}{1}+\frac{V_2}{1}+\frac{V_2-1}{1}=0\Rightarrow -V_1+3V_2=0\). \(D=5\), \(V_1=1.8\), \(V_2=0.6\) V.</p>
+          </div>
+
+          <div class="box" data-ekstra>
+            <h4>Knutepunkt — tre noder (feb 2025)</h4>
+            <p>\(\left[\begin{smallmatrix} 0.3&-0.2&0\\-0.2&0.7&-0.5\\0&-0.5&1\end{smallmatrix}\middle|\begin{smallmatrix}-0.1\\0.5\\-0.5\end{smallmatrix}\right]\) → \(D=0.095\), \(V=(0.053,\,0.58,\,-0.21)\) V. Kontroll: KCL i \(V_3\): \(0.39+0.11=0.5\) ✓.</p>
+            <p><strong>Des 2025:</strong> \(4V_1-V_2=48\), \(-V_1+7V_2=48\) (×12) → \(D=27\), \(V_1=14.2\), \(V_2=8.89\) V.</p>
+          </div>
+
           <div class="box">
             <h4>Maske (sjablong)</h4>
             <p>Alle masker med klokka. For maske \(k\):</p><p>\(R_{kk}I_k-\sum R_{kj}I_j=\sum E_k\)</p><p>\(R_{kk}\): sum av R i masken. \(R_{kj}\): felles R.</p>
             <p>Kilde <strong>+</strong> når maskestrømmen går − → + gjennom den. Utenfor diagonalen alltid minus. Felles gren: \(I_1-I_2\).</p>
             <p><em>Eks. (feb 2024):</em> \(3I_1-I_2=1\), \(-I_1+2I_2=-1\) → \(D=5\), \(I_1=0.2\), \(I_2=-0.4\), \(I_{R_4}=I_1-I_2=0.6\) A.</p>
+          </div>
+
+          <div class="box" data-ekstra>
+            <h4>Maske — tre masker</h4>
+            <p><strong>Des 2024</strong> (kΩ, mA): \(\left[\begin{smallmatrix} 8&-3.3&0\\-3.3&6.5&-1\\0&-1&7.8\end{smallmatrix}\middle|\begin{smallmatrix}12\\-12\\-4\end{smallmatrix}\right]\) → \(I=(0.88,\,-1.51,\,-0.71)\) mA.</p>
+            <p><strong>Des 2023</strong> (bro): \(\left[\begin{smallmatrix} 6&-2&-3\\-2&10&-3\\-3&-3&9\end{smallmatrix}\middle|\begin{smallmatrix}10\\0\\0\end{smallmatrix}\right]\), \(D=324\), \(D_1=810\), \(I_s=2.5\) A.</p>
           </div>
 
           <div class="box">
@@ -467,10 +551,20 @@
             <p>\(D=aei+bfg+cdh\)</p><p>\(\quad\ -ceg-afh-bdi\)</p><p>Kolonne med to nuller: utvid langs den. F.eks. kolonne 1 \(=(10,0,0)\): \(D=10\,(10\cdot 9-3\cdot 3)=810\).</p>
           </div>
 
+          <div class="box" data-ekstra2>
+            <h4>2×2 rett fram</h4>
+            <p>\(a_{11}x_1+a_{12}x_2=b_1,\ a_{21}x_1+a_{22}x_2=b_2\): &nbsp; \(x_1=\dfrac{b_1a_{22}-a_{12}b_2}{D}\), \(x_2=\dfrac{a_{11}b_2-b_1a_{21}}{D}\), \(D=a_{11}a_{22}-a_{12}a_{21}\).</p>
+          </div>
+
           <div class="box">
             <h4>Kondensator og spole</h4>
             <p>\(Q=CU\), \(i_C=C\dfrac{dv_C}{dt}\) &nbsp; \(v_L=L\dfrac{di_L}{dt}\)</p>
             <p>C parallell: \(C_1+C_2\); serie: \(\frac{C_1C_2}{C_1+C_2}\) (motsatt av R). L som R.</p>
+          </div>
+
+          <div class="box" data-ekstra>
+            <h4>Energi og to like</h4>
+            <p>\(W_C=\tfrac12CU^2\), \(W_L=\tfrac12LI^2\). To like C i serie: \(C/2\). To like L i parallell: \(L/2\).</p>
           </div>
 
           <div class="box">
@@ -577,6 +671,22 @@
             <p><em>Eks. (feb 2024):</em> \(E_{Th}=\frac23\cdot 0.2=0.133\) V, \(R_{Th}=1\parallel 2=0.667\) k. \(i_f=\frac{0.133}{0.667+3}=36.4\,\mu\)A, \(\tau=\frac{50\,\text{m}}{3.667\,\text{k}}=13.6\,\mu\)s. </p><p>Ved 20 µs: \(36.4\,(1-e^{-1.47})=28\,\mu\)A.</p>
           </div>
 
+          <div class="box" data-ekstra>
+            <h4>Transient — flere tilfeller</h4>
+            <p><strong>Startverdi ≠ 0</strong> (mar 2023): \(i_L=2+(1-2)e^{-t/1\text{ns}}\) mA, \(v_L=E-R_1i_L=5e^{-t/1\text{ns}}\) V.</p>
+            <p><strong>Utlading via to R</strong> (des 2023): \(v_C(0)=\frac{2}{3}10=6.67\) V, \(\tau=(R_2+R_3)C=1\) s, \(v_C=6.67e^{-t}\).</p>
+            <p><strong>To faser</strong> (des 2025): opp \(\tau=R_1C=2\) ms, \(v_C=12(1-e^{-t/2\text{ms}})\). Ut \(\tau=(R_1+R_2)C=6\) ms, \(v_C=12e^{-t/6\text{ms}}\).</p>
+            <p><strong>Spole ut</strong>: \(i_L(0)=12\) mA gjennom \(R_1+R_2=3\) k: \(v_L=-36e^{-t/0.67\mu\text{s}}\) V.</p>
+            <p><strong>Serie-C</strong> (vår 2026): \(v_a(0)=\frac{3}{12}12=3\) V, \(C'=25\) nF, \(\tau=4\text{k}\cdot25\text{n}=100\,\mu\)s.</p>
+            <p><strong>Tid til verdi</strong> (mar 2022): \(12e^{-t}=8\Rightarrow t=\ln1.5=0.41\) s.</p>
+          </div>
+
+          <div class="box" data-ekstra2>
+            <h4>Transient via Thévenin</h4>
+            <p><strong>Des 2024 (RC):</strong> E med + ned: \(E_{Th}=\frac{24}{32}(-20)=-15\) V, \(R_{Th}=8\parallel24=6\) k. \(\tau=(6+4)\text{k}\cdot15\mu=0.15\) s. \(v_C=-15(1-e^{-t/0.15})\) V, \(i_C=-1.5e^{-t/0.15}\) mA.</p>
+            <p><strong>Feb 2025 (RL):</strong> \(R_{Th}=1+12\parallel4=4\) k, \(V_{Th}=\frac{4}{16}4=1\) V. \(\tau=1\text{m}/4\text{k}=0.25\,\mu\)s. \(i_L=0.25(1-e^{-t/\tau})\) mA, \(v_L=1\cdot e^{-t/\tau}\) V.</p>
+          </div>
+
           <div class="box">
             <h4>Tall og enheter</h4>
             <table>
@@ -592,6 +702,12 @@
             <p>Tid til verdi \(x\): \(t=\tau\ln\dfrac{x_i-x_f}{x-x_f}\). ln 1.5 = 0.405, ln 2 = 0.693, ln 3 = 1.10, ln 10 = 2.30.</p>
             <p>kΩ·mA = V · V/kΩ = mA · kΩ·µF = ms · MΩ·µF = s · mH/kΩ = µs · µH/kΩ = ns</p>
             <p>k \(10^3\), M \(10^6\), m \(10^{-3}\), µ \(10^{-6}\), n \(10^{-9}\), p \(10^{-12}\)</p>
+          </div>
+
+          <div class="box" data-ekstra>
+            <h4>Grafskisse og kalkulator</h4>
+            <p>Skisse: akser med enhet, startverdi, sluttverdi stiplet, \(\tau\) og \(5\tau\) på tidsaksen, tangent fra start til \((\tau,\,x_f)\). Strøm i C og spenning over L hopper, \(v_C\) og \(i_L\) gjør ikke.</p>
+            <p>Kalkulator: ENG-knappen gir prefiks. \(e^{x}\): SHIFT ln. Sjekk Cramer ved å sette svaret inn i én ligning.</p>
           </div>
 
           <div class="box">
