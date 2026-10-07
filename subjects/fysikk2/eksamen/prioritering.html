@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prioritering — Fysikk 2 · H26</title>
+  <meta name="description" content="Hvilke oppgavetyper som gir flest poeng for minst arbeid, og i hvilken rekkefølge du bør øve.">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=36">
+</head>
+<body class="theme-fysikk2" data-updated="2026-10-07">
+  <div class="app-shell">
+
+    <aside class="sidebar"></aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">Fysikk 2</a>
+        <div class="topbar__crumb">Prioritering</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow">PB2050 eksamensforberedelse</div>
+          <h1>Prioritering</h1>
+          <p class="page-header__desc">Hvilke oppgavetyper som gir flest poeng for minst arbeid, regnet ut fra prosentene i ti eksamenssett.</p>
+          <span class="page-header__status" data-status="active"><i></i>basert på 41 oppgaver</span>
+        </header>
+
+        <section class="section">
+          <div class="section__label">Slik er poengene regnet ut</div>
+          <article class="prose">
+            <p>Hver oppgave i settene har en oppgitt prosent (30 %, 20 %, 25 % …), og karakteren settes i utgangspunktet etter poeng. Tallene under er oppgaveprosentene summert per type over alle ti settene og delt på ti. Kolonnen «4 siste» gjelder bare settene fra desember 2024 og senere, som har det nåværende korte formatet. Den betyr mest.</p>
+            <div class="note"><strong>Delspørsmålene teller ikke likt.</strong> I motsetning til statistikk er det oppgaven som har vekt, ikke hvert delspørsmål. Innenfor en oppgave henger delspørsmålene sammen, så det lønner seg å få de første riktige og bruke «vis at»-tallene videre.</div>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section__label">Oppgavetypene rangert</div>
+          <article class="prose">
+            <div class="dtable-wrap"><table class="dtable">
+              <thead>
+                <tr><th class="num">#</th><th>Type</th><th class="num">4 siste</th><th class="num">Alle 10</th><th class="num">I sett</th><th>Arbeid</th></tr>
+              </thead>
+              <tbody>
+                <tr><td class="num">1</td><td><a href="../oppgaver/1-serie-parallell.html">Serie-parallell og effekt</a></td><td class="num">30 %</td><td class="num">31 %</td><td class="num">10 / 10</td><td>Lite</td></tr>
+                <tr><td class="num">2</td><td><a href="../oppgaver/5-transienter.html">Transienter i RC og RL</a></td><td class="num hit">25 %</td><td class="num">20 %</td><td class="num">10 / 10</td><td>Middels</td></tr>
+                <tr><td class="num">3</td><td><a href="../oppgaver/4-maske-knutepunkt.html">Knutepunkt og maske</a></td><td class="num">20 %</td><td class="num">20 %</td><td class="num">8 / 10</td><td>Middels</td></tr>
+                <tr><td class="num">4</td><td><a href="../oppgaver/3-superposisjon.html">Superposisjon</a></td><td class="num">19 %</td><td class="num">12 %</td><td class="num">5 / 10</td><td>Lite</td></tr>
+                <tr><td class="num">5</td><td><a href="../oppgaver/2-thevenin-norton.html">Thévenin, Norton og maks effekt</a></td><td class="num">6 %</td><td class="num">17 %</td><td class="num">7 / 10</td><td>Middels</td></tr>
+              </tbody>
+            </table></div>
+            <p>Thévenin står sist på listen, men lær det før transientene, fordi de fleste transientoppgavene bygger på det.</p>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section__label">Den ene ferdigheten som gir mest</div>
+          <article class="prose">
+            <p>Alle fire oppgavene hviler på å <strong>forenkle en krets med serie og parallell</strong>:</p>
+            <ul>
+              <li><strong>Oppgave 1</strong> er det rene håndverket: \(R_T\), strømdeling og spenningsdeling.</li>
+              <li><strong>Superposisjon</strong> er serie-parallell gjort to ganger, én gang per kilde.</li>
+              <li><strong>Thévenin</strong>: \(R_{Th}\) er serie-parallell med kildene nullstilt, og \(E_{Th}\) er som regel en spenningsdeling.</li>
+              <li><strong>Transienter</strong>: \(\tau\) krever \(R_{Th}\) sett fra C eller L, og start- og sluttverdien er spenningsdelinger.</li>
+            </ul>
+            <p>Sitter dette, er rundt 75 % av poengene i de fire siste settene innen rekkevidde. Det som kommer i tillegg, er ligningssettene i knutepunkt og maske og eksponentialfunksjonen i transientene.</p>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section__label">Rekkefølge å øve i</div>
+          <div class="steps">
+            <div class="step">
+              <h4>Serie-parallell (kapittel 3–5)</h4>
+              <p>30 % i hvert sett. Øv til du ser serie og parallell uten å nøle, og til strømdelingsformelen sitter. Start med <a href="../oppgaver/1-serie-parallell.html#v2026">våren 2026</a> og <a href="../oppgaver/1-serie-parallell.html#h2025">desember 2025</a>.</p>
+            </div>
+            <div class="step">
+              <h4>Kildekonvertering og superposisjon (kapittel 6)</h4>
+              <p>Lite nytt stoff, og med i tre av de fire siste settene. Lær at nullstilt spenningskilde er kortslutning og nullstilt strømkilde er brudd. Øv på <a href="../oppgaver/3-superposisjon.html#v2025">februar 2025</a>.</p>
+            </div>
+            <div class="step">
+              <h4>Thévenin og Norton (kapittel 7)</h4>
+              <p>Fire trinn: fjern last, nullstill kilder og finn \(R_{Th}\), finn tomgangsspenningen, tegn. Maks effekt er én formel. Øv på <a href="../oppgaver/2-thevenin-norton.html#h2025">desember 2025</a>.</p>
+            </div>
+            <div class="step">
+              <h4>Transienter (kapittel 11–12)</h4>
+              <p>25 % i de fire siste settene. Lær \(x_f+(x_i-x_f)e^{-t/\tau}\), at C er brudd og L er kortslutning i stasjonær tilstand, og at \(\tau\) bruker motstanden <em>etter</em> omslaget. Øv på <a href="../oppgaver/5-transienter.html#v2025">februar 2025</a> og <a href="../oppgaver/5-transienter.html#h2025">desember 2025</a>.</p>
+            </div>
+            <div class="step">
+              <h4>Knutepunkt og maske (kapittel 8–10)</h4>
+              <p>20 % i hvert av de siste settene. Sjablongmetoden og 2×2-determinanter dekker det meste, og 3×3 med Sarrus resten. Øv på <a href="../oppgaver/4-maske-knutepunkt.html#v2026">våren 2026</a> (knutepunkt) og <a href="../oppgaver/4-maske-knutepunkt.html#h2024">desember 2024</a> (maske).</p>
+            </div>
+          </div>
+          <p class="callout"><strong>Siste dager:</strong> løs desember 2025 og våren 2026 på tid (3 timer), bare med kalkulator og <a href="huskelapp.html">huskelappen</a>, og rett mot løsningsforslagene etterpå.</p>
+        </section>
+
+        <section class="section">
+          <div class="section__label">Kan nedprioriteres</div>
+          <div class="reslist">
+            <div class="res">
+              <span class="res__num">1–2</span>
+              <div>
+                <div class="res__title">Resistivitet, temperatur, energi og virkningsgrad</div>
+                <div class="res__sub">Aldri spurt om i de ti settene. Ohms lov og \(P=UI\) fra kapittel 2 brukes derimot overalt.</div>
+              </div>
+              <div class="res__tags"><span class="tag">0 / 10</span></div>
+            </div>
+            <div class="res">
+              <span class="res__num">5</span>
+              <div>
+                <div class="res__title">Måleinstrumenter og spenningsdeler med last</div>
+                <div class="res__sub">Hører til laben. Spenningsdeler med last kom i baklengs form i november 2022, men løses med Ohms lov og KCL.</div>
+              </div>
+              <div class="res__tags"><span class="tag">lab</span></div>
+            </div>
+            <div class="res">
+              <span class="res__num">8</span>
+              <div>
+                <div class="res__title">Grenstrømsanalyse</div>
+                <div class="res__sub">Aldri spurt om som egen metode, settene bruker maske eller knutepunkt. Cramers regel fra samme kapittel er derimot sentral.</div>
+              </div>
+              <div class="res__tags"><span class="tag">0 / 10</span></div>
+            </div>
+          </div>
+          <div class="note"><strong>Δ-Y og Wheatstone-bro</strong> er med én gang hver (des 2023 og des 2021). Lær formelen for like motstander, \(R_Y=R_\Delta/3\), og balansebetingelsen. Det tar fem minutter.</div>
+        </section>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="oversikt.html"><small>forrige</small>Eksamensoversikt</a>
+          <a data-dir="next" href="huskelapp.html"><small>neste</small>Huskelappen</a>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js?v=38"></script>
+  <script src="../../../assets/js/status.js?v=35"></script>
+  <script src="../../../assets/js/formler.js?v=35"></script>
+  <script src="../../../assets/js/math.js?v=35"></script>
+</body>
+</html>

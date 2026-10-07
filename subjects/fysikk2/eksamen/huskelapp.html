@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Huskelappen — Fysikk 2 · H26</title>
+  <meta name="description" content="Forslag til det tosidige A4-arket du kan ha med på eksamen: formler, oppskrifter for de fire oppgavetypene og typiske feil.">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=36">
+</head>
+<body class="theme-fysikk2" data-updated="2026-10-07">
+  <div class="app-shell">
+
+    <aside class="sidebar"></aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">Fysikk 2</a>
+        <div class="topbar__crumb">Huskelappen</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow">PB2050 eksamensforberedelse</div>
+          <h1>Huskelappen</h1>
+          <p class="page-header__desc">Forslag til A4-arket du har lov å ha med (begge sider): formlene, oppskriftene for de fire oppgavetypene og feilene som koster mest.</p>
+          <span class="page-header__status" data-status="active"><i></i>2 sider A4</span>
+        </header>
+
+        <section class="section noprint">
+          <div class="section__label">Slik bruker du den</div>
+          <article class="prose">
+            <p>Eksamen tillater «ett A4-ark med notater», og ingen formelark deles ut. Arket under er et forslag til innhold og oppsett, sortert i samme rekkefølge som oppgavene i settet: forsiden dekker oppgave 1–3, baksiden knutepunkt, maske og transienter.</p>
+            <ul>
+              <li><strong>Lag ditt eget.</strong> Arket skal være egenlaget. Skriv det helst av for hånd. Da lærer du stoffet mens du lager det, og du vet hvor alt står.</li>
+              <li><strong>Legg til egne feil.</strong> Når du løser gamle sett, noter det du gjør feil, og før det inn på arket.</li>
+              <li><strong>Utskrift:</strong> Ctrl + P skriver ut de to arkene som nøyaktig to A4-sider uten meny og marger. Velg tosidig utskrift.</li>
+            </ul>
+          </article>
+        </section>
+
+        <div class="a4">
+          <div class="a4__title"><span>Fysikk 2 — elektrisitetslære</span><small>side 1: grunnlag, serie-parallell, teoremer</small></div>
+
+          <div class="box">
+            <h4>Grunnlover</h4>
+            <p>\( U=RI \qquad P=UI=I^2R=\dfrac{U^2}{R} \qquad G=\dfrac1R \)</p>
+            <p>KVL: \(\sum U=0\) rundt sløyfe. KCL: \(\sum I_{inn}=\sum I_{ut}\).</p>
+            <p>Strøm inn på plussiden av R. Kilde leverer \(P\) når strømmen går <em>ut</em> av plussiden. \(\sum P_R=\sum P_{kilder}\).</p>
+          </div>
+
+          <div class="box">
+            <h4>Serie og parallell</h4>
+            <p>Serie: samme \(I\), \(R_T=R_1+R_2+\dots\)</p>
+            <p>Parallell: samme \(U\), \(\dfrac1{R_T}=\dfrac1{R_1}+\dfrac1{R_2}+\dots\)</p>
+            <p>\(R_1\parallel R_2=\dfrac{R_1R_2}{R_1+R_2}\) &nbsp; (alltid &lt; minste)</p>
+            <p>Spenningsdeling (serie): \(U_x=\dfrac{R_x}{R_T}E\)</p>
+            <p>Strømdeling, 2 grener: \(I_1=\dfrac{R_2}{R_1+R_2}I\) (den <em>andre</em> R oppe)</p>
+            <p>Strømdeling, n grener: \(I_x=\dfrac{R_T}{R_x}I=\dfrac{1/R_x}{\sum 1/R}I\)</p>
+            <p>R rett over ideell spenningskilde: har \(E\) over seg, påvirker ikke resten.</p>
+          </div>
+
+          <div class="box">
+            <h4>Oppgave 1 — oppskrift (30 %)</h4>
+            <ol>
+              <li>Merk nodene. Forenkle innenfra og ut, skriv \(R_T=\dots\parallel\dots\) med parenteser.</li>
+              <li>\(I_s=E/R_T\) (strømkilde: \(V_s=I_sR_T\)).</li>
+              <li>Tilbake ut: parallell → samme U, serie → samme I.</li>
+              <li>Bruk formelen oppgaven ber om (strøm-/spenningsdeling).</li>
+              <li>Kontroll: \(P_T=EI_s=I_s^2R_T\). Bruk «vis at»-tall videre.</li>
+            </ol>
+            <p>Eks: \(R_4\parallel R_5=4\parallel 12=3\), \(+R_2+R_3=6\), \(\parallel R_1=3\parallel 6=2\,\Omega\).</p>
+          </div>
+
+          <div class="box">
+            <h4>Δ-Y og bro</h4>
+            <p>\(R_a=\dfrac{R_{ab}R_{ac}}{R_{ab}+R_{bc}+R_{ac}}\); like: \(R_Y=R_\Delta/3\).</p>
+            <p>Bro i balanse: \(R_1/R_2=R_3/R_4\), ingen strøm i midtgrenen.</p>
+          </div>
+
+          <div class="box">
+            <h4>Nullstille kilder</h4>
+            <p><strong>Spenningskilde → kortslutning</strong> (0 Ω). <strong>Strømkilde → brudd</strong> (∞ Ω).</p>
+          </div>
+
+          <div class="box">
+            <h4>Kildekonvertering</h4>
+            <p>\(E\) i serie med \(R\) ⇄ \(I=E/R\) parallelt med \(R\). Pila peker mot plussiden. \(E=IR\).</p>
+            <p>Eks: 10 V + 3 Ω → 3.33 A ∥ 3 Ω.</p>
+          </div>
+
+          <div class="box">
+            <h4>Superposisjon — oppskrift</h4>
+            <ol>
+              <li>Referanseretning for svaret i originalkretsen.</li>
+              <li>Én hjelpekrets per kilde, de andre nullstilt. <strong>Tegn hver.</strong></li>
+              <li>Løs med serie-parallell/strømdeling: \(U', U''\).</li>
+              <li>\(U=U'+U''\) med fortegn (mot ref.retning = −).</li>
+              <li>Effekt fra totalen: \(P=I_{tot}^2R\), aldri \(P'+P''\).</li>
+            </ol>
+          </div>
+
+          <div class="box">
+            <h4>Thévenin og Norton — oppskrift</h4>
+            <ol>
+              <li>Fjern lasten, merk \(a\) og \(b\).</li>
+              <li>\(R_{Th}\): nullstill kilder, \(R\) mellom \(a\) og \(b\). Tegn.</li>
+              <li>\(E_{Th}=U_{ab}\) uten last (spenningsdeling/node/superposisjon). Ingen strøm i R i serie med terminal.</li>
+              <li>Tegn ekvivalenten <em>med verdier og lasten</em>.</li>
+              <li>\(I_L=\dfrac{E_{Th}}{R_{Th}+R_L}\)</li>
+            </ol>
+            <p>Norton: \(R_N=R_{Th}\), \(I_N=E_{Th}/R_{Th}\) = kortslutningsstrømmen.</p>
+            <p>\(E_{Th}\) kan være negativ: skriv \(U_{ab}=U_a-U_b\), behold fortegnet.</p>
+          </div>
+
+          <div class="box">
+            <h4>Maks effekt</h4>
+            <p>\(R_L=R_{Th}\Rightarrow P_{\max}=\dfrac{E_{Th}^2}{4R_{Th}}\), \(\eta=50\,\%\).</p>
+            <p>Eks: 12 V, 3 kΩ → 12 mW.</p>
+          </div>
+
+          <div class="box">
+            <h4>Prefikser</h4>
+            <p>k \(10^3\) · M \(10^6\) · m \(10^{-3}\) · µ \(10^{-6}\) · n \(10^{-9}\) · p \(10^{-12}\). kΩ·mA = V, V/kΩ = mA, kΩ·µF = ms.</p>
+          </div>
+        </div>
+
+        <div class="a4">
+          <div class="a4__title"><span>Fysikk 2 — elektrisitetslære</span><small>side 2: knutepunkt, maske, transienter</small></div>
+
+          <div class="box">
+            <h4>Knutepunkt (sjablong)</h4>
+            <p>Velg jord. For hver node \(k\):</p>
+            <p>\(\big(\sum G_k\big)V_k-\sum G_{kj}V_j=\sum I_{inn}\)</p>
+            <p>\(E\) + \(R\) mot jord → \(E/R\) inn i noden. Mot en annen node: skriv \(\dfrac{V_k-V_j-E}{R}\) direkte.</p>
+            <p>Strøm i R: \(I=(V_a-V_b)/R\), i <em>originalkretsen</em> (ikke den konverterte).</p>
+            <p>Eks: \(\tfrac13V_1-\tfrac14V_2=-1.25\), \(-\tfrac14V_1+\tfrac12V_2=3.75\) → \(V_1=3\), \(V_2=9\) V.</p>
+          </div>
+
+          <div class="box">
+            <h4>Maske (sjablong)</h4>
+            <p>Alle masker med klokka. For maske \(k\):</p>
+            <p>\(\big(\sum R_k\big)I_k-\sum R_{kj}I_j=\sum E_k\)</p>
+            <p>Kilde <strong>+</strong> når maskestrømmen går − → + gjennom den.</p>
+            <p>Utenfor diagonalen alltid minus. Felles gren: \(I_1-I_2\).</p>
+            <p>Eks: \(3I_1-I_2=1\), \(-I_1+2I_2=-1\) → \(I_1=0.2\), \(I_2=-0.4\).</p>
+          </div>
+
+          <div class="box">
+            <h4>Cramers regel</h4>
+            <p>\(\begin{vmatrix} a & b \\ c & d\end{vmatrix}=ad-bc\), &nbsp; \(x_k=D_k/D\)</p>
+            <p>\(D_k\): kolonne \(k\) byttes med høyresiden.</p>
+            <p>3×3 (Sarrus): skriv kol. 1–2 igjen til høyre.</p>
+            <p>\(D=aei+bfg+cdh-ceg-afh-bdi\)</p>
+            <p>for \(\begin{vmatrix} a&b&c\\ d&e&f\\ g&h&i\end{vmatrix}\)</p>
+            <p>Eks: \(\begin{vmatrix} 6&-2&-3\\ -2&10&-3\\ -3&-3&9\end{vmatrix}=324\)</p>
+            <p>Kontroll: sett løsningen inn i én ligning.</p>
+          </div>
+
+          <div class="box">
+            <h4>Kondensator og spole</h4>
+            <p>\(Q=CU\), \(i_C=C\,\dfrac{dv_C}{dt}\) &nbsp; \(v_L=L\,\dfrac{di_L}{dt}\)</p>
+            <p>C parallell: \(C_1+C_2\); serie: \(\dfrac{C_1C_2}{C_1+C_2}\) (motsatt av R).</p>
+            <p>L som R: serie \(L_1+L_2\), parallell \(L_1\parallel L_2\).</p>
+            <p>DC stasjonært: <strong>C = brudd</strong>, <strong>L = kortslutning</strong>.</p>
+            <p>\(v_C\) og \(i_L\) kan <strong>ikke hoppe</strong>.</p>
+          </div>
+
+          <div class="box">
+            <h4>Transient — formel</h4>
+            <p>\(x(t)=x_f+(x_i-x_f)\,e^{-t/\tau}\)</p>
+            <p>\(\tau=R_{Th}C\) &nbsp;&nbsp; \(\tau=L/R_{Th}\)</p>
+            <p>\(R_{Th}\): sett fra C/L, kilder nullstilt, <em>etter</em> omslaget.</p>
+            <p>Opplading: \(v_C=E_{Th}(1-e^{-t/\tau})\), \(i_C=\dfrac{E_{Th}}{R_{Th}}e^{-t/\tau}\)</p>
+            <p>Utlading: \(v_C=V_0e^{-t/\tau}\), \(i_C=-\dfrac{V_0}{R}e^{-t/\tau}\)</p>
+            <p>Spole: \(i_L=\dfrac{E_{Th}}{R_{Th}}(1-e^{-t/\tau})\), \(v_L=E_{Th}e^{-t/\tau}\)</p>
+            <p>Bryter åpnes med strøm i L: \(v_L(0^+)=-i_L(0)\,R_{ny}\) (spiss!)</p>
+          </div>
+
+          <div class="box">
+            <h4>Transient — oppskrift</h4>
+            <ol>
+              <li><strong>Før</strong> omslag (stasjonært): finn \(v_C(0)\) / \(i_L(0)\).</li>
+              <li><strong>Etter</strong> omslag (stasjonært): finn \(x_f\).</li>
+              <li>Thévenin sett fra C/L etter omslag → \(\tau\).</li>
+              <li>Sett inn, regn tallsvar ved oppgitt \(t\).</li>
+              <li>Skisse: start, slutt (stiplet), \(\tau\) på aksen.</li>
+            </ol>
+            <p>R rett over ideell kilde: påvirker ikke \(\tau\) mens kilden er inne. Bryter åpen → kilden borte, utlading gjennom de andre R-ene.</p>
+          </div>
+
+          <div class="box">
+            <h4>Tabell for \(e^{-n}\)</h4>
+            <p>\(t/\tau\): 0.5 → 0.607 · 1 → 0.368 · 2 → 0.135 · 2.5 → 0.082 · 3 → 0.050 · 5 → 0.0067</p>
+            <p>\(1-e^{-1}=63.2\,\%\), \(1-e^{-5}=99.3\,\%\). Tid til verdi: \(t=\tau\ln\dfrac{x_i-x_f}{x-x_f}\)</p>
+            <p>Eks: \(12e^{-t}=8\Rightarrow t=\ln 1.5=0.41\) s.</p>
+          </div>
+
+          <div class="box">
+            <h4>Feller som koster</h4>
+            <ul>
+              <li>Kortslutning/brudd byttet om ved nullstilling.</li>
+              <li>Strømdeling med feil R i telleren.</li>
+              <li>Superposisjon på effekt.</li>
+              <li>Kildepolaritet: se hvor + står (tegnet kan være «opp ned»).</li>
+              <li>Glemt å tegne kretsen på nytt med masker/noder.</li>
+              <li>\(\tau\) med motstanden <em>før</em> omslaget.</li>
+              <li>Enheter: kΩ·µF = ms, mH/kΩ = µs.</li>
+            </ul>
+          </div>
+        </div>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="prioritering.html"><small>forrige</small>Prioritering</a>
+          <a data-dir="next" href="../oppgaver/1-serie-parallell.html"><small>neste</small>Serie-parallell og effekt</a>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js?v=38"></script>
+  <script src="../../../assets/js/status.js?v=35"></script>
+  <script src="../../../assets/js/formler.js?v=35"></script>
+  <script src="../../../assets/js/math.js?v=35"></script>
+</body>
+</html>
