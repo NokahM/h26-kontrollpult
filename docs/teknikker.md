@@ -523,6 +523,24 @@ Alt ligger i `assets/tikz/`:
 - **Bredde:** settes i em ut fra punktstørrelsen, så teksten i figuren blir omtrent like stor som brødteksten.
 - **Tilgjengelighet:** linja `% alt: …` øverst i `.tex`-fila blir `aria-label`.
 
+**Kretsskjemaer med CircuiTikZ (Fysikk 2)**
+
+Kretsene bruker samme pipeline. `krets.tex` laster `felles.tex` og
+`circuitikz` (amerikanske symboler, som i eksamenssettene), og har makroene
+`\volt`/`\volth` (spenningsmerking), `\maske` (maskestrøm med klokka),
+`\thev`/`\nort`/`\last` (ekvivalentkretser) og stilen `trans` for
+transientgrafer. Hver figur er en `fy-<sett>-o<n>[-suffiks].tex`.
+
+- **Polaritet:** en `V` har + ved startpunktet, så en kilde tegnet oppover trenger
+  `invert` for å få + oppe. En `I` peker i tegneretningen. Kontroller fortegnet
+  på hver kilde mot originalen, en feil der gir feil fortegn i hele løsningen.
+- **Etiketter:** loddrett ned gir `l_` venstre og `a^` høyre. Spenningsmerker
+  settes med `\volt` et stykke unna, ellers kolliderer de med verdien.
+- **Første kompilering** med CircuiTikZ i MiKTeX kan ta minutter fordi pakker
+  installeres underveis. Kjør den i bakgrunnen.
+- **Hvitt fyll** (åpne terminaler) blir `var(--bg)` i `build.py`, ellers lyser de
+  som hvite prikker i mørkt tema.
+
 **Regler som sparte tid**
 
 - **Etiketter:** bare grenseverdier står som tall under aksen. Forventninger står som

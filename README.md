@@ -17,7 +17,7 @@ testing) er samlet i [`docs/teknikker.md`](docs/teknikker.md) for gjenbruk.
 | MoS       | Maskinvare og sikkerhet            | aktiv — ressurser lokalt |
 | TSD3060   | Utvikling av sikre webtjenester    | aktiv — ressurser hos ekstern kilde |
 | STAT      | Statistikk                         | kontefag — 88 eksamensoppgaver med løsning |
-| FYS2-EL   | Fysikk 2, elektrisitetslære        | kontefag — ressurser kommer |
+| PB2050    | Fysikk 2, elektrisitetslære        | kontefag — 12 kapitler, 41 eksamensoppgaver med løsning |
 
 ## Kjøre lokalt
 
@@ -91,10 +91,18 @@ foran en bokstav blir tolket som starten på en tag og spiser resten av formelen
 alle eksamenssettene fra 2023 og senere gjør det. Intervaller og
 fordelingsparametre skilles derfor med komma: `[20.6, 26.8]`, `N(57.9, 14.0)`.
 
-**Fysikk 2**: siden har fortsatt en tom-tilstand (`.empty`-komponenten) frem til
-pensum er klart. Når ressurser er klare: legg filene i
-`assets/resources/fysikk2/` og bytt ut `.empty`-blokken med
-`.section`/`.reslist`-mønsteret som på MoS-siden.
+**Fysikk 2** (PB1120/PB2050): `subjects/fysikk2/kapitler/` har ett kapittel per
+forelesning (12, `track: 'page'`), med lenke til forelesnings- og lab-PDF-en.
+`subjects/fysikk2/oppgaver/` har 41 oppgaver fra ti eksamenssett (des 2021 – vår
+2026), sortert på type (A serie-parallell, B Thévenin/Norton, C superposisjon,
+D maske/knutepunkt, E transienter). `subjects/fysikk2/eksamen/` har
+eksamensoversikt, prioritering og huskelappen: et forslag til det tosidige
+A4-arket, som skrives ut som nøyaktig to sider (`.a4` og `@media print` i
+`main.css`). Formelpanelet ligger i `subjects/fysikk2/formler.html`.
+
+Kretsskjemaene er tegnet med CircuiTikZ. Felles oppsett og konvensjoner står i
+`assets/tikz/krets.tex`, og hver figur er en `fy-*.tex`. De bygges med samme
+`build.py` som statistikkfigurene.
 
 **TSD3060**: ressursene ligger på et eksternt, passordbeskyttet
 kurssystem (debbie.usn.no). Innlogging er *bevisst* ikke lagt inn i denne

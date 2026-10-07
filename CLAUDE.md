@@ -2,7 +2,7 @@
 
 Statisk studieside (HTML/CSS/vanilla JS, ingen byggesteg) for høstsemesteret
 2026 ved USN. Fire emner: MoS, TSD3060, Statistikk (PB2030, konte) og Fysikk 2
-(FYS2-EL, konte). Brukeren følger fremdriften sin på oppgaver og kapitler her.
+(PB2050, konte). Brukeren følger fremdriften sin på oppgaver og kapitler her.
 
 - **Repo:** NokahM/h26-kontrollpult, publisert med GitHub Pages:
   https://nokahm.github.io/h26-kontrollpult/
