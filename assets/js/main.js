@@ -107,12 +107,42 @@
       ]
     },
     {
-      id: 'fysikk2', code: 'FYS2-EL', course: 'FYS2-EL', kind: 'konte', short: 'Elektrisitetslære',
+      id: 'fysikk2', code: 'PB2050', course: 'PB1120/PB2050', kind: 'konte', short: 'Elektrisitetslære',
+      formulas: 'subjects/fysikk2/formler.html',
       name: 'Fysikk 2, elektrisitetslære',
-      desc: 'Pensum, øvinger og tidligere eksamenssett legges inn når de er klare.',
-      scope: 'Ingen ressurser ennå',
+      desc: 'Tolv kapitler fra forelesningene og 41 eksamensoppgaver fra ti sett, sortert på oppgavetype, med løsningsforslag.',
+      scope: '12 kapitler og 41 oppgaver',
       href: 'subjects/fysikk2/index.html',
-      groups: []
+      groups: [
+        { label: 'Start her', items: [
+          { title: 'Eksamensoversikt', part: 'Eksamensforberedelse', href: 'subjects/fysikk2/eksamen/oversikt.html' },
+          { title: 'Prioritering', part: 'Eksamensforberedelse', href: 'subjects/fysikk2/eksamen/prioritering.html' },
+          { title: 'Huskelappen (A4-arket)', part: 'Eksamensforberedelse', href: 'subjects/fysikk2/eksamen/huskelapp.html' }
+        ] },
+        // I samme rekkefølge som oppgavene står i settene: O1 er alltid serie-parallell,
+        // O4 er alltid transient. O2 og O3 bytter på de tre metodetypene i midten.
+        { label: 'Eksamensoppgaver etter type', items: [
+          { n: 'A', title: 'Serie-parallell og effekt', meta: '11', tasks: 11, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/fysikk2/oppgaver/1-serie-parallell.html' },
+          { n: 'B', title: 'Thévenin, Norton og maks effekt', meta: '7', tasks: 7, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/fysikk2/oppgaver/2-thevenin-norton.html' },
+          { n: 'C', title: 'Superposisjon', meta: '5', tasks: 5, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/fysikk2/oppgaver/3-superposisjon.html' },
+          { n: 'D', title: 'Maske- og knutepunktsanalyse', meta: '8', tasks: 8, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/fysikk2/oppgaver/4-maske-knutepunkt.html' },
+          { n: 'E', title: 'Transienter i RC og RL', meta: '10', tasks: 10, track: 'tasks', part: 'Oppgaver med løsning', href: 'subjects/fysikk2/oppgaver/5-transienter.html' }
+        ] },
+        { label: 'Kapitler (forelesningene)', items: [
+          { n: '1', title: 'Strøm, spenning og resistans', part: 'Kapittel 1', track: 'page', href: 'subjects/fysikk2/kapitler/01-strom-spenning-resistans.html' },
+          { n: '2', title: 'Ohms lov, effekt og energi', part: 'Kapittel 2', track: 'page', href: 'subjects/fysikk2/kapitler/02-ohms-lov-effekt.html' },
+          { n: '3', title: 'Seriekretser og KVL', part: 'Kapittel 3', track: 'page', href: 'subjects/fysikk2/kapitler/03-seriekretser-kvl.html' },
+          { n: '4', title: 'Parallellkretser og KCL', part: 'Kapittel 4', track: 'page', href: 'subjects/fysikk2/kapitler/04-parallellkretser-kcl.html' },
+          { n: '5', title: 'Serie-parallellkretser', part: 'Kapittel 5', track: 'page', href: 'subjects/fysikk2/kapitler/05-serie-parallell.html' },
+          { n: '6', title: 'Kildekonvertering og superposisjon', part: 'Kapittel 6', track: 'page', href: 'subjects/fysikk2/kapitler/06-kildekonvertering-superposisjon.html' },
+          { n: '7', title: 'Thévenin, Norton og maks effekt', part: 'Kapittel 7', track: 'page', href: 'subjects/fysikk2/kapitler/07-thevenin-norton.html' },
+          { n: '8', title: 'Ligningssett og grenstrømmer', part: 'Kapittel 8', track: 'page', href: 'subjects/fysikk2/kapitler/08-grenstrom-cramer.html' },
+          { n: '9', title: 'Maskestrømsanalyse', part: 'Kapittel 9', track: 'page', href: 'subjects/fysikk2/kapitler/09-maskestrom.html' },
+          { n: '10', title: 'Knutepunktsanalyse', part: 'Kapittel 10', track: 'page', href: 'subjects/fysikk2/kapitler/10-knutepunkt.html' },
+          { n: '11', title: 'Kondensatoren', part: 'Kapittel 11', track: 'page', href: 'subjects/fysikk2/kapitler/11-kondensatoren.html' },
+          { n: '12', title: 'Spolen', part: 'Kapittel 12', track: 'page', href: 'subjects/fysikk2/kapitler/12-spolen.html' }
+        ] }
+      ]
     }
   ];
 

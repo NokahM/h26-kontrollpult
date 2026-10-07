@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Fysikk 2 — elektrisitetslære (konte) · H26</title>
-  <meta name="description" content="Fysikk 2, elektrisitetslære — kontefag. Ressurser legges til når pensum er klart.">
+  <meta name="description" content="Fysikk 2, elektrisitetslære — kontefag. Tolv kapitler fra forelesningene og 41 eksamensoppgaver med løsningsforslag.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../assets/css/main.css?v=35">
+  <link rel="stylesheet" href="../../assets/css/main.css?v=36">
 </head>
-<body class="theme-fysikk2" data-updated="2026-09-01">
+<body class="theme-fysikk2" data-updated="2026-10-07">
   <div class="app-shell">
 
     <aside class="sidebar"></aside>
@@ -25,30 +25,151 @@
 
       <main class="content">
         <header class="page-header">
-          <div class="page-header__eyebrow">FYS2-EL, kontefag</div>
+          <div class="page-header__eyebrow">PB2050, kontefag</div>
           <h1>Fysikk 2 — elektrisitetslære</h1>
-          <p class="page-header__desc">Kontefag denne terminen. Ressursene under fylles på etter hvert som pensum og eksamensdato blir klart.</p>
-          <span class="page-header__status"><i></i>ressurser kommer</span>
+          <p class="page-header__desc">DC-kretsanalyse: serie-parallell, nettverksteoremer, maske- og knutepunktsanalyse og transienter i RC og RL. Eksamen er tre timer skriftlig med penn og papir, med ett egenlaget A4-ark (begge sider) og enkel kalkulator. Labdelen vurderes ikke på eksamen.</p>
+          <span class="page-header__status" data-status="active"><i></i>41 oppgaver · 10 sett · 12 kapitler</span>
         </header>
 
         <section class="section">
-          <div class="empty">
-            <h3>Ingen ressurser lagt til ennå</h3>
-            <p>Når pensum er klart legges følgende til her, på samme form som de aktive emnene:</p>
-            <ul>
-              <li>Pensumliste / fagplan</li>
-              <li>Øvingsoppgaver og løsningsforslag</li>
-              <li>Eksamensdato for kontinuasjonseksamen</li>
-              <li>Tidligere eksamenssett</li>
-            </ul>
+          <div class="section__label">Start her</div>
+          <div class="reslist">
+            <div class="res">
+              <span class="res__num">00</span>
+              <div>
+                <div class="res__title"><a href="eksamen/oversikt.html">Eksamensoversikt</a></div>
+                <div class="res__sub">Den faste oppbygningen, poengene fordelt på type, og hva de fire siste settene tyder på</div>
+              </div>
+              <div class="res__tags"><span class="tag">les først</span></div>
+            </div>
+            <div class="res">
+              <span class="res__num">·</span>
+              <div>
+                <div class="res__title"><a href="eksamen/prioritering.html">Prioritering</a></div>
+                <div class="res__sub">Hvilke typer som gir flest poeng for minst arbeid, og rekkefølgen å øve i</div>
+              </div>
+              <div class="res__tags"><span class="tag">plan</span></div>
+            </div>
+            <div class="res">
+              <span class="res__num">A4</span>
+              <div>
+                <div class="res__title"><a href="eksamen/huskelapp.html">Huskelappen</a></div>
+                <div class="res__sub">Forslag til det tosidige A4-arket du har lov å ha med, klart til utskrift</div>
+              </div>
+              <div class="res__tags"><span class="tag">hjelpemiddel</span></div>
+            </div>
           </div>
+        </section>
+
+        <section class="section">
+          <div class="section__label">Fokus før eksamen</div>
+          <article class="prose">
+            <p>Settet har alltid fire oppgaver: serie-parallell (30 %), knutepunkt eller maske (20 %), superposisjon eller Thévenin (25 %) og en transient (25 %). Alle fire bygger på det samme: å forenkle en krets med serie og parallell. Sitter det, er resten noen få oppskrifter.</p>
+          </article>
+          <div class="steps">
+            <div class="step">
+              <h4>Serie-parallell</h4>
+              <p>30 % i hvert sett, og det enkleste stoffet. \(R_T\), strømdeling og spenningsdeling må sitte perfekt. Øv på: <a href="oppgaver/1-serie-parallell.html#v2026">strømkilde med tre grener</a> (våren 2026).</p>
+            </div>
+            <div class="step">
+              <h4>Transienter</h4>
+              <p>25 % de fire siste gangene. Startverdi, sluttverdi og \(\tau\) fra Thévenin-motstanden etter omslaget. Øv på: <a href="oppgaver/5-transienter.html#h2025">kondensator og spole, inn og ut</a> (desember 2025).</p>
+            </div>
+            <div class="step">
+              <h4>Knutepunkt og maske</h4>
+              <p>Oppgave 2 i alle de fire siste settene. Sjablongmetoden og Cramers regel. Øv på: <a href="oppgaver/4-maske-knutepunkt.html#v2026">to noder med kildekonvertering</a> (våren 2026).</p>
+            </div>
+            <div class="step">
+              <h4>Superposisjon</h4>
+              <p>Oppgave 3 i tre av de fire siste. Nullstilt spenningskilde er kortslutning, nullstilt strømkilde er brudd. Øv på: <a href="oppgaver/3-superposisjon.html#v2025">strømkilde og spenningskilde</a> (februar 2025).</p>
+            </div>
+            <div class="step">
+              <h4>Thévenin og Norton</h4>
+              <p>Egen oppgave i sju av ti sett, og verktøyet i de fleste transientene. Øv på: <a href="oppgaver/2-thevenin-norton.html#h2025">Norton, Thévenin og maks effekt</a> (desember 2025).</p>
+            </div>
+          </div>
+          <p class="callout"><strong>Kan nedprioriteres:</strong> resistivitet, temperatur, energi, virkningsgrad og måleinstrumenter (aldri spurt om), og grenstrømsanalyse som egen metode. <strong>Siste dager:</strong> løs desember 2025 og våren 2026 på tid med bare kalkulator og huskelappen.</p>
+        </section>
+
+        <section class="section">
+          <div class="section__label">Eksamensoppgaver etter type</div>
+          <div class="reslist">
+            <div class="res">
+              <span class="res__num">A</span>
+              <div>
+                <div class="res__title"><a href="oppgaver/1-serie-parallell.html">Serie-parallell og effekt</a></div>
+                <div class="res__sub">Totalmotstand, kildestrøm, strøm- og spenningsdeling, effekt, Wheatstone-bro · 11 oppgaver</div>
+              </div>
+              <div class="res__tags"><span class="tag">10 / 10 sett</span></div>
+            </div>
+            <div class="res">
+              <span class="res__num">B</span>
+              <div>
+                <div class="res__title"><a href="oppgaver/2-thevenin-norton.html">Thévenin, Norton og maks effekt</a></div>
+                <div class="res__sub">Ekvivalenter sett fra en last, negativ \(E_{Th}\), maksimal effektoverføring · 7 oppgaver</div>
+              </div>
+              <div class="res__tags"><span class="tag">7 / 10 sett</span></div>
+            </div>
+            <div class="res">
+              <span class="res__num">C</span>
+              <div>
+                <div class="res__title"><a href="oppgaver/3-superposisjon.html">Superposisjon</a></div>
+                <div class="res__sub">Én kilde om gangen, hjelpekretser, fortegn og effekt i kildene · 5 oppgaver</div>
+              </div>
+              <div class="res__tags"><span class="tag">5 / 10 sett</span></div>
+            </div>
+            <div class="res">
+              <span class="res__num">D</span>
+              <div>
+                <div class="res__title"><a href="oppgaver/4-maske-knutepunkt.html">Maske- og knutepunktsanalyse</a></div>
+                <div class="res__sub">Sjablongmetoden, kildekonvertering, Δ-Y, Cramers regel for 2×2 og 3×3 · 8 oppgaver</div>
+              </div>
+              <div class="res__tags"><span class="tag">8 / 10 sett</span></div>
+            </div>
+            <div class="res">
+              <span class="res__num">E</span>
+              <div>
+                <div class="res__title"><a href="oppgaver/5-transienter.html">Transienter i RC og RL</a></div>
+                <div class="res__sub">Opp- og utlading, startverdi, tidskonstant via Thévenin, spenningsspiss, grafskisse · 10 oppgaver</div>
+              </div>
+              <div class="res__tags"><span class="tag">10 / 10 sett</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section__label">Kapitler fra forelesningene</div>
+          <div class="reslist">
+            <div class="res"><span class="res__num">01</span><div><div class="res__title"><a href="kapitler/01-strom-spenning-resistans.html">Strøm, spenning og resistans</a></div><div class="res__sub">Ladning, resistivitet, temperatur, prefikser, måling</div></div><div class="res__tags"><span class="tag">lab 1</span></div></div>
+            <div class="res"><span class="res__num">02</span><div><div class="res__title"><a href="kapitler/02-ohms-lov-effekt.html">Ohms lov, effekt og energi</a></div><div class="res__sub">Referanseretninger, effekt i kilder, energi, virkningsgrad</div></div><div class="res__tags"><span class="tag">lab 2</span></div></div>
+            <div class="res"><span class="res__num">03</span><div><div class="res__title"><a href="kapitler/03-seriekretser-kvl.html">Seriekretser og KVL</a></div><div class="res__sub">Noder og jord, KVL, spenningsdeling</div></div><div class="res__tags"><span class="tag">lab 3</span></div></div>
+            <div class="res"><span class="res__num">04</span><div><div class="res__title"><a href="kapitler/04-parallellkretser-kcl.html">Parallellkretser og KCL</a></div><div class="res__sub">KCL, parallellmotstand, strømdeling</div></div><div class="res__tags"><span class="tag">lab 4</span></div></div>
+            <div class="res"><span class="res__num">05</span><div><div class="res__title"><a href="kapitler/05-serie-parallell.html">Serie-parallellkretser</a></div><div class="res__sub">Forenkling, spenningsdeler med last, måleinstrumenter, Δ-Y</div></div><div class="res__tags"><span class="tag">lab 5</span></div></div>
+            <div class="res"><span class="res__num">06</span><div><div class="res__title"><a href="kapitler/06-kildekonvertering-superposisjon.html">Kildekonvertering og superposisjon</a></div><div class="res__sub">Ikke-ideelle kilder, konvertering, én kilde om gangen</div></div><div class="res__tags"><span class="tag">lab 6</span></div></div>
+            <div class="res"><span class="res__num">07</span><div><div class="res__title"><a href="kapitler/07-thevenin-norton.html">Thévenin, Norton og maks effekt</a></div><div class="res__sub">Ekvivalenter og maksimal effektoverføring</div></div><div class="res__tags"><span class="tag">lab 7</span></div></div>
+            <div class="res"><span class="res__num">08</span><div><div class="res__title"><a href="kapitler/08-grenstrom-cramer.html">Ligningssett og grenstrømmer</a></div><div class="res__sub">Determinanter, Cramers regel, Sarrus, grenstrømsanalyse</div></div><div class="res__tags"><span class="tag">lab 8</span></div></div>
+            <div class="res"><span class="res__num">09</span><div><div class="res__title"><a href="kapitler/09-maskestrom.html">Maskestrømsanalyse</a></div><div class="res__sub">Masker med klokka, sjablongmetoden</div></div><div class="res__tags"><span class="tag">lab 9</span></div></div>
+            <div class="res"><span class="res__num">10</span><div><div class="res__title"><a href="kapitler/10-knutepunkt.html">Knutepunktsanalyse</a></div><div class="res__sub">Nodespenninger, kildekonvertering inn i noder</div></div><div class="res__tags"><span class="tag">lab 10</span></div></div>
+            <div class="res"><span class="res__num">11</span><div><div class="res__title"><a href="kapitler/11-kondensatoren.html">Kondensatoren</a></div><div class="res__sub">Kapasitans, serie og parallell, opp- og utlading</div></div><div class="res__tags"><span class="tag">lab 11</span></div></div>
+            <div class="res"><span class="res__num">12</span><div><div class="res__title"><a href="kapitler/12-spolen.html">Spolen</a></div><div class="res__sub">Induktans, inn- og utkopling, spenningsspiss</div></div><div class="res__tags"><span class="tag">lab 12</span></div></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section__label">Om samlingen</div>
+          <article class="prose">
+            <p>Oppgavene fra ti eksamenssett (PB1120/PB2050, desember 2021 – våren 2026) er sortert etter type i stedet for etter sett, slik at du kan øve på én ferdighet om gangen. Løsningsforslagene er skjult bak «Løsningsforslag» og viser alle stegene slik de føres på eksamen. Alle tall er regnet ut på nytt og kontrollert mot de offisielle løsningsforslagene. Der løsningsforslaget har feil, er det merket.</p>
+            <p>Kretsene er tegnet på nytt med CircuiTikZ, slik at de følger lyst og mørkt tema og kan forstørres uten å bli uskarpe. Kildene står på <code>assets/tikz/fy-*.tex</code>.</p>
+            <p class="callout">Forelesninger, labhefter og eksamens-PDF-er ligger i <code>assets/resources/fysikk2/</code>, som er ekskludert fra git av opphavsrettshensyn. Lenkene øverst i hvert kapittel virker lokalt, men ikke på den publiserte siden.</p>
+          </article>
         </section>
       </main>
     </div>
   </div>
 
-  <script src="../../assets/js/main.js?v=37"></script>
+  <script src="../../assets/js/main.js?v=38"></script>
   <script src="../../assets/js/status.js?v=35"></script>
   <script src="../../assets/js/formler.js?v=35"></script>
+  <script src="../../assets/js/math.js?v=35"></script>
 </body>
 </html>

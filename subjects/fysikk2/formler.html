@@ -1,0 +1,176 @@
+<!--
+  Formelpanel for PB2050 Fysikk 2, elektrisitetslære.
+  Lastes inn i panelet som åpnes med Σ-knappen i toppfeltet (assets/js/formler.js),
+  og er ikke en egen side. Innholdet i .fp-content er alt som vises.
+
+  Oppbygging:  <section id="f-…" data-short="…"><h2>…</h2>  → hopp-lenke øverst i panelet
+               <div class="rule"> med h3, formel (\[ … \]), forklaring og eksempel
+  Samme innhold som huskelappen (eksamen/huskelapp.html), men med forklaringer.
+-->
+<div class="fp-content">
+
+  <section id="f-symboler" data-short="Symboler">
+    <h2>Symboler</h2>
+    <div class="rule rule--symbols">
+      <h3>Størrelser og enheter</h3>
+      <dl class="symbols">
+        <div><dt>\(Q\) [C]</dt><dd>ladning, coulomb</dd></div>
+        <div><dt>\(I\) [A]</dt><dd>strøm, ladning per tid</dd></div>
+        <div><dt>\(U,\ V,\ E\) [V]</dt><dd>spenning; \(E\) brukes for kilder</dd></div>
+        <div><dt>\(R\) [Ω]</dt><dd>resistans (motstand)</dd></div>
+        <div><dt>\(G\) [S]</dt><dd>konduktans, \(G=1/R\)</dd></div>
+        <div><dt>\(P\) [W]</dt><dd>effekt</dd></div>
+        <div><dt>\(W\) [J, kWh]</dt><dd>energi</dd></div>
+        <div><dt>\(\eta\)</dt><dd>virkningsgrad</dd></div>
+        <div><dt>\(\rho\) [Ω·mm²/m]</dt><dd>resistivitet</dd></div>
+        <div><dt>\(\alpha\) [1/°C]</dt><dd>temperaturkoeffisient</dd></div>
+        <div><dt>\(C\) [F]</dt><dd>kapasitans, farad</dd></div>
+        <div><dt>\(L\) [H]</dt><dd>induktans, henry</dd></div>
+        <div><dt>\(\tau\) [s]</dt><dd>tidskonstant</dd></div>
+        <div><dt>\(\parallel\)</dt><dd>«i parallell med»</dd></div>
+        <div><dt>\(R_{Th},\ E_{Th}\)</dt><dd>Thévenin-motstand og -spenning</dd></div>
+        <div><dt>\(I_N,\ R_N\)</dt><dd>Norton-strøm og -motstand</dd></div>
+      </dl>
+      <p class="symbols__group">Prefikser</p>
+      <dl class="symbols">
+        <div><dt>G, M, k</dt><dd>\(10^9,\ 10^6,\ 10^3\)</dd></div>
+        <div><dt>m, µ, n, p</dt><dd>\(10^{-3},\ 10^{-6},\ 10^{-9},\ 10^{-12}\)</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section id="f-grunn" data-short="Grunnlover">
+    <h2>Grunnlover</h2>
+    <div class="rule">
+      <h3>Ohms lov</h3>
+      <p class="rule__f">\[ U=RI,\qquad I=\frac{U}{R},\qquad R=\frac{U}{I} \]</p>
+      <p class="rule__text">Strømmen gjennom en motstand er proporsjonal med spenningen over den. Referanseretning: strømmen går inn på plussiden.</p>
+      <p class="rule__ex"><span>Eksempel</span> 10 V over 100 Ω gir \(I=0.10\) A.</p>
+    </div>
+    <div class="rule">
+      <h3>Effekt og energi</h3>
+      <p class="rule__f">\[ P=UI=I^2R=\frac{U^2}{R},\qquad W=Pt \]</p>
+      <p class="rule__text">Effekt i motstander er alltid positiv. En kilde der strømmen går ut av plussiden, leverer effekt. Total effekt i motstandene = effekten kildene leverer.</p>
+      <p class="rule__ex"><span>Eksempel</span> 2 kW i 4 timer: \(W=8\) kWh.</p>
+    </div>
+    <div class="rule">
+      <h3>Virkningsgrad</h3>
+      <p class="rule__f">\[ \eta=\frac{P_{ut}}{P_{inn}},\qquad \eta_T=\eta_1\eta_2\cdots\eta_n \]</p>
+      <p class="rule__ex"><span>Eksempel</span> Dynamo 83 % og motor 78 %: \(\eta_T=0.83\cdot 0.78=64\,\%\).</p>
+    </div>
+    <div class="rule">
+      <h3>Resistans i ledere</h3>
+      <p class="rule__f">\[ R=\rho\frac{l}{A},\qquad R_T=R_{20}\left(1+\alpha(T-20^\circ\text{C})\right) \]</p>
+      <p class="rule__ex"><span>Eksempel</span> 10 m kobber, 1 mm²: \(R=0.0172\cdot 10/1=0.172\,\Omega\).</p>
+    </div>
+    <div class="rule">
+      <h3>Kirchhoffs lover</h3>
+      <p class="rule__f">\[ \text{KVL: }\sum_{\text{sløyfe}} U=0,\qquad \text{KCL: }\sum_{\text{node}} I_{inn}=\sum_{\text{node}} I_{ut} \]</p>
+      <p class="rule__text">KVL: summen av spenningene rundt en lukket sløyfe er null. KCL: det som går inn i en node, går ut.</p>
+    </div>
+  </section>
+
+  <section id="f-sp" data-short="Serie/parallell">
+    <h2>Serie og parallell</h2>
+    <div class="rule">
+      <h3>Motstander i serie og parallell</h3>
+      <p class="rule__f">\[ R_T=R_1+R_2+\dots,\qquad \frac{1}{R_T}=\frac{1}{R_1}+\frac{1}{R_2}+\dots,\qquad R_1\parallel R_2=\frac{R_1R_2}{R_1+R_2} \]</p>
+      <p class="rule__text">Serie: samme strøm. Parallell: samme spenning. Parallell er alltid mindre enn den minste.</p>
+      <p class="rule__ex"><span>Eksempel</span> \(6\parallel 3=18/9=2\,\Omega\).</p>
+    </div>
+    <div class="rule">
+      <h3>Spenningsdeling</h3>
+      <p class="rule__f">\[ U_x=\frac{R_x}{R_T}\,E \]</p>
+      <p class="rule__text">Gjelder for motstander i serie (samme strøm). \(R_T\) er summen av seriemotstandene.</p>
+      <p class="rule__ex"><span>Eksempel</span> 20 V over 5 Ω + 5 Ω: \(U=10\) V over hver.</p>
+    </div>
+    <div class="rule">
+      <h3>Strømdeling</h3>
+      <p class="rule__f">\[ I_1=\frac{R_2}{R_1+R_2}\,I,\qquad I_x=\frac{1/R_x}{\sum 1/R_k}\,I=\frac{R_T}{R_x}\,I \]</p>
+      <p class="rule__text">For to grener: strømmen i én gren har motstanden i den <em>andre</em> grenen i telleren.</p>
+      <p class="rule__ex"><span>Eksempel</span> 16 mA inn i 2 kΩ ∥ 14 kΩ: strømmen i 14 kΩ er \(\frac{2}{16}\cdot 16=2\) mA.</p>
+    </div>
+    <div class="rule">
+      <h3>Δ-Y-omforming</h3>
+      <p class="rule__f">\[ R_a=\frac{R_{ab}R_{ac}}{R_{ab}+R_{bc}+R_{ac}},\qquad R_Y=\frac{R_\Delta}{3}\ \text{(like motstander)} \]</p>
+      <p class="rule__text">Hver Y-gren får produktet av de to Δ-motstandene som møtes i samme hjørne, delt på summen. Motsatt vei: \(R_\Delta=3R_Y\).</p>
+    </div>
+    <div class="rule">
+      <h3>Wheatstone-bro i balanse</h3>
+      <p class="rule__f">\[ \frac{R_1}{R_2}=\frac{R_3}{R_4} \]</p>
+      <p class="rule__text">Ingen strøm i midtgrenen når de to spenningsdelerne deler likt.</p>
+    </div>
+  </section>
+
+  <section id="f-teoremer" data-short="Teoremer">
+    <h2>Nettverksteoremer</h2>
+    <div class="rule">
+      <h3>Kildekonvertering</h3>
+      <p class="rule__f">\[ I=\frac{E}{R_s},\quad R_p=R_s\qquad\Longleftrightarrow\qquad E=IR_p,\quad R_s=R_p \]</p>
+      <p class="rule__text">Spenningskilde med seriemotstand ↔ strømkilde med samme motstand i parallell. Strømkildens pil peker mot spenningskildens plusside.</p>
+      <p class="rule__ex"><span>Eksempel</span> 10 V med 3 Ω → 3.33 A parallelt med 3 Ω.</p>
+    </div>
+    <div class="rule">
+      <h3>Superposisjon</h3>
+      <p class="rule__f">\[ x=x'+x''+\dots \]</p>
+      <p class="rule__text">Én kilde om gangen. Nullstilt spenningskilde = kortslutning, nullstilt strømkilde = brudd. Gjelder strøm og spenning, ikke effekt.</p>
+    </div>
+    <div class="rule">
+      <h3>Thévenin og Norton</h3>
+      <p class="rule__f">\[ E_{Th}=U_{ab}\ \text{(uten last)},\quad R_{Th}=R_{ab}\ \text{(kilder nullstilt)},\quad I_N=\frac{E_{Th}}{R_{Th}},\quad R_N=R_{Th} \]</p>
+      <p class="rule__text">\(I_N\) er kortslutningsstrømmen mellom \(a\) og \(b\). Lasten er aldri med i ekvivalenten.</p>
+    </div>
+    <div class="rule">
+      <h3>Maksimal effektoverføring</h3>
+      <p class="rule__f">\[ R_L=R_{Th},\qquad P_{L,\max}=\frac{E_{Th}^2}{4R_{Th}},\qquad \eta=50\,\% \]</p>
+      <p class="rule__ex"><span>Eksempel</span> \(E_{Th}=12\) V, \(R_{Th}=3\) kΩ: \(P_{\max}=144/12\,000=12\) mW.</p>
+    </div>
+  </section>
+
+  <section id="f-analyse" data-short="Maske/node">
+    <h2>Maske- og knutepunktsanalyse</h2>
+    <div class="rule">
+      <h3>Maskestrøm (sjablong)</h3>
+      <p class="rule__f">\[ \Big(\sum R_{\text{maske }k}\Big)I_k-\sum R_{\text{felles}}\,I_{\text{nabo}}=\sum E_{\text{maske }k} \]</p>
+      <p class="rule__text">Alle maskestrømmer med klokka. En kilde teller + når maskestrømmen går gjennom den fra − til +. Grenstrøm i felles gren: \(I_1-I_2\).</p>
+    </div>
+    <div class="rule">
+      <h3>Knutepunkt (sjablong)</h3>
+      <p class="rule__f">\[ \Big(\sum G_{\text{til node }k}\Big)V_k-\sum G_{\text{mellom}}\,V_{\text{nabo}}=\sum I_{\text{inn i node }k} \]</p>
+      <p class="rule__text">\(G=1/R\). Én node er jord. \(E\) i serie med \(R\) mot jord blir strømkilden \(E/R\) inn i noden.</p>
+    </div>
+    <div class="rule">
+      <h3>Cramers regel</h3>
+      <p class="rule__f">\[ \begin{vmatrix} a & b \\ c & d \end{vmatrix}=ad-bc,\qquad x_k=\frac{D_k}{D} \]</p>
+      <p class="rule__text">\(D_k\): bytt kolonne \(k\) med høyresiden. 3×3 med Sarrus: tre diagonaler ned mot høyre med +, tre opp mot høyre med −.</p>
+      <p class="rule__ex"><span>Eksempel</span> \(3I_1-I_2=1,\ -I_1+2I_2=-1\): \(D=5,\ D_1=1\), så \(I_1=0.2\) A.</p>
+    </div>
+  </section>
+
+  <section id="f-cl" data-short="C og L">
+    <h2>Kondensator og spole</h2>
+    <div class="rule">
+      <h3>Kondensatoren</h3>
+      <p class="rule__f">\[ Q=CU,\qquad i_C=C\frac{dv_C}{dt},\qquad C=\varepsilon\frac{A}{d} \]</p>
+      <p class="rule__text">Parallell: \(C_T=C_1+C_2+\dots\). Serie: \(1/C_T=1/C_1+1/C_2+\dots\) (motsatt av motstander). Stasjonært (DC): brudd. \(v_C\) kan ikke hoppe.</p>
+      <p class="rule__ex"><span>Eksempel</span> To 50 nF i serie: 25 nF.</p>
+    </div>
+    <div class="rule">
+      <h3>Spolen</h3>
+      <p class="rule__f">\[ v_L=L\frac{di_L}{dt} \]</p>
+      <p class="rule__text">Serie: \(L_T=L_1+L_2+\dots\). Parallell: \(1/L_T=1/L_1+\dots\) (som motstander). Stasjonært (DC): kortslutning. \(i_L\) kan ikke hoppe.</p>
+    </div>
+    <div class="rule">
+      <h3>Transient (førsteordens)</h3>
+      <p class="rule__f">\[ x(t)=x_f+(x_i-x_f)\,e^{-t/\tau},\qquad \tau=R_{Th}C,\qquad \tau=\frac{L}{R_{Th}} \]</p>
+      <p class="rule__text">\(R_{Th}\): motstanden sett fra C eller L etter omslaget, med kildene nullstilt. Etter \(1\tau\): 63.2 % av veien, etter \(5\tau\): 99.3 %.</p>
+      <p class="rule__ex"><span>Eksempel</span> \(v_C\) fra 5 V mot 10 V med \(\tau=10\) s: \(v_C(10)=10-5e^{-1}=8.16\) V.</p>
+    </div>
+    <div class="rule">
+      <h3>Opp- og utlading</h3>
+      <p class="rule__f">\[ v_C=E\left(1-e^{-t/\tau}\right),\quad i_C=\frac{E}{R}e^{-t/\tau};\qquad v_C=V_0e^{-t/\tau},\quad i_C=-\frac{V_0}{R}e^{-t/\tau} \]</p>
+      <p class="rule__text">Spole fra 0: \(i_L=\frac{E}{R}\left(1-e^{-t/\tau}\right)\), \(v_L=Ee^{-t/\tau}\). Ved bryteråpning: \(v_L(0^+)=-i_L(0)\,R_{\text{ny}}\).</p>
+    </div>
+  </section>
+
+</div>
