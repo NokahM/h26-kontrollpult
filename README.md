@@ -100,7 +100,10 @@ eksamensoversikt, prioritering og huskelappen: et forslag til det tosidige
 A4-arket, som skrives ut som nøyaktig to sider (`.a4` og `@media print` i
 `main.css`). Formelpanelet ligger i `subjects/fysikk2/formler.html`. `subjects/fysikk2/kompendium.html` er en veiviser til
 labheftet (`pb1120-digital-normal.pdf`), med sidelenker inn i PDF-en og oppgavene
-merket etter eksamensrelevans.
+merket etter eksamensrelevans. `subjects/fysikk2/eksamenssett.html` lenker til de ti
+eksamenssettene med løsningsforslag. De ligger i
+`assets/resources/fysikk2/Eksamensoppgaver/` og er, som et bevisst unntak fra
+regelen under, med i git og publisert, så lenkene virker på GitHub Pages.
 
 **Strømanimasjon**: likestrømskretsene i oppgavene har en «Vis strøm»-knapp
 som viser strømmen som prikker langs ledningene, med fart proporsjonal med

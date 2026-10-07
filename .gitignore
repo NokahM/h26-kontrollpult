@@ -11,6 +11,11 @@ assets/resources/*/*
 !assets/resources/tsd3060/losninger/
 assets/resources/tsd3060/**/*.pdf
 
+# Exception: past Fysikk 2 exams (PB1120/PB2050) and their solutions are
+# published on purpose so the links on the exam set page work on GitHub Pages
+# (the user's decision, 2026-10-07). Lectures, labs and the compendium stay local.
+!assets/resources/fysikk2/Eksamensoppgaver/
+
 # OS
 .DS_Store
 Thumbs.db

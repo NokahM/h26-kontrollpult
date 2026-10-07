@@ -28,6 +28,9 @@ Statisk studieside (HTML/CSS/vanilla JS, ingen byggesteg) for høstsemesteret
   alle HTML-sidene.
 - **Kun desktop** (16:10). Ingen mobil-layout.
 - **Kursmateriell** (`assets/resources/*/*`) er med vilje utenfor git. Unntak:
-  TSD3060-kode i `assets/resources/tsd3060/{eksempler,losninger}/` publiseres.
+  TSD3060-kode i `assets/resources/tsd3060/{eksempler,losninger}/` publiseres,
+  og det gjør også Fysikk 2-eksamenssettene med løsningsforslag i
+  `assets/resources/fysikk2/Eksamensoppgaver/` (brukerens valg). Forelesninger,
+  labhefter og kompendiet holdes lokalt.
 - **Studieinnhold:** riktig fremgangsmåte slik den forventes på eksamen er
   viktigere enn eksakt svar.
