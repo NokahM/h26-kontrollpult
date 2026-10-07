@@ -31,11 +31,22 @@ COLORS = {            # farge i felles.tex -> verdi i CSS
 }
 
 
+FLOW = re.compile(r'#f0f0([0-9a-f]{2})')  # strømbaner f01, f02 … (krets.tex), animeres av strom.js
+
+
 def recolor(tag):
     """Flytter kjente farger i fill/stroke over i et style-attributt."""
     styles = []
+    classes = []
     def swap(m):
         attr, val = m.group(1), m.group(2).lower()
+        f = FLOW.fullmatch(val)
+        if f:
+            if attr == 'stroke':
+                classes.append(f'flow f{f.group(1)}')
+                styles.append('stroke:var(--accent)')
+                return ''
+            return f" {attr}='none'"
         if val in COLORS and COLORS[val] != 'currentColor':
             styles.append(f'{attr}:{COLORS[val]}')
             return ''
@@ -43,6 +54,8 @@ def recolor(tag):
     tag = re.sub(r"\s(fill|stroke)='([^']*)'", swap, tag)
     if styles:
         tag = re.sub(r'(/?>)$', f" style='{';'.join(styles)}'" + r'\1', tag)
+    if classes:
+        tag = re.sub(r'(/?>)$', f" class='{classes[0]}'" + r'\1', tag)
     return tag
 
 

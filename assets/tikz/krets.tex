@@ -61,3 +61,19 @@
     xlabel style={at={(axis description cs:1.03,0)}, anchor=west},
     ylabel style={rotate=-90, at={(axis description cs:0,1.04)}, anchor=south}},
 }
+
+% Strømbaner for animasjon (strom.js): f01 ... f12 tegnes i strømretningen og blir
+% CSS-klassene flow f01 ... i build.py. Tegnes sist, slik at prikkene ligger over ledningene.
+\definecolor{f01}{HTML}{F0F001}
+\definecolor{f02}{HTML}{F0F002}
+\definecolor{f03}{HTML}{F0F003}
+\definecolor{f04}{HTML}{F0F004}
+\definecolor{f05}{HTML}{F0F005}
+\definecolor{f06}{HTML}{F0F006}
+\definecolor{f07}{HTML}{F0F007}
+\definecolor{f08}{HTML}{F0F008}
+\definecolor{f09}{HTML}{F0F009}
+\definecolor{f10}{HTML}{F0F010}
+\definecolor{f11}{HTML}{F0F011}
+\definecolor{f12}{HTML}{F0F012}
+\tikzset{strom/.style={line width=1.6pt, line cap=round, line join=round}}
