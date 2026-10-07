@@ -102,6 +102,14 @@ A4-arket, som skrives ut som nøyaktig to sider (`.a4` og `@media print` i
 labheftet (`pb1120-digital-normal.pdf`), med sidelenker inn i PDF-en og oppgavene
 merket etter eksamensrelevans.
 
+**Strømanimasjon**: likestrømskretsene i oppgavene har en «Vis strøm»-knapp
+som viser strømmen som prikker langs ledningene, med fart proporsjonal med
+strømstyrken (superposisjon med én knapp per kilde). Strømbanene og strømmene
+står i `assets/tikz/strom.py`. Skriptet legger banene inn i `fy-*.tex` og
+knappene inn i sidene. Kjør det, og bygg figurene med `build.py` etterpå.
+Animasjonen styres av `assets/js/strom.js`. `subjects/fysikk2/strom.html`
+viser to eksempler med strømmen synlig fra start.
+
 Kretsskjemaene er tegnet med CircuiTikZ. Felles oppsett og konvensjoner står i
 `assets/tikz/krets.tex`, og hver figur er en `fy-*.tex`. De bygges med samme
 `build.py` som statistikkfigurene.
