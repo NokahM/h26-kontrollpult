@@ -1541,3 +1541,6 @@ mjx-container[display="true"] { margin: .9rem 0 !important; }
 @keyframes strom { to { stroke-dashoffset: -8; } }
 /* Utenfor en animert figur vises strømbanene ikke */
 :not(.stromfig__view) > svg .flow { display: none; }
+
+/* Dempet tekst i ressurslister (for eksempel prosent og dato på eksamenssett-siden) */
+.res .muted { color: var(--muted); font-weight: 400; }

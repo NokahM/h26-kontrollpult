@@ -118,6 +118,7 @@
           { title: 'Eksamensoversikt', part: 'Eksamensforberedelse', href: 'subjects/fysikk2/eksamen/oversikt.html' },
           { title: 'Prioritering', part: 'Eksamensforberedelse', href: 'subjects/fysikk2/eksamen/prioritering.html' },
           { title: 'Huskelappen (A4-arket)', part: 'Eksamensforberedelse', href: 'subjects/fysikk2/eksamen/huskelapp.html' },
+          { title: 'Eksamenssett', part: 'Eksamensforberedelse', href: 'subjects/fysikk2/eksamenssett.html' },
           { title: 'Kompendiet', part: 'Kursmateriell', href: 'subjects/fysikk2/kompendium.html' },
           { title: 'Se strømmen', part: 'Animasjoner', href: 'subjects/fysikk2/strom.html' }
         ] },
