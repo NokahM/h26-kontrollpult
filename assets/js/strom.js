@@ -6,14 +6,17 @@
 // Dette skriptet setter farten ut fra strømstyrken og snur retningen når
 // strømmen er negativ, for hver tilstand (knapp) i figuren.
 //
-// <div class="stromfig" data-scale="0.9" data-modes='{"begge": {"view": "a",
+// <div class="stromfig" data-hidden data-scale="0.9" data-modes='{"b": {"view": "a",
 //      "i": {"f01": 33, "f02": -12}, "tekst": "…"}}'>
-//   <div class="stromfig__bar"> <button data-mode="begge">…</button> … </div>
 //   <div class="stromfig__view" data-view="a"> <svg …> </div>
+//   <div class="stromfig__bar"> <button data-mode="b">…</button> <button class="stromfig__toggle">…</button> </div>
 //   <p class="stromfig__cap"></p>
 // </div>
 //
-// data-scale er fart i pt/s per enhet strøm. Strøm 0 skjuler banen.
+// data-scale er fart i pt/s per enhet strøm, og strøm 0 skjuler banen.
+// data-hidden: strømmen er skjult til «Vis strøm» trykkes (standard på
+// oppgavesidene, så svaret ikke vises før man vil). assets/tikz/strom.py lager
+// innpakningen på oppgavesidene.
 (function () {
   var GAP = 8;  // avstand mellom prikkene i pt (samme som stroke-dasharray i CSS)
 
@@ -24,7 +27,7 @@
     var buttons = fig.querySelectorAll('[data-mode]');
     var views = fig.querySelectorAll('.stromfig__view');
     var cap = fig.querySelector('.stromfig__cap');
-    var pause = fig.querySelector('.stromfig__pause');
+    var toggle = fig.querySelector('.stromfig__toggle');
 
     function show(name) {
       var m = modes[name];
@@ -42,18 +45,23 @@
       if (cap) cap.textContent = m.tekst || '';
     }
 
+    function setHidden(hidden) {
+      if (hidden) fig.setAttribute('data-hidden', ''); else fig.removeAttribute('data-hidden');
+      if (toggle) {
+        toggle.textContent = hidden ? 'Vis strøm' : 'Skjul strøm';
+        toggle.setAttribute('aria-pressed', hidden ? 'false' : 'true');
+      }
+    }
+
     buttons.forEach(function (b) {
       b.addEventListener('click', function () { show(b.getAttribute('data-mode')); });
     });
-    if (pause) pause.addEventListener('click', function () {
-      var on = fig.hasAttribute('data-paused');
-      if (on) fig.removeAttribute('data-paused'); else fig.setAttribute('data-paused', '');
-      pause.textContent = on ? 'Pause' : 'Spill av';
-      pause.setAttribute('aria-pressed', on ? 'false' : 'true');
-    });
-    // Med «reduser bevegelse» i systemet starter figuren på pause
-    if (pause && window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) pause.click();
-    var first = buttons.length ? buttons[0].getAttribute('data-mode') : Object.keys(modes)[0];
+    if (toggle) toggle.addEventListener('click', function () { setHidden(!fig.hasAttribute('data-hidden')); });
+
+    // Med «reduser bevegelse» i systemet starter alle figurene skjult
+    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    setHidden(fig.hasAttribute('data-hidden') || reduce);
+    var first = buttons.length ? buttons[buttons.length - 1].getAttribute('data-mode') : Object.keys(modes)[0];
     show(fig.getAttribute('data-start') || first);
   }
 

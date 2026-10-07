@@ -1515,7 +1515,9 @@ mjx-container[display="true"] { margin: .9rem 0 !important; }
 }
 .stromfig__bar button:hover { background: var(--hover); }
 .stromfig__bar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); font-weight: 600; }
-.stromfig__bar .stromfig__pause { margin-left: auto; color: var(--muted); }
+.stromfig__bar .stromfig__toggle { margin-left: auto; color: var(--muted); }
+.stromfig[data-hidden] .stromfig__bar [data-mode], .stromfig[data-hidden] .stromfig__cap { display: none; }
+.stromfig .stromfig__view + .stromfig__bar { margin: .25rem 0 0; }
 .stromfig__cap { margin: .25rem 0 0; font-size: .9rem; color: var(--muted); max-width: var(--measure); }
 .stromfig .flow {
   stroke-width: 2.4px; stroke-linecap: round;
@@ -1524,7 +1526,7 @@ mjx-container[display="true"] { margin: .9rem 0 !important; }
   transition: opacity .2s;
 }
 .stromfig .flow.is-off { opacity: 0; }
-.stromfig[data-paused] .flow { animation-play-state: paused; }
+.stromfig[data-hidden] .flow { opacity: 0; animation: none; }
 @keyframes strom { to { stroke-dashoffset: -8; } }
 /* Utenfor en animert figur vises strømbanene ikke */
 :not(.stromfig__view) > svg .flow { display: none; }
