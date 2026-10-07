@@ -12,6 +12,7 @@ under subjects/ mellom markørene
 Figuren tilpasses siden:
   * svart blir currentColor, så figuren følger lyst og mørkt tema
   * fargene acc, mut og hi fra felles.tex blir CSS-variabler (se COLORS)
+  * hvitt fyll (åpne terminaler i kretsskjema) blir --bg
   * id-ene får filnavnet som prefiks, så flere figurer kan stå på samme side
   * bredden settes i em ut fra punktstørrelsen, så teksten får brødtekststørrelse
   * linja «% alt: …» i .tex-filen blir aria-label
@@ -26,6 +27,7 @@ COLORS = {            # farge i felles.tex -> verdi i CSS
     '#f00': 'var(--accent)',     # acc: det figuren handler om
     '#0f0': 'var(--muted)',      # mut: hjelpelinjer, sekundær kurve
     '#00f': 'var(--st-forstatt)',  # hi: en annen fremhevet mengde (teststyrke)
+    '#fff': 'var(--bg)',         # hvitt fyll (åpne terminaler i kretsskjema) følger bakgrunnen
 }
 
 

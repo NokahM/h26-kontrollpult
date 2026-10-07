@@ -1,0 +1,63 @@
+% Felles oppsett for kretsskjemaene i Fysikk 2. Brukes med \input{krets}.
+% Bygger på felles.tex (farger: acc -> --accent, mut -> --muted, hi -> --st-forstatt).
+% Hvitt fyll (åpne terminaler, bryterkontakter) blir --bg i build.py, så det følger temaet.
+\input{felles}
+\usepackage[american]{circuitikz}
+\ctikzset{
+  bipoles/thickness=1.2,
+  bipoles/length=1.15cm,
+  resistors/scale=0.85,
+  current arrow scale=11,
+  voltage/distance from node=.45,
+  voltage/bump b=1.6,
+}
+\tikzset{
+  every picture/.append style={line width=0.6pt, font=\small},
+  % maskestrøm: sirkulær pil med klokka rundt (x,y)
+  maske/.style={acc, -{Stealth[length=4pt]}, line width=0.7pt},
+  node/.style={circle, fill=acc, inner sep=1.3pt},
+  nodelbl/.style={text=acc, font=\small},
+}
+% \maske{x}{y}{navn}: maskestrøm med klokka, sentrert i (x,y)
+\newcommand{\maske}[3]{%
+  \draw[maske] ($(#1,#2)+(60:0.42)$) arc[start angle=60, end angle=-240, radius=0.42];
+  \node[text=acc, font=\small] at (#1,#2) {#3};}
+
+% Konvensjoner (testet):
+%   V: + ved startpunktet, så en kilde tegnet oppover trenger invert for å få + oppe.
+%   I: pila peker i tegneretningen.
+%   Loddrett oppover: l = venstre, a = høyre.  Loddrett ned: l_ = venstre, a^ = høyre.
+%   Vannrett: l = over, a = under.
+% \volt{x}{ytopp}{ybunn}{etikett}: + oppe, - nede, etikett midt mellom, i x
+\newcommand{\volt}[4]{%
+  \node[font=\small] at (#1,#2) {$+$}; \node[font=\small] at (#1,#3) {$-$};
+  \node[font=\small] at (#1,{(#2+#3)/2}) {#4};}
+% \volth{y}{xvenstre}{xhoyre}{etikett}: + til venstre, - til høyre
+\newcommand{\volth}[4]{%
+  \node[font=\small] at (#2,#1) {$+$}; \node[font=\small] at (#3,#1) {$-$};
+  \node[font=\small] at ({(#2+#3)/2},#1) {#4};}
+\newcommand{\kO}{\,\mathrm{k}\Omega}
+\newcommand{\Om}{\,\Omega}
+
+% \thev{ETh}{RTh}: Thévenin-ekvivalent med terminaler a og b, origo nede til venstre
+\newcommand{\thev}[2]{%
+  \draw (0,0) to[V, invert, l=$E_{Th}$, a=#1] (0,2.6) to[R, l=$R_{Th}$, a=#2] (2.8,2.6)
+    to[short, -o] (3.6,2.6) node[above] {$a$};
+  \draw (0,0) to[short, -o] (3.6,0) node[below] {$b$};}
+% \nort{IN}{RN}: Norton-ekvivalent med terminaler a og b
+\newcommand{\nort}[2]{%
+  \draw (0,0) to[I, l=$I_N$, a=#1] (0,2.6) -- (2.6,2.6) to[short, -o] (3.6,2.6) node[above] {$a$};
+  \draw (2.6,2.6) to[R, l_=$R_N$, a^=#2, *-*] (2.6,0);
+  \draw (0,0) to[short, -o] (3.6,0) node[below] {$b$};}
+% \last{navn}{verdi}: lastmotstand mellom terminalene a og b (x = 3.6), i aksentfarge
+\newcommand{\last}[2]{%
+  \draw (3.6,2.6) -- (4.8,2.6) to[R, l_=#1, a^=#2, color=acc] (4.8,0) -- (3.6,0);}
+
+% Transientgrafer (pgfplots): x i tidskonstanter eller sekunder, ingen rutenett
+\pgfplotsset{
+  trans/.style={width=7.4cm, height=4.6cm, axis lines=left, clip=false, samples=80,
+    tick label style={font=\small}, label style={font=\small}, scaled ticks=false,
+    /pgf/number format/1000 sep={}, every axis plot/.append style={line width=0.8pt},
+    xlabel style={at={(axis description cs:1.03,0)}, anchor=west},
+    ylabel style={rotate=-90, at={(axis description cs:0,1.04)}, anchor=south}},
+}
