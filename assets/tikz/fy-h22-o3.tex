@@ -1,0 +1,12 @@
+% H2022 O3: tre grener, R1 + U1, R2 + U2 og R3.
+% alt: Tre parallelle grener: R1 3 ohm i serie med U1 10 V, R2 4 ohm i serie med U2 5 V med minus opp, og R3 7 ohm
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,4) to[R, l_=$R_1$, a^=$3\Om$] (0,2.2) to[V, l_=$U_1$, a^=$10\,$V] (0,0);
+\draw (3,4) to[R, l_=$R_2$, a^=$4\Om$, *-] (3,2.2) to[V, l_=$U_2$, a^=$5\,$V, invert] (3,0);
+\draw (0,4) -- (6,4) to[R, l_=$R_3$, a^=$7\Om$, f>^=$I_{R_3}$] (6,0) -- (0,0);
+\draw (3,0) node[circ] {};
+\end{circuitikz}
+\end{document}

@@ -1,0 +1,12 @@
+% V2023 O2: Thévenin og Norton med E 10 V, R1 0.5 k, I 100 mA, RL og R2 1 k.
+% alt: E 10 V i serie med R1 0.5 kilo-ohm til en node med strømkilde 100 mA opp, lastmotstand RL mellom a og b, og R2 1 kilo-ohm
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,0) to[V, invert, l=$E$, a=$10\,$V] (0,3) to[R, l=$R_1$, a=$0.5\kO$] (2.8,3) -- (7.8,3);
+\draw (2.8,0) to[I, l=$I$, a=$100\,$mA, *-*] (2.8,3);
+\draw (5.3,3) to[short, *-o] (5.3,2.7) node[right] {$a$} to[R, l_=$R_L$, color=acc] (5.3,0.3) node[right] {$b$} to[short, o-*] (5.3,0);
+\draw (7.8,3) to[R, l_=$R_2$, a^=$1.0\kO$] (7.8,0) -- (0,0);
+\end{circuitikz}
+\end{document}

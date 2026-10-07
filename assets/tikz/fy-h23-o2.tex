@@ -1,0 +1,14 @@
+% H2023 O2: U1 2 V, R1 1 k, R2 5 k, RL, I2 10 mA ned, R3 2 k.
+% alt: U1 2 V i serie med R1 1 kilo-ohm til en skinne med R2 5 kilo-ohm, lastmotstand RL, strømkilde I2 10 mA nedover og R3 2 kilo-ohm
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,0) to[V, invert, l=$U_1$, a=$2\,$V] (0,3) to[R, l=$R_1$, a=$1\kO$] (2.6,3) -- (9.6,3);
+\draw (2.6,3) to[R, l_=$R_2$, a^=$5\kO$, *-*] (2.6,0);
+\draw (4.9,3) to[R, l_=$R_L$, color=acc, *-*] (4.9,0);
+\node at (5.35,2.4) {$+$}; \node at (5.35,0.6) {$-$};
+\draw (7.2,3) to[I, l_=$I_2$, a^=$10\,$mA, *-*] (7.2,0);
+\draw (9.6,3) to[R, l_=$R_3$, a^=$2\kO$] (9.6,0) -- (0,0);
+\end{circuitikz}
+\end{document}

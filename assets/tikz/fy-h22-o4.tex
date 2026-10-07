@@ -1,0 +1,12 @@
+% H2022 O4: E 10 V, bryter, R2 2 k over kilden, R1 1 k og C 10 mF.
+% alt: E 10 V, bryter SW som lukkes, R2 2 kilo-ohm rett over kilden, R1 1 kilo-ohm i serie med kondensatoren C 10 millifarad
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,0) to[V, invert, l=$E$, a=$10\,\mathrm{V}$] (0,3) to[cspst, l=SW] (2.4,3) -- (3.2,3);
+\draw (3.2,3) to[R, l_=$R_2$, a^=$2.0\kO$, *-*] (3.2,0);
+\draw (3.2,3) to[R, l=$R_1$, a=$1.0\kO$] (6.2,3) to[C, l_=$C$, a^=$10\,\mathrm{mF}$, f>^=$i_C$] (6.2,0) -- (0,0);
+\volt{7.85}{2.4}{0.6}{$v_C$}
+\end{circuitikz}
+\end{document}

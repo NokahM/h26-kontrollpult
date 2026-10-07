@@ -1,0 +1,13 @@
+% V2025 O4: Vs 4 V, bryter, R1 12 k, R3 4 k, R2 1 k og L 1 mH.
+% alt: Vs 4 V, bryter som lukkes, R1 12 kilo-ohm til en node med R3 4 kilo-ohm til jord, R2 1 kilo-ohm i serie med spolen L1 1 millihenry
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,0) to[V, invert, l=$V_s$, a=$4.0\,$V] (0,3) to[cspst, l=SW] (1.6,3) to[R, l=$R_1$, a=$12.0\kO$] (4.2,3);
+\draw (4.2,3) to[R, l_=$R_3$, a^=$4.0\kO$, *-*] (4.2,0);
+\draw (4.2,3) to[R, l=$R_2$, a=$1.0\kO$] (7,3) to[L, l_=$L_1$, a^=$1.0\,$mH, f>^=$i_L$] (7,0) -- (0,0);
+\volt{8.55}{2.4}{0.6}{$v_L$}
+\draw (0,0) node[ground] {};
+\end{circuitikz}
+\end{document}

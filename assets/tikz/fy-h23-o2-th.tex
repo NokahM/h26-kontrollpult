@@ -1,0 +1,10 @@
+% H2023 O2 løsning: Thévenin (-4.71 V, 588 ohm) og Norton (-8.0 mA, 588 ohm).
+% alt: Venstre: Thévenin-ekvivalent Uth -4.71 V og Rth 588 ohm. Høyre: Norton-ekvivalent In -8.0 mA og Rn 588 ohm, begge med RL
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\thev{$-4.71\,$V}{$588\Om$} \last{$R_L$}{}
+\begin{scope}[xshift=7.6cm] \nort{$-8.0\,$mA}{$588\Om$} \last{$R_L$}{} \end{scope}
+\end{circuitikz}
+\end{document}

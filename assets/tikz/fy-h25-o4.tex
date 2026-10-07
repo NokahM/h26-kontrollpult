@@ -1,0 +1,16 @@
+% H2025 O4: to kretser, med kondensator og med spole.
+% alt: Venstre: E 12 V, bryter, R2 2 kilo-ohm over kilden, R1 1 kilo-ohm og kondensator 2 mikrofarad. Høyre: samme krets med spole 2 millihenry
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,0) to[V, invert, l=$E$, a=$12\,$V] (0,3) to[cspst, l=SW] (1.8,3) -- (2.6,3);
+\draw (2.6,3) to[R, l_=$R_2$, a^=$2\kO$, *-*] (2.6,0);
+\draw (2.6,3) to[R, l=$R_1$, a=$1\kO$] (5.2,3) to[C, l_=$C$, a^=$2\,\mu\mathrm{F}$] (5.2,0) -- (0,0);
+\begin{scope}[xshift=7.6cm]
+\draw (0,0) to[V, invert, l=$E$, a=$12\,$V] (0,3) to[cspst, l=SW] (1.8,3) -- (2.6,3);
+\draw (2.6,3) to[R, l_=$R_2$, a^=$2\kO$, *-*] (2.6,0);
+\draw (2.6,3) to[R, l=$R_1$, a=$1\kO$] (5.2,3) to[L, l_=$L$, a^=$2\,\mathrm{mH}$] (5.2,0) -- (0,0);
+\end{scope}
+\end{circuitikz}
+\end{document}

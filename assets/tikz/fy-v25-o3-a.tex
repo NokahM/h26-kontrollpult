@@ -1,0 +1,16 @@
+% V2025 O3 løsning: bare strømkilden, E kortsluttet.
+% alt: Kretsen med E kortsluttet
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,0) to[I, l=$I_s$, a=$2.50\,$mA] (0,3.6) -- (2.9,3.6);
+\draw (2.9,3.6) to[R, l_=$R_1$, a^=$1.00\kO$, *-*] (2.9,0);
+\draw (2.9,3.6) to[R, l=$R_2$, a=$1.00\kO$] (5.6,3.6) to[short, *-o] (7.4,3.6);
+\draw (5.6,3.6) to[R, l_=$R_3$, a^=$2.00\kO$] (5.6,1.8);
+\draw (5.6,1.8) to[short, color=acc] (5.6,0); \node[left, text=acc] at (5.6,0.9) {kortsluttet};
+\draw (0,0) -- (5.6,0) node[circ] {} to[short, -o] (7.4,0);
+\draw (2.9,0) node[ground] {};
+\volt{7.4}{2.9}{0.7}{$U_o$}
+\end{circuitikz}
+\end{document}

@@ -1,0 +1,16 @@
+% H2021 O4: RC med tostillingsbryter, E 60 V, R1 1 M, R2 4 M, C 0.2 uF.
+% alt: E 60 V, bryter med stilling 1 mot kilden og stilling 2 mot R2 4 mega-ohm, R1 1 mega-ohm i serie med kondensatoren C 0.2 mikrofarad
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,0) to[V, invert, l=$E$, a=$60\,$V] (0,3) -- (1.5,3) node[ocirc] {} node[below=2pt] {1};
+\draw (2.9,3) node[ocirc] {} -- (1.62,3.32);
+\draw[-{Stealth[length=3pt]}] (2.0,3.55) arc[start angle=110, end angle=150, radius=1.0];
+\draw (2.2,2.25) node[ocirc] {} node[right=2pt] {2} to[R, l_=$R_2$, a^=$4\,\mathrm{M}\Omega$] (2.2,0);
+\draw (2.9,3) to[R, l=$R_1$, a=$1\,\mathrm{M}\Omega$] (5.6,3) to[C, l_=$C$, a^=$0.2\,\mu$F, f>^=$i_C$] (5.6,0) -- (0,0);
+\volth{3.75}{3.8}{4.7}{$v_{R_1}$}
+\volt{7.25}{2.4}{0.6}{$v_C$}
+\draw (0,0) node[ground] {};
+\end{circuitikz}
+\end{document}

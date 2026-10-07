@@ -1,0 +1,11 @@
+% H2022 O2 løsning: Thévenin-ekvivalent Uth 5 V, Rth 90 ohm, med RL 10 ohm.
+% alt: Thévenin-ekvivalent: Uth 5 V i serie med Rth 90 ohm og RL 10 ohm, strømmen IL
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,0) to[V, invert, l=$U_{th}$, a=$5\,$V] (0,2.6) to[R, l=$R_{th}$, a=$90\Om$, i>^=$I_L$] (2.8,2.6) to[short, -o] (3.6,2.6) node[above] {A};
+\draw (0,0) to[short, -o] (3.6,0) node[below] {B};
+\last{$R_L$}{$10\Om$}
+\end{circuitikz}
+\end{document}

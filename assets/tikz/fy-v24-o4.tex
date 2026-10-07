@@ -1,0 +1,12 @@
+% V2024 O4: opplading av spole. Bryteren har vært åpen og lukkes ved t = 0.
+% alt: E 200 millivolt, R1 1 kilo-ohm, bryter som lukkes ved t lik 0, R2 2 kilo-ohm til jord, R3 3 kilo-ohm i serie med spolen 50 millihenry
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,0) to[V, invert, l=$E$, a=$200\,\mathrm{mV}$] (0,3) to[R, l=$R_1$, a=$1.0\kO$] (2.6,3) to[cspst, l={SW, $t=0$}] (4.2,3);
+\draw (4.2,3) to[R, l_=$R_2$, a^=$2.0\kO$, *-*] (4.2,0);
+\draw (4.2,3) to[R, l=$R_3$, a=$3.0\kO$, i>^=$i_L$] (7,3) to[L, l_=$L$, a^=$50\,\mathrm{mH}$] (7,0) -- (0,0);
+\volt{8.75}{2.4}{0.6}{$v_L$}
+\end{circuitikz}
+\end{document}

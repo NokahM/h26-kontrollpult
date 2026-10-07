@@ -1,0 +1,18 @@
+% H2021 O1 (og H2024 O1 med R4/R5 byttet): serie-parallell med 28 V.
+% alt: Krets med spenningskilde 28 V, R1, R2 og R3 i parallell, og R4 parallell R5 i serie med R6
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,0) to[V, invert, l=$E$, a=$28\,$V] (0,3) to[short, i=$I_S$] (2.8,3) -- (7.8,3);
+\draw (2.8,3) to[R, l_=$R_1$, a^=$12\kO$, *-*] (2.8,0);
+\draw (4.6,3) to[R, l_=$R_2$, a^=$12\kO$, *-*, i>_=$I_2$] (4.6,0);
+\draw (6.4,3) to[R, l_=$R_3$, a^=$3\kO$] (6.4,0);
+\volt{1.65}{2.45}{0.55}{$V_1$}
+\draw (7.8,3) -- (7.8,3.9) to[R, l=$R_5$, a=$9\kO$] (10.2,3.9) -- (10.2,3);
+\draw (7.8,3) -- (7.8,2.4) to[R, l_=$R_4$, a^=$6\kO$] (10.2,2.4) -- (10.2,3);
+\volth{4.75}{8.5}{9.5}{$V_5$}
+\draw (10.2,3) -- (11.6,3) to[R, l^=$R_6$, a_=$10.4\kO$, i>^=$I_6$] (11.6,0) -- (0,0);
+\draw (0,0) node[ground] {};
+\end{circuitikz}
+\end{document}

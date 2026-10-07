@@ -1,0 +1,16 @@
+% H2021 O5: Wheatstone-bro med termistor (forenklet utsnitt av figur 6).
+% alt: Wheatstone-bro mellom +15 V og jord: R1 og R2 på venstre side, R3 og R4 i serie og termistoren RT på høyre side, målepunkt A og B
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (3,6) node[above] {$+15\,$V} node[ocirc] {} -- (3,5.6);
+\draw (0,5.6) -- (6,5.6);
+\draw (0,5.6) to[R, l_=$R_1$, a^=$27\kO$] (0,2.8) to[R, l_=$R_2$, a^=$27\kO$] (0,0);
+\draw (6,5.6) to[vR, l_=$R_3$, a^=$0\text{--}10\kO$] (6,4.2) to[R, l_=$R_4$, a^=$20\kO$] (6,2.8)
+  to[thermistor, l_=$R_T$, a^={$25\kO$ ved $25^\circ$C}] (6,0);
+\draw (0,0) -- (6,0); \draw (3,0) node[ground] {};
+\draw (0,2.8) to[short, *-o] (1.4,2.8) node[above] {$A$};
+\draw (6,2.8) to[short, *-o] (4.6,2.8) node[above] {$B$};
+\end{circuitikz}
+\end{document}

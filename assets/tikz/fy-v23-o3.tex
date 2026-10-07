@@ -1,0 +1,13 @@
+% V2023 O3: maske og knutepunkt med E1 15 V og E2 10 V.
+% alt: E1 15 V, R1 5 ohm til node 1 med R2 10 ohm til bunn, R3 7 ohm til node 2 med R4 4 ohm til bunn, R5 3 ohm til E2 10 V
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,0) to[V, invert, l=$E_1$, a=$15\,$V] (0,3) to[R, l=$R_1$, a=$5\Om$] (2.8,3) to[R, l=$R_3$, a=$7\Om$, *-*, i^>=$I_{R_3}$] (5.6,3) to[R, l=$R_5$, a=$3\Om$] (8.4,3);
+\draw (8.4,0) to[V, invert, l_=$E_2$, a^=$10\,$V] (8.4,3);
+\draw (2.8,3) to[R, l_=$R_2$, a^=$10\Om$] (2.8,0) node[circ] {};
+\draw (5.6,3) to[R, l_=$R_4$, a^=$4\Om$] (5.6,0) node[circ] {};
+\draw (0,0) -- (8.4,0);
+\end{circuitikz}
+\end{document}

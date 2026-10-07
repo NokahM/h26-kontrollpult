@@ -1,0 +1,12 @@
+% V2022 O4 løsning: utlading gjennom R1 + R2, tau = 1 s.
+% alt: Strømmen faller fra 12 mikroampere med tidskonstant 1 s og når 8 mikroampere etter 0.41 s
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[trans, at={(0cm,0)}, xmin=0, xmax=3, ymin=0, ymax=13.5, xlabel={$t$ [s]}, ylabel={$|i_C|$ [$\mu$A]},
+  xtick={0,0.41,1,2,3}, ytick={0,8,12}]
+\addplot[acc, domain=0:3] {12*exp(-x)};\draw[hjelp] (axis cs:0.405,0) -- (axis cs:0.405,8) -- (axis cs:0,8); \fill[acc] (axis cs:0.405,8) circle (1.6pt); \node[acc, anchor=south west, font=\small] at (axis cs:0.45,8) {$t=0.41\,$s};
+\end{axis}
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,13 @@
+% V2026 O2: knutepunkter med I1 1.25 A og E 12.5 V.
+% alt: R3 12 ohm fra toppen ned til venstre node, strømkilde I1 1.25 A ned i midten, R4 4 ohm til høyre, R2 20 ohm på tvers, og nederst E 12.5 V og R1 5 ohm
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,5) to[R, l_=$R_3$, a^=$12\Om$] (0,3) to[R, l=$R_2$, a=$20\Om$, *-*] (3.4,3) -- (6.4,3) -- (6.4,0);
+\draw (0,5) -- (6.4,5) to[R, l_=$R_4$, a^=$4\Om$] (6.4,3);
+\draw (3.4,5) to[I, l_={$1.25\,$A}, a^=$I_1$, *-] (3.4,3);
+\draw (0,3) -- (0,0) to[V, invert, l=$E$, a=$12.5\,$V] (3,0) to[R, l=$R_1$, a=$5\Om$] (6.4,0);
+\draw (0,0) node[ground] {};
+\end{circuitikz}
+\end{document}

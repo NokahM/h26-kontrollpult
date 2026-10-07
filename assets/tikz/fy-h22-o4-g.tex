@@ -1,0 +1,16 @@
+% H2022 O4 løsning: vC fra 5 V mot 10 V og iC, tau = 10 s.
+% alt: vC stiger fra 5 V mot 10 V og er 8.16 V ved 10 s, iC faller fra 5 mA og er 1.84 mA ved 10 s
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[trans, at={(0cm,0)}, xmin=0, xmax=50, ymin=0, ymax=11, xlabel={$t$ [s]}, ylabel={$v_C$ [V]},
+  xtick={0,10,20,30,40,50}, ytick={0,5,10}]
+\addplot[acc, domain=0:50] {10-5*exp(-x/10)}; \draw[hjelp] (axis cs:0,10) -- (axis cs:50,10);\draw[hjelp] (axis cs:10,0) -- (axis cs:10,8.16) -- (axis cs:0,8.16); \fill[acc] (axis cs:10,8.16) circle (1.6pt); \node[acc, anchor=north west, font=\small] at (axis cs:10,8.16) {$8.16\,$V};
+\end{axis}
+\begin{axis}[trans, at={(8.6cm,0)}, xmin=0, xmax=50, ymin=0, ymax=5.5, xlabel={$t$ [s]}, ylabel={$i_C$ [mA]},
+  xtick={0,10,20,30,40,50}, ytick={0,1.84,5}]
+\addplot[acc, domain=0:50] {5*exp(-x/10)};\draw[hjelp] (axis cs:10,0) -- (axis cs:10,1.84) -- (axis cs:0,1.84); \fill[acc] (axis cs:10,1.84) circle (1.6pt);
+\end{axis}
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,15 @@
+% H2023 O3: brokobling med nedre delta R4, R5, R6.
+% alt: E 10 V og R1 1 ohm i serie til toppen av en bro: R2 2 ohm og R3 5 ohm øverst, R6 3 ohm på tvers, R4 3 ohm og R5 3 ohm nederst
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,0.6) to[V, invert, l=$E$, a=$10\,$V] (0,2.6) to[R, l=$R_1$, a=$1.0\Om$] (0,5.6) to[short, i=$I_s$] (2.5,5.6) -- (5.2,5.6);
+\draw (5.2,5.6) to[R, l_=$R_2$, a^=$2.0\Om$] (2.6,3);
+\draw (5.2,5.6) to[R, l=$R_3$, a=$5.0\Om$] (7.8,3);
+\draw (2.6,3) to[R, l=$R_6$, a=$3.0\Om$, i^>=$I_{R_6}$, *-*] (7.8,3);
+\draw (2.6,3) to[R, l_=$R_4$, a^=$3.0\Om$] (5.2,0.6);
+\draw (7.8,3) to[R, l=$R_5$, a=$3.0\Om$] (5.2,0.6);
+\draw (5.2,0.6) -- (0,0.6);
+\end{circuitikz}
+\end{document}

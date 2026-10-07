@@ -1,0 +1,15 @@
+% V2026 O1: strømkilde 1.5 A med R1 parallelt med R2 + R3 + (R4 || R5).
+% alt: Strømkilde 1.5 A med R1 3 ohm over seg, og R2 2 ohm, R3 1 ohm i serie med R4 4 ohm parallell R5 12 ohm
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,3) to[R, l_=$R_1$, a^=$3\Om$] (0,0) -- (9,0);
+\volt{1.3}{2.45}{0.55}{$V_{R_1}$}
+\draw (0,3) -- (3.0,3);
+\draw (3.0,0) to[I, l_=$I$, a^=$1.5\,$A, *-*] (3.0,3) to[R, l=$R_2$, a=$2\Om$] (4.8,3) to[R, l=$R_3$, a=$1\Om$] (7.2,3) -- (9,3);
+\draw (7.2,3) to[R, l_=$R_4$, a^=$4\Om$, *-*] (7.2,0);
+\draw (9,3) to[R, l_=$R_5$, a^=$12\Om$] (9,0);
+\draw (3.0,0) node[ground] {};
+\end{circuitikz}
+\end{document}

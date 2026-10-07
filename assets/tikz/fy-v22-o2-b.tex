@@ -1,0 +1,13 @@
+% V2022 O2 løsning: bare E2, E1 satt til 0 V (jord).
+% alt: Kretsen med terminalen E1 lagt til jord
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,5) node[ocirc] {} node[above, text=acc] {$E_1=0\,$V (jord)} to[R, l_=$R_1$, a^=$18\Om$] (0,2.6);
+\draw (0,2.6) node[circ] {} to[R, l_=$R_2$, a^=$9\Om$] (0,0) node[ground] {};
+\draw (0,2.6) to[V, invert, l=$E_2$, a=$24\,$V, i>^=$I$] (3,2.6) -- (5.6,2.6);
+\draw (3,2.6) node[circ] {} to[R, l_=$R_3$, a^=$15\Om$] (3,0) node[ground] {};
+\draw (5.6,2.6) to[R, l_=$R_4$, a^=$10\Om$] (5.6,0) node[ground] {};
+\end{circuitikz}
+\end{document}

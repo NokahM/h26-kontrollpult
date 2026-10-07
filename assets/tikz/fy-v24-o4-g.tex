@@ -1,0 +1,12 @@
+% V2024 O4 løsning: iL mot 36.4 uA, tau = 13.6 us.
+% alt: iL stiger fra 0 mot 36.4 mikroampere og er 28.0 mikroampere ved 20 mikrosekunder
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[trans, at={(0cm,0)}, xmin=0, xmax=70, ymin=0, ymax=40, xlabel={$t$ [$\mu$s]}, ylabel={$i_L$ [$\mu$A]},
+  xtick={0,20,40,60}, ytick={0,28,36.4}]
+\addplot[acc, domain=0:70] {36.36*(1-exp(-x/13.64))}; \draw[hjelp] (axis cs:0,36.36) -- (axis cs:70,36.36);\draw[hjelp] (axis cs:20,0) -- (axis cs:20,27.97) -- (axis cs:0,27.97); \fill[acc] (axis cs:20,27.97) circle (1.6pt);
+\end{axis}
+\end{tikzpicture}
+\end{document}

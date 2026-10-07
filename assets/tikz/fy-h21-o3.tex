@@ -1,0 +1,13 @@
+% H2021 O3: Thévenin med strømkilde 12 A, R1 4 ohm, R2 2 ohm og last R3 7 ohm.
+% alt: Strømkilde 12 A parallelt med R1 4 ohm, R2 2 ohm i serie til terminal a, lastmotstand R3 7 ohm mellom a og b
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,0) to[I, l={$I=12\,$A}] (0,3) -- (2,3) to[R, l=$R_2$, a=$2\Om$, *-] (4.6,3) to[short, -*] (5.2,3) node[above] {$a$};
+\draw (2,3) to[R, l_=$R_1$, a^=$4\Om$, -*] (2,0);
+\draw (5.2,3) -- (6.4,3) to[R, l_=$R_3$, a^=$7\Om$, color=acc] (6.4,0) -- (0,0);
+\draw (5.2,0) node[circ] {} node[below] {$b$};
+\draw (0,0) node[ground] {};
+\end{circuitikz}
+\end{document}

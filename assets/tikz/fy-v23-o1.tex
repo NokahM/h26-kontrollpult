@@ -1,0 +1,13 @@
+% V2023 O1: 20 V med R1 rett over kilden, R2 i serie med R3 || (R4 + R5).
+% alt: U 20 V, R1 10 ohm over kilden, R2 3 ohm til node med R3 7 ohm og R4 5 ohm i serie med R5 4 ohm
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,0) to[V, invert, l=$U$, a=$20\,$V] (0,3) to[short, i=$I$] (2,3) to[R, l=$R_2$, a=$3\Om$, *-, i^>=$I_{R_2}$] (5,3)
+  to[R, l=$R_4$, a=$5\Om$, *-] (8,3) to[R, l^=$R_5$, a_=$4\Om$] (8,0) -- (0,0);
+\draw (2,3) to[R, l_=$R_1$, a^=$10\Om$] (2,0) node[circ] {};
+\draw (5,3) to[R, l_=$R_3$, a^=$7\Om$] (5,0) node[circ] {};
+\volt{3.85}{2.15}{0.75}{$U_{R_3}$}
+\end{circuitikz}
+\end{document}

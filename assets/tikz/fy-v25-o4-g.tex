@@ -1,0 +1,16 @@
+% V2025 O4 løsning: iL mot 0.25 mA og vL fra 1 V, tau = 0.25 us.
+% alt: iL stiger fra 0 mot 0.25 mA, vL faller fra 1 V mot 0, begge med tidskonstant 0.25 mikrosekunder
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[trans, at={(0cm,0)}, xmin=0, xmax=1.25, ymin=0, ymax=0.275, xlabel={$t$ [$\mu$s]}, ylabel={$i_L$ [mA]},
+  xtick={0,0.25,0.5,0.75,1,1.25}, ytick={0,0.158,0.25}]
+\addplot[acc, domain=0:1.25] {0.25*(1-exp(-x/0.25))}; \draw[hjelp] (axis cs:0,0.25) -- (axis cs:1.25,0.25);\draw[hjelp] (axis cs:0.25,0) -- (axis cs:0.25,0.158) -- (axis cs:0,0.158); \fill[acc] (axis cs:0.25,0.158) circle (1.6pt);
+\end{axis}
+\begin{axis}[trans, at={(8.6cm,0)}, xmin=0, xmax=1.25, ymin=0, ymax=1.1, xlabel={$t$ [$\mu$s]}, ylabel={$v_L$ [V]},
+  xtick={0,0.25,0.5,0.75,1,1.25}, ytick={0,0.368,1}]
+\addplot[acc, domain=0:1.25] {exp(-x/0.25)};\draw[hjelp] (axis cs:0.25,0) -- (axis cs:0.25,0.368) -- (axis cs:0,0.368); \fill[acc] (axis cs:0.25,0.368) circle (1.6pt);
+\end{axis}
+\end{tikzpicture}
+\end{document}

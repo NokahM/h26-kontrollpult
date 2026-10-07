@@ -1,0 +1,16 @@
+% H2024 O4 løsning: vC mot -15 V og iC fra -1.5 mA, tau = 0.15 s.
+% alt: vC går fra 0 mot minus 15 V, iC starter på minus 1.5 mA og går mot 0
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[trans, at={(0cm,0)}, xmin=0, xmax=0.75, ymin=-16.5, ymax=0, xlabel={$t$ [s]}, ylabel={$v_C$ [V]},
+  xtick={0,0.15,0.3,0.45,0.6,0.75}, ytick={-15,-9.48,0}]
+\addplot[acc, domain=0:0.75] {-15*(1-exp(-x/0.15))}; \draw[hjelp] (axis cs:0,-15) -- (axis cs:0.75,-15);\draw[hjelp] (axis cs:0.15,0) -- (axis cs:0.15,-9.48) -- (axis cs:0,-9.48); \fill[acc] (axis cs:0.15,-9.48) circle (1.6pt);
+\end{axis}
+\begin{axis}[trans, at={(8.6cm,0)}, xmin=0, xmax=0.75, ymin=-1.65, ymax=0, xlabel={$t$ [s]}, ylabel={$i_C$ [mA]},
+  xtick={0,0.15,0.3,0.45,0.6,0.75}, ytick={-1.5,-0.55,0}]
+\addplot[acc, domain=0:0.75] {-1.5*exp(-x/0.15)};\draw[hjelp] (axis cs:0.15,0) -- (axis cs:0.15,-0.552) -- (axis cs:0,-0.552); \fill[acc] (axis cs:0.15,-0.552) circle (1.6pt);
+\end{axis}
+\end{tikzpicture}
+\end{document}

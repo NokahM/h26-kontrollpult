@@ -1,0 +1,16 @@
+% V2023 O4 løsning: iL fra 1 mA mot 2 mA og vL, tau = 1 ns.
+% alt: iL stiger fra 1 mA mot 2 mA og er 1.86 mA ved 2 ns, vL faller fra 5 V og er 0.68 V ved 2 ns
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[trans, at={(0cm,0)}, xmin=0, xmax=5, ymin=0, ymax=2.2, xlabel={$t$ [ns]}, ylabel={$i_L$ [mA]},
+  xtick={0,1,2,3,4,5}, ytick={0,1,2}]
+\addplot[acc, domain=0:5] {2-exp(-x)}; \draw[hjelp] (axis cs:0,2) -- (axis cs:5,2);\draw[hjelp] (axis cs:2,0) -- (axis cs:2,1.865) -- (axis cs:0,1.865); \fill[acc] (axis cs:2,1.865) circle (1.6pt); \node[acc, anchor=north west, font=\small] at (axis cs:2,1.865) {$1.86\,$mA};
+\end{axis}
+\begin{axis}[trans, at={(8.6cm,0)}, xmin=0, xmax=5, ymin=0, ymax=5.5, xlabel={$t$ [ns]}, ylabel={$v_L$ [V]},
+  xtick={0,1,2,3,4,5}, ytick={0,5}]
+\addplot[acc, domain=0:5] {5*exp(-x)};\draw[hjelp] (axis cs:2,0) -- (axis cs:2,0.677) -- (axis cs:0,0.677); \fill[acc] (axis cs:2,0.677) circle (1.6pt); \node[acc, anchor=south west, font=\small] at (axis cs:2,0.677) {$0.68\,$V};
+\end{axis}
+\end{tikzpicture}
+\end{document}

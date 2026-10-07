@@ -1,0 +1,10 @@
+% H2025 O3 løsning: Norton (4 mA, 3 k) og Thévenin (12 V, 3 k).
+% alt: Venstre: Norton-ekvivalent IN 4 mA parallelt med RN 3 kilo-ohm. Høyre: Thévenin-ekvivalent ETh 12 V i serie med RTh 3 kilo-ohm
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\nort{$4\,$mA}{$3\kO$}
+\begin{scope}[xshift=6.4cm] \thev{$12\,$V}{$3\kO$} \end{scope}
+\end{circuitikz}
+\end{document}

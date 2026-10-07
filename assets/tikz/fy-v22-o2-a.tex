@@ -1,0 +1,13 @@
+% V2022 O2 løsning: bare E1, E2 kortsluttet.
+% alt: Kretsen med E2 kortsluttet
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,5) node[ocirc] {} node[above] {$E_1=+42\,$V} to[R, l_=$R_1$, a^=$18\Om$] (0,2.6);
+\draw (0,2.6) node[circ] {} to[R, l_=$R_2$, a^=$9\Om$] (0,0) node[ground] {};
+\draw (0,2.6) to[short, color=acc] (3,2.6) -- (5.6,2.6); \node[above, text=acc] at (1.5,2.6) {kortsluttet};
+\draw (3,2.6) node[circ] {} to[R, l_=$R_3$, a^=$15\Om$] (3,0) node[ground] {};
+\draw (5.6,2.6) to[R, l_=$R_4$, a^=$10\Om$] (5.6,0) node[ground] {};
+\end{circuitikz}
+\end{document}

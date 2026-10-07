@@ -1,0 +1,14 @@
+% H2024 O2: maskeanalyse med E1 12 V og E2 4 V.
+% alt: R1 4.7 kilo-ohm til venstre, midtgren med R2 3.3 kilo-ohm og E1 12 V med pluss ned, R3 2.2 kilo-ohm langs toppen, R4 1 kilo-ohm, og høyre gren med E2 4 V og R5 6.8 kilo-ohm
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,4) to[R, l_=$R_1$, a^=$4.7\kO$] (0,0);
+\draw (0,4) -- (3.4,4) to[R, l_=$R_2$, a^=$3.3\kO$, *-] (3.4,2) to[V, invert, l_=$E_1$, a^=$12\,$V, -*] (3.4,0);
+\draw (3.4,4) to[R, l=$R_3$, a=$2.2\kO$] (7,4) -- (9.8,4);
+\draw (7,4) to[R, l_=$R_4$, a^=$1\kO$, *-*] (7,0);
+\draw (9.8,4) to[V, l_=$E_2$, a^=$4\,$V] (9.8,2) to[R, l_=$R_5$, a^=$6.8\kO$] (9.8,0) -- (0,0);
+\draw (3.4,0) node[ground] {};
+\end{circuitikz}
+\end{document}

@@ -1,0 +1,15 @@
+% H2022 O3 løsning: masker med klokka og spenningsnoden V.
+% alt: Samme krets med maskestrømmene I1 og I2 med klokka og noden V øverst, bunnen er jord
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,4) to[R, l_=$R_1$, a^=$3\Om$] (0,2.2) to[V, l_=$U_1$, a^=$10\,$V] (0,0);
+\draw (3,4) to[R, l_=$R_2$, a^=$4\Om$, *-] (3,2.2) to[V, l_=$U_2$, a^=$5\,$V, invert] (3,0);
+\draw (0,4) -- (6,4) to[R, l_=$R_3$, a^=$7\Om$, f>^=$I_{R_3}$] (6,0) -- (0,0);
+\draw (3,0) node[circ] {};
+\maske{1.5}{2}{$I_1$} \maske{4.5}{2}{$I_2$}
+\node[node] at (3,4) {}; \node[nodelbl, above] at (3,4) {$V$};
+\draw (3,0) node[ground] {};
+\end{circuitikz}
+\end{document}

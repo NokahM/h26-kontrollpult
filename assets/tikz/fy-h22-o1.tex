@@ -1,0 +1,15 @@
+% H2022 O1: spenningsdeler med tre laster, strømmer og nodespenninger oppgitt.
+% alt: Spenningsdeler R1, R2, R3 fra E til jord med laster RL1 1.6 kilo-ohm, RL2 og RL3. Oppgitt 80 mA, 48 mA, 12 mA, 8 mA, 48 V og 32 V
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,0) to[V, invert, l=$E$] (0,4.5) to[short, i=$80\,$mA] (2.5,4.5) to[short, i=$48\,$mA] (8,4.5)
+  to[R, l^=$R_{L1}$, a_=$1.6\kO$] (8,0) -- (0,0) node[ground] {};
+\draw (2.5,4.5) node[circ] {} to[R, l_=$R_1$] (2.5,3) node[circ] {} node[left=2pt] {$48\,$V}
+  to[R, l_=$R_2$] (2.5,1.5) node[circ] {} node[left=2pt] {$32\,$V}
+  to[R, l_=$R_3$] (2.5,0) node[circ] {};
+\draw (2.5,3) to[short, i=$12\,$mA] (6,3) to[R, l^=$R_{L2}$] (6,0) node[circ] {};
+\draw (2.5,1.5) to[short, i=$8\,$mA] (4.2,1.5) to[R, l^=$R_{L3}$] (4.2,0) node[circ] {};
+\end{circuitikz}
+\end{document}

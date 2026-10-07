@@ -1,0 +1,12 @@
+% V2026 O4 løsning: va = 3 e^(-t/100 us).
+% alt: va faller fra 3 V mot 0 med tidskonstant 100 mikrosekunder
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[trans, at={(0cm,0)}, xmin=0, xmax=500, ymin=0, ymax=3.3, xlabel={$t$ [$\mu$s]}, ylabel={$v_a$ [V]},
+  xtick={0,100,200,300,400,500}, ytick={0,1.10,3}]
+\addplot[acc, domain=0:500] {3*exp(-x/100)};\draw[hjelp] (axis cs:100,0) -- (axis cs:100,1.104) -- (axis cs:0,1.104); \fill[acc] (axis cs:100,1.104) circle (1.6pt);
+\end{axis}
+\end{tikzpicture}
+\end{document}

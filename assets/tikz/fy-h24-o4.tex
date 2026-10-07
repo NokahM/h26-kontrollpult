@@ -1,0 +1,13 @@
+% H2024 O4: E 20 V med pluss ned, R1 8 k, R2 24 k, bryter, C 15 uF og R3 4 k.
+% alt: E 20 V med pluss nederst, R1 8 kilo-ohm, R2 24 kilo-ohm til jord, bryter som lukkes, kondensatoren 15 mikrofarad liggende med pluss til venstre, og R3 4 kilo-ohm til jord
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,3) to[V, invert, l=$E$, a=$20\,$V] (0,0);
+\draw (0,3) to[R, l=$R_1$, a=$8\kO$] (2.8,3) to[cspst, l=SW] (4.4,3) to[C, l={$C$, $15\,\mu$F}, i>^=$i_C$] (7,3) to[R, l_=$R_3$, a^=$4\kO$] (7,0) -- (0,0);
+\draw (2.8,3) to[R, l_=$R_2$, a^=$24\kO$, *-*] (2.8,0);
+\volth{2.4}{5.2}{6.2}{$v_C$}
+\draw (0,0) node[ground] {};
+\end{circuitikz}
+\end{document}

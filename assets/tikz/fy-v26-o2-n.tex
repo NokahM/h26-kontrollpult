@@ -1,0 +1,15 @@
+% V2026 O2 løsning: nodene V1 (topp) og V2, venstre side er jord.
+% alt: Samme krets med nodene V1 og V2 markert
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,5) to[R, l_=$R_3$, a^=$12\Om$] (0,3) to[R, l=$R_2$, a=$20\Om$, *-*] (3.4,3) -- (6.4,3) -- (6.4,0);
+\draw (0,5) -- (6.4,5) to[R, l_=$R_4$, a^=$4\Om$] (6.4,3);
+\draw (3.4,5) to[I, l_={$1.25\,$A}, a^=$I_1$, *-] (3.4,3);
+\draw (0,3) -- (0,0) to[V, invert, l=$E$, a=$12.5\,$V] (3,0) to[R, l=$R_1$, a=$5\Om$] (6.4,0);
+\draw (0,0) node[ground] {};
+\node[node] at (3.4,5) {}; \node[nodelbl, above] at (3.4,5) {$V_1$};
+\node[node] at (4.9,3) {}; \node[nodelbl, below] at (4.9,3) {$V_2$};
+\end{circuitikz}
+\end{document}

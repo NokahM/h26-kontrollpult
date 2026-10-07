@@ -1,0 +1,14 @@
+% H2021 O2 løsning: bare strømkilden, spenningskilden kortsluttet.
+% alt: Samme krets med 60 V-kilden erstattet av en kortslutning
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,0) -- (0,4) to[R, l=$1\kO$, *-] (5.4,4);
+\draw (0,2.2) node[circ] {} to[R, l=$600\Om$, i>^=$I_A$] (2.6,2.2) to[short, color=acc] (5.4,2.2); \node[above, text=acc] at (4.0,2.2) {kortsluttet};
+\draw (5.4,4) -- (5.4,2.2) node[circ] {} to[R, l_=$500\Om$] (5.4,0);
+\volt{6.0}{1.6}{0.6}{$U$}
+\draw (0,0) to[R, l=$1\kO$, i>^=$I_B$] (5.4,0) node[circ] {};
+\draw (5.4,4) -- (7.4,4) to[I, l_={$30\,$mA}, invert] (7.4,0) -- (5.4,0);
+\end{circuitikz}
+\end{document}

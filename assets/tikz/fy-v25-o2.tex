@@ -1,0 +1,14 @@
+% V2025 O2: knutepunktsmetoden med to strømkilder.
+% alt: Strømkilde I1 0.10 A ned, R1 10 ohm, R2 5 ohm langs toppen, R3 2 ohm på tvers, R4 2 ohm langs bunnen og strømkilde I2 0.50 A opp
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,3) to[I, l_=$I_1$, a^=$0.10\,$A] (0,0) -- (2.4,0) to[R, l=$R_4$, a=$2.0\Om$] (5.4,0) -- (8.4,0);
+\draw (0,3) -- (2.4,3) to[R, l=$R_2$, a=$5.0\Om$] (5.4,3) -- (8.4,3);
+\draw (2.4,3) to[R, l_=$R_1$, a^=$10\Om$, *-*] (2.4,0);
+\draw (5.4,3) to[R, l_=$R_3$, a^=$2.0\Om$, *-*] (5.4,0);
+\draw (8.4,0) to[I, l_=$I_2$, a^=$0.50\,$A] (8.4,3);
+\draw (2.4,0) node[ground] {};
+\end{circuitikz}
+\end{document}

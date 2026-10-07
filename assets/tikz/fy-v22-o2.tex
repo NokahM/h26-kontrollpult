@@ -1,0 +1,13 @@
+% V2022 O2: superposisjon med E1 = +42 V (terminal) og E2 = 24 V.
+% alt: E1 +42 V via R1 18 ohm til node A med R2 9 ohm til jord. E2 24 V fra A til B, B har R3 15 ohm og R4 10 ohm til jord
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,5) node[ocirc] {} node[above] {$E_1=+42\,$V} to[R, l_=$R_1$, a^=$18\Om$] (0,2.6);
+\draw (0,2.6) node[circ] {} to[R, l_=$R_2$, a^=$9\Om$] (0,0) node[ground] {};
+\draw (0,2.6) to[V, invert, l=$E_2$, a=$24\,$V, i>^=$I$] (3,2.6) -- (5.6,2.6);
+\draw (3,2.6) node[circ] {} to[R, l_=$R_3$, a^=$15\Om$] (3,0) node[ground] {};
+\draw (5.6,2.6) to[R, l_=$R_4$, a^=$10\Om$] (5.6,0) node[ground] {};
+\end{circuitikz}
+\end{document}

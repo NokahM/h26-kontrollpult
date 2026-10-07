@@ -1,0 +1,16 @@
+% H2025 O4 løsning: vC ved opp- og utlading, vL ved inn- og utkopling.
+% alt: Venstre: vC stiger mot 12 V med tau 2 ms, og faller fra 12 V med tau 6 ms når bryteren åpnes. Høyre: vL starter på 12 V og faller med tau 2 mikrosekunder, og hopper til minus 36 V når bryteren åpnes
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[trans, at={(0cm,0)}, xmin=0, xmax=40, ymin=0, ymax=13.2, xlabel={$t$ [ms]}, ylabel={$v_C$ [V]},
+  xtick={0,10,20,30,40}, ytick={0,12}]
+\addplot[acc, domain=0:10] {12*(1-exp(-x/2))}; \addplot[acc, domain=10:40] {12*exp(-(x-10)/6)}; \draw[hjelp] (axis cs:10,0) -- (axis cs:10,13); \node[font=\small, anchor=south west] at (axis cs:10,12.2) {åpnes};
+\end{axis}
+\begin{axis}[trans, at={(8.6cm,0)}, xmin=0, xmax=14, ymin=-38, ymax=13, xlabel={$t$ [$\mu$s]}, ylabel={$v_L$ [V]},
+  xtick={0,2,10,14}, ytick={-36,0,12}]
+\addplot[acc, domain=0:10] {12*exp(-x/2)}; \addplot[acc, domain=10:14, samples=120] {-36*exp(-(x-10)/0.667)}; \draw[acc] (axis cs:10,0.08) -- (axis cs:10,-36); \draw[hjelp] (axis cs:0,0) -- (axis cs:14,0);
+\end{axis}
+\end{tikzpicture}
+\end{document}

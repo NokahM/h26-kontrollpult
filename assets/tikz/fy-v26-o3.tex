@@ -1,0 +1,16 @@
+% V2026 O3: superposisjon med E1 og E2, finn VO.
+% alt: E1 i serie med R1 1.2 kilo-ohm til node, R2 1.2 kilo-ohm til jord, R3 3 kilo-ohm til utgangen, R4 3.6 kilo-ohm i serie med E2 til jord, utgangsspenning VO
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,3.6) to[R, l_=$R_1$, a^=$1.2\kO$] (0,1.8);
+\draw (0,1.8) to[V, l_=$E_1$] (0,0);
+\draw (0,0) node[ground] {} -- (5.6,0) to[short, -o] (7,0);
+\draw (0,3.6) -- (2.4,3.6) to[R, l=$R_3$, a=$3.0\kO$, *-] (5.6,3.6) to[short, *-o] (7,3.6);
+\draw (2.4,3.6) to[R, l_=$R_2$, a^=$1.2\kO$, -*] (2.4,0);
+\draw (5.6,3.6) to[R, l_=$R_4$, a^=$3.6\kO$] (5.6,1.8);
+\draw (5.6,1.8) to[V, l_=$E_2$] (5.6,0);
+\volt{7}{2.9}{0.7}{$V_O$}
+\end{circuitikz}
+\end{document}

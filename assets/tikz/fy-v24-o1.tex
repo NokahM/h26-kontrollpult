@@ -1,0 +1,17 @@
+% V2024 O1: R1 + R2 i én gren, R3 i serie med R4 || R5 || R6 i den andre, 10 V.
+% alt: 10 V-kilde. Gren 1: R1 3 ohm og R2 2 ohm i serie. Gren 2: R3 4 ohm til node med R4 8 ohm, R5 13 ohm og R6 7 ohm til jord
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,4.4) to[short, i>_=$I_{R_1}$] (0,4.0) to[R, l_=$R_1$, a^=$3\Om$] (0,2.2) to[R, l_=$R_2$, a^=$2\Om$] (0,0) -- (9.0,0);
+\draw (0,4.4) -- (9.0,4.4);
+\draw (4.2,4.4) node[circ] {} to[short, i>_=$I_{R_3}$] (4.2,4.0) to[R, l_=$R_3$, a^=$4\Om$] (4.2,2.2) node[circ] {};
+\draw (1.8,2.2) -- (6.6,2.2);
+\draw (1.8,2.2) to[R, l_=$R_4$, a^=$8\Om$] (1.8,0) node[circ] {};
+\draw (4.2,2.2) to[R, l_=$R_5$, a^=$13\Om$] (4.2,0) node[circ] {};
+\volt{3.1}{1.75}{0.45}{$U_{R_5}$}
+\draw (6.6,2.2) to[short, i>_=$I_{R_6}$] (6.6,1.9) to[R, l_=$R_6$, a^=$7\Om$] (6.6,0) node[circ] {};
+\draw (9.0,0) to[V, invert, l=$U_1$, a=$10\,$V] (9.0,3.6) to[short, i=$I_{U_1}$] (9.0,4.4);
+\end{circuitikz}
+\end{document}

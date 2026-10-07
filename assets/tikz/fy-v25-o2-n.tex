@@ -1,0 +1,17 @@
+% V2025 O2 løsning: nodene V1, V2, V3 og jord.
+% alt: Samme krets med nodene V1, V2 og V3 markert
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,3) to[I, l_=$I_1$, a^=$0.10\,$A] (0,0) -- (2.4,0) to[R, l=$R_4$, a=$2.0\Om$] (5.4,0) -- (8.4,0);
+\draw (0,3) -- (2.4,3) to[R, l=$R_2$, a=$5.0\Om$] (5.4,3) -- (8.4,3);
+\draw (2.4,3) to[R, l_=$R_1$, a^=$10\Om$, *-*] (2.4,0);
+\draw (5.4,3) to[R, l_=$R_3$, a^=$2.0\Om$, *-*] (5.4,0);
+\draw (8.4,0) to[I, l_=$I_2$, a^=$0.50\,$A] (8.4,3);
+\draw (2.4,0) node[ground] {};
+\node[node] at (2.4,3) {}; \node[nodelbl, above] at (2.4,3) {$V_1$};
+\node[node] at (5.4,3) {}; \node[nodelbl, above] at (5.4,3) {$V_2$};
+\node[node] at (5.4,0) {}; \node[nodelbl, below] at (5.4,0) {$V_3$};
+\end{circuitikz}
+\end{document}

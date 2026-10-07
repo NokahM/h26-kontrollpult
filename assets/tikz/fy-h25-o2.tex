@@ -1,0 +1,14 @@
+% H2025 O2: knutepunktsanalyse med I 4 A og E 24 V.
+% alt: R1 4 ohm, strømkilde 4 A opp, R2 12 ohm langs toppen, R3 3 ohm, og R4 6 ohm i serie med E 24 V
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,3) to[R, l_=$R_1$, a^=$4\Om$] (0,0) -- (7.6,0);
+\draw (2.4,0) to[I, l_=$I$, a^=$4\,$A, *-] (2.4,3);
+\draw (0,3) -- (2.4,3) to[R, l=$R_2$, a=$12\Om$] (5.2,3) -- (7.6,3);
+\draw (5.2,3) to[R, l_=$R_3$, a^=$3\Om$, *-*] (5.2,0);
+\draw (7.6,3) to[R, l_=$R_4$, a^=$6\Om$] (7.6,1.5) to[V, l_=$E$, a^=$24\,$V] (7.6,0);
+\draw (0,0) node[ground] {};
+\end{circuitikz}
+\end{document}

@@ -1,0 +1,12 @@
+% V2023 O4: E 10 V, bryter, R2 5 k over kilden, R1 5 k og L 5 uH.
+% alt: E 10 V, bryter SW som lukkes, R2 5 kilo-ohm rett over kilden, R1 5 kilo-ohm i serie med spolen L 5 mikrohenry
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,0) to[V, invert, l=$E$, a=$10\,\mathrm{V}$] (0,3) to[cspst, l=SW] (2.4,3) -- (3.2,3);
+\draw (3.2,3) to[R, l_=$R_2$, a^=$5\kO$, *-*] (3.2,0);
+\draw (3.2,3) to[R, l=$R_1$, a=$5\kO$] (6.2,3) to[L, l_=$L$, a^=$5\,\mu\mathrm{H}$, f>^=$i_L$] (6.2,0) -- (0,0);
+\volt{7.85}{2.4}{0.6}{$v_L$}
+\end{circuitikz}
+\end{document}

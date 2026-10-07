@@ -1,0 +1,13 @@
+% V2025 O1: strømkilde 8 mA med R1 + R2 + R3 i serie mot R6 || (R4 + R5).
+% alt: Strømkilde 8 mA, R1 250 ohm, R2 250 ohm og R3 1 kilo-ohm i serie til node med R6 1.5 kilo-ohm og R4 500 ohm i serie med R5 250 ohm
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,0) to[I, l=$I_s$, a=$8.00\,$mA] (0,3) node[above] {$V_s$} to[R, l=$R_1$, a=$250\Om$] (2.4,3)
+  to[R, l=$R_2$, a=$250\Om$] (4.8,3) to[R, l=$R_3$, a=$1.00\kO$] (7.2,3) to[R, l=$R_4$, a=$500\Om$, *-] (9.8,3)
+  to[R, l^=$R_5$, a_=$250\Om$, i>^=$I_{R_5}$] (9.8,0) -- (0,0);
+\volth{2.05}{3.2}{4.4}{$V_{R_2}$}
+\draw (7.2,3) to[R, l_=$R_6$, a^=$1.50\kO$, -*] (7.2,0) node[ground] {};
+\end{circuitikz}
+\end{document}

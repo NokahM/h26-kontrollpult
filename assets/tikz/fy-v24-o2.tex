@@ -1,0 +1,15 @@
+% V2024 O2: U1 7 V, R1 1 k, R2 9 k, RL i serie langs toppen, I2 5 mA opp, R3 3 k.
+% alt: U1 7 V i serie med R1 1 kilo-ohm til node A med R2 9 kilo-ohm til jord, RL fra A til B, strømkilde I2 5 mA opp inn i B og R3 3 kilo-ohm fra B til jord
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,0) to[V, invert, l=$U_1$, a=$7\,$V] (0,3) to[R, l=$R_1$, a=$1\kO$] (2.6,3)
+  to[R, l=$R_L$, color=acc, *-*] (5.6,3) -- (8,3);
+\node at (3.4,2.55) {$+$}; \node at (4.8,2.55) {$-$};
+\draw (2.6,3) node[above left] {A} to[R, l_=$R_2$, a^=$9\kO$, -*] (2.6,0);
+\draw (5.6,3) node[above right] {B};
+\draw (5.6,0) to[I, l=$I_2$, a=$5\,$mA, *-] (5.6,3);
+\draw (8,3) to[R, l_=$R_3$, a^=$3\kO$] (8,0) -- (0,0);
+\end{circuitikz}
+\end{document}

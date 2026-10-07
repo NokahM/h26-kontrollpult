@@ -1,0 +1,14 @@
+% H2024 O3 løsning: bare E, strømkilden åpen.
+% alt: Kretsen med strømkilden fjernet
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,3) to[R, l_=$R_1$, a^=$10\kO$] (0,0) node[ground] {} -- (5.4,0);
+\draw (0,3) to[V, invert, l=$E$, a=$18\,$V] (2.8,3) -- (7.8,3);
+\draw (5.4,3) to[R, l_=$R_2$, a^=$18\kO$, *-*] (5.4,0);
+\draw (3.4,3) to[short, *-o] (3.4,2.0); \draw (3.4,0) to[short, *-o] (3.4,1.0); \node[text=acc, right] at (3.5,1.5) {åpen};
+\draw (7.8,3) to[R, l=$R_3$, a=$4.7\kO$] (10.4,3) to[R, l_=$R_4$, a^=$3.3\kO$] (10.4,0) node[ground] {};
+\volth{3.55}{8.25}{9.95}{}
+\end{circuitikz}
+\end{document}

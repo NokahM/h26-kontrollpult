@@ -1,0 +1,12 @@
+% H2023 O4: utlading. Bryteren har vært lukket og åpnes ved t = 0.
+% alt: E 10 V, R1 1 kilo-ohm, bryter som åpnes ved t lik 0, R2 2 kilo-ohm til jord, R3 3 kilo-ohm i serie med kondensatoren 200 mikrofarad
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,0) to[V, invert, l=$E$, a=$10\,\mathrm{V}$] (0,3) to[R, l=$R_1$, a=$1.0\kO$] (2.6,3) to[ospst, l={SW, $t=0$}] (4.2,3);
+\draw (4.2,3) to[R, l_=$R_2$, a^=$2.0\kO$, *-*] (4.2,0);
+\draw (4.2,3) to[R, l=$R_3$, a=$3.0\kO$, i>^=$i_C$] (7,3) to[C, l_=$C$, a^=$200\,\mu\mathrm{F}$] (7,0) -- (0,0);
+\volt{8.75}{2.4}{0.6}{$v_C$}
+\end{circuitikz}
+\end{document}

@@ -1,0 +1,16 @@
+% V2022 O1: stigekrets med 240 V.
+% alt: Stigekrets: 240 V, R1 3 ohm og R2 5 ohm i serie med kilden, R3 4 ohm, R4 2 ohm, R5 6 ohm, R6 1 ohm, R7 2 ohm
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,0) to[V, invert, l=$240\,$V] (0,3) to[R, l=$R_1$, a=$3\Om$, i^>=$I$] (2.8,3)
+  to[R, l=$R_4$, a=$2\Om$, *-] (5.6,3) to[R, l=$R_6$, a=$1\Om$, *-] (8.4,3);
+\draw (2.8,3) to[R, l_=$R_3$, a^=$4\Om$] (2.8,0);
+\draw (5.6,3) to[R, l_=$R_5$, a^=$6\Om$] (5.6,0);
+\draw (8.4,3) to[R, l_=$R_7$, a^=$2\Om$, i>^=$I_7$] (8.4,0);
+\volt{1.65}{2.15}{0.75}{$V_3$} \volt{4.45}{2.15}{0.75}{$V_5$} \volt{7.25}{2.15}{0.75}{$V_7$}
+\draw (8.4,0) -- (2.8,0) to[R, l_=$R_2$, a^=$5\Om$, *-] (0,0) node[ground] {};
+\draw (5.6,0) node[circ] {};
+\end{circuitikz}
+\end{document}

@@ -1,0 +1,10 @@
+% V2023 O2 løsning: Thévenin (40 V, 333 ohm) og Norton (0.12 A, 333 ohm).
+% alt: Venstre: Thévenin-ekvivalent ETh 40 V og RTh 333 ohm. Høyre: Norton-ekvivalent IN 120 mA parallelt med RN 333 ohm
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\thev{$40\,$V}{$333\Om$} \last{$R_L$}{}
+\begin{scope}[xshift=7.6cm] \nort{$120\,$mA}{$333\Om$} \last{$R_L$}{} \end{scope}
+\end{circuitikz}
+\end{document}

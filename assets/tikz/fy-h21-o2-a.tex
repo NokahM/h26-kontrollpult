@@ -1,0 +1,15 @@
+% H2021 O2 løsning: bare spenningskilden, strømkilden åpen.
+% alt: Samme krets med strømkilden fjernet (åpen krets)
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,0) -- (0,4) to[R, l=$1\kO$, *-] (5.4,4);
+\draw (0,2.2) node[circ] {} to[R, l=$600\Om$, i>^=$I_A$] (2.6,2.2) to[V, invert, l=$60\,$V] (5.4,2.2);
+\draw (5.4,4) -- (5.4,2.2) node[circ] {} to[R, l_=$500\Om$] (5.4,0);
+\volt{6.0}{1.6}{0.6}{$U$}
+\draw (0,0) to[R, l=$1\kO$, i>^=$I_B$] (5.4,0) node[circ] {};
+\draw (5.4,4) -- (7.4,4) to[short, -o] (7.4,2.6); \draw (5.4,0) -- (7.4,0) to[short, -o] (7.4,1.4);
+\node[text=acc, right] at (7.5,2) {åpen};
+\end{circuitikz}
+\end{document}
