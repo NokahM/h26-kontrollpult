@@ -9,5 +9,11 @@
   to[R, l^=$R_5$, a_=$250\Om$, i>^=$I_{R_5}$] (9.8,0) -- (0,0);
 \volth{2.05}{3.2}{4.4}{$V_{R_2}$}
 \draw (7.2,3) to[R, l_=$R_6$, a^=$1.50\kO$, -*] (7.2,0) node[ground] {};
+% strøm:start (generert av strom.py, ikke rediger)
+\draw[strom, f01] (0,2) -- (0,3) -- (7.2,3);
+\draw[strom, f01] (7.2,0) -- (0,0) -- (0,1);
+\draw[strom, f02] (7.2,3) -- (7.2,0);
+\draw[strom, f03] (7.2,3) -- (9.8,3) -- (9.8,0) -- (7.2,0);
+% strøm:slutt
 \end{circuitikz}
 \end{document}

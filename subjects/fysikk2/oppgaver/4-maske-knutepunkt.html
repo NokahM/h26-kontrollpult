@@ -7,7 +7,7 @@
   <meta name="description" content="Maskestrømsanalyse og knutepunktsanalyse med sjablongmetoden og Cramers regel. Med i åtte av ti eksamenssett.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../../assets/css/main.css?v=37">
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=38">
 </head>
 <body class="theme-fysikk2" data-updated="2026-10-07">
   <div class="app-shell">
@@ -85,7 +85,7 @@
               <span class="task__tags"><span class="tag">knutepunkt</span><span class="tag">kildekonvertering</span><span class="tag">Cramer 2×2</span></span>
             </header>
             <div class="task__q">
-              <!-- tikz:fy-v26-o2 --><svg class='tikz' role='img' aria-label='R3 12 ohm fra toppen ned til venstre node, strømkilde I1 1.25 A ned i midten, R4 4 ohm til høyre, R2 20 ohm på tvers, og nederst E 12.5 V og R1 5 ohm' style='width:25.5em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-55.044044 -71.99809 216.873232 163.567455'>
+              <div class="stromfig" data-fig="fy-v26-o2" data-hidden data-scale="30" data-modes='{"a": {"view": "a", "i": {"f01": 0.25, "f02": 1.25, "f03": 1.5, "f04": 0.45, "f05": 0.7, "f06": 0.8}, "tekst": "R₃ 0.25 A, I₁ 1.25 A, R₄ 1.5 A, R₂ 0.45 A, E og R₁ 0.7 A. Farten er proporsjonal med strømmen."}}'><div class="stromfig__view" data-view="a"><!-- tikz:fy-v26-o2 --><svg class='tikz' role='img' aria-label='R3 12 ohm fra toppen ned til venstre node, strømkilde I1 1.25 A ned i midten, R4 4 ohm til høyre, R2 20 ohm på tvers, og nederst E 12.5 V og R1 5 ohm' style='width:25.5em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-55.044044 -71.99809 216.873232 163.567455'>
 <defs>
 <path stroke='none' id='fy-v26-o2-g0-58' d='M1.75741-.484184C1.75741-.744209 1.551183-.968369 1.273225-.968369S.789041-.744209 .789041-.484184S.995268 0 1.273225 0S1.75741-.224159 1.75741-.484184Z'/>
 <path stroke='none' id='fy-v26-o2-g0-69' d='M2.815442-3.030635H3.730012C4.366625-3.030635 4.501121-2.923039 4.501121-2.627148C4.501121-2.555417 4.474222-2.367123 4.438356-2.223661C4.420423-2.169863 4.411457-2.125031 4.411457-2.098132C4.411457-2.089166 4.411457-1.981569 4.52802-1.981569C4.635616-1.981569 4.644583-2.044334 4.680448-2.178829L5.155666-4.061768C5.191532-4.187298 5.191532-4.20523 5.191532-4.241096C5.191532-4.312827 5.137733-4.357659 5.066002-4.357659C4.967372-4.357659 4.958406-4.303861 4.913574-4.133499C4.734247-3.425156 4.456289-3.308593 3.738979-3.308593H2.887173C3.021669-3.864508 3.443088-5.56812 3.48792-5.675716C3.541719-5.801245 3.604483-5.819178 3.900374-5.819178H5.218431C6.339228-5.819178 6.590286-5.550187 6.590286-4.82391C6.590286-4.545953 6.545455-4.276961 6.545455-4.214197C6.545455-4.142466 6.590286-4.079701 6.670984-4.079701C6.77858-4.079701 6.787547-4.142466 6.805479-4.303861L6.993773-5.971606C6.993773-6.097136 6.90411-6.097136 6.733748-6.097136H2.116065C1.945704-6.097136 1.847073-6.097136 1.847073-5.935741C1.847073-5.819178 1.936737-5.819178 2.125031-5.819178C2.160897-5.819178 2.322291-5.819178 2.465753-5.801245C2.663014-5.774346 2.67198-5.738481 2.67198-5.657783C2.67198-5.630884 2.67198-5.612951 2.627148-5.451557L1.43462-.681445C1.353923-.358655 1.33599-.277958 .663512-.277958C.493151-.277958 .394521-.277958 .394521-.116563C.394521 0 .484184 0 .645579 0H5.379826C5.54122 0 5.559153 0 5.586052-.026899C5.612951-.044832 5.621918-.053798 5.675716-.170361C5.783313-.412453 6.545455-2.116065 6.545455-2.196762C6.545455-2.268493 6.491656-2.313325 6.419925-2.313325S6.339228-2.304359 6.240598-2.098132C5.684682-.842839 5.317061-.277958 3.828643-.277958H2.456787C2.331258-.277958 2.313325-.277958 2.27746-.286924C2.187796-.29589 2.160897-.304857 2.160897-.367621C2.160897-.394521 2.160897-.412453 2.205729-.573848L2.815442-3.030635Z'/>
@@ -189,8 +189,16 @@
 </g>
 <path d='M-38.144533 71.335937V81.11328' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
 <path d='M-43.03125 81.11328H-33.25391M-41.40235 82.7422H-34.88281M-40.17969 84.375H-36.10547' stroke='currentColor' fill='none' stroke-width='1.19554' stroke-miterlimit='10'/>
+<path d='M58.2344-70.3982H-38.144533V-13.7031' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M58.2344-70.3982V-59.0582' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f02'/>
+<path d='M58.2344-25.043V-13.7031' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f02'/>
+<path d='M143.2736-13.7031V-70.3982H58.2344' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f03'/>
+<path d='M58.2344-13.7031H-38.144533' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f04'/>
+<path d='M-38.144533-13.7031V71.335937H-14.0469' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f05'/>
+<path d='M22.8008 71.335937H143.2736V-13.7031' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f05'/>
+<path d='M58.2344-13.7031H143.2736' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f06'/>
 </g>
-</svg><!-- /tikz:fy-v26-o2 -->
+</svg><!-- /tikz:fy-v26-o2 --></div><div class="stromfig__bar"><button type="button" class="stromfig__toggle" aria-pressed="false">Vis strøm</button></div><p class="stromfig__cap"></p></div>
               <ol>
                 <li>Sett opp ligningene for knutepunktene.</li>
                 <li>Beregn knutepunktspenningene.</li>
@@ -343,7 +351,7 @@
               <span class="task__tags"><span class="tag">knutepunkt</span><span class="tag">kildekonvertering</span><span class="tag">Cramer 2×2</span></span>
             </header>
             <div class="task__q">
-              <!-- tikz:fy-h25-o2 --><svg class='tikz' role='img' aria-label='R1 4 ohm, strømkilde 4 A opp, R2 12 ohm langs toppen, R3 3 ohm, og R4 6 ohm i serie med E 24 V' style='width:30.8em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-55.044044 -68.844302 262.176073 112.590472'>
+              <div class="stromfig" data-fig="fy-h25-o2" data-hidden data-scale="11.25" data-modes='{"a": {"view": "a", "i": {"f01": 4, "f02": 3.556, "f03": 0.444, "f04": 2.963, "f05": 2.519}, "tekst": "I 4 A, R₁ 3.56 A, R₂ 0.444 A, R₃ 2.96 A, R₄ og E 2.52 A. Farten er proporsjonal med strømmen."}}'><div class="stromfig__view" data-view="a"><!-- tikz:fy-h25-o2 --><svg class='tikz' role='img' aria-label='R1 4 ohm, strømkilde 4 A opp, R2 12 ohm langs toppen, R3 3 ohm, og R4 6 ohm i serie med E 24 V' style='width:30.8em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-55.044044 -68.844302 262.176073 112.590472'>
 <defs>
 <path stroke='none' id='fy-h25-o2-g0-69' d='M2.815442-3.030635H3.730012C4.366625-3.030635 4.501121-2.923039 4.501121-2.627148C4.501121-2.555417 4.474222-2.367123 4.438356-2.223661C4.420423-2.169863 4.411457-2.125031 4.411457-2.098132C4.411457-2.089166 4.411457-1.981569 4.52802-1.981569C4.635616-1.981569 4.644583-2.044334 4.680448-2.178829L5.155666-4.061768C5.191532-4.187298 5.191532-4.20523 5.191532-4.241096C5.191532-4.312827 5.137733-4.357659 5.066002-4.357659C4.967372-4.357659 4.958406-4.303861 4.913574-4.133499C4.734247-3.425156 4.456289-3.308593 3.738979-3.308593H2.887173C3.021669-3.864508 3.443088-5.56812 3.48792-5.675716C3.541719-5.801245 3.604483-5.819178 3.900374-5.819178H5.218431C6.339228-5.819178 6.590286-5.550187 6.590286-4.82391C6.590286-4.545953 6.545455-4.276961 6.545455-4.214197C6.545455-4.142466 6.590286-4.079701 6.670984-4.079701C6.77858-4.079701 6.787547-4.142466 6.805479-4.303861L6.993773-5.971606C6.993773-6.097136 6.90411-6.097136 6.733748-6.097136H2.116065C1.945704-6.097136 1.847073-6.097136 1.847073-5.935741C1.847073-5.819178 1.936737-5.819178 2.125031-5.819178C2.160897-5.819178 2.322291-5.819178 2.465753-5.801245C2.663014-5.774346 2.67198-5.738481 2.67198-5.657783C2.67198-5.630884 2.67198-5.612951 2.627148-5.451557L1.43462-.681445C1.353923-.358655 1.33599-.277958 .663512-.277958C.493151-.277958 .394521-.277958 .394521-.116563C.394521 0 .484184 0 .645579 0H5.379826C5.54122 0 5.559153 0 5.586052-.026899C5.612951-.044832 5.621918-.053798 5.675716-.170361C5.783313-.412453 6.545455-2.116065 6.545455-2.196762C6.545455-2.268493 6.491656-2.313325 6.419925-2.313325S6.339228-2.304359 6.240598-2.098132C5.684682-.842839 5.317061-.277958 3.828643-.277958H2.456787C2.331258-.277958 2.313325-.277958 2.27746-.286924C2.187796-.29589 2.160897-.304857 2.160897-.367621C2.160897-.394521 2.160897-.412453 2.205729-.573848L2.815442-3.030635Z'/>
 <path stroke='none' id='fy-h25-o2-g0-73' d='M3.416189-5.424658C3.505853-5.76538 3.523786-5.846077 4.250062-5.846077C4.420423-5.846077 4.510087-5.846077 4.510087-6.007472C4.510087-6.106102 4.420423-6.124035 4.366625-6.124035C4.187298-6.124035 3.981071-6.106102 3.801743-6.106102C3.595517-6.106102 3.254795-6.097136 3.19203-6.097136C2.985803-6.097136 2.779577-6.106102 2.57335-6.106102C2.385056-6.106102 2.169863-6.124035 1.990535-6.124035C1.936737-6.124035 1.811208-6.124035 1.811208-5.96264C1.811208-5.846077 1.900872-5.846077 2.080199-5.846077C2.27746-5.846077 2.483686-5.846077 2.663014-5.774346C2.67198-5.738481 2.67198-5.702615 2.67198-5.693649C2.67198-5.657783 2.663014-5.559153 2.654047-5.523288L1.43462-.681445C1.353923-.367621 1.33599-.277958 .645579-.277958C.448319-.277958 .349689-.277958 .349689-.116563C.349689-.071731 .367621 0 .484184 0C.663512 0 .860772-.017933 1.049066-.017933C1.255293-.017933 1.461519-.026899 1.667746-.026899S2.080199-.017933 2.286426-.017933C2.47472-.017933 2.689913 0 2.86924 0C2.932005 0 3.048568 0 3.048568-.161395C3.048568-.277958 2.958904-.277958 2.779577-.277958C2.438854-.277958 2.178829-.277958 2.178829-.439352C2.178829-.502117 2.178829-.52005 2.214695-.645579L3.416189-5.424658Z'/>
@@ -440,8 +448,16 @@
 </g>
 <path d='M-38.144533 30.109374V39.88672' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
 <path d='M-43.03125 39.88672H-33.25391M-41.40235 41.5156H-34.88281M-40.17969 43.1484H-36.10547' stroke='currentColor' fill='none' stroke-width='1.19554' stroke-miterlimit='10'/>
+<path d='M29.8867 28.69141V4.5977' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M29.8867-29.418V-54.9297' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M29.8867-54.9297H-38.144533V30.109374H29.8867' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f02'/>
+<path d='M29.8867-54.9297H109.2576' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f03'/>
+<path d='M109.2576 30.109374H29.8867' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f03'/>
+<path d='M109.2576-54.9297V30.109374' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f04'/>
+<path d='M177.2886-9.5781V-54.9297H109.2576' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f05'/>
+<path d='M109.2576 30.109374H177.2886V25.85547' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f05'/>
 </g>
-</svg><!-- /tikz:fy-h25-o2 -->
+</svg><!-- /tikz:fy-h25-o2 --></div><div class="stromfig__bar"><button type="button" class="stromfig__toggle" aria-pressed="false">Vis strøm</button></div><p class="stromfig__cap"></p></div>
               <ol>
                 <li>Sett opp ligningene for knutepunktene.</li>
                 <li>Beregn knutepunktspenningene.</li>
@@ -586,7 +602,7 @@
               <span class="task__tags"><span class="tag">knutepunkt</span><span class="tag">Cramer 3×3</span></span>
             </header>
             <div class="task__q">
-              <!-- tikz:fy-v25-o2 --><svg class='tikz' role='img' aria-label='Strømkilde I1 0.10 A ned, R1 10 ohm, R2 5 ohm langs toppen, R3 2 ohm på tvers, R4 2 ohm langs bunnen og strømkilde I2 0.50 A opp' style='width:32.7em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-55.097772 -68.844302 277.916026 113.001395'>
+              <div class="stromfig" data-fig="fy-v25-o2" data-hidden data-scale="90" data-modes='{"a": {"view": "a", "i": {"f01": 0.1, "f02": 0.0053, "f03": 0.105, "f05": 0.395, "f06": 0.5}, "tekst": "I₁ 0.1 A, R₁ 0.0053 A, R₂ og R₄ 0.105 A, R₃ 0.395 A, I₂ 0.5 A. Farten er proporsjonal med strømmen."}}'><div class="stromfig__view" data-view="a"><!-- tikz:fy-v25-o2 --><svg class='tikz' role='img' aria-label='Strømkilde I1 0.10 A ned, R1 10 ohm, R2 5 ohm langs toppen, R3 2 ohm på tvers, R4 2 ohm langs bunnen og strømkilde I2 0.50 A opp' style='width:32.7em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-55.097772 -68.844302 277.916026 113.001395'>
 <defs>
 <path stroke='none' id='fy-v25-o2-g0-58' d='M1.75741-.484184C1.75741-.744209 1.551183-.968369 1.273225-.968369S.789041-.744209 .789041-.484184S.995268 0 1.273225 0S1.75741-.224159 1.75741-.484184Z'/>
 <path stroke='none' id='fy-v25-o2-g0-73' d='M3.416189-5.424658C3.505853-5.76538 3.523786-5.846077 4.250062-5.846077C4.420423-5.846077 4.510087-5.846077 4.510087-6.007472C4.510087-6.106102 4.420423-6.124035 4.366625-6.124035C4.187298-6.124035 3.981071-6.106102 3.801743-6.106102C3.595517-6.106102 3.254795-6.097136 3.19203-6.097136C2.985803-6.097136 2.779577-6.106102 2.57335-6.106102C2.385056-6.106102 2.169863-6.124035 1.990535-6.124035C1.936737-6.124035 1.811208-6.124035 1.811208-5.96264C1.811208-5.846077 1.900872-5.846077 2.080199-5.846077C2.27746-5.846077 2.483686-5.846077 2.663014-5.774346C2.67198-5.738481 2.67198-5.702615 2.67198-5.693649C2.67198-5.657783 2.663014-5.559153 2.654047-5.523288L1.43462-.681445C1.353923-.367621 1.33599-.277958 .645579-.277958C.448319-.277958 .349689-.277958 .349689-.116563C.349689-.071731 .367621 0 .484184 0C.663512 0 .860772-.017933 1.049066-.017933C1.255293-.017933 1.461519-.026899 1.667746-.026899S2.080199-.017933 2.286426-.017933C2.47472-.017933 2.689913 0 2.86924 0C2.932005 0 3.048568 0 3.048568-.161395C3.048568-.277958 2.958904-.277958 2.779577-.277958C2.438854-.277958 2.178829-.277958 2.178829-.439352C2.178829-.502117 2.178829-.52005 2.214695-.645579L3.416189-5.424658Z'/>
@@ -691,8 +707,16 @@
 </g>
 <path d='M33.1289 30.109374V39.88672' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
 <path d='M28.2383 39.88672H38.0195M29.8711 41.5156H36.3906M31.0937 43.1484H35.168' stroke='currentColor' fill='none' stroke-width='1.19554' stroke-miterlimit='10'/>
+<path d='M33.1289-54.9297H-34.902344V-29.418' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M-34.902344 4.5977V30.109374H33.1289' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M33.1289-54.9297V30.109374' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f02'/>
+<path d='M118.1679-54.9297H33.1289' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f03'/>
+<path d='M33.1289 30.109374H118.1679' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f03'/>
+<path d='M118.1679-54.9297V30.109374' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f05'/>
+<path d='M118.1679 30.109374H203.2069V4.5977' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f06'/>
+<path d='M203.2069-29.418V-54.9297H118.1679' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f06'/>
 </g>
-</svg><!-- /tikz:fy-v25-o2 -->
+</svg><!-- /tikz:fy-v25-o2 --></div><div class="stromfig__bar"><button type="button" class="stromfig__toggle" aria-pressed="false">Vis strøm</button></div><p class="stromfig__cap"></p></div>
               <p>Bruk knutepunktsmetoden (nodespenningsanalyse) og vis hvordan du kommer frem til ligningene for spenningene i kretsen.</p>
             </div>
             <details class="sol">
@@ -848,7 +872,7 @@
               <span class="task__tags"><span class="tag">maske</span><span class="tag">Cramer 3×3</span></span>
             </header>
             <div class="task__q">
-              <!-- tikz:fy-h24-o2 --><svg class='tikz' role='img' aria-label='R1 4.7 kilo-ohm til venstre, midtgren med R2 3.3 kilo-ohm og E1 12 V med pluss ned, R3 2.2 kilo-ohm langs toppen, R4 1 kilo-ohm, og høyre gren med E2 4 V og R5 6.8 kilo-ohm' style='width:38.3em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-55.044044 -68.844342 325.282424 140.934312'>
+              <div class="stromfig" data-fig="fy-h24-o2" data-hidden data-scale="18.86" data-modes='{"a": {"view": "a", "i": {"f01": 0.877, "f02": 2.386, "f03": 1.509, "f04": 0.803, "f05": 0.706}, "tekst": "R₁ 0.877 mA, R₂ og E₁ 2.39 mA, R₃ 1.51 mA, R₄ (opp) 0.803 mA, R₅ og E₂ (opp) 0.706 mA. Farten er proporsjonal med strømmen."}}'><div class="stromfig__view" data-view="a"><!-- tikz:fy-h24-o2 --><svg class='tikz' role='img' aria-label='R1 4.7 kilo-ohm til venstre, midtgren med R2 3.3 kilo-ohm og E1 12 V med pluss ned, R3 2.2 kilo-ohm langs toppen, R4 1 kilo-ohm, og høyre gren med E2 4 V og R5 6.8 kilo-ohm' style='width:38.3em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-55.044044 -68.844342 325.282424 140.934312'>
 <defs>
 <path stroke='none' id='fy-h24-o2-g0-58' d='M1.75741-.484184C1.75741-.744209 1.551183-.968369 1.273225-.968369S.789041-.744209 .789041-.484184S.995268 0 1.273225 0S1.75741-.224159 1.75741-.484184Z'/>
 <path stroke='none' id='fy-h24-o2-g0-69' d='M2.815442-3.030635H3.730012C4.366625-3.030635 4.501121-2.923039 4.501121-2.627148C4.501121-2.555417 4.474222-2.367123 4.438356-2.223661C4.420423-2.169863 4.411457-2.125031 4.411457-2.098132C4.411457-2.089166 4.411457-1.981569 4.52802-1.981569C4.635616-1.981569 4.644583-2.044334 4.680448-2.178829L5.155666-4.061768C5.191532-4.187298 5.191532-4.20523 5.191532-4.241096C5.191532-4.312827 5.137733-4.357659 5.066002-4.357659C4.967372-4.357659 4.958406-4.303861 4.913574-4.133499C4.734247-3.425156 4.456289-3.308593 3.738979-3.308593H2.887173C3.021669-3.864508 3.443088-5.56812 3.48792-5.675716C3.541719-5.801245 3.604483-5.819178 3.900374-5.819178H5.218431C6.339228-5.819178 6.590286-5.550187 6.590286-4.82391C6.590286-4.545953 6.545455-4.276961 6.545455-4.214197C6.545455-4.142466 6.590286-4.079701 6.670984-4.079701C6.77858-4.079701 6.787547-4.142466 6.805479-4.303861L6.993773-5.971606C6.993773-6.097136 6.90411-6.097136 6.733748-6.097136H2.116065C1.945704-6.097136 1.847073-6.097136 1.847073-5.935741C1.847073-5.819178 1.936737-5.819178 2.125031-5.819178C2.160897-5.819178 2.322291-5.819178 2.465753-5.801245C2.663014-5.774346 2.67198-5.738481 2.67198-5.657783C2.67198-5.630884 2.67198-5.612951 2.627148-5.451557L1.43462-.681445C1.353923-.358655 1.33599-.277958 .663512-.277958C.493151-.277958 .394521-.277958 .394521-.116563C.394521 0 .484184 0 .645579 0H5.379826C5.54122 0 5.559153 0 5.586052-.026899C5.612951-.044832 5.621918-.053798 5.675716-.170361C5.783313-.412453 6.545455-2.116065 6.545455-2.196762C6.545455-2.268493 6.491656-2.313325 6.419925-2.313325S6.339228-2.304359 6.240598-2.098132C5.684682-.842839 5.317061-.277958 3.828643-.277958H2.456787C2.331258-.277958 2.313325-.277958 2.27746-.286924C2.187796-.29589 2.160897-.304857 2.160897-.367621C2.160897-.394521 2.160897-.412453 2.205729-.573848L2.815442-3.030635Z'/>
@@ -976,8 +1000,17 @@
 </g>
 <path d='M58.2344 58.453124V68.23437' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
 <path d='M53.3438 68.23437H63.1246M54.9727 69.8633H61.4922M56.1953 71.4922H60.2734' stroke='currentColor' fill='none' stroke-width='1.19554' stroke-miterlimit='10'/>
+<path d='M-38.144533 58.453124V-54.9294H58.2344' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M58.2344 58.453124H-38.144533' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M58.2344-54.9294V13.1016' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f02'/>
+<path d='M58.2344 47.1172V58.453124' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f02'/>
+<path d='M160.2816-54.9294H58.2344' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f03'/>
+<path d='M58.2344 58.453124H160.2816' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f03'/>
+<path d='M160.2816 58.453124V-54.9294' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f04'/>
+<path d='M160.2816 58.453124H239.6526V-9.5781' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f05'/>
+<path d='M239.6526-43.5934V-54.9294H160.2816' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f05'/>
 </g>
-</svg><!-- /tikz:fy-h24-o2 -->
+</svg><!-- /tikz:fy-h24-o2 --></div><div class="stromfig__bar"><button type="button" class="stromfig__toggle" aria-pressed="false">Vis strøm</button></div><p class="stromfig__cap"></p></div>
               <p>Bruk maskeanalyse og vis hvordan du kommer frem til ligningene for strømmene i kretsen.</p>
             </div>
             <details class="sol">
@@ -1168,7 +1201,7 @@
               <span class="task__tags"><span class="tag">maske</span><span class="tag">knutepunkt</span><span class="tag">Cramer 2×2</span></span>
             </header>
             <div class="task__q">
-              <!-- tikz:fy-v24-o3 --><svg class='tikz' role='img' aria-label='To grener med E1 2 V og R1 1 ohm og med E2 1 V og R2 1 ohm går opp til en felles topp. R4 1 ohm forbinder bunnen av grenene, og en nedre sløyfe har E3 1 V og R3 1 ohm. Venstre side er jord' style='width:23.3em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-55.052946 -71.99779 198.338403 162.26345'>
+              <div class="stromfig" data-fig="fy-v24-o3" data-hidden data-scale="75" data-modes='{"a": {"view": "a", "i": {"f01": 0.2, "f02": 0.6, "f03": 0.4}, "tekst": "E₁, R₁, R₂ og E₂ 0.2 A, R₄ 0.6 A, E₃ og R₃ 0.4 A. Farten er proporsjonal med strømmen."}}'><div class="stromfig__view" data-view="a"><!-- tikz:fy-v24-o3 --><svg class='tikz' role='img' aria-label='To grener med E1 2 V og R1 1 ohm og med E2 1 V og R2 1 ohm går opp til en felles topp. R4 1 ohm forbinder bunnen av grenene, og en nedre sløyfe har E3 1 V og R3 1 ohm. Venstre side er jord' style='width:23.3em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-55.052946 -71.99982 198.338403 162.763612'>
 <defs>
 <path stroke='none' id='fy-v24-o3-g0-0' d='M6.052304-2.0533C6.213699-2.0533 6.38406-2.0533 6.38406-2.25056C6.38406-2.438854 6.204732-2.438854 6.052304-2.438854H1.102864C.950436-2.438854 .771108-2.438854 .771108-2.25056C.771108-2.0533 .941469-2.0533 1.102864-2.0533H6.052304Z'/>
 <path stroke='none' id='fy-v24-o3-g1-82' d='M2.600249-3.640349C2.64807-3.831631 2.654047-3.843587 2.905106-3.843587H3.490909C4.088667-3.843587 4.525031-3.694147 4.525031-3.221918C4.525031-3.012702 4.435367-2.582316 4.022914-2.349191C3.789788-2.217684 3.466999-2.139975 3.060523-2.139975H2.223661L2.600249-3.640349ZM3.825654-2.032379C4.405479-2.163885 5.17061-2.570361 5.17061-3.156164C5.17061-3.652304 4.542964-4.08269 3.610461-4.08269H1.679701C1.566127-4.08269 1.476463-4.08269 1.476463-3.93325C1.476463-3.843587 1.566127-3.843587 1.673724-3.843587S1.93076-3.843587 2.056289-3.801743C2.056289-3.741968 2.056289-3.706102 2.032379-3.610461L1.249315-.496139C1.195517-.280946 1.183562-.239103 .735243-.239103C.603736-.239103 .591781-.239103 .56787-.221171C.537983-.19726 .514072-.119552 .514072-.083686C.52005-.059776 .526027 0 .615691 0C.795019 0 1.231382-.02391 1.41071-.02391C1.775342-.02391 1.3868-.02391 1.823163-.017933C1.95467-.017933 2.098132 0 2.223661 0C2.259527 0 2.30137 0 2.32528-.041843C2.337235-.059776 2.361146-.131507 2.361146-.155417C2.343213-.239103 2.289415-.239103 2.15193-.239103C2.080199-.239103 1.990535-.245081 1.924782-.251059C1.817186-.263014 1.775342-.263014 1.775342-.328767C1.775342-.352677 1.78132-.376588 1.799253-.436364L2.175841-1.942715H3.036613C3.56264-1.942715 3.825654-1.703611 3.825654-1.416687C3.825654-1.344956 3.771856-1.141719 3.73599-1.004234C3.670237-.729265 3.646326-.645579 3.646326-.537983C3.646326-.095641 4.052802 .125529 4.572852 .125529C5.134745 .125529 5.397758-.442341 5.397758-.579826C5.397758-.615691 5.36787-.669489 5.290162-.669489C5.206476-.669489 5.188543-.621669 5.176588-.579826C5.039103-.17335 4.752179-.071731 4.60274-.071731C4.441345-.071731 4.309838-.131507 4.309838-.484184C4.309838-.621669 4.351681-.950436 4.369614-1.105853C4.375592-1.165629 4.393524-1.291158 4.393524-1.338979C4.393524-1.733499 4.08269-1.942715 3.825654-2.032379Z'/>
@@ -1191,116 +1224,122 @@
 <path stroke='none' id='fy-v24-o3-g7-52' d='M3.073474-.811955V-1.031133H2.450809V-3.222914C2.450809-3.342466 2.445828-3.372354 2.316314-3.372354C2.216687-3.372354 2.211706-3.367372 2.156912-3.297634L.313823-1.031133V-.811955H1.972603V-.423412C1.972603-.268991 1.972603-.219178 1.539228-.219178H1.364882V0C1.599004-.009963 1.92279-.019925 2.211706-.019925S2.819427-.009963 3.058531 0V-.219178H2.884184C2.450809-.219178 2.450809-.268991 2.450809-.423412V-.811955H3.073474ZM2.012453-2.834371V-1.031133H.547945L2.012453-2.834371Z'/>
 </defs>
 <g id='fy-v24-o3-page1'>
-<path d='M-32.148438 7.668V-2.3945M-32.148438-21.9531V-32.0159V-40.7739M-32.148438-62.9419V-71.6989H120.9221' stroke='currentColor' fill='none' stroke-width='.59778'/>
-<path d='M-41.92969-12.1719C-41.92969-17.5742-37.55078-21.9531-32.148438-21.9531C-26.74609-21.9531-22.37109-17.5742-22.37109-12.1719C-22.37109-6.7734-26.74609-2.3945-32.148438-2.3945C-37.55078-2.3945-41.92969-6.7734-41.92969-12.1719Z' stroke='currentColor' fill='none' stroke-width='.71732' stroke-miterlimit='10'/>
+<path d='M-32.148438 8.168V-1.8945M-32.148438-21.457V-31.5198V-40.2778M-32.148438-62.4458V-71.2028H120.9221' stroke='currentColor' fill='none' stroke-width='.59778'/>
+<path d='M-41.92969-11.6758C-41.92969-17.0781-37.55078-21.457-32.148438-21.457C-26.74609-21.457-22.37109-17.0781-22.37109-11.6758C-22.37109-6.2734-26.74609-1.8945-32.148438-1.8945C-37.55078-1.8945-41.92969-6.2734-41.92969-11.6758Z' stroke='currentColor' fill='none' stroke-width='.71732' stroke-miterlimit='10'/>
 <g transform='matrix(-1 0 0 1 -60.4234 -76.1893)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g5-0'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g5-0'/>
 </g>
 <g transform='matrix(-1 0 0 1 -60.4234 -83.2389)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g6-43'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g6-43'/>
 </g>
 <g transform='matrix(1 0 0 1 -23.2986 -80.06)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g2-69'/>
-<use stroke='none' x='-25.367382' y='71.027349' xlink:href='#fy-v24-o3-g3-49'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g2-69'/>
+<use stroke='none' x='-25.367382' y='71.525481' xlink:href='#fy-v24-o3-g3-49'/>
 </g>
 <g transform='matrix(1 0 0 1 12.3661 -80.06)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g4-50'/>
-<use stroke='none' x='-26.005279' y='70.0311' xlink:href='#fy-v24-o3-g4-86'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g4-50'/>
+<use stroke='none' x='-26.005279' y='70.529232' xlink:href='#fy-v24-o3-g4-86'/>
 </g>
-<path d='M-32.148438-40.4179L-36.30469-42.6209L-27.99219-46.3169L-36.30469-50.0119L-27.99219-53.7069L-36.30469-57.3989L-27.99219-61.0939L-32.148438-63.3009' stroke='currentColor' fill='none' stroke-width='.71732' stroke-miterlimit='10' stroke-linejoin='bevel'/>
+<path d='M-32.148438-39.9178L-36.30469-42.1248L-27.99219-45.8208L-36.30469-49.5118L-27.99219-53.2068L-36.30469-56.9028L-27.99219-60.5978L-32.148438-62.8008' stroke='currentColor' fill='none' stroke-width='.71732' stroke-miterlimit='10' stroke-linejoin='bevel'/>
 <g transform='matrix(1 0 0 1 -17.3041 -119.7451)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g2-82'/>
-<use stroke='none' x='-25.176353' y='71.027349' xlink:href='#fy-v24-o3-g3-49'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g2-82'/>
+<use stroke='none' x='-25.176353' y='71.525481' xlink:href='#fy-v24-o3-g3-49'/>
 </g>
 <g transform='matrix(1 0 0 1 6.1805 -119.7451)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g4-49'/>
-<use stroke='none' x='-26.005279' y='70.0311' xlink:href='#fy-v24-o3-g4-10'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g4-49'/>
+<use stroke='none' x='-26.005279' y='70.529232' xlink:href='#fy-v24-o3-g4-10'/>
 </g>
-<path d='M120.9221 7.668V-2.3945M120.9221-21.9531V-32.0159V-40.7739M120.9221-62.9419V-71.6989' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
-<path d='M111.1411-12.1719C111.1411-17.5742 115.5191-21.9531 120.9221-21.9531C126.3241-21.9531 130.7031-17.5742 130.7031-12.1719C130.7031-6.7734 126.3241-2.3945 120.9221-2.3945C115.5191-2.3945 111.1411-6.7734 111.1411-12.1719Z' stroke='currentColor' fill='none' stroke-width='.71732' stroke-miterlimit='10'/>
+<path d='M120.9221 8.168V-1.8945M120.9221-21.457V-31.5198V-40.2778M120.9221-62.4458V-71.2028' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
+<path d='M111.1411-11.6758C111.1411-17.0781 115.5191-21.457 120.9221-21.457C126.3241-21.457 130.7031-17.0781 130.7031-11.6758C130.7031-6.2734 126.3241-1.8945 120.9221-1.8945C115.5191-1.8945 111.1411-6.2734 111.1411-11.6758Z' stroke='currentColor' fill='none' stroke-width='.71732' stroke-miterlimit='10'/>
 <g transform='matrix(-1 0 0 1 92.6471 -76.1893)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g5-0'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g5-0'/>
 </g>
 <g transform='matrix(-1 0 0 1 92.6471 -83.2389)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g6-43'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g6-43'/>
 </g>
 <g transform='matrix(1 0 0 1 165.4369 -80.06)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g2-69'/>
-<use stroke='none' x='-25.367382' y='71.027349' xlink:href='#fy-v24-o3-g3-50'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g2-69'/>
+<use stroke='none' x='-25.367382' y='71.525481' xlink:href='#fy-v24-o3-g3-50'/>
 </g>
 <g transform='matrix(1 0 0 1 127.6508 -80.06)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g4-49'/>
-<use stroke='none' x='-26.005279' y='70.0311' xlink:href='#fy-v24-o3-g4-86'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g4-49'/>
+<use stroke='none' x='-26.005279' y='70.529232' xlink:href='#fy-v24-o3-g4-86'/>
 </g>
-<path d='M120.9221-40.4179L116.7661-42.6209L125.0781-46.3169L116.7661-50.0119L125.0781-53.7069L116.7661-57.3989L125.0781-61.0939L120.9221-63.3009' stroke='currentColor' fill='none' stroke-width='.71732' stroke-miterlimit='10' stroke-linejoin='bevel'/>
+<path d='M120.9221-39.9178L116.7661-42.1248L125.0781-45.8208L116.7661-49.5118L125.0781-53.2068L116.7661-56.9028L125.0781-60.5978L120.9221-62.8008' stroke='currentColor' fill='none' stroke-width='.71732' stroke-miterlimit='10' stroke-linejoin='bevel'/>
 <g transform='matrix(1 0 0 1 159.2509 -119.7451)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g2-82'/>
-<use stroke='none' x='-25.176353' y='71.027349' xlink:href='#fy-v24-o3-g3-50'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g2-82'/>
+<use stroke='none' x='-25.176353' y='71.525481' xlink:href='#fy-v24-o3-g3-50'/>
 </g>
 <g transform='matrix(1 0 0 1 134.0909 -119.7451)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g4-49'/>
-<use stroke='none' x='-26.005279' y='70.0311' xlink:href='#fy-v24-o3-g4-10'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g4-49'/>
+<use stroke='none' x='-26.005279' y='70.529232' xlink:href='#fy-v24-o3-g4-10'/>
 </g>
-<path d='M120.9221 7.668H55.4687M33.3047 7.668H-32.148438' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
-<path d='M55.8281 7.668L53.6211 11.8242L49.9297 3.5117L46.2344 11.8242L42.5391 3.5117L38.8437 11.8242L35.1484 3.5117L32.9453 7.668' stroke='currentColor' fill='none' stroke-width='.71732' stroke-miterlimit='10' stroke-linejoin='bevel'/>
-<path stroke='none' d='M122.2261 7.668C122.2261 6.9492 121.6411 6.3672 120.9221 6.3672S119.6171 6.9492 119.6171 7.668C119.6171 8.3906 120.2031 8.9727 120.9221 8.9727S122.2261 8.3906 122.2261 7.668Z'/>
-<path d='M122.2261 7.668C122.2261 6.9492 121.6411 6.3672 120.9221 6.3672S119.6171 6.9492 119.6171 7.668C119.6171 8.3906 120.2031 8.9727 120.9221 8.9727S122.2261 8.3906 122.2261 7.668Z' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
-<path stroke='none' d='M-30.84375 7.668C-30.84375 6.9492-31.429688 6.3672-32.148438 6.3672C-32.867188 6.3672-33.45313 6.9492-33.45313 7.668C-33.45313 8.3906-32.867188 8.9727-32.148438 8.9727C-31.429688 8.9727-30.84375 8.3906-30.84375 7.668Z'/>
-<path d='M-30.84375 7.668C-30.84375 6.9492-31.429688 6.3672-32.148438 6.3672C-32.867188 6.3672-33.45313 6.9492-33.45313 7.668C-33.45313 8.3906-32.867188 8.9727-32.148438 8.9727C-31.429688 8.9727-30.84375 8.3906-30.84375 7.668Z' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
+<path d='M120.9221 8.168H55.4687M33.3047 8.168H-32.148438' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
+<path d='M55.8281 8.168L53.6211 12.3242L49.9297 4.0117L46.2344 12.3242L42.5391 4.0117L38.8437 12.3242L35.1484 4.0117L32.9453 8.168' stroke='currentColor' fill='none' stroke-width='.71732' stroke-miterlimit='10' stroke-linejoin='bevel'/>
+<path stroke='none' d='M122.2261 8.168C122.2261 7.4453 121.6411 6.8633 120.9221 6.8633S119.6171 7.4453 119.6171 8.168C119.6171 8.8867 120.2031 9.4727 120.9221 9.4727S122.2261 8.8867 122.2261 8.168Z'/>
+<path d='M122.2261 8.168C122.2261 7.4453 121.6411 6.8633 120.9221 6.8633S119.6171 7.4453 119.6171 8.168C119.6171 8.8867 120.2031 9.4727 120.9221 9.4727S122.2261 8.8867 122.2261 8.168Z' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
+<path stroke='none' d='M-30.84375 8.168C-30.84375 7.4453-31.429688 6.8633-32.148438 6.8633C-32.867188 6.8633-33.45313 7.4453-33.45313 8.168C-33.45313 8.8867-32.867188 9.4727-32.148438 9.4727C-31.429688 9.4727-30.84375 8.8867-30.84375 8.168Z'/>
+<path d='M-30.84375 8.168C-30.84375 7.4453-31.429688 6.8633-32.148438 6.8633C-32.867188 6.8633-33.45313 7.4453-33.45313 8.168C-33.45313 8.8867-32.867188 9.4727-32.148438 9.4727C-31.429688 9.4727-30.84375 8.8867-30.84375 8.168Z' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
 <g transform='matrix(1 0 0 1 61.7582 -70.151171)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g2-82'/>
-<use stroke='none' x='-25.176353' y='71.027349' xlink:href='#fy-v24-o3-g3-52'/>
-<use stroke='none' x='-21.025309' y='70.0311' xlink:href='#fy-v24-o3-g4-44'/>
-<use stroke='none' x='-15.393687' y='70.0311' xlink:href='#fy-v24-o3-g4-49'/>
-<use stroke='none' x='-9.250099' y='70.0311' xlink:href='#fy-v24-o3-g4-10'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g2-82'/>
+<use stroke='none' x='-25.176353' y='71.525481' xlink:href='#fy-v24-o3-g3-52'/>
+<use stroke='none' x='-21.025309' y='70.529232' xlink:href='#fy-v24-o3-g4-44'/>
+<use stroke='none' x='-15.393687' y='70.529232' xlink:href='#fy-v24-o3-g4-49'/>
+<use stroke='none' x='-9.250099' y='70.529232' xlink:href='#fy-v24-o3-g4-10'/>
 </g>
-<path stroke='none' d='M90.2691 7.668V5.2969L85.2301 7.668L90.2691 10.0391Z'/>
-<path d='M90.2691 7.668V5.2969L85.2301 7.668L90.2691 10.0391Z' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
+<path stroke='none' d='M90.2691 8.168V5.7969L85.2301 8.168L90.2691 10.5391Z'/>
+<path d='M90.2691 8.168V5.7969L85.2301 8.168L90.2691 10.5391Z' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
 <g transform='matrix(1 0 0 1 113.3814 -68.12905)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g2-73'/>
-<use stroke='none' x='-28.120591' y='71.027394' xlink:href='#fy-v24-o3-g1-82'/>
-<use stroke='none' x='-22.608484' y='72.17864' xlink:href='#fy-v24-o3-g7-52'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g2-73'/>
+<use stroke='none' x='-28.120591' y='71.525526' xlink:href='#fy-v24-o3-g1-82'/>
+<use stroke='none' x='-22.608484' y='72.676772' xlink:href='#fy-v24-o3-g7-52'/>
 </g>
 <g transform='matrix(1 0 0 1 50.2743 -47.3647)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g0-0'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g0-0'/>
 </g>
 <g transform='matrix(1 0 0 1 95.6288 -47.3647)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g4-43'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g4-43'/>
 </g>
 <g transform='matrix(1 0 0 1 68.4521 -47.6166)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g2-85'/>
-<use stroke='none' x='-25.880879' y='71.027394' xlink:href='#fy-v24-o3-g1-82'/>
-<use stroke='none' x='-20.368771' y='72.17864' xlink:href='#fy-v24-o3-g7-52'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g2-85'/>
+<use stroke='none' x='-25.880879' y='71.525526' xlink:href='#fy-v24-o3-g1-82'/>
+<use stroke='none' x='-20.368771' y='72.676772' xlink:href='#fy-v24-o3-g7-52'/>
 </g>
-<path d='M-32.148438 7.668V70.031253H-5.0781M14.4805 70.031253H41.5508H70.1521M92.3201 70.031253H120.9221V7.668' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
-<path d='M4.7031 60.25C10.1016 60.25 14.4805 64.62891 14.4805 70.031253C14.4805 75.4336 10.1016 79.8125 4.7031 79.8125C-.6992 79.8125-5.0781 75.4336-5.0781 70.031253C-5.0781 64.62891-.6992 60.25 4.7031 60.25Z' stroke='currentColor' fill='none' stroke-width='.71732' stroke-miterlimit='10'/>
-<g transform='matrix(0 -1 -1 0 68.71722 41.7566)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g5-0'/>
+<path d='M-32.148438 8.168V70.527346H-5.0781M14.4805 70.527346H41.5508H70.1521M92.3201 70.527346H120.9221V8.168' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
+<path d='M4.7031 60.75C10.1016 60.75 14.4805 65.12891 14.4805 70.527346C14.4805 75.92969 10.1016 80.3086 4.7031 80.3086C-.6992 80.3086-5.0781 75.92969-5.0781 70.527346C-5.0781 65.12891-.6992 60.75 4.7031 60.75Z' stroke='currentColor' fill='none' stroke-width='.71732' stroke-miterlimit='10'/>
+<g transform='matrix(0 -1 -1 0 69.21532 42.2547)'>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g5-0'/>
 </g>
-<g transform='matrix(0 -1 -1 0 75.76678 41.7566)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g6-43'/>
+<g transform='matrix(0 -1 -1 0 76.26488 42.2547)'>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g6-43'/>
 </g>
 <g transform='matrix(1 0 0 1 31.384221 -13.9747)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g2-69'/>
-<use stroke='none' x='-25.367382' y='71.027349' xlink:href='#fy-v24-o3-g3-51'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g2-69'/>
+<use stroke='none' x='-25.367382' y='71.525481' xlink:href='#fy-v24-o3-g3-51'/>
 </g>
 <g transform='matrix(1 0 0 1 30.32361 20.0373)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g4-49'/>
-<use stroke='none' x='-26.005279' y='70.0311' xlink:href='#fy-v24-o3-g4-86'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g4-49'/>
+<use stroke='none' x='-26.005279' y='70.529232' xlink:href='#fy-v24-o3-g4-86'/>
 </g>
-<path d='M69.7931 70.031253L72.0001 65.875L75.6951 74.1875L79.3911 65.875L83.0861 74.1875L86.7771 65.875L90.4731 74.1875L92.6801 70.031253' stroke='currentColor' fill='none' stroke-width='.71732' stroke-miterlimit='10' stroke-linejoin='bevel'/>
+<path d='M69.7931 70.527346L72.0001 66.3711L75.6951 74.6836L79.3911 66.3711L83.0861 74.6836L86.7771 66.3711L90.4731 74.6836L92.6801 70.527346' stroke='currentColor' fill='none' stroke-width='.71732' stroke-miterlimit='10' stroke-linejoin='bevel'/>
 <g transform='matrix(1 0 0 1 107.824 -7.7891)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g2-82'/>
-<use stroke='none' x='-25.176353' y='71.027349' xlink:href='#fy-v24-o3-g3-51'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g2-82'/>
+<use stroke='none' x='-25.176353' y='71.525481' xlink:href='#fy-v24-o3-g3-51'/>
 </g>
 <g transform='matrix(1 0 0 1 106.9862 13.8517)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g4-49'/>
-<use stroke='none' x='-26.005279' y='70.0311' xlink:href='#fy-v24-o3-g4-10'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g4-49'/>
+<use stroke='none' x='-26.005279' y='70.529232' xlink:href='#fy-v24-o3-g4-10'/>
 </g>
-<path d='M-32.148438 70.031253V79.8086' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
-<path d='M-37.03906 79.8086H-27.25781M-35.41016 81.4414H-28.89063M-34.1875 83.0703H-30.11328' stroke='currentColor' fill='none' stroke-width='1.19554' stroke-miterlimit='10'/>
+<path d='M-32.148438 70.527346V80.3086' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
+<path d='M-37.03906 80.3086H-27.25781M-35.41016 81.9375H-28.89063M-34.1875 83.5703H-30.11328' stroke='currentColor' fill='none' stroke-width='1.19554' stroke-miterlimit='10'/>
+<path d='M-32.148438 8.168V5.332' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M-32.148438-28.6836V-71.2028H120.9221V-28.6836' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M120.9221 5.332V8.168' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M120.9221 8.168H-32.148438' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f02'/>
+<path d='M-32.148438 8.168V70.527346H-12.3047' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f03'/>
+<path d='M21.7109 70.527346H120.9221V8.168' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f03'/>
 </g>
-</svg><!-- /tikz:fy-v24-o3 -->
+</svg><!-- /tikz:fy-v24-o3 --></div><div class="stromfig__bar"><button type="button" class="stromfig__toggle" aria-pressed="false">Vis strøm</button></div><p class="stromfig__cap"></p></div>
               <ol>
                 <li>Tegn kretsen på nytt, og angi masker og maskestrømmer med retning.</li>
                 <li>Sett opp de tilhørende maskestrømsligningene.</li>
@@ -1507,7 +1546,7 @@
               <span class="task__tags"><span class="tag">Δ-Y</span><span class="tag">maske</span><span class="tag">Cramer 3×3</span></span>
             </header>
             <div class="task__q">
-              <!-- tikz:fy-h23-o3 --><svg class='tikz' role='img' aria-label='E 10 V og R1 1 ohm i serie til toppen av en bro: R2 2 ohm og R3 5 ohm øverst, R6 3 ohm på tvers, R4 3 ohm og R5 3 ohm nederst' style='width:28.5em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-55.052938 -68.676521 241.969428 152.772311'>
+              <div class="stromfig" data-fig="fy-h23-o3" data-hidden data-scale="18" data-modes='{"a": {"view": "a", "i": {"f01": 2.5, "f02": 1.667, "f03": 0.833, "f04": 0.278, "f05": 1.389, "f06": 1.111}, "tekst": "Iₛ 2.5 A, R₂ 1.67 A, R₃ 0.833 A, R₆ 0.278 A, R₄ 1.39 A, R₅ 1.11 A. Farten er proporsjonal med strømmen."}}'><div class="stromfig__view" data-view="a"><!-- tikz:fy-h23-o3 --><svg class='tikz' role='img' aria-label='E 10 V og R1 1 ohm i serie til toppen av en bro: R2 2 ohm og R3 5 ohm øverst, R6 3 ohm på tvers, R4 3 ohm og R5 3 ohm nederst' style='width:28.5em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-55.052938 -68.676521 241.969428 153.270441'>
 <defs>
 <path stroke='none' id='fy-h23-o3-g0-82' d='M2.600249-3.640349C2.64807-3.831631 2.654047-3.843587 2.905106-3.843587H3.490909C4.088667-3.843587 4.525031-3.694147 4.525031-3.221918C4.525031-3.012702 4.435367-2.582316 4.022914-2.349191C3.789788-2.217684 3.466999-2.139975 3.060523-2.139975H2.223661L2.600249-3.640349ZM3.825654-2.032379C4.405479-2.163885 5.17061-2.570361 5.17061-3.156164C5.17061-3.652304 4.542964-4.08269 3.610461-4.08269H1.679701C1.566127-4.08269 1.476463-4.08269 1.476463-3.93325C1.476463-3.843587 1.566127-3.843587 1.673724-3.843587S1.93076-3.843587 2.056289-3.801743C2.056289-3.741968 2.056289-3.706102 2.032379-3.610461L1.249315-.496139C1.195517-.280946 1.183562-.239103 .735243-.239103C.603736-.239103 .591781-.239103 .56787-.221171C.537983-.19726 .514072-.119552 .514072-.083686C.52005-.059776 .526027 0 .615691 0C.795019 0 1.231382-.02391 1.41071-.02391C1.775342-.02391 1.3868-.02391 1.823163-.017933C1.95467-.017933 2.098132 0 2.223661 0C2.259527 0 2.30137 0 2.32528-.041843C2.337235-.059776 2.361146-.131507 2.361146-.155417C2.343213-.239103 2.289415-.239103 2.15193-.239103C2.080199-.239103 1.990535-.245081 1.924782-.251059C1.817186-.263014 1.775342-.263014 1.775342-.328767C1.775342-.352677 1.78132-.376588 1.799253-.436364L2.175841-1.942715H3.036613C3.56264-1.942715 3.825654-1.703611 3.825654-1.416687C3.825654-1.344956 3.771856-1.141719 3.73599-1.004234C3.670237-.729265 3.646326-.645579 3.646326-.537983C3.646326-.095641 4.052802 .125529 4.572852 .125529C5.134745 .125529 5.397758-.442341 5.397758-.579826C5.397758-.615691 5.36787-.669489 5.290162-.669489C5.206476-.669489 5.188543-.621669 5.176588-.579826C5.039103-.17335 4.752179-.071731 4.60274-.071731C4.441345-.071731 4.309838-.131507 4.309838-.484184C4.309838-.621669 4.351681-.950436 4.369614-1.105853C4.375592-1.165629 4.393524-1.291158 4.393524-1.338979C4.393524-1.733499 4.08269-1.942715 3.825654-2.032379Z'/>
 <path stroke='none' id='fy-h23-o3-g0-115' d='M2.731756-2.247572C2.558406-2.205729 2.492653-2.056289 2.492653-1.966625C2.492653-1.870984 2.564384-1.769365 2.701868-1.769365C2.82142-1.769365 2.99477-1.853051 2.99477-2.110087C2.99477-2.510585 2.540473-2.636115 2.15193-2.636115C1.23736-2.636115 1.016189-2.032379 1.016189-1.775342C1.016189-1.291158 1.566127-1.195517 1.721544-1.171606C2.169863-1.093898 2.516563-1.028144 2.516563-.735243C2.516563-.609714 2.414944-.394521 2.199751-.274969C1.966625-.14944 1.709589-.137484 1.536239-.137484C1.327024-.137484 .956413-.161395 .783064-.358655C.992279-.394521 1.093898-.555915 1.093898-.699377C1.093898-.824907 1.010212-.926526 .848817-.926526C.6934-.926526 .502117-.800996 .502117-.52005C.502117-.191283 .830884 .059776 1.530262 .059776C2.64807 .059776 2.887173-.633624 2.887173-.908593C2.887173-1.105853 2.803487-1.243337 2.666002-1.362889C2.47472-1.530262 2.253549-1.566127 1.966625-1.613948C1.673724-1.667746 1.3868-1.715567 1.3868-1.948692C1.3868-1.95467 1.3868-2.438854 2.145953-2.438854C2.295392-2.438854 2.594271-2.414944 2.731756-2.247572Z'/>
@@ -1638,8 +1677,15 @@
 <use stroke='none' x='-22.478252' y='100.803414' xlink:href='#fy-h23-o3-g3-10'/>
 </g>
 <path d='M111.6136 83.7969H-35.789064' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
+<path d='M-35.789064 38.4414V-57.938H111.6136' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M111.6136 83.7969H-35.789064V72.457' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M111.6136-57.938L37.9102 15.7617' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f02'/>
+<path d='M111.6136-57.938L185.3126 15.7617' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f03'/>
+<path d='M37.9102 15.7617H185.3126' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f04'/>
+<path d='M37.9102 15.7617L111.6136 83.7969' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f05'/>
+<path d='M185.3126 15.7617L111.6136 83.7969' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f06'/>
 </g>
-</svg><!-- /tikz:fy-h23-o3 -->
+</svg><!-- /tikz:fy-h23-o3 --></div><div class="stromfig__bar"><button type="button" class="stromfig__toggle" aria-pressed="false">Vis strøm</button></div><p class="stromfig__cap"></p></div>
               <ol>
                 <li>Bruk Δ-Y-konvertering av den nedre delta-koblingen i kretsen, og tegn kretsen på nytt.</li>
                 <li>Bestem totalmotstanden \(R_T\) tilkoblet kilden.</li>
@@ -1956,7 +2002,7 @@
               <span class="task__tags"><span class="tag">maske</span><span class="tag">knutepunkt</span></span>
             </header>
             <div class="task__q">
-              <!-- tikz:fy-v23-o3 --><svg class='tikz' role='img' aria-label='E1 15 V, R1 5 ohm til node 1 med R2 10 ohm til bunn, R3 7 ohm til node 2 med R4 4 ohm til bunn, R5 3 ohm til E2 10 V' style='width:33.3em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-55.052946 -68.844302 283.377403 100.553352'>
+              <div class="stromfig" data-fig="fy-v23-o3" data-hidden data-scale="28.46" data-modes='{"a": {"view": "a", "i": {"f01": 1.237, "f02": 0.881, "f03": 0.356, "f04": 1.581, "f05": 1.225}, "tekst": "E₁ og R₁ 1.24 A, R₂ 0.881 A, R₃ 0.356 A, R₄ 1.58 A, R₅ og E₂ 1.23 A. Farten er proporsjonal med strømmen."}}'><div class="stromfig__view" data-view="a"><!-- tikz:fy-v23-o3 --><svg class='tikz' role='img' aria-label='E1 15 V, R1 5 ohm til node 1 med R2 10 ohm til bunn, R3 7 ohm til node 2 med R4 4 ohm til bunn, R5 3 ohm til E2 10 V' style='width:33.3em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-55.052946 -68.844302 283.377403 100.553352'>
 <defs>
 <path stroke='none' id='fy-v23-o3-g0-82' d='M2.600249-3.640349C2.64807-3.831631 2.654047-3.843587 2.905106-3.843587H3.490909C4.088667-3.843587 4.525031-3.694147 4.525031-3.221918C4.525031-3.012702 4.435367-2.582316 4.022914-2.349191C3.789788-2.217684 3.466999-2.139975 3.060523-2.139975H2.223661L2.600249-3.640349ZM3.825654-2.032379C4.405479-2.163885 5.17061-2.570361 5.17061-3.156164C5.17061-3.652304 4.542964-4.08269 3.610461-4.08269H1.679701C1.566127-4.08269 1.476463-4.08269 1.476463-3.93325C1.476463-3.843587 1.566127-3.843587 1.673724-3.843587S1.93076-3.843587 2.056289-3.801743C2.056289-3.741968 2.056289-3.706102 2.032379-3.610461L1.249315-.496139C1.195517-.280946 1.183562-.239103 .735243-.239103C.603736-.239103 .591781-.239103 .56787-.221171C.537983-.19726 .514072-.119552 .514072-.083686C.52005-.059776 .526027 0 .615691 0C.795019 0 1.231382-.02391 1.41071-.02391C1.775342-.02391 1.3868-.02391 1.823163-.017933C1.95467-.017933 2.098132 0 2.223661 0C2.259527 0 2.30137 0 2.32528-.041843C2.337235-.059776 2.361146-.131507 2.361146-.155417C2.343213-.239103 2.289415-.239103 2.15193-.239103C2.080199-.239103 1.990535-.245081 1.924782-.251059C1.817186-.263014 1.775342-.263014 1.775342-.328767C1.775342-.352677 1.78132-.376588 1.799253-.436364L2.175841-1.942715H3.036613C3.56264-1.942715 3.825654-1.703611 3.825654-1.416687C3.825654-1.344956 3.771856-1.141719 3.73599-1.004234C3.670237-.729265 3.646326-.645579 3.646326-.537983C3.646326-.095641 4.052802 .125529 4.572852 .125529C5.134745 .125529 5.397758-.442341 5.397758-.579826C5.397758-.615691 5.36787-.669489 5.290162-.669489C5.206476-.669489 5.188543-.621669 5.176588-.579826C5.039103-.17335 4.752179-.071731 4.60274-.071731C4.441345-.071731 4.309838-.131507 4.309838-.484184C4.309838-.621669 4.351681-.950436 4.369614-1.105853C4.375592-1.165629 4.393524-1.291158 4.393524-1.338979C4.393524-1.733499 4.08269-1.942715 3.825654-2.032379Z'/>
 <path stroke='none' id='fy-v23-o3-g1-69' d='M2.815442-3.030635H3.730012C4.366625-3.030635 4.501121-2.923039 4.501121-2.627148C4.501121-2.555417 4.474222-2.367123 4.438356-2.223661C4.420423-2.169863 4.411457-2.125031 4.411457-2.098132C4.411457-2.089166 4.411457-1.981569 4.52802-1.981569C4.635616-1.981569 4.644583-2.044334 4.680448-2.178829L5.155666-4.061768C5.191532-4.187298 5.191532-4.20523 5.191532-4.241096C5.191532-4.312827 5.137733-4.357659 5.066002-4.357659C4.967372-4.357659 4.958406-4.303861 4.913574-4.133499C4.734247-3.425156 4.456289-3.308593 3.738979-3.308593H2.887173C3.021669-3.864508 3.443088-5.56812 3.48792-5.675716C3.541719-5.801245 3.604483-5.819178 3.900374-5.819178H5.218431C6.339228-5.819178 6.590286-5.550187 6.590286-4.82391C6.590286-4.545953 6.545455-4.276961 6.545455-4.214197C6.545455-4.142466 6.590286-4.079701 6.670984-4.079701C6.77858-4.079701 6.787547-4.142466 6.805479-4.303861L6.993773-5.971606C6.993773-6.097136 6.90411-6.097136 6.733748-6.097136H2.116065C1.945704-6.097136 1.847073-6.097136 1.847073-5.935741C1.847073-5.819178 1.936737-5.819178 2.125031-5.819178C2.160897-5.819178 2.322291-5.819178 2.465753-5.801245C2.663014-5.774346 2.67198-5.738481 2.67198-5.657783C2.67198-5.630884 2.67198-5.612951 2.627148-5.451557L1.43462-.681445C1.353923-.358655 1.33599-.277958 .663512-.277958C.493151-.277958 .394521-.277958 .394521-.116563C.394521 0 .484184 0 .645579 0H5.379826C5.54122 0 5.559153 0 5.586052-.026899C5.612951-.044832 5.621918-.053798 5.675716-.170361C5.783313-.412453 6.545455-2.116065 6.545455-2.196762C6.545455-2.268493 6.491656-2.313325 6.419925-2.313325S6.339228-2.304359 6.240598-2.098132C5.684682-.842839 5.317061-.277958 3.828643-.277958H2.456787C2.331258-.277958 2.313325-.277958 2.27746-.286924C2.187796-.29589 2.160897-.304857 2.160897-.367621C2.160897-.394521 2.160897-.412453 2.205729-.573848L2.815442-3.030635Z'/>
@@ -2078,8 +2124,16 @@
 <path stroke='none' d='M127.8941 30.109374C127.8941 29.386718 127.3121 28.80469 126.5901 28.80469C125.8711 28.80469 125.2891 29.386718 125.2891 30.109374C125.2891 30.828124 125.8711 31.41016 126.5901 31.41016C127.3121 31.41016 127.8941 30.828124 127.8941 30.109374Z'/>
 <path d='M127.8941 30.109374C127.8941 29.386718 127.3121 28.80469 126.5901 28.80469C125.8711 28.80469 125.2891 29.386718 125.2891 30.109374C125.2891 30.828124 125.8711 31.41016 126.5901 31.41016C127.3121 31.41016 127.8941 30.828124 127.8941 30.109374Z' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
 <path d='M-32.148438 30.109374H205.9611' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
+<path d='M-32.148438-29.418V-54.9297H47.2227' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M47.2227 30.109374H-32.148438V4.5977' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M47.2227-54.9297V30.109374' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f02'/>
+<path d='M47.2227-54.9297H126.5901' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f03'/>
+<path d='M126.5901 30.109374H47.2227' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f03'/>
+<path d='M126.5901-54.9297V30.109374' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f04'/>
+<path d='M205.9611-29.418V-54.9297H126.5901' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f05'/>
+<path d='M126.5901 30.109374H205.9611V4.5977' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f05'/>
 </g>
-</svg><!-- /tikz:fy-v23-o3 -->
+</svg><!-- /tikz:fy-v23-o3 --></div><div class="stromfig__bar"><button type="button" class="stromfig__toggle" aria-pressed="false">Vis strøm</button></div><p class="stromfig__cap"></p></div>
               <ol>
                 <li>(10 %) Tegn kretsen på nytt, og angi maskene med strømretning og med maskene nummerert. Sett deretter opp maskestrømsligningene for kretsen.</li>
                 <li>(10 %) Tegn opp kretsen på nytt, og angi og nummerer nødvendige spenningsnoder. Sett deretter opp knutepunktsligningene for kretsen.</li>
@@ -2273,7 +2327,7 @@
               <span class="task__tags"><span class="tag">kildekonvertering</span><span class="tag">maske</span><span class="tag">knutepunkt</span></span>
             </header>
             <div class="task__q">
-              <!-- tikz:fy-h22-o3 --><svg class='tikz' role='img' aria-label='Tre parallelle grener: R1 3 ohm i serie med U1 10 V, R2 4 ohm i serie med U2 5 V med minus opp, og R3 7 ohm' style='width:25.3em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-54.828872 -71.99849 214.913094 116.59035'>
+              <div class="stromfig" data-fig="fy-h22-o3" data-hidden data-scale="18.93" data-modes='{"a": {"view": "a", "i": {"f01": 2.377, "f02": 1.967, "f03": 0.41}, "tekst": "U₁ og R₁ 2.38 A, R₂ og U₂ 1.97 A, R₃ 0.41 A. Farten er proporsjonal med strømmen."}}'><div class="stromfig__view" data-view="a"><!-- tikz:fy-h22-o3 --><svg class='tikz' role='img' aria-label='Tre parallelle grener: R1 3 ohm i serie med U1 10 V, R2 4 ohm i serie med U2 5 V med minus opp, og R3 7 ohm' style='width:25.3em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-54.828872 -71.99849 214.913094 116.59035'>
 <defs>
 <path stroke='none' id='fy-h22-o3-g0-82' d='M2.600249-3.640349C2.64807-3.831631 2.654047-3.843587 2.905106-3.843587H3.490909C4.088667-3.843587 4.525031-3.694147 4.525031-3.221918C4.525031-3.012702 4.435367-2.582316 4.022914-2.349191C3.789788-2.217684 3.466999-2.139975 3.060523-2.139975H2.223661L2.600249-3.640349ZM3.825654-2.032379C4.405479-2.163885 5.17061-2.570361 5.17061-3.156164C5.17061-3.652304 4.542964-4.08269 3.610461-4.08269H1.679701C1.566127-4.08269 1.476463-4.08269 1.476463-3.93325C1.476463-3.843587 1.566127-3.843587 1.673724-3.843587S1.93076-3.843587 2.056289-3.801743C2.056289-3.741968 2.056289-3.706102 2.032379-3.610461L1.249315-.496139C1.195517-.280946 1.183562-.239103 .735243-.239103C.603736-.239103 .591781-.239103 .56787-.221171C.537983-.19726 .514072-.119552 .514072-.083686C.52005-.059776 .526027 0 .615691 0C.795019 0 1.231382-.02391 1.41071-.02391C1.775342-.02391 1.3868-.02391 1.823163-.017933C1.95467-.017933 2.098132 0 2.223661 0C2.259527 0 2.30137 0 2.32528-.041843C2.337235-.059776 2.361146-.131507 2.361146-.155417C2.343213-.239103 2.289415-.239103 2.15193-.239103C2.080199-.239103 1.990535-.245081 1.924782-.251059C1.817186-.263014 1.775342-.263014 1.775342-.328767C1.775342-.352677 1.78132-.376588 1.799253-.436364L2.175841-1.942715H3.036613C3.56264-1.942715 3.825654-1.703611 3.825654-1.416687C3.825654-1.344956 3.771856-1.141719 3.73599-1.004234C3.670237-.729265 3.646326-.645579 3.646326-.537983C3.646326-.095641 4.052802 .125529 4.572852 .125529C5.134745 .125529 5.397758-.442341 5.397758-.579826C5.397758-.615691 5.36787-.669489 5.290162-.669489C5.206476-.669489 5.188543-.621669 5.176588-.579826C5.039103-.17335 4.752179-.071731 4.60274-.071731C4.441345-.071731 4.309838-.131507 4.309838-.484184C4.309838-.621669 4.351681-.950436 4.369614-1.105853C4.375592-1.165629 4.393524-1.291158 4.393524-1.338979C4.393524-1.733499 4.08269-1.942715 3.825654-2.032379Z'/>
 <path stroke='none' id='fy-h22-o3-g1-73' d='M3.416189-5.424658C3.505853-5.76538 3.523786-5.846077 4.250062-5.846077C4.420423-5.846077 4.510087-5.846077 4.510087-6.007472C4.510087-6.106102 4.420423-6.124035 4.366625-6.124035C4.187298-6.124035 3.981071-6.106102 3.801743-6.106102C3.595517-6.106102 3.254795-6.097136 3.19203-6.097136C2.985803-6.097136 2.779577-6.106102 2.57335-6.106102C2.385056-6.106102 2.169863-6.124035 1.990535-6.124035C1.936737-6.124035 1.811208-6.124035 1.811208-5.96264C1.811208-5.846077 1.900872-5.846077 2.080199-5.846077C2.27746-5.846077 2.483686-5.846077 2.663014-5.774346C2.67198-5.738481 2.67198-5.702615 2.67198-5.693649C2.67198-5.657783 2.663014-5.559153 2.654047-5.523288L1.43462-.681445C1.353923-.367621 1.33599-.277958 .645579-.277958C.448319-.277958 .349689-.277958 .349689-.116563C.349689-.071731 .367621 0 .484184 0C.663512 0 .860772-.017933 1.049066-.017933C1.255293-.017933 1.461519-.026899 1.667746-.026899S2.080199-.017933 2.286426-.017933C2.47472-.017933 2.689913 0 2.86924 0C2.932005 0 3.048568 0 3.048568-.161395C3.048568-.277958 2.958904-.277958 2.779577-.277958C2.438854-.277958 2.178829-.277958 2.178829-.439352C2.178829-.502117 2.178829-.52005 2.214695-.645579L3.416189-5.424658Z'/>
@@ -2368,8 +2422,13 @@
 </g>
 <path stroke='none' d='M53.6797 42.988282C53.6797 42.269532 53.0977 41.68359 52.375 41.68359C51.6562 41.68359 51.0742 42.269532 51.0742 42.988282C51.0742 43.707032 51.6562 44.29297 52.375 44.29297C53.0977 44.29297 53.6797 43.707032 53.6797 42.988282Z'/>
 <path d='M53.6797 42.988282C53.6797 42.269532 53.0977 41.68359 52.375 41.68359C51.6562 41.68359 51.0742 42.269532 51.0742 42.988282C51.0742 43.707032 51.6562 44.29297 52.375 44.29297C53.0977 44.29297 53.6797 43.707032 53.6797 42.988282Z' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
+<path d='M-32.664063-5.1992V-70.3986H52.375' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M52.375 42.988282H-32.664063V28.8164' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M52.375-70.3986V-5.1992' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f02'/>
+<path d='M52.375 28.8164V42.988282' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f02'/>
+<path d='M52.375-70.3986H137.4176V42.988282H52.375' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f03'/>
 </g>
-</svg><!-- /tikz:fy-h22-o3 -->
+</svg><!-- /tikz:fy-h22-o3 --></div><div class="stromfig__bar"><button type="button" class="stromfig__toggle" aria-pressed="false">Vis strøm</button></div><p class="stromfig__cap"></p></div>
               <p>Bruk tre forskjellige teknikker for å regne ut strømmen \(I_{R_3}\):</p>
               <ol>
                 <li>Konverter spenningskildene til strømkilder, tegn kretsen på nytt, og bruk dette til å bestemme strømmen \(I_{R_3}\).</li>
@@ -2627,5 +2686,6 @@
   <script src="../../../assets/js/status.js?v=35"></script>
   <script src="../../../assets/js/formler.js?v=35"></script>
   <script src="../../../assets/js/math.js?v=35"></script>
+  <script src="../../../assets/js/strom.js?v=2"></script>
 </body>
 </html>

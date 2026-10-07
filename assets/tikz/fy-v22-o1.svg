@@ -157,5 +157,12 @@
 <path d='M-25.70313 39.88672H-15.92188M-24.07031 41.5156H-17.55078M-22.85156 43.1484H-18.77344' stroke='currentColor' fill='none' stroke-width='1.19554' stroke-miterlimit='10'/>
 <path stroke='none' d='M139.2307 30.109374C139.2307 29.386718 138.6487 28.80469 137.9297 28.80469C137.2067 28.80469 136.6247 29.386718 136.6247 30.109374C136.6247 30.828124 137.2067 31.41016 137.9297 31.41016C138.6487 31.41016 139.2307 30.828124 139.2307 30.109374Z'/>
 <path d='M139.2307 30.109374C139.2307 29.386718 138.6487 28.80469 137.9297 28.80469C137.2067 28.80469 136.6247 29.386718 136.6247 30.109374C136.6247 30.828124 137.2067 31.41016 137.9297 31.41016C138.6487 31.41016 139.2307 30.828124 139.2307 30.109374Z' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
+<path d='M-20.8125-29.418V-54.9297H58.5586' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M58.5586 30.109374H-20.8125V4.5977' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M58.5586-54.9297V30.109374' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f02'/>
+<path d='M58.5586-54.9297H137.9297' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f02'/>
+<path d='M137.9297 30.109374H58.5586' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f02'/>
+<path d='M137.9297-54.9297V30.109374' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f03'/>
+<path d='M137.9297-54.9297H217.2967V30.109374H137.9297' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f04'/>
 </g>
 </svg>

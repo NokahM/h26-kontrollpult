@@ -11,5 +11,15 @@
 \draw (5.6,3) node[above right] {B};
 \draw (5.6,0) to[I, l=$I_2$, a=$5\,$mA, *-] (5.6,3);
 \draw (8,3) to[R, l_=$R_3$, a^=$3\kO$] (8,0) -- (0,0);
+% strøm:start (generert av strom.py, ikke rediger)
+\draw[strom, f01] (2.6,3) -- (0,3) -- (0,2.1);
+\draw[strom, f01] (0,0.9) -- (0,0) -- (2.6,0);
+\draw[strom, f02] (5.6,3) -- (2.6,3);
+\draw[strom, f02] (2.6,0) -- (5.6,0);
+\draw[strom, f03] (2.6,3) -- (2.6,0);
+\draw[strom, f04] (5.6,0.05) -- (5.6,0.9);
+\draw[strom, f04] (5.6,2.1) -- (5.6,3);
+\draw[strom, f05] (5.6,3) -- (8,3) -- (8,0) -- (5.6,0);
+% strøm:slutt
 \end{circuitikz}
 \end{document}

@@ -8,5 +8,12 @@
 \draw (3,4) to[R, l_=$R_2$, a^=$4\Om$, *-] (3,2.2) to[V, l_=$U_2$, a^=$5\,$V, invert] (3,0);
 \draw (0,4) -- (6,4) to[R, l_=$R_3$, a^=$7\Om$, f>^=$I_{R_3}$] (6,0) -- (0,0);
 \draw (3,0) node[circ] {};
+% strøm:start (generert av strom.py, ikke rediger)
+\draw[strom, f01] (0,1.7) -- (0,4) -- (3,4);
+\draw[strom, f01] (3,0) -- (0,0) -- (0,0.5);
+\draw[strom, f02] (3,4) -- (3,1.7);
+\draw[strom, f02] (3,0.5) -- (3,0);
+\draw[strom, f03] (3,4) -- (6,4) -- (6,0) -- (3,0);
+% strøm:slutt
 \end{circuitikz}
 \end{document}

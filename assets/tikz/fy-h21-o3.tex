@@ -9,5 +9,11 @@
 \draw (5.2,3) -- (6.4,3) to[R, l_=$R_3$, a^=$7\Om$, color=acc] (6.4,0) -- (0,0);
 \draw (5.2,0) node[circ] {} node[below] {$b$};
 \draw (0,0) node[ground] {};
+% strøm:start (generert av strom.py, ikke rediger)
+\draw[strom, f01] (0,2.1) -- (0,3) -- (2,3);
+\draw[strom, f01] (2,0) -- (0,0) -- (0,0.9);
+\draw[strom, f02] (2,3) -- (2,0);
+\draw[strom, f03] (2,3) -- (6.4,3) -- (6.4,0) -- (2,0);
+% strøm:slutt
 \end{circuitikz}
 \end{document}

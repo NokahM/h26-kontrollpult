@@ -14,5 +14,20 @@
 \volth{4.75}{8.5}{9.5}{$V_5$}
 \draw (10.2,3) -- (11.6,3) to[R, l^=$R_6$, a_=$10.4\kO$, i>^=$I_6$] (11.6,0) -- (0,0);
 \draw (0,0) node[ground] {};
+% strøm:start (generert av strom.py, ikke rediger)
+\draw[strom, f01] (0,2) -- (0,3) -- (2.8,3);
+\draw[strom, f01] (2.8,0) -- (0,0) -- (0,1);
+\draw[strom, f02] (2.8,3) -- (2.8,0);
+\draw[strom, f02] (4.6,3) -- (4.6,0);
+\draw[strom, f03] (2.8,3) -- (4.6,3);
+\draw[strom, f03] (4.6,0) -- (2.8,0);
+\draw[strom, f05] (4.6,3) -- (6.4,3);
+\draw[strom, f05] (6.4,0) -- (4.6,0);
+\draw[strom, f06] (6.4,3) -- (6.4,0);
+\draw[strom, f07] (6.4,3) -- (7.8,3);
+\draw[strom, f07] (10.2,3) -- (11.6,3) -- (11.6,0) -- (6.4,0);
+\draw[strom, f08] (7.8,3) -- (7.8,3.9) -- (10.2,3.9) -- (10.2,3);
+\draw[strom, f09] (7.8,3) -- (7.8,2.4) -- (10.2,2.4) -- (10.2,3);
+% strøm:slutt
 \end{circuitikz}
 \end{document}

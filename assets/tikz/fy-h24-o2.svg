@@ -126,5 +126,14 @@
 </g>
 <path d='M58.2344 58.453124V68.23437' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
 <path d='M53.3438 68.23437H63.1246M54.9727 69.8633H61.4922M56.1953 71.4922H60.2734' stroke='currentColor' fill='none' stroke-width='1.19554' stroke-miterlimit='10'/>
+<path d='M-38.144533 58.453124V-54.9294H58.2344' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M58.2344 58.453124H-38.144533' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M58.2344-54.9294V13.1016' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f02'/>
+<path d='M58.2344 47.1172V58.453124' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f02'/>
+<path d='M160.2816-54.9294H58.2344' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f03'/>
+<path d='M58.2344 58.453124H160.2816' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f03'/>
+<path d='M160.2816 58.453124V-54.9294' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f04'/>
+<path d='M160.2816 58.453124H239.6526V-9.5781' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f05'/>
+<path d='M239.6526-43.5934V-54.9294H160.2816' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f05'/>
 </g>
 </svg>

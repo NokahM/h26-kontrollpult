@@ -9,5 +9,15 @@
 \draw (3.4,5) to[I, l_={$1.25\,$A}, a^=$I_1$, *-] (3.4,3);
 \draw (0,3) -- (0,0) to[V, invert, l=$E$, a=$12.5\,$V] (3,0) to[R, l=$R_1$, a=$5\Om$] (6.4,0);
 \draw (0,0) node[ground] {};
+% strøm:start (generert av strom.py, ikke rediger)
+\draw[strom, f01] (3.4,5) -- (0,5) -- (0,3);
+\draw[strom, f02] (3.4,5) -- (3.4,4.6);
+\draw[strom, f02] (3.4,3.4) -- (3.4,3);
+\draw[strom, f03] (6.4,3) -- (6.4,5) -- (3.4,5);
+\draw[strom, f04] (3.4,3) -- (0,3);
+\draw[strom, f05] (0,3) -- (0,0) -- (0.85,0);
+\draw[strom, f05] (2.15,0) -- (6.4,0) -- (6.4,3);
+\draw[strom, f06] (3.4,3) -- (6.4,3);
+% strøm:slutt
 \end{circuitikz}
 \end{document}

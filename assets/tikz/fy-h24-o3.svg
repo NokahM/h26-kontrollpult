@@ -121,5 +121,12 @@
 <g transform='matrix(1 0 0 1 278.4634 -98.3884)'>
 <use stroke='none' x='-38.143431' y='36.293723' xlink:href='#fy-h24-o3-g0-0'/>
 </g>
+<path d='M58.2344 36.292968H-38.144533V-48.7461H-14.0469' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M17.1328-48.7461H58.2344' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M58.2344-48.7461V-23.2344' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f02'/>
+<path d='M58.2344 10.7812V36.292968' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f02'/>
+<path d='M114.9256-48.7461V36.292968H58.2344' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f03'/>
+<path d='M114.9256-48.7461H256.6606V27.78906' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f04'/>
+<path d='M58.2344-48.7461H114.9256' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f05'/>
 </g>
 </svg>

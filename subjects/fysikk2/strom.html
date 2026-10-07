@@ -7,7 +7,7 @@
   <meta name="description" content="Animerte kretser der prikker viser hvor strømmen går og hvor stor den er: strømdeling og superposisjon.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../assets/css/main.css?v=37">
+  <link rel="stylesheet" href="../../assets/css/main.css?v=38">
 </head>
 <body class="theme-fysikk2" data-updated="2026-10-07">
   <div class="app-shell">
@@ -50,7 +50,7 @@
             <p>Kretsen fra <a href="oppgaver/1-serie-parallell.html#v2026">oppgave 1, våren 2026</a>. Strømkilden sender 1.5 A inn i toppnoden. Der deler strømmen seg mellom \(R_1=3\,\Omega\) og den høyre grenen på \(6\,\Omega\), og i den høyre grenen deler den seg igjen mellom \(R_4\) og \(R_5\).</p>
           </article>
           <div class="stromfig" data-scale="30" data-modes='{"normal": {"view": "a", "i": {"f01": 1.5, "f02": 1.0, "f03": 0.5, "f04": 0.375, "f05": 0.125, "f06": 0.5}, "tekst": "1.5 A deler seg i 1.0 A gjennom R₁ og 0.5 A gjennom R₂ og R₃ (forholdet 6 : 3 er motsatt av motstandene). Ved R₄ og R₅ deler 0.5 A seg igjen i 0.375 A og 0.125 A, forholdet 12 : 4. Prikkene i R₅ går en tolvdel så fort som ved kilden."}}'>
-            <div class="stromfig__bar"><button type="button" class="stromfig__pause" aria-pressed="false">Pause</button></div>
+            <div class="stromfig__bar"><button type="button" class="stromfig__toggle" aria-pressed="true">Skjul strøm</button></div>
             <div class="stromfig__view" data-view="a"><!-- tikz:fy-anim-v26 --><svg class='tikz' role='img' aria-label='Strømkilde 1.5 A med R1 over seg og en gren med R2, R3 og R4 parallell R5. Prikker viser strømmen' style='width:34.7em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-55.044044 -68.844302 295.181923 100.553352'>
 <defs>
 <path stroke='none' id='fy-anim-v26-g0-58' d='M1.75741-.484184C1.75741-.744209 1.551183-.968369 1.273225-.968369S.789041-.744209 .789041-.484184S.995268 0 1.273225 0S1.75741-.224159 1.75741-.484184Z'/>
@@ -160,7 +160,7 @@
           <article class="prose">
             <p>Kretsen fra <a href="oppgaver/3-superposisjon.html#h2021">oppgave 2, desember 2021</a>. Bytt mellom kildene og se hvordan bidragene legger seg oppå hverandre. Følg særlig den nederste motstanden (\(I_B\)): med bare spenningskilden går strømmen mot venstre, med bare strømkilden mot høyre, og summen blir 12 mA mot venstre.</p>
           </article>
-          <div class="stromfig" data-scale="0.9" data-modes='{
+          <div class="stromfig" data-start="e" data-scale="0.9" data-modes='{
               "e": {"view": "e", "i": {"f01": 30, "f02": 50, "f03": 20, "f04": -20, "f05": 0, "f06": 30}, "tekst": "Bare spenningskilden (strømkilden er brudd): 50 mA går gjennom 600 Ω og kilden. Tilbake til venstre går 30 mA gjennom øverste 1 kΩ og 20 mA gjennom 500 Ω og nederste 1 kΩ. Nederst går strømmen mot venstre: I_B′ = −20 mA."},
               "i": {"view": "i", "i": {"f01": 3, "f02": -5, "f03": 22, "f04": 8, "f05": 30, "f06": -27}, "tekst": "Bare strømkilden (spenningskilden er kortsluttet): 30 mA inn i høyre node. 22 mA går ned gjennom 500 Ω, og 8 mA tar omveien via venstre node: 3 mA gjennom øverste 1 kΩ og 5 mA gjennom 600 Ω, mot venstre. Nederst går strømmen mot høyre: I_B″ = +8 mA."},
               "begge": {"view": "b", "i": {"f01": 33, "f02": 45, "f03": 42, "f04": -12, "f05": 30, "f06": 3}, "tekst": "Begge kildene: hver gren får summen av bidragene. I_A = 50 − 5 = 45 mA, I_B = −20 + 8 = −12 mA, og strømmen i 500 Ω er 20 + 22 = 42 mA, så U = 21 V. Grenen opp til øverste 1 kΩ får bare 30 − 27 = 3 mA, og prikkene der nesten står stille."}}'>
@@ -168,7 +168,7 @@
               <button type="button" data-mode="e">Bare 60 V</button>
               <button type="button" data-mode="i">Bare 30 mA</button>
               <button type="button" data-mode="begge">Begge</button>
-              <button type="button" class="stromfig__pause" aria-pressed="false">Pause</button>
+              <button type="button" class="stromfig__toggle" aria-pressed="true">Skjul strøm</button>
             </div>
             <div class="stromfig__view" data-view="e"><!-- tikz:fy-anim-h21-e --><svg class='tikz' role='img' aria-label='Kretsen med strømkilden åpen, prikker viser strømmen fra 60 V-kilden' style='width:27.9em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-57.0567 -69.041602 236.807882 132.009632'>
 <defs>
@@ -453,6 +453,6 @@
   <script src="../../assets/js/status.js?v=35"></script>
   <script src="../../assets/js/formler.js?v=35"></script>
   <script src="../../assets/js/math.js?v=35"></script>
-  <script src="../../assets/js/strom.js?v=1"></script>
+  <script src="../../assets/js/strom.js?v=2"></script>
 </body>
 </html>

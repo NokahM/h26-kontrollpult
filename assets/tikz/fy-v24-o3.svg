@@ -1,4 +1,4 @@
-<svg class='tikz' role='img' aria-label='To grener med E1 2 V og R1 1 ohm og med E2 1 V og R2 1 ohm går opp til en felles topp. R4 1 ohm forbinder bunnen av grenene, og en nedre sløyfe har E3 1 V og R3 1 ohm. Venstre side er jord' style='width:23.3em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-55.052946 -71.99779 198.338403 162.26345'>
+<svg class='tikz' role='img' aria-label='To grener med E1 2 V og R1 1 ohm og med E2 1 V og R2 1 ohm går opp til en felles topp. R4 1 ohm forbinder bunnen av grenene, og en nedre sløyfe har E3 1 V og R3 1 ohm. Venstre side er jord' style='width:23.3em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-55.052946 -71.99982 198.338403 162.763612'>
 <defs>
 <path stroke='none' id='fy-v24-o3-g0-0' d='M6.052304-2.0533C6.213699-2.0533 6.38406-2.0533 6.38406-2.25056C6.38406-2.438854 6.204732-2.438854 6.052304-2.438854H1.102864C.950436-2.438854 .771108-2.438854 .771108-2.25056C.771108-2.0533 .941469-2.0533 1.102864-2.0533H6.052304Z'/>
 <path stroke='none' id='fy-v24-o3-g1-82' d='M2.600249-3.640349C2.64807-3.831631 2.654047-3.843587 2.905106-3.843587H3.490909C4.088667-3.843587 4.525031-3.694147 4.525031-3.221918C4.525031-3.012702 4.435367-2.582316 4.022914-2.349191C3.789788-2.217684 3.466999-2.139975 3.060523-2.139975H2.223661L2.600249-3.640349ZM3.825654-2.032379C4.405479-2.163885 5.17061-2.570361 5.17061-3.156164C5.17061-3.652304 4.542964-4.08269 3.610461-4.08269H1.679701C1.566127-4.08269 1.476463-4.08269 1.476463-3.93325C1.476463-3.843587 1.566127-3.843587 1.673724-3.843587S1.93076-3.843587 2.056289-3.801743C2.056289-3.741968 2.056289-3.706102 2.032379-3.610461L1.249315-.496139C1.195517-.280946 1.183562-.239103 .735243-.239103C.603736-.239103 .591781-.239103 .56787-.221171C.537983-.19726 .514072-.119552 .514072-.083686C.52005-.059776 .526027 0 .615691 0C.795019 0 1.231382-.02391 1.41071-.02391C1.775342-.02391 1.3868-.02391 1.823163-.017933C1.95467-.017933 2.098132 0 2.223661 0C2.259527 0 2.30137 0 2.32528-.041843C2.337235-.059776 2.361146-.131507 2.361146-.155417C2.343213-.239103 2.289415-.239103 2.15193-.239103C2.080199-.239103 1.990535-.245081 1.924782-.251059C1.817186-.263014 1.775342-.263014 1.775342-.328767C1.775342-.352677 1.78132-.376588 1.799253-.436364L2.175841-1.942715H3.036613C3.56264-1.942715 3.825654-1.703611 3.825654-1.416687C3.825654-1.344956 3.771856-1.141719 3.73599-1.004234C3.670237-.729265 3.646326-.645579 3.646326-.537983C3.646326-.095641 4.052802 .125529 4.572852 .125529C5.134745 .125529 5.397758-.442341 5.397758-.579826C5.397758-.615691 5.36787-.669489 5.290162-.669489C5.206476-.669489 5.188543-.621669 5.176588-.579826C5.039103-.17335 4.752179-.071731 4.60274-.071731C4.441345-.071731 4.309838-.131507 4.309838-.484184C4.309838-.621669 4.351681-.950436 4.369614-1.105853C4.375592-1.165629 4.393524-1.291158 4.393524-1.338979C4.393524-1.733499 4.08269-1.942715 3.825654-2.032379Z'/>
@@ -21,113 +21,119 @@
 <path stroke='none' id='fy-v24-o3-g7-52' d='M3.073474-.811955V-1.031133H2.450809V-3.222914C2.450809-3.342466 2.445828-3.372354 2.316314-3.372354C2.216687-3.372354 2.211706-3.367372 2.156912-3.297634L.313823-1.031133V-.811955H1.972603V-.423412C1.972603-.268991 1.972603-.219178 1.539228-.219178H1.364882V0C1.599004-.009963 1.92279-.019925 2.211706-.019925S2.819427-.009963 3.058531 0V-.219178H2.884184C2.450809-.219178 2.450809-.268991 2.450809-.423412V-.811955H3.073474ZM2.012453-2.834371V-1.031133H.547945L2.012453-2.834371Z'/>
 </defs>
 <g id='fy-v24-o3-page1'>
-<path d='M-32.148438 7.668V-2.3945M-32.148438-21.9531V-32.0159V-40.7739M-32.148438-62.9419V-71.6989H120.9221' stroke='currentColor' fill='none' stroke-width='.59778'/>
-<path d='M-41.92969-12.1719C-41.92969-17.5742-37.55078-21.9531-32.148438-21.9531C-26.74609-21.9531-22.37109-17.5742-22.37109-12.1719C-22.37109-6.7734-26.74609-2.3945-32.148438-2.3945C-37.55078-2.3945-41.92969-6.7734-41.92969-12.1719Z' stroke='currentColor' fill='none' stroke-width='.71732' stroke-miterlimit='10'/>
+<path d='M-32.148438 8.168V-1.8945M-32.148438-21.457V-31.5198V-40.2778M-32.148438-62.4458V-71.2028H120.9221' stroke='currentColor' fill='none' stroke-width='.59778'/>
+<path d='M-41.92969-11.6758C-41.92969-17.0781-37.55078-21.457-32.148438-21.457C-26.74609-21.457-22.37109-17.0781-22.37109-11.6758C-22.37109-6.2734-26.74609-1.8945-32.148438-1.8945C-37.55078-1.8945-41.92969-6.2734-41.92969-11.6758Z' stroke='currentColor' fill='none' stroke-width='.71732' stroke-miterlimit='10'/>
 <g transform='matrix(-1 0 0 1 -60.4234 -76.1893)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g5-0'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g5-0'/>
 </g>
 <g transform='matrix(-1 0 0 1 -60.4234 -83.2389)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g6-43'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g6-43'/>
 </g>
 <g transform='matrix(1 0 0 1 -23.2986 -80.06)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g2-69'/>
-<use stroke='none' x='-25.367382' y='71.027349' xlink:href='#fy-v24-o3-g3-49'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g2-69'/>
+<use stroke='none' x='-25.367382' y='71.525481' xlink:href='#fy-v24-o3-g3-49'/>
 </g>
 <g transform='matrix(1 0 0 1 12.3661 -80.06)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g4-50'/>
-<use stroke='none' x='-26.005279' y='70.0311' xlink:href='#fy-v24-o3-g4-86'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g4-50'/>
+<use stroke='none' x='-26.005279' y='70.529232' xlink:href='#fy-v24-o3-g4-86'/>
 </g>
-<path d='M-32.148438-40.4179L-36.30469-42.6209L-27.99219-46.3169L-36.30469-50.0119L-27.99219-53.7069L-36.30469-57.3989L-27.99219-61.0939L-32.148438-63.3009' stroke='currentColor' fill='none' stroke-width='.71732' stroke-miterlimit='10' stroke-linejoin='bevel'/>
+<path d='M-32.148438-39.9178L-36.30469-42.1248L-27.99219-45.8208L-36.30469-49.5118L-27.99219-53.2068L-36.30469-56.9028L-27.99219-60.5978L-32.148438-62.8008' stroke='currentColor' fill='none' stroke-width='.71732' stroke-miterlimit='10' stroke-linejoin='bevel'/>
 <g transform='matrix(1 0 0 1 -17.3041 -119.7451)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g2-82'/>
-<use stroke='none' x='-25.176353' y='71.027349' xlink:href='#fy-v24-o3-g3-49'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g2-82'/>
+<use stroke='none' x='-25.176353' y='71.525481' xlink:href='#fy-v24-o3-g3-49'/>
 </g>
 <g transform='matrix(1 0 0 1 6.1805 -119.7451)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g4-49'/>
-<use stroke='none' x='-26.005279' y='70.0311' xlink:href='#fy-v24-o3-g4-10'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g4-49'/>
+<use stroke='none' x='-26.005279' y='70.529232' xlink:href='#fy-v24-o3-g4-10'/>
 </g>
-<path d='M120.9221 7.668V-2.3945M120.9221-21.9531V-32.0159V-40.7739M120.9221-62.9419V-71.6989' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
-<path d='M111.1411-12.1719C111.1411-17.5742 115.5191-21.9531 120.9221-21.9531C126.3241-21.9531 130.7031-17.5742 130.7031-12.1719C130.7031-6.7734 126.3241-2.3945 120.9221-2.3945C115.5191-2.3945 111.1411-6.7734 111.1411-12.1719Z' stroke='currentColor' fill='none' stroke-width='.71732' stroke-miterlimit='10'/>
+<path d='M120.9221 8.168V-1.8945M120.9221-21.457V-31.5198V-40.2778M120.9221-62.4458V-71.2028' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
+<path d='M111.1411-11.6758C111.1411-17.0781 115.5191-21.457 120.9221-21.457C126.3241-21.457 130.7031-17.0781 130.7031-11.6758C130.7031-6.2734 126.3241-1.8945 120.9221-1.8945C115.5191-1.8945 111.1411-6.2734 111.1411-11.6758Z' stroke='currentColor' fill='none' stroke-width='.71732' stroke-miterlimit='10'/>
 <g transform='matrix(-1 0 0 1 92.6471 -76.1893)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g5-0'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g5-0'/>
 </g>
 <g transform='matrix(-1 0 0 1 92.6471 -83.2389)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g6-43'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g6-43'/>
 </g>
 <g transform='matrix(1 0 0 1 165.4369 -80.06)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g2-69'/>
-<use stroke='none' x='-25.367382' y='71.027349' xlink:href='#fy-v24-o3-g3-50'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g2-69'/>
+<use stroke='none' x='-25.367382' y='71.525481' xlink:href='#fy-v24-o3-g3-50'/>
 </g>
 <g transform='matrix(1 0 0 1 127.6508 -80.06)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g4-49'/>
-<use stroke='none' x='-26.005279' y='70.0311' xlink:href='#fy-v24-o3-g4-86'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g4-49'/>
+<use stroke='none' x='-26.005279' y='70.529232' xlink:href='#fy-v24-o3-g4-86'/>
 </g>
-<path d='M120.9221-40.4179L116.7661-42.6209L125.0781-46.3169L116.7661-50.0119L125.0781-53.7069L116.7661-57.3989L125.0781-61.0939L120.9221-63.3009' stroke='currentColor' fill='none' stroke-width='.71732' stroke-miterlimit='10' stroke-linejoin='bevel'/>
+<path d='M120.9221-39.9178L116.7661-42.1248L125.0781-45.8208L116.7661-49.5118L125.0781-53.2068L116.7661-56.9028L125.0781-60.5978L120.9221-62.8008' stroke='currentColor' fill='none' stroke-width='.71732' stroke-miterlimit='10' stroke-linejoin='bevel'/>
 <g transform='matrix(1 0 0 1 159.2509 -119.7451)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g2-82'/>
-<use stroke='none' x='-25.176353' y='71.027349' xlink:href='#fy-v24-o3-g3-50'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g2-82'/>
+<use stroke='none' x='-25.176353' y='71.525481' xlink:href='#fy-v24-o3-g3-50'/>
 </g>
 <g transform='matrix(1 0 0 1 134.0909 -119.7451)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g4-49'/>
-<use stroke='none' x='-26.005279' y='70.0311' xlink:href='#fy-v24-o3-g4-10'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g4-49'/>
+<use stroke='none' x='-26.005279' y='70.529232' xlink:href='#fy-v24-o3-g4-10'/>
 </g>
-<path d='M120.9221 7.668H55.4687M33.3047 7.668H-32.148438' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
-<path d='M55.8281 7.668L53.6211 11.8242L49.9297 3.5117L46.2344 11.8242L42.5391 3.5117L38.8437 11.8242L35.1484 3.5117L32.9453 7.668' stroke='currentColor' fill='none' stroke-width='.71732' stroke-miterlimit='10' stroke-linejoin='bevel'/>
-<path stroke='none' d='M122.2261 7.668C122.2261 6.9492 121.6411 6.3672 120.9221 6.3672S119.6171 6.9492 119.6171 7.668C119.6171 8.3906 120.2031 8.9727 120.9221 8.9727S122.2261 8.3906 122.2261 7.668Z'/>
-<path d='M122.2261 7.668C122.2261 6.9492 121.6411 6.3672 120.9221 6.3672S119.6171 6.9492 119.6171 7.668C119.6171 8.3906 120.2031 8.9727 120.9221 8.9727S122.2261 8.3906 122.2261 7.668Z' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
-<path stroke='none' d='M-30.84375 7.668C-30.84375 6.9492-31.429688 6.3672-32.148438 6.3672C-32.867188 6.3672-33.45313 6.9492-33.45313 7.668C-33.45313 8.3906-32.867188 8.9727-32.148438 8.9727C-31.429688 8.9727-30.84375 8.3906-30.84375 7.668Z'/>
-<path d='M-30.84375 7.668C-30.84375 6.9492-31.429688 6.3672-32.148438 6.3672C-32.867188 6.3672-33.45313 6.9492-33.45313 7.668C-33.45313 8.3906-32.867188 8.9727-32.148438 8.9727C-31.429688 8.9727-30.84375 8.3906-30.84375 7.668Z' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
+<path d='M120.9221 8.168H55.4687M33.3047 8.168H-32.148438' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
+<path d='M55.8281 8.168L53.6211 12.3242L49.9297 4.0117L46.2344 12.3242L42.5391 4.0117L38.8437 12.3242L35.1484 4.0117L32.9453 8.168' stroke='currentColor' fill='none' stroke-width='.71732' stroke-miterlimit='10' stroke-linejoin='bevel'/>
+<path stroke='none' d='M122.2261 8.168C122.2261 7.4453 121.6411 6.8633 120.9221 6.8633S119.6171 7.4453 119.6171 8.168C119.6171 8.8867 120.2031 9.4727 120.9221 9.4727S122.2261 8.8867 122.2261 8.168Z'/>
+<path d='M122.2261 8.168C122.2261 7.4453 121.6411 6.8633 120.9221 6.8633S119.6171 7.4453 119.6171 8.168C119.6171 8.8867 120.2031 9.4727 120.9221 9.4727S122.2261 8.8867 122.2261 8.168Z' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
+<path stroke='none' d='M-30.84375 8.168C-30.84375 7.4453-31.429688 6.8633-32.148438 6.8633C-32.867188 6.8633-33.45313 7.4453-33.45313 8.168C-33.45313 8.8867-32.867188 9.4727-32.148438 9.4727C-31.429688 9.4727-30.84375 8.8867-30.84375 8.168Z'/>
+<path d='M-30.84375 8.168C-30.84375 7.4453-31.429688 6.8633-32.148438 6.8633C-32.867188 6.8633-33.45313 7.4453-33.45313 8.168C-33.45313 8.8867-32.867188 9.4727-32.148438 9.4727C-31.429688 9.4727-30.84375 8.8867-30.84375 8.168Z' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
 <g transform='matrix(1 0 0 1 61.7582 -70.151171)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g2-82'/>
-<use stroke='none' x='-25.176353' y='71.027349' xlink:href='#fy-v24-o3-g3-52'/>
-<use stroke='none' x='-21.025309' y='70.0311' xlink:href='#fy-v24-o3-g4-44'/>
-<use stroke='none' x='-15.393687' y='70.0311' xlink:href='#fy-v24-o3-g4-49'/>
-<use stroke='none' x='-9.250099' y='70.0311' xlink:href='#fy-v24-o3-g4-10'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g2-82'/>
+<use stroke='none' x='-25.176353' y='71.525481' xlink:href='#fy-v24-o3-g3-52'/>
+<use stroke='none' x='-21.025309' y='70.529232' xlink:href='#fy-v24-o3-g4-44'/>
+<use stroke='none' x='-15.393687' y='70.529232' xlink:href='#fy-v24-o3-g4-49'/>
+<use stroke='none' x='-9.250099' y='70.529232' xlink:href='#fy-v24-o3-g4-10'/>
 </g>
-<path stroke='none' d='M90.2691 7.668V5.2969L85.2301 7.668L90.2691 10.0391Z'/>
-<path d='M90.2691 7.668V5.2969L85.2301 7.668L90.2691 10.0391Z' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
+<path stroke='none' d='M90.2691 8.168V5.7969L85.2301 8.168L90.2691 10.5391Z'/>
+<path d='M90.2691 8.168V5.7969L85.2301 8.168L90.2691 10.5391Z' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
 <g transform='matrix(1 0 0 1 113.3814 -68.12905)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g2-73'/>
-<use stroke='none' x='-28.120591' y='71.027394' xlink:href='#fy-v24-o3-g1-82'/>
-<use stroke='none' x='-22.608484' y='72.17864' xlink:href='#fy-v24-o3-g7-52'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g2-73'/>
+<use stroke='none' x='-28.120591' y='71.525526' xlink:href='#fy-v24-o3-g1-82'/>
+<use stroke='none' x='-22.608484' y='72.676772' xlink:href='#fy-v24-o3-g7-52'/>
 </g>
 <g transform='matrix(1 0 0 1 50.2743 -47.3647)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g0-0'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g0-0'/>
 </g>
 <g transform='matrix(1 0 0 1 95.6288 -47.3647)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g4-43'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g4-43'/>
 </g>
 <g transform='matrix(1 0 0 1 68.4521 -47.6166)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g2-85'/>
-<use stroke='none' x='-25.880879' y='71.027394' xlink:href='#fy-v24-o3-g1-82'/>
-<use stroke='none' x='-20.368771' y='72.17864' xlink:href='#fy-v24-o3-g7-52'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g2-85'/>
+<use stroke='none' x='-25.880879' y='71.525526' xlink:href='#fy-v24-o3-g1-82'/>
+<use stroke='none' x='-20.368771' y='72.676772' xlink:href='#fy-v24-o3-g7-52'/>
 </g>
-<path d='M-32.148438 7.668V70.031253H-5.0781M14.4805 70.031253H41.5508H70.1521M92.3201 70.031253H120.9221V7.668' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
-<path d='M4.7031 60.25C10.1016 60.25 14.4805 64.62891 14.4805 70.031253C14.4805 75.4336 10.1016 79.8125 4.7031 79.8125C-.6992 79.8125-5.0781 75.4336-5.0781 70.031253C-5.0781 64.62891-.6992 60.25 4.7031 60.25Z' stroke='currentColor' fill='none' stroke-width='.71732' stroke-miterlimit='10'/>
-<g transform='matrix(0 -1 -1 0 68.71722 41.7566)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g5-0'/>
+<path d='M-32.148438 8.168V70.527346H-5.0781M14.4805 70.527346H41.5508H70.1521M92.3201 70.527346H120.9221V8.168' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
+<path d='M4.7031 60.75C10.1016 60.75 14.4805 65.12891 14.4805 70.527346C14.4805 75.92969 10.1016 80.3086 4.7031 80.3086C-.6992 80.3086-5.0781 75.92969-5.0781 70.527346C-5.0781 65.12891-.6992 60.75 4.7031 60.75Z' stroke='currentColor' fill='none' stroke-width='.71732' stroke-miterlimit='10'/>
+<g transform='matrix(0 -1 -1 0 69.21532 42.2547)'>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g5-0'/>
 </g>
-<g transform='matrix(0 -1 -1 0 75.76678 41.7566)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g6-43'/>
+<g transform='matrix(0 -1 -1 0 76.26488 42.2547)'>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g6-43'/>
 </g>
 <g transform='matrix(1 0 0 1 31.384221 -13.9747)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g2-69'/>
-<use stroke='none' x='-25.367382' y='71.027349' xlink:href='#fy-v24-o3-g3-51'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g2-69'/>
+<use stroke='none' x='-25.367382' y='71.525481' xlink:href='#fy-v24-o3-g3-51'/>
 </g>
 <g transform='matrix(1 0 0 1 30.32361 20.0373)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g4-49'/>
-<use stroke='none' x='-26.005279' y='70.0311' xlink:href='#fy-v24-o3-g4-86'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g4-49'/>
+<use stroke='none' x='-26.005279' y='70.529232' xlink:href='#fy-v24-o3-g4-86'/>
 </g>
-<path d='M69.7931 70.031253L72.0001 65.875L75.6951 74.1875L79.3911 65.875L83.0861 74.1875L86.7771 65.875L90.4731 74.1875L92.6801 70.031253' stroke='currentColor' fill='none' stroke-width='.71732' stroke-miterlimit='10' stroke-linejoin='bevel'/>
+<path d='M69.7931 70.527346L72.0001 66.3711L75.6951 74.6836L79.3911 66.3711L83.0861 74.6836L86.7771 66.3711L90.4731 74.6836L92.6801 70.527346' stroke='currentColor' fill='none' stroke-width='.71732' stroke-miterlimit='10' stroke-linejoin='bevel'/>
 <g transform='matrix(1 0 0 1 107.824 -7.7891)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g2-82'/>
-<use stroke='none' x='-25.176353' y='71.027349' xlink:href='#fy-v24-o3-g3-51'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g2-82'/>
+<use stroke='none' x='-25.176353' y='71.525481' xlink:href='#fy-v24-o3-g3-51'/>
 </g>
 <g transform='matrix(1 0 0 1 106.9862 13.8517)'>
-<use stroke='none' x='-32.148866' y='70.0311' xlink:href='#fy-v24-o3-g4-49'/>
-<use stroke='none' x='-26.005279' y='70.0311' xlink:href='#fy-v24-o3-g4-10'/>
+<use stroke='none' x='-32.148866' y='70.529232' xlink:href='#fy-v24-o3-g4-49'/>
+<use stroke='none' x='-26.005279' y='70.529232' xlink:href='#fy-v24-o3-g4-10'/>
 </g>
-<path d='M-32.148438 70.031253V79.8086' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
-<path d='M-37.03906 79.8086H-27.25781M-35.41016 81.4414H-28.89063M-34.1875 83.0703H-30.11328' stroke='currentColor' fill='none' stroke-width='1.19554' stroke-miterlimit='10'/>
+<path d='M-32.148438 70.527346V80.3086' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
+<path d='M-37.03906 80.3086H-27.25781M-35.41016 81.9375H-28.89063M-34.1875 83.5703H-30.11328' stroke='currentColor' fill='none' stroke-width='1.19554' stroke-miterlimit='10'/>
+<path d='M-32.148438 8.168V5.332' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M-32.148438-28.6836V-71.2028H120.9221V-28.6836' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M120.9221 5.332V8.168' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M120.9221 8.168H-32.148438' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f02'/>
+<path d='M-32.148438 8.168V70.527346H-12.3047' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f03'/>
+<path d='M21.7109 70.527346H120.9221V8.168' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f03'/>
 </g>
 </svg>

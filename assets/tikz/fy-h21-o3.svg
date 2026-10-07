@@ -73,5 +73,9 @@
 </g>
 <path d='M-8.402344 30.109374V39.88672' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
 <path d='M-13.29297 39.88672H-3.51172M-11.66406 41.5156H-5.14453M-10.44141 43.1484H-6.36719' stroke='currentColor' fill='none' stroke-width='1.19554' stroke-miterlimit='10'/>
+<path d='M-8.402344-29.418V-54.9297H48.28905' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M48.28905 30.109374H-8.402344V4.5977' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M48.28905-54.9297V30.109374' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f02'/>
+<path d='M48.28905-54.9297H173.01535V30.109374H48.28905' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f03'/>
 </g>
 </svg>

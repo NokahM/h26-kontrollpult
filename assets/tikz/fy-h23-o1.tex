@@ -13,5 +13,15 @@
 \draw (7.2,3) to[short, *-, i=$I_{R_5}$] (7.6,3) to[R, l=$R_5$, a=$7.0\Om$] (9.7,3);
 \draw (7.2,3) -- (7.2,1.4) to[R, l=$R_6$, a=$12.0\Om$] (9.7,1.4) -- (9.7,3) node[circ] {};
 \draw (9.7,1.4) -- (9.7,0) -- (0,0);
+% strøm:start (generert av strom.py, ikke rediger)
+\draw[strom, f01] (0,2.1) -- (0,3) -- (1,3);
+\draw[strom, f01] (3.5,3) -- (7.2,3);
+\draw[strom, f01] (9.7,3) -- (9.7,0) -- (0,0) -- (0,0.9);
+\draw[strom, f02] (1,3) -- (1,4.6) -- (3.5,4.6) -- (3.5,3);
+\draw[strom, f03] (1,3) -- (3.5,3);
+\draw[strom, f04] (7.2,3) -- (7.2,4.6) -- (9.7,4.6) -- (9.7,3);
+\draw[strom, f05] (7.2,3) -- (9.7,3);
+\draw[strom, f06] (7.2,3) -- (7.2,1.4) -- (9.7,1.4) -- (9.7,3);
+% strøm:slutt
 \end{circuitikz}
 \end{document}

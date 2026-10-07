@@ -11,5 +11,11 @@
 \draw (7,0) node[ocirc] {} node[right] {$B$};
 \node[text=acc] at (7.3,1.5) {$R_L$};
 \draw (0,0) node[ground] {};
+% strøm:start (generert av strom.py, ikke rediger)
+\draw[strom, f01] (2.6,0.05) -- (2.6,0.9);
+\draw[strom, f01] (2.6,2.1) -- (2.6,3);
+\draw[strom, f02] (2.6,3) -- (0,3) -- (0,0) -- (2.6,0);
+\draw[strom, f03] (2.6,3) -- (5,3) -- (5,0) -- (2.6,0);
+% strøm:slutt
 \end{circuitikz}
 \end{document}

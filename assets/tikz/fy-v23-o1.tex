@@ -9,5 +9,14 @@
 \draw (2,3) to[R, l_=$R_1$, a^=$10\Om$] (2,0) node[circ] {};
 \draw (5,3) to[R, l_=$R_3$, a^=$7\Om$] (5,0) node[circ] {};
 \volt{3.85}{2.15}{0.75}{$U_{R_3}$}
+% strøm:start (generert av strom.py, ikke rediger)
+\draw[strom, f01] (0,2.1) -- (0,3) -- (2,3);
+\draw[strom, f01] (2,0) -- (0,0) -- (0,0.9);
+\draw[strom, f02] (2,3) -- (2,0);
+\draw[strom, f03] (2,3) -- (5,3);
+\draw[strom, f03] (5,0) -- (2,0);
+\draw[strom, f04] (5,3) -- (5,0);
+\draw[strom, f05] (5,3) -- (8,3) -- (8,0) -- (5,0);
+% strøm:slutt
 \end{circuitikz}
 \end{document}

@@ -12,5 +12,12 @@
 \draw (0,0) -- (5.6,0) node[circ] {} to[short, -o] (7.4,0);
 \draw (2.9,0) node[ground] {};
 \volt{7.4}{2.9}{0.7}{$U_o$}
+% strøm:start (generert av strom.py, ikke rediger)
+\draw[strom, f01] (0,2.45) -- (0,3.6) -- (2.9,3.6);
+\draw[strom, f01] (2.9,0) -- (0,0) -- (0,1.15);
+\draw[strom, f02] (2.9,3.6) -- (2.9,0);
+\draw[strom, f03] (2.9,3.6) -- (5.6,3.6) -- (5.6,1.5);
+\draw[strom, f03] (5.6,0.3) -- (5.6,0) -- (2.9,0);
+% strøm:slutt
 \end{circuitikz}
 \end{document}

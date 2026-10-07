@@ -120,5 +120,13 @@
 <path stroke='none' d='M127.8941 30.109374C127.8941 29.386718 127.3121 28.80469 126.5901 28.80469C125.8711 28.80469 125.2891 29.386718 125.2891 30.109374C125.2891 30.828124 125.8711 31.41016 126.5901 31.41016C127.3121 31.41016 127.8941 30.828124 127.8941 30.109374Z'/>
 <path d='M127.8941 30.109374C127.8941 29.386718 127.3121 28.80469 126.5901 28.80469C125.8711 28.80469 125.2891 29.386718 125.2891 30.109374C125.2891 30.828124 125.8711 31.41016 126.5901 31.41016C127.3121 31.41016 127.8941 30.828124 127.8941 30.109374Z' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
 <path d='M-32.148438 30.109374H205.9611' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
+<path d='M-32.148438-29.418V-54.9297H47.2227' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M47.2227 30.109374H-32.148438V4.5977' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M47.2227-54.9297V30.109374' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f02'/>
+<path d='M47.2227-54.9297H126.5901' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f03'/>
+<path d='M126.5901 30.109374H47.2227' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f03'/>
+<path d='M126.5901-54.9297V30.109374' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f04'/>
+<path d='M205.9611-29.418V-54.9297H126.5901' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f05'/>
+<path d='M126.5901 30.109374H205.9611V4.5977' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f05'/>
 </g>
 </svg>

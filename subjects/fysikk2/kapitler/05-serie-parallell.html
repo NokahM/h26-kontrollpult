@@ -7,7 +7,7 @@
   <meta name="description" content="Forenkling av sammensatte kretser, spenningsdeler med last, måleinstrumenter og Δ-Y-omforming.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../../assets/css/main.css?v=37">
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=38">
 </head>
 <body class="theme-fysikk2" data-updated="2026-10-07">
   <div class="app-shell">
@@ -41,7 +41,7 @@
         <article class="prose">
 <h2>Forenkle innenfra og ut</h2>
 <p>En serie-parallellkrets løses ved å slå sammen det som er i serie eller i parallell, lengst unna kilden først, og tegne kretsen på nytt for hvert steg. Når \(R_T\) er funnet, regner du deg tilbake ut med Ohms lov, strømdeling og spenningsdeling.</p>
-<!-- tikz:fy-v22-o1 --><svg class='tikz' role='img' aria-label='Stigekrets: 240 V, R1 3 ohm og R2 5 ohm i serie med kilden, R3 4 ohm, R4 2 ohm, R5 6 ohm, R6 1 ohm, R7 2 ohm' style='width:34.2em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-54.990204 -68.844302 290.843434 113.001395'>
+<div class="stromfig" data-fig="fy-v22-o1" data-hidden data-scale="1.875" data-modes='{"a": {"view": "a", "i": {"f01": 24, "f02": 12, "f03": 4, "f04": 8}, "tekst": "R₁ og R₂ 24 A, R₃ og R₄ (hver) 12 A, R₅ 4 A, R₆ og R₇ 8 A. Farten er proporsjonal med strømmen."}}'><div class="stromfig__view" data-view="a"><!-- tikz:fy-v22-o1 --><svg class='tikz' role='img' aria-label='Stigekrets: 240 V, R1 3 ohm og R2 5 ohm i serie med kilden, R3 4 ohm, R4 2 ohm, R5 6 ohm, R6 1 ohm, R7 2 ohm' style='width:34.2em' fill='currentColor' stroke='currentColor' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='-54.990204 -68.844302 290.843434 113.001395'>
 <defs>
 <path stroke='none' id='fy-v22-o1-g0-0' d='M6.052304-2.0533C6.213699-2.0533 6.38406-2.0533 6.38406-2.25056C6.38406-2.438854 6.204732-2.438854 6.052304-2.438854H1.102864C.950436-2.438854 .771108-2.438854 .771108-2.25056C.771108-2.0533 .941469-2.0533 1.102864-2.0533H6.052304Z'/>
 <path stroke='none' id='fy-v22-o1-g1-73' d='M3.416189-5.424658C3.505853-5.76538 3.523786-5.846077 4.250062-5.846077C4.420423-5.846077 4.510087-5.846077 4.510087-6.007472C4.510087-6.106102 4.420423-6.124035 4.366625-6.124035C4.187298-6.124035 3.981071-6.106102 3.801743-6.106102C3.595517-6.106102 3.254795-6.097136 3.19203-6.097136C2.985803-6.097136 2.779577-6.106102 2.57335-6.106102C2.385056-6.106102 2.169863-6.124035 1.990535-6.124035C1.936737-6.124035 1.811208-6.124035 1.811208-5.96264C1.811208-5.846077 1.900872-5.846077 2.080199-5.846077C2.27746-5.846077 2.483686-5.846077 2.663014-5.774346C2.67198-5.738481 2.67198-5.702615 2.67198-5.693649C2.67198-5.657783 2.663014-5.559153 2.654047-5.523288L1.43462-.681445C1.353923-.367621 1.33599-.277958 .645579-.277958C.448319-.277958 .349689-.277958 .349689-.116563C.349689-.071731 .367621 0 .484184 0C.663512 0 .860772-.017933 1.049066-.017933C1.255293-.017933 1.461519-.026899 1.667746-.026899S2.080199-.017933 2.286426-.017933C2.47472-.017933 2.689913 0 2.86924 0C2.932005 0 3.048568 0 3.048568-.161395C3.048568-.277958 2.958904-.277958 2.779577-.277958C2.438854-.277958 2.178829-.277958 2.178829-.439352C2.178829-.502117 2.178829-.52005 2.214695-.645579L3.416189-5.424658Z'/>
@@ -200,8 +200,15 @@
 <path d='M-25.70313 39.88672H-15.92188M-24.07031 41.5156H-17.55078M-22.85156 43.1484H-18.77344' stroke='currentColor' fill='none' stroke-width='1.19554' stroke-miterlimit='10'/>
 <path stroke='none' d='M139.2307 30.109374C139.2307 29.386718 138.6487 28.80469 137.9297 28.80469C137.2067 28.80469 136.6247 29.386718 136.6247 30.109374C136.6247 30.828124 137.2067 31.41016 137.9297 31.41016C138.6487 31.41016 139.2307 30.828124 139.2307 30.109374Z'/>
 <path d='M139.2307 30.109374C139.2307 29.386718 138.6487 28.80469 137.9297 28.80469C137.2067 28.80469 136.6247 29.386718 136.6247 30.109374C136.6247 30.828124 137.2067 31.41016 137.9297 31.41016C138.6487 31.41016 139.2307 30.828124 139.2307 30.109374Z' stroke='currentColor' fill='none' stroke-width='.59778' stroke-miterlimit='10'/>
+<path d='M-20.8125-29.418V-54.9297H58.5586' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M58.5586 30.109374H-20.8125V4.5977' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f01'/>
+<path d='M58.5586-54.9297V30.109374' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f02'/>
+<path d='M58.5586-54.9297H137.9297' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f02'/>
+<path d='M137.9297 30.109374H58.5586' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f02'/>
+<path d='M137.9297-54.9297V30.109374' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f03'/>
+<path d='M137.9297-54.9297H217.2967V30.109374H137.9297' fill='none' stroke-width='1.59404' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round' style='stroke:var(--accent)' class='flow f04'/>
 </g>
-</svg><!-- /tikz:fy-v22-o1 -->
+</svg><!-- /tikz:fy-v22-o1 --></div><div class="stromfig__bar"><button type="button" class="stromfig__toggle" aria-pressed="false">Vis strøm</button></div><p class="stromfig__cap"></p></div>
 <p>Stigen over (mars 2022) forenkles fra høyre: \(R'=R_5\parallel(R_6+R_7)=6\parallel 3=2\,\Omega\), så \(R''=R_3\parallel(R_4+R')=4\parallel 4=2\,\Omega\), og til slutt \(R_T=R_1+R_2+R''=10\,\Omega\).</p>
 <div class="pitfall"><div class="pitfall__title">Fallgruve: hva er i serie?</div><p>To elementer er i serie bare hvis ingen annen gren går ut fra punktet mellom dem. To elementer er i parallell bare hvis begge endene ligger på de samme to nodene. Tegn nodene med prikk før du slår sammen.</p></div>
 
@@ -237,5 +244,6 @@
   <script src="../../../assets/js/status.js?v=35"></script>
   <script src="../../../assets/js/formler.js?v=35"></script>
   <script src="../../../assets/js/math.js?v=35"></script>
+  <script src="../../../assets/js/strom.js?v=2"></script>
 </body>
 </html>

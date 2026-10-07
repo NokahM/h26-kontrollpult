@@ -12,5 +12,14 @@
 \volt{1.65}{2.15}{0.75}{$V_3$} \volt{4.45}{2.15}{0.75}{$V_5$} \volt{7.25}{2.15}{0.75}{$V_7$}
 \draw (8.4,0) -- (2.8,0) to[R, l_=$R_2$, a^=$5\Om$, *-] (0,0) node[ground] {};
 \draw (5.6,0) node[circ] {};
+% strøm:start (generert av strom.py, ikke rediger)
+\draw[strom, f01] (0,2.1) -- (0,3) -- (2.8,3);
+\draw[strom, f01] (2.8,0) -- (0,0) -- (0,0.9);
+\draw[strom, f02] (2.8,3) -- (2.8,0);
+\draw[strom, f02] (2.8,3) -- (5.6,3);
+\draw[strom, f02] (5.6,0) -- (2.8,0);
+\draw[strom, f03] (5.6,3) -- (5.6,0);
+\draw[strom, f04] (5.6,3) -- (8.4,3) -- (8.4,0) -- (5.6,0);
+% strøm:slutt
 \end{circuitikz}
 \end{document}

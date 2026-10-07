@@ -10,5 +10,15 @@
 \draw (4.6,3) node[above right] {B} to[R, l_=$90\Om$, -*] (4.6,0);
 \draw (7.2,0) to[I, l_={$100\,$mA}] (7.2,3);
 \draw (0,0) -- (4.6,0) to[R, l_=$40\Om$] (7.2,0);
+% strøm:start (generert av strom.py, ikke rediger)
+\draw[strom, f01] (0,2.1) -- (0,3) -- (2,3);
+\draw[strom, f01] (2,0) -- (0,0) -- (0,0.9);
+\draw[strom, f02] (2,3) -- (2,0);
+\draw[strom, f03] (2,3) -- (4.6,3);
+\draw[strom, f03] (4.6,0) -- (2,0);
+\draw[strom, f04] (4.6,3) -- (4.6,0);
+\draw[strom, f05] (4.6,0) -- (7.2,0) -- (7.2,0.9);
+\draw[strom, f05] (7.2,2.1) -- (7.2,3) -- (4.6,3);
+% strøm:slutt
 \end{circuitikz}
 \end{document}

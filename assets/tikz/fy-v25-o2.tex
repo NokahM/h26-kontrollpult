@@ -10,5 +10,15 @@
 \draw (5.4,3) to[R, l_=$R_3$, a^=$2.0\Om$, *-*] (5.4,0);
 \draw (8.4,0) to[I, l_=$I_2$, a^=$0.50\,$A] (8.4,3);
 \draw (2.4,0) node[ground] {};
+% strøm:start (generert av strom.py, ikke rediger)
+\draw[strom, f01] (2.4,3) -- (0,3) -- (0,2.1);
+\draw[strom, f01] (0,0.9) -- (0,0) -- (2.4,0);
+\draw[strom, f02] (2.4,3) -- (2.4,0);
+\draw[strom, f03] (5.4,3) -- (2.4,3);
+\draw[strom, f03] (2.4,0) -- (5.4,0);
+\draw[strom, f05] (5.4,3) -- (5.4,0);
+\draw[strom, f06] (5.4,0) -- (8.4,0) -- (8.4,0.9);
+\draw[strom, f06] (8.4,2.1) -- (8.4,3) -- (5.4,3);
+% strøm:slutt
 \end{circuitikz}
 \end{document}
