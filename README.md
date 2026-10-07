@@ -98,7 +98,9 @@ forelesning (12, `track: 'page'`), med lenke til forelesnings- og lab-PDF-en.
 D maske/knutepunkt, E transienter). `subjects/fysikk2/eksamen/` har
 eksamensoversikt, prioritering og huskelappen: et forslag til det tosidige
 A4-arket, som skrives ut som nøyaktig to sider (`.a4` og `@media print` i
-`main.css`). Formelpanelet ligger i `subjects/fysikk2/formler.html`.
+`main.css`). Formelpanelet ligger i `subjects/fysikk2/formler.html`. `subjects/fysikk2/kompendium.html` er en veiviser til
+labheftet (`pb1120-digital-normal.pdf`), med sidelenker inn i PDF-en og oppgavene
+merket etter eksamensrelevans.
 
 Kretsskjemaene er tegnet med CircuiTikZ. Felles oppsett og konvensjoner står i
 `assets/tikz/krets.tex`, og hver figur er en `fy-*.tex`. De bygges med samme
