@@ -118,7 +118,8 @@
           { title: 'Eksamensoversikt', part: 'Eksamensforberedelse', href: 'subjects/fysikk2/eksamen/oversikt.html' },
           { title: 'Prioritering', part: 'Eksamensforberedelse', href: 'subjects/fysikk2/eksamen/prioritering.html' },
           { title: 'Huskelappen (A4-arket)', part: 'Eksamensforberedelse', href: 'subjects/fysikk2/eksamen/huskelapp.html' },
-          { title: 'Kompendiet', part: 'Kursmateriell', href: 'subjects/fysikk2/kompendium.html' }
+          { title: 'Kompendiet', part: 'Kursmateriell', href: 'subjects/fysikk2/kompendium.html' },
+          { title: 'Se strømmen', part: 'Animasjoner', href: 'subjects/fysikk2/strom.html' }
         ] },
         // I samme rekkefølge som oppgavene står i settene: O1 er alltid serie-parallell,
         // O4 er alltid transient. O2 og O3 bytter på de tre metodetypene i midten.

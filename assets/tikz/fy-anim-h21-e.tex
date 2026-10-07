@@ -1,0 +1,19 @@
+% Animasjon: H2021 O2, bare spenningskilden.
+% alt: Kretsen med strømkilden åpen, prikker viser strømmen fra 60 V-kilden
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,0) -- (0,4) to[R, l=$1\kO$, *-] (5.4,4);
+\draw (0,2.2) node[circ] {} to[R, l=$600\Om$] (2.6,2.2) to[V, invert, l=$60\,$V] (5.4,2.2);
+\draw (5.4,4) -- (5.4,2.2) node[circ] {} to[R, l_=$500\Om$] (5.4,0);
+\draw (0,0) to[R, l=$1\kO$] (5.4,0) node[circ] {};
+\draw (5.4,4) -- (7.4,4) to[short, -o] (7.4,2.6); \draw (5.4,0) -- (7.4,0) to[short, -o] (7.4,1.4);
+\node[text=acc, right] at (7.5,2) {åpen};
+\draw[strom, f01] (5.4,4) -- (0,4) -- (0,2.2);
+\draw[strom, f02] (0,2.2) -- (3.45,2.2); \draw[strom, f02] (4.55,2.2) -- (5.4,2.2);
+\draw[strom, f03] (5.4,2.2) -- (5.4,0);
+\draw[strom, f04] (0,2.2) -- (0,0) -- (5.4,0);
+\draw[strom, f06] (5.4,2.2) -- (5.4,4);
+\end{circuitikz}
+\end{document}
