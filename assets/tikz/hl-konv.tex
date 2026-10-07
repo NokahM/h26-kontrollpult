@@ -1,0 +1,16 @@
+% Huskelapp: kildekonvertering.
+% alt: Spenningskilde E i serie med R er ekvivalent med strømkilde E delt på R parallelt med R
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,0) to[V, invert, l=$E$] (0,2) to[R, l=$R$] (2.2,2) to[short, -o] (2.6,2);
+\draw (0,0) to[short, -o] (2.6,0);
+\node at (3.15,1) {$\Longleftrightarrow$};
+\begin{scope}[xshift=4.9cm]
+\draw (0,0) to[I, l=$E/R$] (0,2) -- (1.4,2) to[short, -o] (2.1,2);
+\draw (1.4,2) to[R, l_=$R$, *-*] (1.4,0);
+\draw (0,0) to[short, -o] (2.1,0);
+\end{scope}
+\end{circuitikz}
+\end{document}

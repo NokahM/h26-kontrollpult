@@ -1,0 +1,15 @@
+% Huskelapp: Thévenin- og Norton-ekvivalent med last.
+% alt: Thévenin: ETh i serie med RTh til terminal a, last RL mellom a og b. Norton: IN parallelt med RN og RL
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\draw (0,0) to[V, invert, l=$E_{Th}$] (0,2) to[R, l=$R_{Th}$] (2.2,2) to[short, -o] (2.6,2) node[above] {$a$} -- (3.3,2)
+  to[R, l_=$R_L$, color=acc] (3.3,0) -- (2.6,0) node[ocirc] {} node[below] {$b$} -- (0,0);
+\begin{scope}[xshift=4.6cm]
+\draw (0,0) to[I, l=$I_N$] (0,2) -- (1.4,2) to[short, -o] (2.1,2) node[above] {$a$} -- (2.8,2)
+  to[R, l_=$R_L$, color=acc] (2.8,0) -- (2.1,0) node[ocirc] {} node[below] {$b$} -- (0,0);
+\draw (1.4,2) to[R, l_=$R_N$, *-*] (1.4,0);
+\end{scope}
+\end{circuitikz}
+\end{document}

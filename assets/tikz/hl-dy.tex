@@ -1,0 +1,17 @@
+% Huskelapp: Delta-Y-omforming.
+% alt: Trekant med motstandene Rab, Rbc og Rac mellom hjørnene a, b og c, og stjerne med Ra, Rb og Rc fra et midtpunkt til hjørnene
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{circuitikz}
+\coordinate (a) at (1.2,2); \coordinate (b) at (0,0); \coordinate (c) at (2.4,0);
+\draw (a) to[R, l_=$R_{ab}$, *-*] (b) to[R, l_=$R_{bc}$, -*] (c) to[R, l_=$R_{ac}$] (a);
+\node[above] at (a) {$a$}; \node[left] at (b) {$b$}; \node[right] at (c) {$c$};
+\node at (3.25,1) {$\Rightarrow$};
+\begin{scope}[xshift=4.1cm]
+\coordinate (a) at (1.2,2); \coordinate (b) at (0,0); \coordinate (c) at (2.4,0); \coordinate (s) at (1.2,0.75);
+\draw (s) to[R, l_=$R_a$, *-o] (a); \draw (s) to[R, l=$R_b$, -o] (b); \draw (s) to[R, l_=$R_c$, -o] (c);
+\node[above] at (a) {$a$}; \node[left] at (b) {$b$}; \node[right] at (c) {$c$};
+\end{scope}
+\end{circuitikz}
+\end{document}

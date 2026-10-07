@@ -1,0 +1,19 @@
+% Huskelapp: opplading og utlading med tau, 63 prosent og tangent.
+% alt: To kurver: stigende mot sluttverdien med 63 prosent ved tau, og fallende til 37 prosent ved tau. Tangenten i null treffer sluttverdien ved tau
+\documentclass[tikz,border=2pt]{standalone}
+\input{krets}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[trans, width=5.6cm, height=3.4cm, xmin=0, xmax=5, ymin=0, ymax=1.12,
+  xtick={0,1,2,3,4,5}, xticklabels={0,$\tau$,$2\tau$,$3\tau$,$4\tau$,$5\tau$},
+  ytick={0,0.368,0.632,1}, yticklabels={0,37\,\%,63\,\%,$x_f$}, xlabel={$t$}, ylabel={}]
+\addplot[acc, domain=0:5] {1-exp(-x)};
+\addplot[mut, domain=0:5] {exp(-x)};
+\draw[hjelp] (axis cs:0,0) -- (axis cs:1,1);
+\draw[hjelp] (axis cs:0,1) -- (axis cs:5,1);
+\draw[hjelp] (axis cs:1,0) -- (axis cs:1,0.632) -- (axis cs:0,0.632);
+\draw[hjelp] (axis cs:0,0.368) -- (axis cs:1,0.368);
+\fill[acc] (axis cs:1,0.632) circle (1.5pt); \fill[mut] (axis cs:1,0.368) circle (1.5pt);
+\end{axis}
+\end{tikzpicture}
+\end{document}
