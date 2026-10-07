@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ohms lov, effekt og energi — Fysikk 2 · H26</title>
+  <meta name="description" content="Ohms lov, referanseretninger, effekt i motstander og kilder, energi og virkningsgrad.">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=36">
+</head>
+<body class="theme-fysikk2" data-updated="2026-10-07">
+  <div class="app-shell">
+
+    <aside class="sidebar"></aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">Fysikk 2</a>
+        <div class="topbar__crumb">Kapittel 2</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow">PB2050 kapittel 2</div>
+          <h1>Ohms lov, effekt og energi</h1>
+          <span class="page-header__en">Ohm's law · power · energy · efficiency</span>
+          <p class="page-header__desc">Ohms lov, referanseretninger, effekt i motstander og kilder, energi og virkningsgrad.</p>
+          <span class="page-header__status" data-status="active"><i></i>forelesning 02 + lab 2</span>
+        </header>
+
+        <div class="sourcebar">
+          <a class="tag" href="../../../assets/resources/fysikk2/Forelesning/02_Ohms_lov__effekt_energi_og_virkningsgrad.pdf" target="_blank" rel="noopener">kilde · forelesning 2</a>
+          <a class="tag" href="../../../assets/resources/fysikk2/Lab%C3%B8velser/02-ohms-lov-effekt-og-energi-normal.pdf" target="_blank" rel="noopener">kilde · labøvelse 2</a>
+        </div>
+
+        <article class="prose">
+<h2>Ohms lov</h2>
+<p>\[ U=RI,\qquad I=\frac{U}{R},\qquad R=\frac{U}{I} \]</p>
+<p>Strømmen er proporsjonal med spenningen over motstanden. 10 V over 100 Ω gir 0.10 A. 5 A gjennom 10 Ω krever 50 V.</p>
+<p><strong>Referanseretninger:</strong> strømmen regnes inn på plussiden av motstanden. Da er spenningen positiv i strømretningen, og effekten som leveres til motstanden, er positiv. Det er <em>forskjellen</em> i potensial som teller, ikke spenningen på hver terminal: \(U=V_2-V_1\).</p>
+
+<h2>Effekt</h2>
+<p>\[ P=UI=I^2R=\frac{U^2}{R}\qquad[\text{W}] \]</p>
+<p>For en kilde gjelder samme formel, men med fortegn: går strømmen <em>ut</em> av plussiden, <strong>leverer</strong> kilden effekt.</p>
+<p class="callout"><strong>Eksempel (forelesning 2):</strong> en lader på 28 V lader et 24 V-batteri gjennom 4 Ω. Strømmen er \((28-24)/4=1\) A. Motstanden forbruker 4 W, batteriet tar imot 24 W, og laderen leverer 28 W. Summen av effektene er null.</p>
+<p>Total effekt i motstandene er alltid lik effekten kildene leverer. Det er en god kontroll på oppgave 1, se for eksempel <a href="../oppgaver/1-serie-parallell.html#v2025">februar 2025 f)</a>.</p>
+
+<h2>Energi</h2>
+<p>\[ W=Pt\qquad[\text{J}=\text{Ws}],\qquad 1\,\text{kWh}=3.6\cdot 10^6\,\text{J} \]</p>
+<p>Batterikapasitet oppgis i Ah. Et batteri på 24 V og 100 Ah lagrer \(24\cdot 100=2400\) Wh = 2.4 kWh.</p>
+<p class="callout"><strong>Eksempel:</strong> en 200 W LED-skinne på 12 V trekker \(200/12=16.7\) A. Et 60 Ah-batteri holder da i \(60/16.7=3.6\) timer.</p>
+
+<h2>Virkningsgrad</h2>
+<p>\[ \eta=\frac{P_{ut}}{P_{inn}},\qquad \eta_T=\eta_1\cdot\eta_2\cdots\eta_n \]</p>
+<p class="callout"><strong>Eksempel:</strong> en dynamo får 600 W inn og gir 500 W ut, \(\eta_1=83\,\%\). Med en motor på 78 % etter blir totalen \(0.83\cdot 0.78=64\,\%\).</p>
+<div class="note"><strong>Til eksamen:</strong> Ohms lov og \(P=UI=I^2R=U^2/R\) brukes i hvert eneste sett, særlig i effektspørsmålene i oppgave 1 og i <a href="../oppgaver/3-superposisjon.html#h2021">effekten i kildene i desember 2021</a>. Energi og virkningsgrad er ikke spurt om.</div>
+        </article>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="01-strom-spenning-resistans.html"><small>forrige</small>Kapittel 1</a>
+          <a data-dir="next" href="03-seriekretser-kvl.html"><small>neste</small>Kapittel 3</a>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js?v=38"></script>
+  <script src="../../../assets/js/status.js?v=35"></script>
+  <script src="../../../assets/js/formler.js?v=35"></script>
+  <script src="../../../assets/js/math.js?v=35"></script>
+</body>
+</html>

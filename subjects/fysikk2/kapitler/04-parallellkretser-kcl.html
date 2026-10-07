@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Parallellkretser og KCL — Fysikk 2 · H26</title>
+  <meta name="description" content="Kirchhoffs strømlov, ideelle kilder, motstander i parallell, forholdsformelen for parallellkretser og strømdeling.">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=36">
+</head>
+<body class="theme-fysikk2" data-updated="2026-10-07">
+  <div class="app-shell">
+
+    <aside class="sidebar"></aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">Fysikk 2</a>
+        <div class="topbar__crumb">Kapittel 4</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow">PB2050 kapittel 4</div>
+          <h1>Parallellkretser og KCL</h1>
+          <span class="page-header__en">parallel circuits · Kirchhoff's current law · current division</span>
+          <p class="page-header__desc">Kirchhoffs strømlov, ideelle kilder, motstander i parallell, forholdsformelen for parallellkretser og strømdeling.</p>
+          <span class="page-header__status" data-status="active"><i></i>forelesning 04 + lab 4</span>
+        </header>
+
+        <div class="sourcebar">
+          <a class="tag" href="../../../assets/resources/fysikk2/Forelesning/04_Kap6%2B7%2C%20parallellkretser%2C%20KCL.pdf" target="_blank" rel="noopener">kilde · forelesning 4</a>
+          <a class="tag" href="../../../assets/resources/fysikk2/Lab%C3%B8velser/04-parallellkretser-og-stromdeling-normal.pdf" target="_blank" rel="noopener">kilde · labøvelse 4</a>
+        </div>
+
+        <article class="prose">
+<h2>Kirchhoffs strømlov (KCL)</h2>
+<p>\[ \sum I_{inn}=\sum I_{ut}\qquad\text{i hver node} \]</p>
+<p class="callout"><strong>Eksempel:</strong> 7 A og 5 A inn, 2 A, 1 A og \(I_1\) ut: \(I_1=7+5-2-1=9\) A.</p>
+
+<h2>Ideelle kilder</h2>
+<ul>
+  <li>En ideell <strong>spenningskilde</strong> holder spenningen uansett strøm.</li>
+  <li>En ideell <strong>strømkilde</strong> holder strømmen uansett spenning.</li>
+</ul>
+<p>Strømkilder brukes mest som regneteknisk hjelpemiddel, men eksamensoppgavene har ofte en strømkilde i stedet for en spenningskilde i oppgave 1 (februar 2025, våren 2026).</p>
+
+<h2>Motstander i parallell</h2>
+<p>Parallelle motstander har samme spenning over seg, og strømmene summeres:</p>
+<p>\[ \frac{1}{R_T}=\frac{1}{R_1}+\frac{1}{R_2}+\dots,\qquad G_T=G_1+G_2+\dots,\qquad R_1\parallel R_2=\frac{R_1R_2}{R_1+R_2} \]</p>
+<p>Parallellmotstanden er alltid mindre enn den minste av motstandene. 1 kΩ ∥ 9 kΩ = 0.9 kΩ.</p>
+
+<h2>Strømdeling</h2>
+<p>Strømmene er i forhold til konduktansene: \(\frac{I_1}{I_2}=\frac{R_2}{R_1}\). For en gren \(x\) av \(n\):</p>
+<p>\[ I_x=\frac{G_x}{G_T}\,I=\frac{R_T}{R_x}\,I,\qquad \text{to grener: } I_1=\frac{R_2}{R_1+R_2}\,I \]</p>
+<p class="callout"><strong>Eksempel (forelesning 4):</strong> 10 A inn i 1 Ω, 2 Ω og 4 Ω i parallell. \(G_T=1+0.5+0.25=1.75\) S, og strømmene blir \(\frac{1}{1.75}\cdot 10=5.71\) A, 2.86 A og 1.43 A. Summen er 10 A.</p>
+<div class="pitfall"><div class="pitfall__title">Fallgruve: feil motstand i telleren</div><p>For to grener er det motstanden i den <em>andre</em> grenen som står i telleren. Mest strøm går der motstanden er minst. Sjekk det med sunn fornuft etterpå.</p></div>
+
+<h2>Sammensatt eksempel</h2>
+<p>Forelesningen avslutter med en krets som er hele oppgave 1 i miniatyr: \(R_1=5\,\Omega\) i serie med \(R_2\parallel R_3=10\parallel 10=5\,\Omega\) over 5 V. Da er \(R_T=10\,\Omega\), \(I=0.5\) A, \(U_1=2.5\) V, \(U_2=2.5\) V og \(I_2=I_3=0.25\) A, og KCL gir \(0.5-0.25-0.25=0\).</p>
+<div class="note"><strong>Til eksamen:</strong> «Bruk strømdelingsformelen» står i oppgave 1 i 2022–2024. Strømdeling brukes også i <a href="../oppgaver/3-superposisjon.html">superposisjon</a> og i <a href="../oppgaver/2-thevenin-norton.html#h2025">Norton-strømmen i desember 2025</a>.</div>
+        </article>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="03-seriekretser-kvl.html"><small>forrige</small>Kapittel 3</a>
+          <a data-dir="next" href="05-serie-parallell.html"><small>neste</small>Kapittel 5</a>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js?v=38"></script>
+  <script src="../../../assets/js/status.js?v=35"></script>
+  <script src="../../../assets/js/formler.js?v=35"></script>
+  <script src="../../../assets/js/math.js?v=35"></script>
+</body>
+</html>

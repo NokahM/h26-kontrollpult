@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Strøm, spenning og resistans — Fysikk 2 · H26</title>
+  <meta name="description" content="Ladning, spenning og strøm, resistans i ledere, temperaturavhengighet, prefikser og måling med multimeter.">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=36">
+</head>
+<body class="theme-fysikk2" data-updated="2026-10-07">
+  <div class="app-shell">
+
+    <aside class="sidebar"></aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">Fysikk 2</a>
+        <div class="topbar__crumb">Kapittel 1</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow">PB2050 kapittel 1</div>
+          <h1>Strøm, spenning og resistans</h1>
+          <span class="page-header__en">charge · voltage · current · resistance</span>
+          <p class="page-header__desc">Ladning, spenning og strøm, resistans i ledere, temperaturavhengighet, prefikser og måling med multimeter.</p>
+          <span class="page-header__status" data-status="active"><i></i>forelesning 01 + lab 1</span>
+        </header>
+
+        <div class="sourcebar">
+          <a class="tag" href="../../../assets/resources/fysikk2/Forelesning/01_Str%C3%B8m_Spenning_Motstand.pdf" target="_blank" rel="noopener">kilde · forelesning 1</a>
+          <a class="tag" href="../../../assets/resources/fysikk2/Lab%C3%B8velser/01-strom-spenning-og-resistans-normal.pdf" target="_blank" rel="noopener">kilde · labøvelse 1</a>
+        </div>
+
+        <article class="prose">
+<h2>Ladning, spenning og strøm</h2>
+<p><strong>Ladning</strong> \(Q\) måles i coulomb (C). Motsatte ladninger tiltrekker hverandre, så det koster arbeid å skille dem. Arbeidet per ladning er <strong>spenningen</strong>:</p>
+<p>\[ U=\frac{W}{Q}\quad[\text{V}=\text{J/C}] \]</p>
+<p><strong>Strøm</strong> er netto ladning per tid. Det er spenningsforskjellen som driver strømmen:</p>
+<p>\[ I=\frac{Q}{t}\quad[\text{A}=\text{C/s}],\qquad 1\,\text{C}=6.25\cdot 10^{18}\ \text{elektroner} \]</p>
+<p>Strømretningen regnes fra pluss til minus, selv om elektronene går motsatt vei.</p>
+
+<h2>Resistans og konduktans</h2>
+<p>I en leder er strømmen proporsjonal med spenningen. Stigningstallet er konduktansen \(G\), og den inverse er resistansen \(R\):</p>
+<p>\[ I=GU=\frac{U}{R},\qquad G=\frac1R\ [\text{S}] \]</p>
+<p>Resistansen i en leder avhenger av materiale, lengde og tverrsnitt:</p>
+<p>\[ R=\rho\,\frac{l}{A}\qquad(\rho\text{ i }\Omega\,\text{mm}^2/\text{m}) \]</p>
+<p class="callout"><strong>Eksempel (forelesning 1):</strong> 10 m kobber med 1.0 mm² tverrsnitt: \(R=0.0172\cdot 10/1.0=0.172\,\Omega\) og \(G=5.81\) S. Med ståltråd (\(\rho=0.172\)) blir \(R=1.72\,\Omega\), ti ganger så mye.</p>
+
+<h2>Temperatur</h2>
+<p>Resistansen oppgis vanligvis ved 20 °C. Ved andre temperaturer:</p>
+<p>\[ R_T=R_{20}\left(1+\alpha\,(T-20^\circ\text{C})\right) \]</p>
+<p>Metaller har positiv temperaturkoeffisient (PTC). Termistorer har stor koeffisient, ofte negativ (NTC), og brukes som temperaturfølere, slik som i <a href="../oppgaver/1-serie-parallell.html#h2021-bro">Wheatstone-broen fra desember 2021</a>.</p>
+<p class="callout"><strong>Eksempel:</strong> 100 m aluminium, diameter 5.64 mm (\(A=25\) mm²), ved 90 °C: \(R_{20}=0.0303\cdot 100/25=0.121\,\Omega\) og \(R_{90}=0.121(1+0.00429\cdot 70)=0.157\,\Omega\).</p>
+
+<h2>Prefikser</h2>
+<div class="dtable-wrap"><table class="dtable">
+<thead><tr><th>G</th><th>M</th><th>k</th><th>m</th><th>µ</th><th>n</th><th>p</th></tr></thead>
+<tbody><tr><td>\(10^9\)</td><td>\(10^6\)</td><td>\(10^3\)</td><td>\(10^{-3}\)</td><td>\(10^{-6}\)</td><td>\(10^{-9}\)</td><td>\(10^{-12}\)</td></tr></tbody>
+</table></div>
+<p>Regn i kΩ og mA, så får du volt direkte: \(2\,\text{k}\Omega\cdot 3\,\text{mA}=6\) V. Kalkulatorens ENG-knapp flytter eksponenten til nærmeste prefiks.</p>
+
+<h2>Potensiometer og måling</h2>
+<p>Et potensiometer har tre terminaler. Mellom endene \(a\) og \(c\) er motstanden fast, og glideren \(b\) deler den i to: \(R_{ac}=R_{ab}+R_{bc}\). Er \(R_{ac}=10\) kΩ og \(R_{ab}=2\) kΩ, er \(R_{bc}=8\) kΩ.</p>
+<ul>
+  <li><strong>Amperemeter</strong> kobles i <em>serie</em> med strømmen som skal måles.</li>
+  <li><strong>Voltmeter</strong> kobles i <em>parallell</em> over det som skal måles.</li>
+  <li><strong>Ohmmeter</strong> kobles over en komponent som er koblet ut av kretsen.</li>
+</ul>
+<p>Bytter du om COM og målekontakten, får du negativt fortegn. Det er det samme som å snu referanseretningen.</p>
+<div class="note"><strong>Til eksamen:</strong> stoffet i dette kapitlet er ikke spurt om direkte i noen av de ti settene, men begrepene og enhetene brukes overalt. Resistivitet, temperatur og måleinstrumenter hører til laben.</div>
+        </article>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="../oppgaver/5-transienter.html"><small>forrige</small>Transienter i RC og RL</a>
+          <a data-dir="next" href="02-ohms-lov-effekt.html"><small>neste</small>Kapittel 2</a>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js?v=38"></script>
+  <script src="../../../assets/js/status.js?v=35"></script>
+  <script src="../../../assets/js/formler.js?v=35"></script>
+  <script src="../../../assets/js/math.js?v=35"></script>
+</body>
+</html>

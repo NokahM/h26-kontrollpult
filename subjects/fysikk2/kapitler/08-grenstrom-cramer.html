@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ligningssett og grenstrømmer — Fysikk 2 · H26</title>
+  <meta name="description" content="Ligningssett på matriseform, determinanter og Cramers regel for to og tre ukjente, og grenstrømsanalyse.">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=36">
+</head>
+<body class="theme-fysikk2" data-updated="2026-10-07">
+  <div class="app-shell">
+
+    <aside class="sidebar"></aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">Fysikk 2</a>
+        <div class="topbar__crumb">Kapittel 8</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow">PB2050 kapittel 8</div>
+          <h1>Ligningssett og grenstrømmer</h1>
+          <span class="page-header__en">linear equations · determinants · Cramer's rule · branch-current analysis</span>
+          <p class="page-header__desc">Ligningssett på matriseform, determinanter og Cramers regel for to og tre ukjente, og grenstrømsanalyse.</p>
+          <span class="page-header__status" data-status="active"><i></i>forelesning 08 + lab 8</span>
+        </header>
+
+        <div class="sourcebar">
+          <a class="tag" href="../../../assets/resources/fysikk2/Forelesning/08_Grenstr%C3%B8msanalyse_og_determinantmetoden.pdf" target="_blank" rel="noopener">kilde · forelesning 8</a>
+          <a class="tag" href="../../../assets/resources/fysikk2/Lab%C3%B8velser/08-analysemetoder-del-1-normal.pdf" target="_blank" rel="noopener">kilde · labøvelse 8</a>
+        </div>
+
+        <article class="prose">
+<h2>Ligningssett som utvidet matrise</h2>
+<p>\[ \begin{aligned} a_{11}x_1+a_{12}x_2&=b_1\\ a_{21}x_1+a_{22}x_2&=b_2 \end{aligned}
+\qquad\Longleftrightarrow\qquad
+\left[\begin{array}{cc|c} a_{11} & a_{12} & b_1\\ a_{21} & a_{22} & b_2 \end{array}\right] \]</p>
+<p>Eksamensoppgavene har to eller tre ukjente og skal løses for hånd. En matrisekalkulator (for eksempel matrixcalc.org) er fin til å kontrollere øvingsoppgaver.</p>
+
+<h2>Determinanter og Cramers regel</h2>
+<p>\[ D=\begin{vmatrix} a & b\\ c & d \end{vmatrix}=ad-bc,\qquad x_k=\frac{D_k}{D} \]</p>
+<p>\(D_k\) er determinanten der kolonne \(k\) er byttet ut med høyresiden.</p>
+<p class="callout"><strong>Eksempel (forelesning 8):</strong> \(x_1+2x_2=8\) og \(3x_1-x_2=3\). \(D=1\cdot(-1)-2\cdot 3=-7\), \(D_1=8\cdot(-1)-2\cdot 3=-14\), \(D_2=1\cdot 3-8\cdot 3=-21\). Altså \(x_1=2\) og \(x_2=3\). Prøve: \(2+6=8\) ✓.</p>
+<p><strong>3×3 med Sarrus' regel:</strong> skriv de to første kolonnene en gang til til høyre. Summer produktene langs de tre diagonalene ned mot høyre, og trekk fra produktene langs de tre diagonalene opp mot høyre:</p>
+<p>\[ \begin{vmatrix} a&b&c\\ d&e&f\\ g&h&i \end{vmatrix}=aei+bfg+cdh-ceg-afh-bdi \]</p>
+<p class="callout"><strong>Eksempel:</strong> \(2x_1+x_2+2x_3=-2\), \(-2x_1+2x_2-x_3=-5\), \(4x_1-x_2+2x_3=0\) gir \(D=-6\), \(D_1=14\), \(D_2=20\), \(D_3=-18\), altså \(x=(-\tfrac73,-\tfrac{10}3,3)\).</p>
+<p>Et triks som sparer tid: står det en null i høyresiden, forenkles \(D_k\). Står det to nuller i samme kolonne, utvider du langs den kolonnen, som i <a href="../oppgaver/4-maske-knutepunkt.html#h2023">desember 2023 f)</a> der \(D_1=10\cdot(90-9)=810\).</p>
+
+<h2>Grenstrømsanalyse</h2>
+<p>En <strong>gren</strong> er en seriekobling som fører samme strøm. Metoden:</p>
+<ol>
+  <li>Gi hver gren en strøm med navn og retning.</li>
+  <li>Marker polariteten på spenningsfallene ut fra strømretningene.</li>
+  <li>Bruk KVL rundt hver uavhengig sløyfe («vindu» i kretsen).</li>
+  <li>Bruk KCL i nok noder til at alle grenene er med.</li>
+  <li>Løs ligningssettet.</li>
+</ol>
+<p class="callout"><strong>Eksempel (forelesning 8):</strong> 2 V og 6 V med 2 Ω, 4 Ω og 1 Ω gir \(2I_1+4I_3=2\), \(I_2+4I_3=6\), \(I_1+I_2-I_3=0\), og løsningen \(I_1=-1\) A, \(I_2=2\) A, \(I_3=1\) A.</p>
+<div class="note"><strong>Til eksamen:</strong> grenstrømsanalyse er ikke spurt om som egen metode, settene bruker maske og knutepunkt. Men Cramers regel herfra brukes i alle <a href="../oppgaver/4-maske-knutepunkt.html">maske- og knutepunktsoppgavene</a>, og løsningsforslagene viser determinantene.</div>
+        </article>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="07-thevenin-norton.html"><small>forrige</small>Kapittel 7</a>
+          <a data-dir="next" href="09-maskestrom.html"><small>neste</small>Kapittel 9</a>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js?v=38"></script>
+  <script src="../../../assets/js/status.js?v=35"></script>
+  <script src="../../../assets/js/formler.js?v=35"></script>
+  <script src="../../../assets/js/math.js?v=35"></script>
+</body>
+</html>
