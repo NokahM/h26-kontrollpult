@@ -9,7 +9,7 @@
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
   <link rel="stylesheet" href="../../../assets/css/main.css?v=41">
 </head>
-<body class="theme-mos" data-updated="2026-09-01">
+<body class="theme-mos" data-updated="2026-10-15">
   <div class="app-shell">
 
     <aside class="sidebar"></aside>
@@ -39,18 +39,69 @@
         <article class="prose">
           <h2>Serial Wire Debug (SWD)</h2>
           <p>De fleste moderne ARM Cortex-brikker (som nRF52840-en denne labben bruker) eksponerer et debug-grensesnitt kalt <strong>SWD</strong> — en 2-tråds etterfølger til JTAG som bare trenger klokke (<code>SWCLK</code>) og databane (<code>SWDIO</code>). Formålet er å gi en ekstern debugger full tilgang til å lese/skrive minne, sette breakpoints og styre CPU-en, uten å gå via programvaren som allerede kjører på kretsen.</p>
-          <p>SWD-tilgangen er strukturert som et <strong>Debug Access Port (DAP)</strong>: en <em>Debug Port (DP)</em> er selve den fysiske inngangen utenfra (JTAG/SWD), og DP-en kobler videre til en eller flere <em>Access Ports (AP)</em>. Hver AP gir tilgang til én delsystem på brikken — typisk en <em>MEM-AP</em> som gir minnetilgang til CPU-en. Er MEM-AP-en låst, er det vanlig at én ekstra AP blir stående åpen: <strong>CTRL-AP</strong>.</p>
+          <p>SWD-tilgangen er strukturert som et <strong>Debug Access Port (DAP)</strong>: en <em>Debug Port (DP)</em> er selve den fysiske inngangen utenfra (JTAG/SWD), og DP-en kobler videre til en eller flere <em>Access Ports (AP)</em>. Hver AP gir tilgang til ett delsystem på brikken — typisk en <em>MEM-AP</em> som gir minnetilgang til CPU-en. Er MEM-AP-en låst, er det vanlig at én ekstra AP blir stående åpen: <strong>CTRL-AP</strong>.</p>
 
           <h3>CTRL-AP — bakdøren produsenten selv la inn</h3>
           <p>CTRL-AP er en egen access port designet nettopp for å kunne styre kretsen selv når alle andre AP-er er sperret av <em>access port protection</em>. Den støtter blant annet myk reset og — viktigst her — å fjerne selve beskyttelsen. Nordic sin nRF52-serie kaller denne beskyttelsesmekanismen <code>APPROTECT</code>, og statusen ligger i registeret <code>APPROTECTSTATUS</code>.</p>
-          <p>Konsekvensen er et reelt sikkerhetsavveining: for å gjøre kretsen debugbar igjen etter at leseknyttet er slått på, må man kjøre <code>ERASEALL</code> via CTRL-AP — som sletter <em>alt</em> innhold i flashen. Beskyttelsen kan altså ikke omgås mens koden består; den kan bare fjernes sammen med koden. Det er samme prinsipp som chain of trust i kapittel 01: bryter man tilliten ett sted, mister man alt som lå bak den.</p>
+          <p>Det er en bevisst avveining. For å gjøre kretsen debugbar igjen etter at lesebeskyttelsen er slått på, må man kjøre <code>ERASEALL</code> via CTRL-AP, og det sletter <em>alt</em> i flashen og UICR. Beskyttelsen kan altså ikke fjernes mens koden står der. Den kan bare fjernes sammen med koden.</p>
+          <p>Merk hva APPROTECT beskytter og hva den ikke beskytter:</p>
+          <ul>
+            <li><strong>Konfidensialitet: ja.</strong> Firmware, nøkler og hemmeligheter i flash kan ikke leses ut over SWD.</li>
+            <li><strong>Integritet: nei.</strong> Alle med SWD-tilgang kan slette og programmere inn sin egen kode, slik du gjør i labben. Uten signaturkontroll ved oppstart (chain of trust, kapittel 01) kan en enhet derfor få byttet ut koden uten at noen merker det.</li>
+          </ul>
+
+          <h3>CTRL-AP-registrene du bruker i labben</h3>
+          <div class="dtable-wrap"><table class="dtable">
+            <thead><tr><th>Adresse</th><th>Register</th><th>Hva det gjør</th></tr></thead>
+            <tbody>
+              <tr><td class="num"><code>0x000</code></td><td>RESET</td><td>myk reset av brikken</td></tr>
+              <tr><td class="num"><code>0x004</code></td><td>ERASEALL</td><td>skriv 1: slett flash, RAM og UICR, og fjern dermed beskyttelsen</td></tr>
+              <tr><td class="num"><code>0x008</code></td><td>ERASEALLSTATUS</td><td>1 mens slettingen pågår</td></tr>
+              <tr><td class="num"><code>0x00C</code></td><td>APPROTECTSTATUS</td><td>0 = beskyttet, 1 = åpen</td></tr>
+              <tr><td class="num"><code>0x0FC</code></td><td>IDR</td><td>identifikasjon av access porten</td></tr>
+            </tbody>
+          </table></div>
+          <p>Selve innstillingen ligger i UICR (User Information Configuration Registers), et lite flash-område for konfigurasjon. <code>APPROTECT</code> ligger på <code>0x10001208</code>. Slettet verdi er <code>0xFFFFFFFF</code>, og da er beskyttelsen av. Det er derfor labben forventer den verdien etter ERASEALL.</p>
+
+          <div class="pitfall"><div class="pitfall__title">Utover forelesningen: APPROTECT er brutt med glitching</div><p>I 2020 viste sikkerhetsforskeren LimitedResults at APPROTECT på nRF52-serien kunne omgås <em>uten</em> sletting. Et spenningsglitch i det øyeblikket brikken leser APPROTECT fra UICR ved oppstart, gjorde at debug-porten åpnet seg med koden fortsatt på plass. Nordic svarte med en ny revisjon av brikken der porten også må låses i programvare. Dette er et godt eksempel å bruke på muntlig eksamen, fordi det knytter kapittel 2 og kapittel 6 sammen: én enkel sjekk i maskinvare er bare så sterk som motstanden mot feilinjeksjon.</p></div>
+
+          <h2>Spenningsnivåer og REGOUT0</h2>
+          <p>Forelesningen stiller to spørsmål: <em>«Hvilken spenning har utgangene til nRF52840 når den er slettet?»</em> og <em>«Hvilken adresse har REGOUT0?»</em></p>
+          <p>Donglen får strøm fra USB (5 V inn på VDDH). En intern regulator (REG0) lager spenningen VDD som resten av brikken og alle GPIO-pinnene bruker. Hvilken spenning REG0 gir ut, bestemmes av registeret <code>REGOUT0</code> i UICR på adresse <code>0x10001304</code>. Når UICR er slettet, står det <code>0xFFFFFFFF</code>, og det betyr standardverdien <strong>1,8 V</strong>. Etter ERASEALL har pinnene dermed bare 1,8 V logikknivå. Det er for lite til å styre 3,3 V- eller 5 V-logikk sikkert.</p>
+          <p>Det finnes to løsninger:</p>
+          <ul>
+            <li>Skriv en ny verdi til REGOUT0, for eksempel <code>5</code> for 3,3 V. Bootloaderen fra labben gjør dette.</li>
+            <li>Bruk en nivåomformer, som BOB-12009 fra forelesningen (toveis, f.eks. 1,8 V ↔ 5 V).</li>
+          </ul>
+          <p>Poenget er at feil logikknivå er en vanlig grunn til at kommunikasjonen ikke virker når man kobler seg på et ukjent kort. Mål derfor spenningen før du kobler til.</p>
 
           <h2>Picoprobe: en Raspberry Pi Pico som SWD- og UART-bro</h2>
           <p>Denne labben bruker ikke dedikert debug-maskinvare, men en vanlig <strong>Raspberry Pi Pico</strong> flashet med <em>debugprobe</em>-firmware (kjent som <em>Picoprobe</em>). Den implementerer CMSIS-DAP-protokollen (samme grensesnitt som proprietære debuggere snakker) og eksponerer i tillegg en RS-232-til-USB-bro — én billig USB-enhet dekker altså både programmering/debugging og seriellterminal.</p>
+          <div class="dtable-wrap"><table class="dtable">
+            <thead><tr><th>Pico-pinne</th><th>Funksjon</th></tr></thead>
+            <tbody>
+              <tr><td>GP2</td><td>SWCLK, debug-klokke</td></tr>
+              <tr><td>GP3</td><td>SWDIO, debug-data</td></tr>
+              <tr><td>GP4</td><td>UART1 TX, sender data</td></tr>
+              <tr><td>GP5</td><td>UART1 RX, mottar data</td></tr>
+              <tr><td>VSYS / GND</td><td>+5 V og jord</td></tr>
+            </tbody>
+          </table></div>
+
+          <h2>OpenOCD og GDB-serveren</h2>
+          <p><strong>OpenOCD</strong> (Open On-Chip Debugger) er gratis programvare som står mellom PC-en og debug-proben. Den støtter ARM, RISC-V, MIPS og flere. Når den kjører, åpner den tre TCP-porter:</p>
+          <ul>
+            <li><code>3333</code> er en <strong>GDB-server</strong>. En debugger (GDB, eller VS Code via GDB) kobler seg hit og kan sette breakpoints, gå steg for steg og lese variabler <em>i koden som kjører på brikken</em>. Det er svaret på labspørsmålet om formålet med en gdbserver: den gjør det mulig å debugge et program som kjører på en annen maskin enn debuggeren, her på mikrokontrolleren.</li>
+            <li><code>4444</code> er en telnet-port for OpenOCD-kommandoer (<code>halt</code>, <code>reset</code>, <code>program</code>, <code>flash mdw</code> …).</li>
+            <li><code>6666</code> er en Tcl-port for skript.</li>
+          </ul>
+          <p>Konfigurasjonen er delt i to: <code>interface/*.cfg</code> beskriver proben (her <code>cmsis-dap</code>), og <code>target/*.cfg</code> beskriver brikken (her <code>nrf52</code>). <code>openocd -c "help adapter"</code> viser bare kommandoene for adapteren, mens <code>help</code> viser alt.</p>
 
           <h2>RS-232 — eldgammel, men fortsatt overalt</h2>
           <p><strong>RS-232</strong> (Recommended Standard 232) er en seriellstandard som går tilbake til 1960 og har blitt revidert en rekke ganger siden (senest TIA-232-F). Den definerer hvordan en dataterminal (DTE) — typisk en PC — snakker med kommunikasjonsutstyr (DCE) over separate sende- og mottakslinjer. I praksis brukes den fortsatt til konsoll-/loggtilgang på embedded utstyr, nettopp fordi den er enkel og krever minimalt med logikk på mottakersiden.</p>
           <p>Det ene punktet det er lett å gå på trynet på: <strong>TxD på den ene siden må kobles til RxD på den andre</strong> (og omvendt) — sender- og mottakerlinjene skal krysses mellom to DTE-er, ikke kobles rett gjennom.</p>
+          <div class="pitfall"><div class="pitfall__title">RS-232 kontra UART med TTL-nivå</div><p>Forelesningen kaller koblingen mellom Pi og Pico «RS-232», men pinnene på begge kortene er UART med 3,3 V logikknivå. Ekte RS-232 bruker andre spenninger: omtrent ±3 til ±15 V, der negativ spenning betyr logisk 1. Det krever en nivåomformer, for eksempel MAX232. Protokollen er den samme (startbit, 8 databit, stoppbit, her 115200 bps). Det er bare de elektriske nivåene som er forskjellige. Kobler du ekte RS-232 rett på en 3,3 V-pinne, kan pinnen bli ødelagt.</p></div>
+          <p>Sett fra sikkerhet er en åpen seriellkonsoll ofte den enkleste veien inn i et innebygd system. Mange produkter har UART-pinner på kretskortet som gir bootlogg eller et root-skall, slik du logger inn på Pi-en i labben. Det første en maskinvarehacker ser etter, er derfor UART og SWD/JTAG på kortet. Forsvaret er å fjerne eller låse konsollen og debug-porten i produksjon.</p>
 
           <h2>Lab 1 i praksis</h2>
           <p>Lab-heftet fører deg gjennom å bygge en komplett programmerings- og debug-kjede fra bunnen, og deretter bruke den til å omgå readback-beskyttelsen på en nRF52840-dongle.</p>
@@ -89,18 +140,75 @@ flash mdw 0x10001208            # forvent 0xffffffff — APPROTECT er nå av</pr
             </div>
             <div class="step">
               <h4>Programmer inn ny firmware</h4>
-              <p>Med kretsen ubeskyttet kan den programmeres på vanlig måte, først med en enkel blink-test, deretter med en UF2-bootloader som lar deg programmere videre bare ved å dra en fil inn på en diskstasjon.</p>
-              <pre class="codeblock">program blinky_pca10059_mbr.hex
-reset</pre>
+              <p>Med kretsen ubeskyttet kan den programmeres på vanlig måte, først med en enkel blink-test. Slett først, stopp CPU-en og sjekk at flashen er tom:</p>
+              <pre class="codeblock">nrf52.dap apreg 1 0x04 0x01
+reset
+halt
+flash erase_check 0
+program blinky_pca10059_mbr.hex
+reset                           # alle LED-ene blinker</pre>
+            </div>
+            <div class="step">
+              <h4>Legg inn UF2-bootloaderen</h4>
+              <p>Programmer <code>pca10059_bootloader-0.7.0_s140_6.1.1.hex</code> på samme måte. Filnavnet sier hva den inneholder: Adafruits UF2-bootloader versjon 0.7.0 sammen med SoftDevice S140 v6.1.1, Nordics BLE-stack. LED-ene slukker. Koble fra SWD-ledningene og sett donglen rett i USB. Nå dukker stasjonen <code>NRF52BOOT</code> opp.</p>
+            </div>
+            <div class="step">
+              <h4>Installer CircuitPython</h4>
+              <p>Last ned <code>.uf2</code>-filen for <code>pca10059</code> fra circuitpython.org og kopier den til <code>NRF52BOOT</code>. Når den er ferdig, dukker stasjonen <code>CIRCUITPY</code> opp. Donglen er klar til lab 2. Du har nå byttet ut all firmware på en «beskyttet» krets med fire filer og to verktøy.</p>
             </div>
             <div class="step">
               <h4>Logg inn over seriellport</h4>
               <p>Koble Raspberry Pi-en til picoproben over RS-232 og åpne en seriellsesjon i MobaXterm på 115200 bps.</p>
               <pre class="codeblock">brukernavn: pi
 passord:    student2024</pre>
-              <p>Verifiser nettilgang med <code>ping www.vg.no</code>.</p>
+              <p>Utvid filsystemet og sjekk wifi med <code>sudo raspi-config</code>. Verifiser nettilgangen med <code>ping www.vg.no</code>.</p>
             </div>
           </div>
+
+          <h2>Muntlige eksamensspørsmål</h2>
+          <details class="sol">
+            <summary>Hva er SWD, og hvordan er Debug Access Port bygd opp?</summary>
+            <div class="sol__body">
+              <p>SWD (Serial Wire Debug) er ARMs debug-grensesnitt med to ledninger: SWCLK (klokke) og SWDIO (data, toveis). Det er et alternativ til JTAG, som trenger fire til fem ledninger. Utenfra kobler man seg til <em>Debug Port</em> (DP). DP-en gir tilgang til én eller flere <em>Access Ports</em> (AP). En MEM-AP gir tilgang til minnekartet: CPU, flash, RAM og periferienheter. Nordic har i tillegg en CTRL-AP som alltid svarer, også når MEM-AP er sperret.</p>
+            </div>
+          </details>
+          <details class="sol">
+            <summary>Hvorfor feiler OpenOCD med «Could not find MEM-AP», og hvordan kom du videre?</summary>
+            <div class="sol__body">
+              <p>APPROTECT var slått på, og da er MEM-AP-en sperret. CTRL-AP (AP nr. 1) svarer fortsatt. Lesing av <code>apreg 1 0x00C</code> (APPROTECTSTATUS) ga 0, altså beskyttet. Å skrive 1 til <code>apreg 1 0x004</code> (ERASEALL) sletter flash og UICR. Etter <code>reset</code> er APPROTECT <code>0xFFFFFFFF</code>, altså av, og kretsen kan programmeres. Prisen er at den opprinnelige koden er borte.</p>
+            </div>
+          </details>
+          <details class="sol">
+            <summary>Hva beskytter APPROTECT, og hva beskytter den ikke?</summary>
+            <div class="sol__body">
+              <p>Den beskytter <em>konfidensialiteten</em> til flash-innholdet, altså at koden og nøklene ikke kan leses ut. Den beskytter ikke <em>integriteten</em>, fordi hvem som helst kan slette og programmere inn ny kode. Enheten kan da ikke vite om den kjører originalkoden. Det krever signert oppstart (secure boot).</p>
+              <p>Beskyttelsen kan dessuten omgås med glitching. LimitedResults viste i 2020 at nRF52 åpnet debug-porten etter et spenningsglitch ved oppstart.</p>
+            </div>
+          </details>
+          <details class="sol">
+            <summary>Hvilken spenning har utgangene etter sletting, og hvorfor?</summary>
+            <div class="sol__body">
+              <p>1,8 V. Donglen får strøm fra USB via VDDH, og regulatoren REG0 gir ut den spenningen som står i <code>UICR.REGOUT0</code> (<code>0x10001304</code>). ERASEALL sletter UICR, slik at registeret blir <code>0xFFFFFFFF</code>, som betyr standardverdien 1,8 V. Du løser det ved å skrive 3,3 V til REGOUT0 (bootloaderen gjør det) eller ved å bruke en nivåomformer.</p>
+            </div>
+          </details>
+          <details class="sol">
+            <summary>Hva er formålet med en gdbserver?</summary>
+            <div class="sol__body">
+              <p>Den lar GDB debugge et program som kjører på et annet system. GDB kjører på PC-en og snakker GDB Remote Serial Protocol over TCP (port 3333) med OpenOCD. OpenOCD oversetter til SWD-operasjoner på brikken, som å stoppe CPU-en, sette breakpoints og lese og skrive registre og minne. Dermed kan du gå steg for steg gjennom koden på mikrokontrolleren fra en vanlig IDE.</p>
+            </div>
+          </details>
+          <details class="sol">
+            <summary>Hvorfor krysses TxD og RxD, og hva er forskjellen på RS-232 og UART-pinnene i labben?</summary>
+            <div class="sol__body">
+              <p>Begge sider er DTE og sender på sin TxD. Det én sender, må komme inn på RxD hos den andre. Begge kortene bruker UART med 3,3 V logikknivå. Ekte RS-232 bruker samme rammeformat, men med ±3 til ±15 V og invertert logikk, så det trenger en nivåomformer.</p>
+            </div>
+          </details>
+          <details class="sol">
+            <summary>Hvorfor er UART og SWD interessante for en angriper?</summary>
+            <div class="sol__body">
+              <p>Begge gir tilgang under programvarelaget. UART gir ofte en bootlogg eller et root-skall, og SWD/JTAG gir full minnetilgang hvis porten ikke er låst. De er lette å finne som testpunkter eller pinnerader på kortet. Forsvaret er å slå av eller låse begge i produksjon (APPROTECT, ingen konsoll eller en konsoll med passord) og å bruke signert oppstart, slik at ny kode ikke blir godtatt.</p>
+            </div>
+          </details>
         </article>
 
         <nav class="chapter-nav">
