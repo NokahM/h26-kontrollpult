@@ -33,6 +33,9 @@
           { n: '5', title: 'Effektanalyse', part: 'Kapittel 5', track: 'page', meta: 'lab 4', href: 'subjects/mos/guides/05-effektanalyse.html' },
           { n: '6', title: 'Glitching', part: 'Kapittel 6', track: 'page', meta: 'lab 5', href: 'subjects/mos/guides/06-glitching.html' }
         ] },
+        { label: 'Eksamen', items: [
+          { title: 'Muntlige eksamensspørsmål', part: 'Eksamensøving', meta: '36', tasks: 36, track: 'tasks', href: 'subjects/mos/guides/muntlig-eksamen.html' }
+        ] },
         { label: 'Om emnet', items: [
           { title: 'Emneplan', part: 'Om emnet', href: 'subjects/mos/guides/emneplan.html' }
         ] },

@@ -61,6 +61,8 @@ automatisk fra `.section__label`, `.prose h2` og `.task` på siden. Sett
 prosjektroten. Legg nye filer i mappen og en tilhørende rad i
 `subjects/mos/index.html` sin ressursliste.
 
+**MoS muntlig øving**: `subjects/mos/guides/muntlig-eksamen.html` samler 36 egenformulerte spørsmål fra forelesning 01–06 og lab 1–5. Hvert spørsmål har oppfølging, skjulte svarmomenter og egen status (`track: 'tasks'`). Kildehenvisninger per tema peker til originalenes sider/slides og kapittelguidene. Spørsmålene er øvingsmateriale, ikke offisielle eksamensoppgaver.
+
 **Statistikk**: `subjects/statistikk/oppgaver/` inneholder 88 oppgaver fra 13
 tidligere PB2030-eksamenssett (juni 2020 – mai 2026), gruppert etter tema i
 stedet for etter sitting, hver med et løsningsforslag som ligger skjult i et

@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Muntlige eksamensspørsmål — MoS · H26</title>
+  <meta name="description" content="36 muntlige øvingsspørsmål basert på seks forelesninger og fem laber i maskinvare og sikkerhet, med oppfølging og skjulte svarmomenter.">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=41">
+</head>
+<body class="theme-mos" data-updated="2026-10-15">
+  <div class="app-shell">
+
+    <aside class="sidebar"></aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">MoS</a>
+        <div class="topbar__crumb">Muntlig eksamen</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow">MoS eksamensøving</div>
+          <h1>Muntlige eksamensspørsmål</h1>
+          <p class="page-header__desc">Øv på å forklare teori, begrunne labresultater og vurdere sikkerhet. 36 spørsmål dekker alle seks forelesningene og de fem labene.</p>
+          <span class="page-header__status" data-status="active"><i></i>36 spørsmål · oppfølging og svarmomenter</span>
+        </header>
+
+<section class="section"><div class="section__label">Slik bruker du siden</div><article class="prose"><p>Dette er egenformulerte øvingsspørsmål basert på kursmaterialet, ikke offisielle eksamensoppgaver eller en prognose for hva du blir spurt om. Svarmomentene er støtte til resonnementet, ikke et manus du må gjengi ordrett.</p><p>Svar høyt i 2–4 minutter før du åpner svarmomentene. Forklar først mekanismen, bruk deretter et konkret eksempel fra labben, og avslutt med hva observasjonen viser og hvilke begrensninger den har. Bruk oppfølgingsspørsmålet til å prøve forståelsen din. Tidsforslaget er en øvingsmetode, ikke oppgitt eksamenstid.</p><p>Marker egen status per spørsmål. «Forstått» betyr at du kan forklare og begrunne uten å lese svaret. Ta gjerne en prøveøkt med ett teorispørsmål, ett labspørsmål og ett spørsmål som kobler temaer sammen.</p><p><strong>Kildegrunnlag:</strong> Forelesning 01–04 (PDF), forelesning 05–06 (PowerPoint) og de norske heftene til lab 1–5. Under hvert tema står relevante sider eller slides. Kapittellenkene gir repetisjon og tilgang til originalfilene lokalt. Drøfting og forslag til forsvar er faglige resonnementer med utgangspunkt i materialet.</p></article><nav class="tasknav" aria-label="Velg tema"><a href="#tema-1">Sikkerhet og oppstart</a><a href="#tema-2">Bootloader, SWD og UART</a><a href="#tema-3">Bluetooth Low Energy</a><a href="#tema-4">MicroPython og MQTT</a><a href="#tema-5">Effektanalyse</a><a href="#tema-6">Spenningsglitching</a><a href="#tema-7">Sammenheng og drøfting</a></nav></section>
+<section class="section" id="tema-1"><div class="section__label">Sikkerhet og oppstart</div><p><a href="01-intro.html">Repeter kapittelet</a> · Forelesning 01, særlig side 10–15; lab 1, side 10–11.</p>
+          <article class="task" id="trusselmodell">
+            <header class="task__head"><span class="task__src">Spørsmål 1</span><span class="task__title">Hva må du vite før du kan si at en IoT-enhet er sikker?</span></header>
+            <div class="task__q"><p>Ta utgangspunkt i en sensor som både kan nås over nettverket og tas fysisk ut av bygget. Forklar hvilke verdier og angrepsflater du vil undersøke.</p><p><strong>Oppfølging:</strong> Hvordan endrer vurderingen seg hvis angriperen bare har nettverkstilgang?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Avklar verdier som firmware, nøkler, måledata og styring av aktuatorer. Skill konfidensialitet, integritet og tilgjengelighet. Beskriv angriperens tilgang, utstyr og tid. Fysisk tilgang åpner for debug, uttrekk av flash, måling og feilinjeksjon; nettverkstilgang åpner andre veier. «Sikker» må knyttes til en konkret trusselmodell, ikke bare til at enheten har kryptering.</p></div></details>
+          </article>
+
+          <article class="task" id="tillitskjede">
+            <header class="task__head"><span class="task__src">Spørsmål 2</span><span class="task__title">Forklar en chain of trust fra strømmen slås på til applikasjonen kjører.</span></header>
+            <div class="task__q"><p>Tegn kjeden og forklar hva hvert trinn må kontrollere før det gir fra seg kontrollen.</p><p><strong>Oppfølging:</strong> Hvorfor er det utilstrekkelig å kontrollere signaturen bare i applikasjonen?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Start med en beskyttet tillitsrot, for eksempel ROM og en betrodd offentlig nøkkel. Hvert trinn autentiserer neste trinn før det kjøres. En kontroll i applikasjonen kommer for sent hvis tidligere kode kan endres. Signaturkontroll må håndtere feil ved å avvise; også debug og alternative oppstartsveier må vurderes. Signert betyr autorisert av en betrodd nøkkel, ikke at koden er feilfri.</p></div></details>
+          </article>
+
+          <article class="task" id="bootloader">
+            <header class="task__head"><span class="task__src">Spørsmål 3</span><span class="task__title">Hva er forskjellen på en bootloader og sikker oppstart?</span></header>
+            <div class="task__q"><p>Bruk overgangen fra NRF52BOOT til CIRCUITPY i lab 1 til å forklare hva som faktisk ble installert.</p><p><strong>Oppfølging:</strong> Beviser en vellykket UF2-overføring at firmwaren er autentisk?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Bootloaderen gjør oppstart og innlasting av firmware mulig. UF2 er et filformat og en praktisk overføringsmekanisme; det gir ikke i seg selv autentisering. I lab 1 installeres UF2-bootloaderen og deretter CircuitPython. Sikker oppstart krever at autorisasjonen til koden verifiseres mot en beskyttet tillitsrot. Skill funksjonstesten «koden kjører» fra sikkerhetskravet «bare godkjent kode får kjøre».</p></div></details>
+          </article>
+
+          <article class="task" id="minnetyper">
+            <header class="task__head"><span class="task__src">Spørsmål 4</span><span class="task__title">Hvilken betydning har flash og RAM for en angriper?</span></header>
+            <div class="task__q"><p>Forklar hvor kode, konfigurasjon og midlertidige verdier kan finnes, og hva som skjer ved omstart.</p><p><strong>Oppfølging:</strong> Er hemmeligheten trygg bare fordi den ikke står i kildekoden?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Flash er ikke-flyktig og kan inneholde firmware, konfigurasjon og nøkler. RAM er arbeidsminne og kan inneholde dekrypterte hemmeligheter mens systemet kjører. At en hemmelighet fjernes fra kildekoden sier ikke hvordan den er beskyttet i lagring eller bruk. Vurder lesetilgang via debug, programmeringsgrensesnitt og fysisk tilgang til minne.</p></div></details>
+          </article>
+        </section>
+<section class="section" id="tema-2"><div class="section__label">Bootloader, SWD og UART</div><p><a href="02-bootloader-swd-uart.html">Repeter kapittelet</a> · Forelesning 02; lab 1, side 2–13.</p>
+          <article class="task" id="debugkjede">
+            <header class="task__head"><span class="task__src">Spørsmål 5</span><span class="task__title">Forklar hele kjeden fra debuggeren på PC-en til minnet i nRF52840.</span></header>
+            <div class="task__q"><p>Plasser GDB, OpenOCD, Pico med debugprobe-firmware, SWD, DP og AP i riktig rekkefølge.</p><p><strong>Oppfølging:</strong> Hva skiller GDB-serveren fra telnet-grensesnittet til OpenOCD?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>GDB sender debugforespørsler til OpenOCDs GDB-server. OpenOCD styrer proben, som omsetter forespørslene til SWD-signaler. DP gir tilgang til AP-er, og MEM-AP gir tilgang til minnekartet. SWCLK er klokke og SWDIO er toveis data; jord og riktige spenningsnivåer trengs også. Telnet på port 4444 brukes til OpenOCD-kommandoer, mens GDB-serveren betjener debuggeren.</p></div></details>
+          </article>
+
+          <article class="task" id="approtect">
+            <header class="task__head"><span class="task__src">Spørsmål 6</span><span class="task__title">OpenOCD melder «Could not find MEM-AP». Hvordan undersøker du feilen?</span></header>
+            <div class="task__q"><p>Forklar hvorfor CTRL-AP fortsatt kan svare, og hvordan du skilte aktiv beskyttelse fra en koblingsfeil i lab 1.</p><p><strong>Oppfølging:</strong> Hva må være kontrollert før du konkluderer med at APPROTECT er årsaken?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Kontroller strøm, felles jord, SWCLK/SWDIO, logikknivåer og riktig probe-/target-konfigurasjon. I laboppsettet kan låst MEM-AP skyldes APPROTECT. CTRL-AP gir kontrollfunksjoner selv når minnetilgangen er sperret. Les IDR og APPROTECTSTATUS; labheftet angir 0 som beskyttet. En enkelt feilmelding er ikke alene bevis på aktiv beskyttelse.</p></div></details>
+          </article>
+
+          <article class="task" id="eraseall">
+            <header class="task__head"><span class="task__src">Spørsmål 7</span><span class="task__title">Hvorfor kunne du programmere donglen etter ERASEALL uten å ha lest ut originalprogrammet?</span></header>
+            <div class="task__q"><p>Forklar hva gjenåpningen koster, og hvilke sikkerhetsegenskaper dette viser.</p><p><strong>Oppfølging:</strong> Har du dermed demonstrert at originalfirmwaren kunne stjeles?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>ERASEALL sletter innholdet og fjerner beskyttelsen i laboppsettet. Deretter kan ny firmware programmeres. Det demonstrerer gjenbruk etter sletting, ikke lesing av den beskyttede originalen. Lesebeskyttelse ivaretar et annet krav enn autentisering av ny kode; tilgjengelighet kan også rammes ved sletting. Oppførselen må knyttes til aktuell brikke og revisjon, ikke generaliseres til alle nRF52-enheter.</p></div></details>
+          </article>
+
+          <article class="task" id="regout">
+            <header class="task__head"><span class="task__src">Spørsmål 8</span><span class="task__title">Hvorfor kan kommunikasjonen slutte å fungere etter at nRF52840 er slettet?</span></header>
+            <div class="task__q"><p>Knytt forklaringen til UICR, REGOUT0 og spenningsnivåer.</p><p><strong>Oppfølging:</strong> Hva ville du målt før du koblet til en ekstern 3.3 V-enhet?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>UICR inneholder konfigurasjon, blant annet REGOUT0. For dongleoppsettet med forsyning på VDDH peker forelesningen på 1.8 V som standard etter sletting. Det kan gi utilstrekkelig høyt logikknivå for en 3.3 V-mottaker. Mål VDD og signalnivåer, kontroller datablad og bruk riktig regulatorinnstilling eller nivåomformer. Ikke anta at USB-spenningen også er GPIO-spenningen.</p></div></details>
+          </article>
+
+          <article class="task" id="uart">
+            <header class="task__head"><span class="task__src">Spørsmål 9</span><span class="task__title">Du får bare uleselige tegn i seriellterminalen. Hvordan feilsøker du?</span></header>
+            <div class="task__q"><p>Beskriv koblingen mellom Pi, Pico og PC og hvilke innstillinger som må stemme.</p><p><strong>Oppfølging:</strong> Hvorfor kan en ekte RS-232-adapter være farlig å koble direkte til GPIO?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Kontroller rett COM-port, baudrate (115200 i labben), dataformat, strøm og felles jord. TX skal til RX og omvendt. Skill GPIO-UART med logikknivåer fra elektrisk RS-232 med positive og negative spenninger; ekte RS-232 krever egnet nivåomformer. En åpen konsoll kan gi logger eller innlogging og må vurderes som en angrepsflate.</p></div></details>
+          </article>
+
+          <article class="task" id="flashlab">
+            <header class="task__head"><span class="task__src">Spørsmål 10</span><span class="task__title">Hvordan viste du trinn for trinn at programmeringen i lab 1 virket?</span></header>
+            <div class="task__q"><p>Forklar hva blinkprogrammet, NRF52BOOT og CIRCUITPY beviser hver for seg.</p><p><strong>Oppfølging:</strong> Hvis blink virker, men NRF52BOOT ikke dukker opp, hvilken del av kjeden vil du undersøke?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Blinkprogrammet tester grunnleggende programmering og kjøring. Deretter programmeres bootloaderbildet, og USB-stasjonen NRF52BOOT viser at denne oppstartsveien virker. CircuitPython kopieres som UF2, og CIRCUITPY viser at runtime og filsystem er startet. Feilsøk én overgang om gangen: riktig bilde/target, reset/oppstartsmodus, USB-kabel og forbindelse. Ingen av disse observasjonene alene beviser sikker oppstart.</p></div></details>
+          </article>
+        </section>
+<section class="section" id="tema-3"><div class="section__label">Bluetooth Low Energy</div><p><a href="03-ble.html">Repeter kapittelet</a> · Forelesning 03, side 15–18, 24–45; lab 2, særlig side 7–17.</p>
+          <article class="task" id="gap-gatt">
+            <header class="task__head"><span class="task__src">Spørsmål 11</span><span class="task__title">Hvordan kommer en BLE-klient fra å oppdage donglen til å lese en verdi?</span></header>
+            <div class="task__q"><p>Forklar advertising, central/peripheral, GAP, GATT og ATT som deler av samme forløp.</p><p><strong>Oppfølging:</strong> Er rollen central det samme som rollen GATT-klient i alle mulige systemer?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Advertising gjør enheten synlig. GAP beskriver oppdagelse, forbindelser og roller. I labben kobler telefonen eller Pi-en seg til donglen og bruker GATT til å finne tjenester og karakteristikker. ATT er attributtprotokollen under GATT. GAP-roller og GATT-klient/server beskriver ulike ting; i labben sammenfaller de på en bestemt måte, men de skal ikke defineres som identiske.</p></div></details>
+          </article>
+
+          <article class="task" id="gattlab">
+            <header class="task__head"><span class="task__src">Spørsmål 12</span><span class="task__title">Du skriver 0x01 til 0xA002 og leser 0x11 fra 0xA001. Forklar hele dataveien.</span></header>
+            <div class="task__q"><p>Plasser tjenesten 0xA000, karakteristikkene og programlogikken i forklaringen.</p><p><strong>Oppfølging:</strong> Hva skiller UUID fra handle, og hva må klienten gjøre for å motta notify?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>0xA000 identifiserer labtjenesten. Klienten skriver til 0xA002, og donglens kode legger til 0x10 og oppdaterer 0xA001. UUID beskriver type/identitet; handle adresserer et konkret attributt i serverens tabell. Notify krever støtte i karakteristikken og at klienten aktiverer abonnement, normalt via CCCD. Skill en vanlig lesing fra et varsel serveren sender ved endring.</p></div></details>
+          </article>
+
+          <article class="task" id="blefeil">
+            <header class="task__head"><span class="task__src">Spørsmål 13</span><span class="task__title">Telefonen finner donglen, men Python-programmet på Pi-en gjør ikke det. Hvordan undersøker du?</span></header>
+            <div class="task__q"><p>Lag en begrunnet rekkefølge for kontroll av program, annonsering, adresse/navn og forbindelse.</p><p><strong>Oppfølging:</strong> Hvorfor kan en forbindelse fra telefonen forklare at annonseringen forsvinner?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Kontroller at riktig dongleprogram kjører og at Bluetooth er aktivt på Pi-en. Sammenlign annonsert navn og adressetype med det klienten søker etter; en adresse kan endre seg. Labprogrammet stopper advertising når det er tilkoblet, så koble fra telefonen og sjekk at programmet annonserer igjen. Når forbindelse virker, kontroller oppdagede tjenester, UUID-er og lese-/skriverettigheter. RSSI er en indikasjon på mottatt signalstyrke, ikke en sikker avstandsmåler.</p></div></details>
+          </article>
+
+          <article class="task" id="bleautorisasjon">
+            <header class="task__head"><span class="task__src">Spørsmål 14</span><span class="task__title">Hva ville skjedd hvis labtjenesten styrte en dørlås i stedet for en testverdi?</span></header>
+            <div class="task__q"><p>Bruk labobservasjonene til å vurdere hvem som får lese og skrive.</p><p><strong>Oppfølging:</strong> Er et unikt navn, en ukjent UUID eller stoppet advertising tilstrekkelig tilgangskontroll?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>I labben kan klienten koble til og skrive uten at brukeren gjennomfører paring. Det er en grunn til å undersøke karakteristikkens sikkerhetskrav, ikke et universelt bevis på at alle BLE-tjenester er åpne. Navn og UUID er oppdagbare identifikatorer, ikke hemmelige adgangsbevis. For en lås må en autorisert bruker/enhet autentiseres, følsomme operasjoner beskyttes og gamle kommandoer avvises. Stoppet advertising begrenser synlighet, men erstatter ikke dette.</p></div></details>
+          </article>
+
+          <article class="task" id="ble-python">
+            <header class="task__head"><span class="task__src">Spørsmål 15</span><span class="task__title">Hvorfor kjører deler av lab 2 på donglen og andre deler på Raspberry Pi?</span></header>
+            <div class="task__q"><p>Forklar CircuitPython, REPL, tjenestekoden og klientprogrammet.</p><p><strong>Oppfølging:</strong> Hvordan kunne du avgjort om en feil ligger i klienten eller i donglens programlogikk?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>CircuitPython kjører på nRF52840 og eksponerer tjenesten og GPIO. Thonny/REPL lar deg teste på donglen. Pi-en kjører et separat Python-program som skanner, kobler til, finner tjenesten og leser/skriver verdier. Bruk nRF Connect som uavhengig klient og sammenlign med logging på donglen. Hvis begge klienter får feil resultat, undersøk serverlogikken; hvis bare Pi feiler, undersøk klientens valg av enhet, UUID og datatype.</p></div></details>
+          </article>
+        </section>
+<section class="section" id="tema-4"><div class="section__label">MicroPython og MQTT</div><p><a href="04-micropython-mqtt.html">Repeter kapittelet</a> · Forelesning 04, side 10–33; lab 3, side 2–13.</p>
+          <article class="task" id="soc">
+            <header class="task__head"><span class="task__src">Spørsmål 16</span><span class="task__title">Hva er en SoC, og hva kjører egentlig når du bruker MicroPython på ESP8266?</span></header>
+            <div class="task__q"><p>Skill mellom brikke, kort/modul, flash, firmware og Python-skript.</p><p><strong>Oppfølging:</strong> Hvorfor er det relevant for sikkerheten at flash kan ligge på en separat brikke?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>En SoC samler CPU og flere systemfunksjoner som RAM, periferienheter og radio. Et kort eller en modul kan i tillegg ha ekstern flash, USB-UART og strømforsyning. MicroPython er firmware/runtime på mikrokontrolleren; skriptene kjøres der, mens vanlig Python også kan kjøre lokalt på PC-en. Ekstern flash kan gi en fysisk vei til kode og konfigurasjon. At noe er en SoC betyr ikke at all lagring er intern eller beskyttet.</p></div></details>
+          </article>
+
+          <article class="task" id="mqttflyt">
+            <header class="task__head"><span class="task__src">Spørsmål 17</span><span class="task__title">Forklar hvordan en melding fra nettleseren ender med å tenne LED-en i lab 3.</span></header>
+            <div class="task__q"><p>Tegn publisher, broker, topic, abonnement, callback og GPIO.</p><p><strong>Oppfølging:</strong> Hvorfor kan dette virke selv om ESP8266 står bak NAT?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Nettleserklienten publiserer på et topic. Brokeren videresender til ESP8266-klienten som har et passende abonnement. Callbacken behandler payload og setter GPIO. Kortet etablerer selv en utgående forbindelse til brokeren, som kan brukes begge veier; det trengs ikke en ny innkommende forbindelse gjennom NAT. Et topic er en rutingsadresse, ikke i seg selv tilgangskontroll.</p></div></details>
+          </article>
+
+          <article class="task" id="mqttfeil">
+            <header class="task__head"><span class="task__src">Spørsmål 18</span><span class="task__title">Nettklienten mottar meldingen, men LED-en endres ikke. Hvordan isolerer du feilen?</span></header>
+            <div class="task__q"><p>Beskriv hva du tester i hvert ledd før du endrer kode.</p><p><strong>Oppfølging:</strong> Hva skiller strengen ON fra byteverdien b'ON', og hvorfor kan off() tenne LED-en?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Kontroller først riktig interpreter, seriellport og kjørende program. Test Wi-Fi og brokerforbindelse separat. Kontroller topic, abonnement og at mottaksløkken faktisk kjører; logg topic og payload i callbacken. MicroPython-koden sammenligner byteverdier, og store/små bokstaver og ekstra tegn betyr noe. Test GPIO uavhengig av MQTT. LED-en i laboppsettet er aktiv lav, slik at lavt GPIO-nivå tenner den.</p></div></details>
+          </article>
+
+          <article class="task" id="mqttsikkerhet">
+            <header class="task__head"><span class="task__src">Spørsmål 19</span><span class="task__title">Vurder sikkerheten fra ESP8266 via broker til mottaker.</span></header>
+            <div class="task__q"><p>Prioriter tiltak for hemmeligheter på kortet, transporten og hvilke topic klienter får bruke.</p><p><strong>Oppfølging:</strong> Hvorfor løser ikke TLS problemet med at alle deler samme brokerkonto?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Undersøk passord i skript/flash, fysisk uttrekk, valgt transport og sertifikatvalidering. TLS beskytter forbindelsen til riktig motpart når sertifikatet valideres, men gir ikke automatisk topic-autorisasjon. Bruk separate identiteter og begrens lesing/skriving med ACL-er. Ikke anta at begge klientene bruker TLS bare fordi nettleseren bruker WSS; kontroller også ESP8266-forbindelsen. Et kreativt topic-navn er ikke en tilgangsregel.</p></div></details>
+          </article>
+
+          <article class="task" id="mqttverifisering">
+            <header class="task__head"><span class="task__src">Spørsmål 20</span><span class="task__title">Hva demonstrerer de ulike testene i lab 3, og hva står fortsatt uprøvd?</span></header>
+            <div class="task__q"><p>Sammenlign flash_id, REPL, Wi-Fi-skanning, ping og MQTT send/motta.</p><p><strong>Oppfølging:</strong> Kan et vellykket ping bevise at MQTT over TLS virker?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>flash_id gir informasjon om flashen, ikke en garanti for innholdets sikkerhet. REPL viser at runtime svarer. Skanning finner nettverk, og tilkobling/ping tester deler av nettverksveien. MQTT-testen må i tillegg bekrefte broker, port, transport, autentisering og topic. Ping verifiserer ikke TLS, sertifikatkontroll eller MQTT-rettigheter. Test konkrete påstander med en observasjon som faktisk gjelder det aktuelle laget.</p></div></details>
+          </article>
+        </section>
+<section class="section" id="tema-5"><div class="section__label">Effektanalyse</div><p><a href="05-effektanalyse.html">Repeter kapittelet</a> · Forelesning 05, slide 2–11; lab 4, punkt 5–6.</p>
+          <article class="task" id="stromlekkasje">
+            <header class="task__head"><span class="task__src">Spørsmål 21</span><span class="task__title">Hvorfor kan strømforbruk avsløre noe om en passordsjekk selv om svaret alltid er «feil»?</span></header>
+            <div class="task__q"><p>Knytt transistoraktivitet til instruksjoner, data og en målbar strømkurve.</p><p><strong>Oppfølging:</strong> Hva er forskjellen på å observere programflyt og å utlede hvilke data som behandles?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Lading og utlading av kapasitanser i CMOS gir strømforbruk som avhenger av aktiviteten. Ulike instrukser, data og forgreininger kan gi ulike kurver. Tidlig avslutning ved første feil tegn røper hvor langt sammenligningen kom. Det er en sidekanal utenom programmets vanlige utdata. Identisk svartekst er derfor utilstrekkelig; også den fysiske implementasjonen må vurderes.</p></div></details>
+          </article>
+
+          <article class="task" id="shunt">
+            <header class="task__head"><span class="task__src">Spørsmål 22</span><span class="task__title">Tegn hvordan ChipWhisperer Nano måler strømforbruket til målbrikken.</span></header>
+            <div class="task__q"><p>Forklar shuntmotstanden R12, spenning, strøm og behovet for trigger.</p><p><strong>Oppfølging:</strong> Hva skjer hvis du øker shuntmotstanden for å få et tydeligere signal?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>En kjent motstand i serie med forsyningen gir et spenningsfall V = I × R. Målt spenningsfall kan omregnes til strøm. Skill måling over motstanden fra måling av forsyningsspenningen på brikkesiden, som faller når strømmen øker. En trigger justerer kurvene til samme del av kjøringen. Større motstand gir sterkere signal, men også større forsyningsfall og mulig ustabilitet. Kontroller aktuell kortrevisjon fremfor å anta én R12-verdi.</p></div></details>
+          </article>
+
+          <article class="task" id="spa-passord">
+            <header class="task__head"><span class="task__src">Spørsmål 23</span><span class="task__title">Forklar hvordan lab 4 kan finne ett passordtegn om gangen.</span></header>
+            <div class="task__q"><p>Beskriv hva du varierer, hva du holder fast, og hva du ser etter i kurvene.</p><p><strong>Oppfølging:</strong> Hvorfor blir antall kandidattester omtrent k × n i stedet for k opphøyd i n?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Prøv kandidater for neste tegn mens et allerede funnet prefiks holdes fast. Ved tidlig avslutning kan riktig kandidat gi én ekstra iterasjon og senere avvik i kurven. Gjenta for neste posisjon. I en idealisert modell med k tegnvalg og n posisjoner blir det omtrent k × n kandidattester. Støy, gjentatte opptak, ukjent lengde og tvetydige kurver kan kreve flere målinger; dette er ikke en generell kompleksitetsgaranti for alle passordangrep.</p></div></details>
+          </article>
+
+          <article class="task" id="spalabkontroll">
+            <header class="task__head"><span class="task__src">Spørsmål 24</span><span class="task__title">Hvordan ville du vist at funnet i lab 4 skyldes en reell lekkasje?</span></header>
+            <div class="task__q"><p>Bruk labkravet om å bytte passord, kompilere på nytt og gjenta forsøket.</p><p><strong>Oppfølging:</strong> Hva kontrollerer du hvis alle kurvene ser helt like ut?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Kjør på ekte maskinvare som angitt i labben, og dokumenter hvordan kandidatene skilles. Bytt det hardkodede passordet, bygg og programmer ny firmware, og prøv igjen uten å bruke den nye verdien i angrepslogikken. Kontroller trigger, målevindu, sampling, tilkobling og at riktig firmware kjører. Sammenlign gjentatte målinger før du kaller en liten forskjell et treff.</p></div></details>
+          </article>
+
+          <article class="task" id="pipeline">
+            <header class="task__head"><span class="task__src">Spørsmål 25</span><span class="task__title">Hvorfor kan load-use og et feilpredikert hopp endre både kjøretid og strømkurve?</span></header>
+            <div class="task__q"><p>Forklar stall og flush i pipeline-eksemplet fra forelesningen.</p><p><strong>Oppfølging:</strong> Hvordan bygger du opp gjennomsnittlig CPI fra andeler og kostnader?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>En dataavhengighet kan kreve venting, og et feilpredikert hopp kan kreve at instrukser forkastes. I forelesningens modell gir load-use én ekstra syklus og feilpredikert hopp to. Gjennomsnittlig CPI er et vektet snitt; de oppgitte andelene gir 1.23. Dette er modellens tall, ikke faste kostnader for alle ARM-kjerner. Hemmelighetsavhengig kontrollflyt kan derfor påvirke observerbar tid og effekt.</p></div></details>
+          </article>
+
+          <article class="task" id="spaforsvar">
+            <header class="task__head"><span class="task__src">Spørsmål 26</span><span class="task__title">Hvordan ville du endret en passordsammenligning som avbryter ved første feil?</span></header>
+            <div class="task__q"><p>Forklar prinsippet om å behandle alle tegn før resultatet avgjøres.</p><p><strong>Oppfølging:</strong> Er konstant kjøretid tilstrekkelig mot all effektanalyse?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>For en fast lengde kan forskjeller akkumuleres uten tidlig avslutning, og resultatet avgjøres etter hele gjennomløpet. Håndter også lengdesjekk og hemmelighetsavhengige minneoppslag. Maskinkoden og målinger må støtte påstanden om konstant tid; kildeteksten alene er utilstrekkelig. Konstant tid reduserer programflytlekkasje, men strømforbruk kan fortsatt avhenge av data. Forelesningen viser også til statistisk effektanalyse; slik beskyttelse kan kreve andre tiltak, som maskering.</p></div></details>
+          </article>
+        </section>
+<section class="section" id="tema-6"><div class="section__label">Spenningsglitching</div><p><a href="06-glitching.html">Repeter kapittelet</a> · Forelesning 06, slide 7–43; lab 5, punkt 5–7.</p>
+          <article class="task" id="cmos">
+            <header class="task__head"><span class="task__src">Spørsmål 27</span><span class="task__title">Forklar en CMOS-inverter og hvorfor signalene bruker tid på å skifte nivå.</span></header>
+            <div class="task__q"><p>Bruk nMOS, pMOS og lading/utlading av kapasitanser i forklaringen.</p><p><strong>Oppfølging:</strong> Hvordan knytter dette effektanalyse og spenningsglitching sammen?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Når inngangen er lav, leder pMOS og trekker utgangen opp; når den er høy, leder nMOS og trekker utgangen ned. Kapasitanser må lades gjennom en endelig motstand, slik at signaloverganger tar tid. Omskifting gir målbar strøm, og redusert forsyningsspenning kan øke forsinkelsen. Dette forklarer både lekkasje og hvorfor elektriske forstyrrelser kan gi feil.</p></div></details>
+          </article>
+
+          <article class="task" id="setup-hold">
+            <header class="task__head"><span class="task__src">Spørsmål 28</span><span class="task__title">Hva skiller setup-kravet fra hold-kravet i en synkron krets?</span></header>
+            <div class="task__q"><p>Forklar hvilken betydning lengste og korteste signalvei har.</p><p><strong>Oppfølging:</strong> Hvorfor kan lavere klokkefrekvens hjelpe ved et setup-problem, men ikke normalt løse et hold-problem?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Setup krever at data er stabile før mottakerens klokkeflanke: T ≥ t_pcq + t_pd + t_setup i modellen uten klokkeskjevhet. Hold krever stabilitet etter flanken og avhenger av minste forsinkelse: t_ccq + t_cd &gt; t_hold i slidene. En lengre periode gir mer tid til den lange veien, men endrer ikke at nye data kan komme for tidlig rett etter samme flanke. Buffere på korte veier kan rette hold-problemet.</p></div></details>
+          </article>
+
+          <article class="task" id="timinganalyse">
+            <header class="task__head"><span class="task__src">Spørsmål 29</span><span class="task__title">Vurder timing-eksemplet fra forelesningen uten å blande setup og hold.</span></header>
+            <div class="task__q"><p>t_pcq = 50 ps, t_setup = 60 ps og lengste logikkvei = 105 ps. Samtidig er t_ccq = 30 ps, korteste logikkvei = 25 ps og t_hold = 70 ps. Kan kretsen kjøre pålitelig?</p><p><strong>Oppfølging:</strong> Hva endres hvis en buffer øker korteste logikkvei fra 25 til 50 ps?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Setup gir minste periode 215 ps, tilsvarende omtrent 4.65 GHz. Men hold gir 30 + 25 = 55 ps, som er under 70 ps. Kretsen er dermed ikke pålitelig bare fordi setup er oppfylt. Med bufferen blir minimum 80 ps, og hold er oppfylt i modellen. Lengste vei og dermed setup-grensen er uendret dersom bufferen bare ligger på den korte veien.</p></div></details>
+          </article>
+
+          <article class="task" id="glitchvindu">
+            <header class="task__head"><span class="task__src">Spørsmål 30</span><span class="task__title">Hvordan kan et kort spenningsfall forårsake en nyttig feil i stedet for bare reset?</span></header>
+            <div class="task__q"><p>Forklar sammenhengen mellom redusert VDD, forplantningsforsinkelse og tidspunkt i kjøringen.</p><p><strong>Oppfølging:</strong> Hva bestemmer glitch-posisjon og glitch-bredde, og hvorfor må du søke over mange forsøk?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Lavere VDD kan øke forsinkelsen slik at data ikke rekker frem før klokkeflanken. Posisjonen styrer når forstyrrelsen kommer, og bredden hvor lenge den varer. Amplitude, flanker, avkobling og variasjon i kjøringen påvirker også utfallet. Klassifiser normal kjøring, reset/krasj og nyttig feil separat. En kort glitch garanterer ikke at akkurat én bestemt instruksjon rammes; det må underbygges med observasjoner.</p></div></details>
+          </article>
+
+          <article class="task" id="nanomod">
+            <header class="task__head"><span class="task__src">Spørsmål 31</span><span class="task__title">Hvorfor bruker lab 5 en modifisert ChipWhisperer Nano?</span></header>
+            <div class="task__q"><p>Forklar forbindelsen mellom glitch-transistoren, SJ6 og motstanden på 5.6 Ω i forelesningen.</p><p><strong>Oppfølging:</strong> Hvorfor må en enkel spenningsdelermodell sammenlignes med en faktisk måling?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Modifikasjonen gir glitch-transistoren en motstandsvei til målforsyningen slik at den kan trekkes ned uten en direkte kortslutning. Sliden viser SJ6 frakoblet, 5.6 Ω og R12 på 20 Ω i dette oppsettet. En ideell spenningsdeler kan gi en grov forventning, men last, transistor, kondensatorer og ledninger påvirker pulsformen. Kontroller riktig modifikasjon og mål den virkelige pulsen; ikke bruk modellen som eksakt fasit.</p></div></details>
+          </article>
+
+          <article class="task" id="glitchpassord">
+            <header class="task__head"><span class="task__src">Spørsmål 32</span><span class="task__title">Du får et godkjent svar med feil passord i lab 5. Hva har du vist, og hva har du ikke vist?</span></header>
+            <div class="task__q"><p>Forklar forskjellen på å omgå en sjekk og å finne passordet. Bruk målprogrammet og resultatklassene i notebooken.</p><p><strong>Oppfølging:</strong> Hvordan ville du undersøkt hvilken sikkerhetsbeslutning som feilet, og foreslått forsvar?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Et verifisert treff kan vise at kontrollen ble omgått; det røper ikke nødvendigvis hemmeligheten. Kontroller at feil passord normalt avvises, og at responsen ikke er timeout eller feilklassifisert reset. Studer kildekode og maskinkode for mulige feil i sammenligning, hopp, status eller løkketeller; responsen alene identifiserer ikke én instruksjon. Forsvar kan kombinere avvisning som standard, redundante kontroller og spennings-/feildeteksjon, men må testes mot en konkret feilmodell.</p></div></details>
+          </article>
+        </section>
+<section class="section" id="tema-7"><div class="section__label">Sammenheng og drøfting</div><p>Syntesespørsmål basert på forelesning 01–06 og lab 1–5.</p>
+          <article class="task" id="passiv-aktiv">
+            <header class="task__head"><span class="task__src">Spørsmål 33</span><span class="task__title">Sammenlign hva du oppnådde i lab 4 og lab 5.</span></header>
+            <div class="task__q"><p>Beskriv observasjon, påvirkning, forutsetninger og resultat i hvert angrep.</p><p><strong>Oppfølging:</strong> Kan effektmålinger hjelpe deg å planlegge en glitch?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Effektanalyse observerer lekkasje for å utlede informasjon, i lab 4 et passord. Glitching påvirker utførelsen for å fremkalle en feil, i lab 5 omgåelse av en kontroll. De krever ulike bevis og mottiltak. Målinger kan peke ut et interessant tidsvindu for feilinjeksjon. Konstant tid kan redusere en sidekanal uten å sikre kontrollflyten mot feilinjeksjon.</p></div></details>
+          </article>
+
+          <article class="task" id="lagvis">
+            <header class="task__head"><span class="task__src">Spørsmål 34</span><span class="task__title">En produsent hevder at «TLS gjør IoT-produktet sikkert». Hvordan vurderer du påstanden?</span></header>
+            <div class="task__q"><p>Bruk minst tre konkrete angrepsflater fra labene og foreslå et tiltak for hver.</p><p><strong>Oppfølging:</strong> Hvilke risikoer gjenstår selv om sertifikatkontrollen er korrekt?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>TLS kan beskytte en transportforbindelse, men åpne debugporter, ubeskyttede firmwareoppdateringer, hemmeligheter i flash og åpne BLE-operasjoner må vurderes separat. Brokerrettigheter og delte identiteter avgjør hvem som kan styre enheten. Koble hvert tiltak til et krav: debuglås for lesetilgang, autentisert firmware for oppstart, ACL for topic-tilgang og feilresistent kontroll for glitching. Begrunn også gjenværende risiko og hvordan tiltakene testes.</p></div></details>
+          </article>
+
+          <article class="task" id="bevis">
+            <header class="task__head"><span class="task__src">Spørsmål 35</span><span class="task__title">Hvordan skiller du en fungerende labdemonstrasjon fra en sikkerhetskonklusjon?</span></header>
+            <div class="task__q"><p>Velg én lab og forklar påstand, test, forventet resultat, observasjon og begrensning.</p><p><strong>Oppfølging:</strong> Hva ville en negativ test eller et moteksempel bidratt med?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>En LED som reagerer viser funksjon, ikke at bare autoriserte klienter kan styre den. ERASEALL viser gjenåpning etter sletting, ikke uthenting av originalen. En passordrespons etter glitch må skilles fra reset og normal godkjenning. Bruk kontrollforsøk, gjentakelser og tydelig avgrensede påstander. At ett angrep mislykkes er ikke bevis for at alle angrep mislykkes.</p></div></details>
+          </article>
+
+          <article class="task" id="designoppgave">
+            <header class="task__head"><span class="task__src">Spørsmål 36</span><span class="task__title">Hvordan ville du gjort et av laboppsettene klart for et produkt med fysisk tilgjengelige enheter?</span></header>
+            <div class="task__q"><p>Velg BLE- eller MQTT-oppsettet. Prioriter tre forbedringer og forklar hvordan du ville verifisert dem.</p><p><strong>Oppfølging:</strong> Hvilke avveininger oppstår mellom service/debug, oppdateringer, pris og sikkerhet?</p></div>
+            <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Start med trusselmodell og konsekvens ved uautorisert styring. Begrunn prioritering, for eksempel individuelle identiteter og minste privilegium, autentisert oppstart/oppdatering og begrenset debugtilgang. Vurder nøkkellagring og fysisk angrep der risikoen tilsier det. Test både tillatt bruk og avvisning av uautorisert bruk. Planlegg gjenoppretting og service slik at de ikke blir en alternativ vei rundt sikkerheten.</p></div></details>
+          </article>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js?v=42"></script>
+  <script src="../../../assets/js/status.js?v=35"></script>
+  <script src="../../../assets/js/formler.js?v=35"></script>
+</body>
+</html>
