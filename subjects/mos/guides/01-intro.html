@@ -9,7 +9,7 @@
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
   <link rel="stylesheet" href="../../../assets/css/main.css?v=41">
 </head>
-<body class="theme-mos" data-updated="2026-09-01">
+<body class="theme-mos" data-updated="2026-10-15">
   <div class="app-shell">
 
     <aside class="sidebar"></aside>
@@ -38,7 +38,7 @@
         <article class="prose">
           <h2>Om emnet</h2>
           <p>VE3270/TSD3050 handler om sikkerhet på maskinvarenivå — det laget under operativsystemet og applikasjonskoden, der en angriper med fysisk tilgang til et kretskort kan lese ut, endre eller omgå beskyttelsen i en mikrokontroller. Der webapplikasjonssikkerhet (som i TSD3060) handler om å beskytte tjenester over et nettverk, handler dette emnet om hva som skjer når angriperen har en logisk analysator, et loddebolt eller et oscilloskop koblet rett på kretskortet.</p>
-          <p>Emnet er bygget opp som en vekselvirkning mellom forelesninger og obligatoriske labøvelser: hver teoribolk følges av en praktisk øvelse på ekte maskinvare (Raspberry Pi Pico, nRF52840-dongler, ESP8266-kort og en ChipWhisperer Nano). Vurderingen består av et prosjekt og en avsluttende eksamen. Pensum tar utgangspunkt i <em>The Hardware Hacking Handbook</em> av Colin O'Flynn og Jasper van Woudenberg, som strukturerer feltet i angrepsklasser: feilinjeksjon (klokke-/spenningsglitching, elektromagnetisk injeksjon) og sidekanalanalyse (effektanalyse).</p>
+          <p>Emnet er bygget opp som en vekselvirkning mellom forelesninger og obligatoriske labøvelser: hver teoribolk følges av en praktisk øvelse på ekte maskinvare (Raspberry Pi Pico, nRF52840-dongler, ESP8266-kort og en ChipWhisperer Nano). Vurderingen er en muntlig eksamen uten hjelpemidler (se <a href="emneplan.html">emneplanen</a>), der de første minuttene er en presentasjon av miniprosjektet. Pensum tar utgangspunkt i <em>The Hardware Hacking Handbook</em> av Colin O'Flynn og Jasper van Woudenberg, som strukturerer feltet i angrepsklasser: feilinjeksjon (klokke-/spenningsglitching, elektromagnetisk injeksjon) og sidekanalanalyse (effektanalyse).</p>
 
           <h2>Hva betyr «sikkerhet»?</h2>
           <p>Oxford-ordboken definerer sikkerhet enkelt som <em>«a state of being free from danger or threat»</em> — en tilstand fri for fare eller trussel. Overført til maskinvare betyr det at et system skal fortsette å oppføre seg som tiltenkt selv når noen aktivt prøver å få det til å gjøre noe annet: kjøre uautorisert kode, lekke en hemmelig nøkkel, eller omgå en lisens- eller passordsjekk.</p>
@@ -49,7 +49,62 @@
           <p>Prinsippet er enkelt: en liten, uforanderlig førstetrinns bootloader (ofte brent inn i silisiumet på fabrikken) starter opp og verifiserer signaturen til neste trinn før den gir fra seg kontrollen. Det trinnet verifiserer på sin side neste, og slik fortsetter det — hvert ledd i kjeden sjekker at det neste er signert av noen det stoler på, før det kjøres. Hvis kjeden holder, kan man stole på at kretsen kjører uendret, autorisert kode helt fra første klokkesyklus.</p>
           <p>Kjeden er samtidig det mest attraktive angrepsmålet: klarer man å bryte tilliten ett eneste sted — for eksempel ved å lure et trinn til å hoppe over signatursjekken — er resten av kjeden verdiløs. Store deler av dette emnet handler nettopp om hvordan man i praksis kan angripe (og forsvare) akkurat det trinnet, enten via debug-grensesnittet (kapittel 02), eller ved å fysisk forstyrre kretsen mens den kjører (kapittel 05–06).</p>
 
-          <div class="note"><strong>Underveis i faget:</strong> hver forelesning har en tilhørende obligatorisk lab som må godkjennes av lab-ingeniør/lærer. Denne siden slår sammen teori og lab-oppskrift i ett kapittel per tema — se «kilde»-lenkene øverst for de originale filene.</div>
+          <h3>Et konkret eksempel: hva som ligger i flashen på nRF52840-donglen</h3>
+          <p>Donglen fra lab 1 og 2 viser hvordan en oppstartskjede ser ut i praksis. Etter lab 1 ligger det fire ting i flashen:</p>
+          <ol>
+            <li><strong>MBR</strong> (Master Boot Record) helt nederst i flashen. Det er det første som kjører, og det sender videre til bootloaderen.</li>
+            <li><strong>SoftDevice</strong> (S140) er Nordics ferdigkompilerte Bluetooth-stack, som applikasjonen kaller.</li>
+            <li><strong>Applikasjonen</strong>, i labben CircuitPython.</li>
+            <li><strong>UF2-bootloaderen</strong> øverst i flashen lar deg laste inn ny kode ved å kopiere en <code>.uf2</code>-fil til en diskstasjon.</li>
+          </ol>
+          <p>Ingen av trinnene sjekker en signatur. Det er en <em>kjede</em>, men ingen <em>tillitskjede</em>: alle som kan koble til SWD eller USB, kan bytte ut koden. Det er nettopp det du gjør i lab 1. Spørsmålet «hva mangler for at dette skal være sikker oppstart?» er derfor en god inngang til hele faget. Svaret er en uforanderlig førstetrinnskode som verifiserer neste trinn, og en debug-port som er låst.</p>
+
+          <h2>Hvordan pensum henger sammen</h2>
+          <p>Forelesningene viser selv til kapitler i <em>The Hardware Hacking Handbook</em> (HHH). BLE-sikkerheten er hentet fra kapittel 10 i <em>The IoT Hacker's Handbook</em> (Aditya Gupta), som ligger blant kursfilene.</p>
+          <div class="dtable-wrap"><table class="dtable">
+            <thead><tr><th>Kapittel her</th><th>Lab</th><th>Angrepsflate</th><th>Bok</th></tr></thead>
+            <tbody>
+              <tr><td>02 Bootloader, SWD, UART</td><td>1</td><td>debug-port, readback-beskyttelse</td><td>HHH kap. 3 (dokumentasjon, grensesnitt)</td></tr>
+              <tr><td>03 BLE</td><td>2</td><td>trådløst grensesnitt, GATT uten autentisering</td><td>IoT Hacker's Handbook kap. 10</td></tr>
+              <tr><td>04 MicroPython, MQTT</td><td>3</td><td>sky-/meldingslaget, nøkler i flash</td><td>–</td></tr>
+              <tr><td>05 Effektanalyse</td><td>4</td><td>sidekanal (passiv)</td><td>HHH kap. 8–9 (og 10 for DPA)</td></tr>
+              <tr><td>06 Glitching</td><td>5</td><td>feilinjeksjon (aktiv)</td><td>HHH kap. 4–6 (og 7 for EM-injeksjon)</td></tr>
+            </tbody>
+          </table></div>
+
+          <div class="note"><strong>Underveis i faget:</strong> hver forelesning har en tilhørende obligatorisk lab som må godkjennes av lab-ingeniør/lærer. Denne siden slår sammen teori og lab-oppskrift i ett kapittel per tema — se «kilde»-lenkene øverst for de originale filene. Hvert kapittel slutter med <strong>muntlige eksamensspørsmål</strong> som er hentet fra quizene i forelesningene og spørsmålene i labheftene, med forslag til svar.</div>
+
+          <h2>Muntlige eksamensspørsmål</h2>
+          <details class="sol">
+            <summary>Hva betyr «sikkerhet», og hva er spesielt med maskinvaresikkerhet?</summary>
+            <div class="sol__body">
+              <p>Sikkerhet betyr å være fri for fare eller trussel. For et system betyr det at det oppfører seg som tiltenkt selv om noen aktivt prøver å få det til å gjøre noe annet. Det spesielle med maskinvare er at angriperen har <em>fysisk tilgang</em>. Hen er ikke bundet av API-et. Hen kan bruke debug-porten (kap. 2), måle strømforbruket (kap. 5) eller forstyrre spenningen (kap. 6). Riktig kode er derfor ikke nok. Implementasjonen må også tåle at noen måler den og forstyrrer den.</p>
+            </div>
+          </details>
+          <details class="sol">
+            <summary>Forklar chain of trust. Hvor er kjeden svakest?</summary>
+            <div class="sol__body">
+              <p>Et uforanderlig første trinn (ROM eller låst flash) verifiserer signaturen til neste trinn før det får kjøre, og slik videre for hvert trinn. Tilliten bygger på at første trinn ikke kan endres, og på at hver verifisering faktisk blir gjort.</p>
+              <p>De svake punktene er:</p>
+              <ul>
+                <li>en åpen debug-port som omgår hele kjeden,</li>
+                <li>et første trinn som kan byttes ut,</li>
+                <li>én sjekk som kan hoppes over med en glitch (if-setningen som sammenligner signaturen).</li>
+              </ul>
+              <p>Bryter ett ledd, er alle ledd etter det verdiløse.</p>
+            </div>
+          </details>
+          <details class="sol">
+            <summary>Er nRF52840-donglen etter lab 1 sikker? Hva mangler?</summary>
+            <div class="sol__body">
+              <p>Nei. MBR, bootloader og applikasjon verifiserer ikke hverandre, og SWD-porten er åpen etter ERASEALL. Det som mangler, er:</p>
+              <ul>
+                <li>signert firmware med en offentlig nøkkel i et minne som ikke kan endres,</li>
+                <li>en bootloader som avviser usignerte bilder,</li>
+                <li>APPROTECT slått på i produksjon.</li>
+              </ul>
+            </div>
+          </details>
         </article>
 
         <nav class="chapter-nav">
