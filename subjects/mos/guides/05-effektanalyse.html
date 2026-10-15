@@ -9,7 +9,7 @@
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
   <link rel="stylesheet" href="../../../assets/css/main.css?v=41">
 </head>
-<body class="theme-mos" data-updated="2026-09-01">
+<body class="theme-mos" data-updated="2026-10-15">
   <div class="app-shell">
 
     <aside class="sidebar"></aside>
@@ -40,14 +40,59 @@
         <article class="prose">
           <h2>Fra angrepsklasse til angrepsklasse</h2>
           <p>Gitt fysisk tilgang til et kretskort er man ikke lenger bundet av programmets offisielle grensesnitt. Forelesningen deler angrep med fysisk tilgang i to hovedkategorier: <strong>feilinjeksjon</strong> — å aktivt forstyrre kretsen (klokke-/spenningsglitching, elektromagnetisk injeksjon, tema for neste kapittel) — og <strong>sidekanalanalyse</strong>, der man passivt observerer noe kretsen lekker uten selv å ville det, som strømforbruk. Effektanalyse hører til den andre kategorien, og forutsetter alltid at man har funnet mest mulig dokumentasjon om målbrikken først (databladet er ofte det første stoppet).</p>
+          <p>Forelesningen bruker målbrikken på ChipWhisperer Nano, en <strong>STM32F030</strong> (ARM Cortex-M0), som eksempel. Den viser til disse kapitlene i <em>The Hardware Hacking Handbook</em>:</p>
+          <div class="dtable-wrap"><table class="dtable">
+            <thead><tr><th>Angrep</th><th>Type</th><th>HHH</th></tr></thead>
+            <tbody>
+              <tr><td>Finne dokumentasjon (datablad, skjema)</td><td>forarbeid</td><td>kap. 3</td></tr>
+              <tr><td>Klokke- og spenningsglitching</td><td>feilinjeksjon, aktiv</td><td>kap. 4–6</td></tr>
+              <tr><td>Elektromagnetisk feilinjeksjon</td><td>feilinjeksjon, aktiv</td><td>kap. 7</td></tr>
+              <tr><td>Effektanalyse av programflyt (SPA)</td><td>sidekanal, passiv</td><td>kap. 8–9</td></tr>
+              <tr><td>Hvilke data som behandles (DPA/CPA)</td><td>sidekanal, passiv</td><td>kap. 10</td></tr>
+            </tbody>
+          </table></div>
 
           <h2>Hvorfor strøm lekker informasjon</h2>
           <p>Når en C-kompilator oversetter kildekode til maskininstruksjoner, blir hver instruksjon til en bestemt sekvens av transistorbytter i CPU-en. Ulike instruksjoner — og ulike data instruksjonene opererer på — gir ulikt mønster av transistorbytting, og dermed ulikt momentant strømforbruk. Det høres abstrakt ut helt til man ser konsekvensen: et program som sammenligner et innskrevet passord tegn for tegn og hopper ut av løkken ved første feil tegn, vil typisk bruke <em>kortere tid og et litt annet strømforbruksmønster</em> for et feil passord enn for et som stemmer lenger — selv om selve utdataen («feil passord») er identisk begge veier.</p>
           <p>Denne enkleste formen kalles <strong>Simple Power Analysis (SPA)</strong>: man leser strømforbruket direkte som en graf over tid og prøver å kjenne igjen programflyt — løkker, forgreininger, funksjonskall — rett fra formen på kurven. Det finnes også mer avanserte varianter (dekket i pensumboka) som statistisk sammenligner mange tusen målinger for å trekke ut <em>hvilke data</em> som ble behandlet, selv når selve kontrollflyten er identisk uansett input — det er langt vanskeligere å forsvare seg mot, siden konstant-tid-kode (som fjerner de åpenbare forgreiningene) ikke hjelper alene.</p>
 
+          <h3>SPA kontra DPA</h3>
+          <div class="dtable-wrap"><table class="dtable">
+            <thead><tr><th></th><th>SPA (Simple Power Analysis)</th><th>DPA (Differential Power Analysis)</th></tr></thead>
+            <tbody>
+              <tr><td>Hva den finner</td><td>programflyt: hvilke instruksjoner som kjører og hvor lenge</td><td>data: bit i en hemmelig nøkkel</td></tr>
+              <tr><td>Antall målinger</td><td>én eller noen få</td><td>hundrevis til tusenvis</td></tr>
+              <tr><td>Metode</td><td>se på kurven, sammenligne former</td><td>statistikk: dele målingene i grupper etter en gjettet nøkkelbit og se på forskjellen i gjennomsnitt</td></tr>
+              <tr><td>Forsvar</td><td>konstant tid, ingen hopp som avhenger av hemmelige data</td><td>maskering (tilfeldige verdier blandes inn i dataene), støy, tilfeldig rekkefølge</td></tr>
+            </tbody>
+          </table></div>
+
+          <h2>Passordangrepet i lab 4: fra eksponentielt til lineært</h2>
+          <p>Målprogrammet sammenligner tegn for tegn og avbryter ved første feil tegn. Den lille ekstra jobben for hvert riktige tegn synes i strømkurven: et passord med ett riktig første tegn gir en kurve som «henger igjen» lenger før den skiller lag med de andre, enn et passord der alle tegn er feil. Angrepet blir derfor slik:</p>
+          <ol>
+            <li>Prøv alle mulige førstetegn, ta én måling for hver, og velg det tegnet der kurven skiller seg ut (avviket kommer senere).</li>
+            <li>Lås det tegnet og gjenta for tegn 2, 3 og så videre.</li>
+          </ol>
+          <p>Med \(k\) mulige tegn og et passord på \(n\) tegn går antall forsøk ned fra \(k^n\) (prøve alt) til høyst \(k \cdot n\). For et passord på 5 tegn med små bokstaver og sifre (\(k = 36\)) er det forskjellen mellom \(36^5 \approx 6 \cdot 10^7\) og \(5 \cdot 36 = 180\) forsøk. Det er dette du bør kunne forklare: sidekanalen lekker <em>delresultater</em>, slik at du kan gjette ett tegn om gangen.</p>
+          <p>Forsvaret er å sammenligne <em>alle</em> tegnene hver gang uten å avbryte (f.eks. ved å samle opp <code>diff |= a[i] ^ b[i]</code>), slik at tiden og formen på kurven ikke avhenger av hvor mange tegn som er riktige. Kapittel 6 viser at det ikke stopper glitching.</p>
+
+          <h2>Hvorfor instruksjoner tar ulik tid: pipeline og CPI</h2>
+          <p>Forelesningen tar med en <em>pipelined ARM-prosessor med hazard-enhet</em> for å forklare hvorfor ulike instruksjoner og ulike utfall gir ulik tid, og dermed ulik strømkurve. En 5-trinns pipeline (Fetch, Decode, Execute, Memory, Writeback) fullfører helst én instruksjon per klokkesyklus (CPI = 1). Avvik oppstår ved hazards:</p>
+          <ul>
+            <li><strong>Load-use</strong>: Hvis instruksjonen etter en <code>LDR</code> trenger verdien som lastes, må pipelinen vente én syklus (stall). CPI for den loaden blir da 2.</li>
+            <li><strong>Gjettet feil på et hopp</strong>: Hoppet avgjøres i Execute. Når prosessoren har gjettet feil, må de to instruksjonene som allerede er hentet, kastes (flush). CPI for hoppet blir da 3.</li>
+          </ul>
+          <p>Gjennomregnet eksempel fra forelesningen (SPECINT2000: 25 % load, 10 % store, 13 % hopp, 52 % R-type; 40 % av loadene brukes av neste instruksjon; 50 % av hoppene er gjettet feil):</p>
+          <p class="formula-in-measure">\[ \mathrm{CPI}_{lw} = 1(0{,}6) + 2(0{,}4) = 1{,}4 \qquad \mathrm{CPI}_{beq} = 1(0{,}5) + 3(0{,}5) = 2 \]</p>
+          <p class="formula-in-measure">\[ \overline{\mathrm{CPI}} = 0{,}25(1{,}4) + 0{,}10(1) + 0{,}13(2) + 0{,}52(1) = 1{,}23 \]</p>
+          <p>Koblingen til sikkerhet er dette: Om et hopp blir tatt eller ikke, endrer både tiden og strømforbruket. En <code>if</code> som avhenger av en hemmelighet, synes derfor i kurven. Avanserte prosessorer (dype pipelines, gjetting på hopp, superskalar og out-of-order, SIMD, flere tråder) gjør kurven mer støyete og vanskeligere å lese, men fjerner ikke lekkasjen. Spectre og Meltdown utnytter nettopp gjetting på hopp.</p>
+          <div class="note"><strong>Til muntlig eksamen:</strong> du får ikke regnet med kalkulator, så det er viktigere å kunne forklare <em>hvorfor</em> en load kan koste 2 sykluser og et hopp 3, enn å huske 1,23.</div>
+
           <h2>Hvordan man faktisk måler strømforbruk</h2>
           <p>Man måler sjelden strøm direkte — i stedet setter man inn en liten, kjent <strong>shunt-motstand</strong> i strømbanen til target-kretsen og måler spenningsfallet over den med et oscilloskop. Ohms lov \(V = I \times R\) gjør spenningsmålingen om til en strømkurve: med en kjent motstandsverdi og en målt spenning kan strømmen regnes ut direkte og fortløpende, synkronisert med et trigger-signal fra target-programmet.</p>
           <p>Denne labben bruker et <strong>ChipWhisperer Nano</strong> — et lite verktøy som samler target-programmerer, oscilloskop og seriellport i én pakke, slik at man slipper å koble sammen flere separate instrumenter for å komme i gang.</p>
+          <p>Forelesningen ber deg se etter <strong>R12</strong> i skjemaet til Nano-kortet. Det er shunten. Forsyningen <code>+3v3_T</code> går gjennom R12 (27 Ω i skjemaet rev. 04) til <code>+3v3_L</code>, som er VDD til STM32-en. Målepunktet <code>T_MEAS</code> (via loddebroen SJ5) sitter på brikkesiden av R12. Når brikken trekker mer strøm, faller spenningen der. Kurven du ser, er altså VDD til brikken, og den går ned når strømmen går opp.</p>
+          <p>Et eksempel: trekker brikken 10 mA, blir spenningsfallet \(V = 10\,\mathrm{mA} \cdot 27\,\Omega = 0{,}27\,\mathrm{V}\). Valget av shunt er en avveining. En større motstand gir et tydeligere signal, men senker også VDD så mye at brikken kan begynne å oppføre seg ustabilt. En mindre motstand gir et svakere signal som drukner i støy.</p>
 
           <h2>Referanse: den opprinnelige DPA-artikkelen</h2>
           <p>Den grunnleggende artikkelen for feltet er Kocher, Jaffe og Jun (1999), <em>«Differential Power Analysis»</em>, som først formaliserte hvordan strømforbruksmålinger kan brukes til å bryte kryptografiske implementasjoner — publisert i Lecture Notes in Computer Science, og fortsatt referert til i så godt som all litteratur om sidekanalangrep siden.</p>
@@ -74,9 +119,47 @@
             </div>
             <div class="step">
               <h4>Bytt passord og verifiser metoden på nytt</h4>
-              <p>Erstatt det hardkodede passordet i kildekoden med et annet, kompiler på nytt, og bekreft at samme fremgangsmåte finner det nye passordet — det viser at teknikken utnytter selve implementasjonen, ikke én bestemt tilfeldig verdi.</p>
+              <p>Erstatt det hardkodede passordet (<code>h0px3</code>) i kildekoden med et annet, kompiler på nytt, og bekreft at samme fremgangsmåte finner det nye passordet. Det viser at teknikken utnytter selve implementasjonen, ikke én bestemt tilfeldig verdi.</p>
             </div>
           </div>
+
+          <h2>Muntlige eksamensspørsmål</h2>
+          <details class="sol">
+            <summary>Hvorfor lekker strømforbruket informasjon?</summary>
+            <div class="sol__body">
+              <p>CMOS-logikk bruker strøm nesten bare når den bytter tilstand, fordi kapasitanser lades og utlades. Hvor mye som bytter, avhenger av hvilken instruksjon som kjører og hvilke data den behandler. Hvor mange bit som skifter, påvirker også forbruket (Hamming-vekt og -avstand). Strømmen over tid blir derfor et avtrykk av programflyten og dataene.</p>
+            </div>
+          </details>
+          <details class="sol">
+            <summary>Hvordan måler du strømforbruket? Tegn og forklar oppsettet.</summary>
+            <div class="sol__body">
+              <p>Sett en shunt-motstand i serie med forsyningen til brikken (R12 på ChipWhisperer Nano) og mål spenningen over den, eller på brikkesiden av den, med et oscilloskop. Ohms lov \(V = IR\) gjør spenningen om til strøm. Målingen må synkroniseres med en trigger. I labben setter målprogrammet en GPIO høy (<code>trigger_high()</code>) rett før passordsjekken, slik at alle målingene starter på samme sted i koden. Det gjør det mulig å sammenligne dem.</p>
+            </div>
+          </details>
+          <details class="sol">
+            <summary>Forklar hvordan du fant passordet i lab 4, og hvorfor angrepet er så effektivt.</summary>
+            <div class="sol__body">
+              <p>Sjekken sammenligner tegn for tegn og avbryter ved første feil. Et riktig tegn gir én runde ekstra i løkken, og det synes i kurven som et senere avvik. Prøv alle kandidater for tegn 1 og velg den som skiller seg ut. Lås den og gå videre til tegn 2. Antall forsøk går ned fra \(k^n\) til \(k \cdot n\). Med 36 tegn og 5 posisjoner er det 180 forsøk i stedet for ca. 60 millioner.</p>
+            </div>
+          </details>
+          <details class="sol">
+            <summary>Hvordan beskytter du en passordsjekk mot SPA?</summary>
+            <div class="sol__body">
+              <p>Bruk en sammenligning med konstant tid. Gå alltid gjennom alle tegnene og samle opp forskjellen, f.eks. <code>diff |= a[i] ^ b[i]</code>, og avgjør til slutt. Unngå hopp og minneoppslag som avhenger av hemmeligheten. Andre tiltak er å begrense antall forsøk og legge inn tilfeldige forsinkelser eller støy. For kryptografi mot DPA trengs maskering. Merk at konstant tid ikke beskytter mot glitching (kapittel 6).</p>
+            </div>
+          </details>
+          <details class="sol">
+            <summary>Hva er forskjellen på SPA og DPA?</summary>
+            <div class="sol__body">
+              <p>SPA leser programflyten ut fra én eller noen få kurver ved å se på dem. DPA (Kocher, Jaffe og Jun 1999) bruker statistikk på mange kurver. Man gjetter på en del av nøkkelen, sorterer kurvene etter hva gjetningen gir for en mellomverdi, og ser etter en topp i forskjellen mellom gjennomsnittene. Riktig gjetning gir en tydelig topp. DPA virker selv når programflyten er helt lik uansett input.</p>
+            </div>
+          </details>
+          <details class="sol">
+            <summary>Hvorfor tar et hopp 3 sykluser når det gjettes feil, og hva har det med sidekanaler å gjøre?</summary>
+            <div class="sol__body">
+              <p>I 5-trinns pipelinen avgjøres hoppet i Execute. Da er to nye instruksjoner allerede hentet og dekodet. Har prosessoren gjettet feil, må de kastes, og det koster to ekstra sykluser, altså CPI = 3. Ved load-use må pipelinen vente én syklus (CPI = 2). Om et hopp blir tatt eller ikke, endrer altså både tiden og strømkurven. Et hopp som avhenger av en hemmelighet, lekker derfor hemmeligheten.</p>
+            </div>
+          </details>
         </article>
 
         <nav class="chapter-nav">
