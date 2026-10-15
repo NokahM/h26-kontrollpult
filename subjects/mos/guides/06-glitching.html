@@ -9,7 +9,7 @@
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
   <link rel="stylesheet" href="../../../assets/css/main.css?v=41">
 </head>
-<body class="theme-mos" data-updated="2026-09-01">
+<body class="theme-mos" data-updated="2026-10-15">
   <div class="app-shell">
 
     <aside class="sidebar"></aside>
@@ -41,6 +41,19 @@
           <h2>Feilinjeksjon: å ødelegge én instruksjon med vilje</h2>
           <p>Der effektanalyse i forrige kapittel er et <em>passivt</em> angrep — man lytter uten å forstyrre — er glitching <em>aktivt</em>: man forstyrrer kretsen fysisk mens den kjører, med mål om å få én bestemt instruksjon til å utføres feil. Lykkes det presist nok, kan man for eksempel få en <code>if</code>-sjekk til å hoppe feil vei, eller en løkketeller til aldri å telle ned til null — uten at koden noensinne blir lest eller endret. Dette er samme underliggende mål som APPROTECT-omgåelsen i kapittel 02 (bryt en sikkerhetssjekk), men løst på det elektriske laget i stedet for via debug-porten.</p>
 
+          <h2>Fra transistor til forsinkelse</h2>
+          <p>For å forstå hvorfor lavere spenning gir feil, starter forelesningen nederst, med transistoren.</p>
+          <ul>
+            <li><strong>nMOS</strong> leder (er PÅ) når gate = 1, og er AV når gate = 0. Den kobler utgangen ned mot jord (GND).</li>
+            <li><strong>pMOS</strong> er motsatt: PÅ når gate = 0, AV når gate = 1. Den kobler utgangen opp mot VDD.</li>
+            <li>En <strong>CMOS-inverter</strong> (NOT) har én pMOS (P1) opp og én nMOS (N1) ned. Når A = 0, er P1 PÅ og N1 AV, så Y = 1. Når A = 1, er det motsatt, og Y = 0. Det går nesten ingen strøm i ro, bare når utgangen bytter. Det er grunnen til at strømforbruket følger aktiviteten (kapittel 5).</li>
+          </ul>
+          <p><strong>Quizen «Hvilken logisk port er dette?»</strong> viser to pMOS i <em>serie</em> mot VDD (A og B) og to nMOS i <em>parallell</em> mot jord, etterfulgt av en inverter. Første trinn blir bare 1 når både A og B er 0. Det er en NOR-port. Inverteren snur den, så porten er en <strong>OR</strong>. Huskeregel: serie i pull-up gir NOR, og parallell i pull-up gir NAND.</p>
+
+          <h3>Hvorfor signalene ikke er firkantede</h3>
+          <p>Utgangen på en port driver inngangene på de neste portene. De er i praksis små kondensatorer (gate-kapasitans) som må lades gjennom motstanden i transistorkanalen. Det er et <strong>RC-ledd</strong>. En firkantpuls inn gir en eksponentiell opp- og nedladning ut (integrator), og ved høy frekvens rekker spenningen ikke helt opp eller ned før neste flanke. Tiden fra inngangen bytter til utgangen har passert halvveis, er <strong>forplantningsforsinkelsen</strong> \(t_{pd}\), og den er proporsjonal med \(RC\).</p>
+          <p>Lavere VDD gir mindre strøm gjennom transistoren, altså høyere effektiv \(R\). Da tar oppladningen lengre tid, og \(t_{pd}\) øker. VDD har sunket fra 5 V på 70- og 80-tallet til 3,3 V, 1,8 V, 1,2 V og 1,0 V for å spare strøm og ikke ødelegge stadig mindre transistorer. Jo lavere nominell spenning, jo mindre margin er det før en glitch gjør logikken for treg.</p>
+
           <h2>Hvorfor det fungerer: setup- og hold-tid</h2>
           <p>En synkron krets består av flip-flops (register) forbundet med kombinatorisk logikk, alle styrt av samme klokke. For at kretsen skal virke pålitelig, må to tidsbetingelser holde for hvert register:</p>
           <ul>
@@ -51,10 +64,23 @@
               \[ t_{ccq} + t_{cd} &gt; t_{hold} \]
               Holder ikke dette, fungerer ikke kretsen pålitelig ved <em>noen</em> klokkefrekvens.</li>
           </ul>
+          <h3>Gjennomregnet eksempel fra forelesningen</h3>
+          <p>Flip-flop: \(t_{ccq} = 30\) ps, \(t_{pcq} = 50\) ps, \(t_{setup} = 60\) ps, \(t_{hold} = 70\) ps. Hver port: \(t_{pd} = 35\) ps og \(t_{cd} = 25\) ps. Den lengste veien går gjennom 3 porter, og den korteste gjennom 1.</p>
+          <p class="formula-in-measure">\[ T_c \ge t_{pcq} + 3 \cdot t_{pd} + t_{setup} = 50 + 105 + 60 = 215\ \text{ps} \;\Rightarrow\; f_c \le \tfrac{1}{215\ \text{ps}} \approx 4{,}65\ \text{GHz} \]</p>
+          <p class="formula-in-measure">\[ t_{ccq} + t_{cd} = 30 + 25 = 55\ \text{ps} \;<\; t_{hold} = 70\ \text{ps} \quad \text{(brutt!)} \]</p>
+          <p>Hold-kravet er brutt, og da virker ikke kretsen sikkert ved <em>noen</em> frekvens, fordi det ikke hjelper å senke klokka. Løsningen er å legge inn buffere på den korte veien slik at den går gjennom 2 porter: \(t_{cd} = 2 \cdot 25 = 50\) ps, og \(30 + 50 = 80 &gt; 70\) ps. Den lange veien er uendret, så \(f_c\) blir den samme.</p>
+
           <p>Poenget for glitching: \(t_{pd}\) — forplantningsforsinkelsen gjennom logikken — er ikke konstant. Den avhenger av forsyningsspenningen, fordi transistorer bytter tregere ved lavere spenning. Senker man \(V_{DD}\) kortvarig og presist nok, øker \(t_{pd}\) nok til å bryte setup time-betingelsen for akkurat det ene registeret som er midt i en instruksjonsutførelse akkurat da — signalet rekker ikke stabilisere seg før klokkeflanken, og registeret fanger opp feil verdi. Resten av kretsen fortsetter helt normalt; det er bare den ene instruksjonen som får feil resultat.</p>
 
+          <h3>Hvorfor man kan velge hvilken instruksjon som feiler</h3>
+          <p>Forelesningen spør: <em>«Hvor mange klokkesykluser bruker en instruksjon i en single-cycle RISC-prosessor?»</em> Svaret er én. Klokkeperioden må derfor være lang nok til den <em>tregeste</em> instruksjonen, og de andre har litt tid til overs. Figuren i forelesningen viser ti instruksjoner (R1–R10) med ulik kritisk vei og en klokkeperiode på 10 ns:</p>
+          <ul>
+            <li><strong>Senker man spenningen jevnt</strong> over hele kjøringen, blir alle instruksjonene tregere. Den som allerede var nærmest 10 ns (R9), går over grensen først og feiler. Det er ukontrollert.</li>
+            <li><strong>Senker man spenningen kort</strong> akkurat mens R6 kjører, blir bare R6 forsinket nok til å feile. <em>Posisjonen</em> til glitchen bestemmer altså hvilken instruksjon som rammes.</li>
+          </ul>
+
           <h2>Glitch-vinduet: posisjon og bredde</h2>
-          <p>To parametere avgjør hva et spenningsglitch faktisk treffer:</p>
+          <p>En glitch har en fallende flanke (falling time), en bunn på \(V_{glitch}\) som varer i glitch-bredden, og en stigende flanke (rising time). Hele forløpet er <em>angrepsvinduet</em>. To parametere avgjør hva en spenningsglitch faktisk treffer:</p>
           <ul>
             <li><strong>Posisjon</strong> — <em>når</em> i programutførelsen glitchet trigges, avgjør <em>hvilken</em> instruksjon som rammes.</li>
             <li><strong>Bredde</strong> — <em>hvor lenge</em> spenningen holdes nede, avgjør hvor kraftig forstyrrelsen er: for kort gjør ingenting, for lang trigger typisk en full reset, og et smalt vindu midt imellom gir en kontrollert feilutførelse av nøyaktig én instruksjon.</li>
@@ -62,7 +88,50 @@
           <p>Å finne dette vinduet er i praksis et søkeproblem: man sveiper posisjon og bredde systematisk over mange forsøk til man treffer kombinasjonen som gir en nyttig feil, i stedet for en krasjet eller uendret kjøring.</p>
 
           <h2>ChipWhisperer Nano-modifikasjonen</h2>
-          <p>Standard ChipWhisperer Nano er ikke bygget for spenningsglitching ut av boksen — kretskortet må modifiseres fysisk: motstanden <code>R12</code> desolderes og erstattes med en annen verdi i strømforsyningsbanen til target-kretsen, slik at programvaren kan legge til et kontrollert spenningsdropp (i størrelsesorden noen hundre millivolt) akkurat når og hvor lenge man ber om det.</p>
+          <p>I skjemaet til Nano-kortet går forsyningen <code>+3v3_T</code> gjennom shunten <code>R12</code> til <code>+3v3_L</code>, som er VDD til STM32-en (se kapittel 5). To loddebroer kobler signaler fra ChipWhisperer-delen til VDD:</p>
+          <ul>
+            <li><code>SJ5</code> kobler til <code>T_MEAS</code>, som brukes til å måle strømforbruket.</li>
+            <li><code>SJ6</code> kobler til <code>T_GLITCH</code>, en transistor som kan kortslutte VDD mot jord.</li>
+          </ul>
+          <p>Modden i forelesningen gjør tre ting: <strong>SJ6 er loddet fra</strong>, det er satt inn en <strong>motstand på 5,6 Ω</strong> (den synlige motstanden på bildet), og <strong>R12 er 20 Ω</strong>. Glitch-transistoren drar dermed VDD ned gjennom 5,6 Ω i stedet for å kortslutte den.</p>
+          <p>En enkel modell (vår egen, ikke fra slidene): Når transistoren leder, danner R12 og 5,6 Ω en spenningsdeler fra 3,3 V:</p>
+          <p class="formula-in-measure">\[ V_{glitch} \approx 3{,}3\ \text{V} \cdot \frac{5{,}6}{20 + 5{,}6} \approx 0{,}7\ \text{V} \]</p>
+          <p>Modellen gir et fall på omtrent \(3{,}3 - 0{,}7 \approx 2{,}6\) V. Oscilloskopbildet i forelesningen viser et fall på 2,35 V som varer ca. 490 ns. Det er i samme størrelsesorden, og VDD ligger allerede litt under 3,3 V før glitchen på grunn av fallet over R12. Motstanden gjør glitchen kontrollert og repeterbar. En ren kortslutning ville trukket VDD helt ned og som regel bare gitt reset.</p>
+
+          <h2>Målkoden: simpleserial-glitch.c</h2>
+          <p>Lab 5 bruker ChipWhisperers eksempelprogram (<a href="https://github.com/rlangoy/cwr_nano_vdd_glitching/blob/main/jupyter/simpleserial-glitch.c" target="_blank" rel="noopener">kilde</a>). Hver funksjon setter <code>trigger_high()</code> rett før koden som skal angripes, slik at glitchens <em>posisjon</em> regnes fra et kjent punkt.</p>
+          <pre class="codeblock">uint8_t password(uint8_t* pw, uint8_t len)
+{
+    char passwd[] = "touch";
+    char passok = 1;              // antar «riktig» til det motsatte er bevist
+    int cnt;
+
+    trigger_high();
+    for (cnt = 0; cnt &lt; 5; cnt++) {
+        if (pw[cnt] != passwd[cnt]) {
+            passok = 0;           // &lt;- målet: hopp over denne
+        }
+    }
+    trigger_low();
+
+    simpleserial_put('r', 1, (uint8_t*)&amp;passok);
+    return 0x00;
+}</pre>
+          <p>Legg merke til to ting som er gode å si på eksamen:</p>
+          <ul>
+            <li><strong>Løkka avbryter ikke.</strong> Den går gjennom alle fem tegnene uansett, så SPA-angrepet fra kapittel 5 virker dårlig her. Men det hjelper ikke mot glitching. En feil i sammenligningen eller i hoppet, eller i lagringen av <code>passok = 0</code>, gjør at et feil passord blir godtatt.</li>
+            <li><strong>Feil standardverdi.</strong> <code>passok</code> starter som 1 (godkjent). Én instruksjon som hoppes over, er nok til at svaret blir «riktig». Hadde koden startet med «avvist» og krevd at alle tegnene ble bekreftet, måtte en glitch ha gitt en mye mer spesifikk feil.</li>
+          </ul>
+          <p>Den første notebooken bruker <code>glitch_loop</code>: to løkker inni hverandre teller til \(50 \times 50 = 2500\). Svarer kortet med noe annet enn 2500, har glitchen virket. Det er en enkel måte å lete etter posisjon og bredde før man angriper passordet. <code>glitch_comparison</code> (sjekk om første byte er <code>0xA2</code>) og <code>infinite_loop</code> (<code>while (a != 2)</code> som aldri skal avslutte) er andre klassiske mål.</p>
+
+          <h2>Forsvar mot glitching</h2>
+          <ul>
+            <li><strong>Avvis som standard</strong>, og bruk verdier som er vanskelige å treffe ved et uhell i stedet for 0/1 (f.eks. <code>0xA5C3</code> for OK).</li>
+            <li><strong>Sjekk to ganger</strong>, gjerne med den inverterte betingelsen i tillegg, og ha tilfeldig forsinkelse mellom sjekkene. Da må angriperen treffe to ganger på et ukjent tidspunkt.</li>
+            <li><strong>Tell løkkene</strong>: Sjekk etter løkka at telleren faktisk nådde slutten.</li>
+            <li><strong>Tilfeldig tidsbruk</strong> (jitter), slik at posisjonen ikke kan gjentas fra forsøk til forsøk.</li>
+            <li><strong>Maskinvare</strong>: en brown-out-detektor som resetter ved lav spenning, egne sensorer for glitch og klokke, god avkobling på VDD og en intern regulator. Et kort spenningsfall er vanskeligere å slippe gjennom forbi en kondensator.</li>
+          </ul>
 
           <h2>Lab 5 i praksis</h2>
           <p>Målet er å bruke spenningsglitching til å omgå en passordsjekk på et target-program — uten å kjenne passordet, ved å få selve sammenligningen til å feile.</p>
@@ -89,6 +158,58 @@
               <p>Studer kildekoden i <code>simpleserial-glitch.c</code> og identifiser nøyaktig hvilken instruksjon (typisk selve sammenligningen eller en påfølgende betinget hopp) glitchet er ment å ramme, og hvorfor akkurat den er sårbar. Vurder om resultatene fra notebooken gir mening opp mot koden — samme type resonnement som i forrige kapittel, nå anvendt på et konkret angrep du kan forklare linje for linje til eksamen.</p>
             </div>
           </div>
+
+          <h2>Muntlige eksamensspørsmål</h2>
+          <details class="sol">
+            <summary>Hvorfor kan et kort spenningsfall få én instruksjon til å feile?</summary>
+            <div class="sol__body">
+              <p>Logikken mellom to register må bli ferdig innen én klokkeperiode: \(T_c \ge t_{pcq} + t_{pd} + t_{setup}\). \(t_{pd}\) bestemmes av hvor raskt transistorene lader opp kapasitansene (RC), og lavere VDD gir mindre strøm og tregere oppladning. Når VDD synker kort, øker \(t_{pd}\), og verdien når ikke å bli stabil før klokkeflanken. Registeret fanger opp feil verdi. Fordi glitchen er kort, rammer den bare instruksjonen som kjører akkurat da. Resten kjører som normalt.</p>
+            </div>
+          </details>
+          <details class="sol">
+            <summary>Forklar setup- og hold-kravet. Hva skjer hvis hold-kravet er brutt?</summary>
+            <div class="sol__body">
+              <p>Setup: inngangen til registeret må være stabil \(t_{setup}\) før klokkeflanken. Det gir en øvre grense for frekvensen og avhenger av den <em>lengste</em> veien. Hold: inngangen må være stabil \(t_{hold}\) etter flanken, \(t_{ccq} + t_{cd} &gt; t_{hold}\). Det avhenger av den <em>korteste</em> veien. Hvis hold-kravet er brutt, kommer den nye verdien for tidlig og ødelegger den gamle uansett frekvens. Da hjelper det ikke å senke klokka. Løsningen er buffere på den korte veien. I eksempelet: 55 ps &lt; 70 ps er brutt, og med én buffer blir det 80 ps &gt; 70 ps.</p>
+            </div>
+          </details>
+          <details class="sol">
+            <summary>Hva er glitch-posisjon og glitch-bredde, og hvordan finner du riktige verdier?</summary>
+            <div class="sol__body">
+              <p>Posisjonen er tiden fra triggeren til glitchen, og den bestemmer <em>hvilken</em> instruksjon som rammes. Bredden er hvor lenge VDD holdes nede, og den bestemmer <em>hvor hardt</em> den rammes. For lite gjør ingenting, og for mye gir reset. Man søker gjennom et rutenett av posisjon × bredde og sorterer hvert forsøk: normal kjøring, reset/krasj eller vellykket feil (f.eks. <code>cnt != 2500</code>). Så snevrer man inn rundt treffene.</p>
+            </div>
+          </details>
+          <details class="sol">
+            <summary>Hva er modifikasjonen på ChipWhisperer Nano, og hvorfor trengs motstanden?</summary>
+            <div class="sol__body">
+              <p>Forsyningen til målbrikken går gjennom shunten R12 (20 Ω). SJ6 er loddet fra, og glitch-transistoren er koblet til VDD gjennom en motstand på 5,6 Ω. Når transistoren leder, danner R12 og 5,6 Ω en spenningsdeler, og VDD faller til omtrent \(3{,}3 \cdot 5{,}6/25{,}6 \approx 0{,}7\) V i stedet for 0. Forelesningen målte et fall på 2,35 V i ca. 490 ns. Uten motstanden blir glitchen en ren kortslutning som oftest bare gir reset.</p>
+            </div>
+          </details>
+          <details class="sol">
+            <summary>Hvilken logisk port viser forelesningens transistorskjema, og hvordan ser du det?</summary>
+            <div class="sol__body">
+              <p>To pMOS i serie mot VDD og to nMOS i parallell mot jord. Utgangen blir bare 1 når A = B = 0, altså NOR. Den etterfølgende inverteren gjør den til <strong>OR</strong>. Generelt: pMOS i serie og nMOS i parallell gir NOR, og pMOS i parallell og nMOS i serie gir NAND.</p>
+            </div>
+          </details>
+          <details class="sol">
+            <summary>Hvordan omgår du passordsjekken i lab 5, og hvordan ville du skrevet koden for å stå imot?</summary>
+            <div class="sol__body">
+              <p>Triggeren går høy før løkka. Glitchen legges inne i løkka, ved sammenligningen eller ved lagringen av <code>passok = 0</code>. Siden <code>passok</code> starter som 1, er det nok at den ene skrivingen ikke skjer. Svaret blir da «riktig» selv om passordet er feil.</p>
+              <p>Forsvar:</p>
+              <ul>
+                <li>Start med avvist, og bruk verdier som er vanskelige å treffe ved et uhell.</li>
+                <li>Gjør sjekken to ganger, gjerne invertert, med tilfeldig forsinkelse mellom.</li>
+                <li>Sjekk at løkketelleren nådde slutten.</li>
+                <li>Bruk maskinvare med brown-out- og glitchdetektor.</li>
+              </ul>
+              <p>Merk at koden allerede er SPA-sikker siden den ikke avbryter. Det viser at forsvar mot sidekanaler og forsvar mot feilinjeksjon er to forskjellige ting.</p>
+            </div>
+          </details>
+          <details class="sol">
+            <summary>Hva er forskjellen på effektanalyse og glitching, og hvordan henger de sammen med APPROTECT?</summary>
+            <div class="sol__body">
+              <p>Effektanalyse er passiv: man observerer hva kretsen lekker. Glitching er aktiv: man får kretsen til å regne feil. Begge krever fysisk tilgang og en trigger som forteller hvor i koden man er. De utfyller hverandre, fordi strømkurven ofte brukes til å finne <em>når</em> sjekken skjer, og det er der man legger glitchen. LimitedResults brukte nettopp en spenningsglitch ved oppstart til å åpne nRF52 sin APPROTECT (kapittel 2). Én sikkerhetsbeslutning i maskinvare er bare så sterk som motstanden mot feilinjeksjon.</p>
+            </div>
+          </details>
         </article>
 
         <nav class="chapter-nav">
