@@ -9,7 +9,7 @@
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
   <link rel="stylesheet" href="../../../assets/css/main.css?v=41">
 </head>
-<body class="theme-mos" data-updated="2026-09-01">
+<body class="theme-mos" data-updated="2026-10-15">
   <div class="app-shell">
 
     <aside class="sidebar"></aside>
@@ -40,7 +40,24 @@
         <article class="prose">
           <h2>System on Chip: mer enn bare en prosessor</h2>
           <p>Et moderne mikrokontrollerkort er sjelden «bare en CPU» — det er et <strong>System on Chip (SoC)</strong>: CPU, arbeidsminne, sekundærlagring og en samling periferigrensesnitt (UART, BLE, wifi, I2C, SPI, CAN) integrert på én brikke. <strong>ESP8266</strong> er et av de rimeligste eksemplene med innebygget wifi, og finnes i mange fysiske formfaktorer (ESP-01, ESP-12F, NodeMCU, D1 mini) som alle deler samme brikke og verktøykjede.</p>
-          <p>Brikken programmeres og inspiseres med <code>esptool</code> — et Python-verktøy som kan lese/skrive/slette flashinnhold, lese ut brikkedetaljer som MAC-adresse, og pakke sammen ferdige binærimages for flashing.</p>
+          <p>ESP-01 er bare brikken og en flash på et lite kort. Flashen er en egen brikke ved siden av SoC-en (4 MB på ESP-01 og ESP-12F), ikke en del av den.</p>
+          <p>Brikken programmeres og undersøkes med <code>esptool</code>. Det er et Python-verktøy som kan:</p>
+          <ul>
+            <li>lese, skrive, slette og verifisere innholdet i flashen,</li>
+            <li>lese ut brikkedetaljer som MAC-adresse og ID-en til flashbrikken (<code>flash_id</code>),</li>
+            <li>lese og skrive <strong>eFuses</strong>, små minnebit som bare kan programmeres én gang (OTP),</li>
+            <li>lage, analysere og slå sammen binærfiler for flashing.</li>
+          </ul>
+          <p>For å komme i programmeringsmodus må brikken starte med en bestemt pinne trukket lav («push to program»). Utviklingskort gjør dette automatisk over USB-til-UART-brua.</p>
+          <div class="pitfall"><div class="pitfall__title">Sikkerhet: alt i flashen kan leses ut</div><p>ESP8266 har verken secure boot eller kryptering av flashen. Den som får tak i kortet, kan derfor kjøre <code>esptool read_flash</code> og få med seg alt: programmet, wifi-passordet som ligger lagret i flashen etter tilkobling, og MQTT-brukernavn og passord fra skriptene. Etterfølgeren ESP32 bruker eFuses til nettopp dette. Der kan man brenne inn en nøkkel for flash-kryptering og slå på secure boot. Fordi eFuses bare kan skrives én gang, kan ikke en angriper skru beskyttelsen av igjen.</p></div>
+
+          <h3>Stasjon og aksesspunkt</h3>
+          <p>Wifi-delen kan brukes på to måter, og forelesningen viser begge:</p>
+          <ul>
+            <li>Som <strong>stasjon</strong> (<code>network.WLAN(network.STA_IF)</code>) kobler kortet seg til et eksisterende nett, slik som <code>elab-open</code> i labben.</li>
+            <li>Som <strong>aksesspunkt</strong> (<code>network.AP_IF</code>) lager kortet sitt eget nett som telefonen kobler seg til.</li>
+          </ul>
+          <p>Mange IoT-produkter starter som aksesspunkt første gang, slik at brukeren kan legge inn hjemmenettet. Et åpent aksesspunkt i oppsettsmodus, eller et standardpassord, er derfor en kjent svakhet.</p>
 
           <h2>MicroPython</h2>
           <p><strong>MicroPython</strong> er en slank, effektiv implementasjon av Python 3 bygget for å kjøre innenfor svært begrensede ressurser — ned mot 256 kB kodeplass og 16 kB RAM. Den dekker et delmengde av standardbiblioteket, men beholder det som gjør Python behagelig å jobbe med: en interaktiv REPL for rask utforsking, og et API som ligner vanlig Python så langt maskinvaren tillater det. Det gjør at man kan iterere direkte på selve kretsen — akkurat som i CircuitPython-labben i forrige kapittel — i stedet for å kompilere og flashe C for hver endring.</p>
@@ -48,6 +65,37 @@
           <h2>Publish/subscribe og MQTT</h2>
           <p>Internet of Things (IoT) — «tingenes internett» — beskriver nettverk av gjenstander med innebygd elektronikk, sensorer og programvare som utveksler data med hverandre. Et vanlig problem er at IoT-enheter ofte sitter bak en NAT-brannmur på et hjemmenettverk, uten en offentlig IP en server kan koble seg til. Løsningen er å snu kommunikasjonen: enheten oppretter selv en <em>utgående</em> forbindelse til en sentral megler, og kommunikasjonen skjer via <strong>publish/subscribe</strong>-mønsteret i stedet for direkte forespørsler.</p>
           <p><strong>MQTT (MQ Telemetry Transport)</strong> er den mest brukte pub/sub-protokollen for nettopp dette. Prinsippet: en enhet <em>publiserer</em> en melding på et navngitt <em>topic</em> (f.eks. <code>hjem/stue/temperatur</code>) til en <em>broker</em>. Andre enheter som har <em>abonnert</em> på det samme topicet (eller et mønster som matcher det) mottar meldingen automatisk — uten at publisher og abonnent noensinne trenger å kjenne hverandres adresse. Sammenlignet med HTTP er MQTT lettvekts (liten protokolloverhead, egnet for trege/upålitelige lenker) og løser NAT-problemet gratis, siden begge parter kun trenger en utgående forbindelse til broker.</p>
+          <p>Pub/sub-mønsteret er ikke spesielt for MQTT. ZeroMQ, Kafka og Google Pub/Sub bygger på samme idé. MQTT er laget for små enheter.</p>
+
+          <h3>Topics, jokertegn og QoS</h3>
+          <ul>
+            <li>Topics er hierarkiske og skilles med <code>/</code>, for eksempel <code>MinPrivateKanal/Lysbryter1</code>.</li>
+            <li>Jokertegn kan bare brukes når man abonnerer. <code>+</code> matcher ett nivå (<code>hjem/+/temp</code>), og <code>#</code> matcher alt under et nivå. I labben abonnerer du på <code>navn/#</code> og får alle underkanalene.</li>
+            <li><strong>QoS</strong> bestemmer leveringsgarantien. 0 betyr høyst én gang (send og glem), 1 betyr minst én gang (med kvittering, kan gi duplikater), og 2 betyr nøyaktig én gang (fireveis handshake).</li>
+            <li>En <em>retained</em> melding blir lagret hos brokeren og sendt til nye abonnenter med en gang. <em>Last Will</em> er en melding brokeren sender for klienten hvis den forsvinner uten å si fra.</li>
+            <li>Portene er <code>1883</code> for MQTT uten kryptering, <code>8883</code> for MQTT over TLS, og MQTT over WebSocket, som labbrokeren har på <code>8811</code> med WSS (kryptert).</li>
+          </ul>
+
+          <h3>MQTT kontra HTTP</h3>
+          <div class="dtable-wrap"><table class="dtable">
+            <thead><tr><th></th><th>HTTP</th><th>MQTT</th></tr></thead>
+            <tbody>
+              <tr><td>Mønster</td><td>forespørsel/svar, klienten spør</td><td>publish/subscribe via broker</td></tr>
+              <tr><td>Forbindelse</td><td>kortvarig, én per forespørsel (eller keep-alive)</td><td>én forbindelse som står åpen</td></tr>
+              <tr><td>Overhead</td><td>tekst-headere, ofte hundrevis av byte</td><td>binær header på minimum 2 byte</td></tr>
+              <tr><td>Data ut til enheten</td><td>enheten må spørre (polling) eller bruke ekstra mekanismer</td><td>broker sender til enheten med en gang</td></tr>
+              <tr><td>Bak NAT</td><td>en server kan ikke nå enheten</td><td>ikke noe problem, forbindelsen er utgående</td></tr>
+            </tbody>
+          </table></div>
+
+          <h2>Sikkerhet fra sensor til lagring</h2>
+          <p>Emneplanen sier at du skal kunne «vurdere sikkerheten fra sensor til lagring av data». Lab 3 er et komplett system av den typen: ESP8266 → wifi → broker → nettleser. Gå gjennom det ledd for ledd:</p>
+          <ul>
+            <li><strong>Enheten.</strong> Wifi-passord og MQTT-passord ligger i klartekst i flashen og kan leses ut med <code>esptool</code>. Labheftet sier selv at det er dumt å legge passord i programmer som havner på GitHub.</li>
+            <li><strong>Overføringen.</strong> TLS (8883/WSS) beskytter mot avlytting og endring underveis. Kortet bør da også sjekke sertifikatet til brokeren. Uten den sjekken kan en mann i midten utgi seg for å være brokeren.</li>
+            <li><strong>Brokeren.</strong> Alle studentene deler brukeren <code>usn</code>. Det betyr at alle kan abonnere på <code>#</code> og se alle topicene, og at hvem som helst kan publisere <code>ON</code> til lysbryteren din. Unike topic-navn er ikke tilgangskontroll. Riktig løsning er én identitet per enhet (eget passord eller klientsertifikat) og tilgangslister (ACL) per topic.</li>
+            <li><strong>Mottakeren.</strong> Programmet slår på LED-en for alt som er nøyaktig <code>b'ON'</code>, uansett hvem som sendte det. Det er samme problem med replay og manglende autentisering som i BLE-kapitlet.</li>
+          </ul>
 
           <h2>Lab 3 i praksis</h2>
           <p>Labben installerer MicroPython på et ESP8266-kort, kobler det til wifi, og bruker det til å både publisere og abonnere på MQTT-meldinger.</p>
@@ -55,11 +103,11 @@
           <div class="steps">
             <div class="step">
               <h4>Identifiser seriellporten</h4>
-              <p>Kjør et lite hjelpeskript i Thonny (lokal Python-interpreter, ikke MicroPython ennå) for å finne COM-porten ESP8266-kortet dukker opp som (typisk en CH340- eller CP210x USB-til-UART-bro).</p>
+              <p>Kjør <code>serialPorts.py</code> i Thonny med den lokale Python-interpreteren (ikke MicroPython ennå) for å finne COM-porten ESP8266-kortet bruker. Det er vanligvis en CH340- eller CP210x-bro fra USB til UART. Sett porten inn i <code>chip_info.py</code>, som bruker esptool til å lese ut størrelsen på flashen. Det er svaret på labspørsmålet, og det tilsvarer <code>esptool.py --port COMxx flash_id</code>.</p>
             </div>
             <div class="step">
               <h4>Flash MicroPython-firmware</h4>
-              <p>Bytt interpreter i Thonny til «MicroPython (ESP8266)» og bruk innebygd firmware-wizard til å flashe MicroPython rett på kortet — et alternativ til å kjøre <code>esptool.py</code> manuelt fra kommandolinjen.</p>
+              <p>Bytt interpreter i Thonny til «MicroPython (ESP8266)» og bruk innebygd firmware-wizard til å flashe MicroPython rett på kortet — et alternativ til å kjøre <code>esptool.py</code> manuelt fra kommandolinjen. Velg familie ESP8266, flash mode <code>DIO</code> og flash size «detect».</p>
             </div>
             <div class="step">
               <h4>Last opp programfilene</h4>
@@ -94,8 +142,53 @@ mqtt_topic    = b'mitt/eget/topic'   # må matche på begge sider</pre>
               <pre class="codeblock">from machine import Pin
 led = Pin(2, Pin.OUT)
 led.off()   # aktiv lav: off() lyser LED-en på dette kortet</pre>
+              <p>LED-en sitter mellom 3,3 V og GPIO2. Den lyser derfor når pinnen er <em>lav</em>. Labben ber deg først få LED-en til å blinke raskere i <code>blink_led_on_gpio2.py</code> (kortere <code>sleep</code>). Deretter skal du endre callback-funksjonen i <code>mqtt_subscribe.py</code> slik at <code>b'ON'</code> slår den på og alt annet slår den av. Løsningen står i <code>solution_mqtt_blink.py</code>.</p>
             </div>
           </div>
+
+          <h2>Muntlige eksamensspørsmål</h2>
+          <details class="sol">
+            <summary>Hva er en SoC, og hva skiller den fra en ren prosessor?</summary>
+            <div class="sol__body">
+              <p>En System on Chip har CPU, RAM, ofte flash og periferienheter (timere, UART, I2C, SPI, CAN, radio for wifi/BLE) på én brikke. En prosessor har bare regnekjernen og trenger eksterne brikker til resten. ESP8266 er en SoC med wifi. Flashen sitter likevel på en egen brikke ved siden av, og det har betydning for sikkerheten, fordi den kan leses ut.</p>
+            </div>
+          </details>
+          <details class="sol">
+            <summary>Forklar publish/subscribe og hvorfor MQTT passer for IoT bak NAT.</summary>
+            <div class="sol__body">
+              <p>De som sender og de som mottar, kjenner ikke hverandre. Alle kobler seg til en broker. Avsendere publiserer på et topic, og brokeren sender meldingen videre til alle som abonnerer på topicet eller på et jokertegn som passer. Enheten åpner selv en <em>utgående</em> TCP-forbindelse til brokeren og holder den åpen. Da kan brokeren sende meldinger inn til enheten uten at noen må koble seg <em>inn</em> gjennom NAT eller brannmuren. MQTT har i tillegg liten overhead (minimum 2 byte header), QoS-nivåer og Last Will.</p>
+            </div>
+          </details>
+          <details class="sol">
+            <summary>Hva er forskjellen på QoS 0, 1 og 2?</summary>
+            <div class="sol__body">
+              <p>0: høyst én gang, uten kvittering. 1: minst én gang, med PUBACK, og meldingen sendes på nytt til den er kvittert, så det kan bli duplikater. 2: nøyaktig én gang, med en fireveis handshake (PUBREC/PUBREL/PUBCOMP). Høyere QoS gir sikrere levering, men flere pakker og mer strøm.</p>
+            </div>
+          </details>
+          <details class="sol">
+            <summary>Vurder sikkerheten i lab 3 fra sensor til mottaker.</summary>
+            <div class="sol__body">
+              <ul>
+                <li><strong>Enheten:</strong> passordene ligger i klartekst i flashen, og ESP8266 har verken kryptert flash eller secure boot. Den kan leses ut med <code>esptool read_flash</code>.</li>
+                <li><strong>Lenken:</strong> TLS beskytter mot avlytting, men bare hvis kortet sjekker sertifikatet til brokeren.</li>
+                <li><strong>Brokeren:</strong> alle bruker samme konto og det finnes ingen ACL-er. Alle kan lese <code>#</code> og publisere til hvilket som helst topic.</li>
+                <li><strong>Applikasjonen:</strong> <code>ON</code> blir godtatt fra hvem som helst og kan spilles av på nytt.</li>
+              </ul>
+              <p>Tiltak: egen identitet per enhet (gjerne klientsertifikat), ACL per topic, sertifikatsjekk, hemmeligheter utenfor kildekoden og en brikke med kryptert flash (f.eks. ESP32 med nøkkel i eFuses).</p>
+            </div>
+          </details>
+          <details class="sol">
+            <summary>Hva er eFuses, og hvorfor er det viktig at de bare kan skrives én gang?</summary>
+            <div class="sol__body">
+              <p>eFuses er bit som brennes permanent (one-time programmable). De brukes til MAC-adresse, kalibrering og sikkerhetsinnstillinger: nøkkel til flash-kryptering, «secure boot på» og «JTAG av». Fordi de ikke kan settes tilbake, kan heller ikke en angriper med fysisk tilgang slå beskyttelsen av igjen. Dette er det samme prinsippet som det uforanderlige første trinnet i chain of trust.</p>
+            </div>
+          </details>
+          <details class="sol">
+            <summary>Hva er MicroPython, og hvorfor er det nyttig her?</summary>
+            <div class="sol__body">
+              <p>MicroPython er en slank versjon av Python 3 som kjører i ca. 256 kB kode og 16 kB RAM. Den har en REPL og et lite standardbibliotek (<code>machine</code>, <code>network</code>, <code>umqtt.simple</code>). Du kan prøve ting direkte på kortet uten å kompilere og flashe C hver gang. Ulempen er at den er tregere og bruker mer minne, og at skriptene og hemmelighetene ligger som lesbare filer på kortet.</p>
+            </div>
+          </details>
         </article>
 
         <nav class="chapter-nav">
