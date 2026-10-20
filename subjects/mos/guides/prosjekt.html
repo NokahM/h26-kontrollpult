@@ -7,7 +7,7 @@
   <meta name="description" content="Fusée Gelée (CVE-2018-6242) i Tegra X1: hvor miniprosjektet møter kapittel 1–6 i pensum, og hvor det tydelig ikke gjør det.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../../assets/css/main.css?v=41">
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=42">
 </head>
 <body class="theme-mos" data-updated="2026-09-22">
   <div class="app-shell">
@@ -91,6 +91,79 @@
           <h2>Kapittel 1 — chain of trust, ett skritt før den i det hele tatt starter</h2>
           <p>Kapittel 1 definerer chain of trust som «en liten, uforanderlig førstetrinns bootloader (ofte brent inn i silisiumet på fabrikken)» som verifiserer neste trinn før den gir fra seg kontrollen. IROM i Tegra X1 er nøyaktig denne komponenten, ord for ord: en maske-ROM etset inn i brikken under fabrikasjon, som ikke kan slettes, reflashes eller patches i ettertid.</p>
           <p>Kapittel 1 sier også: «klarer man å bryte tilliten ett eneste sted … er resten av kjeden verdiløs.» Fusée Gelée er den mest ekstreme illustrasjonen av akkurat den setningen som finnes i pensum: bruddet skjer i <em>selve det første leddet</em>, før noen signatursjekk i det hele tatt har kjørt. Bootloaderen som skal verifisere alt som kommer etter, blir selv kompromittert — på BPMP, før sikkerhetslåsene er satt og før tillitskjeden engang er i gang. Resten av kjeden (bootloader, TrustZone OS, Horizon) blir irrelevant, ikke fordi den er svak, men fordi angriperen aldri trenger å forholde seg til den.</p>
+
+          <figure class="flowfig">
+            <svg viewBox="0 0 720 420" role="img" aria-labelledby="cot-title cot-desc">
+              <title id="cot-title">Tillitskjeden i Tegra X1 og hvor Fusée Gelée bryter den</title>
+              <desc id="cot-desc">BootROM (IROM) på BPMP skal verifisere bootloaderen package1, som verifiserer TrustZone Secure Monitor, som verifiserer Horizon. Fusée Gelée kommer inn via RCM over USB og overtar IROM før noen signatursjekk har kjørt, så resten av kjeden blir omgått.</desc>
+              <defs>
+                <marker id="cot-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path class="head" d="M2 1L8 5L2 9"/>
+                </marker>
+                <marker id="cot-arrow-attack" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path class="head head--attack" d="M2 1L8 5L2 9"/>
+                </marker>
+              </defs>
+
+              <g class="node node--root">
+                <rect x="40" y="24" width="250" height="64" rx="6"/>
+                <text class="t1" x="165" y="51" text-anchor="middle">BootROM (IROM) · BPMP</text>
+                <text class="t2" x="165" y="71" text-anchor="middle">maske-ROM — rot av tillit</text>
+              </g>
+              <line class="edge edge--skip" x1="165" y1="88" x2="165" y2="134" marker-end="url(#cot-arrow)"/>
+              <text class="lbl" x="178" y="116">verifiserer signatur</text>
+
+              <g class="node node--skip">
+                <rect x="40" y="136" width="250" height="64" rx="6"/>
+                <text class="t1" x="165" y="163" text-anchor="middle">Bootloader (package1)</text>
+                <text class="t2" x="165" y="183" text-anchor="middle">BPMP, lastes fra eMMC</text>
+              </g>
+              <line class="edge edge--skip" x1="165" y1="200" x2="165" y2="246" marker-end="url(#cot-arrow)"/>
+              <text class="lbl" x="178" y="228">verifiserer</text>
+
+              <g class="node node--skip">
+                <rect x="40" y="248" width="250" height="64" rx="6"/>
+                <text class="t1" x="165" y="275" text-anchor="middle">TrustZone Secure Monitor</text>
+                <text class="t2" x="165" y="295" text-anchor="middle">EL3 på hovedprosessorene</text>
+              </g>
+              <line class="edge edge--skip" x1="165" y1="312" x2="165" y2="342" marker-end="url(#cot-arrow)"/>
+
+              <g class="node node--skip">
+                <rect x="40" y="344" width="250" height="56" rx="6"/>
+                <text class="t1" x="165" y="368" text-anchor="middle">Horizon</text>
+                <text class="t2" x="165" y="387" text-anchor="middle">kjerne og operativsystem</text>
+              </g>
+
+              <g class="node node--attack">
+                <rect x="440" y="24" width="250" height="64" rx="6"/>
+                <text class="t1" x="565" y="51" text-anchor="middle">RCM over USB</text>
+                <text class="t2" x="565" y="71" text-anchor="middle">GET_STATUS uten lengdesjekk</text>
+              </g>
+              <line class="edge edge--attack" x1="440" y1="56" x2="294" y2="56" marker-end="url(#cot-arrow-attack)"/>
+              <text class="lbl lbl--attack" x="367" y="46" text-anchor="middle">før signatursjekk</text>
+
+              <path class="edge edge--attack" d="M565 88 V280 H294" marker-end="url(#cot-arrow-attack)"/>
+              <text class="lbl lbl--attack" x="578" y="196">egen payload</text>
+              <text class="lbl lbl--attack" x="578" y="214">starter CCPLEX</text>
+              <text class="lbl lbl--attack" x="578" y="232">rett på EL3</text>
+            </svg>
+            <figcaption>Normalt verifiserer hvert ledd det neste før det gir fra seg kontrollen (stiplet: ledd som aldri får sjekke noe). Fusée Gelée overtar IROM via RCM, før første signatursjekk, og hopper over resten av kjeden.</figcaption>
+          </figure>
+
+          <h3>Hvorfor en bootROM-feil er en egen klasse</h3>
+          <p>Det som gjør IROM egnet som rot av tillit, er det samme som gjør Fusée Gelée så alvorlig. BootROM-en er på én gang det sterkeste og det svakeste leddet i kjeden — og av samme grunn:</p>
+          <ul>
+            <li><strong>Sterkest:</strong> ingen kan endre den — verken en angriper eller produsenten.</li>
+            <li><strong>Svakest:</strong> nettopp fordi ingen kan endre den. En feil i IROM kan ikke rettes på enheter som allerede er solgt.</li>
+          </ul>
+          <p>Det gir tre egenskaper som skiller bootROM-sårbarheter fra vanlige programvarefeil:</p>
+          <ul>
+            <li><strong>Varige</strong> — kan ikke patches i felten. NVIDIA kunne bare rette nye brikker: først med ipatches i fuses, så med T214/Mariko.</li>
+            <li><strong>Universelle</strong> — rammer alle brikker med samme IROM, ikke bare Switch. NVIDIAs sikkerhetsvarsel gjelder Tegra X1 generelt.</li>
+            <li><strong>Dype</strong> — bruddet skjer nederst i stabelen, så alt som bygger på IROM arver den brutte tilliten.</li>
+          </ul>
+
+          <div class="note"><strong>Designavveiningen i én setning:</strong> å forankre tilliten i uforanderlig maskinvare gir en sterk garanti så lenge implementasjonen er korrekt — men flytter konsekvensen av en feil fra «kan patches» til «permanent». Det er et godt avslutningspoeng for presentasjonen, og et naturlig svar på «hvorfor ikke bare legge bootloaderen i flash?».</div>
 
           <h2>Kapittel 2 — to bakdører, ulik pris</h2>
           <p>Strukturen er identisk: begge sårbarhetene misbruker et grensesnitt som er der <em>med vilje</em>, til et annet formål enn normal drift. CTRL-AP på nRF52 finnes for å kunne styre kretsen selv når andre access ports er sperret. RCM på Tegra X1 finnes for fabrikk- og feltgjenoppretting over USB. Ingen av dem er i seg selv en feil — feilen ligger i hva de tillater når de misbrukes.</p>

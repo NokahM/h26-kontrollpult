@@ -809,6 +809,28 @@ code {
 /* TikZ-figurer bygd med assets/tikz/build.py og limt inn som inline SVG */
 .tikz { display: block; max-width: 100%; height: auto; margin: 1.25rem auto; }
 
+/* Håndtegnet flytdiagram (inline SVG) som følger temaet via variablene:
+   .node = boks (--root rot av tillit, --skip omgått ledd, --attack angrep),
+   .edge = pil, .t1/.t2 = tittel/undertekst, .lbl = kantetikett. */
+.flowfig { margin: 1.5rem 0 0; padding: 1.25rem 1.25rem 1rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--side); }
+.flowfig svg { width: 100%; height: auto; }
+.flowfig figcaption { margin-top: .75rem; font-family: var(--font-ui); font-size: .875rem; color: var(--muted); text-align: center; }
+.flowfig .node rect { fill: var(--bg); stroke: var(--line-2); stroke-width: 1; }
+.flowfig .node--root rect { stroke: var(--accent); stroke-width: 1.75; }
+.flowfig .node--skip rect { fill: none; stroke-dasharray: 5 4; }
+.flowfig .node--skip .t1 { fill: var(--muted); }
+.flowfig .node--attack rect { fill: color-mix(in srgb, var(--st-uklart) 10%, var(--bg)); stroke: var(--st-uklart); stroke-width: 1.5; }
+.flowfig .node--attack .t1 { fill: var(--st-uklart); }
+.flowfig .t1 { font: 600 15px var(--font-ui); fill: var(--ink); }
+.flowfig .t2 { font: 13px var(--font-ui); fill: var(--muted); }
+.flowfig .lbl { font: 13px var(--font-ui); fill: var(--muted); }
+.flowfig .lbl--attack { fill: var(--st-uklart); font-weight: 600; }
+.flowfig .edge { fill: none; stroke: var(--line-2); stroke-width: 1.5; }
+.flowfig .edge--skip { stroke-dasharray: 4 4; }
+.flowfig .edge--attack { stroke: var(--st-uklart); stroke-width: 2; }
+.flowfig .head { fill: none; stroke: var(--line-2); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.flowfig .head--attack { stroke: var(--st-uklart); }
+
 .sol { margin-top: 1rem; border-top: 1px solid var(--line); }
 .sol > summary {
   display: flex;

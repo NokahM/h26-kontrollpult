@@ -82,6 +82,11 @@ og ligger som inline SVG mellom `<!-- tikz:navn -->`-markører. Tallene bak
 figurene står i `assets/tikz/figurer.py`. Se `docs/teknikker.md` §8.1 for
 hvordan du endrer eller lager nye.
 
+Enkle flytdiagrammer uten tall (for eksempel tillitskjeden på MoS-siden
+`prosjekt.html`) er håndtegnet inline SVG i `<figure class="flowfig">`. De
+bruker klasser i stedet for farger (`.node`, `.node--root/--skip/--attack`,
+`.edge`, `.t1`/`.t2`, `.lbl`), så de følger lyst og mørkt tema automatisk.
+
 Sidene er vanlig, håndredigerbar HTML — legg til en ny oppgave ved å kopiere en
 eksisterende `<article class="task">`-blokk. Matematikken skrives som LaTeX
 mellom `\(…\)` (inline) og `\[…\]` (blokk), og rendres av MathJax som lastes
