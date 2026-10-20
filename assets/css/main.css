@@ -831,6 +831,66 @@ code {
 .flowfig .head { fill: none; stroke: var(--line-2); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .flowfig .head--attack { stroke: var(--st-uklart); }
 
+/* Begrep i løpende tekst (begrep.js): stiplet strek, klikk gir forklaringsboble */
+.prose a.term {
+  color: inherit;
+  text-decoration: underline dotted;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: .24em;
+  cursor: help;
+  border-radius: 2px;
+  transition: background-color var(--ease);
+}
+.prose a.term:hover { text-decoration-style: solid; }
+.prose a.term[aria-expanded="true"] { background: color-mix(in srgb, var(--accent) 14%, transparent); text-decoration-style: solid; }
+.term-pop {
+  display: none;
+  position: fixed;
+  z-index: 40;
+  width: min(25rem, calc(100vw - 32px));
+  padding: .8rem 1rem .75rem;
+  background: var(--bg);
+  border: 1px solid var(--line-2);
+  border-top: 3px solid var(--accent);
+  border-radius: 6px;
+  box-shadow: 0 10px 30px rgb(0 0 0 / .16), 0 2px 6px rgb(0 0 0 / .08);
+  font-family: var(--font-read);
+  font-size: .96875rem;
+  line-height: 1.6;
+  color: var(--ink);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 150ms ease, transform 150ms ease;
+}
+.term-pop--above { transform: translateY(-4px); }
+.term-pop.is-open { opacity: 1; transform: none; }
+.term-pop::before {
+  content: "";
+  position: absolute;
+  left: var(--arrow-x, 50%);
+  top: -9px;
+  width: 12px; height: 12px;
+  margin-left: -6px;
+  background: var(--accent);
+  clip-path: polygon(50% 25%, 100% 100%, 0 100%);
+}
+.term-pop--above::before { top: auto; bottom: -7px; background: var(--line-2); clip-path: polygon(0 0, 100% 0, 50% 60%); }
+.term-pop__title { margin-bottom: .3rem; font-family: var(--font-ui); font-size: .8125rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--accent); }
+.term-pop__body em { font-style: italic; }
+.term-pop__body a { color: var(--accent); }
+.term-pop__more { display: inline-block; margin-top: .5rem; font-family: var(--font-ui); font-size: .8125rem; color: var(--muted); text-decoration: none; }
+.term-pop__more:hover { color: var(--accent); }
+.term-pop__more::after { content: " ↓"; }
+
+/* Ordliste: kilden til begrepsboblene */
+.terms { display: grid; grid-template-columns: minmax(11rem, 14rem) minmax(0, 1fr); column-gap: 1.75rem; margin-top: 1rem; }
+.terms dt, .terms dd { padding: .7rem .4rem; border-top: 1px solid var(--line); scroll-margin-top: calc(var(--topbar-h) + 1rem); }
+.terms dt { font-family: var(--font-ui); font-size: 1rem; font-weight: 600; line-height: 1.4; }
+.terms dt small { display: block; font-weight: 400; font-size: .8125rem; color: var(--muted); }
+.terms dd { font-size: 1.0625rem; line-height: 1.65; }
+.terms dt:target, .terms dt:target + dd { background: color-mix(in srgb, var(--accent) 9%, transparent); }
+
 .sol { margin-top: 1rem; border-top: 1px solid var(--line); }
 .sol > summary {
   display: flex;

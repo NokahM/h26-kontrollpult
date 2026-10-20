@@ -45,6 +45,7 @@ site/
   assets/js/formler.js          formelpanelet (Σ-knappen i toppfeltet)
   subjects/statistikk/formler.html  innholdet i formelpanelet for statistikk
   assets/js/math.js             laster MathJax fra CDN (kun statistikk-sidene)
+  assets/js/begrep.js           forklaringsbobler på stiplede begrep (MoS tillitskjede.html)
   assets/tikz/                  figurene (TikZ/pgfplots → inline SVG), se docs/teknikker.md §8.1
   assets/resources/<emne>/      ressursfiler (IKKE i git, se .gitignore)
 ```
@@ -86,6 +87,12 @@ Enkle flytdiagrammer uten tall (for eksempel tillitskjeden på MoS-siden
 `prosjekt.html`) er håndtegnet inline SVG i `<figure class="flowfig">`. De
 bruker klasser i stedet for farger (`.node`, `.node--root/--skip/--attack`,
 `.edge`, `.t1`/`.t2`, `.lbl`), så de følger lyst og mørkt tema automatisk.
+
+**Begrepsforklaringer**: skriv et teknisk begrep som
+`<a class="term" href="#b-navn">ord</a>`. Det får stiplet strek, og et klikk
+viser forklaringen i en boble (`assets/js/begrep.js`). Teksten hentes fra
+ordlisten nederst på siden, `<dl class="terms">` med `<dt id="b-navn">` og en
+`<dd>`, så den skrives bare ett sted. Siden må laste `begrep.js`.
 
 Sidene er vanlig, håndredigerbar HTML — legg til en ny oppgave ved å kopiere en
 eksisterende `<article class="task">`-blokk. Matematikken skrives som LaTeX
