@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tillitskjeden og boot ROM — MoS · H26</title>
+  <meta name="description" content="Sikker oppstart generelt: hvordan en tillitskjede bygges fra en uforanderlig boot ROM, hvor den kan brytes, og hvorfor feil i boot ROM er en egen klasse sårbarheter.">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=42">
+</head>
+<body class="theme-mos" data-updated="2026-10-20">
+  <div class="app-shell">
+
+    <aside class="sidebar"></aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">MoS</a>
+        <div class="topbar__crumb">Tillitskjeden</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow">MoS · miniprosjekt · bakgrunn</div>
+          <h1>Tillitskjeden og boot ROM</h1>
+          <p class="page-header__desc">Hvordan sikker oppstart bygger tillit fra én uforanderlig kodebit og opp til operativsystemet, hvor kjeden kan brytes, og hvorfor en feil i boot ROM er en helt egen klasse sårbarheter. Generelt, uten å binde seg til én brikke. Fusée Gelée er det konkrete caset i <a href="prosjekt.html">prosjektet</a>.</p>
+        </header>
+
+        <div class="sourcebar">
+          <a class="tag" href="01-intro.html">kapittel 1 · chain of trust</a>
+          <a class="tag" href="02-bootloader-swd-uart.html">kapittel 2 · bootloader og debug</a>
+          <a class="tag" href="06-glitching.html">kapittel 6 · glitching</a>
+          <a class="tag" href="prosjekt.html">caset · Fusée Gelée</a>
+        </div>
+
+        <p class="callout"><strong>Kjernen i én setning:</strong> sikker oppstart flytter all tillit ned i et lite stykke kode som ingen kan endre. Det gir en sterk garanti så lenge den koden er feilfri, men gjør samtidig enhver feil i den permanent.</p>
+
+        <article class="prose">
+          <h2>Problemet: hvem verifiserer verifisereren?</h2>
+          <p>Målet med sikker oppstart er at enheten bare skal kjøre kode som produsenten har autorisert. Den naive løsningen er å la operativsystemet sjekke signaturen på applikasjonene. Men hvem sjekker operativsystemet? Bootloaderen. Og hvem sjekker bootloaderen? Spørsmålet gjentar seg for hvert lag, og en kontroll er aldri sterkere enn koden som utfører den. Klarer en angriper å endre bootloaderen, kan hen også fjerne sjekken den gjør.</p>
+          <p>Rekursjonen må stoppe et sted, i noe som ikke selv trenger å verifiseres fordi det <em>ikke kan endres</em>. Det er <strong>roten av tillit</strong> (root of trust). På de aller fleste systemer på brikke (SoC) er roten en <strong>boot ROM</strong>: kode som er etset inn i silisiumet under produksjon, og som er det første prosessoren kjører når den får strøm.</p>
+
+          <h2>Tillitskjeden, ledd for ledd</h2>
+          <p>Fra roten bygges tilliten oppover: hvert ledd verifiserer det neste <em>før</em> det gir fra seg kontrollen. Tilliten «arves» bare hvis hver eneste sjekk på veien holder.</p>
+
+          <figure class="flowfig">
+            <svg viewBox="0 0 720 434" role="img" aria-labelledby="kjede-title kjede-desc">
+              <title id="kjede-title">Tillitskjede ved sikker oppstart</title>
+              <desc id="kjede-desc">Boot ROM leser en hash av den offentlige nøkkelen fra OTP-fuses og verifiserer første trinns bootloader, som verifiserer andre trinns bootloader, som verifiserer OS-kjernen. Bildene som verifiseres lastes inn fra flash.</desc>
+              <defs>
+                <marker id="kjede-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path class="head" d="M2 1L8 5L2 9"/>
+                </marker>
+              </defs>
+
+              <g class="node node--root">
+                <rect x="40" y="20" width="280" height="64" rx="6"/>
+                <text class="t1" x="180" y="47" text-anchor="middle">Boot ROM</text>
+                <text class="t2" x="180" y="67" text-anchor="middle">uforanderlig — rot av tillit</text>
+              </g>
+              <line class="edge" x1="180" y1="84" x2="180" y2="128" marker-end="url(#kjede-arrow)"/>
+              <text class="lbl" x="193" y="111">verifiserer signatur</text>
+
+              <g class="node">
+                <rect x="40" y="130" width="280" height="64" rx="6"/>
+                <text class="t1" x="180" y="157" text-anchor="middle">Første trinns bootloader</text>
+                <text class="t2" x="180" y="177" text-anchor="middle">liten, setter opp minne og klokker</text>
+              </g>
+              <line class="edge" x1="180" y1="194" x2="180" y2="238" marker-end="url(#kjede-arrow)"/>
+              <text class="lbl" x="193" y="221">verifiserer signatur</text>
+
+              <g class="node">
+                <rect x="40" y="240" width="280" height="64" rx="6"/>
+                <text class="t1" x="180" y="267" text-anchor="middle">Andre trinns bootloader</text>
+                <text class="t2" x="180" y="287" text-anchor="middle">mer funksjonalitet, mer kode</text>
+              </g>
+              <line class="edge" x1="180" y1="304" x2="180" y2="348" marker-end="url(#kjede-arrow)"/>
+              <text class="lbl" x="193" y="331">verifiserer signatur</text>
+
+              <g class="node">
+                <rect x="40" y="350" width="280" height="64" rx="6"/>
+                <text class="t1" x="180" y="377" text-anchor="middle">OS-kjerne</text>
+                <text class="t2" x="180" y="397" text-anchor="middle">verifiserer moduler og apper videre</text>
+              </g>
+
+              <g class="node">
+                <rect x="440" y="20" width="250" height="64" rx="6"/>
+                <text class="t1" x="565" y="47" text-anchor="middle">OTP-fuses</text>
+                <text class="t2" x="565" y="67" text-anchor="middle">hash av offentlig nøkkel</text>
+              </g>
+              <line class="edge" x1="440" y1="52" x2="324" y2="52" marker-end="url(#kjede-arrow)"/>
+              <text class="lbl" x="382" y="42" text-anchor="middle">leses av</text>
+
+              <g class="node">
+                <rect x="440" y="130" width="250" height="64" rx="6"/>
+                <text class="t1" x="565" y="157" text-anchor="middle">Bilder i flash</text>
+                <text class="t2" x="565" y="177" text-anchor="middle">kode + signatur + nøkkel</text>
+              </g>
+              <line class="edge" x1="440" y1="162" x2="324" y2="162" marker-end="url(#kjede-arrow)"/>
+              <text class="lbl" x="382" y="152" text-anchor="middle">lastes inn</text>
+            </svg>
+            <figcaption>Roten er boot ROM pluss nøkkelmaterialet i fuses. Alt over ligger i flash, kan byttes ut, og må derfor verifiseres før det kjøres.</figcaption>
+          </figure>
+
+          <h3>Hva ett ledd gjør</h3>
+          <p>Hvert ledd i kjeden gjør i prinsippet de samme fire tingene med det neste:</p>
+          <div class="steps">
+            <div class="step">
+              <h4>Les inn neste bilde</h4>
+              <p>Koden, signaturen og den offentlige nøkkelen kopieres fra flash til internt minne (SRAM/DRAM).</p>
+            </div>
+            <div class="step">
+              <h4>Sjekk nøkkelen</h4>
+              <p>Hashen av den medfølgende offentlige nøkkelen sammenlignes med hashen i OTP-fusene. Bare en nøkkel produsenten har «brent inn», godtas.</p>
+            </div>
+            <div class="step">
+              <h4>Sjekk signaturen</h4>
+              <p>Hash av koden beregnes, og signaturen verifiseres med den offentlige nøkkelen (RSA eller ECDSA). Den private nøkkelen finnes bare hos produsenten.</p>
+            </div>
+            <div class="step">
+              <h4>Hopp, eller stopp</h4>
+              <p>Bare hvis alt stemmer, hopper leddet til den verifiserte koden. Ved feil skal oppstarten avbrytes (<em>fail closed</em>), ikke fortsette med en advarsel.</p>
+            </div>
+          </div>
+
+          <h3>Hva roten egentlig består av</h3>
+          <p>Roten av tillit er mer enn ROM-koden alene. Den består av alt som må være uforanderlig for at første sjekk skal bety noe:</p>
+          <ul>
+            <li><strong>ROM-koden</strong> — verifiseringslogikken som kjører først.</li>
+            <li><strong>Nøkkelmateriale i OTP-fuses</strong> — typisk bare en <em>hash</em> av den offentlige nøkkelen, fordi fuse-plassen er liten. Selve nøkkelen følger med bildet i flash.</li>
+            <li><strong>Konfigurasjonsfuses</strong> — om sikker oppstart er påslått, om debug-porter er låst, og en monoton teller for <em>anti-rollback</em>.</li>
+          </ul>
+          <p>Fuses kan bare brennes fra 0 til 1, aldri tilbake. Derfor er de egnet for innstillinger som skal være permanente.</p>
+
+          <h3>Verified boot og measured boot</h3>
+          <p>Pensum og de fleste innebygde systemer handler om <strong>verified boot</strong>: hvert ledd <em>stopper</em> oppstarten hvis neste ledd ikke er gyldig. En beslektet variant er <strong>measured boot</strong>, der hvert ledd bare <em>måler</em> (hasher) det neste og logger målingen i en TPM. Oppstarten fortsetter uansett, men en ekstern part kan senere be om en signert rapport (attestasjon) og selv avgjøre om enheten er til å stole på. Begge trenger en rot av tillit nederst.</p>
+
+          <h2>Hvor kan kjeden brytes?</h2>
+          <p>Kryptografien i signatursjekken er sjelden det svake punktet. Angrep på sikker oppstart går nesten alltid på <em>implementasjonen</em> rundt den, og ofte på det som skjer <em>før</em> sjekken er ferdig:</p>
+          <ul>
+            <li><strong>Parsing av input før verifisering.</strong> Leddet må lese headere, lengdefelt og formater for å finne ut hva det skal verifisere. En feil i den parsingen, for eksempel et lengdefelt uten grensesjekk, kan gi kodeeksekvering før signaturen i det hele tatt er sjekket.</li>
+            <li><strong>Recovery- og nedlastingsmoduser.</strong> Mange boot ROM-er har en modus for å laste kode over USB eller UART når flash er tom eller ødelagt. Det er en tiltenkt vei inn, og dermed en angrepsflate (sammenlign med debug-portene i <a href="02-bootloader-swd-uart.html">kapittel 2</a>).</li>
+            <li><strong>Feilinjeksjon mot selve sjekken.</strong> Et spennings- eller klokkeglitch på riktig tidspunkt kan få én sammenligning eller ett betinget hopp til å gi feil svar (<a href="06-glitching.html">kapittel 6</a>).</li>
+            <li><strong>Time-of-check / time-of-use.</strong> Hvis leddet verifiserer én kopi av bildet, men kjører en annen (for eksempel leser fra flash på nytt), kan innholdet byttes mellom sjekk og bruk.</li>
+            <li><strong>Rollback.</strong> En gammel versjon er fortsatt gyldig signert, også om den har en kjent sårbarhet. Uten anti-rollback-teller kan angriperen bare installere den.</li>
+            <li><strong>Åpne debug-grensesnitt og lekkede nøkler.</strong> Er JTAG/SWD åpent, eller er den private signeringsnøkkelen lekket, trenger angriperen ikke bryte kjeden i det hele tatt.</li>
+          </ul>
+          <p>Felles for alle: bryter man ett ledd, arver <em>alt over</em> den brutte tilliten. Hvor lavt i kjeden bruddet skjer, avgjør både hvor mye angriperen får, og om det kan repareres.</p>
+
+          <h2>Hvorfor en feil i boot ROM er en egen klasse</h2>
+          <p>Her ligger selve utfordringen. Boot ROM er det sterkeste og det svakeste leddet i kjeden, og av samme grunn:</p>
+          <ul>
+            <li><strong>Sterkest:</strong> den kan ikke endres, verken av en angriper eller av produsenten. Det er hele grunnen til at den kan være rot av tillit.</li>
+            <li><strong>Svakest:</strong> nettopp fordi den ikke kan endres. En feil i boot ROM kan ikke rettes på enheter som allerede er produsert.</li>
+          </ul>
+
+          <figure class="flowfig">
+            <svg viewBox="0 0 720 410" role="img" aria-labelledby="brudd-title brudd-desc">
+              <title id="brudd-title">Feil i en bootloader sammenlignet med feil i boot ROM</title>
+              <desc id="brudd-desc">Til venstre er feilen i bootloaderen. Boot ROM er intakt, og feilen kan rettes med en signert oppdatering. Til høyre er feilen i boot ROM. Hele kjeden over arver bruddet, og bare en ny silisiumrevisjon retter feilen.</desc>
+              <defs>
+                <marker id="brudd-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path class="head" d="M2 1L8 5L2 9"/>
+                </marker>
+              </defs>
+
+              <text class="t1" x="180" y="24" text-anchor="middle">Feil i en bootloader</text>
+              <g class="node node--root">
+                <rect x="30" y="44" width="300" height="52" rx="6"/>
+                <text class="t1" x="180" y="66" text-anchor="middle">Boot ROM</text>
+                <text class="t2" x="180" y="84" text-anchor="middle">intakt, håndhever fortsatt</text>
+              </g>
+              <line class="edge" x1="180" y1="96" x2="180" y2="118" marker-end="url(#brudd-arrow)"/>
+              <g class="node node--attack">
+                <rect x="30" y="120" width="300" height="52" rx="6"/>
+                <text class="t1" x="180" y="142" text-anchor="middle">Bootloader (flash)</text>
+                <text class="t2" x="180" y="160" text-anchor="middle">feilen utnyttes her</text>
+              </g>
+              <line class="edge edge--skip" x1="180" y1="172" x2="180" y2="194" marker-end="url(#brudd-arrow)"/>
+              <g class="node node--skip">
+                <rect x="30" y="196" width="300" height="52" rx="6"/>
+                <text class="t1" x="180" y="218" text-anchor="middle">Neste trinn</text>
+                <text class="t2" x="180" y="236" text-anchor="middle">arver bruddet</text>
+              </g>
+              <line class="edge edge--skip" x1="180" y1="248" x2="180" y2="270" marker-end="url(#brudd-arrow)"/>
+              <g class="node node--skip">
+                <rect x="30" y="272" width="300" height="52" rx="6"/>
+                <text class="t1" x="180" y="294" text-anchor="middle">OS-kjerne</text>
+                <text class="t2" x="180" y="312" text-anchor="middle">arver bruddet</text>
+              </g>
+              <text class="lbl" x="180" y="356" text-anchor="middle">Fiks: signert oppdatering av bootloaderen.</text>
+              <text class="lbl" x="180" y="375" text-anchor="middle">ROM er intakt og håndhever den nye versjonen,</text>
+              <text class="lbl" x="180" y="394" text-anchor="middle">og anti-rollback hindrer nedgradering.</text>
+
+              <text class="t1" x="540" y="24" text-anchor="middle">Feil i boot ROM</text>
+              <g class="node node--attack">
+                <rect x="390" y="44" width="300" height="52" rx="6"/>
+                <text class="t1" x="540" y="66" text-anchor="middle">Boot ROM</text>
+                <text class="t2" x="540" y="84" text-anchor="middle">feilen utnyttes her</text>
+              </g>
+              <line class="edge edge--skip" x1="540" y1="96" x2="540" y2="118" marker-end="url(#brudd-arrow)"/>
+              <g class="node node--skip">
+                <rect x="390" y="120" width="300" height="52" rx="6"/>
+                <text class="t1" x="540" y="142" text-anchor="middle">Bootloader (flash)</text>
+                <text class="t2" x="540" y="160" text-anchor="middle">arver bruddet</text>
+              </g>
+              <line class="edge edge--skip" x1="540" y1="172" x2="540" y2="194" marker-end="url(#brudd-arrow)"/>
+              <g class="node node--skip">
+                <rect x="390" y="196" width="300" height="52" rx="6"/>
+                <text class="t1" x="540" y="218" text-anchor="middle">Neste trinn</text>
+                <text class="t2" x="540" y="236" text-anchor="middle">arver bruddet</text>
+              </g>
+              <line class="edge edge--skip" x1="540" y1="248" x2="540" y2="270" marker-end="url(#brudd-arrow)"/>
+              <g class="node node--skip">
+                <rect x="390" y="272" width="300" height="52" rx="6"/>
+                <text class="t1" x="540" y="294" text-anchor="middle">OS-kjerne</text>
+                <text class="t2" x="540" y="312" text-anchor="middle">arver bruddet</text>
+              </g>
+              <text class="lbl lbl--attack" x="540" y="356" text-anchor="middle">Fiks: ingen for enheter som er produsert.</text>
+              <text class="lbl" x="540" y="375" text-anchor="middle">Det finnes ikke noe lavere ledd som kan</text>
+              <text class="lbl" x="540" y="394" text-anchor="middle">håndheve en rettet versjon.</text>
+            </svg>
+            <figcaption>Stiplet: ledd som ikke lenger er til å stole på. En feil høyere opp kan repareres fordi et intakt ledd under kan håndheve rettelsen. En feil i roten har ingenting under seg.</figcaption>
+          </figure>
+
+          <p>Det er dette som gjør boot ROM-sårbarheter til en egen klasse. De er:</p>
+          <ul>
+            <li><strong>Varige</strong> — de kan ikke patches i felten. Feilen lever like lenge som enhetene.</li>
+            <li><strong>Universelle</strong> — de rammer alle enheter med samme silisiumrevisjon, uavhengig av hvilken programvare de kjører.</li>
+            <li><strong>Dype</strong> — bruddet skjer nederst i stabelen, så alt over faller, også sikkerhetsmekanismer som i seg selv er korrekte.</li>
+          </ul>
+
+          <div class="dtable-wrap">
+            <table class="dtable">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Feil i bootloader eller OS</th>
+                  <th>Feil i boot ROM</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Kan rettes på solgte enheter?</td>
+                  <td>Ja, med signert oppdatering</td>
+                  <td>Nei</td>
+                </tr>
+                <tr>
+                  <td>Hvem rammes?</td>
+                  <td>Enheter med den sårbare versjonen</td>
+                  <td>Alle enheter med samme silisiumrevisjon</td>
+                </tr>
+                <tr>
+                  <td>Hva faller?</td>
+                  <td>Leddet med feilen og alt over</td>
+                  <td>Hele kjeden</td>
+                </tr>
+                <tr>
+                  <td>Hindrer nedgradering?</td>
+                  <td>Ja, anti-rollback håndheves av intakte ledd under</td>
+                  <td>Ikke relevant, ingenting å oppgradere</td>
+                </tr>
+                <tr>
+                  <td>Endelig fiks</td>
+                  <td>Ny programvareversjon</td>
+                  <td>Ny brikkerevisjon fra fabrikken</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Hvordan produsenter begrenser risikoen</h2>
+          <p>Siden en feil i boot ROM ikke kan rettes, handler god design om å gjøre feil usannsynlige og konsekvensene mindre:</p>
+          <ul>
+            <li><strong>Hold ROM-koden minimal.</strong> Minst mulig kode betyr minst mulig angrepsflate. Kompleks funksjonalitet, som filsystemer og nettverk, flyttes til senere ledd som <em>kan</em> oppdateres.</li>
+            <li><strong>Unngå kompleks parsing av ekstern input i ROM.</strong> Spesielt i recovery-moduser: valider alle lengder og felt før de brukes.</li>
+            <li><strong>Test og verifiser hardere enn vanlig kode.</strong> Fuzzing av alle grensesnitt og formell verifisering av kritiske deler, fordi det ikke finnes noen «versjon 1.1».</li>
+            <li><strong>Gjør det mulig å slå av angrepsflate med fuses.</strong> For eksempel å deaktivere recovery-modus eller låse debug permanent når enheten er ferdig produsert.</li>
+            <li><strong>Små patch-mekanismer.</strong> Noen brikker kan rette enkeltinstruksjoner i ROM via fuses. Plassen er svært begrenset, og det hjelper bare enheter som får patchen brent inn.</li>
+            <li><strong>Nøkkelrotasjon og tilbakekalling.</strong> Flere nøkkelhasher i fuses, så en lekket nøkkel kan tilbakekalles uten å miste sikker oppstart.</li>
+            <li><strong>Motmål mot feilinjeksjon.</strong> Redundante sjekker, tilfeldige forsinkelser og glitch-detektorer gjør det vanskeligere å treffe den ene instruksjonen som avgjør utfallet.</li>
+          </ul>
+
+          <div class="note"><strong>Designavveiningen:</strong> å forankre tilliten i uforanderlig maskinvare gir en sterk garanti så lenge implementasjonen er korrekt, men flytter konsekvensen av en feil fra «kan patches» til «permanent». Alternativet, en oppdaterbar rot, er verre: da kan en angriper som får skrivetilgang, også bytte ut roten. Derfor velger man uforanderlighet og legger innsatsen i å gjøre ROM-koden så liten og så godt testet som mulig.</div>
+
+          <h2>Typiske oppfølgingsspørsmål</h2>
+          <p>Spørsmål en eksaminator naturlig kan følge opp med. Prøv å svare selv før du åpner svarmomentene.</p>
+
+          <h3>Hvorfor ligger bare en hash av nøkkelen i fusene, ikke selve nøkkelen?</h3>
+          <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Fuse-plass er dyr og liten, og en offentlig RSA-nøkkel er stor (flere hundre byte), mens en SHA-256-hash er 32 byte. Selve nøkkelen kan derfor ligge i flash sammen med bildet. Det er trygt fordi ROM sjekker at hashen av den medfølgende nøkkelen stemmer med fusene. En angriper kan bytte nøkkelen i flash, men får ikke en hash som stemmer.</p></div></details>
+
+          <h3>Hvorfor ikke legge første ledd i flash, så det kan oppdateres?</h3>
+          <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Da er ikke første ledd lenger uforanderlig, og spørsmålet «hvem verifiserer verifisereren?» kommer tilbake. En angriper med skrivetilgang til flash kan bytte ut første ledd og fjerne alle sjekker over. Roten må være noe angriperen ikke kan endre. Prisen er at heller ikke produsenten kan endre den.</p></div></details>
+
+          <h3>Hva er forskjellen på verified boot og measured boot?</h3>
+          <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Verified boot stopper oppstarten hvis et ledd ikke er gyldig signert, og håndhever dermed lokalt. Measured boot lar oppstarten fortsette, men hasher hvert ledd inn i en TPM, slik at en ekstern part kan be om en signert rapport (attestasjon) og selv avgjøre om enheten er til å stole på. Begge krever en rot av tillit som kjører først og ikke kan endres.</p></div></details>
+
+          <h3>Hvorfor er en parserfeil i boot ROM verre enn en feil i signaturalgoritmen?</h3>
+          <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Parsing skjer <em>før</em> signatursjekken: leddet må lese headere og lengder for å vite hva som skal verifiseres. En feil der kan gi kodeeksekvering uten at angriperen trenger noen gyldig signatur eller nøkkel. Signaturalgoritmer som RSA og ECDSA er godt analyserte, mens ROM-spesifikk parsekode er skrevet én gang for én brikke og testet langt mindre. Og ligger feilen i ROM, kan den ikke rettes.</p></div></details>
+
+          <h3>Kan en feil i boot ROM noen gang rettes?</h3>
+          <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Ikke på enheter som allerede er produsert, i hvert fall ikke fullt ut. Har brikken en patch-mekanisme i fuses, kan nye enheter fra fabrikken få feilen rettet, og noen ganger kan sårbar funksjonalitet (som recovery-modus) slås av med en fuse. Den endelige fiksen er en ny silisiumrevisjon. Gamle enheter forblir sårbare så lenge de er i bruk, og produsenten må leve med det i trusselmodellen sin.</p></div></details>
+        </article>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="emneplan.html"><small>forrige</small>Emneplan</a>
+          <a data-dir="next" href="prosjekt.html"><small>neste</small>Fusée Gelée og pensum</a>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js?v=43"></script>
+  <script src="../../../assets/js/status.js?v=35"></script>
+  <script src="../../../assets/js/formler.js?v=35"></script>
+</body>
+</html>
