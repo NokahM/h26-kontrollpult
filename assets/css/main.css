@@ -832,7 +832,7 @@ code {
 .flowfig .head--attack { stroke: var(--st-uklart); }
 
 /* Begrep i løpende tekst (begrep.js): stiplet strek, klikk gir forklaringsboble */
-.prose a.term {
+a.term, .prose a.term, .sol__body a.term {
   color: inherit;
   text-decoration: underline dotted;
   text-decoration-color: var(--accent);
@@ -842,8 +842,8 @@ code {
   border-radius: 2px;
   transition: background-color var(--ease);
 }
-.prose a.term:hover { text-decoration-style: solid; }
-.prose a.term[aria-expanded="true"] { background: color-mix(in srgb, var(--accent) 14%, transparent); text-decoration-style: solid; }
+a.term:hover { text-decoration-style: solid; }
+a.term[aria-expanded="true"] { background: color-mix(in srgb, var(--accent) 14%, transparent); text-decoration-style: solid; }
 .term-pop {
   display: none;
   position: fixed;
@@ -882,6 +882,7 @@ code {
 .term-pop__more { display: inline-block; margin-top: .5rem; font-family: var(--font-ui); font-size: .8125rem; color: var(--muted); text-decoration: none; }
 .term-pop__more:hover { color: var(--accent); }
 .term-pop__more::after { content: " ↓"; }
+.term-pop__more--away::after { content: " →"; }
 
 /* Ordliste: kilden til begrepsboblene */
 .terms { display: grid; grid-template-columns: minmax(11rem, 14rem) minmax(0, 1fr); column-gap: 1.75rem; margin-top: 1rem; }

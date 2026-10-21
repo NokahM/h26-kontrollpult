@@ -1,16 +1,18 @@
 // Begrepsforklaringer i løpende tekst.
 //
-// <a class="term" href="#b-navn">ord</a> får en stiplet strek under seg (main.css,
-// .term). Et klikk viser forklaringen i en boble ved ordet. Teksten hentes fra
-// ordlisten på samme side, <dl class="terms"> med <dt id="b-navn"> og en <dd>
-// rett etter, så den skrives bare ett sted. Uten skriptet er lenken en vanlig
-// ankerlenke ned til ordlisten.
+// <a class="term" href="ordliste.html#b-navn">ord</a> får en stiplet strek under seg
+// (main.css, .term). Et klikk viser forklaringen i en boble ved ordet. Teksten hentes
+// fra ordlisten, <dl class="terms"> med <dt id="b-navn"> og en <dd> rett etter, så den
+// skrives bare ett sted. Hvert emne har én ordliste (guides/ordliste.html) som hentes
+// første gang et ord klikkes og deretter holdes i minnet. Står ordlisten på samme side,
+// holder det med href="#b-navn". Uten skriptet er lenken en vanlig lenke til ordlisten.
 //
 // Boblen lukkes med Esc, med et klikk utenfor eller med et nytt klikk på ordet.
 // Lenker til andre begrep inne i boblen åpner det begrepet i stedet.
 (function () {
   var pop = null;
   var current = null;
+  var docs = {};   // ordliste-URL -> Promise<Document>
 
   function build() {
     pop = document.createElement('div');
@@ -34,22 +36,62 @@
     pop.style.setProperty('--arrow-x', Math.max(14, Math.min(r.left + r.width / 2 - left, w - 14)) + 'px');
   }
 
-  function open(a) {
-    var dt = document.getElementById(a.getAttribute('href').slice(1));
+  // Delt opp i side og anker. page er '' når ordlisten står på denne siden.
+  function target(a) {
+    var url = new URL(a.getAttribute('href'), location.href);
+    var here = url.origin + url.pathname === location.origin + location.pathname;
+    return { page: here ? '' : url.origin + url.pathname, id: url.hash.slice(1) };
+  }
+
+  function load(page) {
+    if (!page) return Promise.resolve(document);
+    if (!docs[page]) {
+      docs[page] = fetch(page).then(function (res) {
+        if (!res.ok) throw new Error(res.status);
+        return res.text();
+      }).then(function (html) {
+        return new DOMParser().parseFromString(html, 'text/html');
+      });
+      docs[page].catch(function () { delete docs[page]; });
+    }
+    return docs[page];
+  }
+
+  function show(a, t, doc) {
+    var dt = doc.getElementById(t.id);
     var dd = dt && dt.nextElementSibling;
     if (!dd || dd.tagName !== 'DD') return false;
     if (!pop) build();
     if (current) current.setAttribute('aria-expanded', 'false');
     current = a;
     a.setAttribute('aria-expanded', 'true');
+    var body = pop.querySelector('.term-pop__body');
     pop.querySelector('.term-pop__title').textContent = dt.firstChild.textContent.trim();
-    pop.querySelector('.term-pop__body').innerHTML = dd.innerHTML;
-    pop.querySelector('.term-pop__more').setAttribute('href', '#' + dt.id);
+    body.innerHTML = dd.innerHTML;
+    if (t.page) {
+      // Ankere i en hentet ordliste peker inn i den, ikke inn i denne siden.
+      body.querySelectorAll('a[href^="#"]').forEach(function (l) {
+        l.setAttribute('href', t.page + l.getAttribute('href'));
+      });
+    }
+    var more = pop.querySelector('.term-pop__more');
+    more.setAttribute('href', t.page + '#' + dt.id);
+    more.classList.toggle('term-pop__more--away', !!t.page);
     pop.classList.remove('is-open');
     pop.style.display = 'block';
     place();
     void pop.offsetWidth;
     pop.classList.add('is-open');
+    return true;
+  }
+
+  function open(a) {
+    var t = target(a);
+    if (!t.page) return show(a, t, document);
+    // Hentes ordlisten ikke, følges lenken som vanlig.
+    load(t.page).then(function (doc) {
+      if (!show(a, t, doc)) location.href = a.href;
+    }, function () { location.href = a.href; });
     return true;
   }
 
@@ -65,6 +107,7 @@
   document.addEventListener('click', function (e) {
     var a = e.target.closest('a.term');
     if (a) {
+      if (e.ctrlKey || e.metaKey || e.shiftKey) return;
       if (a === current) { e.preventDefault(); close(false); }
       else if (open(a)) e.preventDefault();
       return;
