@@ -7,7 +7,7 @@
   <meta name="description" content="Hjemmelekse uke 38–39: JavaScript som språk, DOM og hendelser i nettleseren, AJAX og fetch med Promises, progressive webapplikasjoner, samme opphav og CORS.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../../assets/css/main.css?v=43">
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=44">
 </head>
 <body class="theme-tsd3060" data-updated="2026-10-02">
   <div class="app-shell">
@@ -60,7 +60,7 @@
         </div>
 
         <article class="prose">
-          <p class="callout">Pensum er <em>JavaScript: The Definitive Guide</em> (7. utg.) kap. 1&#8211;8 og 13&#8211;18, pluss MDN om <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity" target="_blank" rel="noopener">Subresource Integrity</a> og <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS" target="_blank" rel="noopener">CORS</a>. På eksamen skal du <em>lese og forklare</em> JavaScript, ikke skrive store programmer. Prioriter derfor <code>fetch()</code>, <code>credentials</code>, DOM-oppslag og samme opphav.</p>
+          <p class="callout">Pensum er <em><a class="term" href="ordliste.html#b-javascript">JavaScript</a>: The Definitive Guide</em> (7. utg.) kap. 1&#8211;8 og 13&#8211;18, pluss MDN om <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity" target="_blank" rel="noopener">Subresource Integrity</a> og <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS" target="_blank" rel="noopener">CORS</a>. På eksamen skal du <em>lese og forklare</em> JavaScript, ikke skrive store programmer. Prioriter derfor <code>fetch()</code>, <code>credentials</code>, <a class="term" href="ordliste.html#b-dom">DOM</a>-oppslag og samme opphav.</p>
 
           <h2>Språket</h2>
           <p>JavaScript er en implementasjon av standarden <strong>ECMAScript</strong>. Språket er ikke Java, selv om syntaksen ligner. Det kjører både i nettleseren (klientside) og på tjeneren (for eksempel <code>node</code>). Prøv kodebitene i nettleserens konsoll (F12 → Console) eller med <code>node</code>.</p>
@@ -95,7 +95,7 @@ s.b                 // ... som er borte: undefined</pre>
           <p><code>null</code> betyr «uten verdi». <code>undefined</code> er verdien til en variabel som ikke er initialisert, eller et medlem som ikke finnes. <code>NaN</code> er ikke lik noe, heller ikke seg selv, så test med <code>isNaN()</code>.</p>
 
           <h3>Objekter og tabeller</h3>
-          <p>Et objekt er en mengde navn-verdi-par, en hashtabell. Objektlitteralen er opphavet til JSON:</p>
+          <p>Et objekt er en mengde navn-verdi-par, en hashtabell. Objektlitteralen er opphavet til <a class="term" href="ordliste.html#b-json">JSON</a>:</p>
           <pre class="codeblock">o = { navn: 'per', nummer: 123 }
 o["navn"]            // 'per'
 o.navn               // samme medlem
@@ -152,8 +152,8 @@ console.log(t1)            // [ &lt;2 empty items&gt;, 'tredje element' ]</pre>
               <tbody>
                 <tr><td>Hendelsesattributt</td><td><code>&lt;p onclick="alert('…')"&gt;</code></td><td>Navnet er <code>on</code> + hendelsen (<code>click</code>, <code>load</code>, <code>keydown</code> …)</td></tr>
                 <tr><td><code>&lt;script&gt;</code>-element</td><td><code>&lt;script&gt;onload = …&lt;/script&gt;</code></td><td>Alle skript-elementene på siden utgjør til sammen ett program</td></tr>
-                <tr><td>Egen fil</td><td><code>&lt;script src="db.js"&gt;&lt;/script&gt;</code></td><td>Bare JavaScript i fila. Kan sikres med <code>integrity</code> (SRI, se under)</td></tr>
-                <tr><td>Pseudoprotokoll</td><td><code>&lt;a href="javascript: alert(Date())"&gt;</code></td><td>URL-en tolkes som kode i stedet for å sende en HTTP-forespørsel</td></tr>
+                <tr><td>Egen fil</td><td><code>&lt;script src="db.js"&gt;&lt;/script&gt;</code></td><td>Bare JavaScript i fila. Kan sikres med <code>integrity</code> (<a class="term" href="ordliste.html#b-sri">SRI</a>, se under)</td></tr>
+                <tr><td>Pseudoprotokoll</td><td><code>&lt;a href="javascript: alert(Date())"&gt;</code></td><td><a class="term" href="ordliste.html#b-url">URL-en</a> tolkes som kode i stedet for å sende en <a class="term" href="ordliste.html#b-http">HTTP</a>-forespørsel</td></tr>
               </tbody>
             </table>
           </div>
@@ -187,7 +187,7 @@ e.className = 'aktiv'                     // class er reservert ord</pre>
           <p>Det er nesten bare <code>querySelector(…).value</code> eksamenskoden bruker. Den leser verdien i et <code>&lt;input&gt;</code>-felt før den sendes med <code>fetch()</code>.</p>
 
           <h2>Web-applikasjoner: AJAX og fetch</h2>
-          <p><strong>AJAX</strong> betyr at siden gjør HTTP-forespørsler fra JavaScript uten å laste hele siden på nytt. Det eldste API-et er <code>XMLHttpRequest</code>:</p>
+          <p><strong><a class="term" href="ordliste.html#b-ajax">AJAX</a></strong> betyr at siden gjør HTTP-forespørsler fra JavaScript uten å laste hele siden på nytt. Det eldste API-et er <code>XMLHttpRequest</code>:</p>
           <pre class="codeblock">// ajax_get.html (forenklet)
 var f = new XMLHttpRequest()
 f.open("GET", "sql-klient3.cgi?" + s, true)   // true = asynkron
@@ -197,12 +197,12 @@ f.onload = function () {
 f.send(null)</pre>
           <p><code>readyState</code> går fra 0 (UNSENT) via 1 (OPENED), 2 (HEADERS_RECEIVED) og 3 (LOADING) til 4 (DONE). <code>status</code> er HTTP-statuskoden.</p>
           <div class="pitfall">
-            <div class="pitfall__title">Fallgruve: sql-klient3.cgi er SQL-injeksjon med vilje</div>
-            <p>Skriptet sender spørrestrengen <em>rett</em> til <code>sqlite3</code>. Den som skriver i feltet, kan kjøre hvilken som helst SQL, også <code>DROP TABLE</code>. Eksempelet viser AJAX, ikke hvordan en tjeneste skal lages. Se forberedte SQL-kommandoer i <a href="34-sqlite-injeksjon-autentisering.html">uke 34</a>. En detalj: <code>sed "s/%21/=/g"</code> gjør <code>%21</code> om til <code>=</code>, men <code>%21</code> er <code>!</code>. Likhetstegnet er <code>%3D</code>.</p>
+            <div class="pitfall__title">Fallgruve: sql-klient3.cgi er <a class="term" href="ordliste.html#b-sqlinj">SQL-injeksjon</a> med vilje</div>
+            <p>Skriptet sender spørrestrengen <em>rett</em> til <code>sqlite3</code>. Den som skriver i feltet, kan kjøre hvilken som helst <a class="term" href="ordliste.html#b-sql">SQL</a>, også <code>DROP TABLE</code>. Eksempelet viser AJAX, ikke hvordan en tjeneste skal lages. Se forberedte SQL-kommandoer i <a href="34-sqlite-injeksjon-autentisering.html">uke 34</a>. En detalj: <code>sed "s/%21/=/g"</code> gjør <code>%21</code> om til <code>=</code>, men <code>%21</code> er <code>!</code>. Likhetstegnet er <code>%3D</code>.</p>
           </div>
 
           <h3>Promises og pilfunksjoner</h3>
-          <p>Et <strong>Promise</strong> representerer resultatet av <em>én</em> asynkron handling. Det er enten <em>pending</em> (venter) eller <em>settled</em>, som betyr <em>fulfilled</em> (oppfylt) eller <em>rejected</em> (avvist). Med <code>then(ok, feil)</code> registreres funksjoner som kjøres når resultatet foreligger. <code>catch(feil)</code> er en kortform for <code>then(null, feil)</code>. Kjeding av <code>then</code> erstatter tilbakekall nøstet inni hverandre («callback hell»).</p>
+          <p>Et <strong><a class="term" href="ordliste.html#b-promise">Promise</a></strong> representerer resultatet av <em>én</em> asynkron handling. Det er enten <em>pending</em> (venter) eller <em>settled</em>, som betyr <em>fulfilled</em> (oppfylt) eller <em>rejected</em> (avvist). Med <code>then(ok, feil)</code> registreres funksjoner som kjøres når resultatet foreligger. <code>catch(feil)</code> er en kortform for <code>then(null, feil)</code>. Kjeding av <code>then</code> erstatter tilbakekall nøstet inni hverandre («callback hell»).</p>
           <p>En pilfunksjon <code>x =&gt; uttrykk</code> er en kortere skrivemåte for <code>function (x) { return uttrykk }</code>. Disse to er like:</p>
           <pre class="codeblock">// fetch_demo_1.html
 fetch('fetch-test.txt')
@@ -214,19 +214,19 @@ fetch('fetch-test.txt')
   .then(respons    =&gt; respons.text())
   .then(http_kropp =&gt; document.querySelector('#beholder').innerHTML += http_kropp)</pre>
           <p><code>fetch()</code> returnerer et Promise for <em>responsen</em>. <code>respons.text()</code> (eller <code>.json()</code>) returnerer et nytt Promise for <em>kroppen</em>. Derfor trengs to <code>then</code>.</p>
-          <p><code>fetch_demo_3.html</code> sender enten POST med kroppen i <code>body</code>, eller GET der feltene legges inn i URL-en med <code>url.searchParams.set()</code>. <code>fetch-test.cgi</code> skriver tilbake <code>REQUEST_METHOD</code>, <code>QUERY_STRING</code> og kroppen, så du ser forskjellen:</p>
+          <p><code>fetch_demo_3.html</code> sender enten <a class="term" href="ordliste.html#b-post">POST</a> med kroppen i <code>body</code>, eller <a class="term" href="ordliste.html#b-get">GET</a> der feltene legges inn i URL-en med <code>url.searchParams.set()</code>. <code>fetch-test.cgi</code> skriver tilbake <code>REQUEST_METHOD</code>, <code>QUERY_STRING</code> og kroppen, så du ser forskjellen:</p>
           <pre class="codeblock">fetch(url, { method: 'POST', body: t2 })    // data i kroppen → stdin i CGI
 url.searchParams.set('txt1', t1); fetch(url)  // data i URL-en → QUERY_STRING</pre>
           <div class="pitfall">
             <div class="pitfall__title">Fallgruve: eksemplene peker til et gammelt emne</div>
-            <p><code>fetch_demo_3.html</code>, <code>opphav/</code> og <code>kryssopphav/</code> har hardkodet <code>https://debbie.usn.no/da-nan3000/…</code> og <code>web01.usn.no</code>, som er adressene fra forløperemnet. Lokalt må du endre basis-URL-en til der du selv kjører CGI-skriptet, for eksempel busybox <code>httpd</code> fra <a href="38-cgi-html-skjema.html">uke 38</a>.</p>
+            <p><code>fetch_demo_3.html</code>, <code>opphav/</code> og <code>kryssopphav/</code> har hardkodet <code>https://debbie.usn.no/da-nan3000/…</code> og <code>web01.usn.no</code>, som er adressene fra forløperemnet. Lokalt må du endre basis-URL-en til der du selv kjører <a class="term" href="ordliste.html#b-cgi">CGI</a>-skriptet, for eksempel busybox <code>httpd</code> fra <a href="38-cgi-html-skjema.html">uke 38</a>.</p>
           </div>
 
           <h3>Progressive webapplikasjoner (PWA)</h3>
           <p>En PWA er en vanlig nettside med egenskaper som gjør at den oppfører seg som en app: den kan virke offline og startes fra hjemskjermen. To deler:</p>
           <ul>
             <li><strong>Manifest</strong>, en JSON-fil koblet inn med <code>&lt;link rel="manifest" href="manifest.webmanifest"&gt;</code>, med navn, ikon og start-URL.</li>
-            <li><strong>Service worker</strong>, et skript som registreres med <code>navigator.serviceWorker.register()</code>. Det fungerer som en <em>proxy</em> mellom siden og tjeneren. Det kjører i egen tråd uten tilgang til DOM, og krever HTTPS (eller <code>localhost</code>).</li>
+            <li><strong>Service worker</strong>, et skript som registreres med <code>navigator.serviceWorker.register()</code>. Det fungerer som en <em>proxy</em> mellom siden og tjeneren. Det kjører i egen tråd uten tilgang til DOM, og krever <a class="term" href="ordliste.html#b-https">HTTPS</a> (eller <code>localhost</code>).</li>
           </ul>
           <pre class="codeblock">// web-app/serviceArbeider.js
 self.addEventListener('install', event =&gt;          // ved installasjon:
@@ -253,20 +253,20 @@ self.addEventListener('fetch', event =&gt;            // ved hver forespørsel:
               </tbody>
             </table>
           </div>
-          <p><strong>Retningslinjen om samme opphav</strong> (same-origin policy, SOP) håndheves <em>av nettleseren</em>. Kode fra ett opphav får ikke lese svaret på en forespørsel til et annet opphav. Det beskytter brukeren: et skript på en fremmed side kan ikke lese det din innloggede sesjon har tilgang til. SOP gjelder bare kode i nettleseren. <code>curl</code> og en konteiner som snakker med en annen konteiner, merker ingenting av den.</p>
-          <p><strong>CORS</strong> (Cross-Origin Resource Sharing) er unntaket: tjeneren sier i responshodet hvilke fremmede opphav som får lov.</p>
+          <p><strong>Retningslinjen om samme opphav</strong> (<a class="term" href="ordliste.html#b-sop">same-origin policy</a>, SOP) håndheves <em>av nettleseren</em>. Kode fra ett opphav får ikke lese svaret på en forespørsel til et annet opphav. Det beskytter brukeren: et skript på en fremmed side kan ikke lese det din innloggede sesjon har tilgang til. SOP gjelder bare kode i nettleseren. <code>curl</code> og en <a class="term" href="ordliste.html#b-konteiner">konteiner</a> som snakker med en annen konteiner, merker ingenting av den.</p>
+          <p><strong><a class="term" href="ordliste.html#b-cors">CORS</a></strong> (Cross-Origin Resource Sharing) er unntaket: tjeneren sier i responshodet hvilke fremmede opphav som får lov.</p>
           <div class="dtable-wrap">
             <table class="dtable">
               <thead><tr><th>Responshode</th><th>Betyr</th></tr></thead>
               <tbody>
                 <tr><td><code>Access-Control-Allow-Origin: http://localhost:8080</code></td><td>Kode fra dette opphavet får lese svaret. Med <code>credentials</code> kan det ikke være <code>*</code>.</td></tr>
-                <tr><td><code>Access-Control-Allow-Credentials: true</code></td><td>Svaret kan leses også når forespørselen hadde med informasjonskapsler</td></tr>
+                <tr><td><code>Access-Control-Allow-Credentials: true</code></td><td>Svaret kan leses også når forespørselen hadde med <a class="term" href="ordliste.html#b-cookie">informasjonskapsler</a></td></tr>
                 <tr><td><code>Access-Control-Allow-Methods: PUT</code></td><td>Metoder utover GET, HEAD og POST som er tillatt</td></tr>
                 <tr><td><code>Access-Control-Allow-Headers: Content-Type</code></td><td>Hodefelt klienten får sende, for eksempel <code>Content-Type: application/json</code></td></tr>
               </tbody>
             </table>
           </div>
-          <p>En <strong>enkel forespørsel</strong> (GET eller POST med et enkelt <code>Content-Type</code> som <code>text/plain</code>) sendes rett av gårde. Nettleseren sjekker hodet i svaret og stopper bare <em>lesingen</em>. Alt annet, for eksempel PUT, DELETE eller <code>Content-Type: application/json</code>, får først en <strong>forhåndskontroll</strong> (preflight): nettleseren sender <code>OPTIONS</code> og venter på et ja før den sender selve forespørselen.</p>
+          <p>En <strong>enkel forespørsel</strong> (GET eller POST med et enkelt <code>Content-Type</code> som <code>text/plain</code>) sendes rett av gårde. Nettleseren sjekker hodet i svaret og stopper bare <em>lesingen</em>. Alt annet, for eksempel <a class="term" href="ordliste.html#b-put">PUT</a>, <a class="term" href="ordliste.html#b-delete">DELETE</a> eller <code>Content-Type: application/json</code>, får først en <strong><a class="term" href="ordliste.html#b-preflight">forhåndskontroll</a></strong> (preflight): nettleseren sender <code>OPTIONS</code> og venter på et ja før den sender selve forespørselen.</p>
           <div class="note"><strong>Viktig poeng på eksamen:</strong> SOP stopper ikke at en enkel forespørsel <em>når fram</em> til tjeneren. Den stopper bare at koden leser svaret. En POST som endrer data, kan derfor ha skjedd selv om konsollen viser en CORS-feil.</div>
 
           <h3><code>credentials</code> i <code>fetch()</code></h3>
@@ -295,7 +295,7 @@ self.addEventListener('fetch', event =&gt;            // ved hver forespørsel:
               </tbody>
             </table>
           </div>
-          <p><code>opphav/login.html</code> viser den andre siden av saken: siden laster <code>passord.js</code> fra en annen vert. Et skript som lastes med <code>&lt;script src&gt;</code>, kjører med <em>sidens</em> opphav og kan lese alt på siden, også passordfeltet. SOP beskytter ikke mot skript du selv har valgt å laste inn. Det er dette <strong>Subresource Integrity</strong> (<code>integrity</code>-attributtet) hjelper mot: nettleseren nekter å kjøre fila hvis innholdet ikke har den oppgitte hashen. Se <a href="39-sammensatt-eksempel.html">uke 39</a>.</p>
+          <p><code>opphav/login.html</code> viser den andre siden av saken: siden laster <code>passord.js</code> fra en annen vert. Et skript som lastes med <code>&lt;script src&gt;</code>, kjører med <em>sidens</em> opphav og kan lese alt på siden, også passordfeltet. SOP beskytter ikke mot skript du selv har valgt å laste inn. Det er dette <strong>Subresource Integrity</strong> (<code>integrity</code>-attributtet) hjelper mot: nettleseren nekter å kjøre fila hvis innholdet ikke har den oppgitte <a class="term" href="ordliste.html#b-hash">hashen</a>. Se <a href="39-sammensatt-eksempel.html">uke 39</a>.</p>
 
           <div class="pitfall">
             <div class="pitfall__title">Fallgruve: feil i notatene og eksemplene</div>
@@ -335,8 +335,9 @@ self.addEventListener('fetch', event =&gt;            // ved hver forespørsel:
     </div>
   </div>
 
-  <script src="../../../assets/js/main.js?v=43"></script>
+  <script src="../../../assets/js/main.js?v=44"></script>
   <script src="../../../assets/js/status.js?v=35"></script>
   <script src="../../../assets/js/formler.js?v=35"></script>
+  <script src="../../../assets/js/begrep.js?v=2"></script>
 </body>
 </html>

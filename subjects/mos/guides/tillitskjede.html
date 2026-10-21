@@ -7,7 +7,7 @@
   <meta name="description" content="Sikker oppstart generelt: hvordan en tillitskjede bygges fra en uforanderlig boot ROM, hvor den kan brytes, og hvorfor feil i boot ROM er en egen klasse sårbarheter.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../../assets/css/main.css?v=43">
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=44">
 </head>
 <body class="theme-mos" data-updated="2026-10-20">
   <div class="app-shell">
@@ -41,8 +41,8 @@
 
         <article class="prose">
           <h2>Problemet: hvem verifiserer verifisereren?</h2>
-          <p>Målet med sikker oppstart er at enheten bare skal kjøre kode som produsenten har autorisert. Den naive løsningen er å la operativsystemet sjekke <a class="term" href="#b-signatur">signaturen</a> på applikasjonene. Men hvem sjekker operativsystemet? <a class="term" href="#b-bootloader">Bootloaderen</a>. Og hvem sjekker bootloaderen? Spørsmålet gjentar seg for hvert lag, og en kontroll er aldri sterkere enn koden som utfører den. Klarer en angriper å endre bootloaderen, kan hen også fjerne sjekken den gjør.</p>
-          <p>Rekursjonen må stoppe et sted, i noe som ikke selv trenger å verifiseres fordi det <em>ikke kan endres</em>. Det er <a class="term" href="#b-rot"><strong>roten av tillit</strong></a> (root of trust). På de aller fleste <a class="term" href="#b-soc">systemer på brikke (SoC)</a> er roten en <a class="term" href="#b-rom"><strong>boot ROM</strong></a>: kode som er etset inn i silisiumet under produksjon, og som er det første prosessoren kjører når den får strøm.</p>
+          <p>Målet med sikker oppstart er at enheten bare skal kjøre kode som produsenten har autorisert. Den naive løsningen er å la operativsystemet sjekke <a class="term" href="ordliste.html#b-signatur">signaturen</a> på applikasjonene. Men hvem sjekker operativsystemet? <a class="term" href="ordliste.html#b-bootloader">Bootloaderen</a>. Og hvem sjekker bootloaderen? Spørsmålet gjentar seg for hvert lag, og en kontroll er aldri sterkere enn koden som utfører den. Klarer en angriper å endre bootloaderen, kan hen også fjerne sjekken den gjør.</p>
+          <p>Rekursjonen må stoppe et sted, i noe som ikke selv trenger å verifiseres fordi det <em>ikke kan endres</em>. Det er <a class="term" href="ordliste.html#b-rot"><strong>roten av tillit</strong></a> (root of trust). På de aller fleste <a class="term" href="ordliste.html#b-soc">systemer på brikke (SoC)</a> er roten en <a class="term" href="ordliste.html#b-rom"><strong>boot ROM</strong></a>: kode som er etset inn i silisiumet under produksjon, og som er det første prosessoren kjører når den får strøm.</p>
 
           <h2>Tillitskjeden, ledd for ledd</h2>
           <p>Fra roten bygges tilliten oppover: hvert ledd verifiserer det neste <em>før</em> det gir fra seg kontrollen. Tilliten «arves» bare hvis hver eneste sjekk på veien holder.</p>
@@ -111,19 +111,19 @@
           <div class="steps">
             <div class="step">
               <h4>Les inn neste bilde</h4>
-              <p><a class="term" href="#b-bilde">Bildet</a> (koden, signaturen og den offentlige nøkkelen) kopieres fra <a class="term" href="#b-flash">flash</a> til internt minne (<a class="term" href="#b-ram">SRAM/DRAM</a>).</p>
+              <p><a class="term" href="ordliste.html#b-bilde">Bildet</a> (koden, signaturen og den offentlige nøkkelen) kopieres fra <a class="term" href="ordliste.html#b-flash">flash</a> til internt minne (<a class="term" href="ordliste.html#b-ram">SRAM/DRAM</a>).</p>
             </div>
             <div class="step">
               <h4>Sjekk nøkkelen</h4>
-              <p><a class="term" href="#b-hash">Hashen</a> av den medfølgende <a class="term" href="#b-nokkel">offentlige nøkkelen</a> sammenlignes med hashen i <a class="term" href="#b-fuses">OTP-fusene</a>. Bare en nøkkel produsenten har «brent inn», godtas.</p>
+              <p><a class="term" href="ordliste.html#b-hash">Hashen</a> av den medfølgende <a class="term" href="ordliste.html#b-nokkel">offentlige nøkkelen</a> sammenlignes med hashen i <a class="term" href="ordliste.html#b-fuses">OTP-fusene</a>. Bare en nøkkel produsenten har «brent inn», godtas.</p>
             </div>
             <div class="step">
               <h4>Sjekk signaturen</h4>
-              <p>Hash av koden beregnes, og signaturen verifiseres med den offentlige nøkkelen (<a class="term" href="#b-rsa">RSA eller ECDSA</a>). Den private nøkkelen finnes bare hos produsenten.</p>
+              <p>Hash av koden beregnes, og signaturen verifiseres med den offentlige nøkkelen (<a class="term" href="ordliste.html#b-rsa">RSA eller ECDSA</a>). Den private nøkkelen finnes bare hos produsenten.</p>
             </div>
             <div class="step">
               <h4>Hopp, eller stopp</h4>
-              <p>Bare hvis alt stemmer, hopper leddet til den verifiserte koden. Ved feil skal oppstarten avbrytes (<a class="term" href="#b-fail"><em>fail closed</em></a>), ikke fortsette med en advarsel.</p>
+              <p>Bare hvis alt stemmer, hopper leddet til den verifiserte koden. Ved feil skal oppstarten avbrytes (<a class="term" href="ordliste.html#b-fail"><em>fail closed</em></a>), ikke fortsette med en advarsel.</p>
             </div>
           </div>
 
@@ -132,22 +132,22 @@
           <ul>
             <li><strong>ROM-koden</strong> — verifiseringslogikken som kjører først.</li>
             <li><strong>Nøkkelmateriale i OTP-fuses</strong> — typisk bare en <em>hash</em> av den offentlige nøkkelen, fordi fuse-plassen er liten. Selve nøkkelen følger med bildet i flash.</li>
-            <li><strong>Konfigurasjonsfuses</strong> — om sikker oppstart er påslått, om debug-porter er låst, og en monoton teller for <a class="term" href="#b-rollback"><em>anti-rollback</em></a>.</li>
+            <li><strong>Konfigurasjonsfuses</strong> — om sikker oppstart er påslått, om debug-porter er låst, og en monoton teller for <a class="term" href="ordliste.html#b-rollback"><em>anti-rollback</em></a>.</li>
           </ul>
           <p>Fuses kan bare brennes fra 0 til 1, aldri tilbake. Derfor er de egnet for innstillinger som skal være permanente.</p>
 
           <h3>Verified boot og measured boot</h3>
-          <p>Pensum og de fleste innebygde systemer handler om <strong>verified boot</strong>: hvert ledd <em>stopper</em> oppstarten hvis neste ledd ikke er gyldig. En beslektet variant er <strong>measured boot</strong>, der hvert ledd bare <em>måler</em> (hasher) det neste og logger målingen i en <a class="term" href="#b-tpm">TPM</a>. Oppstarten fortsetter uansett, men en ekstern part kan senere be om en signert rapport (<a class="term" href="#b-attest">attestasjon</a>) og selv avgjøre om enheten er til å stole på. Begge trenger en rot av tillit nederst.</p>
+          <p>Pensum og de fleste innebygde systemer handler om <strong>verified boot</strong>: hvert ledd <em>stopper</em> oppstarten hvis neste ledd ikke er gyldig. En beslektet variant er <strong>measured boot</strong>, der hvert ledd bare <em>måler</em> (hasher) det neste og logger målingen i en <a class="term" href="ordliste.html#b-tpm">TPM</a>. Oppstarten fortsetter uansett, men en ekstern part kan senere be om en signert rapport (<a class="term" href="ordliste.html#b-attest">attestasjon</a>) og selv avgjøre om enheten er til å stole på. Begge trenger en rot av tillit nederst.</p>
 
           <h2>Hvor kan kjeden brytes?</h2>
           <p>Kryptografien i signatursjekken er sjelden det svake punktet. Angrep på sikker oppstart går nesten alltid på <em>implementasjonen</em> rundt den, og ofte på det som skjer <em>før</em> sjekken er ferdig:</p>
           <ul>
-            <li><strong>Parsing av input før verifisering.</strong> Leddet må lese <a class="term" href="#b-header">headere</a>, lengdefelt og formater for å finne ut hva det skal verifisere. En feil i den <a class="term" href="#b-parsing">parsingen</a>, for eksempel et lengdefelt uten <a class="term" href="#b-grensesjekk">grensesjekk</a>, kan gi <a class="term" href="#b-kodeeks">kodeeksekvering</a> før signaturen i det hele tatt er sjekket.</li>
-            <li><strong>Recovery- og nedlastingsmoduser.</strong> Mange boot ROM-er har en <a class="term" href="#b-recovery">recovery-modus</a> for å laste kode over USB eller UART når flash er tom eller ødelagt. Det er en tiltenkt vei inn, og dermed en angrepsflate (sammenlign med debug-portene i <a href="02-bootloader-swd-uart.html">kapittel 2</a>).</li>
-            <li><strong>Feilinjeksjon mot selve sjekken.</strong> Et <a class="term" href="#b-glitch">spennings- eller klokkeglitch</a> på riktig tidspunkt kan få én sammenligning eller ett betinget hopp til å gi feil svar (<a href="06-glitching.html">kapittel 6</a>).</li>
-            <li><a class="term" href="#b-toctou"><strong>Time-of-check / time-of-use.</strong></a> Hvis leddet verifiserer én kopi av bildet, men kjører en annen (for eksempel leser fra flash på nytt), kan innholdet byttes mellom sjekk og bruk.</li>
+            <li><strong>Parsing av input før verifisering.</strong> Leddet må lese <a class="term" href="ordliste.html#b-header">headere</a>, lengdefelt og formater for å finne ut hva det skal verifisere. En feil i den <a class="term" href="ordliste.html#b-parsing">parsingen</a>, for eksempel et lengdefelt uten <a class="term" href="ordliste.html#b-grensesjekk">grensesjekk</a>, kan gi <a class="term" href="ordliste.html#b-kodeeks">kodeeksekvering</a> før signaturen i det hele tatt er sjekket.</li>
+            <li><strong>Recovery- og nedlastingsmoduser.</strong> Mange boot ROM-er har en <a class="term" href="ordliste.html#b-recovery">recovery-modus</a> for å laste kode over USB eller <a class="term" href="ordliste.html#b-uart">UART</a> når flash er tom eller ødelagt. Det er en tiltenkt vei inn, og dermed en <a class="term" href="ordliste.html#b-angrepsflate">angrepsflate</a> (sammenlign med debug-portene i <a href="02-bootloader-swd-uart.html">kapittel 2</a>).</li>
+            <li><strong>Feilinjeksjon mot selve sjekken.</strong> Et <a class="term" href="ordliste.html#b-glitch">spennings- eller klokkeglitch</a> på riktig tidspunkt kan få én sammenligning eller ett betinget hopp til å gi feil svar (<a href="06-glitching.html">kapittel 6</a>).</li>
+            <li><a class="term" href="ordliste.html#b-toctou"><strong>Time-of-check / time-of-use.</strong></a> Hvis leddet verifiserer én kopi av bildet, men kjører en annen (for eksempel leser fra flash på nytt), kan innholdet byttes mellom sjekk og bruk.</li>
             <li><strong>Rollback.</strong> En gammel versjon er fortsatt gyldig signert, også om den har en kjent sårbarhet. Uten anti-rollback-teller kan angriperen bare installere den.</li>
-            <li><strong>Åpne debug-grensesnitt og lekkede nøkler.</strong> Er <a class="term" href="#b-debug">JTAG/SWD</a> åpent, eller er den private signeringsnøkkelen lekket, trenger angriperen ikke bryte kjeden i det hele tatt.</li>
+            <li><strong>Åpne debug-grensesnitt og lekkede nøkler.</strong> Er <a class="term" href="ordliste.html#b-debug">JTAG/SWD</a> åpent, eller er den private signeringsnøkkelen lekket, trenger angriperen ikke bryte kjeden i det hele tatt.</li>
           </ul>
           <p>Felles for alle: bryter man ett ledd, arver <em>alt over</em> den brutte tilliten. Hvor lavt i kjeden bruddet skjer, avgjør både hvor mye angriperen får, og om det kan repareres.</p>
 
@@ -230,7 +230,7 @@
           <p>Det er dette som gjør boot ROM-sårbarheter til en egen klasse. De er:</p>
           <ul>
             <li><strong>Varige</strong> — de kan ikke patches i felten. Feilen lever like lenge som enhetene.</li>
-            <li><strong>Universelle</strong> — de rammer alle enheter med samme <a class="term" href="#b-silisium">silisiumrevisjon</a>, uavhengig av hvilken programvare de kjører.</li>
+            <li><strong>Universelle</strong> — de rammer alle enheter med samme <a class="term" href="ordliste.html#b-silisium">silisiumrevisjon</a>, uavhengig av hvilken programvare de kjører.</li>
             <li><strong>Dype</strong> — bruddet skjer nederst i stabelen, så alt over faller, også sikkerhetsmekanismer som i seg selv er korrekte.</li>
           </ul>
 
@@ -278,7 +278,7 @@
           <ul>
             <li><strong>Hold ROM-koden minimal.</strong> Minst mulig kode betyr minst mulig angrepsflate. Kompleks funksjonalitet, som filsystemer og nettverk, flyttes til senere ledd som <em>kan</em> oppdateres.</li>
             <li><strong>Unngå kompleks parsing av ekstern input i ROM.</strong> Spesielt i recovery-moduser: valider alle lengder og felt før de brukes.</li>
-            <li><strong>Test og verifiser hardere enn vanlig kode.</strong> <a class="term" href="#b-fuzz">Fuzzing</a> av alle grensesnitt og <a class="term" href="#b-formell">formell verifisering</a> av kritiske deler, fordi det ikke finnes noen «versjon 1.1».</li>
+            <li><strong>Test og verifiser hardere enn vanlig kode.</strong> <a class="term" href="ordliste.html#b-fuzz">Fuzzing</a> av alle grensesnitt og <a class="term" href="ordliste.html#b-formell">formell verifisering</a> av kritiske deler, fordi det ikke finnes noen «versjon 1.1».</li>
             <li><strong>Gjør det mulig å slå av angrepsflate med fuses.</strong> For eksempel å deaktivere recovery-modus eller låse debug permanent når enheten er ferdig produsert.</li>
             <li><strong>Små patch-mekanismer.</strong> Noen brikker kan rette enkeltinstruksjoner i ROM via fuses. Plassen er svært begrenset, og det hjelper bare enheter som får patchen brent inn.</li>
             <li><strong>Nøkkelrotasjon og tilbakekalling.</strong> Flere nøkkelhasher i fuses, så en lekket nøkkel kan tilbakekalles uten å miste sikker oppstart.</li>
@@ -303,80 +303,9 @@
           <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Parsing skjer <em>før</em> signatursjekken: leddet må lese headere og lengder for å vite hva som skal verifiseres. En feil der kan gi kodeeksekvering uten at angriperen trenger noen gyldig signatur eller nøkkel. Signaturalgoritmer som RSA og ECDSA er godt analyserte, mens ROM-spesifikk parsekode er skrevet én gang for én brikke og testet langt mindre. Og ligger feilen i ROM, kan den ikke rettes.</p></div></details>
 
           <h3>Kan en feil i boot ROM noen gang rettes?</h3>
-          <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Ikke på enheter som allerede er produsert, i hvert fall ikke fullt ut. Har brikken en patch-mekanisme i fuses, kan nye enheter fra fabrikken få feilen rettet, og noen ganger kan sårbar funksjonalitet (som recovery-modus) slås av med en fuse. Den endelige fiksen er en ny silisiumrevisjon. Gamle enheter forblir sårbare så lenge de er i bruk, og produsenten må leve med det i trusselmodellen sin.</p></div></details>
+          <details class="sol"><summary>Svarmomenter</summary><div class="sol__body"><p>Ikke på enheter som allerede er produsert, i hvert fall ikke fullt ut. Har brikken en patch-mekanisme i fuses, kan nye enheter fra fabrikken få feilen rettet, og noen ganger kan sårbar funksjonalitet (som recovery-modus) slås av med en fuse. Den endelige fiksen er en ny silisiumrevisjon. Gamle enheter forblir sårbare så lenge de er i bruk, og produsenten må leve med det i <a class="term" href="ordliste.html#b-trussel">trusselmodellen</a> sin.</p></div></details>
 
-          <h2>Ordliste</h2>
-          <p>Forklaringene bak de stiplede ordene i teksten. Klikk på et slikt ord for å se forklaringen der du leser.</p>
-
-          <h3>Kryptografi</h3>
-          <dl class="terms">
-            <dt id="b-signatur">Digital signatur<small>signature</small></dt>
-            <dd>Et tall som produsenten regner ut fra koden og sin private nøkkel, og legger ved bildet. Enheten sjekker den med den offentlige nøkkelen. Stemmer den, vet enheten to ting: koden er ikke endret siden den ble signert (<em>integritet</em>), og den kommer fra den som har den private nøkkelen (<em>autentisitet</em>). Navnet spiller på en håndskrevet underskrift, men en digital signatur hører til nøyaktig disse dataene: endres én bit i koden, passer den ikke lenger. Signert betyr verken kryptert eller feilfritt.</dd>
-            <dt id="b-hash">Hash<small>hash, hashfunksjon</small></dt>
-            <dd>Et kort «fingeravtrykk» av data, med fast lengde uansett hvor store dataene er (SHA-256 gir alltid 32 byte). Samme data gir alltid samme hash, og endres én bit, blir hashen helt annerledes. Det er i praksis umulig å lage to ulike data med samme hash. En hash viser at dataene er uendret, men ikke hvem som laget dem. Det er jobben til signaturen.</dd>
-            <dt id="b-nokkel">Offentlig og privat nøkkel<small>public / private key</small></dt>
-            <dd>Et nøkkelpar i asymmetrisk kryptografi. Den private nøkkelen holdes hemmelig hos produsenten og brukes til å lage signaturer. Den offentlige nøkkelen kan alle se, og den kan bare brukes til å sjekke signaturer. Ut fra den offentlige nøkkelen kan man verken regne ut den private eller lage nye signaturer.</dd>
-            <dt id="b-rsa">RSA og ECDSA<small>signaturalgoritmer</small></dt>
-            <dd>To vanlige algoritmer for digitale signaturer. ECDSA bygger på elliptiske kurver og gir like sterk sikkerhet med mye kortere nøkler og signaturer. Det er nyttig når det er knapt med plass i ROM og fuses.</dd>
-          </dl>
-
-          <h3>Maskinvare</h3>
-          <dl class="terms">
-            <dt id="b-soc">System på brikke<small>SoC, system on chip</small></dt>
-            <dd>Én brikke som samler prosessorkjerner, internt minne, periferi og ofte egne hjelpeprosessorer. Boot ROM og fuses ligger inne i den samme brikken, utenfor rekkevidde for programvaren som lastes senere.</dd>
-            <dt id="b-rom">Boot ROM<small>maske-ROM</small></dt>
-            <dd>Den første koden prosessoren kjører når den får strøm. ROM står for <em>read-only memory</em>. Ofte er det en maske-ROM: innholdet er en del av selve kretsmønsteret som etses inn under produksjonen, og kan ikke endres etterpå, verken av en angriper eller av produsenten.</dd>
-            <dt id="b-fuses">OTP-fuses<small>eFuses, one-time programmable</small></dt>
-            <dd>Små minneceller i brikken som bare kan programmeres én gang: en bit «brennes» fra 0 til 1 og kan aldri settes tilbake. Brukes til hash av nøkler, innstillinger som «sikker oppstart på» og tellere som bare kan gå oppover.</dd>
-            <dt id="b-flash">Flash<small>flash-minne</small></dt>
-            <dd>Lager som beholder innholdet uten strøm, og som kan skrives på nytt. Bootloadere og operativsystem ligger her nettopp fordi de skal kunne oppdateres, og derfor må de verifiseres før de kjøres.</dd>
-            <dt id="b-ram">SRAM og DRAM<small>arbeidsminne</small></dt>
-            <dd>Arbeidsminne som mister innholdet når strømmen går. SRAM ligger inne i brikken og kan brukes med en gang. DRAM er større, sitter utenfor brikken og må settes opp av en bootloader før det kan brukes.</dd>
-            <dt id="b-tpm">TPM<small>Trusted Platform Module</small></dt>
-            <dd>En egen sikkerhetsbrikke, eller en beskyttet del av hovedbrikken, som lagrer målinger av oppstarten og nøkler, og som kan signere en rapport om målingene.</dd>
-            <dt id="b-debug">JTAG og SWD<small>debug-grensesnitt</small></dt>
-            <dd>Grensesnitt som gir direkte tilgang til prosessor og minne: man kan stoppe koden, lese og skrive minne og flash. Uunnværlig under utvikling, men bør låses i ferdige produkter (se kapittel 2).</dd>
-            <dt id="b-silisium">Silisiumrevisjon<small>brikkerevisjon</small></dt>
-            <dd>En versjon av selve brikken. Nytt ROM-innhold krever nye masker og ny produksjon, så en rettelse gjelder bare brikker som lages etterpå.</dd>
-          </dl>
-
-          <h3>Oppstart</h3>
-          <dl class="terms">
-            <dt id="b-rot">Rot av tillit<small>root of trust</small></dt>
-            <dd>Det man må stole på uten å kunne sjekke det, fordi det er der kjeden starter. Her er det boot ROM pluss nøkkelmaterialet i fuses.</dd>
-            <dt id="b-bootloader">Bootloader<small>oppstartslaster</small></dt>
-            <dd>Et program som gjør maskinvaren klar og laster inn neste program i oppstarten. Ofte delt i trinn: et lite første trinn som setter opp minne og klokker, og et større som kan lese filsystemer, ta imot oppdateringer og starte operativsystemet.</dd>
-            <dt id="b-bilde">Bilde<small>image</small></dt>
-            <dd>Filen et ledd laster inn: selve koden, med en header foran og signatur og offentlig nøkkel lagt ved.</dd>
-            <dt id="b-header">Header<small>metadata</small></dt>
-            <dd>Informasjon først i et bilde, for eksempel hvor stort det er, hvor i minnet det skal lastes og hvilken versjon det er. Leddet må lese headeren for å vite hva det skal verifisere, altså før signaturen er sjekket.</dd>
-            <dt id="b-fail">Fail closed<small>feil gir stopp</small></dt>
-            <dd>At systemet stopper når en sjekk feiler, i stedet for å fortsette. Det motsatte, <em>fail open</em>, betyr at en angriper bare trenger å få sjekken til å feile.</dd>
-            <dt id="b-rollback">Anti-rollback<small>vern mot nedgradering</small></dt>
-            <dd>Vern mot at noen installerer en eldre, sårbar versjon som fortsatt er gyldig signert. Hvert bilde har et versjonsnummer, og en teller i fuses holder laveste tillatte versjon. Telleren kan bare økes.</dd>
-            <dt id="b-recovery">Recovery-modus<small>nedlastingsmodus</small></dt>
-            <dd>En nødmodus i boot ROM for å laste inn kode over USB eller UART når flash er tom eller ødelagt, for eksempel i fabrikken eller ved reparasjon. Nyttig, men også en vei inn som en angriper kan nå.</dd>
-            <dt id="b-attest">Attestasjon<small>attestation</small></dt>
-            <dd>At enheten beviser overfor en ekstern part hva den startet opp med, ved å sende målingene fra oppstarten i en rapport signert av TPM-en. Mottakeren avgjør selv om den stoler på enheten.</dd>
-          </dl>
-
-          <h3>Angrep og testing</h3>
-          <dl class="terms">
-            <dt id="b-parsing">Parsing<small>tolking av input</small></dt>
-            <dd>Å tolke strukturerte data, for eksempel å lese felt for felt i en header eller en USB-forespørsel. God parsekode antar ingenting om at dataene er velformede.</dd>
-            <dt id="b-grensesjekk">Grensesjekk<small>bounds check</small></dt>
-            <dd>Kontroll av at en lengde eller indeks fra input holder seg innenfor bufferen den brukes på. Mangler den, kan input skrive forbi bufferen (bufferoverflyt) og overskrive annet innhold, for eksempel returadresser.</dd>
-            <dt id="b-kodeeks">Kodeeksekvering<small>code execution</small></dt>
-            <dd>At angriperen får prosessoren til å kjøre angriperens egen kode. Det sterkeste resultatet et angrep kan gi: angriperen kan da gjøre alt det kompromitterte leddet kunne gjøre.</dd>
-            <dt id="b-glitch">Feilinjeksjon<small>glitching</small></dt>
-            <dd>Å forstyrre spenning eller klokke et kort øyeblikk på riktig tidspunkt, slik at én instruksjon gir feil resultat, for eksempel at en sammenligning slår feil ut (se kapittel 6).</dd>
-            <dt id="b-toctou">TOCTOU<small>time-of-check to time-of-use</small></dt>
-            <dd>Dataene sjekkes på ett tidspunkt og brukes på et senere, og angriperen endrer dem i mellomtiden. Sjekken var riktig, men gjaldt ikke det som faktisk ble brukt.</dd>
-            <dt id="b-fuzz">Fuzzing<small>automatisk feilsøk</small></dt>
-            <dd>Automatisk testing der et program får store mengder tilfeldige eller misdannede input, for å finne krasj og feilhåndtering som svikter.</dd>
-            <dt id="b-formell">Formell verifisering<small>formal verification</small></dt>
-            <dd>Å bevise matematisk at koden oppfyller en spesifikasjon, i stedet for bare å teste den. Kostbart, men realistisk for små kodebiter som boot ROM.</dd>
-          </dl>
+          <p>Forklaringene bak de stiplede ordene står samlet i <a href="ordliste.html">ordlisten for MoS</a>, sammen med begrepene fra resten av emnet.</p>
         </article>
 
         <nav class="chapter-nav">
@@ -387,9 +316,9 @@
     </div>
   </div>
 
-  <script src="../../../assets/js/main.js?v=43"></script>
+  <script src="../../../assets/js/main.js?v=44"></script>
   <script src="../../../assets/js/status.js?v=35"></script>
   <script src="../../../assets/js/formler.js?v=35"></script>
-  <script src="../../../assets/js/begrep.js?v=1"></script>
+  <script src="../../../assets/js/begrep.js?v=2"></script>
 </body>
 </html>

@@ -7,7 +7,7 @@
   <meta name="description" content="Repetisjon gjennom db2: innlogging med saltet passordhash, sesjons-ID i en informasjonskapsel, fetch med credentials include, og en kritisk vurdering av autentiseringen slik eksamen spør.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../../assets/css/main.css?v=43">
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=44">
 </head>
 <body class="theme-tsd3060" data-updated="2026-10-02">
   <div class="app-shell">
@@ -41,21 +41,21 @@
         </div>
 
         <article class="prose">
-          <p class="callout">I timen gikk dere også gjennom <strong>eksamen 02 fra 2024&#8211;2025 (konte)</strong>, settet med frittstående begrepsoppgaver: demonisering, portnummer, chroot, DTD, informasjonskapsler, samme opphav og konteinere. Se fordelingen i <a href="eksamensanalyse.html">eksamensanalysen</a>. Etter denne uka er det ingen undervisning i uke 41, veiledning på forespørsel i uke 42&#8211;44 og oppsummering i uke 45.</p>
+          <p class="callout">I timen gikk dere også gjennom <strong>eksamen 02 fra 2024&#8211;2025 (konte)</strong>, settet med frittstående begrepsoppgaver: <a class="term" href="ordliste.html#b-demon">demonisering</a>, portnummer, <a class="term" href="ordliste.html#b-chroot">chroot</a>, <a class="term" href="ordliste.html#b-dtd">DTD</a>, <a class="term" href="ordliste.html#b-cookie">informasjonskapsler</a>, samme opphav og <a class="term" href="ordliste.html#b-konteiner">konteinere</a>. Se fordelingen i <a href="eksamensanalyse.html">eksamensanalysen</a>. Etter denne uka er det ingen undervisning i uke 41, veiledning på forespørsel i uke 42&#8211;44 og oppsummering i uke 45.</p>
 
           <h2>Algoritmen</h2>
-          <p>HTTP er tilstandsløst. Hver forespørsel står alene. For å slippe å sende passordet hver gang lager tjeneren en <strong>sesjons-ID</strong> etter vellykket innlogging. ID-en er et identitetsbevis (credential) som begge parter tar vare på, og den reiser i HTTP-hodet som en <strong>informasjonskapsel</strong> (cookie):</p>
+          <p><a class="term" href="ordliste.html#b-http">HTTP</a> er <a class="term" href="ordliste.html#b-tilstandslos">tilstandsløst</a>. Hver forespørsel står alene. For å slippe å sende passordet hver gang lager tjeneren en <strong><a class="term" href="ordliste.html#b-sesjonsid">sesjons-ID</a></strong> etter vellykket innlogging. ID-en er et identitetsbevis (credential) som begge parter tar vare på, og den reiser i <a class="term" href="ordliste.html#b-hode">HTTP-hodet</a> som en <strong>informasjonskapsel</strong> (cookie):</p>
           <ol>
             <li>Klienten sender brukernavn og passord i en innloggingsforespørsel.</li>
             <li>Tjeneren sjekker passordet. Stemmer det, lager den en sesjons-ID, lagrer den sammen med brukerens konto og sender den i responshodet: <code>Set-cookie: SESJONSID=…</code>.</li>
             <li>Nettleseren lagrer kapselen og sender den med i hver etterfølgende forespørsel: <code>Cookie: SESJONSID=…</code>.</li>
             <li>Tjeneren slår opp hvilken bruker sesjons-ID-en hører til, og bestemmer om forespørselen er tillatt.</li>
           </ol>
-          <p>Fra JavaScript mot et annet opphav skjer steg 3 bare hvis <code>fetch()</code> har <code>credentials: 'include'</code>, og tjeneren svarer med <code>Access-Control-Allow-Credentials: true</code>. Uten det blir kapselen verken lagret eller sendt. Se <a href="38-39-javascript.html">JavaScript-kapitlet</a>.</p>
+          <p>Fra <a class="term" href="ordliste.html#b-javascript">JavaScript</a> mot et annet opphav skjer steg 3 bare hvis <code>fetch()</code> har <code>credentials: 'include'</code>, og tjeneren svarer med <code>Access-Control-Allow-Credentials: true</code>. Uten det blir kapselen verken lagret eller sendt. Se <a href="38-39-javascript.html">JavaScript-kapitlet</a>.</p>
 
           <h2>db2: tjeneren</h2>
           <h3>api.c</h3>
-          <p>Samme mønster som <code>db.c</code> i uke 39, men porten tas fra kommandolinja (<code>CMD /api 80</code> i Containerfile), og den skriver en feilmelding hvis <code>bind</code> eller <code>exec</code> feiler. For hver forbindelse gjør den <code>fork</code>, <code>dup2</code> til stdin og stdout, og <code>execlp("env", "env", "-i", "./rest.sh", NULL)</code>.</p>
+          <p>Samme mønster som <code>db.c</code> i uke 39, men porten tas fra kommandolinja (<code>CMD /api 80</code> i <a class="term" href="ordliste.html#b-containerfile">Containerfile</a>), og den skriver en feilmelding hvis <code>bind</code> eller <code>exec</code> feiler. For hver forbindelse gjør den <code>fork</code>, <code>dup2</code> til <a class="term" href="ordliste.html#b-stdio">stdin</a> og stdout, og <code>execlp("env", "env", "-i", "./rest.sh", NULL)</code>.</p>
 
           <h3>Containerfile: databasen</h3>
           <pre class="codeblock">FROM alpine
@@ -70,19 +70,19 @@ RUN chmod a+w /person.db
 COPY api rest.sh /
 EXPOSE 80
 CMD /api 80</pre>
-          <p>Alle tre brukerne får passordet <code>123</code>, hashet med det <em>samme</em> saltet <code>1234567812345678</code>. Hashen lagres på formen <code>$id$salt$hash</code>, så saltet kan hentes ut igjen med <code>cut -f3 -d'$'</code>.</p>
+          <p>Alle tre brukerne får passordet <code>123</code>, hashet med det <em>samme</em> <a class="term" href="ordliste.html#b-salt">saltet</a> <code>1234567812345678</code>. <a class="term" href="ordliste.html#b-hash">Hashen</a> lagres på formen <code>$id$salt$hash</code>, så saltet kan hentes ut igjen med <code>cut -f3 -d'$'</code>.</p>
 
           <h3>rest.sh, steg for steg</h3>
           <ol>
-            <li><strong>Linje 4&#8211;31:</strong> Les forespørselslinja og hodet slik en CGI-tjener ville gjort, og lag miljøvariabler: <code>REQUEST_METHOD</code>, <code>SCRIPT_NAME</code>, <code>CONTENT_LENGTH</code>, og <code>HTTP_*</code> for resten. <code>Cookie:</code> blir <code>HTTP_COOKIE</code>.</li>
-            <li><strong>Linje 34&#8211;39:</strong> Statuslinje, JSON og CORS-hodene. Nytt fra uke 39 er <code>Access-Control-Allow-Credentials: true</code>. Uten det får ikke <code>db2.js</code> lese svarene når den sender kapselen med.</li>
-            <li><strong>Linje 54&#8211;72:</strong> Ved POST og PUT leses kroppen, og feltene hentes ut med <code>jq</code>. Er det et passord, hentes saltet fra brukerens lagrede hash, og det innsendte passordet hashes med det: <code>PW_HASHET=$(mkpasswd -S $SALT $PW)</code>.</li>
+            <li><strong>Linje 4&#8211;31:</strong> Les forespørselslinja og hodet slik en <a class="term" href="ordliste.html#b-cgi">CGI</a>-tjener ville gjort, og lag miljøvariabler: <code>REQUEST_METHOD</code>, <code>SCRIPT_NAME</code>, <code>CONTENT_LENGTH</code>, og <code>HTTP_*</code> for resten. <code>Cookie:</code> blir <code>HTTP_COOKIE</code>.</li>
+            <li><strong>Linje 34&#8211;39:</strong> Statuslinje, <a class="term" href="ordliste.html#b-json">JSON</a> og <a class="term" href="ordliste.html#b-cors">CORS</a>-hodene. Nytt fra uke 39 er <code>Access-Control-Allow-Credentials: true</code>. Uten det får ikke <code>db2.js</code> lese svarene når den sender kapselen med.</li>
+            <li><strong>Linje 54&#8211;72:</strong> Ved <a class="term" href="ordliste.html#b-post">POST</a> og <a class="term" href="ordliste.html#b-put">PUT</a> leses kroppen, og feltene hentes ut med <code>jq</code>. Er det et passord, hentes saltet fra brukerens lagrede hash, og det innsendte passordet hashes med det: <code>PW_HASHET=$(mkpasswd -S $SALT $PW)</code>.</li>
             <li><strong>Linje 76&#8211;97, innlogging</strong> (<code>PUT /login/&lt;brukerid&gt;</code>): Sammenlign <code>PW_HASHET</code> med den lagrede hashen. Er de like, lages en ny sesjons-ID med <code>uuidgen</code>, som lagres på brukeren og sendes:
               <pre class="codeblock">printf "Set-cookie: SESJONSID=$SESJONSID; SameSite=Strict; Path=/person/\r\n"</pre></li>
             <li><strong>Linje 104&#8211;118, sesjonssjekk:</strong> For alt under <code>/person/</code> plukkes de 36 tegnene i sesjons-ID-en ut av <code>HTTP_COOKIE</code>, og brukeren slås opp med <code>SELECT brukerid FROM person WHERE sesjonsid=…</code>. Finnes ingen, svarer tjeneren <code>Ikke innlogget</code> og avslutter.</li>
-            <li><strong>Linje 120&#8211;153:</strong> CRUD som i uke 39, nå på <code>brukerid</code>.</li>
+            <li><strong>Linje 120&#8211;153:</strong> <a class="term" href="ordliste.html#b-crud">CRUD</a> som i uke 39, nå på <code>brukerid</code>.</li>
           </ol>
-          <p>Forhåndskontrollen (<code>OPTIONS</code>) har ingen kapsel og ender derfor i «Ikke innlogget». Men den får CORS-hodene og en avsluttet header, og det er alt nettleseren trenger.</p>
+          <p><a class="term" href="ordliste.html#b-preflight">Forhåndskontrollen</a> (<code>OPTIONS</code>) har ingen kapsel og ender derfor i «Ikke innlogget». Men den får CORS-hodene og en avsluttet header, og det er alt nettleseren trenger.</p>
 
           <h3>Prøv med curl</h3>
           <p><code>-c</code> lagrer kapsler i en fil, og <code>-b</code> sender dem. Det er det nettleseren gjør automatisk:</p>
@@ -112,9 +112,9 @@ curl -v localhost:1234/person/ola                                              #
               <thead><tr><th>Bra</th><th>Hvorfor</th></tr></thead>
               <tbody>
                 <tr><td>Passordet lagres hashet med salt</td><td>En lekket database gir ikke passordene direkte, og ferdigberegnede tabeller (rainbow tables) virker ikke</td></tr>
-                <tr><td>Ny, tilfeldig sesjons-ID ved hver innlogging</td><td>Hindrer sesjonsfiksering (<a href="34-sqlite-injeksjon-autentisering.html">uke 34</a>)</td></tr>
+                <tr><td>Ny, tilfeldig sesjons-ID ved hver innlogging</td><td>Hindrer <a class="term" href="ordliste.html#b-fiksering">sesjonsfiksering</a> (<a href="34-sqlite-injeksjon-autentisering.html">uke 34</a>)</td></tr>
                 <tr><td>Passordet sendes bare én gang</td><td>Deretter brukes sesjons-ID-en</td></tr>
-                <tr><td><code>SameSite=Strict</code></td><td>Kapselen sendes ikke fra fremmede <em>sites</em>, noe som demper CSRF</td></tr>
+                <tr><td><code>SameSite=Strict</code></td><td>Kapselen sendes ikke fra fremmede <em>sites</em>, noe som demper <a class="term" href="ordliste.html#b-csrf">CSRF</a></td></tr>
               </tbody>
             </table>
           </div>
@@ -125,10 +125,10 @@ curl -v localhost:1234/person/ola                                              #
                 <tr><td>Alle brukerne har <strong>samme salt</strong>. Like passord gir like hasher, som synes i databasen.</td><td>Containerfile</td><td>Tilfeldig salt per bruker (utelat <code>-S</code>, så lager <code>mkpasswd</code> et nytt)</td></tr>
                 <tr><td>Nye brukere (POST) får passordet lagret <strong>i klartekst</strong> i <code>passordhash</code>, ikke hashet. De kan heller aldri logge inn, fordi det ikke finnes noe salt å hente ut.</td><td><code>rest.sh</code> 131&#8211;135</td><td>Hash passordet med nytt salt før <code>INSERT</code></td></tr>
                 <tr><td>Oppdatering (PUT) uten passord setter <code>passordhash</code> til <code>null</code>. <code>jq -r</code> skriver strengen <code>null</code> for et felt som mangler, og <code>-z</code>-testen slipper den gjennom. Etter «Oppdater» i <code>db2.html</code> kan brukeren ikke logge inn igjen.</td><td><code>rest.sh</code> 56, 60, 142</td><td>Bruk <code>jq -r '.passord // empty'</code>, og oppdater bare feltene som er sendt</td></tr>
-                <tr><td><strong>Ingen autorisasjon:</strong> en innlogget bruker kan endre og slette <em>alle</em> brukere. <code>BRUKERID</code> sammenlignes aldri med <code>RAD</code>.</td><td><code>rest.sh</code> 114&#8211;153</td><td>Krev <code>BRUKERID = RAD</code> for PUT og DELETE</td></tr>
-                <tr><td><strong>SQL-injeksjon</strong> via URL, JSON og selve kapselen, som limes inn i <code>WHERE sesjonsid='…'</code>.</td><td><code>rest.sh</code> 66, 107, 133, 142</td><td>Forberedte kommandoer, eller valider at sesjons-ID-en er en UUID</td></tr>
+                <tr><td><strong>Ingen autorisasjon:</strong> en innlogget bruker kan endre og slette <em>alle</em> brukere. <code>BRUKERID</code> sammenlignes aldri med <code>RAD</code>.</td><td><code>rest.sh</code> 114&#8211;153</td><td>Krev <code>BRUKERID = RAD</code> for PUT og <a class="term" href="ordliste.html#b-delete">DELETE</a></td></tr>
+                <tr><td><strong><a class="term" href="ordliste.html#b-sqlinj">SQL-injeksjon</a></strong> via <a class="term" href="ordliste.html#b-url">URL</a>, JSON og selve kapselen, som limes inn i <code>WHERE sesjonsid='…'</code>.</td><td><code>rest.sh</code> 66, 107, 133, 142</td><td><a class="term" href="ordliste.html#b-prepared">Forberedte kommandoer</a>, eller valider at sesjons-ID-en er en UUID</td></tr>
                 <tr><td>Kapselen mangler <code>HttpOnly</code>, <code>Secure</code> og <code>Max-Age</code>, og sesjonen varer evig.</td><td><code>rest.sh</code> 86</td><td>Legg til alle tre, og la sesjonen utløpe på tjeneren også</td></tr>
-                <tr><td>Alt går over <strong>HTTP</strong>, så passord og sesjons-ID kan avlyttes.</td><td><code>compose.yaml</code></td><td>HTTPS (TLS)</td></tr>
+                <tr><td>Alt går over <strong>HTTP</strong>, så passord og sesjons-ID kan avlyttes.</td><td><code>compose.yaml</code></td><td><a class="term" href="ordliste.html#b-https">HTTPS</a> (TLS)</td></tr>
                 <tr><td>Passordfeltet har <code>type='text'</code>.</td><td><code>db2.html</code></td><td><code>type='password'</code></td></tr>
               </tbody>
             </table>
@@ -163,8 +163,9 @@ curl -v localhost:1234/person/ola                                              #
     </div>
   </div>
 
-  <script src="../../../assets/js/main.js?v=43"></script>
+  <script src="../../../assets/js/main.js?v=44"></script>
   <script src="../../../assets/js/status.js?v=35"></script>
   <script src="../../../assets/js/formler.js?v=35"></script>
+  <script src="../../../assets/js/begrep.js?v=2"></script>
 </body>
 </html>

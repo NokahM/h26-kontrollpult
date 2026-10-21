@@ -7,7 +7,7 @@
   <meta name="description" content="Fra håndlaget chroot-rot til konteinerbilder med Podman/Docker: import, Containerfile, lag, cgroup-begrensninger, nettverk og podman-compose.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../../assets/css/main.css?v=43">
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=44">
 </head>
 <body class="theme-tsd3060" data-updated="2026-09-18">
   <div class="app-shell">
@@ -43,26 +43,26 @@
 
         <article class="prose">
           <h2>Fra rotkatalog til konteinerbilde</h2>
-          <p>Et <strong>konteinerbilde</strong> (container image) er i bunn og grunn et filsystem pakket som en tar-fil, pluss litt metadata om hva som skal kjøres. Rotkatalogen <code>nyrot/</code> fra uke 35 (med busybox) kan derfor gjøres om til et bilde direkte:</p>
+          <p>Et <strong><a class="term" href="ordliste.html#b-bilde">konteinerbilde</a></strong> (container image) er i bunn og grunn et filsystem pakket som en tar-fil, pluss litt metadata om hva som skal kjøres. Rotkatalogen <code>nyrot/</code> fra uke 35 (med busybox) kan derfor gjøres om til et bilde direkte:</p>
           <pre class="codeblock">tar -czf nyrot.tar.gz -C nyrot .     # pakker filsystemet i en "tar-ball"
 sudo apt install podman
 podman import - nyrot &lt; nyrot.tar.gz  # lager bildet "nyrot" i Podmans bildelager
 podman image ls                      # lister bildene</pre>
-          <p>Så kan vi starte konteinere basert på bildet:</p>
+          <p>Så kan vi starte <a class="term" href="ordliste.html#b-konteiner">konteinere</a> basert på bildet:</p>
           <pre class="codeblock">podman run nyrot                     # feiler: bildet sier ikke hva som skal kjøres
 podman run nyrot pwd                 # vi oppgir kommandoen selv
 podman container ps                  # tilsynelatende ingen konteinere ...
 podman container ps -a               # ... men de avsluttede ligger igjen ("zombiekonteinere")
 podman container rm -a               # sletter alle
 podman run --rm nyrot ps             # --rm: slett konteineren når prosessen avslutter</pre>
-          <p>Et skall trenger både stdin og en terminal. Uten dem avslutter <code>sh</code> med en gang:</p>
+          <p>Et skall trenger både <a class="term" href="ordliste.html#b-stdio">stdin</a> og en terminal. Uten dem avslutter <code>sh</code> med en gang:</p>
           <pre class="codeblock">podman run --rm nyrot sh                           # problem: ingen stdin/terminal
 podman run --interactive --tty --rm nyrot sh       # løsning
 podman run -it --rm nyrot sh                       # samme i kortform</pre>
           <p>Med <code>-c</code> kan vi gi en <em>konteinerfilinstruksjon</em> allerede ved import, slik at bildet selv vet hva det skal starte:</p>
           <pre class="codeblock">podman import -c 'ENTRYPOINT /bin/sh' nyrot.tar.gz nyrot
 podman run -it --rm nyrot</pre>
-          <p>Alt dette fungerer likt med Docker: bytt <code>podman</code> med <code>docker</code>. Forskjellen er at Podman ikke trenger en bakgrunnsdemon som kjører som root, og konteinerne kan kjøres av en vanlig bruker (rootless).</p>
+          <p>Alt dette fungerer likt med <a class="term" href="ordliste.html#b-docker">Docker</a>: bytt <code>podman</code> med <code>docker</code>. Forskjellen er at <a class="term" href="ordliste.html#b-podman">Podman</a> ikke trenger en bakgrunnsdemon som kjører som root, og konteinerne kan kjøres av en vanlig bruker (<a class="term" href="ordliste.html#b-rootless">rootless</a>).</p>
 
           <div class="pitfall">
             <div class="pitfall__title">Fallgruve: «short-name did not resolve»</div>
@@ -79,7 +79,7 @@ podman stop -a -t1                   # rydder opp
 podman import nyrot2.tar.gz nyrot2</pre>
 
           <h2>Containerfile: bygge videre på et eksisterende bilde</h2>
-          <p>Den vanlige måten er å beskrive bildet i en <strong>Containerfile</strong> (Docker kaller den <code>Dockerfile</code>, formatet er det samme). Hver instruksjon bygger videre på bildet fra forrige linje:</p>
+          <p>Den vanlige måten er å beskrive bildet i en <strong><a class="term" href="ordliste.html#b-containerfile">Containerfile</a></strong> (Docker kaller den <code>Dockerfile</code>, formatet er det samme). Hver instruksjon bygger videre på bildet fra forrige linje:</p>
           <pre class="codeblock"># bildet vi bygger videre på
 FROM localhost/nyrot2:latest
 # kopier fra byggekatalogen inn i bildet
@@ -105,7 +105,7 @@ podman build -t nyrot3 nyrot3/       # katalogen er "byggekonteksten"</pre>
 
           <div class="pitfall">
             <div class="pitfall__title">Fallgruve: en demonisert tjener stopper konteineren</div>
-            <p>En konteiner lever bare så lenge hovedprosessen (PID 1 i konteineren) lever. Hvis <code>hallotjener</code> demoniserer seg, avslutter opphavet, og da stopper konteineren og tar demonen med seg. I en konteiner skal tjeneren kjøre i forgrunnen. Det er <code>podman run -d</code> som gjør den terminaluavhengig. Samme grunn til at <code>httpd</code> trenger <code>-f</code> under.</p>
+            <p>En konteiner lever bare så lenge hovedprosessen (<a class="term" href="ordliste.html#b-pid">PID</a> 1 i konteineren) lever. Hvis <code>hallotjener</code> demoniserer seg, avslutter opphavet, og da stopper konteineren og tar <a class="term" href="ordliste.html#b-demon">demonen</a> med seg. I en konteiner skal tjeneren kjøre i forgrunnen. Det er <code>podman run -d</code> som gjør den terminaluavhengig. Samme grunn til at <code>httpd</code> trenger <code>-f</code> under.</p>
           </div>
 
           <h2>Lag og historie</h2>
@@ -123,7 +123,7 @@ podman run -it --rm --name sh1 busybox echo hei      # laster ned
 podman run -it --rm --name sh1 busybox echo hallo    # bruker mellomlageret</pre>
 
           <h2>Begrensninger med cgroups</h2>
-          <p>Navnerom (uke 35) bestemmer hva en konteiner kan <em>se</em>. <strong>cgroups</strong> (control groups) bestemmer hvor mye den kan <em>bruke</em> av minne og CPU. Det beskytter verten og de andre konteinerne mot en konteiner som går amok, for eksempel under et tjenestenektangrep:</p>
+          <p><a class="term" href="ordliste.html#b-navnerom">Navnerom</a> (uke 35) bestemmer hva en konteiner kan <em>se</em>. <strong><a class="term" href="ordliste.html#b-cgroups">cgroups</a></strong> (control groups) bestemmer hvor mye den kan <em>bruke</em> av minne og CPU. Det beskytter verten og de andre konteinerne mot en konteiner som går amok, for eksempel under et tjenestenektangrep:</p>
           <pre class="codeblock">podman run -dit --rm -m 8m --name sh1 busybox        # maks 8 MB minne
 podman container inspect sh1 | jq .[].HostConfig.Memory
 
@@ -177,7 +177,7 @@ podman stop -a -t1; podman network prune                    # rydder opp</pre>
           <p>I egendefinerte nettverk kan konteinerne nå hverandre ved <em>navn</em> (innebygd DNS), ikke bare ved IP-adresse.</p>
 
           <h2>Compose: flere konteinere i én fil</h2>
-          <p>Med mange konteinere og nettverk blir kommandolinjene lange. <strong>Compose</strong> beskriver hele oppsettet i en YAML-fil (<code>sudo apt install podman-compose</code>):</p>
+          <p>Med mange konteinere og nettverk blir kommandolinjene lange. <strong><a class="term" href="ordliste.html#b-compose">Compose</a></strong> beskriver hele oppsettet i en YAML-fil (<code>sudo apt install podman-compose</code>):</p>
           <pre class="codeblock"># shell.yaml
 services:
   sh1:
@@ -252,7 +252,7 @@ curl web</pre>
             <table class="dtable">
               <thead><tr><th>Mekanisme</th><th>Hva den gir</th><th>Verktøy</th></tr></thead>
               <tbody>
-                <tr><td>chroot / bildets filsystem</td><td>Eget filtre</td><td><code>import</code>, <code>build</code></td></tr>
+                <tr><td><a class="term" href="ordliste.html#b-chroot">chroot</a> / bildets filsystem</td><td>Eget filtre</td><td><code>import</code>, <code>build</code></td></tr>
                 <tr><td>Navnerom</td><td>Egne PID-er, nettverk, vertsnavn …</td><td>settes opp av <code>podman run</code></td></tr>
                 <tr><td>cgroups</td><td>Grenser for minne og CPU</td><td><code>-m</code>, <code>--cpuset-cpus</code>, <code>--cpu-shares</code></td></tr>
                 <tr><td>Nettverk</td><td>Segmentering og portvideresending</td><td><code>network create</code>, <code>-p</code></td></tr>
@@ -304,8 +304,9 @@ curl web</pre>
     </div>
   </div>
 
-  <script src="../../../assets/js/main.js?v=43"></script>
+  <script src="../../../assets/js/main.js?v=44"></script>
   <script src="../../../assets/js/status.js?v=35"></script>
   <script src="../../../assets/js/formler.js?v=35"></script>
+  <script src="../../../assets/js/begrep.js?v=2"></script>
 </body>
 </html>

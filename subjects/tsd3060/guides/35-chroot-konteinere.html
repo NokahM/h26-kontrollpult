@@ -7,7 +7,7 @@
   <meta name="description" content="Fra chroot() til namespaces og manuell konteinerhåndtering med unshare og nsenter — hva en konteiner faktisk består av.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../../assets/css/main.css?v=43">
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=44">
 </head>
 <body class="theme-tsd3060" data-updated="2026-09-02">
   <div class="app-shell">
@@ -40,7 +40,7 @@
 
         <article class="prose">
           <h2>Hva ordet «konteiner» faktisk betyr</h2>
-          <p>«Konteiner» kommer av det engelske <em>contain</em>, fra latin <em>con-</em> (sammen) + <em>tenere</em> (holde) — å holde noe sammen. Å holde noe sammen skaper samtidig et skille mellom det som holdes inne og det som holdes ute, og nettopp skiller og grenser er kjernen i god sikkerhet. En programvarekonteiner er et fullstendig, flyttbart datasystem realisert med operativsystem-nivå-virtualisering: alt av programvare pakken trenger er inkludert, bortsett fra selve kjernen — den deles med vertssystemet. To Linux-mekanismer gjør dette mulig: <strong>chroot(2)</strong> og <strong>namespaces(7)</strong>.</p>
+          <p>«<a class="term" href="ordliste.html#b-konteiner">Konteiner</a>» kommer av det engelske <em>contain</em>, fra latin <em>con-</em> (sammen) + <em>tenere</em> (holde) — å holde noe sammen. Å holde noe sammen skaper samtidig et skille mellom det som holdes inne og det som holdes ute, og nettopp skiller og grenser er kjernen i god sikkerhet. En programvarekonteiner er et fullstendig, flyttbart datasystem realisert med operativsystem-nivå-virtualisering: alt av programvare pakken trenger er inkludert, bortsett fra selve kjernen — den deles med vertssystemet. To Linux-mekanismer gjør dette mulig: <strong><a class="term" href="ordliste.html#b-chroot">chroot</a>(2)</strong> og <strong><a class="term" href="ordliste.html#b-navnerom">namespaces</a>(7)</strong>.</p>
 
           <h2>chroot(2) — en tidlig konteinerforløper</h2>
           <p>En prosess kan sette en ny rot i filsystemtreet for seg selv og sine etterkommere med systemkallet <code>chroot()</code> — et av de eldste isolasjonsverktøyene i Unix. Alt prosessen ser av filsystemet begrenses til det som ligger under den nye roten:</p>
@@ -52,7 +52,7 @@ int main() {
   raise(SIGSTOP);   // fryser prosessen slik at den kan inspiseres
   return 0;
 }</pre>
-          <p>Kjør den, finn PID-en, og se at prosessen faktisk oppfatter <code>/tmp</code> som sin rot:</p>
+          <p>Kjør den, finn <a class="term" href="ordliste.html#b-pid">PID-en</a>, og se at prosessen faktisk oppfatter <code>/tmp</code> som sin rot:</p>
           <pre class="codeblock">gcc rot.c &amp;&amp; sudo ./a.out
 jobs -l                     # finner PID til a.out
 sudo ls -l /proc/&lt;PID&gt;/root  # viser hva prosessen selv ser som "/"</pre>
@@ -70,7 +70,7 @@ ldd hallotjener       # hvilke bibliotek trengs?
 
 gcc -static hallotjener.c -o hallotjener     # løsning: statisk lenking
 file $(which busybox)                        # dynamisk? da: sudo apt install busybox-static</pre>
-            <p>Det samme gjelder alt du kopierer inn i en chroot eller konteiner, også i uke 36–38. REST-eksempelet trenger i tillegg <code>sqlite3</code> og <code>jq</code>, som ikke finnes i busybox. De må kopieres inn sammen med bibliotekene <code>ldd</code> viser, eller så kan du bruke et Alpine-bilde med <code>apk add sqlite jq</code> (uke 36).</p>
+            <p>Det samme gjelder alt du kopierer inn i en chroot eller konteiner, også i uke 36–38. <a class="term" href="ordliste.html#b-rest">REST</a>-eksempelet trenger i tillegg <code>sqlite3</code> og <code>jq</code>, som ikke finnes i busybox. De må kopieres inn sammen med bibliotekene <code>ldd</code> viser, eller så kan du bruke et Alpine-bilde med <code>apk add sqlite jq</code> (uke 36).</p>
           </div>
 
           <h2>namespaces(7) — isolerer alt chroot ikke gjør</h2>
@@ -102,7 +102,7 @@ sudo unshare --mount-proc=$PWD/nyrot/proc --pid --fork chroot nyrot/ sh</pre>
           </div>
 
           <h2>Å bygge en konteiner for hånd</h2>
-          <p>Kombinerer man chroot med flere navnerom samtidig, får man noe som begynner å ligne det Docker/Podman gjør automatisk — bare manuelt, ett flagg om gangen:</p>
+          <p>Kombinerer man chroot med flere navnerom samtidig, får man noe som begynner å ligne det <a class="term" href="ordliste.html#b-docker">Docker</a>/Podman gjør automatisk — bare manuelt, ett flagg om gangen:</p>
           <pre class="codeblock">$ mkdir -p nyrot/{bin,proc,etc}
 $ cp /usr/bin/busybox nyrot/bin/ &amp;&amp; nyrot/bin/busybox --install nyrot/bin/
 $ cd nyrot
@@ -154,8 +154,9 @@ $ sudo nsenter -t &lt;PID&gt; -a chroot $PWD/nyrot sh</pre>
     </div>
   </div>
 
-  <script src="../../../assets/js/main.js?v=43"></script>
+  <script src="../../../assets/js/main.js?v=44"></script>
   <script src="../../../assets/js/status.js?v=35"></script>
   <script src="../../../assets/js/formler.js?v=35"></script>
+  <script src="../../../assets/js/begrep.js?v=2"></script>
 </body>
 </html>

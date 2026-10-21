@@ -7,7 +7,7 @@
   <meta name="description" content="Spenningsglitching som feilinjeksjon: setup-/hold-tid, glitch-vindu, og hvordan man omgår en passordsjekk med ChipWhisperer Nano.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../../assets/css/main.css?v=43">
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=44">
 </head>
 <body class="theme-mos" data-updated="2026-10-15">
   <div class="app-shell">
@@ -39,14 +39,14 @@
 
         <article class="prose">
           <h2>Feilinjeksjon: å ødelegge én instruksjon med vilje</h2>
-          <p>Der effektanalyse i forrige kapittel er et <em>passivt</em> angrep — man lytter uten å forstyrre — er glitching <em>aktivt</em>: man forstyrrer kretsen fysisk mens den kjører, med mål om å få én bestemt instruksjon til å utføres feil. Lykkes det presist nok, kan man for eksempel få en <code>if</code>-sjekk til å hoppe feil vei, eller en løkketeller til aldri å telle ned til null — uten at koden noensinne blir lest eller endret. Dette er samme underliggende mål som APPROTECT-omgåelsen i kapittel 02 (bryt en sikkerhetssjekk), men løst på det elektriske laget i stedet for via debug-porten.</p>
+          <p>Der effektanalyse i forrige kapittel er et <em>passivt</em> angrep — man lytter uten å forstyrre — er <a class="term" href="ordliste.html#b-glitch">glitching</a> <em>aktivt</em>: man forstyrrer kretsen fysisk mens den kjører, med mål om å få én bestemt instruksjon til å utføres feil. Lykkes det presist nok, kan man for eksempel få en <code>if</code>-sjekk til å hoppe feil vei, eller en løkketeller til aldri å telle ned til null — uten at koden noensinne blir lest eller endret. Dette er samme underliggende mål som <a class="term" href="ordliste.html#b-approtect">APPROTECT</a>-omgåelsen i kapittel 02 (bryt en sikkerhetssjekk), men løst på det elektriske laget i stedet for via debug-porten.</p>
 
           <h2>Fra transistor til forsinkelse</h2>
           <p>For å forstå hvorfor lavere spenning gir feil, starter forelesningen nederst, med transistoren.</p>
           <ul>
             <li><strong>nMOS</strong> leder (er PÅ) når gate = 1, og er AV når gate = 0. Den kobler utgangen ned mot jord (GND).</li>
-            <li><strong>pMOS</strong> er motsatt: PÅ når gate = 0, AV når gate = 1. Den kobler utgangen opp mot VDD.</li>
-            <li>En <strong>CMOS-inverter</strong> (NOT) har én pMOS (P1) opp og én nMOS (N1) ned. Når A = 0, er P1 PÅ og N1 AV, så Y = 1. Når A = 1, er det motsatt, og Y = 0. Det går nesten ingen strøm i ro, bare når utgangen bytter. Det er grunnen til at strømforbruket følger aktiviteten (kapittel 5).</li>
+            <li><strong>pMOS</strong> er motsatt: PÅ når gate = 0, AV når gate = 1. Den kobler utgangen opp mot <a class="term" href="ordliste.html#b-vdd">VDD</a>.</li>
+            <li>En <strong><a class="term" href="ordliste.html#b-cmos">CMOS</a>-inverter</strong> (NOT) har én pMOS (P1) opp og én nMOS (N1) ned. Når A = 0, er P1 PÅ og N1 AV, så Y = 1. Når A = 1, er det motsatt, og Y = 0. Det går nesten ingen strøm i ro, bare når utgangen bytter. Det er grunnen til at strømforbruket følger aktiviteten (kapittel 5).</li>
           </ul>
           <p><strong>Quizen «Hvilken logisk port er dette?»</strong> viser to pMOS i <em>serie</em> mot VDD (A og B) og to nMOS i <em>parallell</em> mot jord, etterfulgt av en inverter. Første trinn blir bare 1 når både A og B er 0. Det er en NOR-port. Inverteren snur den, så porten er en <strong>OR</strong>. Huskeregel: serie i pull-up gir NOR, og parallell i pull-up gir NAND.</p>
 
@@ -80,15 +80,15 @@
           </ul>
 
           <h2>Glitch-vinduet: posisjon og bredde</h2>
-          <p>En glitch har en fallende flanke (falling time), en bunn på \(V_{glitch}\) som varer i glitch-bredden, og en stigende flanke (rising time). Hele forløpet er <em>angrepsvinduet</em>. To parametere avgjør hva en spenningsglitch faktisk treffer:</p>
+          <p>En glitch har en fallende flanke (falling time), en bunn på \(V_{glitch}\) som varer i <a class="term" href="ordliste.html#b-glitchvindu">glitch-bredden</a>, og en stigende flanke (rising time). Hele forløpet er <em>angrepsvinduet</em>. To parametere avgjør hva en spenningsglitch faktisk treffer:</p>
           <ul>
             <li><strong>Posisjon</strong> — <em>når</em> i programutførelsen glitchet trigges, avgjør <em>hvilken</em> instruksjon som rammes.</li>
-            <li><strong>Bredde</strong> — <em>hvor lenge</em> spenningen holdes nede, avgjør hvor kraftig forstyrrelsen er: for kort gjør ingenting, for lang trigger typisk en full reset, og et smalt vindu midt imellom gir en kontrollert feilutførelse av nøyaktig én instruksjon.</li>
+            <li><strong>Bredde</strong> — <em>hvor lenge</em> spenningen holdes nede, avgjør hvor kraftig forstyrrelsen er: for kort gjør ingenting, for lang <a class="term" href="ordliste.html#b-trigger">trigger</a> typisk en full reset, og et smalt vindu midt imellom gir en kontrollert feilutførelse av nøyaktig én instruksjon.</li>
           </ul>
           <p>Å finne dette vinduet er i praksis et søkeproblem: man sveiper posisjon og bredde systematisk over mange forsøk til man treffer kombinasjonen som gir en nyttig feil, i stedet for en krasjet eller uendret kjøring.</p>
 
           <h2>ChipWhisperer Nano-modifikasjonen</h2>
-          <p>I skjemaet til Nano-kortet går forsyningen <code>+3v3_T</code> gjennom shunten <code>R12</code> til <code>+3v3_L</code>, som er VDD til STM32-en (se kapittel 5). To loddebroer kobler signaler fra ChipWhisperer-delen til VDD:</p>
+          <p>I skjemaet til Nano-kortet går forsyningen <code>+3v3_T</code> gjennom <a class="term" href="ordliste.html#b-shunt">shunten</a> <code>R12</code> til <code>+3v3_L</code>, som er VDD til STM32-en (se kapittel 5). To loddebroer kobler signaler fra <a class="term" href="ordliste.html#b-chipwhisperer">ChipWhisperer</a>-delen til VDD:</p>
           <ul>
             <li><code>SJ5</code> kobler til <code>T_MEAS</code>, som brukes til å måle strømforbruket.</li>
             <li><code>SJ6</code> kobler til <code>T_GLITCH</code>, en transistor som kan kortslutte VDD mot jord.</li>
@@ -119,7 +119,7 @@
 }</pre>
           <p>Legg merke til to ting som er gode å si på eksamen:</p>
           <ul>
-            <li><strong>Løkka avbryter ikke.</strong> Den går gjennom alle fem tegnene uansett, så SPA-angrepet fra kapittel 5 virker dårlig her. Men det hjelper ikke mot glitching. En feil i sammenligningen eller i hoppet, eller i lagringen av <code>passok = 0</code>, gjør at et feil passord blir godtatt.</li>
+            <li><strong>Løkka avbryter ikke.</strong> Den går gjennom alle fem tegnene uansett, så <a class="term" href="ordliste.html#b-spa">SPA</a>-angrepet fra kapittel 5 virker dårlig her. Men det hjelper ikke mot glitching. En feil i sammenligningen eller i hoppet, eller i lagringen av <code>passok = 0</code>, gjør at et feil passord blir godtatt.</li>
             <li><strong>Feil standardverdi.</strong> <code>passok</code> starter som 1 (godkjent). Én instruksjon som hoppes over, er nok til at svaret blir «riktig». Hadde koden startet med «avvist» og krevd at alle tegnene ble bekreftet, måtte en glitch ha gitt en mye mer spesifikk feil.</li>
           </ul>
           <p>Den første notebooken bruker <code>glitch_loop</code>: to løkker inni hverandre teller til \(50 \times 50 = 2500\). Svarer kortet med noe annet enn 2500, har glitchen virket. Det er en enkel måte å lete etter posisjon og bredde før man angriper passordet. <code>glitch_comparison</code> (sjekk om første byte er <code>0xA2</code>) og <code>infinite_loop</code> (<code>while (a != 2)</code> som aldri skal avslutte) er andre klassiske mål.</p>
@@ -130,7 +130,7 @@
             <li><strong>Sjekk to ganger</strong>, gjerne med den inverterte betingelsen i tillegg, og ha tilfeldig forsinkelse mellom sjekkene. Da må angriperen treffe to ganger på et ukjent tidspunkt.</li>
             <li><strong>Tell løkkene</strong>: Sjekk etter løkka at telleren faktisk nådde slutten.</li>
             <li><strong>Tilfeldig tidsbruk</strong> (jitter), slik at posisjonen ikke kan gjentas fra forsøk til forsøk.</li>
-            <li><strong>Maskinvare</strong>: en brown-out-detektor som resetter ved lav spenning, egne sensorer for glitch og klokke, god avkobling på VDD og en intern regulator. Et kort spenningsfall er vanskeligere å slippe gjennom forbi en kondensator.</li>
+            <li><strong>Maskinvare</strong>: en <a class="term" href="ordliste.html#b-brownout">brown-out-detektor</a> som resetter ved lav spenning, egne sensorer for glitch og klokke, god avkobling på VDD og en intern regulator. Et kort spenningsfall er vanskeligere å slippe gjennom forbi en kondensator.</li>
           </ul>
 
           <h2>Lab 5 i praksis</h2>
@@ -201,7 +201,7 @@
                 <li>Sjekk at løkketelleren nådde slutten.</li>
                 <li>Bruk maskinvare med brown-out- og glitchdetektor.</li>
               </ul>
-              <p>Merk at koden allerede er SPA-sikker siden den ikke avbryter. Det viser at forsvar mot sidekanaler og forsvar mot feilinjeksjon er to forskjellige ting.</p>
+              <p>Merk at koden allerede er SPA-sikker siden den ikke avbryter. Det viser at forsvar mot <a class="term" href="ordliste.html#b-sidekanal">sidekanaler</a> og forsvar mot feilinjeksjon er to forskjellige ting.</p>
             </div>
           </details>
           <details class="sol">
@@ -220,9 +220,10 @@
     </div>
   </div>
 
-  <script src="../../../assets/js/main.js?v=43"></script>
+  <script src="../../../assets/js/main.js?v=44"></script>
   <script src="../../../assets/js/status.js?v=35"></script>
   <script src="../../../assets/js/formler.js?v=35"></script>
   <script src="../../../assets/js/math.js?v=35"></script>
+  <script src="../../../assets/js/begrep.js?v=2"></script>
 </body>
 </html>

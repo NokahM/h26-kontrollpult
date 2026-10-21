@@ -37,7 +37,8 @@
           { title: 'Muntlige eksamensspørsmål', part: 'Eksamensøving', meta: '36', tasks: 36, track: 'tasks', href: 'subjects/mos/guides/muntlig-eksamen.html' }
         ] },
         { label: 'Om emnet', items: [
-          { title: 'Emneplan', part: 'Om emnet', href: 'subjects/mos/guides/emneplan.html' }
+          { title: 'Emneplan', part: 'Om emnet', href: 'subjects/mos/guides/emneplan.html' },
+          { title: 'Ordliste', part: 'Om emnet', href: 'subjects/mos/guides/ordliste.html' }
         ] },
         { label: 'Miniprosjekt', items: [
           { title: 'Tillitskjeden og boot ROM', part: 'Miniprosjekt', href: 'subjects/mos/guides/tillitskjede.html' },
@@ -69,7 +70,8 @@
           { title: 'Eksamensanalyse', part: 'Eksamensforberedelse', href: 'subjects/tsd3060/guides/eksamensanalyse.html' }
         ] },
         { label: 'Om emnet', items: [
-          { title: 'Emneplan', part: 'Om emnet', href: 'subjects/tsd3060/guides/emneplan.html' }
+          { title: 'Emneplan', part: 'Om emnet', href: 'subjects/tsd3060/guides/emneplan.html' },
+          { title: 'Ordliste', part: 'Om emnet', href: 'subjects/tsd3060/guides/ordliste.html' }
         ] },
         { label: 'Andre steder', items: [
           { title: 'Kurssystemet', meta: 'debbie', external: true, href: 'https://debbie.usn.no/tsd3060/' }

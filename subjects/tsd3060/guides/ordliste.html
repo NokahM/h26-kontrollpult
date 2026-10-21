@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ordliste — TSD3060 · H26</title>
+  <meta name="description" content="Ordliste for TSD3060: forklaring av de tekniske begrepene som brukes i kapitlene.">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=44">
+</head>
+<body class="theme-tsd3060" data-updated="2026-10-21">
+  <div class="app-shell">
+
+    <aside class="sidebar"></aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">TSD3060</a>
+        <div class="topbar__crumb">Ordliste</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow">TSD3060 · oppslag</div>
+          <h1>Ordliste</h1>
+          <p class="page-header__desc">Forklaring av de tekniske begrepene i TSD3060, fra HTTP og sockets til konteinere, JavaScript og innlogging.</p>
+        </header>
+
+        <div class="sourcebar">
+          <a class="tag" href="#g-http">HTTP og REST</a>
+          <a class="tag" href="#g-unix">Tjenere i C og Unix</a>
+          <a class="tag" href="#g-db">Databaser og injeksjon</a>
+          <a class="tag" href="#g-konteiner">Konteinere</a>
+          <a class="tag" href="#g-web">HTML, XML og CSS</a>
+          <a class="tag" href="#g-cgi">CGI og skjema</a>
+          <a class="tag" href="#g-js">JavaScript</a>
+          <a class="tag" href="#g-auth">Innlogging og sesjoner</a>
+        </div>
+
+        <article class="prose">
+          <p>De stiplede ordene i teksten på de andre sidene viser forklaringen herfra når du klikker på dem. Klikk på ordet igjen, utenfor boblen eller trykk Esc for å lukke den.</p>
+
+          <h2 id="g-http">HTTP og REST</h2>
+          <dl class="terms">
+            <dt id="b-http">HTTP<small>Hypertext Transfer Protocol</small></dt>
+            <dd>Tekstprotokollen mellom nettleser og webtjener. Klienten sender en forespørsel (metode, sti, versjon, hodelinjer, tom linje og eventuelt en kropp), og tjeneren svarer med statuslinje, hode og kropp. Hver linje i hodet skal slutte med <code>\r\n</code>.</dd>
+            <dt id="b-https">HTTPS<small>HTTP over TLS</small></dt>
+            <dd>HTTP gjennom en kryptert TLS-forbindelse, vanligvis på port 443. Beskytter mot avlytting og endring underveis, og lar nettleseren sjekke tjenerens sertifikat.</dd>
+            <dt id="b-url">URL<small>Uniform Resource Locator</small></dt>
+            <dd>Adressen til en ressurs: protokoll, vert, eventuelt port, sti og eventuelt en spørrestreng etter <code>?</code>, for eksempel <code>http://localhost:8080/person?id=3</code>.</dd>
+            <dt id="b-urlkoding">URL-koding<small>prosentkoding</small></dt>
+            <dd>Tegn som ikke kan stå direkte i en URL, skrives som <code>%</code> og to heksadesimale sifre per byte: <code>ø</code> blir <code>%C3%B8</code> og <code>&amp;</code> blir <code>%26</code>. I skjemadata blir mellomrom til <code>+</code>. Programmet som tar imot, må dekode selv.</dd>
+            <dt id="b-hode">HTTP-hode<small>header</small></dt>
+            <dd>Linjene med <code>Navn: verdi</code> etter første linje i en forespørsel eller et svar, avsluttet med en tom linje. Forteller blant annet type og lengde på kroppen, informasjonskapsler og innloggingsdata.</dd>
+            <dt id="b-get">GET<small>HTTP-metode</small></dt>
+            <dd>Henter en ressurs. Skal ikke endre noe på tjeneren. Eventuelle data sendes i URL-en (spørrestrengen), så de havner i logger og nettleserhistorikk. I REST: lese (R i CRUD).</dd>
+            <dt id="b-post">POST<small>HTTP-metode</small></dt>
+            <dd>Sender data i kroppen av forespørselen, for eksempel et skjema eller JSON. I REST: opprette en ny ressurs (C i CRUD).</dd>
+            <dt id="b-put">PUT<small>HTTP-metode</small></dt>
+            <dd>Sender en ny utgave av en ressurs i kroppen og erstatter den som finnes. I REST: oppdatere (U i CRUD).</dd>
+            <dt id="b-delete">DELETE<small>HTTP-metode</small></dt>
+            <dd>Sletter ressursen URL-en peker på. I REST: slette (D i CRUD).</dd>
+            <dt id="b-options">OPTIONS<small>HTTP-metode</small></dt>
+            <dd>Spør tjeneren hvilke metoder og hoder den godtar. Nettleseren sender den automatisk som preflight før forespørsler til et annet opphav som ikke er «enkle».</dd>
+            <dt id="b-statuskode">Statuskode<small>status code</small></dt>
+            <dd>Tresifret tall først i svaret som sier hvordan det gikk: 2xx vellykket (200 OK), 3xx omdirigering, 4xx feil hos klienten (401 Unauthorized, 403 Forbidden, 404 Not Found) og 5xx feil hos tjeneren.</dd>
+            <dt id="b-contenttype">Content-Type<small>hodefelt</small></dt>
+            <dd>Hodefeltet som sier hva slags data kroppen inneholder, som MIME-type: <code>text/html</code>, <code>application/json</code> eller <code>application/x-www-form-urlencoded</code> for skjemadata.</dd>
+            <dt id="b-contentlength">Content-Length<small>hodefelt</small></dt>
+            <dd>Hvor mange byte kroppen inneholder. En socket sier ikke selv når meldingen er slutt, så tjeneren må lese akkurat så mange byte. I CGI får programmet verdien som miljøvariabelen <code>CONTENT_LENGTH</code>.</dd>
+            <dt id="b-mime">MIME-type<small>medietype</small></dt>
+            <dd>Standard navn på datatyper, på formen <code>type/undertype</code>, for eksempel <code>text/css</code> eller <code>image/png</code>. Brukes i Content-Type.</dd>
+            <dt id="b-rest">REST<small>Representational State Transfer</small></dt>
+            <dd>En stil for API-er over HTTP: hver ressurs har sin URL, og HTTP-metodene brukes som operasjoner på den (GET leser, POST oppretter, PUT oppdaterer, DELETE sletter). Tilstandsløst, som HTTP.</dd>
+            <dt id="b-crud">CRUD<small>create, read, update, delete</small></dt>
+            <dd>De fire grunnoperasjonene på lagrede data. I REST svarer de til POST, GET, PUT og DELETE, og i SQL til INSERT, SELECT, UPDATE og DELETE.</dd>
+            <dt id="b-tilstandslos">Tilstandsløs<small>stateless</small></dt>
+            <dd>Hver forespørsel står alene, og tjeneren husker ingenting mellom dem. For å holde på en innlogging må klienten derfor sende med noe hver gang, typisk en sesjons-ID i en informasjonskapsel.</dd>
+          </dl>
+
+          <h2 id="g-unix">Tjenere i C og Unix</h2>
+          <dl class="terms">
+            <dt id="b-socket">Socket<small>endepunkt for nettverk</small></dt>
+            <dd>Et endepunkt for kommunikasjon som programmet bruker som en fil. En TCP-tjener lager en socket, binder den til en port (<code>bind</code>), lytter (<code>listen</code>) og tar imot forbindelser (<code>accept</code>).</dd>
+            <dt id="b-tcp">TCP<small>Transmission Control Protocol</small></dt>
+            <dd>Transportprotokollen HTTP går over. Gir en pålitelig, ordnet strøm av byte mellom to programmer, men ingen grenser mellom meldinger.</dd>
+            <dt id="b-port">Privilegert port<small>port under 1024</small></dt>
+            <dd>Portene under 1024, blant dem 80 (HTTP) og 443 (HTTPS). På Unix krever det root å binde seg til dem. Løsninger er blant annet en capability, viderekobling i brannmuren eller å binde porten som root og så gi fra seg rettighetene.</dd>
+            <dt id="b-fork">fork()<small>ny prosess</small></dt>
+            <dd>Systemkallet som lager en kopi av den kjørende prosessen. Barnet får 0 som returverdi, forelderen får barnets PID. En enkel tjener forker for hver forbindelse: barnet svarer, forelderen venter på neste.</dd>
+            <dt id="b-pid">PID<small>prosess-ID</small></dt>
+            <dd>Nummeret operativsystemet gir hver prosess. Under <code>/proc/&lt;PID&gt;/</code> kan man se prosessens åpne filer, rotkatalog og navnerom.</dd>
+            <dt id="b-fd">Fildeskriptor<small>file descriptor</small></dt>
+            <dd>Et lite heltall en prosess bruker for å referere til en åpen fil, socket eller pipe. 0, 1 og 2 er standard inn, ut og feil. Deskriptorene arves ved <code>fork()</code> og <code>exec</code>.</dd>
+            <dt id="b-stdio">stdin, stdout og stderr<small>standard inn, ut og feil</small></dt>
+            <dd>De tre strømmene alle prosesser starter med, fildeskriptor 0, 1 og 2. Et CGI-program leser kroppen fra stdin og skriver svaret til stdout.</dd>
+            <dt id="b-demon">Demon<small>daemon</small></dt>
+            <dd>Et program som kjører i bakgrunnen uavhengig av terminalen. For å bli en demon forker prosessen, starter en ny sesjon, lukker arvede filer og ignorerer SIGHUP.</dd>
+            <dt id="b-sighup">SIGHUP<small>hangup-signal</small></dt>
+            <dd>Signalet som sendes til prosessene i en sesjon når terminalen lukkes. Standardvirkningen er at prosessen avsluttes, så en tjener som skal overleve, må ignorere det.</dd>
+            <dt id="b-nohup">nohup<small>kjør uten hangup</small></dt>
+            <dd>Et verktøy som starter et program med SIGHUP ignorert og utskriften sendt til en fil, slik at det fortsetter etter at terminalen lukkes.</dd>
+          </dl>
+
+          <h2 id="g-db">Databaser og injeksjon</h2>
+          <dl class="terms">
+            <dt id="b-sql">SQL<small>Structured Query Language</small></dt>
+            <dd>Språket for å spørre etter og endre data i relasjonsdatabaser: <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code> og <code>CREATE TABLE</code>.</dd>
+            <dt id="b-sqlite">SQLite<small>innebygd database</small></dt>
+            <dd>En SQL-database som er et bibliotek i stedet for en egen tjener: hele databasen er én fil, og programmet åpner den direkte. Brukes fra kommandolinjen med <code>sqlite3</code>.</dd>
+            <dt id="b-acid">ACID<small>transaksjonsgarantier</small></dt>
+            <dd>Atomisk (alt eller ingenting), konsistent, isolert og varig. En transaksjon som er bekreftet, overlever strømbrudd og krasj.</dd>
+            <dt id="b-transaksjon">Transaksjon<small>transaction</small></dt>
+            <dd>En gruppe endringer som enten gjennomføres samlet eller ikke i det hele tatt.</dd>
+            <dt id="b-fremmednokkel">Fremmednøkkel<small>foreign key</small></dt>
+            <dd>En kolonne som peker på primærnøkkelen i en annen tabell, slik at databasen kan hindre at det refereres til rader som ikke finnes. I SQLite håndheves det bare etter <code>PRAGMA foreign_keys=ON</code>.</dd>
+            <dt id="b-pragma">PRAGMA<small>SQLite-innstilling</small></dt>
+            <dd>SQLite-kommando for innstillinger på databasen, for eksempel <code>PRAGMA foreign_keys=ON</code>.</dd>
+            <dt id="b-sqlinj">SQL-injeksjon<small>SQL injection</small></dt>
+            <dd>Input fra brukeren limes rett inn i en SQL-setning og tolkes som SQL i stedet for data. Med input som <code>' OR '1'='1</code> kan angriperen endre hva spørringen gjør, for eksempel logge inn uten passord eller lese andre tabeller.</dd>
+            <dt id="b-prepared">Forberedte kommandoer<small>prepared statements</small></dt>
+            <dd>SQL-setningen sendes først med plassholdere (<code>?</code>), og verdiene bindes til den etterpå. Verdiene kan da aldri tolkes som SQL. Hovedforsvaret mot SQL-injeksjon.</dd>
+          </dl>
+
+          <h2 id="g-konteiner">Konteinere</h2>
+          <dl class="terms">
+            <dt id="b-chroot">chroot<small>change root</small></dt>
+            <dd>Gir en prosess en annen katalog som sin rot <code>/</code>, så den ikke ser filene utenfor. Avgrenser bare filsystemet: prosesser, nettverk og brukere er de samme som før.</dd>
+            <dt id="b-navnerom">Navnerom<small>namespaces</small></dt>
+            <dd>Linux-funksjon som gir en prosess sin egen, private utgave av en global ressurs: PID (egne prosessnummer), mount (filsystemer), net (nettverk), UTS (vertsnavn), IPC og user. Navnerom bestemmer hva en konteiner kan <em>se</em>.</dd>
+            <dt id="b-cgroups">cgroups<small>control groups</small></dt>
+            <dd>Linux-funksjon som begrenser hvor mye en gruppe prosesser kan bruke av minne, CPU og annet. cgroups bestemmer hvor mye en konteiner kan <em>bruke</em>.</dd>
+            <dt id="b-capabilities">Capabilities<small>delte root-rettigheter</small></dt>
+            <dd>Root-rettighetene delt opp i småbiter, for eksempel retten til å binde en privilegert port. En konteiner kan få bare de få den trenger.</dd>
+            <dt id="b-apparmor">AppArmor<small>tilgangskontroll</small></dt>
+            <dd>Et sikkerhetsmodul i Linux som begrenser hvilke filer og ressurser et program får bruke, etter en profil, også når programmet kjører som root.</dd>
+            <dt id="b-konteiner">Konteiner<small>container</small></dt>
+            <dd>En vanlig prosess som er isolert med navnerom, begrenset med cgroups og har sitt eget rotfilsystem. Deler kjernen med verten, så den er lettere enn en virtuell maskin, men isolerer også svakere.</dd>
+            <dt id="b-bilde">Konteinerbilde<small>container image</small></dt>
+            <dd>Et filsystem pakket som en tar-fil, i lag, pluss metadata som hvilket program som skal starte. En konteiner er et bilde som kjører.</dd>
+            <dt id="b-containerfile">Containerfile<small>Dockerfile</small></dt>
+            <dd>Oppskriften et bilde bygges fra: et grunnbilde (<code>FROM</code>) og instruksjoner som <code>RUN</code>, <code>COPY</code>, <code>EXPOSE</code> og <code>ENTRYPOINT</code>. Hver instruksjon gir et nytt lag.</dd>
+            <dt id="b-entrypoint">ENTRYPOINT og CMD<small>oppstartskommando</small></dt>
+            <dd>Hva som kjøres når konteineren starter. ENTRYPOINT er selve programmet, CMD er standardargumenter som kan overstyres på kommandolinjen.</dd>
+            <dt id="b-expose">EXPOSE<small>port i bildet</small></dt>
+            <dd>Dokumenterer hvilken port tjenesten i bildet lytter på. Åpner ingenting av seg selv; det gjør <code>-p</code> ved <code>run</code>.</dd>
+            <dt id="b-podman">Podman<small>konteinerverktøy</small></dt>
+            <dd>Konteinerverktøy med samme kommandoer som Docker, men uten en bakgrunnsdemon som kjører som root. Konteinerne kan kjøres av en vanlig bruker.</dd>
+            <dt id="b-docker">Docker<small>konteinerplattform</small></dt>
+            <dd>Det mest utbredte konteinerverktøyet. Bruker en demon som kjører som root, og den som kan styre den, har i praksis root på verten.</dd>
+            <dt id="b-compose">Compose<small>flere konteinere</small></dt>
+            <dd>Beskriver flere konteinere, nettverkene mellom dem og portene ut i én YAML-fil, og starter alt med én kommando.</dd>
+            <dt id="b-rootless">Rootless<small>uten root</small></dt>
+            <dd>At konteinerne kjøres av en vanlig bruker. Bryter noen ut av konteineren, har de bare den brukerens rettigheter. Ulempen er blant annet at privilegerte porter ikke kan bindes direkte.</dd>
+          </dl>
+
+          <h2 id="g-web">HTML, XML og CSS</h2>
+          <dl class="terms">
+            <dt id="b-html">HTML<small>HyperText Markup Language</small></dt>
+            <dd>Markeringsspråket for nettsider. Elementer i tagger beskriver struktur og innhold, og nettleseren bygger et DOM-tre av dem.</dd>
+            <dt id="b-sgml">SGML<small>Standard Generalized Markup Language</small></dt>
+            <dd>ISO-standard fra 1986 for markeringsspråk der brukeren selv definerer strukturen i en DTD. Idégrunnlaget for både HTML og XML, men så komplisert at det aldri slo an bredt.</dd>
+            <dt id="b-xml">XML<small>Extensible Markup Language</small></dt>
+            <dd>Et forenklet SGML for å utveksle strukturerte data. Strengere enn HTML: alle elementer må lukkes, og det er forskjell på store og små bokstaver.</dd>
+            <dt id="b-velformet">Velformet og gyldig<small>well-formed / valid</small></dt>
+            <dd>Et XML-dokument er <em>velformet</em> når syntaksen er riktig: ett rotelement, alle elementer lukket og riktig nøstet, attributter i anførselstegn. Det er <em>gyldig</em> når det i tillegg følger strukturen i en DTD eller et XML Schema.</dd>
+            <dt id="b-dtd">DTD<small>Document Type Definition</small></dt>
+            <dd>Beskriver hvilke elementer og attributter et dokument kan ha, i hvilken rekkefølge og hvor mange, med <code>&lt;!ELEMENT&gt;</code> og <code>&lt;!ATTLIST&gt;</code>.</dd>
+            <dt id="b-xmlschema">XML Schema<small>XSD</small></dt>
+            <dd>Et alternativ til DTD, skrevet i XML selv, med datatyper som tall og datoer.</dd>
+            <dt id="b-pcdata">#PCDATA og CDATA<small>tekstinnhold</small></dt>
+            <dd><code>#PCDATA</code> i en DTD betyr tekst som tolkes (parsed character data), der <code>&lt;</code> og <code>&amp;</code> må skrives som entiteter. En <code>CDATA</code>-seksjon er tekst som ikke tolkes i det hele tatt.</dd>
+            <dt id="b-css">CSS<small>Cascading Style Sheets</small></dt>
+            <dd>Språket for utseendet til en side. Regler består av en selektor og navn–verdi-par. Når flere regler treffer samme element, avgjør spesifisitet og rekkefølge (kaskaden) hvilken som gjelder.</dd>
+            <dt id="b-selektor">Selektor<small>selector</small></dt>
+            <dd>Den delen av en CSS-regel som velger elementer: etter type (<code>p</code>), klasse (<code>.navn</code>), id (<code>#navn</code>) eller plassering. Samme syntaks brukes i JavaScript med <code>querySelector</code>.</dd>
+            <dt id="b-dom">DOM<small>Document Object Model</small></dt>
+            <dd>Nettleserens tre av objekter bygget fra HTML-en. JavaScript leser og endrer siden gjennom DOM-en, for eksempel med <code>document.querySelector</code>.</dd>
+          </dl>
+
+          <h2 id="g-cgi">CGI og skjema</h2>
+          <dl class="terms">
+            <dt id="b-cgi">CGI<small>Common Gateway Interface</small></dt>
+            <dd>Standard for hvordan en webtjener starter et eksternt program for hver forespørsel. Opplysninger om forespørselen kommer i miljøvariabler (<code>REQUEST_METHOD</code>, <code>QUERY_STRING</code>, <code>CONTENT_LENGTH</code>), kroppen på stdin, og programmet skriver hode og kropp til stdout.</dd>
+            <dt id="b-skjema">HTML-skjema<small>form</small></dt>
+            <dd>Et <code>&lt;form&gt;</code>-element med inndatafelt. Ved innsending pakkes feltene som URL-kodede <code>navn=verdi</code>-par og sendes til adressen i <code>action</code>, med GET i URL-en eller med POST i kroppen.</dd>
+          </dl>
+
+          <h2 id="g-js">JavaScript</h2>
+          <dl class="terms">
+            <dt id="b-javascript">JavaScript<small>nettleserens språk</small></dt>
+            <dd>Programmeringsspråket som kjører i nettleseren. Kan endre siden via DOM-en og sende forespørsler med <code>fetch</code> uten å laste siden på nytt.</dd>
+            <dt id="b-json">JSON<small>JavaScript Object Notation</small></dt>
+            <dd>Tekstformat for data, med objekter <code>{"navn": verdi}</code>, lister <code>[…]</code>, tekst, tall og <code>true</code>/<code>false</code>/<code>null</code>. Vanlig format for svar fra REST-API-er.</dd>
+            <dt id="b-ajax">AJAX<small>asynkrone forespørsler</small></dt>
+            <dd>Samlenavn på at JavaScript henter data fra tjeneren i bakgrunnen og oppdaterer deler av siden, i stedet for å laste hele siden på nytt.</dd>
+            <dt id="b-xhr">XMLHttpRequest<small>eldre API</small></dt>
+            <dd>Det eldste API-et for AJAX. Man lager et objekt, åpner forespørselen og følger tilstanden fra 0 til 4 (DONE) i en hendelse. Erstattes i ny kode av <code>fetch</code>.</dd>
+            <dt id="b-fetch">fetch()<small>moderne API</small></dt>
+            <dd>Nettleserens API for HTTP-forespørsler fra JavaScript. Returnerer en Promise med svaret. Informasjonskapsler sendes til andre opphav bare med <code>credentials: 'include'</code>.</dd>
+            <dt id="b-promise">Promise<small>løfte om et resultat</small></dt>
+            <dd>Et objekt for et resultat som kommer senere. Man henger på hva som skal skje med <code>.then()</code>, og feil fanges med <code>.catch()</code>, eller man venter med <code>await</code>.</dd>
+            <dt id="b-sop">Same-origin policy<small>SOP</small></dt>
+            <dd>Nettleserens regel om at et skript bare får lese svar fra samme opphav som siden, altså samme protokoll, vert og port. Hindrer at en fremmed side leser data fra tjenester du er innlogget på.</dd>
+            <dt id="b-cors">CORS<small>Cross-Origin Resource Sharing</small></dt>
+            <dd>Måten en tjener gir unntak fra same-origin policy: den svarer med hoder som <code>Access-Control-Allow-Origin</code>, og først da lar nettleseren skriptet lese svaret.</dd>
+            <dt id="b-preflight">Preflight<small>forhåndskontroll</small></dt>
+            <dd>Før en forespørsel til et annet opphav som ikke er «enkel» (for eksempel PUT, DELETE eller JSON-kropp), sender nettleseren først en OPTIONS-forespørsel og venter på ja fra tjeneren.</dd>
+            <dt id="b-sri">SRI<small>Subresource Integrity</small></dt>
+            <dd>En hash av et skript eller stilark i <code>integrity</code>-attributtet. Nettleseren nekter å bruke filen hvis innholdet ikke stemmer med hashen, for eksempel hvis en CDN er kompromittert.</dd>
+            <dt id="b-cdn">CDN<small>Content Delivery Network</small></dt>
+            <dd>Et nett av tjenere som leverer felles filer, som JavaScript-biblioteker, nær brukeren. Bekvemt, men da kjører siden kode fra en tredjepart.</dd>
+          </dl>
+
+          <h2 id="g-auth">Innlogging og sesjoner</h2>
+          <dl class="terms">
+            <dt id="b-basic">HTTP-autentisering<small>Basic Auth</small></dt>
+            <dd>Den enkleste innloggingen i HTTP. Tjeneren svarer 401 med WWW-Authenticate, nettleseren viser en dialog og sender <code>brukernavn:passord</code> Base64-kodet i Authorization-hodet med hver forespørsel. Uten HTTPS er det i praksis klartekst.</dd>
+            <dt id="b-base64">Base64<small>koding, ikke kryptering</small></dt>
+            <dd>Skriver vilkårlige byte med 64 vanlige tegn, slik at de kan sendes som tekst. Kan dekodes av hvem som helst, og gir ingen hemmelighold.</dd>
+            <dt id="b-authorization">Authorization<small>hodefelt</small></dt>
+            <dd>Hodefeltet klienten sender innloggingsdata i, for eksempel <code>Authorization: Basic dXNlcjpwYXNz</code>.</dd>
+            <dt id="b-wwwauth">WWW-Authenticate<small>hodefelt</small></dt>
+            <dd>Hodefeltet tjeneren sender sammen med 401 Unauthorized for å be om innlogging, for eksempel <code>WWW-Authenticate: Basic realm="…"</code>.</dd>
+            <dt id="b-hash">Hash<small>hashfunksjon</small></dt>
+            <dd>Et kort «fingeravtrykk» av data med fast lengde. Samme data gir alltid samme hash, og det er i praksis umulig å regne seg baklengs eller lage to ulike data med samme hash. Brukes til passord: tjeneren lagrer hashen, ikke passordet, og sammenligner med hashen av det brukeren taster. Brukes også i SRI for å sjekke at en fil er uendret.</dd>
+            <dt id="b-salt">Salt<small>tilfeldig tillegg</small></dt>
+            <dd>En tilfeldig verdi som blandes inn før passordet hashes, og lagres sammen med hashen (<code>$id$salt$hash</code>). Samme passord gir da ulike hasher, og ferdigberegnede tabeller virker ikke.</dd>
+            <dt id="b-sesjonsid">Sesjons-ID<small>session ID</small></dt>
+            <dd>Et langt, tilfeldig tall tjeneren gir klienten etter innlogging, og som klienten sender med senere i stedet for passordet. Den som har ID-en, er innlogget, så den må være uforutsigbar og byttes ved innlogging.</dd>
+            <dt id="b-cookie">Informasjonskapsel<small>cookie</small></dt>
+            <dd>En liten navn–verdi-tekst tjeneren setter med <code>Set-Cookie</code>, og som nettleseren automatisk sender tilbake i <code>Cookie</code>-hodet til samme nettsted. Brukes til å bære sesjons-ID-en.</dd>
+            <dt id="b-secure">Secure<small>cookie-attributt</small></dt>
+            <dd>Kapselen sendes bare over HTTPS, så den ikke kan fanges opp i klartekst.</dd>
+            <dt id="b-httponly">HttpOnly<small>cookie-attributt</small></dt>
+            <dd>Kapselen er usynlig for JavaScript. En XSS-feil kan da ikke lese sesjons-ID-en rett ut.</dd>
+            <dt id="b-samesite">SameSite<small>cookie-attributt</small></dt>
+            <dd>Styrer om kapselen sendes med forespørsler som starter på et annet nettsted. <code>Strict</code>: aldri. <code>Lax</code>: bare ved vanlig navigering. <code>None</code>: alltid (krever Secure). Hovedforsvar mot CSRF.</dd>
+            <dt id="b-maxage">Max-Age<small>cookie-attributt</small></dt>
+            <dd>Hvor mange sekunder kapselen skal leve. Uten den er det en sesjonskapsel som forsvinner når nettleseren lukkes.</dd>
+            <dt id="b-csrf">CSRF<small>Cross-Site Request Forgery</small></dt>
+            <dd>En fremmed side får nettleseren din til å sende en forespørsel til en tjeneste du er innlogget på, og nettleseren legger ved informasjonskapselen. Tjenesten tror du selv ba om det.</dd>
+            <dt id="b-xss">XSS<small>Cross-Site Scripting</small></dt>
+            <dd>Input fra en bruker settes inn i en side uten å kodes, og tolkes som HTML eller JavaScript i andres nettleser. Skriptet kjører da med sidens rettigheter. Forsvar: kode all utdata, og bruk HttpOnly.</dd>
+            <dt id="b-fiksering">Sesjonsfiksering<small>session fixation</small></dt>
+            <dd>Angriperen får offeret til å bruke en sesjons-ID angriperen kjenner. Bytter ikke tjenesten ID ved innlogging, blir angriperens ID innlogget som offeret. Forsvar: ny sesjons-ID ved hver innlogging.</dd>
+          </dl>
+        </article>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="emneplan.html"><small>forrige</small>Emneplan</a>
+          <span></span>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js?v=44"></script>
+  <script src="../../../assets/js/status.js?v=35"></script>
+  <script src="../../../assets/js/formler.js?v=35"></script>
+  <script src="../../../assets/js/begrep.js?v=2"></script>
+</body>
+</html>

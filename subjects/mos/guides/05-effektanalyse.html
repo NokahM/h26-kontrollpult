@@ -7,7 +7,7 @@
   <meta name="description" content="Simple Power Analysis: hvordan strømforbruket til en mikrokontroller lekker hva den regner på — teori og lab 4-oppskrift med ChipWhisperer Nano.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../../assets/css/main.css?v=43">
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=44">
 </head>
 <body class="theme-mos" data-updated="2026-10-15">
   <div class="app-shell">
@@ -39,16 +39,16 @@
 
         <article class="prose">
           <h2>Fra angrepsklasse til angrepsklasse</h2>
-          <p>Gitt fysisk tilgang til et kretskort er man ikke lenger bundet av programmets offisielle grensesnitt. Forelesningen deler angrep med fysisk tilgang i to hovedkategorier: <strong>feilinjeksjon</strong> — å aktivt forstyrre kretsen (klokke-/spenningsglitching, elektromagnetisk injeksjon, tema for neste kapittel) — og <strong>sidekanalanalyse</strong>, der man passivt observerer noe kretsen lekker uten selv å ville det, som strømforbruk. Effektanalyse hører til den andre kategorien, og forutsetter alltid at man har funnet mest mulig dokumentasjon om målbrikken først (databladet er ofte det første stoppet).</p>
-          <p>Forelesningen bruker målbrikken på ChipWhisperer Nano, en <strong>STM32F030</strong> (ARM Cortex-M0), som eksempel. Den viser til disse kapitlene i <em>The Hardware Hacking Handbook</em>:</p>
+          <p>Gitt fysisk tilgang til et kretskort er man ikke lenger bundet av programmets offisielle grensesnitt. Forelesningen deler angrep med fysisk tilgang i to hovedkategorier: <strong><a class="term" href="ordliste.html#b-glitch">feilinjeksjon</a></strong> — å aktivt forstyrre kretsen (klokke-/spenningsglitching, elektromagnetisk injeksjon, tema for neste kapittel) — og <strong>sidekanalanalyse</strong>, der man passivt observerer noe kretsen lekker uten selv å ville det, som strømforbruk. Effektanalyse hører til den andre kategorien, og forutsetter alltid at man har funnet mest mulig dokumentasjon om målbrikken først (databladet er ofte det første stoppet).</p>
+          <p>Forelesningen bruker målbrikken på <a class="term" href="ordliste.html#b-chipwhisperer">ChipWhisperer</a> Nano, en <strong>STM32F030</strong> (ARM Cortex-M0), som eksempel. Den viser til disse kapitlene i <em>The Hardware Hacking Handbook</em>:</p>
           <div class="dtable-wrap"><table class="dtable">
             <thead><tr><th>Angrep</th><th>Type</th><th>HHH</th></tr></thead>
             <tbody>
               <tr><td>Finne dokumentasjon (datablad, skjema)</td><td>forarbeid</td><td>kap. 3</td></tr>
               <tr><td>Klokke- og spenningsglitching</td><td>feilinjeksjon, aktiv</td><td>kap. 4–6</td></tr>
               <tr><td>Elektromagnetisk feilinjeksjon</td><td>feilinjeksjon, aktiv</td><td>kap. 7</td></tr>
-              <tr><td>Effektanalyse av programflyt (SPA)</td><td>sidekanal, passiv</td><td>kap. 8–9</td></tr>
-              <tr><td>Hvilke data som behandles (DPA/CPA)</td><td>sidekanal, passiv</td><td>kap. 10</td></tr>
+              <tr><td>Effektanalyse av programflyt (<a class="term" href="ordliste.html#b-spa">SPA</a>)</td><td><a class="term" href="ordliste.html#b-sidekanal">sidekanal</a>, passiv</td><td>kap. 8–9</td></tr>
+              <tr><td>Hvilke data som behandles (<a class="term" href="ordliste.html#b-dpa">DPA</a>/CPA)</td><td>sidekanal, passiv</td><td>kap. 10</td></tr>
             </tbody>
           </table></div>
 
@@ -77,7 +77,7 @@
           <p>Forsvaret er å sammenligne <em>alle</em> tegnene hver gang uten å avbryte (f.eks. ved å samle opp <code>diff |= a[i] ^ b[i]</code>), slik at tiden og formen på kurven ikke avhenger av hvor mange tegn som er riktige. Kapittel 6 viser at det ikke stopper glitching.</p>
 
           <h2>Hvorfor instruksjoner tar ulik tid: pipeline og CPI</h2>
-          <p>Forelesningen tar med en <em>pipelined ARM-prosessor med hazard-enhet</em> for å forklare hvorfor ulike instruksjoner og ulike utfall gir ulik tid, og dermed ulik strømkurve. En 5-trinns pipeline (Fetch, Decode, Execute, Memory, Writeback) fullfører helst én instruksjon per klokkesyklus (CPI = 1). Avvik oppstår ved hazards:</p>
+          <p>Forelesningen tar med en <em>pipelined ARM-prosessor med hazard-enhet</em> for å forklare hvorfor ulike instruksjoner og ulike utfall gir ulik tid, og dermed ulik strømkurve. En 5-trinns <a class="term" href="ordliste.html#b-pipeline">pipeline</a> (Fetch, Decode, Execute, Memory, Writeback) fullfører helst én instruksjon per klokkesyklus (CPI = 1). Avvik oppstår ved hazards:</p>
           <ul>
             <li><strong>Load-use</strong>: Hvis instruksjonen etter en <code>LDR</code> trenger verdien som lastes, må pipelinen vente én syklus (stall). CPI for den loaden blir da 2.</li>
             <li><strong>Gjettet feil på et hopp</strong>: Hoppet avgjøres i Execute. Når prosessoren har gjettet feil, må de to instruksjonene som allerede er hentet, kastes (flush). CPI for hoppet blir da 3.</li>
@@ -89,9 +89,9 @@
           <div class="note"><strong>Til muntlig eksamen:</strong> du får ikke regnet med kalkulator, så det er viktigere å kunne forklare <em>hvorfor</em> en load kan koste 2 sykluser og et hopp 3, enn å huske 1,23.</div>
 
           <h2>Hvordan man faktisk måler strømforbruk</h2>
-          <p>Man måler sjelden strøm direkte — i stedet setter man inn en liten, kjent <strong>shunt-motstand</strong> i strømbanen til target-kretsen og måler spenningsfallet over den med et oscilloskop. Ohms lov \(V = I \times R\) gjør spenningsmålingen om til en strømkurve: med en kjent motstandsverdi og en målt spenning kan strømmen regnes ut direkte og fortløpende, synkronisert med et trigger-signal fra target-programmet.</p>
+          <p>Man måler sjelden strøm direkte — i stedet setter man inn en liten, kjent <strong><a class="term" href="ordliste.html#b-shunt">shunt-motstand</a></strong> i strømbanen til target-kretsen og måler spenningsfallet over den med et oscilloskop. Ohms lov \(V = I \times R\) gjør spenningsmålingen om til en strømkurve: med en kjent motstandsverdi og en målt spenning kan strømmen regnes ut direkte og fortløpende, synkronisert med et trigger-signal fra target-programmet.</p>
           <p>Denne labben bruker et <strong>ChipWhisperer Nano</strong> — et lite verktøy som samler target-programmerer, oscilloskop og seriellport i én pakke, slik at man slipper å koble sammen flere separate instrumenter for å komme i gang.</p>
-          <p>Forelesningen ber deg se etter <strong>R12</strong> i skjemaet til Nano-kortet. Det er shunten. Forsyningen <code>+3v3_T</code> går gjennom R12 (27 Ω i skjemaet rev. 04) til <code>+3v3_L</code>, som er VDD til STM32-en. Målepunktet <code>T_MEAS</code> (via loddebroen SJ5) sitter på brikkesiden av R12. Når brikken trekker mer strøm, faller spenningen der. Kurven du ser, er altså VDD til brikken, og den går ned når strømmen går opp.</p>
+          <p>Forelesningen ber deg se etter <strong>R12</strong> i skjemaet til Nano-kortet. Det er shunten. Forsyningen <code>+3v3_T</code> går gjennom R12 (27 Ω i skjemaet rev. 04) til <code>+3v3_L</code>, som er <a class="term" href="ordliste.html#b-vdd">VDD</a> til STM32-en. Målepunktet <code>T_MEAS</code> (via loddebroen SJ5) sitter på brikkesiden av R12. Når brikken trekker mer strøm, faller spenningen der. Kurven du ser, er altså VDD til brikken, og den går ned når strømmen går opp.</p>
           <p>Et eksempel: trekker brikken 10 mA, blir spenningsfallet \(V = 10\,\mathrm{mA} \cdot 27\,\Omega = 0{,}27\,\mathrm{V}\). Valget av shunt er en avveining. En større motstand gir et tydeligere signal, men senker også VDD så mye at brikken kan begynne å oppføre seg ustabilt. En mindre motstand gir et svakere signal som drukner i støy.</p>
 
           <h2>Referanse: den opprinnelige DPA-artikkelen</h2>
@@ -127,13 +127,13 @@
           <details class="sol">
             <summary>Hvorfor lekker strømforbruket informasjon?</summary>
             <div class="sol__body">
-              <p>CMOS-logikk bruker strøm nesten bare når den bytter tilstand, fordi kapasitanser lades og utlades. Hvor mye som bytter, avhenger av hvilken instruksjon som kjører og hvilke data den behandler. Hvor mange bit som skifter, påvirker også forbruket (Hamming-vekt og -avstand). Strømmen over tid blir derfor et avtrykk av programflyten og dataene.</p>
+              <p><a class="term" href="ordliste.html#b-cmos">CMOS</a>-logikk bruker strøm nesten bare når den bytter tilstand, fordi kapasitanser lades og utlades. Hvor mye som bytter, avhenger av hvilken instruksjon som kjører og hvilke data den behandler. Hvor mange bit som skifter, påvirker også forbruket (<a class="term" href="ordliste.html#b-hamming">Hamming-vekt</a> og -avstand). Strømmen over tid blir derfor et avtrykk av programflyten og dataene.</p>
             </div>
           </details>
           <details class="sol">
             <summary>Hvordan måler du strømforbruket? Tegn og forklar oppsettet.</summary>
             <div class="sol__body">
-              <p>Sett en shunt-motstand i serie med forsyningen til brikken (R12 på ChipWhisperer Nano) og mål spenningen over den, eller på brikkesiden av den, med et oscilloskop. Ohms lov \(V = IR\) gjør spenningen om til strøm. Målingen må synkroniseres med en trigger. I labben setter målprogrammet en GPIO høy (<code>trigger_high()</code>) rett før passordsjekken, slik at alle målingene starter på samme sted i koden. Det gjør det mulig å sammenligne dem.</p>
+              <p>Sett en shunt-motstand i serie med forsyningen til brikken (R12 på ChipWhisperer Nano) og mål spenningen over den, eller på brikkesiden av den, med et oscilloskop. Ohms lov \(V = IR\) gjør spenningen om til strøm. Målingen må synkroniseres med en <a class="term" href="ordliste.html#b-trigger">trigger</a>. I labben setter målprogrammet en <a class="term" href="ordliste.html#b-gpio">GPIO</a> høy (<code>trigger_high()</code>) rett før passordsjekken, slik at alle målingene starter på samme sted i koden. Det gjør det mulig å sammenligne dem.</p>
             </div>
           </details>
           <details class="sol">
@@ -170,9 +170,10 @@
     </div>
   </div>
 
-  <script src="../../../assets/js/main.js?v=43"></script>
+  <script src="../../../assets/js/main.js?v=44"></script>
   <script src="../../../assets/js/status.js?v=35"></script>
   <script src="../../../assets/js/formler.js?v=35"></script>
   <script src="../../../assets/js/math.js?v=35"></script>
+  <script src="../../../assets/js/begrep.js?v=2"></script>
 </body>
 </html>

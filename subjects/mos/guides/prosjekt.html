@@ -7,7 +7,7 @@
   <meta name="description" content="Fusée Gelée (CVE-2018-6242) i Tegra X1: hvor miniprosjektet møter kapittel 1–6 i pensum, og hvor det tydelig ikke gjør det.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../../assets/css/main.css?v=43">
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=44">
 </head>
 <body class="theme-mos" data-updated="2026-09-22">
   <div class="app-shell">
@@ -56,22 +56,22 @@
             <tbody>
               <tr>
                 <td><a href="01-intro.html">1 · Introduksjon</a></td>
-                <td>Chain of trust — IROM <em>er</em> «den uforanderlige førstetrinns bootloaderen» fra kapittelet, ordrett</td>
+                <td><a class="term" href="ordliste.html#b-kjede">Chain of trust</a> — IROM <em>er</em> «den uforanderlige førstetrinns <a class="term" href="ordliste.html#b-bootloader">bootloaderen</a>» fra kapittelet, ordrett</td>
                 <td><span class="hit">Sterk</span></td>
               </tr>
               <tr>
                 <td><a href="02-bootloader-swd-uart.html">2 · Bootloader, SWD, UART</a></td>
-                <td>Samme mønster som APPROTECT/CTRL-AP: en tiltenkt recovery-vei blir angrepsvei</td>
+                <td>Samme mønster som <a class="term" href="ordliste.html#b-approtect">APPROTECT</a>/CTRL-AP: en tiltenkt recovery-vei blir angrepsvei</td>
                 <td><span class="hit">Sterk</span></td>
               </tr>
               <tr>
                 <td><a href="03-ble.html">3 · Bluetooth Low Energy</a></td>
-                <td>Begge er protokollhåndterere som stoler på ekstern input — men trådløst vs. fysisk USB er reelt forskjellige angrepsflater</td>
+                <td>Begge er protokollhåndterere som stoler på ekstern input — men trådløst vs. fysisk USB er reelt forskjellige <a class="term" href="ordliste.html#b-angrepsflate">angrepsflater</a></td>
                 <td>Svak</td>
               </tr>
               <tr>
                 <td><a href="04-micropython-mqtt.html">4 · MicroPython, MQTT</a></td>
-                <td>SoC-begrepet passer direkte; ESP8266s seriell-ROM-bootloader er den ufarlige tvillingen av RCM</td>
+                <td><a class="term" href="ordliste.html#b-soc">SoC</a>-begrepet passer direkte; ESP8266s seriell-ROM-bootloader er den ufarlige tvillingen av <a class="term" href="ordliste.html#b-rcm">RCM</a></td>
                 <td>Moderat</td>
               </tr>
               <tr>
@@ -89,8 +89,8 @@
           </div>
 
           <h2>Kapittel 1 — chain of trust, ett skritt før den i det hele tatt starter</h2>
-          <p>Kapittel 1 definerer chain of trust som «en liten, uforanderlig førstetrinns bootloader (ofte brent inn i silisiumet på fabrikken)» som verifiserer neste trinn før den gir fra seg kontrollen. IROM i Tegra X1 er nøyaktig denne komponenten, ord for ord: en maske-ROM etset inn i brikken under fabrikasjon, som ikke kan slettes, reflashes eller patches i ettertid.</p>
-          <p>Kapittel 1 sier også: «klarer man å bryte tilliten ett eneste sted … er resten av kjeden verdiløs.» Fusée Gelée er den mest ekstreme illustrasjonen av akkurat den setningen som finnes i pensum: bruddet skjer i <em>selve det første leddet</em>, før noen signatursjekk i det hele tatt har kjørt. Bootloaderen som skal verifisere alt som kommer etter, blir selv kompromittert — på BPMP, før sikkerhetslåsene er satt og før tillitskjeden engang er i gang. Resten av kjeden (bootloader, TrustZone OS, Horizon) blir irrelevant, ikke fordi den er svak, men fordi angriperen aldri trenger å forholde seg til den.</p>
+          <p>Kapittel 1 definerer chain of trust som «en liten, uforanderlig førstetrinns bootloader (ofte brent inn i silisiumet på fabrikken)» som verifiserer neste trinn før den gir fra seg kontrollen. IROM i Tegra X1 er nøyaktig denne komponenten, ord for ord: en <a class="term" href="ordliste.html#b-rom">maske-ROM</a> etset inn i brikken under fabrikasjon, som ikke kan slettes, reflashes eller patches i ettertid.</p>
+          <p>Kapittel 1 sier også: «klarer man å bryte tilliten ett eneste sted … er resten av kjeden verdiløs.» Fusée Gelée er den mest ekstreme illustrasjonen av akkurat den setningen som finnes i pensum: bruddet skjer i <em>selve det første leddet</em>, før noen signatursjekk i det hele tatt har kjørt. Bootloaderen som skal verifisere alt som kommer etter, blir selv kompromittert — på <a class="term" href="ordliste.html#b-bpmp">BPMP</a>, før sikkerhetslåsene er satt og før tillitskjeden engang er i gang. Resten av kjeden (bootloader, <a class="term" href="ordliste.html#b-trustzone">TrustZone</a> OS, Horizon) blir irrelevant, ikke fordi den er svak, men fordi angriperen aldri trenger å forholde seg til den.</p>
 
           <figure class="flowfig">
             <svg viewBox="0 0 720 420" role="img" aria-labelledby="cot-title cot-desc">
@@ -151,33 +151,33 @@
           </figure>
 
           <h3>Hvorfor en bootROM-feil er en egen klasse</h3>
-          <p>Det som gjør IROM egnet som rot av tillit, er det samme som gjør Fusée Gelée så alvorlig. BootROM-en er på én gang det sterkeste og det svakeste leddet i kjeden — og av samme grunn:</p>
+          <p>Det som gjør IROM egnet som <a class="term" href="ordliste.html#b-rot">rot av tillit</a>, er det samme som gjør Fusée Gelée så alvorlig. BootROM-en er på én gang det sterkeste og det svakeste leddet i kjeden — og av samme grunn:</p>
           <ul>
             <li><strong>Sterkest:</strong> ingen kan endre den — verken en angriper eller produsenten.</li>
             <li><strong>Svakest:</strong> nettopp fordi ingen kan endre den. En feil i IROM kan ikke rettes på enheter som allerede er solgt.</li>
           </ul>
           <p>Det gir tre egenskaper som skiller bootROM-sårbarheter fra vanlige programvarefeil:</p>
           <ul>
-            <li><strong>Varige</strong> — kan ikke patches i felten. NVIDIA kunne bare rette nye brikker: først med ipatches i fuses, så med T214/Mariko.</li>
+            <li><strong>Varige</strong> — kan ikke patches i felten. NVIDIA kunne bare rette nye brikker: først med ipatches i <a class="term" href="ordliste.html#b-fuses">fuses</a>, så med T214/Mariko.</li>
             <li><strong>Universelle</strong> — rammer alle brikker med samme IROM, ikke bare Switch. NVIDIAs sikkerhetsvarsel gjelder Tegra X1 generelt.</li>
             <li><strong>Dype</strong> — bruddet skjer nederst i stabelen, så alt som bygger på IROM arver den brutte tilliten.</li>
           </ul>
 
-          <div class="note"><strong>Designavveiningen i én setning:</strong> å forankre tilliten i uforanderlig maskinvare gir en sterk garanti så lenge implementasjonen er korrekt — men flytter konsekvensen av en feil fra «kan patches» til «permanent». Det er et godt avslutningspoeng for presentasjonen, og et naturlig svar på «hvorfor ikke bare legge bootloaderen i flash?».</div>
+          <div class="note"><strong>Designavveiningen i én setning:</strong> å forankre tilliten i uforanderlig maskinvare gir en sterk garanti så lenge implementasjonen er korrekt — men flytter konsekvensen av en feil fra «kan patches» til «permanent». Det er et godt avslutningspoeng for presentasjonen, og et naturlig svar på «hvorfor ikke bare legge bootloaderen i <a class="term" href="ordliste.html#b-flash">flash</a>?».</div>
 
           <h2>Kapittel 2 — to bakdører, ulik pris</h2>
-          <p>Strukturen er identisk: begge sårbarhetene misbruker et grensesnitt som er der <em>med vilje</em>, til et annet formål enn normal drift. CTRL-AP på nRF52 finnes for å kunne styre kretsen selv når andre access ports er sperret. RCM på Tegra X1 finnes for fabrikk- og feltgjenoppretting over USB. Ingen av dem er i seg selv en feil — feilen ligger i hva de tillater når de misbrukes.</p>
+          <p>Strukturen er identisk: begge sårbarhetene misbruker et grensesnitt som er der <em>med vilje</em>, til et annet formål enn normal drift. <a class="term" href="ordliste.html#b-ctrlap">CTRL-AP</a> på nRF52 finnes for å kunne styre kretsen selv når andre access ports er sperret. RCM på Tegra X1 finnes for fabrikk- og feltgjenoppretting over USB. Ingen av dem er i seg selv en feil — feilen ligger i hva de tillater når de misbrukes.</p>
           <p>Der de skiller lag, er verdt å få tydelig fram: å omgå APPROTECT krever <code>ERASEALL</code> — hele flashen slettes, og med den forsvinner både firmware <em>og</em> eventuelle hemmeligheter som lå der. Det er en reell sikkerhetsavveining: angriperen får debug-tilgang, men bare ved å ødelegge det hen ville stjålet. Fusée Gelée har ingen slik pris. Kodekjøring på BPMP — og deretter EL3 på hovedprosessorene — oppnås uten å slette eller endre noe som helst — enheten fortsetter å se uberørt ut, og alle hemmeligheter brent inn i fuse-arrayet er fortsatt der, fullt lesbare for koden angriperen nå kjører. Samme underliggende mønster, men Tegra-varianten gir angriperen alt uten å måtte ofre noe.</p>
 
           <h2>Kapittel 4 — SoC-begrepet og den ufarlige tvillingen</h2>
-          <p>Kapittel 4 definerer et System on Chip som «CPU, arbeidsminne, sekundærlagring og en samling periferigrensesnitt … integrert på én brikke», med ESP8266 som billig eksempel. Tegra X1 er samme type komponent i en helt annen skala: CPU-kompleks (4×Cortex-A57 + 4×Cortex-A53), en 256-kjerners GPU, en egen boot-/strømstyringsprosessor (BPMP) og et fuse-array for hemmeligheter, alt på én TSMC 20 nm-brikke.</p>
-          <p>Mer presist: <code>esptool</code> snakker med ESP8266 sin egen ROM-bootloader over seriellporten for å lese/skrive flash — en liten, fastbrent kodesnutt som eksponerer en enkel binærprotokoll for å laste inn data utenfra. Det er strukturelt <em>nøyaktig</em> mønsteret RCM implementerer på Tegra X1, bare over USB i stedet for UART. Poenget er ikke at ESP8266 er sårbar på samme måte — det er ikke dokumentert at den er det — men at «en liten bit fastbrent kode som snakker et enkelt binærprotokoll for å laste data ved oppstart» er et vanlig, ufarlig og nyttig mønster i seg selv. Fusée Gelée viser hva som skjer når akkurat den kodebiten har en feil, og ikke kan rettes i ettertid.</p>
+          <p>Kapittel 4 definerer et System on Chip som «CPU, arbeidsminne, sekundærlagring og en samling periferigrensesnitt … integrert på én brikke», med <a class="term" href="ordliste.html#b-esp8266">ESP8266</a> som billig eksempel. Tegra X1 er samme type komponent i en helt annen skala: CPU-kompleks (4×Cortex-A57 + 4×Cortex-A53), en 256-kjerners GPU, en egen boot-/strømstyringsprosessor (BPMP) og et fuse-array for hemmeligheter, alt på én TSMC 20 nm-brikke.</p>
+          <p>Mer presist: <code>esptool</code> snakker med ESP8266 sin egen ROM-bootloader over seriellporten for å lese/skrive flash — en liten, fastbrent kodesnutt som eksponerer en enkel binærprotokoll for å laste inn data utenfra. Det er strukturelt <em>nøyaktig</em> mønsteret RCM implementerer på Tegra X1, bare over USB i stedet for <a class="term" href="ordliste.html#b-uart">UART</a>. Poenget er ikke at ESP8266 er sårbar på samme måte — det er ikke dokumentert at den er det — men at «en liten bit fastbrent kode som snakker et enkelt binærprotokoll for å laste data ved oppstart» er et vanlig, ufarlig og nyttig mønster i seg selv. Fusée Gelée viser hva som skjer når akkurat den kodebiten har en feil, og ikke kan rettes i ettertid.</p>
 
           <h2>Kapittel 5 og 6 — hvor passer Fusée Gelée i taksonomien pensum bruker?</h2>
-          <p>Kapittel 5 deler angrep med fysisk tilgang i to kategorier: <strong>feilinjeksjon</strong> (aktivt forstyrre kretsen — klokke-/spenningsglitching, elektromagnetisk injeksjon) og <strong>sidekanalanalyse</strong> (passivt observere noe kretsen lekker, som strømforbruk). Det er verdt å si høyt i presentasjonen: <strong>Fusée Gelée passer strengt tatt i ingen av dem.</strong> Det er ikke sidekanalanalyse — ingenting måles passivt. Og det er ikke feilinjeksjon slik kapittel 6 definerer det heller: ingen spenning eller klokke manipuleres analogt for å bryte en setup-/hold-tidsbetingelse. Sårbarheten er en klassisk, digital programvarefeil (CWE-119, en lengde uten grensesjekk) i en protokollhåndterer — som bare krever fysisk tilgang fordi RCM går over USB, ikke fordi selve angrepsmekanismen er elektrisk.</p>
+          <p>Kapittel 5 deler angrep med fysisk tilgang i to kategorier: <strong><a class="term" href="ordliste.html#b-glitch">feilinjeksjon</a></strong> (aktivt forstyrre kretsen — klokke-/spenningsglitching, elektromagnetisk injeksjon) og <strong>sidekanalanalyse</strong> (passivt observere noe kretsen lekker, som strømforbruk). Det er verdt å si høyt i presentasjonen: <strong>Fusée Gelée passer strengt tatt i ingen av dem.</strong> Det er ikke sidekanalanalyse — ingenting måles passivt. Og det er ikke feilinjeksjon slik kapittel 6 definerer det heller: ingen spenning eller klokke manipuleres analogt for å bryte en setup-/hold-tidsbetingelse. Sårbarheten er en klassisk, digital programvarefeil (<a class="term" href="ordliste.html#b-cve">CWE-119</a>, en lengde uten <a class="term" href="ordliste.html#b-grensesjekk">grensesjekk</a>) i en protokollhåndterer — som bare krever fysisk tilgang fordi RCM går over USB, ikke fordi selve angrepsmekanismen er elektrisk.</p>
           <p>To konkrete forskjeller fra spenningsglitching i kapittel 6, verdt å ha klare til «hvorfor det?»-spørsmål:</p>
           <ul>
-            <li><strong>Hva man oppnår.</strong> Glitching i kapittel 6 får typisk <em>én</em> instruksjon — en sammenligning eller et betinget hopp — til å gi feil svar, uten at ny kode noensinne kjøres. Fusée Gelée overskriver returadressen på stacken og oppnår <em>vilkårlig kodeeksekvering</em>: angriperen kjører sin egen, fullstendige payload på BPMP, og kan derfra starte hovedprosessorene på EL3. Det er en kategorisk sterkere konsekvens enn å snu utfallet av én if-sjekk.</li>
+            <li><strong>Hva man oppnår.</strong> Glitching i kapittel 6 får typisk <em>én</em> instruksjon — en sammenligning eller et betinget hopp — til å gi feil svar, uten at ny kode noensinne kjøres. Fusée Gelée overskriver returadressen på stacken og oppnår <em>vilkårlig <a class="term" href="ordliste.html#b-kodeeks">kodeeksekvering</a></em>: angriperen kjører sin egen, fullstendige payload på BPMP, og kan derfra starte hovedprosessorene på EL3. Det er en kategorisk sterkere konsekvens enn å snu utfallet av én if-sjekk.</li>
             <li><strong>Pålitelighet.</strong> Kapittel 6 beskriver glitching som et søkeproblem — posisjon og bredde sveipes systematisk fordi timingen er en analog, probabilistisk affære. Fusée Gelée er deterministisk: er offset til returadressen kjent (den er offentlig dokumentert), virker samme <code>wLength</code>-verdi hver eneste gang, uten sveip.</li>
           </ul>
           <p>Kapittel 6 påpeker selv at APPROTECT-omgåelsen i kapittel 2 og spenningsglitching har «samme underliggende mål … men løst på det elektriske laget i stedet for via debug-porten». Fusée Gelée er en tredje løsning på det samme underliggende målet — bryt en sikkerhetssjekk uten å kjenne hemmeligheten den beskytter — løst verken via debug-porten eller det elektriske laget, men i selve programvarelogikken til bootROM-ens egen protokollparser.</p>
@@ -185,7 +185,7 @@
           <div class="note"><strong>Bruk skillet aktivt i presentasjonen.</strong> Å plassere Fusée Gelée <em>utenfor</em> feilinjeksjon/sidekanal-taksonomien er en sterkere observasjon enn å late som den passer i en av dem — det viser at du forstår rammeverket faget bruker, ikke bare det ene caset du har fordypet deg i. Det er nøyaktig den typen resonnement en muntlig eksaminator kan følge opp med «hvorfor det?» på.</div>
 
           <h2>Kapittel 3 — den svakeste koblingen</h2>
-          <p>Ærlig sagt er dette den tynneste. GAP/GATT i kapittel 3 er en trådløs protokoll for tilkoblede enheter; RCM er et fysisk USB-grensesnitt som krever at man kortslutter en pinne og kobler en kabel. Det eneste reelle fellestrekket er abstrakt: begge er en protokollhåndterer på enheten som stoler på strukturert input utenfra (en GATT-skriving vs. en USB control-transfer), og i begge tilfeller definerer feltene i forespørselen hva enheten gjør med dem. Det er for tynt til å bygge en presentasjonsdel på — ta det med som ett resonnerende sammenligningspunkt om det kommer opp, ikke som en egen bolk.</p>
+          <p>Ærlig sagt er dette den tynneste. <a class="term" href="ordliste.html#b-gap">GAP</a>/GATT i kapittel 3 er en trådløs protokoll for tilkoblede enheter; RCM er et fysisk USB-grensesnitt som krever at man kortslutter en pinne og kobler en kabel. Det eneste reelle fellestrekket er abstrakt: begge er en protokollhåndterer på enheten som stoler på strukturert input utenfra (en <a class="term" href="ordliste.html#b-gatt">GATT</a>-skriving vs. en USB control-transfer), og i begge tilfeller definerer feltene i forespørselen hva enheten gjør med dem. Det er for tynt til å bygge en presentasjonsdel på — ta det med som ett resonnerende sammenligningspunkt om det kommer opp, ikke som en egen bolk.</p>
 
           <div class="note"><strong>Formelle krav:</strong> presentasjonen er ikke en egen innlevering — den er de første ca. 10 minuttene av den 30 minutter lange muntlige eksamen. Se <a href="emneplan.html">emneplanen</a> for resten av vurderingsformen og arbeidskravene.</div>
         </article>
@@ -198,8 +198,9 @@
     </div>
   </div>
 
-  <script src="../../../assets/js/main.js?v=43"></script>
+  <script src="../../../assets/js/main.js?v=44"></script>
   <script src="../../../assets/js/status.js?v=35"></script>
   <script src="../../../assets/js/formler.js?v=35"></script>
+  <script src="../../../assets/js/begrep.js?v=2"></script>
 </body>
 </html>

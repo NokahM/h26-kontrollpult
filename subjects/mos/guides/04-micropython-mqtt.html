@@ -7,7 +7,7 @@
   <meta name="description" content="SoC-er, MicroPython, publish/subscribe-mønsteret og MQTT — teori og lab 3-oppskrift med ESP8266.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../../assets/css/main.css?v=43">
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=44">
 </head>
 <body class="theme-mos" data-updated="2026-10-15">
   <div class="app-shell">
@@ -39,17 +39,17 @@
 
         <article class="prose">
           <h2>System on Chip: mer enn bare en prosessor</h2>
-          <p>Et moderne mikrokontrollerkort er sjelden «bare en CPU» — det er et <strong>System on Chip (SoC)</strong>: CPU, arbeidsminne, sekundærlagring og en samling periferigrensesnitt (UART, BLE, wifi, I2C, SPI, CAN) integrert på én brikke. <strong>ESP8266</strong> er et av de rimeligste eksemplene med innebygget wifi, og finnes i mange fysiske formfaktorer (ESP-01, ESP-12F, NodeMCU, D1 mini) som alle deler samme brikke og verktøykjede.</p>
-          <p>ESP-01 er bare brikken og en flash på et lite kort. Flashen er en egen brikke ved siden av SoC-en (4 MB på ESP-01 og ESP-12F), ikke en del av den.</p>
+          <p>Et moderne mikrokontrollerkort er sjelden «bare en CPU» — det er et <strong><a class="term" href="ordliste.html#b-soc">System on Chip</a> (SoC)</strong>: CPU, arbeidsminne, sekundærlagring og en samling periferigrensesnitt (<a class="term" href="ordliste.html#b-uart">UART</a>, <a class="term" href="ordliste.html#b-ble">BLE</a>, wifi, <a class="term" href="ordliste.html#b-i2c">I2C</a>, SPI, CAN) integrert på én brikke. <strong><a class="term" href="ordliste.html#b-esp8266">ESP8266</a></strong> er et av de rimeligste eksemplene med innebygget wifi, og finnes i mange fysiske formfaktorer (ESP-01, ESP-12F, NodeMCU, D1 mini) som alle deler samme brikke og verktøykjede.</p>
+          <p>ESP-01 er bare brikken og en <a class="term" href="ordliste.html#b-flash">flash</a> på et lite kort. Flashen er en egen brikke ved siden av SoC-en (4 MB på ESP-01 og ESP-12F), ikke en del av den.</p>
           <p>Brikken programmeres og undersøkes med <code>esptool</code>. Det er et Python-verktøy som kan:</p>
           <ul>
             <li>lese, skrive, slette og verifisere innholdet i flashen,</li>
             <li>lese ut brikkedetaljer som MAC-adresse og ID-en til flashbrikken (<code>flash_id</code>),</li>
-            <li>lese og skrive <strong>eFuses</strong>, små minnebit som bare kan programmeres én gang (OTP),</li>
+            <li>lese og skrive <strong><a class="term" href="ordliste.html#b-fuses">eFuses</a></strong>, små minnebit som bare kan programmeres én gang (OTP),</li>
             <li>lage, analysere og slå sammen binærfiler for flashing.</li>
           </ul>
           <p>For å komme i programmeringsmodus må brikken starte med en bestemt pinne trukket lav («push to program»). Utviklingskort gjør dette automatisk over USB-til-UART-brua.</p>
-          <div class="pitfall"><div class="pitfall__title">Sikkerhet: alt i flashen kan leses ut</div><p>ESP8266 har verken secure boot eller kryptering av flashen. Den som får tak i kortet, kan derfor kjøre <code>esptool read_flash</code> og få med seg alt: programmet, wifi-passordet som ligger lagret i flashen etter tilkobling, og MQTT-brukernavn og passord fra skriptene. Etterfølgeren ESP32 bruker eFuses til nettopp dette. Der kan man brenne inn en nøkkel for flash-kryptering og slå på secure boot. Fordi eFuses bare kan skrives én gang, kan ikke en angriper skru beskyttelsen av igjen.</p></div>
+          <div class="pitfall"><div class="pitfall__title">Sikkerhet: alt i flashen kan leses ut</div><p>ESP8266 har verken secure boot eller kryptering av flashen. Den som får tak i kortet, kan derfor kjøre <code>esptool read_flash</code> og få med seg alt: programmet, wifi-passordet som ligger lagret i flashen etter tilkobling, og <a class="term" href="ordliste.html#b-mqtt">MQTT</a>-brukernavn og passord fra skriptene. Etterfølgeren ESP32 bruker eFuses til nettopp dette. Der kan man brenne inn en nøkkel for flash-kryptering og slå på secure boot. Fordi eFuses bare kan skrives én gang, kan ikke en angriper skru beskyttelsen av igjen.</p></div>
 
           <h3>Stasjon og aksesspunkt</h3>
           <p>Wifi-delen kan brukes på to måter, og forelesningen viser begge:</p>
@@ -60,20 +60,20 @@
           <p>Mange IoT-produkter starter som aksesspunkt første gang, slik at brukeren kan legge inn hjemmenettet. Et åpent aksesspunkt i oppsettsmodus, eller et standardpassord, er derfor en kjent svakhet.</p>
 
           <h2>MicroPython</h2>
-          <p><strong>MicroPython</strong> er en slank, effektiv implementasjon av Python 3 bygget for å kjøre innenfor svært begrensede ressurser — ned mot 256 kB kodeplass og 16 kB RAM. Den dekker et delmengde av standardbiblioteket, men beholder det som gjør Python behagelig å jobbe med: en interaktiv REPL for rask utforsking, og et API som ligner vanlig Python så langt maskinvaren tillater det. Det gjør at man kan iterere direkte på selve kretsen — akkurat som i CircuitPython-labben i forrige kapittel — i stedet for å kompilere og flashe C for hver endring.</p>
+          <p><strong><a class="term" href="ordliste.html#b-micropython">MicroPython</a></strong> er en slank, effektiv implementasjon av Python 3 bygget for å kjøre innenfor svært begrensede ressurser — ned mot 256 kB kodeplass og 16 kB <a class="term" href="ordliste.html#b-ram">RAM</a>. Den dekker et delmengde av standardbiblioteket, men beholder det som gjør Python behagelig å jobbe med: en interaktiv <a class="term" href="ordliste.html#b-repl">REPL</a> for rask utforsking, og et API som ligner vanlig Python så langt maskinvaren tillater det. Det gjør at man kan iterere direkte på selve kretsen — akkurat som i CircuitPython-labben i forrige kapittel — i stedet for å kompilere og flashe C for hver endring.</p>
 
           <h2>Publish/subscribe og MQTT</h2>
-          <p>Internet of Things (IoT) — «tingenes internett» — beskriver nettverk av gjenstander med innebygd elektronikk, sensorer og programvare som utveksler data med hverandre. Et vanlig problem er at IoT-enheter ofte sitter bak en NAT-brannmur på et hjemmenettverk, uten en offentlig IP en server kan koble seg til. Løsningen er å snu kommunikasjonen: enheten oppretter selv en <em>utgående</em> forbindelse til en sentral megler, og kommunikasjonen skjer via <strong>publish/subscribe</strong>-mønsteret i stedet for direkte forespørsler.</p>
-          <p><strong>MQTT (MQ Telemetry Transport)</strong> er den mest brukte pub/sub-protokollen for nettopp dette. Prinsippet: en enhet <em>publiserer</em> en melding på et navngitt <em>topic</em> (f.eks. <code>hjem/stue/temperatur</code>) til en <em>broker</em>. Andre enheter som har <em>abonnert</em> på det samme topicet (eller et mønster som matcher det) mottar meldingen automatisk — uten at publisher og abonnent noensinne trenger å kjenne hverandres adresse. Sammenlignet med HTTP er MQTT lettvekts (liten protokolloverhead, egnet for trege/upålitelige lenker) og løser NAT-problemet gratis, siden begge parter kun trenger en utgående forbindelse til broker.</p>
+          <p>Internet of Things (IoT) — «tingenes internett» — beskriver nettverk av gjenstander med innebygd elektronikk, sensorer og programvare som utveksler data med hverandre. Et vanlig problem er at IoT-enheter ofte sitter bak en <a class="term" href="ordliste.html#b-nat">NAT</a>-brannmur på et hjemmenettverk, uten en offentlig IP en server kan koble seg til. Løsningen er å snu kommunikasjonen: enheten oppretter selv en <em>utgående</em> forbindelse til en sentral megler, og kommunikasjonen skjer via <strong>publish/subscribe</strong>-mønsteret i stedet for direkte forespørsler.</p>
+          <p><strong>MQTT (MQ Telemetry Transport)</strong> er den mest brukte pub/sub-protokollen for nettopp dette. Prinsippet: en enhet <em>publiserer</em> en melding på et navngitt <em><a class="term" href="ordliste.html#b-topic">topic</a></em> (f.eks. <code>hjem/stue/temperatur</code>) til en <em><a class="term" href="ordliste.html#b-broker">broker</a></em>. Andre enheter som har <em>abonnert</em> på det samme topicet (eller et mønster som matcher det) mottar meldingen automatisk — uten at publisher og abonnent noensinne trenger å kjenne hverandres adresse. Sammenlignet med HTTP er MQTT lettvekts (liten protokolloverhead, egnet for trege/upålitelige lenker) og løser NAT-problemet gratis, siden begge parter kun trenger en utgående forbindelse til broker.</p>
           <p>Pub/sub-mønsteret er ikke spesielt for MQTT. ZeroMQ, Kafka og Google Pub/Sub bygger på samme idé. MQTT er laget for små enheter.</p>
 
           <h3>Topics, jokertegn og QoS</h3>
           <ul>
             <li>Topics er hierarkiske og skilles med <code>/</code>, for eksempel <code>MinPrivateKanal/Lysbryter1</code>.</li>
             <li>Jokertegn kan bare brukes når man abonnerer. <code>+</code> matcher ett nivå (<code>hjem/+/temp</code>), og <code>#</code> matcher alt under et nivå. I labben abonnerer du på <code>navn/#</code> og får alle underkanalene.</li>
-            <li><strong>QoS</strong> bestemmer leveringsgarantien. 0 betyr høyst én gang (send og glem), 1 betyr minst én gang (med kvittering, kan gi duplikater), og 2 betyr nøyaktig én gang (fireveis handshake).</li>
+            <li><strong><a class="term" href="ordliste.html#b-qos">QoS</a></strong> bestemmer leveringsgarantien. 0 betyr høyst én gang (send og glem), 1 betyr minst én gang (med kvittering, kan gi duplikater), og 2 betyr nøyaktig én gang (fireveis handshake).</li>
             <li>En <em>retained</em> melding blir lagret hos brokeren og sendt til nye abonnenter med en gang. <em>Last Will</em> er en melding brokeren sender for klienten hvis den forsvinner uten å si fra.</li>
-            <li>Portene er <code>1883</code> for MQTT uten kryptering, <code>8883</code> for MQTT over TLS, og MQTT over WebSocket, som labbrokeren har på <code>8811</code> med WSS (kryptert).</li>
+            <li>Portene er <code>1883</code> for MQTT uten kryptering, <code>8883</code> for MQTT over <a class="term" href="ordliste.html#b-tls">TLS</a>, og MQTT over <a class="term" href="ordliste.html#b-websocket">WebSocket</a>, som labbrokeren har på <code>8811</code> med WSS (kryptert).</li>
           </ul>
 
           <h3>MQTT kontra HTTP</h3>
@@ -92,7 +92,7 @@
           <p>Emneplanen sier at du skal kunne «vurdere sikkerheten fra sensor til lagring av data». Lab 3 er et komplett system av den typen: ESP8266 → wifi → broker → nettleser. Gå gjennom det ledd for ledd:</p>
           <ul>
             <li><strong>Enheten.</strong> Wifi-passord og MQTT-passord ligger i klartekst i flashen og kan leses ut med <code>esptool</code>. Labheftet sier selv at det er dumt å legge passord i programmer som havner på GitHub.</li>
-            <li><strong>Overføringen.</strong> TLS (8883/WSS) beskytter mot avlytting og endring underveis. Kortet bør da også sjekke sertifikatet til brokeren. Uten den sjekken kan en mann i midten utgi seg for å være brokeren.</li>
+            <li><strong>Overføringen.</strong> TLS (8883/WSS) beskytter mot avlytting og endring underveis. Kortet bør da også sjekke sertifikatet til brokeren. Uten den sjekken kan en <a class="term" href="ordliste.html#b-mitm">mann i midten</a> utgi seg for å være brokeren.</li>
             <li><strong>Brokeren.</strong> Alle studentene deler brukeren <code>usn</code>. Det betyr at alle kan abonnere på <code>#</code> og se alle topicene, og at hvem som helst kan publisere <code>ON</code> til lysbryteren din. Unike topic-navn er ikke tilgangskontroll. Riktig løsning er én identitet per enhet (eget passord eller klientsertifikat) og tilgangslister (ACL) per topic.</li>
             <li><strong>Mottakeren.</strong> Programmet slår på LED-en for alt som er nøyaktig <code>b'ON'</code>, uansett hvem som sendte det. Det er samme problem med replay og manglende autentisering som i BLE-kapitlet.</li>
           </ul>
@@ -138,7 +138,7 @@ mqtt_topic    = b'mitt/eget/topic'   # må matche på begge sider</pre>
             </div>
             <div class="step">
               <h4>Koble en LED til meldingsstrømmen</h4>
-              <p>Utvid abonnement-skriptet slik at meldingen <code>ON</code> slår på en LED koblet til en GPIO-pin, og alt annet slår den av — MQTT-meldinger blir nå en fysisk bryter.</p>
+              <p>Utvid abonnement-skriptet slik at meldingen <code>ON</code> slår på en LED koblet til en <a class="term" href="ordliste.html#b-gpio">GPIO</a>-pin, og alt annet slår den av — MQTT-meldinger blir nå en fysisk bryter.</p>
               <pre class="codeblock">from machine import Pin
 led = Pin(2, Pin.OUT)
 led.off()   # aktiv lav: off() lyser LED-en på dette kortet</pre>
@@ -180,7 +180,7 @@ led.off()   # aktiv lav: off() lyser LED-en på dette kortet</pre>
           <details class="sol">
             <summary>Hva er eFuses, og hvorfor er det viktig at de bare kan skrives én gang?</summary>
             <div class="sol__body">
-              <p>eFuses er bit som brennes permanent (one-time programmable). De brukes til MAC-adresse, kalibrering og sikkerhetsinnstillinger: nøkkel til flash-kryptering, «secure boot på» og «JTAG av». Fordi de ikke kan settes tilbake, kan heller ikke en angriper med fysisk tilgang slå beskyttelsen av igjen. Dette er det samme prinsippet som det uforanderlige første trinnet i chain of trust.</p>
+              <p>eFuses er bit som brennes permanent (one-time programmable). De brukes til MAC-adresse, kalibrering og sikkerhetsinnstillinger: nøkkel til flash-kryptering, «secure boot på» og «<a class="term" href="ordliste.html#b-jtag">JTAG</a> av». Fordi de ikke kan settes tilbake, kan heller ikke en angriper med fysisk tilgang slå beskyttelsen av igjen. Dette er det samme prinsippet som det uforanderlige første trinnet i <a class="term" href="ordliste.html#b-kjede">chain of trust</a>.</p>
             </div>
           </details>
           <details class="sol">
@@ -199,8 +199,9 @@ led.off()   # aktiv lav: off() lyser LED-en på dette kortet</pre>
     </div>
   </div>
 
-  <script src="../../../assets/js/main.js?v=43"></script>
+  <script src="../../../assets/js/main.js?v=44"></script>
   <script src="../../../assets/js/status.js?v=35"></script>
   <script src="../../../assets/js/formler.js?v=35"></script>
+  <script src="../../../assets/js/begrep.js?v=2"></script>
 </body>
 </html>

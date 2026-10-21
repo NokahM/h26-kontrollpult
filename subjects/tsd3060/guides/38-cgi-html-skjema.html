@@ -7,7 +7,7 @@
   <meta name="description" content="Common Gateway Interface: hvordan webtjeneren kjører et program per forespørsel, miljøvariablene det arver, fordeler og ulemper, og HTML-skjema med GET og POST.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../../assets/css/main.css?v=43">
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=44">
 </head>
 <body class="theme-tsd3060" data-updated="2026-09-18">
   <div class="app-shell">
@@ -47,13 +47,13 @@
 
         <article class="prose">
           <h2>Common Gateway Interface</h2>
-          <p><strong>CGI</strong> er en spesifikasjon (<a href="https://datatracker.ietf.org/doc/html/rfc3875" target="_blank" rel="noopener">RFC 3875</a>, CGI 1.1) for hvordan en webtjener og et CGI-program kommuniserer. Det fungerer slik:</p>
+          <p><strong><a class="term" href="ordliste.html#b-cgi">CGI</a></strong> er en spesifikasjon (<a href="https://datatracker.ietf.org/doc/html/rfc3875" target="_blank" rel="noopener">RFC 3875</a>, CGI 1.1) for hvordan en webtjener og et CGI-program kommuniserer. Det fungerer slik:</p>
           <ul>
-            <li>Filen URL-en peker på, CGI-programmet, <em>kjøres</em> av webtjeneren i stedet for å sendes som den er.</li>
-            <li>Det programmet skriver til standard ut, sendes til klienten som <strong>kroppen</strong> i HTTP-responsen.</li>
+            <li>Filen <a class="term" href="ordliste.html#b-url">URL-en</a> peker på, CGI-programmet, <em>kjøres</em> av webtjeneren i stedet for å sendes som den er.</li>
+            <li>Det programmet skriver til standard ut, sendes til klienten som <strong>kroppen</strong> i <a class="term" href="ordliste.html#b-http">HTTP</a>-responsen.</li>
             <li>Webtjeneren sender <em>begynnelsen</em> av responshodet (statuslinja). CGI-programmet sender <em>slutten</em> av hodet, for eksempel <code>Content-Type</code>, og <strong>den tomme linja</strong> som skiller hodet fra kroppen.</li>
           </ul>
-          <p>Slik håndterer tjeneren en POST-forespørsel, i pseudokode. Det er de samme systemkallene som i hallotjener og NOHUP-oppgaven fra uke 33:</p>
+          <p>Slik håndterer tjeneren en <a class="term" href="ordliste.html#b-post">POST</a>-forespørsel, i pseudokode. Det er de samme systemkallene som i hallotjener og NOHUP-oppgaven fra uke 33:</p>
           <pre class="codeblock">// Webtjeneren:
 if (0 == fork()) {       // ny prosess behandler forespørselen
     dup2(...)            // socketen blir STDIN og STDOUT
@@ -76,7 +76,7 @@ exit()</pre>
             <li><strong>Stien og spørrestrengen i URL-en</strong> (via <code>PATH_INFO</code> og <code>QUERY_STRING</code>).</li>
             <li><strong>Standard inn</strong>: kroppen i forespørselen, for eksempel ved POST.</li>
           </ol>
-          <p>CGI-programmet kan <strong>ikke</strong> regne med å få EOF når det leser kroppen, for socketen er fortsatt åpen. Tjeneren setter derfor <code>CONTENT_LENGTH</code>, slik at programmet vet hvor mange byte det skal lese. Verdien kommer fra <code>Content-Length</code> i forespørselshodet. Du kan se hva klienten sender:</p>
+          <p>CGI-programmet kan <strong>ikke</strong> regne med å få EOF når det leser kroppen, for <a class="term" href="ordliste.html#b-socket">socketen</a> er fortsatt åpen. Tjeneren setter derfor <code>CONTENT_LENGTH</code>, slik at programmet vet hvor mange byte det skal lese. Verdien kommer fra <code>Content-Length</code> i forespørselshodet. Du kan se hva klienten sender:</p>
           <pre class="codeblock">nc -l -p 5555 &amp;
 curl -D - -d "kropp" -X POST localhost:5555</pre>
 
@@ -86,15 +86,15 @@ curl -D - -d "kropp" -X POST localhost:5555</pre>
               <thead><tr><th>Variabel</th><th>Innhold</th></tr></thead>
               <tbody>
                 <tr><td colspan="2"><strong>Basert på forespørselen</strong></td></tr>
-                <tr><td><code>REQUEST_METHOD</code></td><td>GET, HEAD, POST, PUT, DELETE …</td></tr>
+                <tr><td><code>REQUEST_METHOD</code></td><td><a class="term" href="ordliste.html#b-get">GET</a>, HEAD, POST, <a class="term" href="ordliste.html#b-put">PUT</a>, <a class="term" href="ordliste.html#b-delete">DELETE</a> …</td></tr>
                 <tr><td><code>QUERY_STRING</code></td><td>Det som står etter <code>?</code> i URL-en</td></tr>
-                <tr><td><code>CONTENT_TYPE</code></td><td>MIME-typen til kroppen</td></tr>
+                <tr><td><code>CONTENT_TYPE</code></td><td><a class="term" href="ordliste.html#b-mime">MIME-typen</a> til kroppen</td></tr>
                 <tr><td><code>CONTENT_LENGTH</code></td><td>Lengden av kroppen i byte</td></tr>
                 <tr><td><code>PATH_INFO</code>, <code>PATH_TRANSLATED</code></td><td>Ekstra sti etter programnavnet, og den oversatt til en filsti</td></tr>
                 <tr><td><code>SCRIPT_NAME</code></td><td>Stien til CGI-programmet</td></tr>
                 <tr><td><code>SERVER_PROTOCOL</code>, <code>SERVER_PORT</code></td><td>For eksempel <code>HTTP/1.1</code> og <code>80</code></td></tr>
                 <tr><td><code>REMOTE_ADDR</code>, <code>REMOTE_HOST</code></td><td>Klientens adresse og vertsnavn</td></tr>
-                <tr><td><code>AUTH_TYPE</code>, <code>REMOTE_USER</code>, <code>REMOTE_IDENT</code></td><td>Autentiseringsmetode og brukernavn (for eksempel ved Basic Auth, uke 34)</td></tr>
+                <tr><td><code>AUTH_TYPE</code>, <code>REMOTE_USER</code>, <code>REMOTE_IDENT</code></td><td>Autentiseringsmetode og brukernavn (for eksempel ved <a class="term" href="ordliste.html#b-basic">Basic Auth</a>, uke 34)</td></tr>
                 <tr><td colspan="2"><strong>Uavhengig av forespørselen</strong></td></tr>
                 <tr><td><code>SERVER_SOFTWARE</code></td><td>Navn og versjon på webtjeneren</td></tr>
                 <tr><td><code>SERVER_NAME</code></td><td>Tjenerens vertsnavn</td></tr>
@@ -102,7 +102,7 @@ curl -D - -d "kropp" -X POST localhost:5555</pre>
               </tbody>
             </table>
           </div>
-          <p>I tillegg blir hvert felt i HTTP-hodet til en miljøvariabel med prefikset <code>HTTP_</code> og store bokstaver: <code>User-Agent</code> blir <code>HTTP_USER_AGENT</code>, og <code>Cookie</code> blir <code>HTTP_COOKIE</code>. Det enkleste CGI-programmet viser alle:</p>
+          <p>I tillegg blir hvert felt i <a class="term" href="ordliste.html#b-hode">HTTP-hodet</a> til en miljøvariabel med prefikset <code>HTTP_</code> og store bokstaver: <code>User-Agent</code> blir <code>HTTP_USER_AGENT</code>, og <code>Cookie</code> blir <code>HTTP_COOKIE</code>. Det enkleste CGI-programmet viser alle:</p>
           <pre class="codeblock">#!/bin/sh
 # miljo.cgi
 echo "Content-type:text/plain;charset=utf-8"   # slutten av responshodet
@@ -116,8 +116,8 @@ env | sort                                     # kroppen</pre>
               <tbody>
                 <tr><td>Enkelt</td><td>En ny prosess per forespørsel: ressurskrevende, med konkurranse om minne, disk og CPU</td></tr>
                 <tr><td>Uavhengig av programmeringsspråk</td><td>All kommunikasjon mellom klient og database eller andre tjenester går via webtjeneren, som kan bli en flaskehals</td></tr>
-                <tr><td>Uavhengig av webtjener</td><td>Tjeneren må ofte konvertere til HTML for hver respons</td></tr>
-                <tr><td>Stor utbredelse, tidligere de facto-standard</td><td>Tilstandsløst (arvet fra HTTP) og uten transaksjonsstøtte: programmet må logge inn og ut av databasen for hver forespørsel</td></tr>
+                <tr><td>Uavhengig av webtjener</td><td>Tjeneren må ofte konvertere til <a class="term" href="ordliste.html#b-html">HTML</a> for hver respons</td></tr>
+                <tr><td>Stor utbredelse, tidligere de facto-standard</td><td><a class="term" href="ordliste.html#b-tilstandslos">Tilstandsløst</a> (arvet fra HTTP) og uten transaksjonsstøtte: programmet må logge inn og ut av databasen for hver forespørsel</td></tr>
                 <tr><td></td><td>Ved feil i brukerinput må tjeneren enten be brukeren gå tilbake, eller sende hele skjemaet på nytt, ferdig utfylt</td></tr>
                 <tr><td></td><td><strong>Sikkerhet:</strong> mange CGI-programmer starter et skall, og brukerinput kan da inneholde kode som blir utført (kommandoinjeksjon, uke 34)</td></tr>
               </tbody>
@@ -140,7 +140,7 @@ echo
 echo "Hallo $QUERY_STRING. Ha en fin dag :-)"</pre>
 
           <h2>HTML-skjema</h2>
-          <p>Et <code>&lt;form&gt;</code> lager spørrestrengen for oss. Med standardmetoden GET sender nettleseren feltene som <code>navn=verdi</code>-par, URL-kodet og skilt med <code>&amp;</code>, i URL-en til programmet i <code>action</code>:</p>
+          <p>Et <code>&lt;form&gt;</code> lager spørrestrengen for oss. Med standardmetoden GET sender nettleseren feltene som <code>navn=verdi</code>-par, <a class="term" href="ordliste.html#b-urlkoding">URL-kodet</a> og skilt med <code>&amp;</code>, i URL-en til programmet i <code>action</code>:</p>
           <pre class="codeblock">&lt;!-- hallo_2.html --&gt;
 &lt;form action="hallo_2.cgi"&gt;
   &lt;input type="text" name="navn"&gt;
@@ -164,7 +164,7 @@ cat &lt;&lt; EOF
   &lt;body&gt;Variabelen QUERY_STRING: $QUERY_STRING&lt;/body&gt;
 &lt;/html&gt;
 EOF</pre>
-          <p class="callout">Å skrive brukerinput rett inn i HTML er utrygt: inneholder input <code>&lt;script&gt;</code>, blir det kjørt i nettleseren (cross-site scripting). Input må dekodes, valideres og HTML-escapes (<code>&lt;</code> → <code>&amp;lt;</code>) før det skrives ut. Det er samme prinsipp som forberedte SQL-kommandoer i uke 34: data skal aldri tolkes som kode.</p>
+          <p class="callout">Å skrive brukerinput rett inn i HTML er utrygt: inneholder input <code>&lt;script&gt;</code>, blir det kjørt i nettleseren (cross-site scripting). Input må dekodes, valideres og HTML-escapes (<code>&lt;</code> → <code>&amp;lt;</code>) før det skrives ut. Det er samme prinsipp som forberedte <a class="term" href="ordliste.html#b-sql">SQL</a>-kommandoer i uke 34: data skal aldri tolkes som kode.</p>
           <p><strong>Hallo_4</strong> skriver ut skjemaet selv. Da er skjema og behandling samme program, og brukeren ser resultatet under skjemaet:</p>
           <pre class="codeblock">#!/bin/sh
 # hallo_4.cgi
@@ -220,7 +220,7 @@ EOF</pre>
               <thead><tr><th></th><th>GET</th><th>POST</th></tr></thead>
               <tbody>
                 <tr><td>Hvor dataene ligger</td><td>I URL-en</td><td>I kroppen</td></tr>
-                <tr><td>CGI-programmet leser</td><td><code>QUERY_STRING</code></td><td>stdin, <code>CONTENT_LENGTH</code> byte</td></tr>
+                <tr><td>CGI-programmet leser</td><td><code>QUERY_STRING</code></td><td><a class="term" href="ordliste.html#b-stdio">stdin</a>, <code>CONTENT_LENGTH</code> byte</td></tr>
                 <tr><td>Synlig i historikk, logger og bokmerker</td><td>Ja</td><td>Nei</td></tr>
                 <tr><td>Egnet for</td><td>Oppslag uten sideeffekter</td><td>Endringer og sensitive data (passord)</td></tr>
               </tbody>
@@ -275,8 +275,9 @@ echo -n 'fornavn=Ola' | REQUEST_METHOD=POST CONTENT_LENGTH=11 ./hallo_5.cgi</pre
     </div>
   </div>
 
-  <script src="../../../assets/js/main.js?v=43"></script>
+  <script src="../../../assets/js/main.js?v=44"></script>
   <script src="../../../assets/js/status.js?v=35"></script>
   <script src="../../../assets/js/formler.js?v=35"></script>
+  <script src="../../../assets/js/begrep.js?v=2"></script>
 </body>
 </html>

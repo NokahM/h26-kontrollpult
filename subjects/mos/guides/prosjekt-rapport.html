@@ -7,7 +7,7 @@
   <meta name="description" content="Sammendrag av miniprosjektrapporten om Fusée Gelée (CVE-2018-6242): sårbarheten, exploit-kjeden, verktøyhistorikk og fiksen i Tegra X1.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../../assets/css/main.css?v=43">
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=44">
 </head>
 <body class="theme-mos" data-updated="2026-09-22">
   <div class="app-shell">
@@ -42,7 +42,7 @@
 
         <article class="prose">
           <h2>1. Historisk kontekst i korte trekk</h2>
-          <p>Fusée Gelée oppstod ikke isolert — den er ett ledd i tre tiår med Nintendo-konsollhacking, med et gjenkjennelig mønster: en fabrikkfunksjon (her RCM) som misbrukes, et hobbyistmiljø som offentliggjør, og en kommersiell piratkopieringsgruppe som utnytter samme feil.</p>
+          <p>Fusée Gelée oppstod ikke isolert — den er ett ledd i tre tiår med Nintendo-konsollhacking, med et gjenkjennelig mønster: en fabrikkfunksjon (her <a class="term" href="ordliste.html#b-rcm">RCM</a>) som misbrukes, et hobbyistmiljø som offentliggjør, og en kommersiell piratkopieringsgruppe som utnytter samme feil.</p>
           <div class="dtable-wrap">
             <table class="dtable">
               <thead><tr><th>Når</th><th>Hva</th></tr></thead>
@@ -50,26 +50,26 @@
                 <tr><td>mar. 2017</td><td>Switch (HAC-001/T210) lanseres; ReSwitched slipper PegaSwitch (nettleser-exploit, ikke kodekjøring)</td></tr>
                 <tr><td>jan. 2018</td><td>Team Xecuter teaser en kommersiell Switch-modchip, uavhengig av ReSwitched</td></tr>
                 <tr><td>18. jan. 2018</td><td>Første private commit mot det som blir Atmosphère — <em>før</em> Fusée Gelée er offentlig</td></tr>
-                <tr><td>24. apr. 2018</td><td>Lekkasje av en fungerende zero-day tvinger ReSwitched til å slippe writeup + <code>fusee-launcher</code> ~2 måneder tidligere enn planlagt; fail0verflow slipper uavhengig «shofEL2» samtidig; CVE-2018-6242 tildeles</td></tr>
+                <tr><td>24. apr. 2018</td><td>Lekkasje av en fungerende zero-day tvinger ReSwitched til å slippe writeup + <code>fusee-launcher</code> ~2 måneder tidligere enn planlagt; fail0verflow slipper uavhengig «shofEL2» samtidig; <a class="term" href="ordliste.html#b-cve">CVE-2018-6242</a> tildeles</td></tr>
                 <tr><td>mai&#8211;jun. 2018</td><td>Team Xecuter kommersialiserer samme feil som SX Pro/SX OS</td></tr>
                 <tr><td>jul. 2018</td><td>Kate Temkin forlater ReSwitched etter et omstridt tillitsbrudd (community-drama, ikke uavhengig verifisert)</td></tr>
-                <tr><td>midten 2018&#8211;</td><td>«iPatch» lukker feilen via fuses for <em>nyproduserte</em> T210-brikker — retter ingenting for eksisterende enheter</td></tr>
+                <tr><td>midten 2018&#8211;</td><td>«iPatch» lukker feilen via <a class="term" href="ordliste.html#b-fuses">fuses</a> for <em>nyproduserte</em> T210-brikker — retter ingenting for eksisterende enheter</td></tr>
                 <tr><td>okt. 2018</td><td>Atmosphère v0.7.0, første offisielle CFW-slipp</td></tr>
-                <tr><td>jul. 2019</td><td>Mariko (T210B01/T214) med ny, rettet Boot ROM — Switch Lite og senere OLED leveres med denne fra dag én</td></tr>
+                <tr><td>jul. 2019</td><td>Mariko (T210B01/T214) med ny, rettet <a class="term" href="ordliste.html#b-rom">Boot ROM</a> — Switch Lite og senere OLED leveres med denne fra dag én</td></tr>
                 <tr><td>2020&#8211;2023</td><td>Føderal straffesak mot Team Xecuter (Bowser dømt og løslatt, Louarn uutlevert i Frankrike, Chen aldri pågrepet)</td></tr>
               </tbody>
             </table>
           </div>
 
           <h2>2. Tegra X1-arkitektur og Recovery Mode</h2>
-          <p>BPMP (Boot and Power Management Processor) er en liten hjelpeprosessor som kjører aller først i oppstartssekvensen. Det er en ARM7TDMI, en eldre kjerne uten TrustZone eller privilegienivåer som EL3 — de finnes bare på Cortex-kjernene i hovedklyngen (CCPLEX). BPMP har likevel full tilgang til brikken før sikkerhetslåsene er satt. Boot ROM-en dens (IROM, maske-ROM, kan bare justeres med ipatches i fuses før salg) utgjør root of trust for hele kjeden, og håndterer blant annet USB Recovery Mode: en fabrikkstøttefunksjon ment for å laste et lite oppstartsbilde inn i IRAM ved førstegangsflashing eller «murstein»-gjenoppretting.</p>
+          <p><a class="term" href="ordliste.html#b-bpmp">BPMP</a> (Boot and Power Management Processor) er en liten hjelpeprosessor som kjører aller først i oppstartssekvensen. Det er en ARM7TDMI, en eldre kjerne uten <a class="term" href="ordliste.html#b-trustzone">TrustZone</a> eller privilegienivåer som EL3 — de finnes bare på Cortex-kjernene i hovedklyngen (CCPLEX). BPMP har likevel full tilgang til brikken før sikkerhetslåsene er satt. Boot ROM-en dens (IROM, maske-ROM, kan bare justeres med ipatches i fuses før salg) utgjør <a class="term" href="ordliste.html#b-rot">root of trust</a> for hele kjeden, og håndterer blant annet USB Recovery Mode: en fabrikkstøttefunksjon ment for å laste et lite oppstartsbilde inn i IRAM ved førstegangsflashing eller «murstein»-gjenoppretting.</p>
           <p>På Switch aktiveres RCM ved å holde VOL+ inne mens HOME-signalet trigges — normalt via høyre Joy-Con, men det samme signalet kan reproduseres ved å kortslutte pin 10 på kontakten mot GND («RCM-jig»). At Tegra-brikker generelt kan tvinges inn i RCM var allerede offentlig kjent fra NVIDIAs egen Jetson-dokumentasjon (<code>FORCE_RECOVERY</code>-pinne); det Switch-spesifikke arbeidet var å finne hvilken fysisk pinne på Nintendos egen Joy-Con-kontakt signalet var rutet til.</p>
 
           <h2>3. Sårbarheten (CVE-2018-6242)</h2>
-          <p>NVD beskriver feilen som en bufferoverflyt i BootROM Recovery Mode, utnyttbar av en angriper med fysisk USB-tilgang som kan tvinge enheten inn i RCM. Klassifisert som <strong>CWE-119</strong> (manglende grensekontroll på minnebuffer), med CVSS v3.0-score 6,8 (Medium) — moderat kun fordi fysisk tilgang kreves; konsekvensen ved oppfylt forutsetning er total kompromittering.</p>
+          <p>NVD beskriver feilen som en <a class="term" href="ordliste.html#b-overflyt">bufferoverflyt</a> i BootROM Recovery Mode, utnyttbar av en angriper med fysisk USB-tilgang som kan tvinge enheten inn i RCM. Klassifisert som <strong>CWE-119</strong> (manglende <a class="term" href="ordliste.html#b-grensesjekk">grensekontroll</a> på minnebuffer), med <a class="term" href="ordliste.html#b-cvss">CVSS</a> v3.0-score 6,8 (Medium) — moderat kun fordi fysisk tilgang kreves; konsekvensen ved oppfylt forutsetning er total kompromittering.</p>
           <p><strong>Rotårsak:</strong> tre USB control-forespørsler (<code>GET_CONFIGURATION</code>, <code>GET_INTERFACE</code>, <code>GET_STATUS</code>) henter svarlengden direkte fra det 16-bit, angriperkontrollerte <code>wLength</code>-feltet i stedet for å begrense den til den faktiske datastørrelsen:</p>
           <pre class="codeblock">memcpy(dma_buffer, data_to_tx, size_to_tx);  // size_to_tx = wLength, ukontrollert</pre>
-          <p>De to DMA-mellomlagringsbufferne (<code>0x40005000</code>, <code>0x40009000</code>) ligger rett under den aktive eksekveringsstacken i IRAM. En angriper skriver først fritt innhold inn i disse via den ordinære opplastingsprotokollen, og utløser deretter en overdimensjonert control-transfer som kopierer langt forbi bufferet og inn i stacken — klassisk stack smashing, utløst eksternt over USB. En ekstra detalj gjør dette til en fullt kontrollerbar primitiv: lengdefeltet på selve RCM-opplastingen valideres først <em>etter</em> at hele payloaden allerede er kopiert inn i minnet, så angriperen kan forberede et helt selvvalgt minnebilde før selve overflyten utløses.</p>
+          <p>De to <a class="term" href="ordliste.html#b-dma">DMA</a>-mellomlagringsbufferne (<code>0x40005000</code>, <code>0x40009000</code>) ligger rett under den aktive eksekveringsstacken i IRAM. En angriper skriver først fritt innhold inn i disse via den ordinære opplastingsprotokollen, og utløser deretter en overdimensjonert control-transfer som kopierer langt forbi bufferet og inn i stacken — klassisk stack smashing, utløst eksternt over USB. En ekstra detalj gjør dette til en fullt kontrollerbar primitiv: lengdefeltet på selve RCM-opplastingen valideres først <em>etter</em> at hele payloaden allerede er kopiert inn i minnet, så angriperen kan forberede et helt selvvalgt minnebilde før selve overflyten utløses.</p>
 
           <h2>4. Exploit-kjeden</h2>
           <div class="steps">
@@ -154,8 +154,9 @@
     </div>
   </div>
 
-  <script src="../../../assets/js/main.js?v=43"></script>
+  <script src="../../../assets/js/main.js?v=44"></script>
   <script src="../../../assets/js/status.js?v=35"></script>
   <script src="../../../assets/js/formler.js?v=35"></script>
+  <script src="../../../assets/js/begrep.js?v=2"></script>
 </body>
 </html>

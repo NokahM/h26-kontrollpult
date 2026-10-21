@@ -7,7 +7,7 @@
   <meta name="description" content="Semistrukturerte data og dokumenter som trær: HTML og HTML5, XML med velformethet, navnerom, DTD og XML Schema, og CSS for både HTML og XML.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../../assets/css/main.css?v=43">
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=44">
 </head>
 <body class="theme-tsd3060" data-updated="2026-09-18">
   <div class="app-shell">
@@ -52,8 +52,8 @@
             <li>ha en struktur som endres ofte,</li>
             <li>være skjemaløse, med bare begrensninger på selve dataene.</li>
           </ul>
-          <p>JSON og XML er typiske eksempler. Skjemaet bygges ofte <em>når dataene leses inn</em>, i stedet for å være definert på forhånd som i en relasjonsdatabase. Spørringer mot slike data er som regel <strong>navigerende</strong> (du går gjennom en trestruktur og finner data etter posisjon) og ikke <strong>deklarative</strong> som SQL.</p>
-          <p><strong>SGML</strong> (Standard Generalized Markup Language, ISO-standard fra 1986) er en tidlig standard for å definere slike oppmerkingsspråk. Den skiller struktur fra data, lar brukeren definere strukturen selv med en DTD, og er idégrunnlaget for både HTML og XML. Den høye kompleksiteten bremset utbredelsen.</p>
+          <p><a class="term" href="ordliste.html#b-json">JSON</a> og <a class="term" href="ordliste.html#b-xml">XML</a> er typiske eksempler. Skjemaet bygges ofte <em>når dataene leses inn</em>, i stedet for å være definert på forhånd som i en relasjonsdatabase. Spørringer mot slike data er som regel <strong>navigerende</strong> (du går gjennom en trestruktur og finner data etter posisjon) og ikke <strong>deklarative</strong> som <a class="term" href="ordliste.html#b-sql">SQL</a>.</p>
+          <p><strong><a class="term" href="ordliste.html#b-sgml">SGML</a></strong> (Standard Generalized Markup Language, ISO-standard fra 1986) er en tidlig standard for å definere slike oppmerkingsspråk. Den skiller struktur fra data, lar brukeren definere strukturen selv med en <a class="term" href="ordliste.html#b-dtd">DTD</a>, og er idégrunnlaget for både <a class="term" href="ordliste.html#b-html">HTML</a> og XML. Den høye kompleksiteten bremset utbredelsen.</p>
 
           <h2>Dokumentet som tre</h2>
           <p>Et dokument med et tekstavsnitt og en nummerert liste med to punkter er et tre: dokumentet er roten, avsnittet og lista er barn, og hvert punkt er barn av lista. Samme tre kan skrives i HTML eller XML:</p>
@@ -92,7 +92,7 @@
           </div>
           <p><strong>HTML5</strong> erstatter HTML 4.01 og er ikke lenger basert på SGML. Standarden prøver å gjøre tilleggsmoduler (plugins) overflødige og inkluderer:</p>
           <ul>
-            <li>DOM (Document Object Model) med API for JavaScript,</li>
+            <li><a class="term" href="ordliste.html#b-dom">DOM</a> (Document Object Model) med API for <a class="term" href="ordliste.html#b-javascript">JavaScript</a>,</li>
             <li>egne elementer for lyd, video og tegning (<code>audio</code>, <code>video</code>, <code>canvas</code>),</li>
             <li>semantiske elementer (<code>section</code>, <code>article</code>, <code>header</code>, <code>nav</code>),</li>
             <li>støtte for SVG (vektorgrafikk) og MathML (matematisk notasjon).</li>
@@ -106,7 +106,7 @@
                 <tr><td>Template</td><td>Mal som ikke vises direkte</td><td><code>template</code></td></tr>
                 <tr><td>Raw text</td><td>Innholdet tolkes ikke som HTML</td><td><code>script</code>, <code>style</code></td></tr>
                 <tr><td>Escapable raw text</td><td>Bare tekst, men entiteter som <code>&amp;amp;</code> tolkes</td><td><code>textarea</code>, <code>title</code></td></tr>
-                <tr><td>Foreign elements</td><td>Fra navnerommene til MathML og SVG</td><td><code>math</code>, <code>svg</code></td></tr>
+                <tr><td>Foreign elements</td><td>Fra <a class="term" href="ordliste.html#b-navnerom">navnerommene</a> til MathML og SVG</td><td><code>math</code>, <code>svg</code></td></tr>
                 <tr><td>Normal elements</td><td>Alle andre tillatte elementer</td><td><code>p</code>, <code>div</code>, <code>a</code></td></tr>
               </tbody>
             </table>
@@ -128,7 +128,7 @@
 
           <h2>XML</h2>
           <p><strong>eXtensible Markup Language</strong> er laget for å representere semistrukturerte data. Et XML-dokument består av elementer. Et element har en start-tagg, en slutt-tagg og innholdet mellom dem, som kan være andre elementer, tekst og <em>entitetsreferanser</em> (for tegn som ikke finnes på tastaturet, reserverte tegn som <code>&amp;lt;</code>, og «snarveier» til tekst eller eksterne filer). Elementer kan også ha attributter.</p>
-          <p>Et XML-dokument er <strong>velformet</strong> (well-formed) når</p>
+          <p>Et XML-dokument er <strong><a class="term" href="ordliste.html#b-velformet">velformet</a></strong> (well-formed) når</p>
           <ol>
             <li>ett rotelement inneholder alle de andre elementene,</li>
             <li>elementene er nøstet i en trestruktur uten overlapping (<code>&lt;a&gt;&lt;b&gt;&lt;/a&gt;&lt;/b&gt;</code> er ulovlig),</li>
@@ -159,7 +159,7 @@ curl -s $URL | xq &gt; 3112.xml</pre>
           <p>Her er <code>tekst:punkt</code> og <code>tall:punkt</code> to forskjellige elementtyper, selv om begge heter <code>punkt</code>.</p>
 
           <h3>Gyldig XML: DTD og XML Schema</h3>
-          <p>Velformet betyr at syntaksen er riktig. <strong>Gyldig</strong> (valid) betyr i tillegg at dokumentet følger en bestemt innholdsmodell: hvilke elementer som er lov, i hvilken rekkefølge og hvor mange. Innholdsmodellen beskrives med en <strong>DTD</strong> (Document Type Definition) eller et <strong>XML Schema</strong>. Ingen av dem er påkrevd.</p>
+          <p>Velformet betyr at syntaksen er riktig. <strong>Gyldig</strong> (valid) betyr i tillegg at dokumentet følger en bestemt innholdsmodell: hvilke elementer som er lov, i hvilken rekkefølge og hvor mange. Innholdsmodellen beskrives med en <strong>DTD</strong> (Document Type Definition) eller et <strong><a class="term" href="ordliste.html#b-xmlschema">XML Schema</a></strong>. Ingen av dem er påkrevd.</p>
           <p>En DTD har fire typer deklarasjoner: element, attributtliste, entitet og notasjon.</p>
           <pre class="codeblock">&lt;!ELEMENT bokliste (bok+)&gt;                    &lt;!-- én eller flere bok --&gt;
 &lt;!ELEMENT bok (tittel, etternavn, fornavn)&gt;    &lt;!-- akkurat disse, i denne rekkefølgen --&gt;
@@ -189,8 +189,8 @@ xmllint --noout --schema timeliste.xsd timeliste.xml   # mot XML Schema</pre>
           </div>
 
           <h2>CSS</h2>
-          <p><strong>Cascading Style Sheets</strong> bestemmer utseendet, og ble foreslått av Håkon Wium Lie fra Halden. CSS kan styre visningen av både HTML og XML, men kan ikke endre strukturen i dokumentet. Du kan prøve i nettleserkonsollet: <code>document.body.style.backgroundColor="red"</code>.</p>
-          <p>Syntaksen er en <em>selektor</em>, som velger elementer i dokumentet, fulgt av navn–verdi-par:</p>
+          <p><strong>Cascading Style Sheets</strong> bestemmer utseendet, og ble foreslått av Håkon Wium Lie fra Halden. <a class="term" href="ordliste.html#b-css">CSS</a> kan styre visningen av både HTML og XML, men kan ikke endre strukturen i dokumentet. Du kan prøve i nettleserkonsollet: <code>document.body.style.backgroundColor="red"</code>.</p>
+          <p>Syntaksen er en <em><a class="term" href="ordliste.html#b-selektor">selektor</a></em>, som velger elementer i dokumentet, fulgt av navn–verdi-par:</p>
           <pre class="codeblock">selektor { navn: verdi; navn: verdi; ... }</pre>
           <p>Elementer kan grupperes i <strong>klasser</strong> (<code>.navn</code>), og enkeltelementer kan få en <strong>id</strong> (<code>#navn</code>):</p>
           <pre class="codeblock">.sitat     { color: green }
@@ -238,7 +238,7 @@ bokid    { background-color: red; font-family: "Times New Roman"; font-size: 32p
           <pre class="codeblock">punkt { display: list-item; list-style-position: inside; list-style-type: decimal; }</pre>
 
           <h2>Sammenstilling</h2>
-          <p>En liten nettside som lenker til eksemplene over. Alt kan serveres fra en konteiner med busybox sin <code>httpd</code> (se uke 36):</p>
+          <p>En liten nettside som lenker til eksemplene over. Alt kan serveres fra en <a class="term" href="ordliste.html#b-konteiner">konteiner</a> med busybox sin <code>httpd</code> (se uke 36):</p>
           <pre class="codeblock">&lt;!DOCTYPE html&gt;
 &lt;html lang="no"&gt;
   &lt;head&gt;
@@ -295,8 +295,9 @@ bokid    { background-color: red; font-family: "Times New Roman"; font-size: 32p
     </div>
   </div>
 
-  <script src="../../../assets/js/main.js?v=43"></script>
+  <script src="../../../assets/js/main.js?v=44"></script>
   <script src="../../../assets/js/status.js?v=35"></script>
   <script src="../../../assets/js/formler.js?v=35"></script>
+  <script src="../../../assets/js/begrep.js?v=2"></script>
 </body>
 </html>

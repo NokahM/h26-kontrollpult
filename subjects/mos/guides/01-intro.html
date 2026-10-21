@@ -7,7 +7,7 @@
   <meta name="description" content="Introduksjon til Maskinvare og sikkerhet (VE3270/TSD3050): hva faget dekker, sikkerhetsbegrepet, og chain of trust ved oppstart av en mikrokontroller.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../../assets/css/main.css?v=43">
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=44">
 </head>
 <body class="theme-mos" data-updated="2026-10-15">
   <div class="app-shell">
@@ -37,37 +37,37 @@
 
         <article class="prose">
           <h2>Om emnet</h2>
-          <p>VE3270/TSD3050 handler om sikkerhet på maskinvarenivå — det laget under operativsystemet og applikasjonskoden, der en angriper med fysisk tilgang til et kretskort kan lese ut, endre eller omgå beskyttelsen i en mikrokontroller. Der webapplikasjonssikkerhet (som i TSD3060) handler om å beskytte tjenester over et nettverk, handler dette emnet om hva som skjer når angriperen har en logisk analysator, et loddebolt eller et oscilloskop koblet rett på kretskortet.</p>
-          <p>Emnet er bygget opp som en vekselvirkning mellom forelesninger og obligatoriske labøvelser: hver teoribolk følges av en praktisk øvelse på ekte maskinvare (Raspberry Pi Pico, nRF52840-dongler, ESP8266-kort og en ChipWhisperer Nano). Vurderingen er en muntlig eksamen uten hjelpemidler (se <a href="emneplan.html">emneplanen</a>), der de første minuttene er en presentasjon av miniprosjektet. Pensum tar utgangspunkt i <em>The Hardware Hacking Handbook</em> av Colin O'Flynn og Jasper van Woudenberg, som strukturerer feltet i angrepsklasser: feilinjeksjon (klokke-/spenningsglitching, elektromagnetisk injeksjon) og sidekanalanalyse (effektanalyse).</p>
+          <p>VE3270/TSD3050 handler om sikkerhet på maskinvarenivå — det laget under operativsystemet og applikasjonskoden, der en angriper med fysisk tilgang til et kretskort kan lese ut, endre eller omgå beskyttelsen i en <a class="term" href="ordliste.html#b-mcu">mikrokontroller</a>. Der webapplikasjonssikkerhet (som i TSD3060) handler om å beskytte tjenester over et nettverk, handler dette emnet om hva som skjer når angriperen har en logisk analysator, et loddebolt eller et oscilloskop koblet rett på kretskortet.</p>
+          <p>Emnet er bygget opp som en vekselvirkning mellom forelesninger og obligatoriske labøvelser: hver teoribolk følges av en praktisk øvelse på ekte maskinvare (Raspberry Pi Pico, nRF52840-dongler, <a class="term" href="ordliste.html#b-esp8266">ESP8266</a>-kort og en <a class="term" href="ordliste.html#b-chipwhisperer">ChipWhisperer</a> Nano). Vurderingen er en muntlig eksamen uten hjelpemidler (se <a href="emneplan.html">emneplanen</a>), der de første minuttene er en presentasjon av miniprosjektet. Pensum tar utgangspunkt i <em>The Hardware Hacking Handbook</em> av Colin O'Flynn og Jasper van Woudenberg, som strukturerer feltet i angrepsklasser: <a class="term" href="ordliste.html#b-glitch">feilinjeksjon</a> (klokke-/spenningsglitching, elektromagnetisk injeksjon) og sidekanalanalyse (effektanalyse).</p>
 
           <h2>Hva betyr «sikkerhet»?</h2>
           <p>Oxford-ordboken definerer sikkerhet enkelt som <em>«a state of being free from danger or threat»</em> — en tilstand fri for fare eller trussel. Overført til maskinvare betyr det at et system skal fortsette å oppføre seg som tiltenkt selv når noen aktivt prøver å få det til å gjøre noe annet: kjøre uautorisert kode, lekke en hemmelig nøkkel, eller omgå en lisens- eller passordsjekk.</p>
           <p>Det som gjør maskinvaresikkerhet vanskeligere enn ren programvaresikkerhet, er at angriperen ikke er bundet av API-et systemet eksponerer. Et program kan validere input perfekt og likevel være sårbart for at noen måler strømforbruket mens det regner ut et passord, eller injiserer en kortvarig feil i klokkesignalet akkurat idet en if-sjekk skal evalueres.</p>
 
           <h2>Chain of trust — hvorfor oppstart er alt</h2>
-          <p>De fleste mikrokontrollere har minst tre minnetyper som er relevante for sikkerhet: <strong>flash</strong> (der programkoden ligger lagret permanent), <strong>RAM</strong> (arbeidsminne) og selve <strong>CPU-en</strong> som utfører instruksjonene. Når kretsen får strøm, må den bestemme hvilken kode i flashen som faktisk skal kjøres — og det er her <em>chain of trust</em> (tillitskjeden) kommer inn.</p>
-          <p>Prinsippet er enkelt: en liten, uforanderlig førstetrinns bootloader (ofte brent inn i silisiumet på fabrikken) starter opp og verifiserer signaturen til neste trinn før den gir fra seg kontrollen. Det trinnet verifiserer på sin side neste, og slik fortsetter det — hvert ledd i kjeden sjekker at det neste er signert av noen det stoler på, før det kjøres. Hvis kjeden holder, kan man stole på at kretsen kjører uendret, autorisert kode helt fra første klokkesyklus.</p>
-          <p>Kjeden er samtidig det mest attraktive angrepsmålet: klarer man å bryte tilliten ett eneste sted — for eksempel ved å lure et trinn til å hoppe over signatursjekken — er resten av kjeden verdiløs. Store deler av dette emnet handler nettopp om hvordan man i praksis kan angripe (og forsvare) akkurat det trinnet, enten via debug-grensesnittet (kapittel 02), eller ved å fysisk forstyrre kretsen mens den kjører (kapittel 05–06).</p>
+          <p>De fleste mikrokontrollere har minst tre minnetyper som er relevante for sikkerhet: <strong><a class="term" href="ordliste.html#b-flash">flash</a></strong> (der programkoden ligger lagret permanent), <strong><a class="term" href="ordliste.html#b-ram">RAM</a></strong> (arbeidsminne) og selve <strong>CPU-en</strong> som utfører instruksjonene. Når kretsen får strøm, må den bestemme hvilken kode i flashen som faktisk skal kjøres — og det er her <em><a class="term" href="ordliste.html#b-kjede">chain of trust</a></em> (tillitskjeden) kommer inn.</p>
+          <p>Prinsippet er enkelt: en liten, uforanderlig førstetrinns <a class="term" href="ordliste.html#b-bootloader">bootloader</a> (ofte brent inn i silisiumet på fabrikken) starter opp og verifiserer <a class="term" href="ordliste.html#b-signatur">signaturen</a> til neste trinn før den gir fra seg kontrollen. Det trinnet verifiserer på sin side neste, og slik fortsetter det — hvert ledd i kjeden sjekker at det neste er signert av noen det stoler på, før det kjøres. Hvis kjeden holder, kan man stole på at kretsen kjører uendret, autorisert kode helt fra første klokkesyklus.</p>
+          <p>Kjeden er samtidig det mest attraktive angrepsmålet: klarer man å bryte tilliten ett eneste sted — for eksempel ved å lure et trinn til å hoppe over signatursjekken — er resten av kjeden verdiløs. Store deler av dette emnet handler nettopp om hvordan man i praksis kan angripe (og forsvare) akkurat det trinnet, enten via <a class="term" href="ordliste.html#b-debug">debug-grensesnittet</a> (kapittel 02), eller ved å fysisk forstyrre kretsen mens den kjører (kapittel 05–06).</p>
 
           <h3>Et konkret eksempel: hva som ligger i flashen på nRF52840-donglen</h3>
           <p>Donglen fra lab 1 og 2 viser hvordan en oppstartskjede ser ut i praksis. Etter lab 1 ligger det fire ting i flashen:</p>
           <ol>
-            <li><strong>MBR</strong> (Master Boot Record) helt nederst i flashen. Det er det første som kjører, og det sender videre til bootloaderen.</li>
-            <li><strong>SoftDevice</strong> (S140) er Nordics ferdigkompilerte Bluetooth-stack, som applikasjonen kaller.</li>
-            <li><strong>Applikasjonen</strong>, i labben CircuitPython.</li>
-            <li><strong>UF2-bootloaderen</strong> øverst i flashen lar deg laste inn ny kode ved å kopiere en <code>.uf2</code>-fil til en diskstasjon.</li>
+            <li><strong><a class="term" href="ordliste.html#b-mbr">MBR</a></strong> (Master Boot Record) helt nederst i flashen. Det er det første som kjører, og det sender videre til bootloaderen.</li>
+            <li><strong><a class="term" href="ordliste.html#b-softdevice">SoftDevice</a></strong> (S140) er Nordics ferdigkompilerte Bluetooth-stack, som applikasjonen kaller.</li>
+            <li><strong>Applikasjonen</strong>, i labben <a class="term" href="ordliste.html#b-micropython">CircuitPython</a>.</li>
+            <li><strong><a class="term" href="ordliste.html#b-uf2">UF2</a>-bootloaderen</strong> øverst i flashen lar deg laste inn ny kode ved å kopiere en <code>.uf2</code>-fil til en diskstasjon.</li>
           </ol>
-          <p>Ingen av trinnene sjekker en signatur. Det er en <em>kjede</em>, men ingen <em>tillitskjede</em>: alle som kan koble til SWD eller USB, kan bytte ut koden. Det er nettopp det du gjør i lab 1. Spørsmålet «hva mangler for at dette skal være sikker oppstart?» er derfor en god inngang til hele faget. Svaret er en uforanderlig førstetrinnskode som verifiserer neste trinn, og en debug-port som er låst.</p>
+          <p>Ingen av trinnene sjekker en signatur. Det er en <em>kjede</em>, men ingen <em>tillitskjede</em>: alle som kan koble til <a class="term" href="ordliste.html#b-swd">SWD</a> eller USB, kan bytte ut koden. Det er nettopp det du gjør i lab 1. Spørsmålet «hva mangler for at dette skal være sikker oppstart?» er derfor en god inngang til hele faget. Svaret er en uforanderlig førstetrinnskode som verifiserer neste trinn, og en debug-port som er låst.</p>
 
           <h2>Hvordan pensum henger sammen</h2>
-          <p>Forelesningene viser selv til kapitler i <em>The Hardware Hacking Handbook</em> (HHH). BLE-sikkerheten er hentet fra kapittel 10 i <em>The IoT Hacker's Handbook</em> (Aditya Gupta), som ligger blant kursfilene.</p>
+          <p>Forelesningene viser selv til kapitler i <em>The Hardware Hacking Handbook</em> (HHH). <a class="term" href="ordliste.html#b-ble">BLE</a>-sikkerheten er hentet fra kapittel 10 i <em>The IoT Hacker's Handbook</em> (Aditya Gupta), som ligger blant kursfilene.</p>
           <div class="dtable-wrap"><table class="dtable">
             <thead><tr><th>Kapittel her</th><th>Lab</th><th>Angrepsflate</th><th>Bok</th></tr></thead>
             <tbody>
-              <tr><td>02 Bootloader, SWD, UART</td><td>1</td><td>debug-port, readback-beskyttelse</td><td>HHH kap. 3 (dokumentasjon, grensesnitt)</td></tr>
-              <tr><td>03 BLE</td><td>2</td><td>trådløst grensesnitt, GATT uten autentisering</td><td>IoT Hacker's Handbook kap. 10</td></tr>
-              <tr><td>04 MicroPython, MQTT</td><td>3</td><td>sky-/meldingslaget, nøkler i flash</td><td>–</td></tr>
-              <tr><td>05 Effektanalyse</td><td>4</td><td>sidekanal (passiv)</td><td>HHH kap. 8–9 (og 10 for DPA)</td></tr>
+              <tr><td>02 Bootloader, SWD, <a class="term" href="ordliste.html#b-uart">UART</a></td><td>1</td><td>debug-port, <a class="term" href="ordliste.html#b-approtect">readback-beskyttelse</a></td><td>HHH kap. 3 (dokumentasjon, grensesnitt)</td></tr>
+              <tr><td>03 BLE</td><td>2</td><td>trådløst grensesnitt, <a class="term" href="ordliste.html#b-gatt">GATT</a> uten autentisering</td><td>IoT Hacker's Handbook kap. 10</td></tr>
+              <tr><td>04 MicroPython, <a class="term" href="ordliste.html#b-mqtt">MQTT</a></td><td>3</td><td>sky-/meldingslaget, nøkler i flash</td><td>–</td></tr>
+              <tr><td>05 Effektanalyse</td><td>4</td><td><a class="term" href="ordliste.html#b-sidekanal">sidekanal</a> (passiv)</td><td>HHH kap. 8–9 (og 10 for <a class="term" href="ordliste.html#b-dpa">DPA</a>)</td></tr>
               <tr><td>06 Glitching</td><td>5</td><td>feilinjeksjon (aktiv)</td><td>HHH kap. 4–6 (og 7 for EM-injeksjon)</td></tr>
             </tbody>
           </table></div>
@@ -97,9 +97,9 @@
           <details class="sol">
             <summary>Er nRF52840-donglen etter lab 1 sikker? Hva mangler?</summary>
             <div class="sol__body">
-              <p>Nei. MBR, bootloader og applikasjon verifiserer ikke hverandre, og SWD-porten er åpen etter ERASEALL. Det som mangler, er:</p>
+              <p>Nei. MBR, bootloader og applikasjon verifiserer ikke hverandre, og SWD-porten er åpen etter <a class="term" href="ordliste.html#b-eraseall">ERASEALL</a>. Det som mangler, er:</p>
               <ul>
-                <li>signert firmware med en offentlig nøkkel i et minne som ikke kan endres,</li>
+                <li>signert firmware med en <a class="term" href="ordliste.html#b-nokkel">offentlig nøkkel</a> i et minne som ikke kan endres,</li>
                 <li>en bootloader som avviser usignerte bilder,</li>
                 <li>APPROTECT slått på i produksjon.</li>
               </ul>
@@ -118,8 +118,9 @@
     </div>
   </div>
 
-  <script src="../../../assets/js/main.js?v=43"></script>
+  <script src="../../../assets/js/main.js?v=44"></script>
   <script src="../../../assets/js/status.js?v=35"></script>
   <script src="../../../assets/js/formler.js?v=35"></script>
+  <script src="../../../assets/js/begrep.js?v=2"></script>
 </body>
 </html>

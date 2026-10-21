@@ -7,7 +7,7 @@
   <meta name="description" content="Et lite system med fire konteinere: REST-API i shell over SQLite, et tjenerside-grensesnitt med HTML-skjema og CGI, og et klientside-grensesnitt med fetch, CORS og Subresource Integrity.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../../assets/css/main.css?v=43">
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=44">
 </head>
 <body class="theme-tsd3060" data-updated="2026-10-02">
   <div class="app-shell">
@@ -50,7 +50,7 @@
 
         <article class="prose">
           <h2>Data til en HTML-side</h2>
-          <p>Oppvarmingen er et spørsmål fra timen før: kan en <em>statisk</em> HTML-side ta imot data fra et skjema? Ja, hvis JavaScript gjør jobben i nettleseren. <code>a.html</code> sender skjemaet med GET til <code>b.html</code>. Tjeneren ser bort fra spørrestrengen og leverer fila som den er, og så leser skriptet i <code>b.html</code> spørrestrengen selv:</p>
+          <p>Oppvarmingen er et spørsmål fra timen før: kan en <em>statisk</em> <a class="term" href="ordliste.html#b-html">HTML</a>-side ta imot data fra et skjema? Ja, hvis <a class="term" href="ordliste.html#b-javascript">JavaScript</a> gjør jobben i nettleseren. <code>a.html</code> sender skjemaet med <a class="term" href="ordliste.html#b-get">GET</a> til <code>b.html</code>. Tjeneren ser bort fra spørrestrengen og leverer fila som den er, og så leser skriptet i <code>b.html</code> spørrestrengen selv:</p>
           <pre class="codeblock">&lt;!-- a.html --&gt;
 &lt;form action=b.html&gt;
   &lt;input type=text name=navn&gt;
@@ -63,8 +63,8 @@
     document.querySelector('#avsnitt').innerHTML = window.location.search
 &lt;/script&gt;
 &lt;p id="avsnitt"&gt;&lt;/p&gt;</pre>
-          <p>Siden viser <code>?navn=Ola+Nordmann</code>, altså fortsatt URL-kodet. Det er grensen mellom en «HTML-side» og en «web-app»: dataene behandles bare hos klienten, og tjeneren får aldri vite noe om dem.</p>
-          <div class="note"><strong>Bedre praksis:</strong> bruk <code>textContent</code> i stedet for <code>innerHTML</code> når du skriver brukerdata inn på siden, og dekod med <code>new URLSearchParams(location.search).get('navn')</code>. <code>innerHTML</code> tolker teksten som HTML. Her redder det deg at nettleseren URL-koder <code>&lt;</code> til <code>%3C</code> i spørrestrengen, men vaner fra slike eksempler havner fort i kode der data ikke er kodet (XSS, se <a href="38-cgi-html-skjema.html">uke 38</a>).</div>
+          <p>Siden viser <code>?navn=Ola+Nordmann</code>, altså fortsatt <a class="term" href="ordliste.html#b-urlkoding">URL-kodet</a>. Det er grensen mellom en «HTML-side» og en «web-app»: dataene behandles bare hos klienten, og tjeneren får aldri vite noe om dem.</p>
+          <div class="note"><strong>Bedre praksis:</strong> bruk <code>textContent</code> i stedet for <code>innerHTML</code> når du skriver brukerdata inn på siden, og dekod med <code>new URLSearchParams(location.search).get('navn')</code>. <code>innerHTML</code> tolker teksten som HTML. Her redder det deg at nettleseren <a class="term" href="ordliste.html#b-url">URL</a>-koder <code>&lt;</code> til <code>%3C</code> i spørrestrengen, men vaner fra slike eksempler havner fort i kode der data ikke er kodet (<a class="term" href="ordliste.html#b-xss">XSS</a>, se <a href="38-cgi-html-skjema.html">uke 38</a>).</div>
 
           <h2>Systemet</h2>
           <pre class="codeblock">tjenerside_og_klientside/
@@ -88,7 +88,7 @@
 
           <h2>db: REST-API-et</h2>
           <h3>db.c: en minimal HTTP-tjener</h3>
-          <p>Dette er <code>starter.c</code> fra <a href="33-http-rest.html">uke 33</a> i kortversjon: <code>socket</code> → <code>bind</code> (port 80) → <code>listen</code> → <code>accept</code> i en løkke. For hver forbindelse gjør den <code>fork</code>, og barnet kobler socketen til stdin og stdout med <code>dup2</code> og bytter seg ut med skallskriptet:</p>
+          <p>Dette er <code>starter.c</code> fra <a href="33-http-rest.html">uke 33</a> i kortversjon: <code>socket</code> → <code>bind</code> (port 80) → <code>listen</code> → <code>accept</code> i en løkke. For hver forbindelse gjør den <code>fork</code>, og barnet kobler <a class="term" href="ordliste.html#b-socket">socketen</a> til <a class="term" href="ordliste.html#b-stdio">stdin</a> og stdout med <code>dup2</code> og bytter seg ut med skallskriptet:</p>
           <pre class="codeblock">if (0 == fork()) {
   dup2(ny_sd, 1);  dup2(ny_sd, 0);
   execlp("env", "env", "-i", "./db.sh", NULL);   // tomt miljø: ingen arvede variabler
@@ -97,14 +97,14 @@ else { close(ny_sd); }</pre>
           <p>Den kompileres statisk (<code>gcc -static db/db.c -o db/db</code>), fordi Alpine-bildet ikke har de samme C-bibliotekene som maskinen du kompilerer på.</p>
 
           <h3>db.sh: HTTP og REST i shell</h3>
-          <p>Det finnes ingen webtjener som setter CGI-variabler her, så <code>db.sh</code> leser HTTP-forespørselen selv:</p>
+          <p>Det finnes ingen webtjener som setter <a class="term" href="ordliste.html#b-cgi">CGI</a>-variabler her, så <code>db.sh</code> leser <a class="term" href="ordliste.html#b-http">HTTP</a>-forespørselen selv:</p>
           <ol>
             <li>Linje 2&#8211;5: Les <strong>forespørselslinja</strong> (<code>PUT /person/ola@example.com HTTP/1.1</code>) og del den med <code>cut</code> i metode og URI.</li>
-            <li>Linje 7&#8211;12: Skriv statuslinja, <code>Content-Type: application/json</code> og <strong>CORS-hodene</strong>, som tillater <code>http://localhost:8080</code> (der <code>db.html</code> ligger).</li>
+            <li>Linje 7&#8211;12: Skriv statuslinja, <code>Content-Type: application/json</code> og <strong><a class="term" href="ordliste.html#b-cors">CORS</a>-hodene</strong>, som tillater <code>http://localhost:8080</code> (der <code>db.html</code> ligger).</li>
             <li>Linje 15&#8211;22: Les resten av hodet til den <strong>tomme linja</strong>. Ta vare på <code>Content-Length</code>.</li>
             <li>Linje 24&#8211;25: <code>/person/ola@example.com</code> gir tabellen <code>TAB=person</code> og raden <code>RAD=ola@example.com</code>.</li>
-            <li>Linje 27&#8211;34: Ved POST og PUT leses nøyaktig <code>CONTENT_LENGTH</code> byte av kroppen med <code>dd</code>, og feltene hentes ut med <code>jq</code>.</li>
-            <li>Linje 42&#8211;69: Metoden velger SQL-setningen. Svaret er JSON fra <code>sqlite3 -json</code>.</li>
+            <li>Linje 27&#8211;34: Ved <a class="term" href="ordliste.html#b-post">POST</a> og <a class="term" href="ordliste.html#b-put">PUT</a> leses nøyaktig <code>CONTENT_LENGTH</code> byte av kroppen med <code>dd</code>, og feltene hentes ut med <code>jq</code>.</li>
+            <li>Linje 42&#8211;69: Metoden velger <a class="term" href="ordliste.html#b-sql">SQL</a>-setningen. Svaret er <a class="term" href="ordliste.html#b-json">JSON</a> fra <code>sqlite3 -json</code>.</li>
           </ol>
           <div class="dtable-wrap">
             <table class="dtable">
@@ -114,25 +114,25 @@ else { close(ny_sd); }</pre>
                 <tr><td>GET</td><td><code>/person/&lt;epost&gt;</code></td><td><code>SELECT … WHERE epost=…</code></td></tr>
                 <tr><td>POST</td><td><code>/person/</code> + JSON</td><td><code>INSERT INTO person …</code></td></tr>
                 <tr><td>PUT</td><td><code>/person/&lt;epost&gt;</code> + JSON</td><td><code>UPDATE person SET … WHERE epost=…</code></td></tr>
-                <tr><td>DELETE</td><td><code>/person/&lt;epost&gt;</code></td><td><code>DELETE FROM person WHERE epost=…</code></td></tr>
+                <tr><td><a class="term" href="ordliste.html#b-delete">DELETE</a></td><td><code>/person/&lt;epost&gt;</code></td><td><code>DELETE FROM person WHERE epost=…</code></td></tr>
               </tbody>
             </table>
           </div>
-          <p>Svaret har alltid status 200, også ved feil. Et ekte REST-API ville svart 404 for en ukjent ressurs og 201 for en ny rad.</p>
+          <p>Svaret har alltid status 200, også ved feil. Et ekte <a class="term" href="ordliste.html#b-rest">REST-API</a> ville svart 404 for en ukjent ressurs og 201 for en ny rad.</p>
 
           <h2>app: tjenerside, uten JavaScript</h2>
           <p><code>app.html</code> er et vanlig skjema med <code>method='post'</code> og fire submit-knapper med samme <code>name='handling'</code>. Knappen du trykker, sendes med som <code>handling=Ny</code> og så videre. <code>app.cgi</code> gjør så tre ting:</p>
           <ol>
             <li>Leser kroppen (<code>epost=…&amp;telefon=…&amp;handling=Ny</code>) og deler den i variabler med <code>tr</code> og <code>cut</code>. Den eneste URL-dekodingen er <code>%40</code> → <code>@</code>.</li>
             <li>Bygger et JSON-objekt av feltene.</li>
-            <li>Sender det med <code>curl</code> til <code>db/person</code>. <code>db</code> er tjenestenavnet i <code>compose.yaml</code>, og Compose sitt nettverk gjør det om til konteinerens adresse. Porten er 80, altså konteinerporten, ikke 8090.</li>
+            <li>Sender det med <code>curl</code> til <code>db/person</code>. <code>db</code> er tjenestenavnet i <code>compose.yaml</code>, og <a class="term" href="ordliste.html#b-compose">Compose</a> sitt nettverk gjør det om til konteinerens adresse. Porten er 80, altså konteinerporten, ikke 8090.</li>
           </ol>
           <pre class="codeblock">URL='db/person'
 if [ "$HA" = "Oppdater" ]; then curl -X PUT    -d "$JSON" $URL/$EP; fi
 if [ "$HA" = "Ny"       ]; then curl -X POST   -d "$JSON" $URL;     fi
 if [ "$HA" = "Slett"    ]; then curl -X DELETE            $URL/$EP; fi
 if [ "$HA" = "Liste"    ]; then curl -X GET               $URL/$EP; fi</pre>
-          <p>Her er det ingen CORS: kallet til <code>db</code> går fra konteiner til konteiner, ikke fra kode i en nettleser. Retningslinjen om samme opphav gjelder ikke. Det ga uttelling i 2025&#8211;26 konte å påpeke nettopp det (se <a href="eksamensanalyse.html">eksamensanalysen</a>).</p>
+          <p>Her er det ingen CORS: kallet til <code>db</code> går fra <a class="term" href="ordliste.html#b-konteiner">konteiner</a> til konteiner, ikke fra kode i en nettleser. Retningslinjen om samme opphav gjelder ikke. Det ga uttelling i 2025&#8211;26 konte å påpeke nettopp det (se <a href="eksamensanalyse.html">eksamensanalysen</a>).</p>
           <p>Linja <code>CONTENT_LENGTH=$HTTP_CONTENT_LENGTH$CONTENT_LENGTH</code> omgår en feil i busybox <code>httpd</code>: lengden kan havne i den ene eller den andre variabelen, og skjøtes de, blir resultatet det som er satt.</p>
 
           <h2>web/db.html: klientside, med JavaScript</h2>
@@ -152,17 +152,17 @@ function liste() {
   let url = new URL('/person/' + epost, 'http://localhost:8090')
   window.location.href = url        // navigerer dit: ikke fetch, så ingen CORS
 }</pre>
-          <p>Siden er lastet fra <code>localhost:8080</code> og kaller <code>localhost:8090</code>. Det er <strong>ulike opphav</strong> fordi porten er forskjellig. Med <code>Content-Type: application/json</code> og metodene PUT og DELETE blir det en <strong>forhåndskontroll</strong> (<code>OPTIONS</code>) før hvert kall. <code>db.sh</code> skriver CORS-hodene (linje 10&#8211;12) for alle metoder, også <code>OPTIONS</code>. Det er derfor <code>Access-Control-Allow-Headers: Content-Type</code> må være med.</p>
+          <p>Siden er lastet fra <code>localhost:8080</code> og kaller <code>localhost:8090</code>. Det er <strong>ulike opphav</strong> fordi porten er forskjellig. Med <code>Content-Type: application/json</code> og metodene PUT og DELETE blir det en <strong><a class="term" href="ordliste.html#b-preflight">forhåndskontroll</a></strong> (<code>OPTIONS</code>) før hvert kall. <code>db.sh</code> skriver CORS-hodene (linje 10&#8211;12) for alle metoder, også <code>OPTIONS</code>. Det er derfor <code>Access-Control-Allow-Headers: Content-Type</code> må være med.</p>
           <p>Men det finnes ingen gren for <code>OPTIONS</code> i linje 42&#8211;69, så skriptet avslutter uten å skrive den tomme linja som avslutter hodet. Om nettleseren godtar et slikt avkappet svar som godkjent forhåndskontroll, bør du ikke stole på. Legg til en egen gren: <code>elif [ "$REQUEST_METHOD" = "OPTIONS" ]; then printf "\r\n"</code>.</p>
 
           <h3>Subresource Integrity</h3>
-          <p><code>db.html</code> laster skriptet med en hash:</p>
+          <p><code>db.html</code> laster skriptet med en <a class="term" href="ordliste.html#b-hash">hash</a>:</p>
           <pre class="codeblock">&lt;script src="db.js" integrity="sha384-gchPot6akwYig1yf…"&gt;&lt;/script&gt;</pre>
-          <p>Nettleseren beregner hashen av fila den får, og nekter å kjøre den hvis den ikke stemmer. Det beskytter mot at noen bytter ut skriptet på tjeneren eller underveis, og er mest nyttig for skript fra fremmede tjenere (CDN). Hashen lages slik:</p>
+          <p>Nettleseren beregner hashen av fila den får, og nekter å kjøre den hvis den ikke stemmer. Det beskytter mot at noen bytter ut skriptet på tjeneren eller underveis, og er mest nyttig for skript fra fremmede tjenere (<a class="term" href="ordliste.html#b-cdn">CDN</a>). Hashen lages slik:</p>
           <pre class="codeblock">( openssl dgst -sha384 -binary | base64 ) &lt; db.js</pre>
           <div class="pitfall">
             <div class="pitfall__title">Fallgruve: hashen i db.html stemmer ikke med db.js</div>
-            <p>Hashen i <code>db.html</code> på debbie er <code>gchPot6a…</code>, men <code>db.js</code> på debbie gir <code>vA6U34ti…</code>. Fila er altså endret etter at hashen ble laget, og nettleseren vil nekte å kjøre skriptet. Ingen knapper virker, og konsollen viser en integritetsfeil. Kjør kommandoen over og lim inn den nye hashen. Dette er også et godt eksamenseksempel på at SRI gjør jobben sin: endret innhold blir stoppet.</p>
+            <p>Hashen i <code>db.html</code> på debbie er <code>gchPot6a…</code>, men <code>db.js</code> på debbie gir <code>vA6U34ti…</code>. Fila er altså endret etter at hashen ble laget, og nettleseren vil nekte å kjøre skriptet. Ingen knapper virker, og konsollen viser en integritetsfeil. Kjør kommandoen over og lim inn den nye hashen. Dette er også et godt eksamenseksempel på at <a class="term" href="ordliste.html#b-sri">SRI</a> gjør jobben sin: endret innhold blir stoppet.</p>
           </div>
 
           <h2>Tjenerside eller klientside?</h2>
@@ -183,7 +183,7 @@ function liste() {
             <div class="pitfall__title">Fallgruve: feil og svakheter i koden (eksamensstoff)</div>
             <ul>
               <li><strong>Feil kolonnerekkefølge ved POST</strong> (<code>db.sh</code> linje 52&#8211;54): kolonnene er <code>(epost, fornavn, etternavn, telefon)</code>, men verdiene er <code>('$EP', '$TF', '$FN', '$EN')</code>. Telefonnummeret havner i <code>fornavn</code>, fornavnet i <code>etternavn</code> og etternavnet i <code>telefon</code>.</li>
-              <li><strong>SQL-injeksjon:</strong> både URL-en (<code>$RAD</code>) og JSON-feltene limes rett inn i SQL. Med <code>curl -X DELETE "localhost:8090/person/x'OR'1'='1"</code> blir setningen <code>… WHERE epost='x'OR'1'='1'</code>, og alle radene slettes. Mellomrom trengs ikke, og skriptet dekoder ikke URL-en. Løsningen er forberedte kommandoer, eller streng validering, fra <a href="34-sqlite-injeksjon-autentisering.html">uke 34</a>.</li>
+              <li><strong><a class="term" href="ordliste.html#b-sqlinj">SQL-injeksjon</a>:</strong> både URL-en (<code>$RAD</code>) og JSON-feltene limes rett inn i SQL. Med <code>curl -X DELETE "localhost:8090/person/x'OR'1'='1"</code> blir setningen <code>… WHERE epost='x'OR'1'='1'</code>, og alle radene slettes. Mellomrom trengs ikke, og skriptet dekoder ikke URL-en. Løsningen er <a class="term" href="ordliste.html#b-prepared">forberedte kommandoer</a>, eller streng validering, fra <a href="34-sqlite-injeksjon-autentisering.html">uke 34</a>.</li>
               <li><strong>JSON bygd med strengskjøting</strong> i <code>db.js</code> og <code>app.cgi</code>: et <code>"</code> i et felt ødelegger JSON-en eller legger til felt. Bruk <code>JSON.stringify({fornavn, etternavn, telefon})</code>.</li>
               <li><strong>Ingen innlogging:</strong> hvem som helst som når port 8090, kan lese og endre alt. Det er det <a href="40-innlogging-sesjoner.html">db2 i uke 40</a> retter på.</li>
               <li><strong><code>Allow-Origin</code> er et eksakt opphav:</strong> åpner du siden som <code>http://127.0.0.1:8080</code> i stedet for <code>localhost:8080</code>, stopper nettleseren kallene.</li>
@@ -232,8 +232,9 @@ curl -X DELETE localhost:8090/person/per@example.com</pre>
     </div>
   </div>
 
-  <script src="../../../assets/js/main.js?v=43"></script>
+  <script src="../../../assets/js/main.js?v=44"></script>
   <script src="../../../assets/js/status.js?v=35"></script>
   <script src="../../../assets/js/formler.js?v=35"></script>
+  <script src="../../../assets/js/begrep.js?v=2"></script>
 </body>
 </html>

@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ordliste — MoS · H26</title>
+  <meta name="description" content="Ordliste for MoS: forklaring av de tekniske begrepene som brukes i kapitlene.">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=44">
+</head>
+<body class="theme-mos" data-updated="2026-10-21">
+  <div class="app-shell">
+
+    <aside class="sidebar"></aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">MoS</a>
+        <div class="topbar__crumb">Ordliste</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow">MoS · oppslag</div>
+          <h1>Ordliste</h1>
+          <p class="page-header__desc">Forklaring av de tekniske begrepene i MoS, fra tillitskjede og debug-porter til BLE, MQTT og sidekanaler.</p>
+        </header>
+
+        <div class="sourcebar">
+          <a class="tag" href="#g-sikkerhet">Sikkerhet og trusler</a>
+          <a class="tag" href="#g-krypto">Kryptografi</a>
+          <a class="tag" href="#g-maskinvare">Maskinvare</a>
+          <a class="tag" href="#g-debug">Debug og seriellkommunikasjon</a>
+          <a class="tag" href="#g-oppstart">Oppstart og fastvare</a>
+          <a class="tag" href="#g-ble">Bluetooth Low Energy</a>
+          <a class="tag" href="#g-mqtt">MQTT og nettverk</a>
+          <a class="tag" href="#g-sidekanal">Sidekanaler og feilinjeksjon</a>
+          <a class="tag" href="#g-feil">Programfeil og testing</a>
+        </div>
+
+        <article class="prose">
+          <p>De stiplede ordene i teksten på de andre sidene viser forklaringen herfra når du klikker på dem. Klikk på ordet igjen, utenfor boblen eller trykk Esc for å lukke den.</p>
+
+          <h2 id="g-sikkerhet">Sikkerhet og trusler</h2>
+          <dl class="terms">
+            <dt id="b-trussel">Trusselmodell<small>threat model</small></dt>
+            <dd>En beskrivelse av hva som skal beskyttes, mot hvem, og hva angriperen har tilgang til: fysisk tilgang eller bare nettverk, utstyr, tid og kunnskap. «Sikker» betyr bare noe i forhold til en trusselmodell.</dd>
+            <dt id="b-angrepsflate">Angrepsflate<small>attack surface</small></dt>
+            <dd>Summen av stedene en angriper kan påvirke systemet fra: åpne porter, debug-grensesnitt, radiogrensesnitt, input som tolkes, fysiske pinner. Hver funksjon som fjernes eller låses, gjør flaten mindre.</dd>
+            <dt id="b-kit">Konfidensialitet, integritet og tilgjengelighet<small>CIA, KIT</small></dt>
+            <dd>De tre klassiske sikkerhetsmålene. <em>Konfidensialitet</em>: bare de rette kan lese dataene. <em>Integritet</em>: dataene er ikke endret uten at det oppdages. <em>Tilgjengelighet</em>: systemet virker når det trengs. Et tiltak beskytter som regel bare noen av dem, for eksempel beskytter lesebeskyttelse konfidensialitet, ikke integritet.</dd>
+            <dt id="b-cve">CVE og CWE<small>sårbarhetskataloger</small></dt>
+            <dd><em>CVE</em> er et nummer for én konkret sårbarhet i ett produkt (for eksempel CVE-2018-6242). <em>CWE</em> er en katalog over feiltyper, for eksempel CWE-119, manglende grensesjekk på en minnebuffer. En CVE klassifiseres gjerne med en CWE.</dd>
+            <dt id="b-cvss">CVSS<small>Common Vulnerability Scoring System</small></dt>
+            <dd>En skala fra 0 til 10 for hvor alvorlig en sårbarhet er, ut fra blant annet hvilken tilgang angriperen trenger og hva konsekvensen blir. Krav om fysisk tilgang trekker scoren ned selv om konsekvensen er stor.</dd>
+          </dl>
+
+          <h2 id="g-krypto">Kryptografi</h2>
+          <dl class="terms">
+            <dt id="b-signatur">Digital signatur<small>signature</small></dt>
+            <dd>Et tall som produsenten regner ut fra koden og sin private nøkkel, og legger ved bildet. Enheten sjekker den med den offentlige nøkkelen. Stemmer den, vet enheten to ting: koden er ikke endret siden den ble signert (<em>integritet</em>), og den kommer fra den som har den private nøkkelen (<em>autentisitet</em>). Navnet spiller på en håndskrevet underskrift, men en digital signatur hører til nøyaktig disse dataene: endres én bit i koden, passer den ikke lenger. Signert betyr verken kryptert eller feilfritt.</dd>
+            <dt id="b-hash">Hash<small>hash, hashfunksjon</small></dt>
+            <dd>Et kort «fingeravtrykk» av data, med fast lengde uansett hvor store dataene er (SHA-256 gir alltid 32 byte). Samme data gir alltid samme hash, og endres én bit, blir hashen helt annerledes. Det er i praksis umulig å lage to ulike data med samme hash. En hash viser at dataene er uendret, men ikke hvem som laget dem. Det er jobben til signaturen.</dd>
+            <dt id="b-nokkel">Offentlig og privat nøkkel<small>public / private key</small></dt>
+            <dd>Et nøkkelpar i asymmetrisk kryptografi. Den private nøkkelen holdes hemmelig hos produsenten og brukes til å lage signaturer. Den offentlige nøkkelen kan alle se, og den kan bare brukes til å sjekke signaturer. Ut fra den offentlige nøkkelen kan man verken regne ut den private eller lage nye signaturer.</dd>
+            <dt id="b-rsa">RSA og ECDSA<small>signaturalgoritmer</small></dt>
+            <dd>To vanlige algoritmer for digitale signaturer. ECDSA bygger på elliptiske kurver og gir like sterk sikkerhet med mye kortere nøkler og signaturer. Det er nyttig når det er knapt med plass i ROM og fuses.</dd>
+            <dt id="b-ecdh">ECDH<small>Elliptic Curve Diffie–Hellman</small></dt>
+            <dd>En nøkkelutveksling der to parter blir enige om en felles hemmelig nøkkel over en åpen kanal. Hver part sender bare sin offentlige del, og en som lytter, kan ikke regne ut nøkkelen. BLE bruker ECDH i LE Secure Connections.</dd>
+            <dt id="b-tls">TLS<small>Transport Layer Security</small></dt>
+            <dd>Protokollen som krypterer og integritetsbeskytter en forbindelse over nettet, og som lar klienten sjekke tjenerens identitet med et sertifikat. HTTPS er HTTP over TLS, og MQTT over TLS bruker port 8883.</dd>
+          </dl>
+
+          <h2 id="g-maskinvare">Maskinvare</h2>
+          <dl class="terms">
+            <dt id="b-soc">System på brikke<small>SoC, system on chip</small></dt>
+            <dd>Én brikke som samler prosessorkjerner, internt minne, periferi og ofte egne hjelpeprosessorer. Boot ROM og fuses ligger inne i den samme brikken, utenfor rekkevidde for programvaren som lastes senere.</dd>
+            <dt id="b-mcu">Mikrokontroller<small>MCU, microcontroller</small></dt>
+            <dd>En liten datamaskin på én brikke laget for å styre én ting: prosessorkjerne, flash, RAM og periferi som GPIO, UART og radio. Kjører gjerne ett program direkte på maskinvaren, uten operativsystem.</dd>
+            <dt id="b-rom">Boot ROM<small>maske-ROM</small></dt>
+            <dd>Den første koden prosessoren kjører når den får strøm. ROM står for <em>read-only memory</em>. Ofte er det en maske-ROM: innholdet er en del av selve kretsmønsteret som etses inn under produksjonen, og kan ikke endres etterpå, verken av en angriper eller av produsenten.</dd>
+            <dt id="b-fuses">OTP-fuses<small>eFuses, one-time programmable</small></dt>
+            <dd>Små minneceller i brikken som bare kan programmeres én gang: en bit «brennes» fra 0 til 1 og kan aldri settes tilbake. Brukes til hash av nøkler, innstillinger som «sikker oppstart på» og tellere som bare kan gå oppover.</dd>
+            <dt id="b-flash">Flash<small>flash-minne</small></dt>
+            <dd>Lager som beholder innholdet uten strøm, og som kan skrives på nytt. Bootloadere og operativsystem ligger her nettopp fordi de skal kunne oppdateres, og derfor må de verifiseres før de kjøres.</dd>
+            <dt id="b-ram">RAM: SRAM og DRAM<small>arbeidsminne</small></dt>
+            <dd>Arbeidsminne som mister innholdet når strømmen går. SRAM ligger inne i brikken og kan brukes med en gang. DRAM er større, sitter utenfor brikken og må settes opp av en bootloader før det kan brukes.</dd>
+            <dt id="b-tpm">TPM<small>Trusted Platform Module</small></dt>
+            <dd>En egen sikkerhetsbrikke, eller en beskyttet del av hovedbrikken, som lagrer målinger av oppstarten og nøkler, og som kan signere en rapport om målingene.</dd>
+            <dt id="b-silisium">Silisiumrevisjon<small>brikkerevisjon</small></dt>
+            <dd>En versjon av selve brikken. Nytt ROM-innhold krever nye masker og ny produksjon, så en rettelse gjelder bare brikker som lages etterpå.</dd>
+            <dt id="b-gpio">GPIO<small>general purpose input/output</small></dt>
+            <dd>En pinne som programvaren selv bestemmer bruken av: som utgang (sett høy eller lav, for eksempel en LED) eller som inngang (les en knapp). Spenningsnivået følger forsyningsspenningen VDD.</dd>
+            <dt id="b-vdd">VDD<small>forsyningsspenning</small></dt>
+            <dd>Forsyningsspenningen til den digitale logikken i brikken. Logikknivået på utgangene følger VDD, og det er VDD man senker et kort øyeblikk ved spenningsglitching.</dd>
+            <dt id="b-uicr">UICR<small>User Information Configuration Registers</small></dt>
+            <dd>Et lite flashområde på Nordic-brikker med innstillinger som leses ved oppstart, blant annet APPROTECT og REGOUT0. Slettes sammen med resten av flash ved ERASEALL, og står da til 0xFFFFFFFF, som betyr standardverdiene.</dd>
+            <dt id="b-regout0">REGOUT0<small>register i UICR</small></dt>
+            <dd>Registeret i UICR (adresse 0x10001304 på nRF52840) som bestemmer hvilken spenning den interne regulatoren gir ut som VDD. Slettet betyr standardverdien 1,8 V. Det er for lite for 3,3 V-utstyr, så bootloaderen skriver for eksempel 5 for 3,3 V.</dd>
+            <dt id="b-cmos">CMOS<small>complementary MOS</small></dt>
+            <dd>Logikken nesten all digital elektronikk bygges av: par av pMOS- og nMOS-transistorer der den ene leder når den andre er av. Det går nesten bare strøm når en port bytter tilstand og kapasitanser lades og utlades. Derfor avhenger strømforbruket av dataene, og det er grunnlaget for effektanalyse.</dd>
+            <dt id="b-trustzone">TrustZone og EL3<small>ARM-sikkerhetsutvidelse</small></dt>
+            <dd>TrustZone deler en ARM-prosessor i en sikker og en vanlig «verden», slik at nøkler og sikker kode er skjermet fra operativsystemet. EL3 er det høyeste privilegienivået på moderne ARM, der monitoren som bytter mellom verdenene kjører.</dd>
+            <dt id="b-bpmp">BPMP<small>Boot and Power Management Processor</small></dt>
+            <dd>En liten hjelpeprosessor (ARM7TDMI) i Tegra X1 som kjører boot ROM aller først og så starter hovedprosessorene. Den har ikke TrustZone, men har full tilgang til brikken.</dd>
+            <dt id="b-dma">DMA<small>direct memory access</small></dt>
+            <dd>Maskinvare som flytter data mellom periferi og minne uten at prosessoren kopierer hver byte. I Fusée Gelée er det USB-kontrollerens DMA-buffere som lengden ikke sjekkes mot.</dd>
+            <dt id="b-esp8266">ESP8266<small>wifi-SoC</small></dt>
+            <dd>En rimelig SoC med innebygd wifi, brukt i mange IoT-produkter og i labben med MicroPython og MQTT.</dd>
+          </dl>
+
+          <h2 id="g-debug">Debug og seriellkommunikasjon</h2>
+          <dl class="terms">
+            <dt id="b-debug">Debug-grensesnitt<small>JTAG og SWD</small></dt>
+            <dd>Grensesnitt som gir direkte tilgang til prosessor og minne: man kan stoppe koden, lese og skrive minne og flash. Uunnværlig under utvikling, men bør låses i ferdige produkter (se kapittel 2).</dd>
+            <dt id="b-swd">SWD<small>Serial Wire Debug</small></dt>
+            <dd>ARMs debug-grensesnitt med bare to signaler, SWCLK (klokke) og SWDIO (data begge veier), pluss jord. Gir samme tilgang som JTAG: stoppe kjernen, lese og skrive minne og programmere flash.</dd>
+            <dt id="b-swclk">SWCLK og SWDIO<small>SWD-pinnene</small></dt>
+            <dd>De to signalene i SWD. SWCLK er klokken som debuggeren styrer, SWDIO er datalinjen som går begge veier.</dd>
+            <dt id="b-jtag">JTAG<small>IEEE 1149.1</small></dt>
+            <dd>Et eldre og mer utbredt test- og debug-grensesnitt med fire–fem signaler (TCK, TMS, TDI, TDO og eventuelt reset). Gir samme type tilgang som SWD og finnes på brikker fra mange produsenter.</dd>
+            <dt id="b-dap">DAP, DP og AP<small>Debug Access Port</small></dt>
+            <dd>Strukturen i ARM-debug. Debug Port (DP) er den fysiske inngangen utenfra (SWD eller JTAG). Bak den sitter én eller flere Access Ports (AP), som hver gir tilgang til ett delsystem på brikken.</dd>
+            <dt id="b-memap">MEM-AP<small>memory access port</small></dt>
+            <dd>Access porten som gir debuggeren tilgang til minnebussen og dermed CPU, RAM, flash og periferi. Det er denne som stenges når lesebeskyttelsen er på.</dd>
+            <dt id="b-ctrlap">CTRL-AP<small>control access port</small></dt>
+            <dd>En ekstra access port på Nordic-brikker som er åpen selv når MEM-AP er låst. Den gir ikke tilgang til minnet, men kan blant annet starte ERASEALL. Produsentens egen vei tilbake til en låst brikke.</dd>
+            <dt id="b-approtect">Lesebeskyttelse (APPROTECT)<small>readback protection</small></dt>
+            <dd>Beskyttelse som stenger debuggerens tilgang til minnet, slik at koden og nøklene i flash ikke kan leses ut over SWD. Nordic kaller den APPROTECT, og den slås på i UICR. Den beskytter konfidensialitet, ikke integritet, og kan bare fjernes ved å slette alt.</dd>
+            <dt id="b-eraseall">ERASEALL<small>full sletting</small></dt>
+            <dd>Kommando via CTRL-AP som sletter all flash, RAM og UICR. Dermed forsvinner også lesebeskyttelsen, men bare sammen med koden den beskyttet.</dd>
+            <dt id="b-openocd">OpenOCD<small>Open On-Chip Debugger</small></dt>
+            <dd>Gratis programvare mellom PC-en og debug-proben. Den kjenner probens protokoll og brikkens debug-oppsett, og tilbyr en GDB-server og en kommandolinje (telnet) for å stoppe kjernen, lese minne og programmere flash.</dd>
+            <dt id="b-gdb">GDB<small>GNU Debugger</small></dt>
+            <dd>Debuggeren som kobler seg til GDB-serveren i OpenOCD. Med den setter man stoppunkter, går gjennom koden instruksjon for instruksjon og leser registre og minne.</dd>
+            <dt id="b-cmsisdap">CMSIS-DAP<small>debug-probeprotokoll</small></dt>
+            <dd>ARMs åpne standard for hvordan en USB-debugprobe snakker med PC-en. Picoprobe-firmwaren på en Raspberry Pi Pico implementerer den, slik at OpenOCD kan bruke Pico-en som SWD-probe.</dd>
+            <dt id="b-uart">UART<small>seriellport</small></dt>
+            <dd>Enkel asynkron seriekommunikasjon over to linjer, TX og RX, pluss jord. Det er ingen felles klokke, så begge sider må være enige om hastigheten (baudraten, for eksempel 115200). Ofte en konsoll med logger eller innlogging, og dermed en angrepsflate.</dd>
+            <dt id="b-rs232">RS-232<small>seriellstandard</small></dt>
+            <dd>Den gamle standarden for seriellporter, med samme rammeformat som UART men andre spenningsnivåer (positive og negative volt i stedet for logikknivå). Mellom ulike nivåer trengs en nivåomformer.</dd>
+            <dt id="b-i2c">I2C og SPI<small>seriebusser</small></dt>
+            <dd>To vanlige busser mellom en brikke og sensorer eller minne. I2C bruker to ledninger (data og klokke) og adresserer hver enhet. SPI bruker fire (klokke, data hver vei og chip select) og er raskere.</dd>
+          </dl>
+
+          <h2 id="g-oppstart">Oppstart og fastvare</h2>
+          <dl class="terms">
+            <dt id="b-rot">Rot av tillit<small>root of trust</small></dt>
+            <dd>Det man må stole på uten å kunne sjekke det, fordi det er der kjeden starter. Typisk boot ROM pluss nøkkelmaterialet i fuses.</dd>
+            <dt id="b-kjede">Tillitskjede<small>chain of trust</small></dt>
+            <dd>Oppstart der hvert ledd verifiserer signaturen på det neste før det gir fra seg kontrollen, fra boot ROM og opp til applikasjonen. Kjeden er ikke sterkere enn det svakeste leddet. Se <a href="tillitskjede.html">Tillitskjeden og boot ROM</a>.</dd>
+            <dt id="b-bootloader">Bootloader<small>oppstartslaster</small></dt>
+            <dd>Et program som gjør maskinvaren klar og laster inn neste program i oppstarten. Ofte delt i trinn: et lite første trinn som setter opp minne og klokker, og et større som kan lese filsystemer, ta imot oppdateringer og starte operativsystemet.</dd>
+            <dt id="b-mbr">MBR<small>Master Boot Record (Nordic)</small></dt>
+            <dd>På nRF52 et lite program helt nederst i flash som kjører først og sender videre til bootloader eller SoftDevice. Det verifiserer ingen signaturer.</dd>
+            <dt id="b-softdevice">SoftDevice<small>Nordics BLE-stack</small></dt>
+            <dd>Nordics ferdigkompilerte Bluetooth-stack (S140 på nRF52840). Den ligger i flash ved siden av applikasjonen, og applikasjonen kaller den for alt som har med radioen å gjøre.</dd>
+            <dt id="b-uf2">UF2<small>USB Flashing Format</small></dt>
+            <dd>Et filformat for å laste inn kode uten debugger: kortet dukker opp som en USB-disk, og man kopierer en .uf2-fil til den. UF2-bootloaderen tar imot filen og skriver den til flash.</dd>
+            <dt id="b-bilde">Bilde<small>image</small></dt>
+            <dd>Filen et ledd laster inn: selve koden, med en header foran og signatur og offentlig nøkkel lagt ved.</dd>
+            <dt id="b-header">Header<small>metadata</small></dt>
+            <dd>Informasjon først i et bilde, for eksempel hvor stort det er, hvor i minnet det skal lastes og hvilken versjon det er. Leddet må lese headeren for å vite hva det skal verifisere, altså før signaturen er sjekket.</dd>
+            <dt id="b-fail">Fail closed<small>feil gir stopp</small></dt>
+            <dd>At systemet stopper når en sjekk feiler, i stedet for å fortsette. Det motsatte, <em>fail open</em>, betyr at en angriper bare trenger å få sjekken til å feile.</dd>
+            <dt id="b-rollback">Anti-rollback<small>vern mot nedgradering</small></dt>
+            <dd>Vern mot at noen installerer en eldre, sårbar versjon som fortsatt er gyldig signert. Hvert bilde har et versjonsnummer, og en teller i fuses holder laveste tillatte versjon. Telleren kan bare økes.</dd>
+            <dt id="b-recovery">Recovery-modus<small>nedlastingsmodus</small></dt>
+            <dd>En nødmodus i boot ROM for å laste inn kode over USB eller UART når flash er tom eller ødelagt, for eksempel i fabrikken eller ved reparasjon. Nyttig, men også en vei inn som en angriper kan nå.</dd>
+            <dt id="b-rcm">RCM<small>USB Recovery Mode (Tegra)</small></dt>
+            <dd>Recovery-modusen i boot ROM på NVIDIA Tegra, der brikken tar imot kode over USB. Fusée Gelée utnytter en manglende lengdesjekk i RCM.</dd>
+            <dt id="b-attest">Attestasjon<small>attestation</small></dt>
+            <dd>At enheten beviser overfor en ekstern part hva den startet opp med, ved å sende målingene fra oppstarten i en rapport signert av TPM-en. Mottakeren avgjør selv om den stoler på enheten.</dd>
+            <dt id="b-micropython">MicroPython og CircuitPython<small>Python på mikrokontrollere</small></dt>
+            <dd>Slanke utgaver av Python som kjører direkte på en mikrokontroller. CircuitPython er Adafruits variant, der kortet dukker opp som en USB-disk og koden ligger som en fil på den.</dd>
+            <dt id="b-repl">REPL<small>read–eval–print loop</small></dt>
+            <dd>Et interaktivt skall der man skriver én Python-linje om gangen og får svaret med en gang, her over seriellporten til kortet. Nyttig for å utforske pinner og maskinvare.</dd>
+          </dl>
+
+          <h2 id="g-ble">Bluetooth Low Energy</h2>
+          <dl class="terms">
+            <dt id="b-ble">BLE<small>Bluetooth Low Energy</small></dt>
+            <dd>Strømgjerrig variant av Bluetooth, laget for sensorer og små enheter. Bruker 2,4 GHz med 40 kanaler, der tre er satt av til advertising.</dd>
+            <dt id="b-advertising">Advertising<small>annonsering</small></dt>
+            <dd>Små pakker en BLE-enhet kringkaster med jevne mellomrom for å fortelle at den finnes, gjerne med navn og hvilke tjenester den har. Alle i nærheten kan lese dem uten å koble til.</dd>
+            <dt id="b-gap">GAP<small>Generic Access Profile</small></dt>
+            <dd>Laget i BLE som styrer hvordan enheter oppdager og kobler seg til hverandre. Definerer fire roller: broadcaster og observer (uten forbindelse), og peripheral og central (med forbindelse).</dd>
+            <dt id="b-gatt">GATT<small>Generic Attribute Profile</small></dt>
+            <dd>Hvordan dataene på en BLE-enhet er organisert: tjenester (services) som inneholder karakteristikker (characteristics), som igjen kan ha descriptors. Bygger på ATT. Telefonen er vanligvis klient, sensoren tjener.</dd>
+            <dt id="b-att">ATT<small>Attribute Protocol</small></dt>
+            <dd>Protokollen under GATT. Enheten har en tabell med attributter, hvert med en handle (adresse), en type (UUID), en verdi og tillatelser for lesing og skriving.</dd>
+            <dt id="b-service">Service<small>tjeneste</small></dt>
+            <dd>En samling karakteristikker som sammen utgjør én funksjon på enheten, for eksempel batterinivå eller pulsmåling.</dd>
+            <dt id="b-karakteristikk">Karakteristikk<small>characteristic</small></dt>
+            <dd>Én verdi i en BLE-tjeneste som kan leses, skrives eller abonneres på, med egenskaper (properties) som sier hva som er lov.</dd>
+            <dt id="b-uuid">UUID<small>universally unique identifier</small></dt>
+            <dd>Et 128-bits navn på en tjeneste eller karakteristikk. Standardiserte typer fra Bluetooth SIG forkortes til 16 bit, for eksempel 0x2800 for en tjenestedeklarasjon og 0x2902 for CCCD.</dd>
+            <dt id="b-cccd">CCCD og notify<small>Client Characteristic Configuration Descriptor</small></dt>
+            <dd>Med notify sender tjeneren en ny verdi av seg selv når den endres, i stedet for at klienten må spørre. Klienten slår det på ved å skrive 0x0001 til karakteristikkens CCCD (0x2902).</dd>
+            <dt id="b-paring">Paring<small>pairing og bonding</small></dt>
+            <dd>Prosessen der to BLE-enheter blir enige om nøkler for å kryptere forbindelsen. Lagres nøklene for senere, kalles det bonding. Hvor sterk paringen er, avhenger av metoden.</dd>
+            <dt id="b-lesc">LE Secure Connections<small>og Legacy pairing</small></dt>
+            <dd>Paringen fra Bluetooth 4.2, som bruker ECDH: en passiv lytter kan ikke regne ut nøkkelen. Den eldre <em>Legacy pairing</em> kan knekkes fra et opptak av paringen.</dd>
+            <dt id="b-justworks">Just Works<small>paringsmetode</small></dt>
+            <dd>Paring uten at brukeren bekrefter noe. Gir kryptering, men ingen beskyttelse mot en mann i midten, fordi ingen av enhetene vet hvem de snakker med.</dd>
+            <dt id="b-passkey">Passkey Entry<small>paringsmetode</small></dt>
+            <dd>Brukeren taster en sekssifret kode som den andre enheten viser. Gir MITM-beskyttelse, men i Legacy pairing er det bare 10<sup>6</sup> mulige koder, og de kan prøves gjennom fra et opptak.</dd>
+            <dt id="b-numeric">Numeric Comparison<small>paringsmetode</small></dt>
+            <dd>Begge enhetene viser et sekssifret tall, og brukeren bekrefter at de er like. Finnes bare med LE Secure Connections og gir MITM-beskyttelse.</dd>
+            <dt id="b-oob">Out of Band<small>OOB</small></dt>
+            <dd>Paringsdata utveksles over en annen kanal enn Bluetooth, for eksempel NFC. Like sterk som den andre kanalen.</dd>
+            <dt id="b-mitm">Mann i midten<small>MITM, man in the middle</small></dt>
+            <dd>Angriperen plasserer seg mellom to parter og videresender trafikken, slik at begge tror de snakker direkte med hverandre. Angriperen kan da lese og endre alt.</dd>
+            <dt id="b-irk">IRK og private adresser<small>Identity Resolving Key</small></dt>
+            <dd>For å unngå sporing kan en BLE-enhet bytte adresse jevnlig (resolvable private address). Bare enheter den er paret med og som har nøkkelen IRK, kan kjenne den igjen.</dd>
+            <dt id="b-rssi">RSSI<small>received signal strength indicator</small></dt>
+            <dd>Mottatt signalstyrke i dBm. Nær null betyr nær (−31 dBm er rett ved siden av), mer negativt betyr lenger unna. Kan brukes til å anslå avstand, og til å spore enheter.</dd>
+            <dt id="b-sniffing">Sniffing<small>avlytting</small></dt>
+            <dd>Å fange opp radiotrafikk mellom andre enheter. For BLE må lytteren følge forbindelsen mens den hopper mellom kanaler, for eksempel med en Ubertooth.</dd>
+          </dl>
+
+          <h2 id="g-mqtt">MQTT og nettverk</h2>
+          <dl class="terms">
+            <dt id="b-mqtt">MQTT<small>publish/subscribe-protokoll</small></dt>
+            <dd>En lettvekts meldingsprotokoll for IoT over TCP. Enheter publiserer meldinger på et topic til en broker, og alle som abonnerer på topicet, får dem. Port 1883 uten kryptering, 8883 over TLS.</dd>
+            <dt id="b-broker">Broker<small>MQTT-tjener</small></dt>
+            <dd>Tjeneren i MQTT som tar imot alle meldinger og sender dem videre til dem som abonnerer. Klientene snakker aldri direkte med hverandre, bare med brokeren.</dd>
+            <dt id="b-topic">Topic<small>emne i MQTT</small></dt>
+            <dd>Navnet en melding publiseres på, delt med skråstrek, for eksempel <code>hjem/stue/temperatur</code>. Ved abonnement matcher <code>+</code> ett nivå og <code>#</code> resten. Et topic-navn er ingen tilgangskontroll.</dd>
+            <dt id="b-qos">QoS<small>quality of service</small></dt>
+            <dd>Leveringsgarantien i MQTT. 0: høyst én gang (send og glem). 1: minst én gang (kan komme dobbelt). 2: nøyaktig én gang, med mest overhead.</dd>
+            <dt id="b-nat">NAT<small>network address translation</small></dt>
+            <dd>Ruteren oversetter mange private adresser til én offentlig. Enheter bak NAT kan koble seg ut, men kan ikke nås utenfra. Derfor passer MQTT: enheten åpner selv forbindelsen til brokeren.</dd>
+            <dt id="b-websocket">WebSocket og WSS<small>toveis forbindelse over HTTP</small></dt>
+            <dd>En vedvarende forbindelse som starter som HTTP og deretter lar begge sider sende når de vil. WSS er det samme over TLS. MQTT kan gå over WebSocket, slik labbrokeren gjør.</dd>
+          </dl>
+
+          <h2 id="g-sidekanal">Sidekanaler og feilinjeksjon</h2>
+          <dl class="terms">
+            <dt id="b-sidekanal">Sidekanal<small>side channel</small></dt>
+            <dd>Informasjon som lekker gjennom fysiske egenskaper ved beregningen, som strømforbruk, tid eller elektromagnetisk stråling, i stedet for gjennom input og output.</dd>
+            <dt id="b-shunt">Shunt-motstand<small>strømmåling</small></dt>
+            <dd>En liten, kjent motstand i serie med strømforsyningen til kretsen. Spenningsfallet over den er proporsjonalt med strømmen (<em>U = RI</em>), så man måler spenning og regner ut strøm.</dd>
+            <dt id="b-trigger">Trigger<small>synkroniseringssignal</small></dt>
+            <dd>Et signal som markerer når den interessante operasjonen starter, for eksempel en GPIO som settes høy rett før passordsjekken. Målingene og glitchene regnes i tid fra triggeren.</dd>
+            <dt id="b-spa">SPA<small>Simple Power Analysis</small></dt>
+            <dd>Å lese strømkurven direkte og kjenne igjen programflyten: hvilke instruksjoner som kjører, hvor mange runder en løkke går, og hvilken gren som ble valgt.</dd>
+            <dt id="b-dpa">DPA og CPA<small>Differential / Correlation Power Analysis</small></dt>
+            <dd>Statistiske angrep over mange målinger. For hver gjetning på en nøkkelbit eller -byte sammenlignes målingene med hva gjetningen forutsier. DPA ser på forskjellen i snitt mellom to grupper, CPA på korrelasjonen med en modell som Hamming-vekt. Riktig gjetning skiller seg ut.</dd>
+            <dt id="b-hamming">Hamming-vekt og -avstand<small>effektmodell</small></dt>
+            <dd>Hamming-vekt er antall 1-bit i en verdi. Hamming-avstand er antall bit som er ulike mellom to verdier, altså hvor mange bit som skifter. Begge brukes som modell for strømforbruket.</dd>
+            <dt id="b-pipeline">Pipeline og CPI<small>tidsforbruk per instruksjon</small></dt>
+            <dd>En pipeline behandler flere instruksjoner samtidig i trinn (hent, dekod, utfør, minne, skriv tilbake). Ideelt fullføres én instruksjon per klokkesyklus (CPI = 1). Hazards, som at en instruksjon venter på resultatet fra den forrige eller et hopp tømmer pipelinen, gir ekstra sykluser, og dermed ulik tid og strømkurve.</dd>
+            <dt id="b-glitch">Feilinjeksjon<small>glitching</small></dt>
+            <dd>Å forstyrre spenning eller klokke et kort øyeblikk på riktig tidspunkt, slik at én instruksjon gir feil resultat, for eksempel at en sammenligning slår feil ut (se kapittel 6).</dd>
+            <dt id="b-glitchvindu">Glitch-vindu<small>posisjon og bredde</small></dt>
+            <dd>Når og hvor lenge glitchen varer. Posisjonen er tiden fra triggeren, bredden er hvor lenge spenningen holdes nede. Begge sveipes systematisk, fordi treffet er sannsynlighetsbasert.</dd>
+            <dt id="b-brownout">Brown-out-detektor<small>vern mot lav spenning</small></dt>
+            <dd>En krets som resetter brikken når forsyningsspenningen faller under en terskel. Et tiltak mot spenningsglitching, men en kort nok glitch kan gå under terskelen.</dd>
+            <dt id="b-chipwhisperer">ChipWhisperer<small>måle- og glitchverktøy</small></dt>
+            <dd>Åpen maskinvare og programvare for effektanalyse og glitching. Labben bruker ChipWhisperer Nano, som både måler strømmen og lager glitchene.</dd>
+          </dl>
+
+          <h2 id="g-feil">Programfeil og testing</h2>
+          <dl class="terms">
+            <dt id="b-parsing">Parsing<small>tolking av input</small></dt>
+            <dd>Å tolke strukturerte data, for eksempel å lese felt for felt i en header eller en USB-forespørsel. God parsekode antar ingenting om at dataene er velformede.</dd>
+            <dt id="b-grensesjekk">Grensesjekk<small>bounds check</small></dt>
+            <dd>Kontroll av at en lengde eller indeks fra input holder seg innenfor bufferen den brukes på. Mangler den, kan input skrive forbi bufferen og overskrive annet innhold.</dd>
+            <dt id="b-overflyt">Bufferoverflyt<small>buffer overflow</small></dt>
+            <dd>Data skrives forbi slutten av en buffer og overskriver det som ligger etter, for eksempel en returadresse på stacken. Kan gi kodeeksekvering.</dd>
+            <dt id="b-kodeeks">Kodeeksekvering<small>code execution</small></dt>
+            <dd>At angriperen får prosessoren til å kjøre angriperens egen kode. Det sterkeste resultatet et angrep kan gi: angriperen kan da gjøre alt det kompromitterte leddet kunne gjøre.</dd>
+            <dt id="b-toctou">TOCTOU<small>time-of-check to time-of-use</small></dt>
+            <dd>Dataene sjekkes på ett tidspunkt og brukes på et senere, og angriperen endrer dem i mellomtiden. Sjekken var riktig, men gjaldt ikke det som faktisk ble brukt.</dd>
+            <dt id="b-fuzz">Fuzzing<small>automatisk feilsøk</small></dt>
+            <dd>Automatisk testing der et program får store mengder tilfeldige eller misdannede input, for å finne krasj og feilhåndtering som svikter.</dd>
+            <dt id="b-formell">Formell verifisering<small>formal verification</small></dt>
+            <dd>Å bevise matematisk at koden oppfyller en spesifikasjon, i stedet for bare å teste den. Kostbart, men realistisk for små kodebiter som boot ROM.</dd>
+          </dl>
+        </article>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="emneplan.html"><small>forrige</small>Emneplan</a>
+          <span></span>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js?v=44"></script>
+  <script src="../../../assets/js/status.js?v=35"></script>
+  <script src="../../../assets/js/formler.js?v=35"></script>
+  <script src="../../../assets/js/begrep.js?v=2"></script>
+</body>
+</html>

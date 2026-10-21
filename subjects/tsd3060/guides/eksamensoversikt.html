@@ -7,7 +7,7 @@
   <meta name="description" content="Mønstre fra åtte tidligere TSD3060-eksamener (2022-2023 til 2025-2026): hva som går igjen, og hva som sannsynligvis dukker opp igjen.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../../assets/css/main.css?v=43">
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=44">
 </head>
 <body class="theme-tsd3060" data-updated="2026-09-02">
   <div class="app-shell">
@@ -37,8 +37,8 @@
           <h2>To eksamensformater — begge kan dukke opp, uansett ordinær/konte</h2>
           <p>Eksamenene faller stort sett i to bøtter, og hvilken det blir er ikke pålitelig knyttet til om det er ordinær eller konte-eksamen:</p>
           <ul>
-            <li><strong>Kodegjennomgang.</strong> Ett komplett, lite web-system (som regel <code>compose.yaml</code>/<code>Dockerfile</code> + en HTML-side + en JS-fil med <code>fetch()</code>-kall + et server-skript i shell/CGI som snakker med SQLite) er listet opp i sin helhet bakerst i oppgavesettet. Du skal forklare hva filene gjør sammen, gå linje for linje gjennom deler av koden, vurdere autentiseringsmekanismen og foreslå en konkret forbedring. Dette er det klart vanligste formatet — 6 av 8 sett følger det.</li>
-            <li><strong>Begrepssjekkliste.</strong> En rekke frittstående deloppgaver (10&#8211;16 % hver) som hver spør «forklar X, gi et eksempel, og vurder om/hvordan X bidrar til sikkerhet» — for temaer som demonisering, chroot, cookies, samme opphav, konteinere. Ett sett (2024&#8211;2025 konte) følger dette formatet helt, og 2022&#8211;2023 ordinær delvis. De to andre konte-settene (2025&#8211;2026 og 2022&#8211;2023) er scenario-oppgaver: «forklar og vis med eksempel hvordan du ville bygget …».</li>
+            <li><strong>Kodegjennomgang.</strong> Ett komplett, lite web-system (som regel <code>compose.yaml</code>/<code>Dockerfile</code> + en <a class="term" href="ordliste.html#b-html">HTML</a>-side + en JS-fil med <code>fetch()</code>-kall + et server-skript i shell/CGI som snakker med <a class="term" href="ordliste.html#b-sqlite">SQLite</a>) er listet opp i sin helhet bakerst i oppgavesettet. Du skal forklare hva filene gjør sammen, gå linje for linje gjennom deler av koden, vurdere autentiseringsmekanismen og foreslå en konkret forbedring. Dette er det klart vanligste formatet — 6 av 8 sett følger det.</li>
+            <li><strong>Begrepssjekkliste.</strong> En rekke frittstående deloppgaver (10&#8211;16 % hver) som hver spør «forklar X, gi et eksempel, og vurder om/hvordan X bidrar til sikkerhet» — for temaer som <a class="term" href="ordliste.html#b-demon">demonisering</a>, <a class="term" href="ordliste.html#b-chroot">chroot</a>, <a class="term" href="ordliste.html#b-cookie">cookies</a>, samme opphav, <a class="term" href="ordliste.html#b-konteiner">konteinere</a>. Ett sett (2024&#8211;2025 konte) følger dette formatet helt, og 2022&#8211;2023 ordinær delvis. De to andre konte-settene (2025&#8211;2026 og 2022&#8211;2023) er scenario-oppgaver: «forklar og vis med eksempel hvordan du ville bygget …».</li>
           </ul>
           <div class="note"><strong>Konsekvens:</strong> uansett hvilket format det blir, må du kunne <em>begge</em> ferdighetene — lese fremmed kode linje for linje <em>og</em> forklare enkeltbegreper isolert med eksempel.</div>
 
@@ -55,22 +55,22 @@
             </thead>
             <tbody>
               <tr style="border-bottom:1px solid var(--line)">
-                <td style="padding:.6rem .3rem"><strong>Autentisering</strong> (hashing+salt, sesjonskapsel, kritiser & forbedre)</td>
+                <td style="padding:.6rem .3rem"><strong>Autentisering</strong> (hashing+<a class="term" href="ordliste.html#b-salt">salt</a>, sesjonskapsel, kritiser & forbedre)</td>
                 <td style="padding:.6rem .3rem">7 / 8</td>
                 <td style="padding:.6rem .3rem">Ordrett samme spørsmål i 2023&#8211;2024 konte og 2024&#8211;2025 ordinær: <em>«Gi en vurdering av autentiseringsmekanismen som brukes i systemet. Foreslå en forbedring. Begrunn svaret.»</em> Koden i 2024&#8211;2026 bruker <code>mkpasswd</code> med salt + en <code>SESJONSID</code>-informasjonskapsel satt med <code>SameSite=Strict</code>.</td>
               </tr>
               <tr style="border-bottom:1px solid var(--line)">
-                <td style="padding:.6rem .3rem"><strong>Konteinere / OS-nivå-virtualisering</strong> (chroot, namespaces, Docker/Podman)</td>
+                <td style="padding:.6rem .3rem"><strong>Konteinere / OS-nivå-virtualisering</strong> (chroot, <a class="term" href="ordliste.html#b-navnerom">namespaces</a>, <a class="term" href="ordliste.html#b-docker">Docker</a>/Podman)</td>
                 <td style="padding:.6rem .3rem">5 / 8 direkte</td>
                 <td style="padding:.6rem .3rem">Enten direkte («forklar chroot», «hvilke Linux-kjernemekanismer gir konteinerisering») eller indirekte via en <code>Dockerfile</code>/<code>Containerfile</code> som skal forklares linje for linje — inkludert hvorfor flere <code>RUN</code>-linjer bør slås sammen til én (lagdeling/image-størrelse).</td>
               </tr>
               <tr style="border-bottom:1px solid var(--line)">
-                <td style="padding:.6rem .3rem"><strong>REST over HTTP</strong> (GET/POST/PUT/DELETE → SQL, Content-Length/Cookie-parsing i shell)</td>
+                <td style="padding:.6rem .3rem"><strong><a class="term" href="ordliste.html#b-rest">REST</a> over <a class="term" href="ordliste.html#b-http">HTTP</a></strong> (<a class="term" href="ordliste.html#b-get">GET</a>/POST/PUT/DELETE → <a class="term" href="ordliste.html#b-sql">SQL</a>, <a class="term" href="ordliste.html#b-contentlength">Content-Length</a>/Cookie-parsing i shell)</td>
                 <td style="padding:.6rem .3rem">6 / 8</td>
                 <td style="padding:.6rem .3rem">Server-skriptet er nesten alltid strukturelt identisk med <code>fordeler.sh</code>/<code>get.sh</code>/<code>post.sh</code> fra uke 33 — les hodet linje for linje, finn <code>Content-Length</code>, les kroppen med <code>dd</code>, grener på <code>REQUEST_METHOD</code>.</td>
               </tr>
               <tr style="border-bottom:1px solid var(--line)">
-                <td style="padding:.6rem .3rem"><strong>Samme opphav (same-origin policy) / CORS</strong></td>
+                <td style="padding:.6rem .3rem"><strong>Samme opphav (<a class="term" href="ordliste.html#b-sop">same-origin policy</a>) / <a class="term" href="ordliste.html#b-cors">CORS</a></strong></td>
                 <td style="padding:.6rem .3rem">5 / 8</td>
                 <td style="padding:.6rem .3rem">«Hvor håndheves retningslinjen, og hvordan?» — som regel koblet til <code>fetch(..., {credentials:'include'})</code> og <code>Access-Control-Allow-*</code>-headere i eksempelkoden når to konteinere (web + db) kjører på ulike porter.</td>
               </tr>
@@ -80,9 +80,9 @@
                 <td style="padding:.6rem .3rem">Samme mønster som hallotjener/close.c fra uke 33 (<code>socket→bind→listen→accept→fork</code>), av og til med et konkret linjeintervall å forklare.</td>
               </tr>
               <tr>
-                <td style="padding:.6rem .3rem">DTD/XML-validering (<code>xmllint --xpath</code>)</td>
+                <td style="padding:.6rem .3rem"><a class="term" href="ordliste.html#b-dtd">DTD</a>/XML-validering (<code>xmllint --xpath</code>)</td>
                 <td style="padding:.6rem .3rem">3 / 8 &#8212; 2023&#8211;2025</td>
-                <td style="padding:.6rem .3rem">XML med DTD i koden begge sittinger i 2023&#8211;2024, og DTD som egen oppgave (12 %) i 2024&#8211;2025 konte. Kodeeksemplene bruker JSON fra 2024&#8211;2025 ordinær. Lavere prioritet, men ikke borte.</td>
+                <td style="padding:.6rem .3rem"><a class="term" href="ordliste.html#b-xml">XML</a> med DTD i koden begge sittinger i 2023&#8211;2024, og DTD som egen oppgave (12 %) i 2024&#8211;2025 konte. Kodeeksemplene bruker <a class="term" href="ordliste.html#b-json">JSON</a> fra 2024&#8211;2025 ordinær. Lavere prioritet, men ikke borte.</td>
               </tr>
             </tbody>
           </table>
@@ -102,7 +102,7 @@ KROPP=$(dd bs=1 count=$CONTENT_LENGTH status=none) # les nøyaktig så mange byt
 
 # autentisering: finn bruker via sesjonskapsel, avvis hvis ikke innlogget
 # deretter: grener på $REQUEST_METHOD → tilsvarende SQL mot SQLite</pre>
-          <p>Og login-delen som går igjen med saltet passordhash og ny sesjons-ID ved hver innlogging (se også sesjonsfiksering i uke 34):</p>
+          <p>Og login-delen som går igjen med saltet <a class="term" href="ordliste.html#b-hash">passordhash</a> og ny <a class="term" href="ordliste.html#b-sesjonsid">sesjons-ID</a> ved hver innlogging (se også <a class="term" href="ordliste.html#b-fiksering">sesjonsfiksering</a> i uke 34):</p>
           <pre class="codeblock">SALT=$(echo "SELECT passordhash FROM person WHERE brukerid='$BRUKER'" | sqlite3 db.db | cut -f3 -d'$')
 HASHET=$(echo $PASSORD | mkpasswd -S $SALT --stdin)
 if [ "$HASHET" = "$LAGRET_HASH" ]; then
@@ -116,9 +116,9 @@ fi</pre>
           <ul>
             <li>Bytt <code>SameSite=Strict</code> til å alltid inkludere <code>Secure</code> og <code>HttpOnly</code> eksplisitt (koden i eksemplene setter ofte ikke disse).</li>
             <li>Sett en utløpstid (<code>Max-Age</code>) på sesjonskapselen &#8212; eksempelkoden lar sesjoner leve for alltid.</li>
-            <li>Bruk HTTPS (TLS) i stedet for ren HTTP &#8212; passord og sesjons-ID sendes i klartekst over transportlaget i eksemplene.</li>
+            <li>Bruk <a class="term" href="ordliste.html#b-https">HTTPS</a> (TLS) i stedet for ren HTTP &#8212; passord og sesjons-ID sendes i klartekst over transportlaget i eksemplene.</li>
             <li>Rate-limiting/lockout på innloggingsforsøk &#8212; ingenting i eksempelkoden hindrer brute force mot <code>login</code>-endepunktet.</li>
-            <li>Valider/sanitiser input før det brukes i SQL &#8212; flere av eksemplene limer variabler rett inn i SQL-strenger igjen (se injeksjon, uke 34) selv i «ordinær»-eksamenskoden.</li>
+            <li>Valider/sanitiser input før det brukes i SQL &#8212; flere av eksemplene limer variabler rett inn i SQL-strenger igjen (se <a class="term" href="ordliste.html#b-sqlinj">injeksjon</a>, uke 34) selv i «ordinær»-eksamenskoden.</li>
           </ul>
 
           <div class="note"><strong>Ikke lenger sett:</strong> service workers (kun 2022&#8211;2023) dukket opp bare i 2022&#8211;2023, og DTD/XML sist i 2024&#8211;2025 konte &#8212; lavest prioritet av det som faktisk har vært spurt om.</div>
@@ -132,8 +132,9 @@ fi</pre>
     </div>
   </div>
 
-  <script src="../../../assets/js/main.js?v=43"></script>
+  <script src="../../../assets/js/main.js?v=44"></script>
   <script src="../../../assets/js/status.js?v=35"></script>
   <script src="../../../assets/js/formler.js?v=35"></script>
+  <script src="../../../assets/js/begrep.js?v=2"></script>
 </body>
 </html>

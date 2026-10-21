@@ -7,7 +7,7 @@
   <meta name="description" content="Forberedte SQL-kommandoer mot injeksjon, Basic Authentication, informasjonskapsler og sesjonsfikseringsangrep.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../../assets/css/main.css?v=43">
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=44">
 </head>
 <body class="theme-tsd3060" data-updated="2026-09-02">
   <div class="app-shell">
@@ -43,7 +43,7 @@
 
         <article class="prose">
           <h2>SQLite: en database som er ett filsystem-kall unna</h2>
-          <p>SQLite er ikke en tjener man kobler seg til, men et bibliotek som leser og skriver rett mot en enkelt fil på disk — «SQLite konkurrerer ikke med klient/tjener-databaser, SQLite konkurrerer med <code>fopen()</code>», som dokumentasjonen selv beskriver det. Ingen oppsett, ingen egen prosess, én fil per database, og transaksjonene er ACID selv ved strømbrudd eller krasj. Fremmednøkler finnes, men håndheves ikke automatisk — de må skrus på eksplisitt med <code>PRAGMA foreign_keys=ON</code>.</p>
+          <p><a class="term" href="ordliste.html#b-sqlite">SQLite</a> er ikke en tjener man kobler seg til, men et bibliotek som leser og skriver rett mot en enkelt fil på disk — «SQLite konkurrerer ikke med klient/tjener-databaser, SQLite konkurrerer med <code>fopen()</code>», som dokumentasjonen selv beskriver det. Ingen oppsett, ingen egen prosess, én fil per database, og <a class="term" href="ordliste.html#b-transaksjon">transaksjonene</a> er <a class="term" href="ordliste.html#b-acid">ACID</a> selv ved strømbrudd eller krasj. <a class="term" href="ordliste.html#b-fremmednokkel">Fremmednøkler</a> finnes, men håndheves ikke automatisk — de må skrus på eksplisitt med <code>PRAGMA foreign_keys=ON</code>.</p>
           <p>Fra C snakker man med SQLite gjennom <code>sqlite3_exec()</code>, som tar en tilbakekallsfunksjon som kjøres én gang per rad i resultatet:</p>
           <pre class="codeblock">int main() {
   sqlite3 *db;
@@ -65,7 +65,7 @@
           </div>
 
           <h2>Injeksjonssårbarheten</h2>
-          <p>Problemet oppstår idet brukerinput limes rett inn i en SQL-tekststreng. Skriptet under ser uskyldig ut for normal bruk:</p>
+          <p>Problemet oppstår idet brukerinput limes rett inn i en <a class="term" href="ordliste.html#b-sql">SQL</a>-tekststreng. Skriptet under ser uskyldig ut for normal bruk:</p>
           <pre class="codeblock">#!/usr/bin/sh
 sqlite3 p.db "INSERT INTO person(navn, nr) VALUES ('$1', '$2');"</pre>
           <p>Men fordi <code>$1</code> limes rett inn i SQL-strengen uten noen skille mellom «kode» og «data», kan en ondsinnet verdi for <code>$1</code> avslutte den tiltenkte kommandoen tidlig og starte en helt ny en:</p>
@@ -73,14 +73,14 @@ sqlite3 p.db "INSERT INTO person(navn, nr) VALUES ('$1', '$2');"</pre>
           <p>Denne ene input-strengen lukker parentesen og strengen tidlig, legger til et semikolon, og kjører <code>DROP TABLE Person</code> som en egen kommando — resten av den opprinnelige SQL-en blir stående som en ufarlig kommentar etter <code>--</code>. Databasen sletter tabellen sin fordi den aldri klarte å skille mellom «dette er et navn» og «dette er en kommando».</p>
 
           <h2>Løsningen: forberedte (parametriserte) kommandoer</h2>
-          <p>Riktig fiks er ikke å prøve å luke ut farlige tegn manuelt (escaping er lett å gjøre feil eller glemme ett sted) — det er å aldri lime data inn i SQL-teksten i utgangspunktet. En forberedt kommando definerer <em>malen</em> med plassholdere først, og binder verdier til dem etterpå. Databasemotoren vet dermed alltid nøyaktig hvor kommandoen slutter og dataene begynner, uansett hva verdiene inneholder:</p>
+          <p>Riktig fiks er ikke å prøve å luke ut farlige tegn manuelt (escaping er lett å gjøre feil eller glemme ett sted) — det er å aldri lime data inn i SQL-teksten i utgangspunktet. En <a class="term" href="ordliste.html#b-prepared">forberedt kommando</a> definerer <em>malen</em> med plassholdere først, og binder verdier til dem etterpå. Databasemotoren vet dermed alltid nøyaktig hvor kommandoen slutter og dataene begynner, uansett hva verdiene inneholder:</p>
           <pre class="codeblock">const char *sql = "INSERT INTO Person(navn, nr) VALUES (?, ?);";
 sqlite3_prepare_v2(db, sql, -1, &amp;stmt, NULL);
 sqlite3_bind_text(stmt, 1, navn, -1, SQLITE_TRANSIENT);  // navn kan inneholde hva som helst
 sqlite3_bind_int (stmt, 2, nr);
 sqlite3_step(stmt);</pre>
           <p>Samme angrepsstreng som brøt <code>usikker.sh</code> gjør ingenting skadelig mot denne versjonen — den blir ganske enkelt lagret som en litt rar tekststreng i <code>navn</code>-kolonnen, fordi den aldri får sjansen til å bli tolket som SQL-syntaks.</p>
-          <div class="note"><strong>Prinsippet generaliserer:</strong> «forberedt kommando» er databasenes svar, men selve ideen — skill kode fra data strukturelt i stedet for å stole på escaping — går igjen overalt i sikker webutvikling, fra SQL til shell-kommandoer til HTML-templating.</div>
+          <div class="note"><strong>Prinsippet generaliserer:</strong> «forberedt kommando» er databasenes svar, men selve ideen — skill kode fra data strukturelt i stedet for å stole på escaping — går igjen overalt i sikker webutvikling, fra SQL til shell-kommandoer til <a class="term" href="ordliste.html#b-html">HTML</a>-templating.</div>
 
           <div class="pitfall">
             <div class="pitfall__title">Feil i kursets eksempel: sikrere.sh tester ikke det den skal</div>
@@ -92,7 +92,7 @@ sqlite3 p.db "SELECT navn, nr FROM Person;"</pre>
           </div>
 
           <h2>Basic Authentication</h2>
-          <p>Den enkleste formen for HTTP-autentisering sender brukernavn og passord i klartekst, base64-kodet, i en <code>Authorization</code>-header. Servere kan be om innlogging ved å svare <code>401 Unauthorized</code> med en <code>WWW-Authenticate</code>-header — nettleseren viser da en innebygd innloggingsdialog og gjentar forespørselen med akkreditivene lagt til:</p>
+          <p>Den enkleste formen for <a class="term" href="ordliste.html#b-basic">HTTP-autentisering</a> sender brukernavn og passord i klartekst, <a class="term" href="ordliste.html#b-base64">base64-kodet</a>, i en <code>Authorization</code>-header. Servere kan be om innlogging ved å svare <code>401 Unauthorized</code> med en <code>WWW-Authenticate</code>-header — nettleseren viser da en innebygd innloggingsdialog og gjentar forespørselen med akkreditivene lagt til:</p>
           <pre class="codeblock">CRED=$(echo $LINJE | cut -f3 -d' ' | base64 -d -i)   # dekoder "Basic &lt;base64&gt;"
 NAVN=$(echo $CRED | cut -f1 -d:)
 PASS=$(echo $CRED | cut -f2 -d:)
@@ -103,18 +103,18 @@ if [ "$NAVN" != tux -o "$PASS" != 1234 ]; then
 else
     printf "HTTP/1.1 200 OK\r\n\r\nGratulerer %s. Du er autentisert.\r\n" "$NAVN"
 fi</pre>
-          <p>Base64 er koding, ikke kryptering — Basic Authentication er derfor kun trygt over HTTPS, aldri over ren HTTP. (Denne siden i seg selv — debbie.usn.no — bruker nettopp Basic Authentication, som er hvorfor den ber om et enkelt brukernavn/passord-par i en nettleser-dialog i stedet for et vanlig innloggingsskjema.)</p>
+          <p>Base64 er koding, ikke kryptering — Basic Authentication er derfor kun trygt over <a class="term" href="ordliste.html#b-https">HTTPS</a>, aldri over ren <a class="term" href="ordliste.html#b-http">HTTP</a>. (Denne siden i seg selv — debbie.usn.no — bruker nettopp Basic Authentication, som er hvorfor den ber om et enkelt brukernavn/passord-par i en nettleser-dialog i stedet for et vanlig innloggingsskjema.)</p>
 
           <h2>Informasjonskapsler og attributtene som avgjør hvor trygge de er</h2>
-          <p>Der Basic Auth sender akkreditiver på hver eneste forespørsel, lar informasjonskapsler (cookies) tjeneren gi klienten et lite stykke tilstand å sende tilbake senere — typisk en sesjons-ID i stedet for selve passordet:</p>
+          <p>Der Basic Auth sender akkreditiver på hver eneste forespørsel, lar <a class="term" href="ordliste.html#b-cookie">informasjonskapsler</a> (cookies) tjeneren gi klienten et lite stykke tilstand å sende tilbake senere — typisk en <a class="term" href="ordliste.html#b-sesjonsid">sesjons-ID</a> i stedet for selve passordet:</p>
           <pre class="codeblock">HDARG="Set-cookie:kake1=xyz; Secure; HttpOnly; Max-Age=600; SameSite=lax\r\n"</pre>
           <ul>
-            <li><strong>Secure</strong> — sendes kun over HTTPS (unntatt til <code>localhost</code>, av praktiske utviklingsgrunner).</li>
-            <li><strong>HttpOnly</strong> — utilgjengelig for JavaScript, så en XSS-sårbarhet kan ikke lese den rett ut.</li>
-            <li><strong>Max-Age</strong> — hvor lenge kapselen skal leve; uten den er den en sesjonskapsel som forsvinner når nettleseren lukkes.</li>
-            <li><strong>SameSite</strong> — styrer om kapselen sendes ved forespørsler fra <em>andre</em> nettsteder (se under).</li>
+            <li><strong><a class="term" href="ordliste.html#b-secure">Secure</a></strong> — sendes kun over HTTPS (unntatt til <code>localhost</code>, av praktiske utviklingsgrunner).</li>
+            <li><strong><a class="term" href="ordliste.html#b-httponly">HttpOnly</a></strong> — utilgjengelig for <a class="term" href="ordliste.html#b-javascript">JavaScript</a>, så en <a class="term" href="ordliste.html#b-xss">XSS</a>-sårbarhet kan ikke lese den rett ut.</li>
+            <li><strong><a class="term" href="ordliste.html#b-maxage">Max-Age</a></strong> — hvor lenge kapselen skal leve; uten den er den en sesjonskapsel som forsvinner når nettleseren lukkes.</li>
+            <li><strong><a class="term" href="ordliste.html#b-samesite">SameSite</a></strong> — styrer om kapselen sendes ved forespørsler fra <em>andre</em> nettsteder (se under).</li>
           </ul>
-          <p><code>SameSite</code> har tre nivåer: <code>strict</code> sender kapselen bare når forespørselen kommer fra samme nettsted; <code>lax</code> tillater i tillegg toppnivå-navigasjon (adressefeltet endres) med en «trygg» metode som ikke endrer tilstand på tjeneren (typisk <code>GET</code>); <code>none</code> setter ingen begrensning i det hele tatt. Sammen med <code>HttpOnly</code> og <code>Secure</code> er dette hovedforsvaret mot CSRF-angrep (Cross-Site Request Forgery), der et ondsinnet nettsted prøver å få nettleseren din til å sende en forespørsel til et annet nettsted du er innlogget på.</p>
+          <p><code>SameSite</code> har tre nivåer: <code>strict</code> sender kapselen bare når forespørselen kommer fra samme nettsted; <code>lax</code> tillater i tillegg toppnivå-navigasjon (adressefeltet endres) med en «trygg» metode som ikke endrer tilstand på tjeneren (typisk <code>GET</code>); <code>none</code> setter ingen begrensning i det hele tatt. Sammen med <code>HttpOnly</code> og <code>Secure</code> er dette hovedforsvaret mot <a class="term" href="ordliste.html#b-csrf">CSRF</a>-angrep (Cross-Site Request Forgery), der et ondsinnet nettsted prøver å få nettleseren din til å sende en forespørsel til et annet nettsted du er innlogget på.</p>
 
           <div class="pitfall">
             <div class="pitfall__title">Fallgruve: test innlogging med curl, ikke bare nettleseren</div>
@@ -123,14 +123,14 @@ fi</pre>
 curl -v -u tux:1234 http://localhost:8888/
 # lagrer og sender informasjonskapsler
 curl -v -c kaker.txt -b kaker.txt http://localhost:8888/</pre>
-            <p>En kapsel med <code>Secure</code> sendes bare over HTTPS, med <code>localhost</code> som eneste unntak. Når tjenesten senere kjører i en konteiner og nås som <code>http://web/</code> (uke 36–38), blir kapselen verken lagret eller sendt, og det ser ut som om sesjonen ikke virker.</p>
+            <p>En kapsel med <code>Secure</code> sendes bare over HTTPS, med <code>localhost</code> som eneste unntak. Når tjenesten senere kjører i en <a class="term" href="ordliste.html#b-konteiner">konteiner</a> og nås som <code>http://web/</code> (uke 36–38), blir kapselen verken lagret eller sendt, og det ser ut som om sesjonen ikke virker.</p>
           </div>
 
           <h2>Sesjonsfikseringsangrep</h2>
-          <p>Et sesjonsfikseringsangrep utnytter at en tjeneste <em>ikke</em> bytter ut et eksisterende berettigelsestegn (sesjons-ID) ved ny innlogging:</p>
+          <p>Et <a class="term" href="ordliste.html#b-fiksering">sesjonsfikseringsangrep</a> utnytter at en tjeneste <em>ikke</em> bytter ut et eksisterende berettigelsestegn (sesjons-ID) ved ny innlogging:</p>
           <ol>
             <li>Angriperen logger inn i tjenesten med sitt eget navn og passord, og mottar et gyldig berettigelsestegn.</li>
-            <li>Angriperen lurer offeret til å bruke nettopp <em>det</em> tegnet — for eksempel via en lenke med sesjons-ID i URL-en.</li>
+            <li>Angriperen lurer offeret til å bruke nettopp <em>det</em> tegnet — for eksempel via en lenke med sesjons-ID i <a class="term" href="ordliste.html#b-url">URL-en</a>.</li>
             <li>Offeret logger inn. Tjenesten kobler nå offerets identitet til det berettigelsestegnet angriperen allerede kjenner.</li>
             <li>Angriperen bruker det samme tegnet, og blir identifisert som offeret.</li>
           </ol>
@@ -162,8 +162,9 @@ curl -v -c kaker.txt -b kaker.txt http://localhost:8888/</pre>
     </div>
   </div>
 
-  <script src="../../../assets/js/main.js?v=43"></script>
+  <script src="../../../assets/js/main.js?v=44"></script>
   <script src="../../../assets/js/status.js?v=35"></script>
   <script src="../../../assets/js/formler.js?v=35"></script>
+  <script src="../../../assets/js/begrep.js?v=2"></script>
 </body>
 </html>

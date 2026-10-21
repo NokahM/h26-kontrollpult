@@ -7,7 +7,7 @@
   <meta name="description" content="Hvorfor webtjenere ikke kan binde port 80 direkte, demonisering, og REST som CRUD over HTTP — med hallotjener.c som gjennomgående eksempel.">
   <meta name="color-scheme" content="light dark">
   <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="../../../assets/css/main.css?v=43">
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=44">
 </head>
 <body class="theme-tsd3060" data-updated="2026-09-02">
   <div class="app-shell">
@@ -53,7 +53,7 @@
 
         <article class="prose">
           <h2>hallotjener.c — den minste HTTP-tjeneren som virker</h2>
-          <p>Hele emnet bygger videre på én liten C-tjener som gjør akkurat nok til å svare et gyldig HTTP-svar: den lager en socket, binder den til en port, lytter, og for hver innkommende forbindelse forker den seg — barnet skriver responsen og avslutter, opphavet lukker sin kopi av forbindelsen og går tilbake til å vente på neste. Ett barn per tilkobling, ingen tråder, ingen event-loop.</p>
+          <p>Hele emnet bygger videre på én liten C-tjener som gjør akkurat nok til å svare et gyldig <a class="term" href="ordliste.html#b-http">HTTP</a>-svar: den lager en <a class="term" href="ordliste.html#b-socket">socket</a>, binder den til en port, lytter, og for hver innkommende forbindelse <a class="term" href="ordliste.html#b-fork">forker</a> den seg — barnet skriver responsen og avslutter, opphavet lukker sin kopi av forbindelsen og går tilbake til å vente på neste. Ett barn per tilkobling, ingen tråder, ingen event-loop.</p>
           <pre class="codeblock">sd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 setsockopt(sd, SOL_SOCKET, SO_REUSEADDR, &amp;(int){ 1 }, sizeof(int));
 lok_adr.sin_family      = AF_INET;
@@ -76,7 +76,7 @@ while (1) {
     close(ny_sd);                  // opphavet trenger ikke sin kopi
   }
 }</pre>
-          <p>Denne strukturen — <code>socket → bind → listen → accept → fork</code> — er selve grunnmønsteret for en blokkerende, forkende TCP-tjener, og går igjen i alle eksemplene resten av dette kapittelet bygger videre på.</p>
+          <p>Denne strukturen — <code>socket → bind → listen → accept → fork</code> — er selve grunnmønsteret for en blokkerende, forkende <a class="term" href="ordliste.html#b-tcp">TCP</a>-tjener, og går igjen i alle eksemplene resten av dette kapittelet bygger videre på.</p>
 
           <div class="pitfall">
             <div class="pitfall__title">Fallgruve: filene fra debbie må gjøres kjørbare, og Windows-linjeskift ødelegger skript</div>
@@ -85,7 +85,7 @@ while (1) {
           </div>
 
           <h2>Hvorfor port 80/443 er et problem</h2>
-          <p>Standardportene for webtrafikk (80 for HTTP, 443 for HTTPS) er under 1024 — såkalte «privilegerte porter» som på Unix-lignende systemer krever root-rettigheter å binde til. Å kjøre selve webtjeneren som root er farlig: en feil i koden er da også en rot-sårbarhet. Vanlige løsninger:</p>
+          <p>Standardportene for webtrafikk (80 for HTTP, 443 for <a class="term" href="ordliste.html#b-https">HTTPS</a>) er under 1024 — såkalte «<a class="term" href="ordliste.html#b-port">privilegerte porter</a>» som på Unix-lignende systemer krever root-rettigheter å binde til. Å kjøre selve webtjeneren som root er farlig: en feil i koden er da også en rot-sårbarhet. Vanlige løsninger:</p>
           <ul>
             <li><strong>Akseptere risikoen</strong> og kjøre som root — enkelt, men et dårlig utgangspunkt sikkerhetsmessig.</li>
             <li><strong>Privilegeseparasjon</strong> — prosessen starter som root bare lenge nok til å binde porten, gir så fra seg rettighetene permanent med <code>setuid()</code>/<code>setgid()</code> før den behandler noe som helst klientdata. Minst mulig rettighet-prinsippet i praksis.</li>
@@ -101,9 +101,9 @@ while (1) {
           <div class="steps">
             <div class="step"><h4>Fork og la opphavet avslutte</h4><p>Barnet arver miljøet, men blir ikke prosessgruppeleder — en forutsetning for neste steg.</p></div>
             <div class="step"><h4>setsid()</h4><p>Gjør prosessen til leder for en helt ny sesjon og prosessgruppe, og løser den dermed fra en eventuell kontrollterminal.</p></div>
-            <div class="step"><h4>Ignorer SIGHUP</h4><p>Når en sesjonsleder senere termineres, sendes SIGHUP til alle prosessene i sesjonen — det skal ikke ramme demonen.</p></div>
+            <div class="step"><h4>Ignorer SIGHUP</h4><p>Når en sesjonsleder senere termineres, sendes <a class="term" href="ordliste.html#b-sighup">SIGHUP</a> til alle prosessene i sesjonen — det skal ikke ramme <a class="term" href="ordliste.html#b-demon">demonen</a>.</p></div>
             <div class="step"><h4>Fork én gang til, la opphavet avslutte</h4><p>Hindrer at demonen selv er sesjonsleder, slik at den aldri ved et uhell kan knytte til seg en ny kontrollterminal.</p></div>
-            <div class="step"><h4>Lukk unødvendige filer</h4><p>Arvede filbeskrivere (stdin/stdout/stderr fra den opprinnelige terminalen) ryddes opp.</p></div>
+            <div class="step"><h4>Lukk unødvendige filer</h4><p>Arvede <a class="term" href="ordliste.html#b-fd">filbeskrivere</a> (<a class="term" href="ordliste.html#b-stdio">stdin</a>/stdout/stderr fra den opprinnelige terminalen) ryddes opp.</p></div>
           </div>
           <p>Referanse: Lennert (1987), <em>«How To Write a UNIX Daemon»</em> — sitert i blant annet W. Richard Stevens' <em>UNIX Network Programming</em>.</p>
 
@@ -130,7 +130,7 @@ echo -en 'GET / HTTP/1.1\r\nHost: debbie\r\nConnection: close\r\n\r\n' \
           </div>
 
           <h2>REST: HTTP-verb som CRUD</h2>
-          <p>REST bruker selve HTTP-metoden som handling, og stien som mål for handlingen — <em>samlingen</em> eller <em>elementet</em> den gjelder for:</p>
+          <p><a class="term" href="ordliste.html#b-rest">REST</a> bruker selve HTTP-metoden som handling, og stien som mål for handlingen — <em>samlingen</em> eller <em>elementet</em> den gjelder for:</p>
           <table style="width:100%; margin-top:1rem; border-collapse:collapse; font-size:.88rem;">
             <thead><tr style="text-align:left; border-bottom:1px solid var(--line)"><th style="padding:.5rem .3rem">CRUD</th><th style="padding:.5rem .3rem">HTTP</th><th style="padding:.5rem .3rem">På samling</th><th style="padding:.5rem .3rem">På element</th></tr></thead>
             <tbody>
@@ -140,7 +140,7 @@ echo -en 'GET / HTTP/1.1\r\nHost: debbie\r\nConnection: close\r\n\r\n' \
               <tr><td style="padding:.5rem .3rem">Delete</td><td style="padding:.5rem .3rem"><code>DELETE</code></td><td style="padding:.5rem .3rem">Slett samling</td><td style="padding:.5rem .3rem">Slett element</td></tr>
             </tbody>
           </table>
-          <p>Undervisningens REST-eksempel er bygget som en liten kjede av shell-skript: <code>starter</code> tar imot forbindelsen og kjører <code>fordeler.sh</code>, som leser HTTP-metoden fra forespørselslinja og ruter videre til riktig skript (<code>get.sh</code>, <code>post.sh</code>, <code>put.sh</code>, <code>delete.sh</code>) — hvert av dem gjør akkurat den tilsvarende SQLite-operasjonen mot en <code>Person</code>-tabell og skriver et JSON-svar tilbake.</p>
+          <p>Undervisningens REST-eksempel er bygget som en liten kjede av shell-skript: <code>starter</code> tar imot forbindelsen og kjører <code>fordeler.sh</code>, som leser HTTP-metoden fra forespørselslinja og ruter videre til riktig skript (<code>get.sh</code>, <code>post.sh</code>, <code>put.sh</code>, <code>delete.sh</code>) — hvert av dem gjør akkurat den tilsvarende <a class="term" href="ordliste.html#b-sqlite">SQLite</a>-operasjonen mot en <code>Person</code>-tabell og skriver et <a class="term" href="ordliste.html#b-json">JSON</a>-svar tilbake.</p>
           <pre class="codeblock">MET=$(echo $LINJE | cut -f1 -d' ')
 if   [ "$MET" = "GET"    ]; then      ./get.sh
 elif [ "$MET" = "POST"   ]; then      ./post.sh
@@ -148,7 +148,7 @@ elif [ "$MET" = "DELETE" ]; then      ./delete.sh
 elif [ "$MET" = "PUT"    ]; then exec ./put.sh
 else printf "HTTP/1.1 405 Method not allowed\r\n\r\n"
 fi</pre>
-          <p><code>get.sh</code> er den enkleste: uten radnummer i stien listes hele tabellen, med radnummer hentes bare den ene raden — begge veier ender i en <code>SELECT ... FROM $TABELL</code> formattert som JSON. <code>post.sh</code> og <code>put.sh</code> må derimot først lese <code>Content-Length</code> fra HTTP-hodet for å vite hvor mange byte HTTP-kroppen inneholder, siden en socket ikke har noe naturlig sluttmerke for kroppen slik den har for hodet (den tomme linja).</p>
+          <p><code>get.sh</code> er den enkleste: uten radnummer i stien listes hele tabellen, med radnummer hentes bare den ene raden — begge veier ender i en <code>SELECT ... FROM $TABELL</code> formattert som JSON. <code>post.sh</code> og <code>put.sh</code> må derimot først lese <code>Content-Length</code> fra <a class="term" href="ordliste.html#b-hode">HTTP-hodet</a> for å vite hvor mange byte HTTP-kroppen inneholder, siden en socket ikke har noe naturlig sluttmerke for kroppen slik den har for hodet (den tomme linja).</p>
 
           <div class="pitfall">
             <div class="pitfall__title">Fallgruve: slik får du REST-eksempelet til å kjøre</div>
@@ -161,7 +161,7 @@ fi</pre>
             <p><code>statisk.sh</code> setter <code>FILSTI=.</code> foran stien fra forespørselen uten å sjekke den. En klient kan derfor gå ut av katalogen med <code>..</code> (<em>path traversal</em>):</p>
             <pre class="codeblock">curl --path-as-is http://localhost:8888/../../../../etc/passwd</pre>
             <p>(<code>--path-as-is</code> hindrer curl i å fjerne <code>..</code> selv.) En sikker tjener må avvise stier som inneholder <code>..</code>, eller slå opp den ekte stien og sjekke at den ligger under webroten. Siste linje, <code>exec ./steng_socket // hjelper ...</code>, er heller ikke en kommentar: <code>//</code> er ikke kommentartegn i sh, så ordene sendes som argumenter. Det er ufarlig her, men kommentarer i sh starter med <code>#</code>.</p>
-            <p>Også <code>get.sh</code> og <code>delete.sh</code> limer <code>$RAD</code> fra URL-en rett inn i SQL. Det er nettopp det uke 34-øvingen går ut på å fikse.</p>
+            <p>Også <code>get.sh</code> og <code>delete.sh</code> limer <code>$RAD</code> fra <a class="term" href="ordliste.html#b-url">URL-en</a> rett inn i <a class="term" href="ordliste.html#b-sql">SQL</a>. Det er nettopp det uke 34-øvingen går ut på å fikse.</p>
           </div>
 
           <div class="note"><strong>Videre lesning (V3 — støttelitteratur for socketprogrammering):</strong> kapitlene om sockets, domener, adresser og TCP-klient/tjener-programmering i <em>Linux Socket Programming by Example</em> dekker det teoretiske grunnlaget for <code>socket()</code>/<code>bind()</code>/<code>listen()</code>/<code>accept()</code>-mønsteret over.</div>
@@ -249,8 +249,9 @@ execvp(argv[0], argv);  // erstatter denne prosessen med det angitte programmet<
     </div>
   </div>
 
-  <script src="../../../assets/js/main.js?v=43"></script>
+  <script src="../../../assets/js/main.js?v=44"></script>
   <script src="../../../assets/js/status.js?v=35"></script>
   <script src="../../../assets/js/formler.js?v=35"></script>
+  <script src="../../../assets/js/begrep.js?v=2"></script>
 </body>
 </html>
