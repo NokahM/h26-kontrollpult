@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Presentasjon — MoS · H26</title>
+  <meta name="description" content="Manus for den ti minutter lange presentasjonen av miniprosjektet om BootROM-exploits og Fusée Gelée, i sju steg etter tilbakemeldingen fra faglærer.">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('h26-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="stylesheet" href="../../../assets/css/main.css?v=44">
+</head>
+<body class="theme-mos" data-updated="2026-10-30">
+  <div class="app-shell">
+
+    <aside class="sidebar"></aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="sidebar__toggle" data-sidebar-toggle aria-label="Vis/skjul sidepanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+        </button>
+        <a class="topbar__back" href="../index.html">MoS</a>
+        <div class="topbar__crumb">Presentasjon</div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-header__eyebrow">MoS · miniprosjekt</div>
+          <h1>Presentasjon: BootROM-exploits</h1>
+          <p class="page-header__desc">Manus for de første ca. ti minuttene av den muntlige eksamenen, i sju steg. Hvert steg har tidsbruk, forslag til lysbilde, det dere bør si og svarmomenter til oppfølgingsspørsmål. Rekkefølgen svarer på problemstillingen og på tilbakemeldingen fra faglærer.</p>
+          <span class="page-header__status" data-status="active"><i></i>ca. 10 min · 7 steg</span>
+        </header>
+
+        <div class="sourcebar">
+          <a class="tag" href="prosjekt-rapport.html">rapportsammendrag</a>
+          <a class="tag" href="prosjekt.html">koblingen til pensum</a>
+          <a class="tag" href="tillitskjede.html">tillitskjeden og boot ROM</a>
+          <a class="tag" href="https://switch.hacks.guide/files/extras/fusee_gelee_nvidia.pdf" target="_blank" rel="noopener">kilde · Fusée Gelée disclosure</a>
+          <a class="tag" href="https://nvidia.custhelp.com/app/answers/detail/a_id/4660" target="_blank" rel="noopener">kilde · NVIDIA security notice</a>
+        </div>
+
+        <p class="callout"><strong>Problemstilling:</strong> Hvordan kan feil i BootROM omgå sikker oppstart, og hvordan viser Fusée Gelée på Nintendo Switch hvorfor slike feil er alvorlige og vanskelige å rette?<br><br><strong>Faglærer (30. okt.):</strong> «Forklar RCM, sårbarheten og hvilke enheter som faktisk er berørt; skill mellom oppdateringer av programvare og endret silisium.» Steg 2, 3, 5 og 6 svarer på hvert av de fire punktene.</p>
+
+        <article class="prose">
+          <div class="dtable-wrap">
+            <table class="dtable">
+              <thead><tr><th>Steg</th><th>Innhold</th><th>Tid</th></tr></thead>
+              <tbody>
+                <tr><td><a href="#s1">1</a></td><td>Secure boot og BootROM som rot av tillit</td><td>1 min</td></tr>
+                <tr><td><a href="#s2">2</a></td><td>RCM: hva og hvorfor</td><td>1,5 min</td></tr>
+                <tr><td><a href="#s3">3</a></td><td>Sårbarheten: lengden som ikke sjekkes</td><td>2,5 min</td></tr>
+                <tr><td><a href="#s4">4</a></td><td>Fra BPMP til full kontroll</td><td>1,5 min</td></tr>
+                <tr><td><a href="#s5">5</a></td><td>Hvilke enheter er faktisk berørt</td><td>1,5 min</td></tr>
+                <tr><td><a href="#s6">6</a></td><td>Tre nivåer av fiks: programvare, iPatch, silisium</td><td>1,5 min</td></tr>
+                <tr><td><a href="#s7">7</a></td><td>Konklusjon: svar på problemstillingen</td><td>0,5 min</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2 id="s1">Secure boot og BootROM som rot av tillit</h2>
+          <div class="note"><strong>1 min · Lysbilde:</strong> tillitskjeden som fire bokser: BootROM → bootloader → TrustZone-monitor → operativsystem, med «verifiserer signatur» på hver pil.</div>
+          <p>Secure boot betyr at hvert ledd i oppstarten sjekker signaturen på neste ledd før det får kjøre. Det er en <a class="term" href="ordliste.html#b-kjede">tillitskjede</a>, og kjeden er bare så sterk som det første leddet, fordi det første leddet ikke har noen over seg som sjekker det.</p>
+          <p>Det første leddet er <strong>BootROM</strong>: koden som kjører når strømmen kommer på. I Tegra X1 ligger den i <a class="term" href="ordliste.html#b-rom">maske-ROM</a>, altså etset inn i brikken under produksjon. Ingen kan endre den, verken en angriper eller produsenten. Det er det som gjør den egnet som <a class="term" href="ordliste.html#b-rot">rot av tillit</a>, og det er det som gjør en feil i den så alvorlig.</p>
+          <details class="sol"><summary>Hvis eksaminator spør</summary><div class="sol__body">
+            <p><strong>«Hvorfor ikke legge første ledd i flash, så det kan oppdateres?»</strong> Da kan også en angriper med skrivetilgang endre det, og da finnes det ingen fast rot å forankre tilliten i. Avveiningen er sterk garanti så lenge koden er riktig, mot at en feil blir permanent.</p>
+          </div></details>
+
+          <h2 id="s2">RCM: hva og hvorfor</h2>
+          <div class="note"><strong>1,5 min · Lysbilde:</strong> bilde av Joy-Con-skinnen med pin 10 og GND markert, og teksten «VOL+ + HOME ved oppstart → RCM».</div>
+          <p><a class="term" href="ordliste.html#b-rcm">RCM</a> (USB Recovery Mode) er en <a class="term" href="ordliste.html#b-recovery">nødmodus</a> som ligger i selve BootROM-en. Når brikken starter i RCM, laster den ikke bootloaderen fra lagringen, men venter på at en PC skal sende et lite program over USB. NVIDIA laget den for to formål: å flashe brikker første gang i fabrikken, og å redde enheter der lagringen er ødelagt.</p>
+          <p>På Switch starter man RCM ved å holde VOL+ mens HOME-signalet er aktivt. HOME-signalet går gjennom høyre Joy-Con-skinne, og man kan lage det ved å kortslutte pin 10 mot jord med en enkel «RCM-jig». At Tegra-brikker har en slik modus var allerede kjent fra NVIDIAs Jetson-dokumentasjon.</p>
+          <p>Poenget: RCM er laget for å ta imot data fra USB <em>før</em> noen signatur er sjekket. Normalt sjekker BootROM signaturen på programmet som lastes inn, men koden som tar imot USB-forespørslene, kjører før den sjekken. Det er angrepsflaten.</p>
+          <details class="sol"><summary>Hvis eksaminator spør</summary><div class="sol__body">
+            <p><strong>«Er RCM i seg selv en feil?»</strong> Nei. Det er en tiltenkt funksjon, akkurat som CTRL-AP på nRF52 i kapittel 2. Feilen ligger i hvordan koden som håndterer USB i RCM, behandler input.</p>
+            <p><strong>«Krever angrepet fysisk tilgang?»</strong> Ja, USB-kabel og tilgang til Joy-Con-skinnen. Derfor er CVSS-scoren bare 6,8 (middels), selv om konsekvensen er full kontroll.</p>
+          </div></details>
+
+          <h2 id="s3">Sårbarheten: lengden som ikke sjekkes</h2>
+          <div class="note"><strong>2,5 min · Lysbilde:</strong> kodelinjen under, og minnefiguren som viser at kopien går forbi bufferet og inn i stacken.</div>
+          <p>I RCM svarer BootROM på vanlige USB-kontrollforespørsler, for eksempel <code>GET_STATUS</code>. Forespørselen har et felt, <code>wLength</code>, der verten oppgir hvor mange byte den vil ha tilbake. Riktig svar på <code>GET_STATUS</code> er 2 byte. BootROM bruker likevel <code>wLength</code> direkte som lengde i en kopi til et <a class="term" href="ordliste.html#b-dma">DMA</a>-buffer, uten å begrense den til 2:</p>
+          <pre class="codeblock">memcpy(dma_buffer, data_to_tx, length);  // length = wLength fra angriperen, opptil 65 535
+// riktig: length = min(wLength, faktisk_størrelse)</pre>
+          <p>Feilen er altså en manglende <a class="term" href="ordliste.html#b-grensesjekk">grensesjekk</a> (CWE-119). DMA-bufferet ligger rett under stacken til BootROM i IRAM. Med en stor nok lengde fortsetter kopien forbi bufferet og overskriver stacken, med data angriperen har lastet opp på forhånd gjennom den vanlige opplastingen i RCM. På stacken ligger returadressen, så når funksjonen returnerer, hopper prosessoren dit angriperen har bestemt.</p>
+
+          <figure class="flowfig">
+            <svg viewBox="0 0 720 330" role="img" aria-labelledby="mem-title mem-desc">
+              <title id="mem-title">IRAM under Fusée Gelée-overflyten</title>
+              <desc id="mem-desc">Høyere adresser øverst. Øverst ligger angriperens opplastede payload fra 0x40010000, under den BootROM-stacken med returadressen, og under den DMA-bufferet på 0x40009000. Kopien starter i DMA-bufferet og fortsetter oppover forbi bufferet og over stacken.</desc>
+              <defs>
+                <marker id="mem-arrow-attack" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path class="head head--attack" d="M2 1L8 5L2 9"/>
+                </marker>
+              </defs>
+
+              <text class="lbl" x="40" y="40">høyere adresser ↑</text>
+
+              <g class="node">
+                <rect x="200" y="24" width="300" height="64" rx="6"/>
+                <text class="t1" x="350" y="51" text-anchor="middle">Opplastet payload</text>
+                <text class="t2" x="350" y="71" text-anchor="middle">fra 0x40010000 · lastet opp via RCM</text>
+              </g>
+              <g class="node node--attack">
+                <rect x="200" y="112" width="300" height="64" rx="6"/>
+                <text class="t1" x="350" y="139" text-anchor="middle">BootROM-stack</text>
+                <text class="t2" x="350" y="159" text-anchor="middle">returadressen blir overskrevet</text>
+              </g>
+              <g class="node node--root">
+                <rect x="200" y="200" width="300" height="64" rx="6"/>
+                <text class="t1" x="350" y="227" text-anchor="middle">DMA-buffer</text>
+                <text class="t2" x="350" y="247" text-anchor="middle">0x40009000 · plass til svaret</text>
+              </g>
+
+              <path class="edge edge--attack" d="M500 240 C 580 240, 580 144, 506 144" marker-end="url(#mem-arrow-attack)"/>
+              <text class="lbl lbl--attack" x="586" y="186">memcpy, lengde</text>
+              <text class="lbl lbl--attack" x="586" y="204">= wLength</text>
+
+              <text class="lbl" x="350" y="300" text-anchor="middle">Kopien starter i bufferet og fortsetter forbi slutten av det, opp i stacken.</text>
+            </svg>
+            <figcaption>Forenklet IRAM-oppsett. Stacken ligger mellom bufferet og payloaden, så en for lang kopi treffer den.</figcaption>
+          </figure>
+
+          <details class="sol"><summary>Hvis eksaminator spør</summary><div class="sol__body">
+            <p><strong>«Hvorfor er det en programvarefeil og ikke feilinjeksjon?»</strong> Ingenting elektrisk manipuleres. Det er en digital logikkfeil i en protokollhåndterer, og den virker likt hver gang (deterministisk). Glitching i kapittel 6 er sannsynlighetsbasert og snur typisk én sjekk.</p>
+            <p><strong>«Hvordan vet angriperen hvor returadressen ligger?»</strong> Oppsettet i IRAM er det samme på alle enheter med samme BootROM. Angriperen fyller området med samme adresse mange ganger («spray»), så det treffer uansett.</p>
+          </div></details>
+
+          <h2 id="s4">Fra BPMP til full kontroll</h2>
+          <div class="note"><strong>1,5 min · Lysbilde:</strong> tillitskjeden fra steg 1, med et rødt kryss på BootROM og pilen fra RCM inn i den.</div>
+          <p>BootROM kjører på <a class="term" href="ordliste.html#b-bpmp">BPMP</a>, en liten hjelpeprosessor (ARM7) som starter før hovedprosessorene. Angriperens kode kjører nå der, med full tilgang til brikken og <em>før</em> BootROM har låst nøklene i <a class="term" href="ordliste.html#b-fuses">fuses</a> og før første signatursjekk. Derfra kan koden starte hovedprosessorene med egen fastvare på det høyeste privilegienivået, EL3, der normalt TrustZone-monitoren kjører.</p>
+          <p>Dette er svaret på første del av problemstillingen: bruddet skjer i første ledd i tillitskjeden. Alle senere signatursjekker, TrustZone og operativsystemets vern blir uten betydning, ikke fordi de er svake, men fordi angriperen aldri passerer dem. Angriperen bestemmer selv hva som skal startes.</p>
+          <details class="sol"><summary>Hvis eksaminator spør</summary><div class="sol__body">
+            <p><strong>«Hva kan angriperen gjøre med dette?»</strong> Kjøre egen fastvare (for eksempel Atmosphère), lese ut nøkler som er brent inn i brikken, og ta sikkerhetskopi av eller endre lagringen. Kontroll over BootROM-nivået betyr kontroll over alt som kommer etter.</p>
+          </div></details>
+
+          <h2 id="s5">Hvilke enheter er faktisk berørt</h2>
+          <div class="note"><strong>1,5 min · Lysbilde:</strong> tabellen under.</div>
+          <p>Det er ikke «Switch» som er sårbar, men <strong>brikken</strong>: Tegra X1 (T210) uten iPatch-rettelsen. Alle enheter med en slik brikke har samme BootROM og samme feil, også enheter som ikke er laget av Nintendo.</p>
+          <div class="dtable-wrap">
+            <table class="dtable">
+              <thead><tr><th>Enhet</th><th>Brikke</th><th>Sårbar?</th></tr></thead>
+              <tbody>
+                <tr><td>Switch HAC-001, tidlig produksjon (2017 – midten av 2018)</td><td>T210</td><td><span class="hit">Ja, permanent</span></td></tr>
+                <tr><td>Switch HAC-001, senere produksjon (midten av 2018 – 2019)</td><td>T210 med iPatch</td><td>Nei</td></tr>
+                <tr><td>Switch HAC-001(-01) «rød eske», Switch Lite, Switch OLED (2019 →)</td><td>T210B01 «Mariko»</td><td>Nei</td></tr>
+                <tr><td>Andre T210-enheter: NVIDIA Shield TV (2015, 2017), Jetson TX1, Google Pixel C</td><td>T210</td><td><span class="hit">Ja</span>, samme BootROM</td></tr>
+                <tr><td>Shield TV (2019)</td><td>T210B01</td><td>Nei</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Den første og den andre raden er samme konsollmodell med samme brikkemodell. Man kan ikke se forskjell utenpå, bare på faktisk BootROM-oppførsel eller på serienummerlister som brukermiljøet har samlet inn.</p>
+          <div class="pitfall"><div class="pitfall__title">Sjekk før eksamen</div><p>Raden med andre T210-enheter bør dere bekrefte mot NVIDIAs sikkerhetsvarsel [3] og nevne med kilde, så dere ikke påstår mer enn kildene sier.</p></div>
+
+          <h2 id="s6">Tre nivåer av fiks: programvare, iPatch, silisium</h2>
+          <div class="note"><strong>1,5 min · Lysbilde:</strong> tre kolonner: hva tiltaket endrer, hvem det hjelper, og om det retter BootROM-feilen.</div>
+          <p>Faglærer ber dere skille mellom programvareoppdateringer og endret silisium. Det finnes et tredje nivå mellom dem, og det er nettopp det som viser at dere forstår forskjellen.</p>
+          <div class="dtable-wrap">
+            <table class="dtable">
+              <thead><tr><th>Nivå</th><th>Hva endres</th><th>Hvem hjelper det</th><th>Retter BootROM-feilen?</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Programvare- og fastvareoppdatering</strong></td><td>Senere ledd i kjeden: bootloader, OS, nettjenester</td><td>Alle konsoller som oppdateres</td><td>Nei. BootROM kjører før oppdatert kode og kan ikke endres.</td></tr>
+                <tr><td><strong><a class="term" href="ordliste.html#b-ipatch">iPatch</a> i fuses</strong> (fra midten av 2018)</td><td>Samme silisium og samme maske-ROM. En liten rettelse brennes i fuses på fabrikken og legges over ROM-koden ved oppstart.</td><td>Bare nyproduserte T210-brikker</td><td>Ja, for de nye brikkene. Solgte enheter får den aldri.</td></tr>
+                <tr><td><strong>Endret silisium</strong> (T210B01 «Mariko», 2019)</td><td>Ny brikkerevisjon med nye masker og ny BootROM</td><td>Bare nye enheter</td><td>Ja, feilen finnes ikke i den nye BootROM-en.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Det programvareoppdateringer <em>kan</em> gjøre, er å gjøre angrepet mindre nyttig: Nintendo brenner en fuse per større systemoppdatering som <a class="term" href="ordliste.html#b-rollback">vern mot nedgradering</a>, og stenger konsoller med endret fastvare ute fra nettjenestene. Ingen av delene stopper selve kodekjøringen i BootROM.</p>
+          <details class="sol"><summary>Hvis eksaminator spør</summary><div class="sol__body">
+            <p><strong>«Er iPatch en fysisk fiks eller en programvarefiks?»</strong> Begge deler. Rettelsen er kode (noen få instruksjoner), men den lagres fysisk i fuses som bare kan skrives én gang, og maskinvaren i brikken legger den over ROM-adressene ved oppstart. Den kan ikke sendes ut som en oppdatering, fordi patch-området i fuses er låst når brikken har forlatt fabrikken.</p>
+            <p><strong>«Hvorfor brenner ikke Nintendo bare iPatch med en oppdatering, når de kan brenne fuses for anti-nedgradering?»</strong> Det er forskjellige fuses. Teller-fusene for nedgradering er ment å kunne brennes etter salg. Patch-området låses på fabrikken.</p>
+          </div></details>
+
+          <h2 id="s7">Konklusjon</h2>
+          <div class="note"><strong>0,5 min · Lysbilde:</strong> én setning per del av problemstillingen.</div>
+          <ul>
+            <li><strong>Hvordan omgås secure boot?</strong> En feil i BootROM gir kodekjøring i første ledd av tillitskjeden, før noen signatur er sjekket. Da blir alle senere sjekker uten betydning.</li>
+            <li><strong>Hvorfor alvorlig?</strong> Full kontroll over brikken, også nøklene i fuses, på alle enheter med samme BootROM.</li>
+            <li><strong>Hvorfor vanskelig å rette?</strong> Maske-ROM kan ikke endres. Programvare kan bare begrense følgene. Selve feilen kunne bare rettes i nye brikker, først med iPatch og så med nytt silisium. Solgte enheter er sårbare for alltid.</li>
+          </ul>
+          <div class="note"><strong>Avslutningssetning:</strong> Det som gjør BootROM til den sterkeste roten av tillit, at ingen kan endre den, er også det som gjør en feil i den permanent.</div>
+        </article>
+
+        <nav class="chapter-nav">
+          <a data-dir="prev" href="prosjekt-rapport.html"><small>forrige</small>Rapportsammendrag</a>
+          <span></span>
+        </nav>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/main.js?v=45"></script>
+  <script src="../../../assets/js/status.js?v=35"></script>
+  <script src="../../../assets/js/formler.js?v=35"></script>
+  <script src="../../../assets/js/begrep.js?v=2"></script>
+</body>
+</html>

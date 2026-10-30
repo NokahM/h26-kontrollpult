@@ -43,7 +43,8 @@
         { label: 'Miniprosjekt', items: [
           { title: 'Tillitskjeden og boot ROM', part: 'Miniprosjekt', href: 'subjects/mos/guides/tillitskjede.html' },
           { title: 'Fusée Gelée og pensum', part: 'Miniprosjekt', href: 'subjects/mos/guides/prosjekt.html' },
-          { title: 'Rapportsammendrag', part: 'Miniprosjekt', href: 'subjects/mos/guides/prosjekt-rapport.html' }
+          { title: 'Rapportsammendrag', part: 'Miniprosjekt', href: 'subjects/mos/guides/prosjekt-rapport.html' },
+          { title: 'Presentasjon', part: 'Miniprosjekt', meta: '10 min', href: 'subjects/mos/guides/presentasjon.html' }
         ] }
       ]
     },

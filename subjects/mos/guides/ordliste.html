@@ -173,6 +173,8 @@
             <dd>En nødmodus i boot ROM for å laste inn kode over USB eller UART når flash er tom eller ødelagt, for eksempel i fabrikken eller ved reparasjon. Nyttig, men også en vei inn som en angriper kan nå.</dd>
             <dt id="b-rcm">RCM<small>USB Recovery Mode (Tegra)</small></dt>
             <dd>Recovery-modusen i boot ROM på NVIDIA Tegra, der brikken tar imot kode over USB. Fusée Gelée utnytter en manglende lengdesjekk i RCM.</dd>
+            <dt id="b-ipatch">iPatch<small>ROM-rettelse i fuses</small></dt>
+            <dd>Tegra-brikkens mekanisme for å rette feil i maske-ROM: en liten rettelse brennes i fuses på fabrikken, og maskinvaren legger den over ROM-koden ved oppstart. Samme silisium, men kan ikke legges inn på brikker som er solgt.</dd>
             <dt id="b-attest">Attestasjon<small>attestation</small></dt>
             <dd>At enheten beviser overfor en ekstern part hva den startet opp med, ved å sende målingene fra oppstarten i en rapport signert av TPM-en. Mottakeren avgjør selv om den stoler på enheten.</dd>
             <dt id="b-micropython">MicroPython og CircuitPython<small>Python på mikrokontrollere</small></dt>
@@ -292,7 +294,7 @@
     </div>
   </div>
 
-  <script src="../../../assets/js/main.js?v=44"></script>
+  <script src="../../../assets/js/main.js?v=45"></script>
   <script src="../../../assets/js/status.js?v=35"></script>
   <script src="../../../assets/js/formler.js?v=35"></script>
   <script src="../../../assets/js/begrep.js?v=2"></script>
