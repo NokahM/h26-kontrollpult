@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lysbilder — MoS · H26</title>
+  <meta name="description" content="Lysbildene til presentasjonen av miniprosjektet om BootROM-exploits og Fusée Gelée, med talenotater.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+  <!--
+    Lysbildene er en kopi av presentasjonen som ble laget i Claude (privat artifact).
+    Hvert lysbilde er en <section> på et fast 1920x1080-lerret som skaleres til vinduet.
+    Talenotatene ligger i <aside> sist i hver section. Piler er inline SVG.
+  -->
+  <style>
+    html, body { margin: 0; height: 100%; background: #0B0E13; overflow: hidden; }
+    body { font-family: 'IBM Plex Sans', Arial, sans-serif; }
+    .viewport { position: fixed; inset: 0 0 var(--notes-h, 0px) 0; display: grid; place-items: center; }
+    .stage { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: 0 0; box-shadow: 0 10px 40px rgba(0,0,0,.5); }
+    .slide { position: absolute; inset: 0; box-sizing: border-box; overflow: hidden; }
+    .slide[hidden] { display: none !important; }
+    .slide * { margin: 0; box-sizing: border-box; }
+    .slide h1, .slide h2, .slide h3 { font-weight: 600; }
+    .slide ol, .slide ul { padding-left: 1.4em; }
+    .slide table { width: 100%; border-collapse: collapse; }
+    .slide th, .slide td { padding: .45em .6em; border-bottom: 1px solid #CFCAC0; text-align: left; vertical-align: top; }
+    .slide th { font-weight: 600; border-bottom: 2px solid #1B2028; }
+    .slide aside { display: none; }
+
+    .bar { position: fixed; right: 16px; bottom: calc(var(--notes-h, 0px) + 12px); display: flex; gap: 6px; align-items: center;
+           font: 600 13px 'IBM Plex Sans', Arial, sans-serif; color: #B8C0CC; opacity: .35; transition: opacity .2s; }
+    .bar:hover, body.idle-off .bar { opacity: 1; }
+    .bar a, .bar button { font: inherit; color: inherit; background: #1B2028; border: 1px solid #2C333D; border-radius: 6px; padding: 6px 10px; cursor: pointer; text-decoration: none; }
+    .bar button:hover, .bar a:hover { background: #2C333D; color: #F5F3EE; }
+    .bar .count { padding: 0 8px; font-variant-numeric: tabular-nums; }
+
+    .notes { position: fixed; left: 0; right: 0; bottom: 0; height: var(--notes-h, 0px); overflow: auto; box-sizing: border-box;
+             background: #161B22; border-top: 1px solid #2C333D; color: #D5DAE1; padding: 16px 24px; font-size: 17px; line-height: 1.6; }
+    .notes[hidden] { display: none; }
+    .notes strong { color: #F2944F; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; display: block; margin-bottom: 4px; }
+  </style>
+</head>
+<body>
+  <div class="viewport"><div class="stage" id="stage">
+<section id="cover" class="slide" data-transition="fade" style="background:#161B22;color:#F5F3EE;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:space-between">
+<p style="font-size:28px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#F2944F">Maskinvare og sikkerhet · USN · miniprosjekt</p>
+<div style="display:flex;flex-direction:column;gap:32px">
+<h1 style="font-size:120px;font-weight:700;line-height:1.05;color:#F5F3EE">BootROM-exploits</h1>
+<p style="font-size:44px;line-height:1.3;color:#B8C0CC">Fusée Gelée (CVE-2018-6242) på Nintendo Switch</p>
+</div>
+<p style="font-size:28px;color:#B8C0CC">Jeppe Høines og Håkon Moen · høsten 2026</p>
+<aside>Presenter dere kort. Prosjektet handler om BootROM-exploits generelt, med Fusée Gelée på Nintendo Switch som konkret eksempel. Hele presentasjonen er ca. ti minutter.</aside>
+</section>
+<section id="problem" class="slide" hidden data-transition="fade" style="background:#F5F3EE;color:#1B2028;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:space-between">
+<p style="font-size:28px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#B8501A">Problemstilling</p>
+<h2 style="font-size:60px;font-weight:600;line-height:1.25;color:#1B2028">«Hvordan kan feil i BootROM omgå sikker oppstart, og hvordan viser Fusée Gelée på Nintendo Switch hvorfor slike feil er alvorlige og vanskelige å rette?»</h2>
+<div style="display:flex;gap:16px;flex-wrap:wrap">
+<p style="font-size:24px;padding:12px 20px;border:1px solid #CFCAC0;border-radius:999px;color:#4A5260">1 Secure boot</p>
+<p style="font-size:24px;padding:12px 20px;border:1px solid #CFCAC0;border-radius:999px;color:#4A5260">2 RCM</p>
+<p style="font-size:24px;padding:12px 20px;border:1px solid #CFCAC0;border-radius:999px;color:#4A5260">3 Sårbarheten</p>
+<p style="font-size:24px;padding:12px 20px;border:1px solid #CFCAC0;border-radius:999px;color:#4A5260">4 Konsekvensen</p>
+<p style="font-size:24px;padding:12px 20px;border:1px solid #CFCAC0;border-radius:999px;color:#4A5260">5 Berørte enheter</p>
+<p style="font-size:24px;padding:12px 20px;border:1px solid #CFCAC0;border-radius:999px;color:#4A5260">6 Tre nivåer av fiks</p>
+<p style="font-size:24px;padding:12px 20px;border:1px solid #CFCAC0;border-radius:999px;color:#4A5260">7 Konklusjon</p>
+</div>
+<aside>Les problemstillingen. Den har to deler: hvordan en BootROM-feil omgår secure boot, og hvorfor slike feil er alvorlige og vanskelige å rette. Vi går gjennom sju steg, og konklusjonen svarer på begge delene.</aside>
+</section>
+<section id="secureboot" class="slide" hidden data-transition="fade" style="background:#F5F3EE;color:#1B2028;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:space-between">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#2F5FA8">1 · Secure boot</p>
+<h2 style="font-size:72px;font-weight:600;line-height:1.1">Oppstarten er en tillitskjede</h2>
+</div>
+<div style="display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;align-items:center;gap:20px">
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#FBFAF7;padding:32px;border:3px solid #2F5FA8;border-radius:16px">
+<h3 style="font-size:36px;font-weight:600;color:#2F5FA8">BootROM</h3>
+<p style="font-size:24px;color:#4A5260">maske-ROM på BPMP, rot av tillit</p>
+</div>
+<svg width="56" height="28" viewBox="0 0 56 28" aria-hidden="true" style="flex:none"><polygon points="0,8.4 33.6,8.4 33.6,0 56,14 33.6,28 33.6,19.6 0,19.6" fill="#8A93A0"/></svg>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#FBFAF7;padding:32px;border:1px solid #CFCAC0;border-radius:16px">
+<h3 style="font-size:36px;font-weight:600">Bootloader</h3>
+<p style="font-size:24px;color:#4A5260">package1, fra lagringen</p>
+</div>
+<svg width="56" height="28" viewBox="0 0 56 28" aria-hidden="true" style="flex:none"><polygon points="0,8.4 33.6,8.4 33.6,0 56,14 33.6,28 33.6,19.6 0,19.6" fill="#8A93A0"/></svg>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#FBFAF7;padding:32px;border:1px solid #CFCAC0;border-radius:16px">
+<h3 style="font-size:36px;font-weight:600">Secure Monitor</h3>
+<p style="font-size:24px;color:#4A5260">TrustZone, nivå EL3</p>
+</div>
+<svg width="56" height="28" viewBox="0 0 56 28" aria-hidden="true" style="flex:none"><polygon points="0,8.4 33.6,8.4 33.6,0 56,14 33.6,28 33.6,19.6 0,19.6" fill="#8A93A0"/></svg>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#FBFAF7;padding:32px;border:1px solid #CFCAC0;border-radius:16px">
+<h3 style="font-size:36px;font-weight:600">Horizon</h3>
+<p style="font-size:24px;color:#4A5260">Switch sitt operativsystem</p>
+</div>
+</div>
+<p style="font-size:28px;color:#4A5260">Hver pil: sjekk signaturen på neste ledd før det får kjøre.</p>
+</div>
+<p style="font-size:40px;line-height:1.3;font-weight:600;color:#1B2028">Kjeden er aldri sterkere enn første ledd, og ingen sjekker første ledd.</p>
+<aside>Secure boot betyr at hvert ledd i oppstarten sjekker signaturen på neste ledd før det får kjøre. Det er en tillitskjede. Det første leddet er BootROM: koden som kjører når strømmen kommer på. I Tegra X1 ligger den i maske-ROM, etset inn i brikken under produksjon. Ingen kan endre den, verken en angriper eller produsenten. Det gjør den egnet som rot av tillit, og det er også det som gjør en feil i den så alvorlig. (ca. 1 min)</aside>
+</section>
+<section id="rcm" class="slide" hidden data-transition="fade" style="background:#F5F3EE;color:#1B2028;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#2F5FA8">2 · RCM</p>
+<h2 style="font-size:72px;font-weight:600;line-height:1.1">En nødmodus inne i BootROM</h2>
+</div>
+<div style="display:flex;gap:48px;flex:1">
+<div style="flex:3;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<h3 style="font-size:36px;font-weight:600">Hva</h3>
+<p style="font-size:30px;line-height:1.4;color:#4A5260">Brikken tar imot et program over USB i stedet for å starte fra lagringen.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<h3 style="font-size:36px;font-weight:600">Hvorfor</h3>
+<p style="font-size:30px;line-height:1.4;color:#4A5260">Flashing i fabrikken og redning av enheter som ikke starter.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<h3 style="font-size:36px;font-weight:600">Hvordan på Switch</h3>
+<p style="font-size:30px;line-height:1.4;color:#4A5260">VOL+ og HOME ved oppstart. HOME lages ved å kortslutte pin 10 på høyre Joy-Con-skinne mot jord.</p>
+</div>
+</div>
+<div style="flex:2;display:flex;flex-direction:column;justify-content:center;gap:24px;background:#161B22;padding:56px;border-radius:16px">
+<p style="font-size:28px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#F2944F">Angrepsflaten</p>
+<p style="font-size:40px;line-height:1.3;font-weight:600;color:#F5F3EE">Koden som tar imot USB-forespørslene, kjører før noen signatur er sjekket.</p>
+</div>
+</div>
+<aside>RCM, USB Recovery Mode, er en nødmodus som ligger i selve BootROM-en. I RCM laster ikke brikken bootloaderen fra lagringen, men venter på et lite program over USB. NVIDIA laget den for fabrikkflashing og for å redde enheter der lagringen er ødelagt. På Switch starter man RCM med VOL+ og HOME ved oppstart. HOME-signalet går gjennom høyre Joy-Con-skinne og kan lages ved å kortslutte pin 10 mot jord med en enkel RCM-jig. RCM i seg selv er ikke en feil, akkurat som CTRL-AP i kapittel 2. Poenget er at koden som tar imot USB-forespørslene, kjører før signatursjekken. Det er angrepsflaten. Angrepet krever fysisk tilgang, derfor CVSS 6,8. (ca. 1,5 min)</aside>
+</section>
+<section id="vuln" class="slide" hidden data-transition="fade" style="background:#F5F3EE;color:#1B2028;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:space-between">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#B8501A">3 · Sårbarheten</p>
+<h2 style="font-size:72px;font-weight:600;line-height:1.1">Lengden sjekkes aldri</h2>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;background:#161B22;padding:48px 56px;border-radius:16px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:40px;color:#F5F3EE">memcpy(dma_buffer, data, <span style="color:#F2944F">wLength</span>);</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;color:#8DB4EE">// riktig: min(wLength, 2)</p>
+</div>
+<div style="display:flex;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#FBFAF7;padding:40px;border:1px solid #CFCAC0;border-radius:16px">
+<p style="font-size:64px;font-weight:700;line-height:1.1;color:#2F5FA8">2 byte</p>
+<p style="font-size:26px;color:#4A5260">riktig svar på GET_STATUS</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#FBFAF7;padding:40px;border:1px solid #CFCAC0;border-radius:16px">
+<p style="font-size:64px;font-weight:700;line-height:1.1;color:#B8501A">65 535 byte</p>
+<p style="font-size:26px;color:#4A5260">største wLength angriperen kan be om</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#FBFAF7;padding:40px;border:1px solid #CFCAC0;border-radius:16px">
+<p style="font-size:64px;font-weight:700;line-height:1.1;color:#1B2028">CWE-119</p>
+<p style="font-size:26px;color:#4A5260">manglende grensesjekk</p>
+</div>
+</div>
+<aside>I RCM svarer BootROM på vanlige USB-kontrollforespørsler, for eksempel GET_STATUS. Forespørselen har et felt, wLength, der verten oppgir hvor mange byte den vil ha tilbake. Riktig svar på GET_STATUS er 2 byte. BootROM bruker likevel wLength direkte som lengde i en kopi til et DMA-buffer, uten å begrense den til 2. Angriperen kan be om opptil 65 535 byte. Feilen er en manglende grensesjekk, CWE-119. Det er en vanlig programvarefeil, ikke feilinjeksjon: ingenting elektrisk manipuleres, og den virker likt hver gang.</aside>
+</section>
+<section id="memory" class="slide" hidden data-transition="fade" style="background:#F5F3EE;color:#1B2028;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#B8501A">3 · Sårbarheten</p>
+<h2 style="font-size:72px;font-weight:600;line-height:1.1">Kopien går over stacken</h2>
+</div>
+<div style="display:flex;gap:64px;flex:1;align-items:center">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;color:#4A5260">høyere adresser ↑</p>
+<div style="display:flex;gap:24px">
+<div style="width:520px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;flex-direction:column;gap:4px;background:#FBFAF7;padding:24px 32px;border:1px solid #CFCAC0;border-radius:12px">
+<h3 style="font-size:32px;font-weight:600">Opplastet payload</h3>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#4A5260">fra 0x40010000</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:4px;background:#F7E6DA;padding:24px 32px;border:3px solid #B8501A;border-radius:12px">
+<h3 style="font-size:32px;font-weight:600;color:#B8501A">BootROM-stack</h3>
+<p style="font-size:24px;color:#4A5260">returadressen overskrives</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:4px;background:#FBFAF7;padding:24px 32px;border:3px solid #2F5FA8;border-radius:12px">
+<h3 style="font-size:32px;font-weight:600;color:#2F5FA8">DMA-buffer</h3>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#4A5260">0x40009000</p>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;justify-content:end;padding:0 0 56px 0">
+<svg width="56" height="140" viewBox="0 0 56 140" aria-hidden="true" style="flex:none"><polygon points="16.8,140 16.8,56 0,56 28,0 56,56 39.2,56 39.2,140" fill="#B8501A"/></svg>
+</div>
+<div style="width:220px;display:flex;flex-direction:column;justify-content:end;padding:0 0 80px 0">
+<p style="font-size:26px;font-weight:600;line-height:1.3;color:#B8501A">memcpy med lengde = wLength</p>
+</div>
+</div>
+</div>
+<ol style="flex:1;font-size:30px;line-height:1.4;color:#1B2028;display:flex;flex-direction:column;gap:20px">
+<li>Angriperen laster opp egne data via RCM.</li>
+<li>Ber om GET_STATUS med stor wLength.</li>
+<li>Kopien fyller bufferet og fortsetter opp i stacken.</li>
+<li>Returadressen peker nå til angriperens kode.</li>
+</ol>
+</div>
+<aside>DMA-bufferet ligger rett under stacken til BootROM i minnet. Med en stor nok lengde fortsetter kopien forbi bufferet og overskriver stacken, med data angriperen har lastet opp på forhånd gjennom den vanlige opplastingen i RCM. På stacken ligger returadressen. Når funksjonen returnerer, hopper prosessoren dit angriperen har bestemt. Oppsettet i minnet er likt på alle enheter med samme BootROM, og angriperen fyller området med samme adresse mange ganger, så det treffer hver gang. (Steg 3 totalt ca. 2,5 min)</aside>
+</section>
+<section id="chain" class="slide" hidden data-transition="fade" style="background:#F5F3EE;color:#1B2028;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:space-between">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#B8501A">4 · Konsekvensen</p>
+<h2 style="font-size:72px;font-weight:600;line-height:1.1">Bruddet skjer i første ledd</h2>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="width:344px;display:flex;flex-direction:column;align-items:center;gap:12px">
+<p style="font-size:26px;font-weight:600;padding:10px 24px;background:#B8501A;color:#FBFAF7;border-radius:999px">USB → RCM</p>
+<svg width="28" height="48" viewBox="0 0 28 48" aria-hidden="true" style="flex:none"><polygon points="8.4,0 8.4,28.8 0,28.8 14,48 28,28.8 19.6,28.8 19.6,0" fill="#B8501A"/></svg>
+</div>
+<div style="display:flex;align-items:center;gap:20px">
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#F7E6DA;padding:32px;border:3px solid #B8501A;border-radius:16px">
+<h3 style="font-size:36px;font-weight:600;color:#B8501A">BootROM</h3>
+<p style="font-size:24px;color:#4A5260">kapret på BPMP</p>
+</div>
+<svg width="56" height="28" viewBox="0 0 56 28" aria-hidden="true" style="flex:none"><polygon points="0,8.4 33.6,8.4 33.6,0 56,14 33.6,28 33.6,19.6 0,19.6" fill="#CFCAC0"/></svg>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;padding:32px;border:2px dashed #A9A396;border-radius:16px">
+<h3 style="font-size:36px;font-weight:600;color:#6B7280">Bootloader</h3>
+<p style="font-size:24px;color:#6B7280">omgått</p>
+</div>
+<svg width="56" height="28" viewBox="0 0 56 28" aria-hidden="true" style="flex:none"><polygon points="0,8.4 33.6,8.4 33.6,0 56,14 33.6,28 33.6,19.6 0,19.6" fill="#CFCAC0"/></svg>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;padding:32px;border:2px dashed #A9A396;border-radius:16px">
+<h3 style="font-size:36px;font-weight:600;color:#6B7280">Secure Monitor</h3>
+<p style="font-size:24px;color:#6B7280">angriperen på EL3</p>
+</div>
+<svg width="56" height="28" viewBox="0 0 56 28" aria-hidden="true" style="flex:none"><polygon points="0,8.4 33.6,8.4 33.6,0 56,14 33.6,28 33.6,19.6 0,19.6" fill="#CFCAC0"/></svg>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;padding:32px;border:2px dashed #A9A396;border-radius:16px">
+<h3 style="font-size:36px;font-weight:600;color:#6B7280">Horizon</h3>
+<p style="font-size:24px;color:#6B7280">angriperen velger</p>
+</div>
+</div>
+</div>
+<p style="font-size:36px;line-height:1.35;color:#1B2028">Koden kjører <b>før første signatursjekk</b> og før nøklene i fuses er låst. Alt senere vern blir uten betydning.</p>
+<aside>BootROM kjører på BPMP, en liten hjelpeprosessor som starter før hovedprosessorene. Angriperens kode kjører nå der, med full tilgang til brikken, før BootROM har låst nøklene i fuses og før første signatursjekk. Derfra kan koden starte hovedprosessorene med egen fastvare på det høyeste privilegienivået, EL3. Dette svarer på første del av problemstillingen: alle senere signatursjekker, TrustZone og operativsystemets vern blir uten betydning, ikke fordi de er svake, men fordi angriperen aldri passerer dem. (ca. 1,5 min)</aside>
+</section>
+<section id="devices" class="slide" hidden data-transition="fade" style="background:#F5F3EE;color:#1B2028;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#2F5FA8">5 · Berørte enheter</p>
+<h2 style="font-size:72px;font-weight:600;line-height:1.1">Det er brikken som er sårbar</h2>
+</div>
+<table style="font-size:28px;color:#1B2028">
+<tr><th style="width:56%;text-align:left">Enhet</th><th style="width:22%;text-align:left">Brikke</th><th style="width:22%;text-align:left">Sårbar?</th></tr>
+<tr style="background:#F7E6DA"><td>Switch HAC-001, 2017 – midten av 2018</td><td>T210</td><td style="color:#B8501A">Ja, permanent</td></tr>
+<tr><td>Switch HAC-001, midten av 2018 – 2019</td><td>T210 + iPatch</td><td>Nei</td></tr>
+<tr><td>Switch-revisjon, Switch Lite, Switch OLED (2019 →)</td><td>T210B01 «Mariko»</td><td>Nei</td></tr>
+<tr style="background:#F7E6DA"><td>Shield TV (2015, 2017), Jetson TX1, Pixel C</td><td>T210</td><td style="color:#B8501A">Ja, samme BootROM</td></tr>
+<tr><td>Shield TV (2019)</td><td>T210B01</td><td>Nei</td></tr>
+</table>
+<p style="font-size:30px;line-height:1.4;color:#4A5260">De to første radene er samme konsoll med samme brikkemodell. Forskjellen synes bare på hvordan BootROM oppfører seg, eller i serienummerlister fra brukermiljøet.</p>
+<aside>Det er ikke «Switch» som er sårbar, men brikken: Tegra X1, T210, uten iPatch-rettelsen. Alle enheter med en slik brikke har samme BootROM og samme feil, også enheter som ikke er laget av Nintendo, for eksempel Shield TV og Jetson TX1. Konsoller laget fra midten av 2018 har iPatch og er ikke sårbare, og fra 2019 kom den nye brikken Mariko i den reviderte Switch, Lite og OLED. Merk: sjekk listen over andre T210-enheter mot NVIDIAs sikkerhetsvarsel før eksamen. (ca. 1,5 min)</aside>
+</section>
+<section id="fixes" class="slide" hidden data-transition="fade" style="background:#F5F3EE;color:#1B2028;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#2F5FA8">6 · Fiksen</p>
+<h2 style="font-size:72px;font-weight:600;line-height:1.1">Tre nivåer av fiks</h2>
+</div>
+<div style="display:flex;gap:32px;flex:1">
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FBFAF7;padding:40px;border:1px solid #CFCAC0;border-radius:16px">
+<p style="font-size:24px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#4A5260">Nivå 1</p>
+<h3 style="font-size:40px;font-weight:600">Programvare</h3>
+<p style="font-size:26px;line-height:1.4;color:#4A5260">Systemoppdateringer endrer bootloader, operativsystem og nettjenester.</p>
+<p style="font-size:26px;line-height:1.4;color:#4A5260">Kan begrense følgene: anti-nedgradering i fuses og utestengelse fra nett.</p>
+<div style="flex:1"></div>
+<p style="font-size:26px;font-weight:600;padding:10px 20px;background:#F7E6DA;color:#8F3D12;border-radius:999px">Retter ikke BootROM</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FBFAF7;padding:40px;border:1px solid #CFCAC0;border-radius:16px">
+<p style="font-size:24px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#4A5260">Nivå 2</p>
+<h3 style="font-size:40px;font-weight:600">iPatch i fuses</h3>
+<p style="font-size:26px;line-height:1.4;color:#4A5260">Samme silisium. En liten rettelse brennes i fuses på fabrikken og legges over ROM-koden.</p>
+<p style="font-size:26px;line-height:1.4;color:#4A5260">Bare nye T210-brikker, fra midten av 2018.</p>
+<div style="flex:1"></div>
+<p style="font-size:26px;font-weight:600;padding:10px 20px;background:#DCE6F5;color:#1F4580;border-radius:999px">Retter nye brikker</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FBFAF7;padding:40px;border:1px solid #CFCAC0;border-radius:16px">
+<p style="font-size:24px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#4A5260">Nivå 3</p>
+<h3 style="font-size:40px;font-weight:600">Nytt silisium</h3>
+<p style="font-size:26px;line-height:1.4;color:#4A5260">T210B01 «Mariko» (2019): nye masker og ny BootROM.</p>
+<p style="font-size:26px;line-height:1.4;color:#4A5260">Switch-revisjon, Lite og OLED.</p>
+<div style="flex:1"></div>
+<p style="font-size:26px;font-weight:600;padding:10px 20px;background:#DCE6F5;color:#1F4580;border-radius:999px">Feilen finnes ikke</p>
+</div>
+</div>
+<aside>Faglærer ba oss skille mellom programvareoppdateringer og endret silisium. Det finnes et tredje nivå mellom dem. Nivå 1: systemoppdateringer endrer bare senere ledd i kjeden. De kan gjøre angrepet mindre nyttig: Nintendo brenner en fuse per større oppdatering, så eldre fastvare ikke kan legges inn igjen, og stenger konsoller med endret fastvare ute fra nett. Men BootROM kjører før all oppdatert kode, så selve feilen rettes ikke. Nivå 2: iPatch. Samme silisium og samme maske-ROM, men en liten rettelse brennes i fuses på fabrikken, og maskinvaren legger den over ROM-koden ved oppstart. Rettelsen er kode, men den lagres fysisk og kan bare legges inn før brikken forlater fabrikken. Solgte enheter får den aldri. Nivå 3: nytt silisium. T210B01, Mariko, har nye masker og ny BootROM uten feilen. (ca. 1,5 min)</aside>
+</section>
+<section id="conclusion" class="slide" hidden data-transition="fade" style="background:#161B22;color:#F5F3EE;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:space-between">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#F2944F">7 · Konklusjon</p>
+<h2 style="font-size:72px;font-weight:600;line-height:1.1;color:#F5F3EE">Svar på problemstillingen</h2>
+</div>
+<div style="display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;gap:48px">
+<p style="width:420px;font-size:32px;font-weight:600;color:#8DB4EE">Omgår secure boot</p>
+<p style="flex:1;font-size:32px;line-height:1.4;color:#D5DAE1">Kodekjøring i første ledd, før noen signatur er sjekket.</p>
+</div>
+<div style="display:flex;gap:48px">
+<p style="width:420px;font-size:32px;font-weight:600;color:#8DB4EE">Alvorlig</p>
+<p style="flex:1;font-size:32px;line-height:1.4;color:#D5DAE1">Full kontroll over brikken og nøklene, på alle enheter med samme BootROM.</p>
+</div>
+<div style="display:flex;gap:48px">
+<p style="width:420px;font-size:32px;font-weight:600;color:#8DB4EE">Vanskelig å rette</p>
+<p style="flex:1;font-size:32px;line-height:1.4;color:#D5DAE1">Maske-ROM kan ikke endres. Bare nye brikker ble rettet, solgte er sårbare for alltid.</p>
+</div>
+</div>
+<p style="font-size:40px;line-height:1.3;font-weight:600;color:#F2944F">Det som gjør BootROM til en sterk rot av tillit, at ingen kan endre den, gjør også en feil i den permanent.</p>
+<aside>Oppsummer med én setning per del av problemstillingen. Hvordan omgås secure boot: en feil i BootROM gir kodekjøring i første ledd, før noen signatur er sjekket. Hvorfor alvorlig: full kontroll over brikken, også nøklene, på alle enheter med samme BootROM. Hvorfor vanskelig å rette: maske-ROM kan ikke endres, programvare kan bare begrense følgene, og selve feilen kunne bare rettes i nye brikker. Avslutt med setningen nederst. (ca. 0,5 min)</aside>
+</section>
+<section id="sources" class="slide" hidden data-transition="fade" style="background:#F5F3EE;color:#1B2028;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:48px">
+<h2 style="font-size:72px;font-weight:600;line-height:1.1">Kilder</h2>
+<div style="display:flex;flex-direction:column;gap:28px;font-size:26px;line-height:1.45;color:#4A5260">
+<p style="font-size:26px">[1] J. van Woudenberg og C. O’Flynn, <i>The Hardware Hacking Handbook: Breaking Embedded Security with Hardware Attacks</i>. No Starch Press, 2021, kap. 1, 2 og 14.</p>
+<p style="font-size:26px">[2] K. Temkin, «Vulnerability Disclosure: Fusée Gelée», ReSwitched, 2018. switch.hacks.guide/files/extras/fusee_gelee_nvidia.pdf</p>
+<p style="font-size:26px">[3] NVIDIA, «Security Notice: NVIDIA Tegra RCM Vulnerability», 24. april 2018. nvidia.custhelp.com/app/answers/detail/a_id/4660</p>
+<p style="font-size:26px">[4] Nintendo Homebrew, «Entering RCM», NH Switch Guide. switch.hacks.guide/user_guide/rcm/entering_rcm</p>
+</div>
+<aside>Kildelisten fra prosjektbeskrivelsen. Vis den bare hvis eksaminator spør, eller la den stå mens dere tar spørsmål.</aside>
+</section>
+  </div></div>
+
+  <section class="notes" id="notes" hidden aria-live="polite"><strong>Talenotater</strong><p id="notes-text"></p></section>
+
+  <nav class="bar" aria-label="Lysbildenavigasjon">
+    <a href="presentasjon.html" title="Tilbake til manuset">← Manus</a>
+    <button id="prev" title="Forrige (venstre pil)">‹</button>
+    <span class="count" id="count"></span>
+    <button id="next" title="Neste (høyre pil eller mellomrom)">›</button>
+    <button id="toggle-notes" title="Talenotater (N)">Notater</button>
+    <button id="fs" title="Fullskjerm (F)">Fullskjerm</button>
+  </nav>
+
+  <script>
+  (function () {
+    var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+    var stage = document.getElementById('stage');
+    var notes = document.getElementById('notes');
+    var i = 0;
+
+    function fit() {
+      var nh = notes.hidden ? 0 : Math.round(window.innerHeight * 0.28);
+      document.documentElement.style.setProperty('--notes-h', nh + 'px');
+      var w = window.innerWidth, h = window.innerHeight - nh;
+      var s = Math.min(w / 1920, h / 1080) * 0.96;
+      stage.style.transform = 'scale(' + s + ') translate(-50%, -50%)';
+      stage.style.top = (h / 2) + 'px';
+    }
+
+    function show(n) {
+      i = Math.max(0, Math.min(slides.length - 1, n));
+      slides.forEach(function (s, k) { s.hidden = k !== i; });
+      document.getElementById('count').textContent = (i + 1) + ' / ' + slides.length;
+      var aside = slides[i].querySelector('aside');
+      document.getElementById('notes-text').textContent = aside ? aside.textContent : '';
+      history.replaceState(null, '', '#' + (i + 1));
+    }
+
+    function toggleNotes() {
+      notes.hidden = !notes.hidden;
+      try { localStorage.setItem('h26-lysbilder-notes', notes.hidden ? '0' : '1'); } catch (e) {}
+      fit();
+    }
+
+    function fullscreen() {
+      if (document.fullscreenElement) document.exitFullscreen();
+      else document.documentElement.requestFullscreen();
+    }
+
+    document.getElementById('prev').onclick = function () { show(i - 1); };
+    document.getElementById('next').onclick = function () { show(i + 1); };
+    document.getElementById('toggle-notes').onclick = toggleNotes;
+    document.getElementById('fs').onclick = fullscreen;
+    stage.addEventListener('click', function () { show(i + 1); });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+      var k = e.key;
+      if (k === 'ArrowRight' || k === 'PageDown' || k === ' ') { show(i + 1); e.preventDefault(); }
+      else if (k === 'ArrowLeft' || k === 'PageUp') { show(i - 1); e.preventDefault(); }
+      else if (k === 'Home') show(0);
+      else if (k === 'End') show(slides.length - 1);
+      else if (k === 'n' || k === 'N') toggleNotes();
+      else if (k === 'f' || k === 'F') fullscreen();
+    });
+
+    try { if (localStorage.getItem('h26-lysbilder-notes') === '1') notes.hidden = false; } catch (e) {}
+    window.addEventListener('resize', fit);
+    fit();
+    show((parseInt(location.hash.slice(1), 10) || 1) - 1);
+  })();
+  </script>
+</body>
+</html>
